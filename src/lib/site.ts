@@ -5,6 +5,9 @@ export const SITE_URL =
 
 export const SITE_NAME = "MafiaCL";
 
+/** Тестовая версия (до переезда на mafiacl.com): закрыть весь сайт от поисковиков. */
+export const NOINDEX = process.env.NEXT_PUBLIC_NOINDEX === "1";
+
 /** Ключ раздела в messages/*.json → внутренний путь роутера. */
 export const SECTIONS = {
   play: "/play",

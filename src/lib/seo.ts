@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { NOINDEX, SITE_NAME, SITE_URL } from "@/lib/site";
 
 type Href = Parameters<typeof getPathname>[0]["href"];
 
@@ -58,6 +58,6 @@ export async function pageMetadata({
       alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => OG_LOCALE[l]),
     },
     twitter: { card: "summary_large_image", title, description },
-    robots: noindex ? { index: false, follow: false } : undefined,
+    robots: noindex || NOINDEX ? { index: false, follow: false } : undefined,
   };
 }
