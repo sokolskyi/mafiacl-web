@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "play": "Play",
+    "kings": "Kings",
+    "tournaments": "Tournaments",
+    "ratings": "Ratings",
+    "learn": "Rules",
+    "documents": "Documents",
+    "blog": "Blog",
+    "gallery": "Gallery",
+    "shop": "Shop",
+    "corporate": "Corporate",
+    "kids": "Kids",
+    "franchise": "Franchise",
+    "partners": "Partners",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "contacts": "Contacts",
+    "account": "Sign in"
+  },
+  "common": {
+    "comingSoon": "This page is coming soon.",
+    "menu": "Menu",
+    "language": "Language",
+    "rights": "All rights reserved.",
+    "tagline": "Sports mafia club",
+    "cityNotFound": "There is no club in this city yet."
+  },
+  "pages": {
+    "home": {
+      "title": "MafiaCL — sports mafia club in Prague",
+      "description": "Play mafia with a host in Prague: club games, MafiaCL Kings and MCL Europe tournaments, corporate and kids mafia."
+    },
+    "play": {
+      "title": "Play",
+      "description": "Club game schedule and sign-up. How to play for the first time."
+    },
+    "kings": {
+      "title": "MafiaCL Kings",
+      "description": "The season's main final tournament: quotas, finalists, season history."
+    },
+    "tournaments": {
+      "title": "Tournaments",
+      "description": "Tournament calendar, the MafiaCL tournament series and MCL Europe."
+    },
+    "ratings": {
+      "title": "Ratings",
+      "description": "Current season, points table, season results, hall of fame."
+    },
+    "learn": {
+      "title": "Mafia game rules",
+      "description": "Rules, roles, rule commentary and the club's tips for beginners."
+    },
+    "documents": {
+      "title": "Documents",
+      "description": "Club regulations, club code, code of conduct and season regulations."
+    },
+    "blog": {
+      "title": "Blog and news",
+      "description": "Club news, articles about mafia and posts by players."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "Photos from club games and tournaments."
+    },
+    "shop": {
+      "title": "Shop",
+      "description": "Passes, gift vouchers and club merch."
+    },
+    "corporate": {
+      "title": "Corporate mafia in Prague",
+      "description": "Team building and corporate events with a mafia game and a professional host."
+    },
+    "kids": {
+      "title": "Kids mafia",
+      "description": "Mafia for kids and teenagers, birthday parties and kids' games."
+    },
+    "franchise": {
+      "title": "MafiaCL franchise",
+      "description": "Open a MafiaCL club in your city: packages, consultation, application."
+    },
+    "partners": {
+      "title": "Club partners",
+      "description": "General partners, city partners and event partners."
+    },
+    "reviews": {
+      "title": "Reviews",
+      "description": "Reviews from club players and companies after corporate events."
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "What age mafia suits, how many players, how long a game lasts, parking, card payment."
+    },
+    "contacts": {
+      "title": "Contacts",
+      "description": "Address, how to get here, parking, phone and social media."
+    },
+    "club": {
+      "title": "MafiaCL club {city}",
+      "description": "Games, tournaments and players of the MafiaCL club in {city}."
+    },
+    "account": {
+      "title": "My account",
+      "description": "Sign-ups, statistics, MafiaCL Coin and orders."
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "play": "Hrát",
+    "kings": "Kings",
+    "tournaments": "Turnaje",
+    "ratings": "Žebříčky",
+    "learn": "Pravidla",
+    "documents": "Dokumenty",
+    "blog": "Blog",
+    "gallery": "Galerie",
+    "shop": "Obchod",
+    "corporate": "Firemní mafie",
+    "kids": "Dětská mafie",
+    "franchise": "Franšíza",
+    "partners": "Partneři",
+    "reviews": "Recenze",
+    "faq": "FAQ",
+    "contacts": "Kontakty",
+    "account": "Přihlásit"
+  },
+  "common": {
+    "comingSoon": "Stránka se připravuje.",
+    "menu": "Menu",
+    "language": "Jazyk",
+    "rights": "Všechna práva vyhrazena.",
+    "tagline": "Klub sportovní mafie",
+    "cityNotFound": "Klub v tomto městě zatím není."
+  },
+  "pages": {
+    "home": {
+      "title": "MafiaCL — klub sportovní mafie v Praze",
+      "description": "Hrajte mafii s moderátorem v Praze: klubové hry, turnaje MafiaCL Kings a MCL Europe, firemní a dětská mafie."
+    },
+    "play": {
+      "title": "Hrát mafii",
+      "description": "Rozpis klubových her a přihlášení. Jak si zahrát poprvé."
+    },
+    "kings": {
+      "title": "MafiaCL Kings",
+      "description": "Hlavní finálový turnaj sezóny MafiaCL: kvóty, finalisté, historie sezón."
+    },
+    "tournaments": {
+      "title": "Turnaje",
+      "description": "Kalendář turnajů, série turnajů MafiaCL a MCL Europe."
+    },
+    "ratings": {
+      "title": "Žebříčky",
+      "description": "Aktuální sezóna, tabulka bodů, výsledky sezón, síň slávy."
+    },
+    "learn": {
+      "title": "Pravidla hry mafie",
+      "description": "Pravidla, role, komentáře k pravidlům a tipy klubu pro začátečníky."
+    },
+    "documents": {
+      "title": "Dokumenty",
+      "description": "Řád klubu, kodex klubu, pravidla chování a řády sezón."
+    },
+    "blog": {
+      "title": "Blog a novinky",
+      "description": "Novinky klubu, články o mafii a příspěvky hráčů."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Fotky z klubových her a turnajů."
+    },
+    "shop": {
+      "title": "Obchod",
+      "description": "Permanentky, dárkové poukazy a merch klubu."
+    },
+    "corporate": {
+      "title": "Firemní mafie v Praze",
+      "description": "Teambuilding a firemní akce s hrou mafie a profesionálním moderátorem."
+    },
+    "kids": {
+      "title": "Dětská mafie",
+      "description": "Mafie pro děti a dospívající, oslavy narozenin a dětské kroužky."
+    },
+    "franchise": {
+      "title": "Franšíza MafiaCL",
+      "description": "Otevřete klub MafiaCL ve svém městě: balíčky, konzultace, přihláška."
+    },
+    "partners": {
+      "title": "Partneři klubu",
+      "description": "Generální partneři, partneři měst a akcí."
+    },
+    "reviews": {
+      "title": "Recenze",
+      "description": "Recenze hráčů klubu a firem po firemních akcích."
+    },
+    "faq": {
+      "title": "Časté dotazy",
+      "description": "Pro jaký věk je mafie, kolik hráčů, jak dlouho hra trvá, parkování, platba kartou."
+    },
+    "contacts": {
+      "title": "Kontakty",
+      "description": "Adresa, jak se k nám dostat, parkování, telefon a sociální sítě."
+    },
+    "club": {
+      "title": "Klub MafiaCL {city}",
+      "description": "Hry, turnaje a hráči klubu MafiaCL ve městě {city}."
+    },
+    "account": {
+      "title": "Můj účet",
+      "description": "Přihlášky, statistiky, MafiaCL Coin a objednávky."
+    }
+  }
+}
