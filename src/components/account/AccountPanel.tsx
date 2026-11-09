@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { signInWithGoogle, signOut } from "@/lib/auth/actions";
+import { signInWithProvider, signOut } from "@/lib/auth/actions";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { NicknameForm } from "./NicknameForm";
@@ -24,16 +24,17 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
             {t("authError")}
           </p>
         )}
-        <form action={signInWithGoogle} className="mt-6">
-          <input type="hidden" name="locale" value={locale} />
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center gap-3 rounded bg-white px-4 py-2.5 font-semibold text-black hover:bg-neutral-200"
-          >
+        <div className="mt-6 space-y-3">
+          <ProviderButton locale={locale} provider="google" label={t("google")} className="bg-white text-black hover:bg-neutral-200">
             <GoogleIcon />
-            {t("google")}
-          </button>
-        </form>
+          </ProviderButton>
+          <ProviderButton locale={locale} provider="facebook" label={t("facebook")} className="bg-[#1877F2] text-white hover:bg-[#166fe0]">
+            <FacebookIcon />
+          </ProviderButton>
+          <ProviderButton locale={locale} provider="custom:telegram" label={t("telegram")} className="bg-[#229ED9] text-white hover:bg-[#1f91c7]">
+            <TelegramIcon />
+          </ProviderButton>
+        </div>
       </section>
     );
   }
@@ -69,6 +70,50 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
         </button>
       </form>
     </section>
+  );
+}
+
+function ProviderButton({
+  locale,
+  provider,
+  label,
+  className,
+  children,
+}: {
+  locale: Locale;
+  provider: string;
+  label: string;
+  className: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <form action={signInWithProvider}>
+      <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="provider" value={provider} />
+      <button
+        type="submit"
+        className={`flex w-full items-center justify-center gap-3 rounded px-4 py-2.5 font-semibold ${className}`}
+      >
+        {children}
+        {label}
+      </button>
+    </form>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z" />
+    </svg>
+  );
+}
+
+function TelegramIcon() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9.78 15.27 9.4 20.6c.54 0 .78-.23 1.06-.51l2.55-2.44 5.28 3.87c.97.53 1.65.25 1.91-.89l3.46-16.24c.31-1.43-.52-1.99-1.46-1.64L1.86 10.6c-1.39.54-1.37 1.32-.24 1.67l5.2 1.62 12.08-7.6c.57-.37 1.09-.17.66.21z" />
+    </svg>
   );
 }
 

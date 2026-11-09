@@ -19,20 +19,33 @@ async function siteOrigin() {
   return `${proto}://${host}`;
 }
 
-/** Кнопка «Войти через Google». */
-export async function signInWithGoogle(formData: FormData) {
+/** Разрешённые способы входа (Telegram — свой OIDC-провайдер в Supabase). */
+const PROVIDERS = ["google", "facebook", "custom:telegram"] as const;
+type Provider = (typeof PROVIDERS)[number];
+
+const SCOPES: Partial<Record<Provider, string>> = {
+  facebook: "email public_profile",
+  "custom:telegram": "openid profile",
+};
+
+/** Кнопки «Войти через Google / Facebook / Telegram». */
+export async function signInWithProvider(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
+  const raw = String(formData.get("provider") ?? "");
+  const provider = (PROVIDERS as readonly string[]).includes(raw) ? (raw as Provider) : "google";
   const next = getPathname({ href: "/account", locale });
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
+    // custom:* провайдеры появились в supabase-js недавно, тип Provider их ещё не знает
+    provider: provider as "google",
     options: {
       redirectTo: `${await siteOrigin()}/auth/callback?next=${encodeURIComponent(next)}`,
-      queryParams: { prompt: "select_account" },
+      scopes: SCOPES[provider],
+      queryParams: provider === "google" ? { prompt: "select_account" } : undefined,
     },
   });
   if (error || !data.url) {
-    console.error("signInWithGoogle failed", { message: error?.message });
+    console.error("signInWithProvider failed", { provider, message: error?.message });
     redirect(`${next}?auth=error`);
   }
   redirect(data.url);

@@ -120,6 +120,8 @@
     "error": "Щось пішло не так. Спробуйте ще раз.",
     "signOut": "Вийти",
     "loading": "Завантаження…",
-    "notConfigured": "Вхід поки не налаштовано."
+    "notConfigured": "Вхід поки не налаштовано.",
+    "facebook": "Увійти через Facebook",
+    "telegram": "Увійти через Telegram"
   }
 }

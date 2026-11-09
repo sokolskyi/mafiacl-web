@@ -120,6 +120,8 @@
     "error": "Something went wrong. Please try again.",
     "signOut": "Sign out",
     "loading": "Loading…",
-    "notConfigured": "Sign-in is not configured yet."
+    "notConfigured": "Sign-in is not configured yet.",
+    "facebook": "Continue with Facebook",
+    "telegram": "Continue with Telegram"
   }
 }

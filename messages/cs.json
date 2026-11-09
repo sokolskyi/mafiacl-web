@@ -120,6 +120,8 @@
     "error": "Něco se pokazilo. Zkuste to znovu.",
     "signOut": "Odhlásit se",
     "loading": "Načítám…",
-    "notConfigured": "Přihlášení zatím není nastavené."
+    "notConfigured": "Přihlášení zatím není nastavené.",
+    "facebook": "Pokračovat přes Facebook",
+    "telegram": "Pokračovat přes Telegram"
   }
 }
