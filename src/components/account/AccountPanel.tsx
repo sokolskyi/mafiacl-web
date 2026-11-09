@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { signInWithProvider, signOut } from "@/lib/auth/actions";
+import { linkProvider, signInWithProvider, signOut } from "@/lib/auth/actions";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { NicknameForm } from "./NicknameForm";
@@ -45,6 +45,13 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
     .eq("id", userId)
     .single();
   const name = profile?.nickname ?? profile?.display_name ?? "";
+  const { data: ids } = await supabase.auth.getUserIdentities();
+  const linked = new Set((ids?.identities ?? []).map((i) => i.provider));
+  const methods = [
+    { provider: "google", label: "Google", icon: <GoogleIcon /> },
+    { provider: "facebook", label: "Facebook", icon: <FacebookIcon /> },
+    { provider: "custom:telegram", label: "Telegram", icon: <TelegramIcon /> },
+  ];
 
   return (
     <section className="mt-10">
@@ -63,6 +70,34 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
         <p className="text-2xl font-bold">{t("hello", { name })}</p>
       </div>
       <NicknameForm current={profile?.nickname ?? null} />
+      <section className="mt-10 max-w-md">
+        <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>
+        <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>
+        {authError && (
+          <p role="alert" className="mt-2 text-sm text-red-400">
+            {t("linkError")}
+          </p>
+        )}
+        <ul className="mt-3 divide-y divide-white/10 rounded border border-white/10">
+          {methods.map((m) => (
+            <li key={m.provider} className="flex items-center gap-3 px-4 py-3">
+              {m.icon}
+              <span className="flex-1">{m.label}</span>
+              {linked.has(m.provider) ? (
+                <span className="text-sm text-green-400">✓ {t("linked")}</span>
+              ) : (
+                <form action={linkProvider}>
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="provider" value={m.provider} />
+                  <button type="submit" className="text-sm font-semibold text-red-400 hover:text-red-300">
+                    {t("link")}
+                  </button>
+                </form>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
       <form action={signOut} className="mt-10">
         <input type="hidden" name="locale" value={locale} />
         <button type="submit" className="text-sm text-neutral-400 underline hover:text-white">

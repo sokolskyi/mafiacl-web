@@ -122,6 +122,11 @@
     "loading": "Načítám…",
     "notConfigured": "Přihlášení zatím není nastavené.",
     "facebook": "Pokračovat přes Facebook",
-    "telegram": "Pokračovat přes Telegram"
+    "telegram": "Pokračovat přes Telegram",
+    "loginMethods": "Způsoby přihlášení",
+    "loginMethodsHint": "Propojte účty, abyste se do jednoho profilu mohli přihlásit čímkoli.",
+    "linked": "propojeno",
+    "link": "Propojit",
+    "linkError": "Propojení se nepovedlo. Tento účet už může patřit jinému profilu."
   }
 }

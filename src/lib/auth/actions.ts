@@ -51,6 +51,29 @@ export async function signInWithProvider(formData: FormData) {
   redirect(data.url);
 }
 
+/** «Привязать Facebook/Telegram/Google» к уже вошедшему аккаунту — один профиль на все способы входа. */
+export async function linkProvider(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const raw = String(formData.get("provider") ?? "");
+  if (!(PROVIDERS as readonly string[]).includes(raw)) redirect(getPathname({ href: "/account", locale }));
+  const provider = raw as Provider;
+  const next = getPathname({ href: "/account", locale });
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.linkIdentity({
+    provider: provider as "google",
+    options: {
+      redirectTo: `${await siteOrigin()}/auth/callback?next=${encodeURIComponent(next)}`,
+      scopes: SCOPES[provider],
+    },
+  });
+  if (error || !data.url) {
+    console.error("linkProvider failed", { provider, message: error?.message });
+    redirect(`${next}?auth=error`);
+  }
+  redirect(data.url);
+}
+
 export async function signOut(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
   const supabase = await createClient();

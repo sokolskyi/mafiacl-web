@@ -122,6 +122,11 @@
     "loading": "Loading…",
     "notConfigured": "Sign-in is not configured yet.",
     "facebook": "Continue with Facebook",
-    "telegram": "Continue with Telegram"
+    "telegram": "Continue with Telegram",
+    "loginMethods": "Sign-in methods",
+    "loginMethodsHint": "Link accounts to sign in to one profile with any of them.",
+    "linked": "linked",
+    "link": "Link",
+    "linkError": "Linking failed. This account may already belong to another profile."
   }
 }
