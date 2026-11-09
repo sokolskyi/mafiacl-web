@@ -103,5 +103,23 @@
       "title": "Můj účet",
       "description": "Přihlášky, statistiky, MafiaCL Coin a objednávky."
     }
+  },
+  "account": {
+    "signInTitle": "Přihlášení",
+    "signInText": "Přihlaste se, abyste se mohli zapisovat na hry a sledovat svou statistiku.",
+    "google": "Pokračovat přes Google",
+    "authError": "Přihlášení se nepovedlo. Zkuste to prosím znovu.",
+    "hello": "Ahoj, {name}!",
+    "nickname": "Herní přezdívka",
+    "nicknameHint": "Zobrazuje se v žebříčcích a seznamech přihlášených. 2–32 znaků.",
+    "save": "Uložit",
+    "saving": "Ukládám…",
+    "saved": "Uloženo.",
+    "invalid": "Přezdívka musí mít 2–32 znaků.",
+    "taken": "Tuto přezdívku už někdo má.",
+    "error": "Něco se pokazilo. Zkuste to znovu.",
+    "signOut": "Odhlásit se",
+    "loading": "Načítám…",
+    "notConfigured": "Přihlášení zatím není nastavené."
   }
 }

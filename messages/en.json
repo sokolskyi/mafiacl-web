@@ -103,5 +103,23 @@
       "title": "My account",
       "description": "Sign-ups, statistics, MafiaCL Coin and orders."
     }
+  },
+  "account": {
+    "signInTitle": "Sign in",
+    "signInText": "Sign in to sign up for games and follow your statistics.",
+    "google": "Continue with Google",
+    "authError": "Sign-in failed. Please try again.",
+    "hello": "Hi, {name}!",
+    "nickname": "Game nickname",
+    "nicknameHint": "Shown in ratings and sign-up lists. 2–32 characters.",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved.",
+    "invalid": "Nickname must be 2–32 characters.",
+    "taken": "This nickname is already taken.",
+    "error": "Something went wrong. Please try again.",
+    "signOut": "Sign out",
+    "loading": "Loading…",
+    "notConfigured": "Sign-in is not configured yet."
   }
 }
