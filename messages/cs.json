@@ -461,5 +461,30 @@
     "myPage": "Moje stránka hráče",
     "redVotesLine": "Jako civilista hlasuje pro černé: {pct} ({n} hlasů)",
     "blackVotesLine": "jako mafie pro červené: {pct} ({n})"
+  },
+  "rating": {
+    "filters": "Filtry žebříčku",
+    "season": "Sezóna",
+    "series": "Série",
+    "allSeries": "Všechny hry",
+    "sortBy": "Řazení",
+    "sort": {
+      "points": "Body",
+      "avg": "Průměr",
+      "winrate": "Úspěšnost"
+    },
+    "minGames": "Do pořadí podle průměru a úspěšnosti se počítá od {n} her, ostatní šedě níže.",
+    "empty": "V této sezóně zatím žádné odehrané hry do žebříčku.",
+    "caption": "Žebříček klubu, sezóna {season}",
+    "player": "Hráč",
+    "games": "Her",
+    "wins": "Výher",
+    "winrate": "% výher",
+    "sheriff": "Šerif",
+    "black": "Mafie",
+    "bestMove": "NT",
+    "avg": "Průměr",
+    "points": "Body",
+    "note": "Počítají se hry do žebříčku z elektronického zápisu u hráčů s účtem na webu. Šerif a mafie — výhry / hry v roli. NT — body za nejlepší tah."
   }
 }
