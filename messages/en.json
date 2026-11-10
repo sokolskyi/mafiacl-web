@@ -159,6 +159,8 @@
       "tournament": "Tournament",
       "corporate": "Corporate game",
       "kids": "Kids game"
-    }
+    },
+    "price": "Entry: {price}",
+    "info": "Tournament page"
   }
 }

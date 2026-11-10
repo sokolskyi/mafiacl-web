@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import type { UpcomingGame } from "@/lib/games";
+import { gameTitle, type UpcomingGame } from "@/lib/games";
 import { joinGame, leaveGame } from "@/lib/games-actions";
 
 type MyStatus = "confirmed" | "waitlist";
@@ -41,7 +41,8 @@ export async function GameList({
               new Date(g.lateAfter),
             )
           : null;
-        const title = g.title?.[locale] ?? g.title?.cs ?? t(`kind.${g.kind}`);
+        const template = g.title?.[locale] ?? g.title?.cs;
+        const title = template ? gameTitle(template, g.number, g.numberStyle) : t(`kind.${g.kind}`);
         const free = Math.max(g.capacity - g.confirmed, 0);
         const mine = me?.signups.get(g.id);
 
@@ -77,6 +78,18 @@ export async function GameList({
                 <span className="text-amber-400">{t("full", { waitlist: g.waitlist })}</span>
               )}
             </p>
+            {g.priceCzk !== null && (
+              <p className="mt-1 text-sm text-neutral-300">
+                {t("price", {
+                  price: new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(g.priceCzk),
+                })}
+              </p>
+            )}
+            {g.infoUrl && (
+              <a href={g.infoUrl} target="_blank" rel="noopener noreferrer" className="mt-2 text-sm text-neutral-300 underline hover:text-white">
+                {t("info")}
+              </a>
+            )}
             {g.streamUrl && (
               <a href={g.streamUrl} target="_blank" rel="noopener noreferrer" className="mt-2 text-sm text-red-400 underline">
                 {t("stream")}

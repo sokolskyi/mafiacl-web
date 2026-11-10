@@ -159,6 +159,8 @@
       "tournament": "Turnaj",
       "corporate": "Firemní hra",
       "kids": "Dětská hra"
-    }
+    },
+    "price": "Vstupné: {price}",
+    "info": "Stránka turnaje"
   }
 }

@@ -14,6 +14,10 @@ export type UpcomingGame = {
   confirmed: number;
   waitlist: number;
   streamUrl: string | null;
+  infoUrl: string | null;
+  number: number | null;
+  numberStyle: "arabic" | "roman";
+  priceCzk: number | null;
   venue: { name: string; address: string | null; mapsUrl: string | null } | null;
   timezone: string;
 };
@@ -32,7 +36,8 @@ export async function getUpcomingGames(clubSlug: string, limit = 12): Promise<Up
   const { data, error } = await supabase
     .from("games")
     .select(
-      `id, starts_at, late_after, title, kind, capacity, stream_url,
+      `id, starts_at, late_after, title, kind, capacity, stream_url, info_url, number, price_czk,
+       game_schedules ( number_style ),
        venues ( name, address, maps_url ),
        clubs!inner ( slug, cities ( timezone ) ),
        game_signups ( status )`,
@@ -62,8 +67,29 @@ export async function getUpcomingGames(clubSlug: string, limit = 12): Promise<Up
       confirmed: signups.filter((s) => s.status === "confirmed").length,
       waitlist: signups.filter((s) => s.status === "waitlist").length,
       streamUrl: g.stream_url,
+      infoUrl: g.info_url,
+      number: g.number,
+      numberStyle:
+        (g.game_schedules as unknown as { number_style: string } | null)?.number_style === "roman" ? "roman" : "arabic",
+      priceCzk: g.price_czk === null ? null : Number(g.price_czk),
       venue: venue ? { name: venue.name, address: venue.address, mapsUrl: venue.maps_url } : null,
       timezone: club?.cities?.timezone ?? "Europe/Prague",
     };
   });
+}
+
+function toRoman(n: number) {
+  const map: [number, string][] = [
+    [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"],
+    [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
+  ];
+  let out = "";
+  for (const [v, r] of map) while (n >= v) { out += r; n -= v; }
+  return out;
+}
+
+/** «Мини-турнир {n}» → «Мини-турнир XXXVIII»; без номера — просто «Мини-турнир». */
+export function gameTitle(template: string, number: number | null, style: "arabic" | "roman") {
+  if (number === null) return template.replace(/\s*\{n\}/g, "").trim();
+  return template.replace(/\{n\}/g, style === "roman" ? toRoman(number) : String(number));
 }
