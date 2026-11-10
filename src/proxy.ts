@@ -14,5 +14,5 @@ export default async function proxy(request: NextRequest) {
 
 export const config = {
   // Всё, кроме API, служебных файлов Next.js и файлов с расширением (картинки, sitemap.xml, robots.txt).
-  matcher: "/((?!api|auth|_next|_vercel|.*\\..*).*)",
+  matcher: "/((?!api|auth|stream|_next|_vercel|.*\\..*).*)",
 };

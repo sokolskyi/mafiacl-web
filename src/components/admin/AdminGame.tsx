@@ -5,6 +5,8 @@ import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
 import { addGuest, changeSignup, recordGamePayment, undoPayment, updateGame } from "@/lib/admin/actions";
 import { announceGame } from "@/lib/telegram/actions";
+import { createMatch } from "@/lib/match/actions";
+import { getGameMatches } from "@/lib/match/queries";
 import { getAdminGame, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
 
@@ -20,6 +22,8 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
   const data = await getAdminGame(id);
   if (!data || !ctx.clubs.some((c) => c.id === data.game.club_id)) notFound();
   const { game, signups, venues } = data;
+  const matches = await getGameMatches(game.id);
+  const tm = await getTranslations({ locale, namespace: "match" });
 
   const tpl = game.title?.[locale] ?? game.title?.cs;
   const title = tpl ? gameTitle(tpl, game.number, game.numberStyle) : tg(`kind.${game.kind}`);
@@ -90,7 +94,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
       {flags.announced && <p role="status" className="text-green-400">{t("announced")}</p>}
       {flags.error && (
         <p role="alert" className="text-red-400">
-          {t(`errors.${["invalid", "full", "bot", "channel"].includes(flags.error) ? flags.error : "save"}`)}
+          {t(`errors.${["invalid", "full", "bot", "channel", "matchNumber"].includes(flags.error) ? flags.error : "save"}`)}
         </p>
       )}
       <form action={announceGame}>
@@ -98,6 +102,42 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
         <input type="hidden" name="gameId" value={game.id} />
         <button className="rounded bg-[#229ED9] px-4 py-2 text-sm font-semibold hover:bg-[#1f91c7]">{t("announce")}</button>
       </form>
+
+      <section>
+        <h3 className="text-lg font-bold">{tm("matches")}</h3>
+        {matches.length > 0 && (
+          <ul className="mt-3 divide-y divide-white/10 rounded border border-white/10">
+            {matches.map((m) => (
+              <li key={m.id}>
+                <Link
+                  href={{ pathname: "/admin/matches/[id]", params: { id: String(m.id) } }}
+                  className="flex items-center gap-4 px-4 py-3 hover:bg-white/5"
+                >
+                  <span className="font-semibold">{tm("header", { number: m.number, table: m.tableNo })}</span>
+                  <span className="flex-1 text-sm text-neutral-400">
+                    {m.status === "live" ? tm("statusLive") : m.result ? tm(`result.${m.result}`) : tm("statusVoid")}
+                  </span>
+                  <span className="text-sm text-red-400">→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        <form action={createMatch} className="mt-3 flex flex-wrap items-end gap-2">
+          <input type="hidden" name="locale" value={locale} />
+          <input type="hidden" name="gameId" value={game.id} />
+          <label className="text-sm">{tm("table")}
+            <select name="tableNo" defaultValue="1" className="mt-1 block rounded border border-white/20 bg-neutral-900 px-3 py-2">
+              {[1, 2, 3].map((n) => <option key={n} value={n}>{n}</option>)}
+            </select>
+          </label>
+          <label className="text-sm">{tm("numberField")}
+            <input type="number" name="number" min={1} placeholder={tm("numberAuto")} className="mt-1 block w-32 rounded border border-white/20 bg-neutral-900 px-3 py-2" />
+          </label>
+          <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500">{tm("newMatch")}</button>
+        </form>
+        <p className="mt-2 text-xs text-neutral-500">{tm("newMatchHint")}</p>
+      </section>
 
       {game.priority_until && (
         <p className="max-w-2xl rounded border border-sky-500/30 bg-sky-500/5 px-4 py-3 text-sm text-sky-200">
