@@ -138,7 +138,8 @@
     "checking": "Checking…",
     "invalidEmail": "Please check the e-mail address.",
     "tooMany": "Too many attempts. Try again in a few minutes.",
-    "invalidCode": "The code is invalid or has expired."
+    "invalidCode": "The code is invalid or has expired.",
+    "admin": "Club admin →"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -162,5 +163,55 @@
     },
     "price": "Entry: {price}",
     "info": "Tournament page"
+  },
+  "admin": {
+    "title": "Club admin",
+    "loading": "Loading…",
+    "signIn": "Please sign in",
+    "noAccess": "You have no role in any club.",
+    "games": "Games",
+    "newGame": "New game · {club}",
+    "newGameHint": "One-off game (corporate, special event). Regular games are created automatically. A new game starts as a draft — check it and open sign-ups.",
+    "create": "Create game",
+    "created": "Game created as a draft. Check it and set the status to “Open”.",
+    "back": "All games",
+    "players": "Players: {confirmed} of {capacity}",
+    "waitlist": "Waitlist: {count}",
+    "nobody": "Nobody yet.",
+    "guest": "guest",
+    "guestName": "Guest name",
+    "addGuest": "Add guest",
+    "confirm": "Move in",
+    "checkIn": "Arrived",
+    "checkedIn": "arrived",
+    "remove": "Remove",
+    "settings": "Game settings",
+    "save": "Save",
+    "saved": "Saved.",
+    "fields": {
+      "startsAt": "Start (local time)",
+      "kind": "Type",
+      "title": "Title",
+      "titlePlaceholder": "e.g. Škoda corporate game",
+      "capacity": "Seats",
+      "status": "Status",
+      "venue": "Venue",
+      "number": "Number in series",
+      "price": "Price, CZK",
+      "streamUrl": "Stream link",
+      "infoUrl": "Tournament page (mafgame etc.)"
+    },
+    "status": {
+      "draft": "Draft",
+      "open": "Open",
+      "closed": "Closed",
+      "finished": "Finished",
+      "cancelled": "Cancelled"
+    },
+    "errors": {
+      "invalid": "Please check the fields.",
+      "save": "Could not save (or no permission).",
+      "full": "The game is full — the player stays on the waitlist. Increase the seats."
+    }
   }
 }

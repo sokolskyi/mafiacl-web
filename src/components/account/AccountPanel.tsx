@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/routing";
 import { linkProvider, signInWithProvider, signOut } from "@/lib/auth/actions";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { Link } from "@/i18n/navigation";
 import { EmailSignIn } from "./EmailSignIn";
 import { NicknameForm } from "./NicknameForm";
 
@@ -52,6 +53,10 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
     .eq("id", userId)
     .single();
   const name = profile?.nickname ?? profile?.display_name ?? "";
+  const { count: staffRoles } = await supabase
+    .from("club_staff")
+    .select("club_id", { count: "exact", head: true })
+    .eq("profile_id", userId);
   const { data: ids } = await supabase.auth.getUserIdentities();
   const linked = new Set((ids?.identities ?? []).map((i) => i.provider));
   const methods = [
@@ -76,6 +81,13 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
         )}
         <p className="text-2xl font-bold">{t("hello", { name })}</p>
       </div>
+      {(staffRoles ?? 0) > 0 && (
+        <p className="mt-6">
+          <Link href="/admin" className="font-semibold text-red-400 hover:text-red-300">
+            {t("admin")}
+          </Link>
+        </p>
+      )}
       <NicknameForm current={profile?.nickname ?? null} />
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>

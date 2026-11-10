@@ -34,6 +34,8 @@ export const routing = defineRouting({
     "/contacts": { cs: "/kontakty", ru: "/kontakty", uk: "/kontakty", en: "/contacts" },
     "/clubs/[city]": { cs: "/kluby/[city]", ru: "/kluby/[city]", uk: "/kluby/[city]", en: "/clubs/[city]" },
     "/account": { cs: "/ucet", ru: "/kabinet", uk: "/kabinet", en: "/account" },
+    "/admin": "/admin",
+    "/admin/games/[id]": "/admin/games/[id]",
   },
 });
 

@@ -138,7 +138,8 @@
     "checking": "Ověřuji…",
     "invalidEmail": "Zkontrolujte e-mail.",
     "tooMany": "Příliš mnoho pokusů. Zkuste to za pár minut.",
-    "invalidCode": "Kód je neplatný nebo vypršel."
+    "invalidCode": "Kód je neplatný nebo vypršel.",
+    "admin": "Správa klubu →"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -162,5 +163,55 @@
     },
     "price": "Vstupné: {price}",
     "info": "Stránka turnaje"
+  },
+  "admin": {
+    "title": "Správa klubu",
+    "loading": "Načítám…",
+    "signIn": "Přihlaste se",
+    "noAccess": "Nemáte roli v žádném klubu.",
+    "games": "Hry",
+    "newGame": "Nová hra · {club}",
+    "newGameHint": "Jednorázová hra (firemní, speciální). Pravidelné hry se vytvářejí samy. Nová hra je nejdřív koncept — po kontrole ji otevřete.",
+    "create": "Vytvořit hru",
+    "created": "Hra vytvořena jako koncept. Zkontrolujte a přepněte stav na „Otevřeno“.",
+    "back": "Všechny hry",
+    "players": "Hráči: {confirmed} z {capacity}",
+    "waitlist": "Čekací listina: {count}",
+    "nobody": "Zatím nikdo.",
+    "guest": "host",
+    "guestName": "Jméno hosta",
+    "addGuest": "Přidat hosta",
+    "confirm": "Do sestavy",
+    "checkIn": "Přišel",
+    "checkedIn": "přišel",
+    "remove": "Odebrat",
+    "settings": "Nastavení hry",
+    "save": "Uložit",
+    "saved": "Uloženo.",
+    "fields": {
+      "startsAt": "Začátek (místní čas)",
+      "kind": "Typ",
+      "title": "Název",
+      "titlePlaceholder": "např. Firemní mafie Škoda",
+      "capacity": "Míst",
+      "status": "Stav",
+      "venue": "Místo",
+      "number": "Číslo v sérii",
+      "price": "Vstupné, Kč",
+      "streamUrl": "Odkaz na přenos",
+      "infoUrl": "Stránka turnaje (mafgame apod.)"
+    },
+    "status": {
+      "draft": "Koncept",
+      "open": "Otevřeno",
+      "closed": "Zápis uzavřen",
+      "finished": "Odehráno",
+      "cancelled": "Zrušeno"
+    },
+    "errors": {
+      "invalid": "Zkontrolujte vyplněná pole.",
+      "save": "Nepodařilo se uložit (nebo nemáte oprávnění).",
+      "full": "Hra je plná — hráč zůstal na čekací listině. Zvyšte počet míst."
+    }
   }
 }

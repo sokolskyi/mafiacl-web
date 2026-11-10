@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -22,7 +23,10 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-3">
-          <LocaleSwitcher label={c("language")} />
+          {/* Переключатель читает адрес страницы — на динамических страницах он догружается. */}
+          <Suspense fallback={<span className="w-[148px]" aria-hidden="true" />}>
+            <LocaleSwitcher label={c("language")} />
+          </Suspense>
           <Link
             href="/account"
             className="rounded bg-red-600 px-3 py-1.5 text-sm font-semibold hover:bg-red-500"
