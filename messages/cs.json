@@ -143,7 +143,8 @@
     "botTitle": "Telegram-bot klubu",
     "botHint": "Připomínky 3 hodiny před hrou, zpráva o uvolněném místě a zápis na hry přímo v Telegramu.",
     "botConnect": "Připojit Telegram",
-    "botOn": "Telegram připojen"
+    "botOn": "Telegram připojen",
+    "myPage": "Moje stránka hráče"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -417,5 +418,35 @@
       "day": "den",
       "finish": "výsledek"
     }
+  },
+  "player": {
+    "metaTitle": "{nick} — hráč mafiánského klubu",
+    "metaDescription": "Statistiky hráče {nick} v klubu MafiaCL: {games} her, {wins} výher, body a role.",
+    "since": "Na webu od {date}",
+    "staff": {
+      "owner": "Majitel",
+      "admin": "Admin",
+      "host": "Moderátor"
+    },
+    "stats": "Statistiky",
+    "games": "Her",
+    "wins": "Výher",
+    "winRate": "Úspěšnost",
+    "points": "Body",
+    "avgPoints": "Průměr bodů",
+    "noGames": "Zatím žádné odehrané hry do žebříčku.",
+    "byRole": "Podle rolí",
+    "role": "Role",
+    "bestMoveLine": "Zabit první: {killed} · nejlepší tah s body: {hits} (+{points})",
+    "foulsLine": "faulů na hru: {avg}",
+    "recent": "Poslední hry",
+    "date": "Datum",
+    "game": "Hra",
+    "seat": "Místo",
+    "outcome": "Výsledek",
+    "won": "výhra",
+    "lost": "prohra",
+    "unrated": "mimo žebříček",
+    "myPage": "Moje stránka hráče"
   }
 }

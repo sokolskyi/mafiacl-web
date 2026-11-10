@@ -95,6 +95,13 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           </Link>
         </p>
       )}
+      {profile?.nickname && (
+        <p className="mt-4">
+          <Link href={{ pathname: "/players/[nick]", params: { nick: profile.nickname } }} className="font-semibold text-red-400 hover:text-red-300">
+            {t("myPage")}
+          </Link>
+        </p>
+      )}
       <NicknameForm current={profile?.nickname ?? null} />
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>

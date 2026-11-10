@@ -1,6 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { updateTag } from "next/cache";
+import { MATCHES_TAG } from "@/lib/players";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
@@ -207,6 +209,7 @@ export async function finishMatch(input: {
     console.error("finishMatch failed", { id, code: error.code, message: error.message });
     return { ok: false, code: "save" };
   }
+  updateTag(MATCHES_TAG);
   return { ok: true };
 }
 
@@ -221,5 +224,6 @@ export async function reopenMatch(input: { id: number }) {
     .from("matches")
     .update({ status: "live", result: null, finished_at: null, version: m.version + 1 })
     .eq("id", id);
+  if (!error) updateTag(MATCHES_TAG);
   return { ok: !error };
 }

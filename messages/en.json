@@ -143,7 +143,8 @@
     "botTitle": "Club Telegram bot",
     "botHint": "Reminders 3 hours before a game, a message when a seat opens up, and sign-up right in Telegram.",
     "botConnect": "Connect Telegram",
-    "botOn": "Telegram connected"
+    "botOn": "Telegram connected",
+    "myPage": "My player page"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -417,5 +418,35 @@
       "day": "day",
       "finish": "result"
     }
+  },
+  "player": {
+    "metaTitle": "{nick} — mafia club player",
+    "metaDescription": "{nick}'s stats at MafiaCL: {games} games, {wins} wins, points and roles.",
+    "since": "On the site since {date}",
+    "staff": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "host": "Host"
+    },
+    "stats": "Stats",
+    "games": "Games",
+    "wins": "Wins",
+    "winRate": "Win rate",
+    "points": "Points",
+    "avgPoints": "Avg. points",
+    "noGames": "No rated games played yet.",
+    "byRole": "By role",
+    "role": "Role",
+    "bestMoveLine": "Killed first: {killed} · scoring best moves: {hits} (+{points})",
+    "foulsLine": "fouls per game: {avg}",
+    "recent": "Recent games",
+    "date": "Date",
+    "game": "Game",
+    "seat": "Seat",
+    "outcome": "Result",
+    "won": "win",
+    "lost": "loss",
+    "unrated": "unrated",
+    "myPage": "My player page"
   }
 }
