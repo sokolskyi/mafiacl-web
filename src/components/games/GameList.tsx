@@ -51,7 +51,7 @@ export async function GameList({
             id={`game-${g.id}`}
             className="flex flex-col rounded-lg border border-white/10 bg-neutral-950 p-5"
           >
-            <p className="text-sm capitalize text-neutral-400">
+            <p className="text-sm text-neutral-400 first-letter:uppercase">
               <time dateTime={g.startsAt}>{day}</time>
             </p>
             <h2 className="mt-1 text-2xl font-black">
