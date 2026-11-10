@@ -45,10 +45,11 @@ export async function GameList({
         const title = template ? gameTitle(template, g.number, g.numberStyle) : t(`kind.${g.kind}`);
         const free = Math.max(g.capacity - g.confirmed, 0);
         const queueOpen = g.queueUntil !== null;
+        // Окно закрывается в полночь — пишем как в клубе: «воскресенье 24:00».
         const queueEnd = g.queueUntil
-          ? new Intl.DateTimeFormat(locale, { timeZone: g.timezone, weekday: "long", hour: "2-digit", minute: "2-digit" }).format(
+          ? `${new Intl.DateTimeFormat(locale, { timeZone: g.timezone, weekday: "long" }).format(
               new Date(new Date(g.queueUntil).getTime() - 60_000),
-            )
+            )} 24:00`
           : null;
         const mine = me?.signups.get(g.id);
 

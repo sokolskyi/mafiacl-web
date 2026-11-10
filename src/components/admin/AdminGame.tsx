@@ -102,7 +102,9 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
       {game.priority_until && (
         <p className="max-w-2xl rounded border border-sky-500/30 bg-sky-500/5 px-4 py-3 text-sm text-sky-200">
           {t("queueRules", {
-            until: fmt(new Date(new Date(game.priority_until).getTime() - 60_000).toISOString()),
+            until: `${new Intl.DateTimeFormat(locale, { timeZone: game.timezone, weekday: "short", day: "numeric", month: "numeric" }).format(
+              new Date(new Date(game.priority_until).getTime() - 60_000),
+            )} 24:00`,
             final: game.final_at ? fmt(game.final_at) : "—",
           })}
           {game.finalized_at && <span className="block text-neutral-400">{t("queueFinalized")}</span>}
