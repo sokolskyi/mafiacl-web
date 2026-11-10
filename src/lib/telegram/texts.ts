@@ -77,6 +77,38 @@ const T = {
     uk: "⚠️ Гру <b>{when}</b> — {title} скасовано.",
     en: "⚠️ The game <b>{when}</b> — {title} is cancelled.",
   },
+  queued: {
+    cs: "Jste v pořadí ✓ Sestava se určí v neděli o půlnoci (předplatitelé mají přednost), potvrzení přijde v pondělí.",
+    ru: "Вы в очереди ✓ Состав определится в воскресенье в 24:00 (у абонементов приоритет), подтверждение придёт в понедельник.",
+    uk: "Ви в черзі ✓ Склад визначиться в неділю о 24:00 (абонементи мають пріоритет), підтвердження прийде в понеділок.",
+    en: "You're in the queue ✓ The line-up is set on Sunday at midnight (pass holders first); confirmation comes on Monday.",
+  },
+  inQueue: { cs: "v pořadí: {c}", ru: "в очереди: {c}", uk: "у черзі: {c}", en: "queued: {c}" },
+  youQueue: { cs: "· v pořadí", ru: "· в очереди", uk: "· у черзі", en: "· queued" },
+  confirmedMsg: {
+    cs: "✅ Potvrzeno — jste v sestavě!\n<b>{when}</b> — {title}\n📍 {venue}",
+    ru: "✅ Подтверждено — вы в составе!\n<b>{when}</b> — {title}\n📍 {venue}",
+    uk: "✅ Підтверджено — ви в складі!\n<b>{when}</b> — {title}\n📍 {venue}",
+    en: "✅ Confirmed — you're in!\n<b>{when}</b> — {title}\n📍 {venue}",
+  },
+  waitlistedMsg: {
+    cs: "⏳ <b>{when}</b> — {title}\nZatím jste na čekací listině. Do pondělí 19:00 se rozhodne, zda bude druhý stůl — dáme vědět.",
+    ru: "⏳ <b>{when}</b> — {title}\nПока вы в листе ожидания. До понедельника 19:00 станет ясно, будет ли второй стол, — сообщим.",
+    uk: "⏳ <b>{when}</b> — {title}\nПоки ви в листі очікування. До понеділка 19:00 стане зрозуміло, чи буде другий стіл, — повідомимо.",
+    en: "⏳ <b>{when}</b> — {title}\nYou're on the waitlist for now. By Monday 19:00 we'll know if there's a second table — we'll let you know.",
+  },
+  waitlistFinal: {
+    cs: "⏳ <b>{when}</b> — {title}\nDruhý stůl se nesešel, zůstáváte na čekací listině. Pokud se uvolní místo, hned napíšu.",
+    ru: "⏳ <b>{when}</b> — {title}\nВторой стол не набрался, вы остаётесь в листе ожидания. Если освободится место — сразу напишу.",
+    uk: "⏳ <b>{when}</b> — {title}\nДругий стіл не зібрався, ви залишаєтеся в листі очікування. Якщо звільниться місце — одразу напишу.",
+    en: "⏳ <b>{when}</b> — {title}\nNo second table this time, you stay on the waitlist. If a seat opens up, I'll message you right away.",
+  },
+  notEnough: {
+    cs: "⚠️ <b>{when}</b> — {title}\nPřihlášeno jen {count} — stůl se nesešel. Zrušte hru v administraci, nebo doplňte hráče.",
+    ru: "⚠️ <b>{when}</b> — {title}\nЗаписалось только {count} — стол не набрался. Отмените игру в админке или доберите игроков.",
+    uk: "⚠️ <b>{when}</b> — {title}\nЗаписалося лише {count} — стіл не зібрався. Скасуйте гру в адмінці або доберіть гравців.",
+    en: "⚠️ <b>{when}</b> — {title}\nOnly {count} signed up — not enough for a table. Cancel the game in the admin panel or find more players.",
+  },
   tableFull: {
     cs: "✅ Stůl je plný! Návrh příspěvku:",
     ru: "✅ Стол собран! Черновик поста:",

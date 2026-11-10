@@ -48,10 +48,15 @@ async function gamesMessage(db: SupabaseClient, origin: string, lang: BotLang, p
   const buttons: InlineButton[][] = [];
   for (const g of games) {
     const status = mine.get(g.id);
-    const mark = status === "confirmed" ? ` ${t(lang, "you")}` : status === "waitlist" ? ` ${t(lang, "youWait")}` : "";
+    const mark =
+      status === "confirmed" ? ` ${t(lang, "you")}`
+      : status === "waitlist" ? ` ${t(lang, "youWait")}`
+      : status === "queued" ? ` ${t(lang, "youQueue")}`
+      : "";
+    const seats = g.queueOpen ? t(lang, "inQueue", { c: g.active }) : t(lang, "seats", { c: g.confirmed, cap: g.capacity });
     lines.push(`🗓 <b>${whenOf(g, lang)}</b> — ${titleOf(g, lang)}`);
-    lines.push(`📍 ${escapeHtml(g.venue?.name ?? "")} · ${t(lang, "seats", { c: g.confirmed, cap: g.capacity })}${mark}`, "");
-    const label = status ? t(lang, "leave") : g.confirmed >= g.capacity ? t(lang, "joinWait") : t(lang, "join");
+    lines.push(`📍 ${escapeHtml(g.venue?.name ?? "")} · ${seats}${mark}`, "");
+    const label = status ? t(lang, "leave") : !g.queueOpen && g.confirmed >= g.capacity ? t(lang, "joinWait") : t(lang, "join");
     buttons.push([{ text: `${label} · ${whenOf(g, lang)}`, callback_data: `${status ? "l" : "j"}:${g.id}` }]);
   }
   if (!games.length) lines.push(t(lang, "noGames"));
@@ -103,6 +108,7 @@ async function handleCallback(db: SupabaseClient, origin: string, q: NonNullable
 
   const gameId = Number(m[2]);
   let notice: string;
+  let alert = false;
   if (m[1] === "j") {
     // Бот работает с секретным ключом, поэтому правила записи проверяем здесь сами:
     // только открытая и ещё не начавшаяся игра, только себя.
@@ -116,7 +122,11 @@ async function handleCallback(db: SupabaseClient, origin: string, q: NonNullable
         .select("status")
         .single();
       if (error && error.code !== "23505") throw new Error(`join: ${error.message}`);
-      notice = data?.status === "waitlist" ? t(lang, "waitlisted") : t(lang, "joined");
+      notice =
+        data?.status === "waitlist" ? t(lang, "waitlisted")
+        : data?.status === "queued" ? t(lang, "queued")
+        : t(lang, "joined");
+      alert = data?.status === "queued";
     }
   } else {
     const { error } = await db
@@ -130,7 +140,7 @@ async function handleCallback(db: SupabaseClient, origin: string, q: NonNullable
     notice = t(lang, "left");
   }
 
-  await tg("answerCallbackQuery", { callback_query_id: q.id, text: notice });
+  await tg("answerCallbackQuery", { callback_query_id: q.id, text: notice, show_alert: alert });
   const msg = await gamesMessage(db, origin, lang, linked.profileId);
   await tg("editMessageText", {
     chat_id: chatId,

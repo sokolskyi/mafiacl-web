@@ -19,11 +19,15 @@ export type BotGame = {
   venue: { name: string; address: string | null } | null;
   timezone: string;
   confirmed: number;
+  /** Все активные записи: в очереди + в составе + в ожидании. */
+  active: number;
+  /** До этого момента записи — в очереди (вторники с приоритетом абонементов). */
+  queueOpen: boolean;
 };
 
 export const GAME_SELECT = `id, starts_at, late_after, status, capacity, title, number, kind,
   game_schedules ( number_style ), venues ( name, address ), clubs ( cities ( timezone ) ),
-  game_signups ( status )`;
+  game_signups ( status ), priority_until, allocated_at`;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function toBotGame(g: any): BotGame {
@@ -41,6 +45,8 @@ export function toBotGame(g: any): BotGame {
     venue: g.venues ? { name: g.venues.name, address: g.venues.address } : null,
     timezone: g.clubs?.cities?.timezone ?? "Europe/Prague",
     confirmed: signups.filter((s) => s.status === "confirmed").length,
+    active: signups.filter((s) => s.status !== "cancelled").length,
+    queueOpen: !!g.priority_until && !g.allocated_at && new Date(g.priority_until) > new Date(),
   };
 }
 

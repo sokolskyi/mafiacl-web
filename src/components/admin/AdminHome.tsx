@@ -2,13 +2,16 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addStaff, createGame, removeStaff } from "@/lib/admin/actions";
+import { addStaff, createGame, grantMembership, removeMembership, removeStaff } from "@/lib/admin/actions";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 
 /** Читает сессию — только внутри <Suspense>. */
-export async function AdminHome({ locale, error, team, bot }: { locale: Locale; error?: string; team?: boolean; bot?: boolean }) {
+export async function AdminHome({
+  locale, error, team, bot, membership,
+}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: boolean }) {
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
   const ctx = await getStaffContext();
@@ -35,6 +38,7 @@ export async function AdminHome({ locale, error, team, bot }: { locale: Locale; 
       )}
       {team && <p role="status" className="text-green-400">{t("teamAdded")}</p>}
       {bot && <p role="status" className="text-green-400">{t("botReady")}</p>}
+      {membership && <p role="status" className="text-green-400">{t("membershipAdded")}</p>}
 
       <section>
         <h2 className="text-xl font-bold">{t("games")}</h2>
@@ -58,6 +62,7 @@ export async function AdminHome({ locale, error, team, bot }: { locale: Locale; 
                   <span className="text-sm">
                     {g.confirmed}/{g.capacity}
                     {g.waitlist > 0 && <span className="text-amber-400"> +{g.waitlist}</span>}
+                    {g.queued > 0 && <span className="text-sky-400"> · {t("queuedShort", { count: g.queued })}</span>}
                   </span>
                   <span className="rounded bg-white/10 px-2 py-0.5 text-xs">{t(`status.${g.status}`)}</span>
                 </Link>
@@ -101,6 +106,77 @@ export async function AdminHome({ locale, error, team, bot }: { locale: Locale; 
           </form>
         </section>
       ))}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const list = await getClubMemberships(club.id, club.timezone);
+            const today = new Intl.DateTimeFormat("en-CA", { timeZone: club.timezone }).format(new Date());
+            const date = (d: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(d));
+            return (
+              <section key={`m-${club.id}`} id="memberships">
+                <h2 className="text-xl font-bold">{t("memberships", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("membershipsHint")}</p>
+                <ul className="mt-4 max-w-3xl divide-y divide-white/10 rounded border border-white/10">
+                  {list.map((m) => (
+                    <li key={m.id} className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2">
+                      <span className="flex-1 font-semibold">{m.name}</span>
+                      <span className="text-sm text-neutral-400">{t(`plans.${m.plan}`)}</span>
+                      <span className="text-sm">{date(m.validFrom)} – {date(m.validUntil)}</span>
+                      <span className="text-sm">
+                        {m.paid ? <span className="text-green-400">✓ {m.paid.amount} Kč · {t(`pay.${m.paid.method}`)}</span> : <span className="text-amber-400">{t("pay.unpaid")}</span>}
+                      </span>
+                      <form action={removeMembership}>
+                        <input type="hidden" name="locale" value={locale} />
+                        <input type="hidden" name="membershipId" value={m.id} />
+                        <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                      </form>
+                    </li>
+                  ))}
+                  {list.length === 0 && <li className="px-4 py-3 text-neutral-500">{t("noMemberships")}</li>}
+                </ul>
+                <form action={grantMembership} className="mt-4 grid max-w-3xl gap-3 sm:grid-cols-3">
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="clubId" value={club.id} />
+                  <label className="text-sm">{t("fields.nickname")}
+                    <input name="nickname" required minLength={2} maxLength={32} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.plan")}
+                    <select name="plan" defaultValue="month" className={`mt-1 w-full ${input}`}>
+                      {(Object.keys(MEMBERSHIP_PLANS) as (keyof typeof MEMBERSHIP_PLANS)[]).map((p) => (
+                        <option key={p} value={p}>
+                          {t(`plans.${p}`)}{MEMBERSHIP_PLANS[p].priceCzk ? ` · ${MEMBERSHIP_PLANS[p].priceCzk} Kč` : ""}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="text-sm">{t("fields.validFrom")}
+                    <input type="date" name="validFrom" required defaultValue={today} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.paidHow")}
+                    <select name="method" defaultValue="cash" className={`mt-1 w-full ${input}`}>
+                      {(["cash", "card", "transfer", "none"] as const).map((p) => (
+                        <option key={p} value={p}>{t(p === "none" ? "pay.unpaid" : `pay.${p}`)}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="text-sm">{t("fields.amount")}
+                    <input type="number" name="amount" min={0} step="1" placeholder={t("fields.amountHint")} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.validUntil")}
+                    <input type="date" name="validUntil" className={`mt-1 w-full ${input}`} />
+                    <span className="mt-1 block text-xs text-neutral-500">{t("fields.validUntilHint")}</span>
+                  </label>
+                  <label className="text-sm sm:col-span-3">{t("fields.note")}
+                    <input name="note" maxLength={200} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-3">{t("grantMembership")}</button>
+                </form>
+              </section>
+            );
+          }),
+      )}
 
       {ctx.clubs.some((c) => c.roles.includes("owner")) && (
         <section>

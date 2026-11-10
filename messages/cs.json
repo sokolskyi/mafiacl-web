@@ -166,7 +166,10 @@
       "kids": "Dětská hra"
     },
     "price": "Vstupné: {price}",
-    "info": "Stránka turnaje"
+    "info": "Stránka turnaje",
+    "queueOpen": "Předběžný zápis: {count} · sestava se určí {until}",
+    "queueHint": "Předplatitelé mají přednost. Potvrzení přijde v pondělí; při 20 hráčích bude druhý stůl.",
+    "youAreQueued": "Jste v pořadí"
   },
   "admin": {
     "title": "Správa klubu",
@@ -205,7 +208,15 @@
       "streamUrl": "Odkaz na přenos",
       "infoUrl": "Stránka turnaje (mafgame apod.)",
       "nickname": "Přezdívka hráče",
-      "role": "Role"
+      "role": "Role",
+      "plan": "Typ",
+      "validFrom": "Od",
+      "validUntil": "Do (jen pro vlastní období)",
+      "validUntilHint": "U 1 a 3 měsíců se dopočítá samo.",
+      "paidHow": "Platba",
+      "amount": "Částka, Kč",
+      "amountHint": "výchozí — cena typu",
+      "note": "Poznámka"
     },
     "status": {
       "draft": "Koncept",
@@ -236,6 +247,29 @@
     "botSetup": "Připojit bota",
     "botReady": "Bot je připojen. Napište mu /start.",
     "announce": "Oznámit v Telegram kanálu",
-    "announced": "Oznámení odesláno do kanálu."
+    "announced": "Oznámení odesláno do kanálu.",
+    "membershipBadge": "předplatné",
+    "queue": "V pořadí: {count}",
+    "queuedShort": "pořadí {count}",
+    "queueRules": "Předběžný zápis do {until}: předplatitelé mají přednost. Pak prvních 10 dostane potvrzení (ráno v 09:00), ostatní jsou na čekačce. {final} — finále: 20+ přihlášených → druhý stůl, méně než 10 → přijde zpráva, rozhodnete vy.",
+    "queueFinalized": "Finále proběhlo, dál běží běžný zápis podle kapacity.",
+    "memberships": "Předplatné · {club}",
+    "membershipsHint": "Předplatné dává přednost na úterní mini-turnaje a večery se neplatí. Hráč se musí přihlásit na webu a vyplnit přezdívku.",
+    "noMemberships": "Žádné platné předplatné.",
+    "grantMembership": "Vydat předplatné",
+    "membershipAdded": "Předplatné vydáno.",
+    "plans": {
+      "month": "1 měsíc",
+      "quarter": "3 měsíce",
+      "custom": "Vlastní období"
+    },
+    "pay": {
+      "cash": "Hotově",
+      "card": "Kartou",
+      "transfer": "Převodem",
+      "gopay": "GoPay",
+      "unpaid": "nezaplaceno",
+      "undo": "Zrušit označení platby"
+    }
   }
 }

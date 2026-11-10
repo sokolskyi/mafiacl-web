@@ -166,7 +166,10 @@
       "kids": "Kids game"
     },
     "price": "Entry: {price}",
-    "info": "Tournament page"
+    "info": "Tournament page",
+    "queueOpen": "Pre-registration: {count} · line-up set {until}",
+    "queueHint": "Pass holders go first. Confirmation comes on Monday; with 20 players there's a second table.",
+    "youAreQueued": "You're in the queue"
   },
   "admin": {
     "title": "Club admin",
@@ -205,7 +208,15 @@
       "streamUrl": "Stream link",
       "infoUrl": "Tournament page (mafgame etc.)",
       "nickname": "Player nickname",
-      "role": "Role"
+      "role": "Role",
+      "plan": "Type",
+      "validFrom": "Valid from",
+      "validUntil": "Valid until (custom period only)",
+      "validUntilHint": "Calculated automatically for 1 and 3 months.",
+      "paidHow": "Payment",
+      "amount": "Amount, Kč",
+      "amountHint": "defaults to the plan price",
+      "note": "Note"
     },
     "status": {
       "draft": "Draft",
@@ -236,6 +247,29 @@
     "botSetup": "Connect bot",
     "botReady": "Bot connected. Send it /start.",
     "announce": "Announce in Telegram channel",
-    "announced": "Announcement sent to the channel."
+    "announced": "Announcement sent to the channel.",
+    "membershipBadge": "pass",
+    "queue": "Queued: {count}",
+    "queuedShort": "queue {count}",
+    "queueRules": "Pre-registration until {until}: pass holders go first. Then the first 10 get confirmed (in the morning at 09:00), the rest go to the waitlist. {final} — final call: 20+ → a second table, fewer than 10 → you get a message and decide.",
+    "queueFinalized": "The final call has passed; normal capacity-based sign-up from here.",
+    "memberships": "Passes · {club}",
+    "membershipsHint": "A pass gives priority for Tuesday mini-tournaments and covers the evening fee. The player must sign in on the website and set a nickname.",
+    "noMemberships": "No active passes.",
+    "grantMembership": "Issue pass",
+    "membershipAdded": "Pass issued.",
+    "plans": {
+      "month": "1 month",
+      "quarter": "3 months",
+      "custom": "Custom period"
+    },
+    "pay": {
+      "cash": "Cash",
+      "card": "Card",
+      "transfer": "Transfer",
+      "gopay": "GoPay",
+      "unpaid": "unpaid",
+      "undo": "Remove payment mark"
+    }
   }
 }

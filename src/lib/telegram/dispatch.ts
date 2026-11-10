@@ -7,7 +7,15 @@ import { botLang, t, type BotLang } from "./texts";
 
 type Pending = {
   id: number;
-  kind: "reminder" | "promoted" | "table_full" | "game_cancelled";
+  kind:
+    | "reminder"
+    | "promoted"
+    | "table_full"
+    | "game_cancelled"
+    | "confirmed"
+    | "waitlisted"
+    | "waitlist_final"
+    | "not_enough";
   attempts: number;
   game_id: number | null;
   profile_id: string;
@@ -43,7 +51,8 @@ export async function dispatchNotifications(origin: string) {
     .select("id, kind, attempts, game_id, profile_id")
     .is("sent_at", null)
     .lt("attempts", 5)
-    .order("created_at")
+    .lte("send_after", new Date().toISOString())
+    .order("send_after")
     .limit(50);
   if (error) throw new Error(`dispatch: ${error.message}`);
   const rows = (pending ?? []) as Pending[];
@@ -86,6 +95,20 @@ export async function dispatchNotifications(origin: string) {
         await sendMessage(chatId, t(lang, "promoted", { when: whenOf(g, lang), title: titleOf(g, lang), venue: venueOf(g) }), [
           [{ text: t(lang, "leave"), callback_data: `l:${g.id}` }],
         ]);
+      } else if (n.kind === "confirmed") {
+        if (new Date(g.startsAt) < new Date()) throw new Error("too_late");
+        await sendMessage(chatId, t(lang, "confirmedMsg", { when: whenOf(g, lang), title: titleOf(g, lang), venue: venueOf(g) }), [
+          [{ text: t(lang, "leave"), callback_data: `l:${g.id}` }],
+        ]);
+      } else if (n.kind === "waitlisted" || n.kind === "waitlist_final") {
+        if (new Date(g.startsAt) < new Date()) throw new Error("too_late");
+        await sendMessage(
+          chatId,
+          t(lang, n.kind === "waitlisted" ? "waitlistedMsg" : "waitlistFinal", { when: whenOf(g, lang), title: titleOf(g, lang) }),
+          [[{ text: t(lang, "leave"), callback_data: `l:${g.id}` }]],
+        );
+      } else if (n.kind === "not_enough") {
+        await sendMessage(chatId, t(lang, "notEnough", { when: whenOf(g, lang), title: titleOf(g, lang), count: g.active }));
       } else if (n.kind === "game_cancelled") {
         await sendMessage(chatId, t(lang, "cancelledGame", { when: whenOf(g, lang), title: titleOf(g, lang) }), [
           [{ text: t(lang, "site"), url: playUrl }],

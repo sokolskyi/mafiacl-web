@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n/routing";
 import { gameTitle, type UpcomingGame } from "@/lib/games";
 import { joinGame, leaveGame } from "@/lib/games-actions";
 
-type MyStatus = "confirmed" | "waitlist";
+export type MyStatus = "queued" | "confirmed" | "waitlist";
 
 /**
  * Расписание. Без `me` — статичная версия (мгновенно из кеша, без кнопок);
@@ -44,6 +44,12 @@ export async function GameList({
         const template = g.title?.[locale] ?? g.title?.cs;
         const title = template ? gameTitle(template, g.number, g.numberStyle) : t(`kind.${g.kind}`);
         const free = Math.max(g.capacity - g.confirmed, 0);
+        const queueOpen = g.queueUntil !== null;
+        const queueEnd = g.queueUntil
+          ? new Intl.DateTimeFormat(locale, { timeZone: g.timezone, weekday: "long", hour: "2-digit", minute: "2-digit" }).format(
+              new Date(new Date(g.queueUntil).getTime() - 60_000),
+            )
+          : null;
         const mine = me?.signups.get(g.id);
 
         return (
@@ -72,12 +78,15 @@ export async function GameList({
               </p>
             )}
             <p className="mt-3 text-sm">
-              {free > 0 ? (
+              {queueOpen ? (
+                <span className="text-sky-400">{t("queueOpen", { count: g.queued, until: queueEnd ?? "" })}</span>
+              ) : free > 0 ? (
                 <span className="text-green-400">{t("seats", { free, capacity: g.capacity })}</span>
               ) : (
                 <span className="text-amber-400">{t("full", { waitlist: g.waitlist })}</span>
               )}
             </p>
+            {queueOpen && <p className="mt-1 text-xs text-neutral-500">{t("queueHint")}</p>}
             {g.priceCzk !== null && (
               <p className="mt-1 text-sm text-neutral-300">
                 {t("price", {
@@ -103,8 +112,14 @@ export async function GameList({
                 <form action={leaveGame} className="flex items-center justify-between gap-3">
                   <input type="hidden" name="locale" value={locale} />
                   <input type="hidden" name="gameId" value={g.id} />
-                  <span className={mine === "confirmed" ? "font-semibold text-green-400" : "font-semibold text-amber-400"}>
-                    {mine === "confirmed" ? t("youAreIn") : t("youAreWaitlisted")}
+                  <span
+                    className={
+                      mine === "confirmed" ? "font-semibold text-green-400"
+                      : mine === "queued" ? "font-semibold text-sky-400"
+                      : "font-semibold text-amber-400"
+                    }
+                  >
+                    {mine === "confirmed" ? t("youAreIn") : mine === "queued" ? t("youAreQueued") : t("youAreWaitlisted")}
                   </span>
                   <button type="submit" className="text-sm text-neutral-400 underline hover:text-white">
                     {t("cancel")}
@@ -118,7 +133,7 @@ export async function GameList({
                     type="submit"
                     className="h-10 w-full rounded bg-red-600 px-4 font-semibold hover:bg-red-500"
                   >
-                    {!me.signedIn ? t("signInToJoin") : free > 0 ? t("join") : t("joinWaitlist")}
+                    {!me.signedIn ? t("signInToJoin") : queueOpen || free > 0 ? t("join") : t("joinWaitlist")}
                   </button>
                 </form>
               )}

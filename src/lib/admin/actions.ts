@@ -6,6 +6,7 @@ import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { GAMES_TAG } from "@/lib/games";
+import { MEMBERSHIP_PLANS, PAYMENT_METHODS, membershipEnd, type MembershipPlan } from "@/lib/memberships";
 import { localInputToIso } from "./time";
 
 // Все действия идут от имени вошедшего пользователя: права проверяет RLS в базе
@@ -212,4 +213,137 @@ export async function removeStaff(formData: FormData) {
     redirect(`${back}?error=save#team`);
   }
   redirect(`${back}#team`);
+}
+
+// ---------------------------------------------------------------------------
+// Оплаты (наличные / карта / перевод — отметка сотрудника) и абонементы
+// ---------------------------------------------------------------------------
+
+function method(value: FormDataEntryValue | null) {
+  const v = String(value ?? "");
+  return (PAYMENT_METHODS as readonly string[]).includes(v) ? (v as (typeof PAYMENT_METHODS)[number]) : null;
+}
+
+/** Отметить, что игрок заплатил за вечер. Сумма — цена игры. */
+export async function recordGamePayment(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const gameId = int(formData.get("gameId"), 1, Number.MAX_SAFE_INTEGER);
+  const signupId = int(formData.get("signupId"), 1, Number.MAX_SAFE_INTEGER);
+  const how = method(formData.get("method"));
+  if (!gameId) redirect(getPathname({ href: "/admin", locale }));
+  if (!signupId || !how) redirect(gamePath(locale, gameId, "error=invalid"));
+
+  const supabase = await createClient();
+  const { data: s } = await supabase
+    .from("game_signups")
+    .select("profile_id, games!inner ( id, club_id, price_czk )")
+    .eq("id", signupId)
+    .eq("game_id", gameId)
+    .maybeSingle();
+  const game = s?.games as unknown as { club_id: number; price_czk: number | null } | undefined;
+  if (!s || !game) redirect(gamePath(locale, gameId, "error=save"));
+
+  const { error } = await supabase.from("payments").insert({
+    club_id: game.club_id,
+    profile_id: s.profile_id,
+    purpose: "game",
+    signup_id: signupId,
+    amount_czk: Number(game.price_czk ?? 0),
+    method: how,
+  });
+  // 23505 — уже отмечено (двойной клик): не ошибка.
+  if (error && error.code !== "23505") {
+    console.error("recordGamePayment failed", { signupId, code: error.code, message: error.message });
+    redirect(gamePath(locale, gameId, "error=save"));
+  }
+  redirect(gamePath(locale, gameId));
+}
+
+/** Снять ошибочную ручную отметку оплаты. */
+export async function undoPayment(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const gameId = int(formData.get("gameId"), 1, Number.MAX_SAFE_INTEGER);
+  const paymentId = int(formData.get("paymentId"), 1, Number.MAX_SAFE_INTEGER);
+  const back = gameId ? gamePath(locale, gameId) : `${getPathname({ href: "/admin", locale })}#memberships`;
+  if (!paymentId) redirect(back);
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("payments").delete().eq("id", paymentId).select("id");
+  if (error || !data?.length) {
+    console.error("undoPayment failed", { paymentId, code: error?.code, message: error?.message });
+    redirect(gameId ? gamePath(locale, gameId, "error=save") : back);
+  }
+  redirect(back);
+}
+
+/** Выдать абонемент игроку по нику (и, если оплачен на месте, сразу отметить оплату). */
+export async function grantMembership(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const plan = String(formData.get("plan")) as MembershipPlan;
+  const from = String(formData.get("validFrom") ?? "");
+  const untilRaw = String(formData.get("validUntil") ?? "");
+  const payRaw = String(formData.get("method") ?? "");
+  const how = payRaw === "none" ? null : method(payRaw);
+  const amountRaw = String(formData.get("amount") ?? "").trim();
+  const amount = amountRaw === "" ? MEMBERSHIP_PLANS[plan]?.priceCzk ?? 0 : Number(amountRaw);
+  const note = String(formData.get("note") ?? "").trim().slice(0, 200) || null;
+  const isDate = (v: string) => /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v));
+
+  if (
+    !clubId || nickname.length < 2 || nickname.length > 32 || nickname.includes("*") ||
+    !(plan in MEMBERSHIP_PLANS) || !isDate(from) || (payRaw !== "none" && !how) || !(amount >= 0)
+  ) {
+    redirect(`${back}?error=invalid#memberships`);
+  }
+  const until = plan === "custom" ? untilRaw : membershipEnd(from, MEMBERSHIP_PLANS[plan].months);
+  if (!isDate(until) || until < from) redirect(`${back}?error=invalid#memberships`);
+
+  const supabase = await createClient();
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  if (!found || found.length !== 1) redirect(`${back}?error=noPlayer#memberships`);
+
+  const { data: m, error } = await supabase
+    .from("memberships")
+    .insert({ club_id: clubId, profile_id: found[0].id, plan, valid_from: from, valid_until: until, note })
+    .select("id")
+    .single();
+  if (error || !m) {
+    console.error("grantMembership failed", { clubId, code: error?.code, message: error?.message });
+    redirect(`${back}?error=save#memberships`);
+  }
+  if (how) {
+    const { error: payError } = await supabase.from("payments").insert({
+      club_id: clubId,
+      profile_id: found[0].id,
+      purpose: "membership",
+      membership_id: m.id,
+      amount_czk: amount,
+      method: how,
+    });
+    if (payError) {
+      console.error("membership payment failed", { membershipId: m.id, code: payError.code, message: payError.message });
+      redirect(`${back}?error=save#memberships`);
+    }
+  }
+  redirect(`${back}?membership=1#memberships`);
+}
+
+/** Удалить ошибочно выданный абонемент (вместе с ручной отметкой оплаты). */
+export async function removeMembership(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#memberships`;
+  const id = int(formData.get("membershipId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+
+  const supabase = await createClient();
+  await supabase.from("payments").delete().eq("membership_id", id).in("method", PAYMENT_METHODS as unknown as string[]);
+  const { data, error } = await supabase.from("memberships").delete().eq("id", id).select("id");
+  if (error || !data?.length) {
+    console.error("removeMembership failed", { id, code: error?.code, message: error?.message });
+  }
+  redirect(back);
 }

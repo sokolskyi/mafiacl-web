@@ -41,6 +41,7 @@ export type AdminGameRow = {
   capacity: number;
   confirmed: number;
   waitlist: number;
+  queued: number;
   venueName: string | null;
 };
 
@@ -73,6 +74,7 @@ export async function getAdminGames(clubIds: number[]): Promise<AdminGameRow[]> 
       capacity: g.capacity,
       confirmed: s.filter((x) => x.status === "confirmed").length,
       waitlist: s.filter((x) => x.status === "waitlist").length,
+      queued: s.filter((x) => x.status === "queued").length,
       venueName: (g.venues as unknown as { name: string } | null)?.name ?? null,
     };
   });
@@ -84,6 +86,7 @@ export async function getAdminGame(id: number) {
     .from("games")
     .select(
       `id, club_id, venue_id, starts_at, status, kind, title, number, capacity, price_czk, stream_url, info_url, late_after,
+       priority_until, allocated_at, final_at, finalized_at, table_size, max_capacity,
        game_schedules ( number_style ), clubs ( name, cities ( timezone ) )`,
     )
     .eq("id", id)
@@ -93,7 +96,9 @@ export async function getAdminGame(id: number) {
   const [{ data: signups }, { data: venues }] = await Promise.all([
     supabase
       .from("game_signups")
-      .select("id, status, guest_name, checked_in_at, created_at, profiles!game_signups_profile_id_fkey ( nickname, display_name )")
+      .select(
+        "id, status, guest_name, checked_in_at, created_at, has_priority, profile_id, profiles!game_signups_profile_id_fkey ( nickname, display_name )",
+      )
       .eq("game_id", id)
       .neq("status", "cancelled")
       .order("created_at"),
@@ -101,26 +106,93 @@ export async function getAdminGame(id: number) {
   ]);
 
   const club = game.clubs as unknown as { name: string; cities: { timezone: string } | null };
+  const timezone = club?.cities?.timezone ?? "Europe/Prague";
+  const gameDay = new Intl.DateTimeFormat("en-CA", { timeZone: timezone }).format(new Date(game.starts_at));
+  const rows = signups ?? [];
+  const profileIds = rows.map((s) => s.profile_id).filter((x): x is string => !!x);
+
+  // Оплаты за эти записи и абонементы, действующие в день игры.
+  const [{ data: payments }, { data: memberships }] = await Promise.all([
+    rows.length
+      ? supabase.from("payments").select("id, signup_id, method, amount_czk, status").in("signup_id", rows.map((s) => s.id)).in("status", ["paid", "pending"])
+      : Promise.resolve({ data: [] as { id: number; signup_id: number | null; method: string; amount_czk: number; status: string }[] }),
+    profileIds.length
+      ? supabase
+          .from("memberships")
+          .select("profile_id")
+          .eq("club_id", game.club_id)
+          .in("profile_id", profileIds)
+          .lte("valid_from", gameDay)
+          .gte("valid_until", gameDay)
+      : Promise.resolve({ data: [] as { profile_id: string }[] }),
+  ]);
+  const paymentOf = new Map((payments ?? []).map((p) => [p.signup_id, p]));
+  const members = new Set((memberships ?? []).map((m) => m.profile_id));
+
   return {
     game: {
       ...game,
       numberStyle: (game.game_schedules as unknown as { number_style: string } | null)?.number_style === "roman" ? ("roman" as const) : ("arabic" as const),
       title: game.title as Localized | null,
       clubName: club?.name ?? "",
-      timezone: club?.cities?.timezone ?? "Europe/Prague",
+      timezone,
     },
-    signups: (signups ?? []).map((s) => {
+    signups: rows.map((s) => {
       const p = s.profiles as unknown as { nickname: string | null; display_name: string | null } | null;
+      const pay = paymentOf.get(s.id);
       return {
         id: s.id,
-        status: s.status as "confirmed" | "waitlist",
+        status: s.status as "queued" | "confirmed" | "waitlist",
         name: s.guest_name ?? p?.nickname ?? p?.display_name ?? "—",
+        profileId: s.profile_id as string | null,
         isGuest: s.guest_name !== null,
         checkedIn: s.checked_in_at !== null,
+        hasMembership: !!s.profile_id && members.has(s.profile_id),
+        payment: pay ? { id: pay.id, method: pay.method, amount: Number(pay.amount_czk), pending: pay.status === "pending" } : null,
       };
     }),
     venues: venues ?? [],
   };
+}
+
+export type AdminMembership = {
+  id: number;
+  name: string;
+  plan: "month" | "quarter" | "custom";
+  validFrom: string;
+  validUntil: string;
+  note: string | null;
+  paid: { method: string; amount: number } | null;
+};
+
+/** Действующие и будущие абонементы клуба (для владельца/админа). */
+export async function getClubMemberships(clubId: number, timezone: string): Promise<AdminMembership[]> {
+  const supabase = await createClient();
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: timezone }).format(new Date());
+  const { data, error } = await supabase
+    .from("memberships")
+    .select("id, plan, valid_from, valid_until, note, profiles!memberships_profile_id_fkey ( nickname, display_name ), payments ( method, amount_czk, status )")
+    .eq("club_id", clubId)
+    .gte("valid_until", today)
+    .order("valid_until")
+    .limit(200);
+  if (error) {
+    console.error("getClubMemberships failed", { code: error.code, message: error.message });
+    return [];
+  }
+  return (data ?? []).map((m) => {
+    const p = m.profiles as unknown as { nickname: string | null; display_name: string | null } | null;
+    const pay = ((m.payments ?? []) as { method: string; amount_czk: number; status: string }[]).find((x) => x.status === "paid");
+    return {
+      id: m.id,
+      name: p?.nickname ?? p?.display_name ?? "—",
+      plan: m.plan as AdminMembership["plan"],
+      validFrom: m.valid_from,
+      validUntil: m.valid_until,
+      note: m.note,
+      paid: pay ? { method: pay.method, amount: Number(pay.amount_czk) } : null,
+    };
+  });
 }
 
 export async function getClubStaff(clubId: number) {

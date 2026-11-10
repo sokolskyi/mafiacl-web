@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addGuest, changeSignup, updateGame } from "@/lib/admin/actions";
+import { addGuest, changeSignup, recordGamePayment, undoPayment, updateGame } from "@/lib/admin/actions";
 import { announceGame } from "@/lib/telegram/actions";
 import { getAdminGame, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
@@ -25,6 +25,14 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
   const title = tpl ? gameTitle(tpl, game.number, game.numberStyle) : tg(`kind.${game.kind}`);
   const confirmed = signups.filter((s) => s.status === "confirmed");
   const waitlist = signups.filter((s) => s.status === "waitlist");
+  // Очередь в том порядке, в каком её разберёт база: абонементы, потом время записи.
+  const queued = signups
+    .filter((s) => s.status === "queued")
+    .sort((a, b) => Number(b.hasMembership) - Number(a.hasMembership));
+  const fmt = (iso: string) =>
+    new Intl.DateTimeFormat(locale, { timeZone: game.timezone, weekday: "short", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+  const queueOpen = !!game.priority_until && !game.allocated_at;
+  const money = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(n);
   const input = "mt-1 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
 
   const Row = ({ s, n }: { s: (typeof signups)[number]; n: number }) => (
@@ -33,12 +41,34 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
       <span className="flex-1">
         {s.name}
         {s.isGuest && <span className="ml-2 rounded bg-white/10 px-1.5 text-xs text-neutral-400">{t("guest")}</span>}
+        {s.hasMembership && <span className="ml-2 rounded bg-sky-500/20 px-1.5 text-xs text-sky-300">{t("membershipBadge")}</span>}
       </span>
+      {s.status === "confirmed" && !s.hasMembership && (
+        s.payment ? (
+          <form action={undoPayment} className="flex items-center gap-2 text-sm">
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="gameId" value={game.id} />
+            <input type="hidden" name="paymentId" value={s.payment.id} />
+            <span className="text-green-400">✓ {money(s.payment.amount)} · {t(`pay.${s.payment.method}`)}</span>
+            {s.payment.method !== "gopay" && (
+              <button aria-label={t("pay.undo")} title={t("pay.undo")} className="text-neutral-500 hover:text-red-400">×</button>
+            )}
+          </form>
+        ) : (
+          <form action={recordGamePayment} className="flex gap-2 text-sm">
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="gameId" value={game.id} />
+            <input type="hidden" name="signupId" value={s.id} />
+            <button name="method" value="cash" className="rounded bg-white/10 px-2 py-0.5 hover:bg-white/20">{t("pay.cash")}</button>
+            <button name="method" value="card" className="rounded bg-white/10 px-2 py-0.5 hover:bg-white/20">{t("pay.card")}</button>
+          </form>
+        )
+      )}
       <form action={changeSignup} className="flex gap-3 text-sm">
         <input type="hidden" name="locale" value={locale} />
         <input type="hidden" name="gameId" value={game.id} />
         <input type="hidden" name="signupId" value={s.id} />
-        {s.status === "waitlist" && (
+        {(s.status === "waitlist" || s.status === "queued") && (
           <button name="op" value="confirm" className="text-green-400 hover:underline">{t("confirm")}</button>
         )}
         {s.status === "confirmed" && (
@@ -68,6 +98,26 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
         <input type="hidden" name="gameId" value={game.id} />
         <button className="rounded bg-[#229ED9] px-4 py-2 text-sm font-semibold hover:bg-[#1f91c7]">{t("announce")}</button>
       </form>
+
+      {game.priority_until && (
+        <p className="max-w-2xl rounded border border-sky-500/30 bg-sky-500/5 px-4 py-3 text-sm text-sky-200">
+          {t("queueRules", {
+            until: fmt(new Date(new Date(game.priority_until).getTime() - 60_000).toISOString()),
+            final: game.final_at ? fmt(game.final_at) : "—",
+          })}
+          {game.finalized_at && <span className="block text-neutral-400">{t("queueFinalized")}</span>}
+        </p>
+      )}
+
+      {(queueOpen || queued.length > 0) && (
+        <section>
+          <h3 className="text-lg font-bold text-sky-400">{t("queue", { count: queued.length })}</h3>
+          <ol className="mt-3 divide-y divide-white/10 rounded border border-white/10">
+            {queued.map((s, i) => <Row key={s.id} s={s} n={i + 1} />)}
+            {queued.length === 0 && <li className="px-4 py-3 text-neutral-500">{t("nobody")}</li>}
+          </ol>
+        </section>
+      )}
 
       <section>
         <h3 className="text-lg font-bold">{t("players", { confirmed: confirmed.length, capacity: game.capacity })}</h3>

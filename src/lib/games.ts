@@ -13,6 +13,9 @@ export type UpcomingGame = {
   capacity: number;
   confirmed: number;
   waitlist: number;
+  /** Окно приоритета абонементов ещё открыто: записи пока в очереди. */
+  queueUntil: string | null;
+  queued: number;
   streamUrl: string | null;
   infoUrl: string | null;
   number: number | null;
@@ -37,6 +40,7 @@ export async function getUpcomingGames(clubSlug: string, limit = 12): Promise<Up
     .from("games")
     .select(
       `id, starts_at, late_after, title, kind, capacity, stream_url, info_url, number, price_czk,
+       priority_until, allocated_at,
        game_schedules ( number_style ),
        venues ( name, address, maps_url ),
        clubs!inner ( slug, cities ( timezone ) ),
@@ -66,6 +70,9 @@ export async function getUpcomingGames(clubSlug: string, limit = 12): Promise<Up
       capacity: g.capacity,
       confirmed: signups.filter((s) => s.status === "confirmed").length,
       waitlist: signups.filter((s) => s.status === "waitlist").length,
+      // Кеш живёт минуты: момент закрытия окна сравниваем на клиенте рендера, а не здесь.
+      queueUntil: g.priority_until && !g.allocated_at ? g.priority_until : null,
+      queued: signups.filter((s) => s.status === "queued").length,
       streamUrl: g.stream_url,
       infoUrl: g.info_url,
       number: g.number,
