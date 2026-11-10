@@ -233,7 +233,7 @@ export function MatchApp(p: MatchAppProps) {
   }
 
   /** Записать голосование (если отмечали руки) и, если нужно, выбывших. */
-  function commitVote(seatsOut: number[]) {
+  function commitVote(seatsOut: number[], keepOnly?: number[]) {
     const hasVotes = Object.values(cur.voters).some((l) => l.length);
     const steps: Action[] = [];
     const at = stamp();
@@ -243,6 +243,8 @@ export function MatchApp(p: MatchAppProps) {
       steps.push({ t: "vote", counts, voters, at });
     }
     if (seatsOut.length) steps.push({ t: "eliminate", seats: seatsOut, reason: "voted", at });
+    // Переголосование после равенства — только между теми, кто набрал поровну.
+    if (keepOnly) for (const s of nominees) if (!keepOnly.includes(s)) steps.push({ t: "unnominate", seat: s, at });
     if (!steps.length) return;
     try {
       steps.reduce((st, a) => tryApply(st, a), state);
@@ -458,7 +460,7 @@ export function MatchApp(p: MatchAppProps) {
                 {leaders.length > 1 && (
                   <>
                     <p className="w-full text-sm text-amber-300">{t("tie", { seats: leaders.join(", ") })}</p>
-                    <button className={btnSoft} onClick={() => commitVote([])}>{t("revote")}</button>
+                    <button className={btnSoft} onClick={() => commitVote([], leaders)}>{t("revote")}</button>
                     <button className={btnMain} onClick={() => commitVote(leaders)}>{t("outAll", { seats: leaders.join(", ") })}</button>
                   </>
                 )}
