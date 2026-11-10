@@ -418,3 +418,44 @@ export async function removeTitle(formData: FormData) {
   updateTag(TITLES_TAG);
   redirect(back);
 }
+
+// ---------------------------------------------------------------------------
+// Призовые (Kč)
+// ---------------------------------------------------------------------------
+
+export async function addPrize(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const amount = int(formData.get("amount"), 1, 1_000_000);
+  const label = String(formData.get("label") ?? "").trim().slice(0, 80);
+  const wonOn = String(formData.get("wonOn") ?? "");
+  if (!clubId || !amount || nickname.length < 1 || nickname.length > 32 || nickname.includes("*") || !label || (wonOn && !/^\d{4}-\d{2}-\d{2}$/.test(wonOn))) {
+    redirect(`${back}?error=invalid#prizes`);
+  }
+  const supabase = await createClient();
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  const profileId = found?.length === 1 ? (found[0].id as string) : null;
+  const { error } = await supabase
+    .from("player_prizes")
+    .insert({ club_id: clubId, profile_id: profileId, holder_name: nickname, amount_czk: amount, label, won_on: wonOn || null });
+  if (error) {
+    console.error("addPrize failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#prizes`);
+  }
+  updateTag(TITLES_TAG);
+  redirect(`${back}#prizes`);
+}
+
+export async function removePrize(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#prizes`;
+  const id = int(formData.get("prizeId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  await supabase.from("player_prizes").delete().eq("id", id);
+  updateTag(TITLES_TAG);
+  redirect(back);
+}

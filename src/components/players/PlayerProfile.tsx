@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n/routing";
 import type { PlayerPage, PlayerRole } from "@/lib/players";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getPlayerOfWeek, getSeasons } from "@/lib/rating";
-import { badgeOf, getBadges, getTitles } from "@/lib/badges";
+import { badgeOf, belongsTo, getBadges, getPrizes, getTitles } from "@/lib/badges";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -30,9 +30,10 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const isPotw = !!potw?.winners.some((w) => w.profileId === player.id);
   const badges = await getBadges(MAIN_CLUB_SLUG);
   const badge = badgeOf(badges, player.id, player.nickname);
-  const titles = (await getTitles(MAIN_CLUB_SLUG)).filter(
-    (x) => x.profileId === player.id || (!x.profileId && x.holderName?.toLowerCase() === player.nickname.toLowerCase()),
-  );
+  const titles = (await getTitles(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
+  const prizes = (await getPrizes(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
+  const prizeTotal = prizes.reduce((a, x) => a + x.amount, 0);
+  const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(n);
   const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
 
   return (
@@ -85,12 +86,13 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
 
       <section aria-labelledby="stats" className="mt-10">
         <h2 id="stats" className="sr-only">{t("stats")}</h2>
-        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <dl className={`grid grid-cols-2 gap-3 ${prizeTotal ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
           {[
             [t("games"), String(s.games)],
             [t("winRate"), pct(s.wins, s.games)],
             [t("points"), num(s.points)],
             [t("avgPoints"), s.games ? num(s.points / s.games) : "—"],
+            ...(prizeTotal ? [[t("prizeMoney"), czk(prizeTotal)]] : []),
           ].map(([k, v]) => (
             <div key={k} className="rounded-lg border border-white/10 bg-neutral-950 p-4">
               <dt className="text-sm text-neutral-400">{k}</dt>
@@ -100,6 +102,21 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         </dl>
         {s.games === 0 && <p className="mt-6 text-neutral-400">{t("noGames")}</p>}
       </section>
+
+      {prizes.length > 0 && (
+        <section aria-labelledby="prizes" className="mt-10">
+          <h2 id="prizes" className="text-xl font-bold">{t("prizeMoney")}</h2>
+          <ul className="mt-3 divide-y divide-white/10 rounded border border-white/10 text-sm">
+            {prizes.map((x) => (
+              <li key={x.id} className="flex items-center gap-3 px-4 py-2">
+                <span className="w-24 text-neutral-400">{x.wonOn ? date(x.wonOn) : ""}</span>
+                <span className="flex-1">{x.label}</span>
+                <span className="font-mono font-bold">{czk(x.amount)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {s.games > 0 && (
         <>

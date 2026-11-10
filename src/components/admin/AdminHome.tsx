@@ -2,8 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addStaff, addTitle, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
-import { getTitles } from "@/lib/badges";
+import { addPrize, addStaff, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
 import { getAdminGames, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
@@ -238,6 +238,54 @@ export async function AdminHome({
                     <input type="date" name="wonOn" className={`mt-1 w-full ${input}`} />
                   </label>
                   <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-4">{t("addTitle")}</button>
+                </form>
+              </section>
+            );
+          }),
+      )}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const prizes = (await getPrizes(club.slug)).slice(0, 30);
+            const today = new Intl.DateTimeFormat("en-CA", { timeZone: club.timezone }).format(new Date());
+            return (
+              <section key={`p-${club.id}`} id="prizes">
+                <h2 className="text-xl font-bold">{t("prizes", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("prizesHint")}</p>
+                {prizes.length > 0 && (
+                  <ul className="mt-4 max-w-2xl divide-y divide-white/10 rounded border border-white/10">
+                    {prizes.map((x) => (
+                      <li key={x.id} className="flex items-center gap-3 px-4 py-2">
+                        <span className="flex-1 font-semibold">{x.nickname ?? x.holderName}</span>
+                        <span className="text-sm text-neutral-400">{x.label}</span>
+                        <span className="font-mono">{x.amount} Kč</span>
+                        <form action={removePrize}>
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="prizeId" value={x.id} />
+                          <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                        </form>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <form action={addPrize} className="mt-4 grid max-w-2xl gap-3 sm:grid-cols-4">
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="clubId" value={club.id} />
+                  <label className="text-sm">{t("fields.nickname")}
+                    <input name="nickname" required maxLength={32} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.amount")}
+                    <input type="number" name="amount" min={1} required className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.titleLabel")}
+                    <input name="label" required maxLength={80} placeholder={t("fields.prizeLabelHint")} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.wonOn")}
+                    <input type="date" name="wonOn" defaultValue={today} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-4">{t("addPrize")}</button>
                 </form>
               </section>
             );

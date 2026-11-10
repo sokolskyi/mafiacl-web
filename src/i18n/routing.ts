@@ -15,6 +15,7 @@ export const routing = defineRouting({
     "/kings": "/kings",
     "/tournaments": { cs: "/turnaje", ru: "/turniry", uk: "/turniry", en: "/tournaments" },
     "/ratings": { cs: "/zebricky", ru: "/reytingi", uk: "/reitynhy", en: "/ratings" },
+    "/hall-of-fame": { cs: "/sin-slavy", ru: "/zal-slavy", uk: "/zal-slavy", en: "/hall-of-fame" },
     "/learn": { cs: "/pravidla", ru: "/pravila", uk: "/pravyla", en: "/rules" },
     "/documents": { cs: "/dokumenty", ru: "/dokumenty", uk: "/dokumenty", en: "/documents" },
     "/blog": "/blog",

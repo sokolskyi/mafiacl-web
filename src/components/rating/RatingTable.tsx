@@ -129,6 +129,9 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
         </div>
       )}
       <p className="text-xs text-neutral-500">{t("note")}</p>
+      <p>
+        <Link href="/hall-of-fame" className="font-semibold text-yellow-300 hover:text-yellow-200">⭐ {t("hallOfFame")} →</Link>
+      </p>
     </div>
   );
 }

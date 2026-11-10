@@ -102,6 +102,10 @@
     "account": {
       "title": "My account",
       "description": "Sign-ups, statistics, MafiaCL Coin and orders."
+    },
+    "hallOfFame": {
+      "title": "Hall of fame",
+      "description": "Season champions, MafiaCL Kings winners, mini tournament wins and prize money of club players."
     }
   },
   "account": {
@@ -224,7 +228,8 @@
       "titleKind": "Title",
       "titleLabel": "For",
       "titleLabelHint": "e.g. Season IV",
-      "wonOn": "Date"
+      "wonOn": "Date",
+      "prizeLabelHint": "e.g. Season V final, 1st place"
     },
     "status": {
       "draft": "Draft",
@@ -292,7 +297,10 @@
     "titleKinds": {
       "season_champion": "Season champion",
       "kings_winner": "MafiaCL Kings winner"
-    }
+    },
+    "prizes": "Prizes · {club}",
+    "prizesHint": "Cash prizes for players: season final, MafiaCl Arena rounds, etc. Shown on the player page and in the hall of fame.",
+    "addPrize": "Add prize"
   },
   "match": {
     "matches": "Games tonight",
@@ -481,7 +489,8 @@
     "title": {
       "season_champion": "Season champion",
       "kings_winner": "MafiaCL Kings winner"
-    }
+    },
+    "prizeMoney": "Prize money"
   },
   "rating": {
     "filters": "Rating filters",
@@ -506,11 +515,22 @@
     "prize": "Prize pool now: {sum} Kč ({ppg} Kč per game + {ppe} Kč per mini tournament).",
     "finalist": "final",
     "rating": "Rating",
-    "eveningWinsHint": "Mini tournament wins"
+    "eveningWinsHint": "Mini tournament wins",
+    "hallOfFame": "Hall of fame"
   },
   "home": {
     "playerOfWeek": "Player of the week",
     "winnerOf": "Winner of {title}, {date}",
     "winnerStats": "{points} points · {wins} wins in {games} games"
+  },
+  "hall": {
+    "back": "Ratings",
+    "empty": "Empty for now — titles and prizes are added in the admin panel.",
+    "player": "Player",
+    "champion": "Premier League season champion",
+    "kings": "MafiaCL Kings winner",
+    "evenings": "Mini tournament wins",
+    "prize": "Prize money",
+    "legend": "⭐ — Premier League season champion, 👑 — MafiaCL Kings winner, ⚜️ — mini tournament wins (since season V, from the electronic sheet)."
   }
 }

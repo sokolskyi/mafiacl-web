@@ -102,6 +102,10 @@
     "account": {
       "title": "Особистий кабінет",
       "description": "Записи, статистика, MafiaCL Coin і замовлення."
+    },
+    "hallOfFame": {
+      "title": "Зала слави",
+      "description": "Чемпіони сезонів, переможці MafiaCL Kings, перемоги в міні-турнірах і призові гравців клубу."
     }
   },
   "account": {
@@ -224,7 +228,8 @@
       "titleKind": "Титул",
       "titleLabel": "За що",
       "titleLabelHint": "напр. IV сезон",
-      "wonOn": "Дата"
+      "wonOn": "Дата",
+      "prizeLabelHint": "напр. Фінал V сезону, 1 місце"
     },
     "status": {
       "draft": "Чернетка",
@@ -292,7 +297,10 @@
     "titleKinds": {
       "season_champion": "Чемпіон сезону",
       "kings_winner": "Переможець MafiaCL Kings"
-    }
+    },
+    "prizes": "Призові · {club}",
+    "prizesHint": "Грошові призи гравцям: фінал сезону, раунди MafiaCl Arena тощо. Видно в профілі гравця та в залі слави.",
+    "addPrize": "Додати приз"
   },
   "match": {
     "matches": "Партії вечора",
@@ -481,7 +489,8 @@
     "title": {
       "season_champion": "Чемпіон сезону",
       "kings_winner": "Переможець MafiaCL Kings"
-    }
+    },
+    "prizeMoney": "Призові"
   },
   "rating": {
     "filters": "Фільтри рейтингу",
@@ -506,11 +515,22 @@
     "prize": "Призовий фонд зараз: {sum} Kč ({ppg} Kč за партію + {ppe} Kč за міні-турнір).",
     "finalist": "фінал",
     "rating": "Рейтинг",
-    "eveningWinsHint": "Перемоги в міні-турнірах"
+    "eveningWinsHint": "Перемоги в міні-турнірах",
+    "hallOfFame": "Зала слави"
   },
   "home": {
     "playerOfWeek": "Гравець тижня",
     "winnerOf": "Переможець: {title}, {date}",
     "winnerStats": "{points} балів · перемог {wins} з {games}"
+  },
+  "hall": {
+    "back": "Рейтинги",
+    "empty": "Поки порожньо — титули та призові додаються в адмінці.",
+    "player": "Гравець",
+    "champion": "Чемпіон сезону Premier League",
+    "kings": "Переможець MafiaCL Kings",
+    "evenings": "Перемоги в міні-турнірах",
+    "prize": "Призові",
+    "legend": "⭐ — чемпіон сезону Premier League, 👑 — переможець MafiaCL Kings, ⚜️ — перемоги в міні-турнірах (з V сезону, за електронним бланком)."
   }
 }

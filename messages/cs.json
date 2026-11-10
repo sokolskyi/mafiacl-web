@@ -102,6 +102,10 @@
     "account": {
       "title": "Můj účet",
       "description": "Přihlášky, statistiky, MafiaCL Coin a objednávky."
+    },
+    "hallOfFame": {
+      "title": "Síň slávy",
+      "description": "Šampioni sezón, vítězové MafiaCL Kings, výhry v mini-turnajích a výhry hráčů klubu."
     }
   },
   "account": {
@@ -224,7 +228,8 @@
       "titleKind": "Titul",
       "titleLabel": "Za co",
       "titleLabelHint": "např. IV. sezóna",
-      "wonOn": "Datum"
+      "wonOn": "Datum",
+      "prizeLabelHint": "např. Finále V. sezóny, 1. místo"
     },
     "status": {
       "draft": "Koncept",
@@ -292,7 +297,10 @@
     "titleKinds": {
       "season_champion": "Šampion sezóny",
       "kings_winner": "Vítěz MafiaCL Kings"
-    }
+    },
+    "prizes": "Výhry · {club}",
+    "prizesHint": "Peněžní výhry hráčům: finále sezóny, kola MafiaCl Arena apod. Zobrazí se v profilu hráče a v síni slávy.",
+    "addPrize": "Přidat výhru"
   },
   "match": {
     "matches": "Hry večera",
@@ -481,7 +489,8 @@
     "title": {
       "season_champion": "Šampion sezóny",
       "kings_winner": "Vítěz MafiaCL Kings"
-    }
+    },
+    "prizeMoney": "Výhry"
   },
   "rating": {
     "filters": "Filtry žebříčku",
@@ -506,11 +515,22 @@
     "prize": "Výherní fond teď: {sum} Kč ({ppg} Kč za hru + {ppe} Kč za mini-turnaj).",
     "finalist": "finále",
     "rating": "Žebříček",
-    "eveningWinsHint": "Výhry v mini-turnajích"
+    "eveningWinsHint": "Výhry v mini-turnajích",
+    "hallOfFame": "Síň slávy"
   },
   "home": {
     "playerOfWeek": "Hráč týdne",
     "winnerOf": "Vítěz: {title}, {date}",
     "winnerStats": "{points} bodů · výher {wins} z {games}"
+  },
+  "hall": {
+    "back": "Žebříčky",
+    "empty": "Zatím prázdné — tituly a výhry se přidávají v administraci.",
+    "player": "Hráč",
+    "champion": "Šampion sezóny Premier League",
+    "kings": "Vítěz MafiaCL Kings",
+    "evenings": "Výhry v mini-turnajích",
+    "prize": "Výhry",
+    "legend": "⭐ — šampion sezóny Premier League, 👑 — vítěz MafiaCL Kings, ⚜️ — výhry v mini-turnajích (od V. sezóny, podle elektronického zápisu)."
   }
 }
