@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addStaff, createGame, grantMembership, removeMembership, removeStaff } from "@/lib/admin/actions";
+import { addStaff, createGame, grantMembership, linkMembership, removeMembership, removeStaff } from "@/lib/admin/actions";
 import { setupBot } from "@/lib/telegram/actions";
 import { getAdminGames, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
@@ -11,7 +11,7 @@ import { isoToLocalInput } from "@/lib/admin/time";
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminHome({
   locale, error, team, bot, membership,
-}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: boolean }) {
+}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: string }) {
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
   const ctx = await getStaffContext();
@@ -38,7 +38,11 @@ export async function AdminHome({
       )}
       {team && <p role="status" className="text-green-400">{t("teamAdded")}</p>}
       {bot && <p role="status" className="text-green-400">{t("botReady")}</p>}
-      {membership && <p role="status" className="text-green-400">{t("membershipAdded")}</p>}
+      {membership && (
+        <p role="status" className="text-green-400">
+          {t(membership === "unlinked" ? "membershipUnlinked" : membership === "linked" ? "membershipLinked" : "membershipAdded")}
+        </p>
+      )}
 
       <section>
         <h2 className="text-xl font-bold">{t("games")}</h2>
@@ -121,12 +125,23 @@ export async function AdminHome({
                 <ul className="mt-4 max-w-3xl divide-y divide-white/10 rounded border border-white/10">
                   {list.map((m) => (
                     <li key={m.id} className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2">
-                      <span className="flex-1 font-semibold">{m.name}</span>
+                      <span className="flex-1 font-semibold">
+                        {m.name}
+                        {!m.linked && <span className="ml-2 rounded bg-amber-500/20 px-1.5 text-xs font-normal text-amber-300">{t("notLinked")}</span>}
+                      </span>
                       <span className="text-sm text-neutral-400">{t(`plans.${m.plan}`)}</span>
                       <span className="text-sm">{date(m.validFrom)} – {date(m.validUntil)}</span>
                       <span className="text-sm">
-                        {m.paid ? <span className="text-green-400">✓ {m.paid.amount} Kč · {t(`pay.${m.paid.method}`)}</span> : <span className="text-amber-400">{t("pay.unpaid")}</span>}
+                        {m.paid ? <span className="text-green-400">✓ {m.paid.amount} Kč{m.paid.method !== "other" && ` · ${t(`pay.${m.paid.method}`)}`}</span> : <span className="text-amber-400">{t("pay.unpaid")}</span>}
                       </span>
+                      {!m.linked && (
+                        <form action={linkMembership} className="flex gap-1">
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="membershipId" value={m.id} />
+                          <input name="nickname" required minLength={2} maxLength={32} defaultValue={m.name} aria-label={t("fields.siteNickname")} className="w-32 rounded border border-white/20 bg-neutral-900 px-2 py-0.5 text-sm" />
+                          <button className="text-sm text-sky-400 hover:underline">{t("link")}</button>
+                        </form>
+                      )}
                       <form action={removeMembership}>
                         <input type="hidden" name="locale" value={locale} />
                         <input type="hidden" name="membershipId" value={m.id} />

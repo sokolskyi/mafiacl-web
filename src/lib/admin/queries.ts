@@ -158,7 +158,9 @@ export async function getAdminGame(id: number) {
 export type AdminMembership = {
   id: number;
   name: string;
-  plan: "month" | "quarter" | "custom";
+  /** Абонемент записан на ник из таблицы, аккаунт ещё не привязан — приоритета не даёт. */
+  linked: boolean;
+  plan: "month" | "quarter" | "year" | "custom";
   validFrom: string;
   validUntil: string;
   note: string | null;
@@ -171,10 +173,11 @@ export async function getClubMemberships(clubId: number, timezone: string): Prom
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: timezone }).format(new Date());
   const { data, error } = await supabase
     .from("memberships")
-    .select("id, plan, valid_from, valid_until, note, profiles!memberships_profile_id_fkey ( nickname, display_name ), payments ( method, amount_czk, status )")
+    .select("id, plan, valid_from, valid_until, note, holder_name, profile_id, profiles!memberships_profile_id_fkey ( nickname, display_name ), payments ( method, amount_czk, status )")
     .eq("club_id", clubId)
     .gte("valid_until", today)
     .order("valid_until")
+    .order("holder_name")
     .limit(200);
   if (error) {
     console.error("getClubMemberships failed", { code: error.code, message: error.message });
@@ -185,7 +188,8 @@ export async function getClubMemberships(clubId: number, timezone: string): Prom
     const pay = ((m.payments ?? []) as { method: string; amount_czk: number; status: string }[]).find((x) => x.status === "paid");
     return {
       id: m.id,
-      name: p?.nickname ?? p?.display_name ?? "—",
+      name: p?.nickname ?? p?.display_name ?? m.holder_name ?? "—",
+      linked: m.profile_id !== null,
       plan: m.plan as AdminMembership["plan"],
       validFrom: m.valid_from,
       validUntil: m.valid_until,

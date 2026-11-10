@@ -216,7 +216,8 @@
       "paidHow": "Platba",
       "amount": "Částka, Kč",
       "amountHint": "výchozí — cena typu",
-      "note": "Poznámka"
+      "note": "Poznámka",
+      "siteNickname": "Přezdívka na webu"
     },
     "status": {
       "draft": "Koncept",
@@ -254,14 +255,15 @@
     "queueRules": "Předběžný zápis do {until}: předplatitelé mají přednost. Pak prvních 10 dostane potvrzení (ráno v 09:00), ostatní jsou na čekačce. {final} — finále: 20+ přihlášených → druhý stůl, méně než 10 → přijde zpráva, rozhodnete vy.",
     "queueFinalized": "Finále proběhlo, dál běží běžný zápis podle kapacity.",
     "memberships": "Předplatné · {club}",
-    "membershipsHint": "Předplatné dává přednost na úterní mini-turnaje a večery se neplatí. Hráč se musí přihlásit na webu a vyplnit přezdívku.",
+    "membershipsHint": "Předplatné dává přednost na úterní mini-turnaje a večery se neplatí. Lze vydat i hráči, který ještě není na webu — na přezdívku; přednost začne platit po propojení s jeho účtem.",
     "noMemberships": "Žádné platné předplatné.",
     "grantMembership": "Vydat předplatné",
     "membershipAdded": "Předplatné vydáno.",
     "plans": {
       "month": "1 měsíc",
       "quarter": "3 měsíce",
-      "custom": "Vlastní období"
+      "custom": "Vlastní období",
+      "year": "Rok (do 31.12)"
     },
     "pay": {
       "cash": "Hotově",
@@ -269,7 +271,12 @@
       "transfer": "Převodem",
       "gopay": "GoPay",
       "unpaid": "nezaplaceno",
-      "undo": "Zrušit označení platby"
-    }
+      "undo": "Zrušit označení platby",
+      "other": "jinak"
+    },
+    "notLinked": "nepropojeno s účtem",
+    "link": "Propojit",
+    "membershipUnlinked": "Předplatné je zapsané na přezdívku. Až se hráč zaregistruje, propojte ho s účtem — pak začne platit přednost.",
+    "membershipLinked": "Předplatné propojeno s účtem."
   }
 }

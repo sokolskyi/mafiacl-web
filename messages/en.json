@@ -216,7 +216,8 @@
       "paidHow": "Payment",
       "amount": "Amount, Kč",
       "amountHint": "defaults to the plan price",
-      "note": "Note"
+      "note": "Note",
+      "siteNickname": "Nickname on the site"
     },
     "status": {
       "draft": "Draft",
@@ -254,14 +255,15 @@
     "queueRules": "Pre-registration until {until}: pass holders go first. Then the first 10 get confirmed (in the morning at 09:00), the rest go to the waitlist. {final} — final call: 20+ → a second table, fewer than 10 → you get a message and decide.",
     "queueFinalized": "The final call has passed; normal capacity-based sign-up from here.",
     "memberships": "Passes · {club}",
-    "membershipsHint": "A pass gives priority for Tuesday mini-tournaments and covers the evening fee. The player must sign in on the website and set a nickname.",
+    "membershipsHint": "A pass gives priority for Tuesday mini-tournaments and covers the evening fee. You can issue one to someone not on the site yet — by nickname; priority starts once you link it to their account.",
     "noMemberships": "No active passes.",
     "grantMembership": "Issue pass",
     "membershipAdded": "Pass issued.",
     "plans": {
       "month": "1 month",
       "quarter": "3 months",
-      "custom": "Custom period"
+      "custom": "Custom period",
+      "year": "Year (until 31.12)"
     },
     "pay": {
       "cash": "Cash",
@@ -269,7 +271,12 @@
       "transfer": "Transfer",
       "gopay": "GoPay",
       "unpaid": "unpaid",
-      "undo": "Remove payment mark"
-    }
+      "undo": "Remove payment mark",
+      "other": "other"
+    },
+    "notLinked": "not linked to an account",
+    "link": "Link",
+    "membershipUnlinked": "Pass saved under the nickname. Once the player signs up on the site, link it to their account to activate priority.",
+    "membershipLinked": "Pass linked to the account."
   }
 }

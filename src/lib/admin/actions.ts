@@ -298,17 +298,18 @@ export async function grantMembership(formData: FormData) {
   ) {
     redirect(`${back}?error=invalid#memberships`);
   }
-  const until = plan === "custom" ? untilRaw : membershipEnd(from, MEMBERSHIP_PLANS[plan].months);
+  const until = plan === "custom" ? untilRaw : membershipEnd(from, plan);
   if (!isDate(until) || until < from) redirect(`${back}?error=invalid#memberships`);
 
   const supabase = await createClient();
+  // Есть аккаунт с таким ником — привязываем сразу; нет — записываем на ник, привяжете позже.
   const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
   const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
-  if (!found || found.length !== 1) redirect(`${back}?error=noPlayer#memberships`);
+  const profileId = found?.length === 1 ? (found[0].id as string) : null;
 
   const { data: m, error } = await supabase
     .from("memberships")
-    .insert({ club_id: clubId, profile_id: found[0].id, plan, valid_from: from, valid_until: until, note })
+    .insert({ club_id: clubId, profile_id: profileId, holder_name: nickname, plan, valid_from: from, valid_until: until, note })
     .select("id")
     .single();
   if (error || !m) {
@@ -318,7 +319,7 @@ export async function grantMembership(formData: FormData) {
   if (how) {
     const { error: payError } = await supabase.from("payments").insert({
       club_id: clubId,
-      profile_id: found[0].id,
+      profile_id: profileId,
       purpose: "membership",
       membership_id: m.id,
       amount_czk: amount,
@@ -329,7 +330,28 @@ export async function grantMembership(formData: FormData) {
       redirect(`${back}?error=save#memberships`);
     }
   }
-  redirect(`${back}?membership=1#memberships`);
+  redirect(`${back}?membership=${profileId ? "1" : "unlinked"}#memberships`);
+}
+
+/** Привязать абонемент (записанный на ник из таблицы) к аккаунту игрока на сайте. */
+export async function linkMembership(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const id = int(formData.get("membershipId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  if (!id || nickname.length < 2 || nickname.length > 32 || nickname.includes("*")) redirect(`${back}?error=invalid#memberships`);
+
+  const supabase = await createClient();
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  if (!found || found.length !== 1) redirect(`${back}?error=noPlayer#memberships`);
+
+  const { data, error } = await supabase.from("memberships").update({ profile_id: found[0].id }).eq("id", id).select("id");
+  if (error || !data?.length) {
+    console.error("linkMembership failed", { id, code: error?.code, message: error?.message });
+    redirect(`${back}?error=save#memberships`);
+  }
+  redirect(`${back}?membership=linked#memberships`);
 }
 
 /** Удалить ошибочно выданный абонемент (вместе с ручной отметкой оплаты). */
