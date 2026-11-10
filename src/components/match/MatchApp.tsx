@@ -309,6 +309,7 @@ export function MatchApp(p: MatchAppProps) {
               <span className="w-6 text-right font-mono text-sm text-neutral-400">{seat}</span>
               <button
                 onClick={() => seatTap(seat)}
+                aria-label={`${seat}. ${nameOf(seat)}`}
                 disabled={locked || (state.phase !== "night0" && !!out && !(state.phase === "night" && nightMode !== "shot"))}
                 className="flex min-h-11 flex-1 items-center gap-2 text-left"
               >
