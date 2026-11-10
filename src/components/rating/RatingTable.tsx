@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getSeasonRating, getSeasons } from "@/lib/rating";
+import { badgeOf, getBadges } from "@/lib/badges";
 
 export async function RatingTable({ locale, season, rating }: { locale: Locale; season: number | null; rating: number | null }) {
   const t = await getTranslations({ locale, namespace: "rating" });
@@ -14,6 +15,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
   if (!r) return <p className="mt-10 text-neutral-400">{t("empty")}</p>;
 
   const { rows, matches, evenings } = await getSeasonRating(r.id);
+  const badges = await getBadges(MAIN_CLUB_SLUG);
   // Победы в мини-турнирах (вечерах) — для рейтингов с призом за вечер.
   const showEvenings = r.prizePerEvening !== null;
   const eveningWins = new Map<string, number>();
@@ -85,7 +87,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
                 <th className="text-right font-normal">{t("sheriff")}</th>
                 <th className="text-right font-normal">{t("black")}</th>
                 <th className="text-right font-normal">{t("bestMove")}</th>
-                {showEvenings && <th className="text-right font-normal" title={t("eveningWinsHint")}>🏆</th>}
+                {showEvenings && <th className="text-right font-normal" title={t("eveningWinsHint")}>⚜️</th>}
                 {r.formula === "winrate" && <th className="text-right font-normal">{t("points")}</th>}
                 <th className="text-right font-normal">{t("rating")}</th>
               </tr>
@@ -106,6 +108,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
                           <span aria-hidden="true" className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-800 text-xs">{x.nickname.slice(0, 1).toUpperCase()}</span>
                         )}
                         {x.nickname}
+                        {badgeOf(badges, x.profileId, x.nickname) && <span aria-hidden="true">{badgeOf(badges, x.profileId, x.nickname)}</span>}
                         {finalist && <span className="rounded bg-yellow-500/20 px-1.5 text-xs font-normal text-yellow-300">{t("finalist")}</span>}
                       </Link>
                     </td>

@@ -2,7 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addStaff, createGame, grantMembership, linkMembership, removeMembership, removeStaff } from "@/lib/admin/actions";
+import { addStaff, addTitle, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
 import { getAdminGames, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
@@ -187,6 +188,56 @@ export async function AdminHome({
                     <input name="note" maxLength={200} className={`mt-1 w-full ${input}`} />
                   </label>
                   <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-3">{t("grantMembership")}</button>
+                </form>
+              </section>
+            );
+          }),
+      )}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const titles = await getTitles(club.slug);
+            return (
+              <section key={`t-${club.id}`} id="titles">
+                <h2 className="text-xl font-bold">{t("titles", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("titlesHint")}</p>
+                {titles.length > 0 && (
+                  <ul className="mt-4 max-w-2xl divide-y divide-white/10 rounded border border-white/10">
+                    {titles.map((x) => (
+                      <li key={x.id} className="flex items-center gap-3 px-4 py-2">
+                        <span aria-hidden="true">{x.kind === "season_champion" ? "⭐" : "👑"}</span>
+                        <span className="flex-1 font-semibold">{x.nickname ?? x.holderName}</span>
+                        <span className="text-sm text-neutral-400">{x.label}</span>
+                        <form action={removeTitle}>
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="titleId" value={x.id} />
+                          <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                        </form>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <form action={addTitle} className="mt-4 grid max-w-2xl gap-3 sm:grid-cols-4">
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="clubId" value={club.id} />
+                  <label className="text-sm">{t("fields.nickname")}
+                    <input name="nickname" required maxLength={32} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.titleKind")}
+                    <select name="kind" className={`mt-1 w-full ${input}`}>
+                      <option value="season_champion">⭐ {t("titleKinds.season_champion")}</option>
+                      <option value="kings_winner">👑 {t("titleKinds.kings_winner")}</option>
+                    </select>
+                  </label>
+                  <label className="text-sm">{t("fields.titleLabel")}
+                    <input name="label" required maxLength={60} placeholder={t("fields.titleLabelHint")} className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <label className="text-sm">{t("fields.wonOn")}
+                    <input type="date" name="wonOn" className={`mt-1 w-full ${input}`} />
+                  </label>
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-4">{t("addTitle")}</button>
                 </form>
               </section>
             );

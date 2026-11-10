@@ -220,7 +220,11 @@
       "note": "Нотатка",
       "siteNickname": "Нік на сайті",
       "finalRating": "Фінал рейтингу",
-      "notFinal": "— звичайний вечір —"
+      "notFinal": "— звичайний вечір —",
+      "titleKind": "Титул",
+      "titleLabel": "За що",
+      "titleLabelHint": "напр. IV сезон",
+      "wonOn": "Дата"
     },
     "status": {
       "draft": "Чернетка",
@@ -281,7 +285,14 @@
     "notLinked": "не прив'язано до акаунта",
     "link": "Прив'язати",
     "membershipUnlinked": "Абонемент записано на нік. Коли гравець зареєструється — прив'яжіть його до акаунта, тоді запрацює пріоритет.",
-    "membershipLinked": "Абонемент прив'язано до акаунта."
+    "membershipLinked": "Абонемент прив'язано до акаунта.",
+    "titles": "Титули · {club}",
+    "titlesHint": "⭐ чемпіон сезону Premier League і 👑 переможець MafiaCL Kings — значок стоїть біля ніка на сайті та в дописах бота. ⚜️ ставиться сам переможцю останнього міні-турніру. Можна записати на нік, якщо гравця ще немає на сайті.",
+    "addTitle": "Додати титул",
+    "titleKinds": {
+      "season_champion": "Чемпіон сезону",
+      "kings_winner": "Переможець MafiaCL Kings"
+    }
   },
   "match": {
     "matches": "Партії вечора",
@@ -465,7 +476,12 @@
     "redVotesLine": "Мирним голосує в чорних: {pct} ({n} голосів)",
     "blackVotesLine": "мафією — в червоних: {pct} ({n})",
     "playerOfWeek": "Гравець тижня",
-    "eveningWins": "Перемог у міні-турнірах: {n} ({rating}, {season})"
+    "eveningWins": "Перемог у міні-турнірах: {n} ({rating}, {season})",
+    "badges": "Значки",
+    "title": {
+      "season_champion": "Чемпіон сезону",
+      "kings_winner": "Переможець MafiaCL Kings"
+    }
   },
   "rating": {
     "filters": "Фільтри рейтингу",

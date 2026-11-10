@@ -220,7 +220,11 @@
       "note": "Poznámka",
       "siteNickname": "Přezdívka na webu",
       "finalRating": "Finále žebříčku",
-      "notFinal": "— běžný večer —"
+      "notFinal": "— běžný večer —",
+      "titleKind": "Titul",
+      "titleLabel": "Za co",
+      "titleLabelHint": "např. IV. sezóna",
+      "wonOn": "Datum"
     },
     "status": {
       "draft": "Koncept",
@@ -281,7 +285,14 @@
     "notLinked": "nepropojeno s účtem",
     "link": "Propojit",
     "membershipUnlinked": "Předplatné je zapsané na přezdívku. Až se hráč zaregistruje, propojte ho s účtem — pak začne platit přednost.",
-    "membershipLinked": "Předplatné propojeno s účtem."
+    "membershipLinked": "Předplatné propojeno s účtem.",
+    "titles": "Tituly · {club}",
+    "titlesHint": "⭐ šampion sezóny Premier League a 👑 vítěz MafiaCL Kings — odznak je u přezdívky na webu i v příspěvcích bota. ⚜️ dostane automaticky vítěz posledního mini-turnaje. Lze zapsat na přezdívku, i když hráč ještě není na webu.",
+    "addTitle": "Přidat titul",
+    "titleKinds": {
+      "season_champion": "Šampion sezóny",
+      "kings_winner": "Vítěz MafiaCL Kings"
+    }
   },
   "match": {
     "matches": "Hry večera",
@@ -465,7 +476,12 @@
     "redVotesLine": "Jako civilista hlasuje pro černé: {pct} ({n} hlasů)",
     "blackVotesLine": "jako mafie pro červené: {pct} ({n})",
     "playerOfWeek": "Hráč týdne",
-    "eveningWins": "Výher v mini-turnajích: {n} ({rating}, {season})"
+    "eveningWins": "Výher v mini-turnajích: {n} ({rating}, {season})",
+    "badges": "Odznaky",
+    "title": {
+      "season_champion": "Šampion sezóny",
+      "kings_winner": "Vítěz MafiaCL Kings"
+    }
   },
   "rating": {
     "filters": "Filtry žebříčku",

@@ -4,6 +4,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { escapeHtml, sendMessage } from "./api";
 import { GAME_SELECT, timeOf, titleOf, toBotGame, venueOf, whenOf, type BotGame } from "./games";
 import { botLang, t, type BotLang } from "./texts";
+import { getBadges, withBadge } from "@/lib/badges";
+import { MAIN_CLUB_SLUG } from "@/lib/site";
 
 type Pending = {
   id: number;
@@ -25,13 +27,15 @@ type Pending = {
 async function tableDraft(db: ReturnType<typeof createAdminClient>, g: BotGame, lang: BotLang) {
   const { data } = await db
     .from("game_signups")
-    .select("guest_name, profiles!game_signups_profile_id_fkey ( nickname, display_name )")
+    .select("profile_id, guest_name, profiles!game_signups_profile_id_fkey ( nickname, display_name )")
     .eq("game_id", g.id)
     .eq("status", "confirmed")
     .order("created_at");
+  // Значки как в постах клуба: ⭐ чемпион сезона, 👑 Kings, ⚜️ победитель мини-турнира.
+  const badges = await getBadges(MAIN_CLUB_SLUG);
   const names = (data ?? []).map((s) => {
     const p = s.profiles as unknown as { nickname: string | null; display_name: string | null } | null;
-    return escapeHtml(s.guest_name ?? p?.nickname ?? p?.display_name ?? "—");
+    return escapeHtml(withBadge(badges, s.profile_id, s.guest_name ?? p?.nickname ?? p?.display_name ?? "—"));
   });
   const late = g.lateAfter ? `\n${t(lang, "late", { time: timeOf(g.lateAfter, g.timezone, lang) })}` : "";
   return [

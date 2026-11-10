@@ -220,7 +220,11 @@
       "note": "Note",
       "siteNickname": "Nickname on the site",
       "finalRating": "Rating final",
-      "notFinal": "— regular evening —"
+      "notFinal": "— regular evening —",
+      "titleKind": "Title",
+      "titleLabel": "For",
+      "titleLabelHint": "e.g. Season IV",
+      "wonOn": "Date"
     },
     "status": {
       "draft": "Draft",
@@ -281,7 +285,14 @@
     "notLinked": "not linked to an account",
     "link": "Link",
     "membershipUnlinked": "Pass saved under the nickname. Once the player signs up on the site, link it to their account to activate priority.",
-    "membershipLinked": "Pass linked to the account."
+    "membershipLinked": "Pass linked to the account.",
+    "titles": "Titles · {club}",
+    "titlesHint": "⭐ Premier League season champion and 👑 MafiaCL Kings winner — the badge shows next to the nickname on the site and in bot posts. ⚜️ goes automatically to the latest mini tournament winner. You can record it for a nickname even if the player isn't on the site yet.",
+    "addTitle": "Add title",
+    "titleKinds": {
+      "season_champion": "Season champion",
+      "kings_winner": "MafiaCL Kings winner"
+    }
   },
   "match": {
     "matches": "Games tonight",
@@ -465,7 +476,12 @@
     "redVotesLine": "As a civilian votes for black: {pct} ({n} votes)",
     "blackVotesLine": "as mafia for red: {pct} ({n})",
     "playerOfWeek": "Player of the week",
-    "eveningWins": "Mini tournament wins: {n} ({rating}, {season})"
+    "eveningWins": "Mini tournament wins: {n} ({rating}, {season})",
+    "badges": "Badges",
+    "title": {
+      "season_champion": "Season champion",
+      "kings_winner": "MafiaCL Kings winner"
+    }
   },
   "rating": {
     "filters": "Rating filters",

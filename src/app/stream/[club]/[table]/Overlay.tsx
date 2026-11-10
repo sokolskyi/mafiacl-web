@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 
-type Seat = { seat: number; name: string; avatar: string | null; fouls: number; out: string | null; role: string | null };
+type Seat = { seat: number; name: string; badge?: string; avatar: string | null; fouls: number; out: string | null; role: string | null };
 type Data = {
   club?: string;
   match: null | { number: number; table: number; phase: string; round: number; result: string | null; nominations: number[]; seats: Seat[] };
@@ -94,7 +94,7 @@ export function Overlay() {
             )}
             <div className="flex items-center gap-1 bg-red-800 px-1.5 py-1 text-sm font-bold">
               <span>{s.seat}</span>
-              <span className="truncate">{s.name}</span>
+              <span className="truncate">{s.name}{s.badge ? ` ${s.badge}` : ""}</span>
             </div>
           </div>
         ))}

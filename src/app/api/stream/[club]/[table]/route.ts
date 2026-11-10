@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { replay, type Action } from "@/lib/match/engine";
+import { getBadges, badgeOf } from "@/lib/badges";
 
 // Данные для слоя трансляции. Публичные, поэтому роли отдаём только если ведущий включил
 // «показывать роли» (обычно при задержке стрима). Журнал целиком наружу не уходит.
@@ -39,6 +40,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ club: string; 
   const { data: profiles } = ids.length ? await db.from("profiles").select("id, avatar_url").in("id", ids) : { data: [] };
   const avatarOf = new Map((profiles ?? []).map((p) => [p.id, p.avatar_url as string | null]));
   const reveal = m.show_roles || s.phase === "finished";
+  const badges = await getBadges(club);
 
   return NextResponse.json(
     {
@@ -56,6 +58,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ club: string; 
           return {
             seat,
             name: info?.name || String(seat),
+            badge: badgeOf(badges, info?.profile_id ?? null, info?.name ?? null),
             avatar: info?.profile_id ? avatarOf.get(info.profile_id) ?? null : null,
             fouls: s.fouls[seat] ?? 0,
             out: s.out[seat]?.reason ?? null,

@@ -8,6 +8,7 @@ import { announceGame } from "@/lib/telegram/actions";
 import { createMatch } from "@/lib/match/actions";
 import { getGameMatches } from "@/lib/match/queries";
 import { getEveningStandings } from "@/lib/rating";
+import { getBadges, withBadge } from "@/lib/badges";
 import { getAdminGame, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
 
@@ -24,6 +25,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
   if (!data || !ctx.clubs.some((c) => c.id === data.game.club_id)) notFound();
   const { game, signups, venues, ratings } = data;
   const matches = await getGameMatches(game.id);
+  const badges = await getBadges(ctx.clubs.find((c) => c.id === game.club_id)?.slug ?? "");
   const standings = matches.some((m) => m.status === "finished") ? await getEveningStandings(game.id) : [];
   const tm = await getTranslations({ locale, namespace: "match" });
 
@@ -45,7 +47,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
     <li className="flex flex-wrap items-center gap-3 px-4 py-2">
       <span className="w-6 text-right text-sm text-neutral-500">{n}</span>
       <span className="flex-1">
-        {s.name}
+        {withBadge(badges, s.profileId, s.name)}
         {s.isGuest && <span className="ml-2 rounded bg-white/10 px-1.5 text-xs text-neutral-400">{t("guest")}</span>}
         {s.hasMembership && <span className="ml-2 rounded bg-sky-500/20 px-1.5 text-xs text-sky-300">{t("membershipBadge")}</span>}
       </span>
@@ -146,7 +148,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
               {standings.map((r) => (
                 <li key={`${r.profileId ?? r.name}`} className={`flex items-center gap-3 px-3 py-1.5 ${r.place === 1 ? "bg-yellow-500/10 font-bold" : ""}`}>
                   <span className="w-6 font-mono text-neutral-400">{r.place}</span>
-                  <span className="flex-1">{r.place === 1 && "🏆 "}{r.nickname ?? r.name}</span>
+                  <span className="flex-1">{r.place === 1 && "⚜️ "}{withBadge(badges, r.profileId, r.nickname ?? r.name)}</span>
                   <span className="text-neutral-400">{r.wins}/{r.games}</span>
                   <span className="w-12 text-right font-mono">{r.points}</span>
                 </li>

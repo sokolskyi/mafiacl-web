@@ -4,12 +4,14 @@ import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getPlayerOfWeek } from "@/lib/rating";
+import { getBadges, withBadge } from "@/lib/badges";
 
 /** Победитель последнего мини-турнира — «Игрок недели». */
 export async function PlayerOfWeek({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "home" });
   const data = await getPlayerOfWeek(MAIN_CLUB_SLUG);
   if (!data) return null;
+  const badges = await getBadges(MAIN_CLUB_SLUG);
   const w0 = data.winners[0];
   const tpl = w0.title?.[locale] ?? w0.title?.cs;
   const title = tpl ? gameTitle(tpl, w0.gameNumber, "roman") : data.rating.name;
@@ -18,7 +20,7 @@ export async function PlayerOfWeek({ locale }: { locale: Locale }) {
 
   return (
     <section aria-labelledby="potw" className="mt-12 rounded-xl border border-yellow-500/30 bg-gradient-to-br from-yellow-500/10 to-transparent p-6">
-      <h2 id="potw" className="text-sm font-bold uppercase tracking-widest text-yellow-300">🏆 {t("playerOfWeek")}</h2>
+      <h2 id="potw" className="text-sm font-bold uppercase tracking-widest text-yellow-300">⚜️ {t("playerOfWeek")}</h2>
       <ul className="mt-4 flex flex-wrap gap-6">
         {data.winners.map((w) => {
           const face = w.avatarUrl ? (
@@ -29,7 +31,7 @@ export async function PlayerOfWeek({ locale }: { locale: Locale }) {
               {(w.nickname ?? w.name).slice(0, 1).toUpperCase()}
             </span>
           );
-          const name = <span className="text-3xl font-black">{w.nickname ?? w.name}</span>;
+          const name = <span className="text-3xl font-black">{withBadge(badges, w.profileId, w.nickname ?? w.name)}</span>;
           return (
             <li key={`${w.profileId ?? w.name}`} className="flex items-center gap-4">
               {face}

@@ -7,6 +7,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { GAMES_TAG } from "@/lib/games";
 import { MATCHES_TAG } from "@/lib/players";
+import { TITLES_TAG } from "@/lib/badges";
 import { MEMBERSHIP_PLANS, PAYMENT_METHODS, membershipEnd, type MembershipPlan } from "@/lib/memberships";
 import { localInputToIso } from "./time";
 
@@ -371,5 +372,49 @@ export async function removeMembership(formData: FormData) {
   if (error || !data?.length) {
     console.error("removeMembership failed", { id, code: error?.code, message: error?.message });
   }
+  redirect(back);
+}
+
+// ---------------------------------------------------------------------------
+// Титулы: ⭐ чемпион сезона, 👑 MafiaCL Kings
+// ---------------------------------------------------------------------------
+
+export async function addTitle(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const kind = String(formData.get("kind"));
+  const label = String(formData.get("label") ?? "").trim().slice(0, 60);
+  const wonOn = String(formData.get("wonOn") ?? "");
+  if (
+    !clubId || nickname.length < 1 || nickname.length > 32 || nickname.includes("*") || !label ||
+    !["season_champion", "kings_winner"].includes(kind) || (wonOn && !/^\d{4}-\d{2}-\d{2}$/.test(wonOn))
+  ) {
+    redirect(`${back}?error=invalid#titles`);
+  }
+  const supabase = await createClient();
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  const profileId = found?.length === 1 ? (found[0].id as string) : null;
+  const { error } = await supabase
+    .from("player_titles")
+    .insert({ club_id: clubId, profile_id: profileId, holder_name: nickname, kind, label, won_on: wonOn || null });
+  if (error) {
+    console.error("addTitle failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#titles`);
+  }
+  updateTag(TITLES_TAG);
+  redirect(`${back}#titles`);
+}
+
+export async function removeTitle(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#titles`;
+  const id = int(formData.get("titleId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  await supabase.from("player_titles").delete().eq("id", id);
+  updateTag(TITLES_TAG);
   redirect(back);
 }
