@@ -18,7 +18,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const pct = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)} %` : "—");
   const num = (n: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n);
   const date = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(iso));
-  const since = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
+  const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
 
   return (
     <article>
