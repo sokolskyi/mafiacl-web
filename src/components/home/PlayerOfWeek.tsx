@@ -7,7 +7,6 @@ import { getPlayerOfWeek } from "@/lib/rating";
 
 /** Победитель последнего мини-турнира — «Игрок недели». */
 export async function PlayerOfWeek({ locale }: { locale: Locale }) {
-  "use cache";
   const t = await getTranslations({ locale, namespace: "home" });
   const data = await getPlayerOfWeek(MAIN_CLUB_SLUG);
   if (!data) return null;

@@ -172,6 +172,9 @@ export async function getEveningStandings(gameId: number): Promise<StandingRow[]
 
 /** «Игрок недели»: победитель(и) последнего мини-турнира рейтинга с призом за вечер, если он был не старше 14 дней. */
 export async function getPlayerOfWeek(clubSlug: string) {
+  "use cache";
+  cacheTag(MATCHES_TAG);
+  cacheLife("minutes");
   const seasons = await getSeasons(clubSlug);
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date());
   const season = currentSeason(seasons, today);
