@@ -17,11 +17,12 @@ export async function getTitles(clubSlug: string): Promise<Title[]> {
   cacheLife("hours");
   if (!isSupabaseConfigured) return [];
   const db = createPublicClient();
-  const { data } = await db
+  const { data, error } = await db
     .from("player_titles")
-    .select("id, kind, label, won_on, profile_id, holder_name, profiles ( nickname ), clubs!inner ( slug )")
+    .select("id, kind, label, won_on, profile_id, holder_name, profiles!player_titles_profile_id_fkey ( nickname ), clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
     .order("won_on", { ascending: false, nullsFirst: false });
+  if (error) console.error("getTitles failed", { code: error.code, message: error.message });
   return (data ?? []).map((t) => ({
     id: t.id,
     kind: t.kind as Title["kind"],
@@ -81,12 +82,13 @@ export async function getPrizes(clubSlug: string): Promise<Prize[]> {
   cacheLife("hours");
   if (!isSupabaseConfigured) return [];
   const db = createPublicClient();
-  const { data } = await db
+  const { data, error } = await db
     .from("player_prizes")
-    .select("id, amount_czk, label, won_on, profile_id, holder_name, profiles ( nickname ), clubs!inner ( slug )")
+    .select("id, amount_czk, label, won_on, profile_id, holder_name, profiles!player_prizes_profile_id_fkey ( nickname ), clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
     .order("won_on", { ascending: false, nullsFirst: false })
     .limit(5000);
+  if (error) console.error("getPrizes failed", { code: error.code, message: error.message });
   return (data ?? []).map((p) => ({
     id: p.id,
     amount: p.amount_czk,
