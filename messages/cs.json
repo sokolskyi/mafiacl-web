@@ -430,7 +430,8 @@
     "outOneNamed": "Vypadl {seat}",
     "revote": "Zapsat a hlasovat znovu",
     "nobodyOut": "Zapsat, nikdo nevypadl",
-    "manualOut": "Vyřazení bez označení hlasů"
+    "manualOut": "Vyřazení bez označení hlasů",
+    "standings": "Výsledky večera"
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",
@@ -462,7 +463,9 @@
     "unrated": "mimo žebříček",
     "myPage": "Moje stránka hráče",
     "redVotesLine": "Jako civilista hlasuje pro černé: {pct} ({n} hlasů)",
-    "blackVotesLine": "jako mafie pro červené: {pct} ({n})"
+    "blackVotesLine": "jako mafie pro červené: {pct} ({n})",
+    "playerOfWeek": "Hráč týdne",
+    "eveningWins": "Výher v mini-turnajích: {n} ({rating}, {season})"
   },
   "rating": {
     "filters": "Filtry žebříčku",
@@ -486,6 +489,12 @@
     "final": "Finále {date}: hraje prvních {size}, koeficient her finále {coef}.",
     "prize": "Výherní fond teď: {sum} Kč ({ppg} Kč za hru + {ppe} Kč za mini-turnaj).",
     "finalist": "finále",
-    "rating": "Žebříček"
+    "rating": "Žebříček",
+    "eveningWinsHint": "Výhry v mini-turnajích"
+  },
+  "home": {
+    "playerOfWeek": "Hráč týdne",
+    "winnerOf": "Vítěz: {title}, {date}",
+    "winnerStats": "{points} bodů · výher {wins} z {games}"
   }
 }

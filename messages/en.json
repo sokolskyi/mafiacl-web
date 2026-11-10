@@ -430,7 +430,8 @@
     "outOneNamed": "{seat} is out",
     "revote": "Record and revote",
     "nobodyOut": "Record, nobody out",
-    "manualOut": "Out without marking votes"
+    "manualOut": "Out without marking votes",
+    "standings": "Evening results"
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",
@@ -462,7 +463,9 @@
     "unrated": "unrated",
     "myPage": "My player page",
     "redVotesLine": "As a civilian votes for black: {pct} ({n} votes)",
-    "blackVotesLine": "as mafia for red: {pct} ({n})"
+    "blackVotesLine": "as mafia for red: {pct} ({n})",
+    "playerOfWeek": "Player of the week",
+    "eveningWins": "Mini tournament wins: {n} ({rating}, {season})"
   },
   "rating": {
     "filters": "Rating filters",
@@ -486,6 +489,12 @@
     "final": "Final on {date}: top {size} play, final games count ×{coef}.",
     "prize": "Prize pool now: {sum} Kč ({ppg} Kč per game + {ppe} Kč per mini tournament).",
     "finalist": "final",
-    "rating": "Rating"
+    "rating": "Rating",
+    "eveningWinsHint": "Mini tournament wins"
+  },
+  "home": {
+    "playerOfWeek": "Player of the week",
+    "winnerOf": "Winner of {title}, {date}",
+    "winnerStats": "{points} points · {wins} wins in {games} games"
   }
 }

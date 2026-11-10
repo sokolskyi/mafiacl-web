@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { SectionPage } from "@/components/SectionPage";
+import { PlayerOfWeek } from "@/components/home/PlayerOfWeek";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">) {
   const { locale } = (await params) as { locale: Locale };
@@ -36,7 +37,9 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <OrganizationJsonLd />
-      <SectionPage locale={locale} pageKey="home" />
+      <SectionPage locale={locale} pageKey="home">
+        <PlayerOfWeek locale={locale} />
+      </SectionPage>
     </>
   );
 }

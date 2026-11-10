@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
-import { currentSeason, getSeasonRating, getSeasons } from "@/lib/rating";
+import { currentSeason, getEveningWinners, getSeasonRating, getSeasons } from "@/lib/rating";
 
 export async function RatingTable({ locale, season, rating }: { locale: Locale; season: number | null; rating: number | null }) {
   const t = await getTranslations({ locale, namespace: "rating" });
@@ -14,6 +14,14 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
   if (!r) return <p className="mt-10 text-neutral-400">{t("empty")}</p>;
 
   const { rows, matches, evenings } = await getSeasonRating(r.id);
+  // Победы в мини-турнирах (вечерах) — для рейтингов с призом за вечер.
+  const showEvenings = r.prizePerEvening !== null;
+  const eveningWins = new Map<string, number>();
+  if (showEvenings) {
+    for (const w of await getEveningWinners(r.id)) {
+      if (w.profileId) eveningWins.set(w.profileId, (eveningWins.get(w.profileId) ?? 0) + 1);
+    }
+  }
   const minGames = Math.ceil(r.minShare * matches);
   const qualified = rows.filter((x) => x.games >= minGames && x.games > 0).sort((a, b) => b.rating - a.rating || b.games - a.games);
   const rest = rows.filter((x) => !(x.games >= minGames && x.games > 0)).sort((a, b) => b.rating - a.rating);
@@ -77,6 +85,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
                 <th className="text-right font-normal">{t("sheriff")}</th>
                 <th className="text-right font-normal">{t("black")}</th>
                 <th className="text-right font-normal">{t("bestMove")}</th>
+                {showEvenings && <th className="text-right font-normal" title={t("eveningWinsHint")}>🏆</th>}
                 {r.formula === "winrate" && <th className="text-right font-normal">{t("points")}</th>}
                 <th className="text-right font-normal">{t("rating")}</th>
               </tr>
@@ -106,6 +115,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
                     <td className="text-right">{x.sheriffGames ? `${x.sheriffWins}/${x.sheriffGames}` : "—"}</td>
                     <td className="text-right">{x.blackGames ? `${x.blackWins}/${x.blackGames}` : "—"}</td>
                     <td className="text-right">{x.bestMove ? `+${num(x.bestMove)}` : "—"}</td>
+                    {showEvenings && <td className="text-right">{eveningWins.get(x.profileId) ?? "—"}</td>}
                     {r.formula === "winrate" && <td className="text-right">{num(x.points)}</td>}
                     <td className="text-right font-mono text-base font-black">{num(x.rating)}</td>
                   </tr>

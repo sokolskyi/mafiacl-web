@@ -430,7 +430,8 @@
     "outOneNamed": "Выбыл {seat}",
     "revote": "Записать и переголосовать",
     "nobodyOut": "Записать, никто не выбыл",
-    "manualOut": "Выбывший без отметки голосов"
+    "manualOut": "Выбывший без отметки голосов",
+    "standings": "Итоги вечера"
   },
   "player": {
     "metaTitle": "{nick} — игрок клуба мафии",
@@ -462,7 +463,9 @@
     "unrated": "не рейтинг",
     "myPage": "Моя страница игрока",
     "redVotesLine": "Мирным голосует в чёрных: {pct} ({n} голосов)",
-    "blackVotesLine": "мафией — в красных: {pct} ({n})"
+    "blackVotesLine": "мафией — в красных: {pct} ({n})",
+    "playerOfWeek": "Игрок недели",
+    "eveningWins": "Побед в мини-турнирах: {n} ({rating}, {season})"
   },
   "rating": {
     "filters": "Фильтры рейтинга",
@@ -486,6 +489,12 @@
     "final": "Финал {date}: играют первые {size}, коэффициент игр финала {coef}.",
     "prize": "Призовой фонд сейчас: {sum} Kč ({ppg} Kč за партию + {ppe} Kč за мини-турнир).",
     "finalist": "финал",
-    "rating": "Рейтинг"
+    "rating": "Рейтинг",
+    "eveningWinsHint": "Победы в мини-турнирах"
+  },
+  "home": {
+    "playerOfWeek": "Игрок недели",
+    "winnerOf": "Победитель: {title}, {date}",
+    "winnerStats": "{points} баллов · побед {wins} из {games}"
   }
 }

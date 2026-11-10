@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import type { PlayerPage, PlayerRole } from "@/lib/players";
+import { MAIN_CLUB_SLUG } from "@/lib/site";
+import { currentSeason, getEveningWinners, getPlayerOfWeek, getSeasons } from "@/lib/rating";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -18,6 +20,13 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const pct = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)} %` : "—");
   const num = (n: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n);
   const date = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(iso));
+  // Победы в мини-турнирах текущего сезона и «Игрок недели».
+  const seasons = await getSeasons(MAIN_CLUB_SLUG);
+  const season = currentSeason(seasons, new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date()));
+  const eveningRating = season?.ratings.find((r) => r.prizePerEvening !== null);
+  const eveningWins = eveningRating ? (await getEveningWinners(eveningRating.id)).filter((w) => w.profileId === player.id).length : 0;
+  const potw = await getPlayerOfWeek(MAIN_CLUB_SLUG);
+  const isPotw = !!potw?.winners.some((w) => w.profileId === player.id);
   const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
 
   return (
@@ -34,6 +43,16 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         <div>
           <h1 className="text-4xl font-black tracking-tight">{player.nickname}</h1>
           <p className="mt-1 text-sm text-neutral-400">{t("since", { date: since })}</p>
+          {(isPotw || eveningWins > 0) && (
+            <p className="mt-2 flex flex-wrap gap-2">
+              {isPotw && <span className="rounded bg-yellow-500/20 px-2 py-0.5 text-xs font-bold text-yellow-300">🏆 {t("playerOfWeek")}</span>}
+              {eveningWins > 0 && eveningRating && season && (
+                <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-200">
+                  {t("eveningWins", { n: eveningWins, rating: eveningRating.name, season: season.name })}
+                </span>
+              )}
+            </p>
+          )}
           {player.staff.length > 0 && (
             <p className="mt-2 flex flex-wrap gap-2">
               {player.staff.map((r) => (

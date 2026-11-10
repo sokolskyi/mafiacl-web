@@ -110,3 +110,76 @@ export async function getSeasonRating(ratingId: number): Promise<{ rows: RatingR
 export function currentSeason(seasons: Season[], today: string) {
   return seasons.find((s) => s.startsOn <= today) ?? seasons[seasons.length - 1] ?? null;
 }
+
+export type EveningWinner = {
+  gameId: number;
+  startsAt: string;
+  gameNumber: number | null;
+  title: Record<string, string> | null;
+  profileId: string | null;
+  name: string;
+  nickname: string | null;
+  avatarUrl: string | null;
+  games: number;
+  wins: number;
+  points: number;
+};
+
+/** Победители вечеров рейтинга, новые сверху. */
+export async function getEveningWinners(ratingId: number): Promise<EveningWinner[]> {
+  "use cache";
+  cacheTag(MATCHES_TAG);
+  cacheLife("minutes");
+  if (!isSupabaseConfigured) return [];
+  const db = createPublicClient();
+  const { data, error } = await db.rpc("evening_winners", { p_rating_id: ratingId });
+  if (error) console.error("getEveningWinners failed", { code: error.code, message: error.message });
+  return ((data ?? []) as Record<string, unknown>[]).map((r) => ({
+    gameId: Number(r.game_id),
+    startsAt: r.starts_at as string,
+    gameNumber: r.game_number === null ? null : Number(r.game_number),
+    title: (r.title as Record<string, string> | null) ?? null,
+    profileId: (r.profile_id as string | null) ?? null,
+    name: String(r.name),
+    nickname: (r.nickname as string | null) ?? null,
+    avatarUrl: (r.avatar_url as string | null) ?? null,
+    games: Number(r.games),
+    wins: Number(r.wins),
+    points: Number(r.points),
+  }));
+}
+
+export type StandingRow = { place: number; profileId: string | null; name: string; nickname: string | null; games: number; wins: number; points: number };
+
+/** Итоги одного вечера (мини-турнира). */
+export async function getEveningStandings(gameId: number): Promise<StandingRow[]> {
+  "use cache";
+  cacheTag(MATCHES_TAG);
+  cacheLife("minutes");
+  if (!isSupabaseConfigured) return [];
+  const db = createPublicClient();
+  const { data } = await db.rpc("evening_standings", { p_game_id: gameId });
+  return ((data ?? []) as Record<string, unknown>[]).map((r) => ({
+    place: Number(r.place),
+    profileId: (r.profile_id as string | null) ?? null,
+    name: String(r.name),
+    nickname: (r.nickname as string | null) ?? null,
+    games: Number(r.games),
+    wins: Number(r.wins),
+    points: Number(r.points),
+  }));
+}
+
+/** «Игрок недели»: победитель(и) последнего мини-турнира рейтинга с призом за вечер, если он был не старше 14 дней. */
+export async function getPlayerOfWeek(clubSlug: string) {
+  const seasons = await getSeasons(clubSlug);
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date());
+  const season = currentSeason(seasons, today);
+  const rating = season?.ratings.find((r) => r.prizePerEvening !== null) ?? season?.ratings[0];
+  if (!rating) return null;
+  const winners = await getEveningWinners(rating.id);
+  if (!winners.length) return null;
+  const latest = winners.filter((w) => w.gameId === winners[0].gameId);
+  if (Date.now() - new Date(latest[0].startsAt).getTime() > 14 * 24 * 3600 * 1000) return null;
+  return { rating, winners: latest };
+}

@@ -7,6 +7,7 @@ import { addGuest, changeSignup, recordGamePayment, undoPayment, updateGame } fr
 import { announceGame } from "@/lib/telegram/actions";
 import { createMatch } from "@/lib/match/actions";
 import { getGameMatches } from "@/lib/match/queries";
+import { getEveningStandings } from "@/lib/rating";
 import { getAdminGame, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
 
@@ -23,6 +24,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
   if (!data || !ctx.clubs.some((c) => c.id === data.game.club_id)) notFound();
   const { game, signups, venues, ratings } = data;
   const matches = await getGameMatches(game.id);
+  const standings = matches.some((m) => m.status === "finished") ? await getEveningStandings(game.id) : [];
   const tm = await getTranslations({ locale, namespace: "match" });
 
   const tpl = game.title?.[locale] ?? game.title?.cs;
@@ -137,6 +139,21 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
           <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500">{tm("newMatch")}</button>
         </form>
         <p className="mt-2 text-xs text-neutral-500">{tm("newMatchHint")}</p>
+        {standings.length > 0 && (
+          <div className="mt-6">
+            <h4 className="font-bold">{tm("standings")}</h4>
+            <ol className="mt-2 max-w-md divide-y divide-white/10 rounded border border-white/10 text-sm">
+              {standings.map((r) => (
+                <li key={`${r.profileId ?? r.name}`} className={`flex items-center gap-3 px-3 py-1.5 ${r.place === 1 ? "bg-yellow-500/10 font-bold" : ""}`}>
+                  <span className="w-6 font-mono text-neutral-400">{r.place}</span>
+                  <span className="flex-1">{r.place === 1 && "🏆 "}{r.nickname ?? r.name}</span>
+                  <span className="text-neutral-400">{r.wins}/{r.games}</span>
+                  <span className="w-12 text-right font-mono">{r.points}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
       </section>
 
       {game.priority_until && (
