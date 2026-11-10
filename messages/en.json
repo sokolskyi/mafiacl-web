@@ -96,8 +96,8 @@
       "description": "Address, how to get here, parking, phone and social media."
     },
     "club": {
-      "title": "MafiaCL club {city}",
-      "description": "Games, tournaments and players of the MafiaCL club in {city}."
+      "title": "{club}",
+      "description": "Games, tournaments and players of the {club} club ({city})."
     },
     "account": {
       "title": "My account",
@@ -139,5 +139,26 @@
     "invalidEmail": "Please check the e-mail address.",
     "tooMany": "Too many attempts. Try again in a few minutes.",
     "invalidCode": "The code is invalid or has expired."
+  },
+  "games": {
+    "empty": "No upcoming games yet. Follow our Telegram.",
+    "lateFrom": "Late penalty from {time}",
+    "seats": "{free} of {capacity} seats free",
+    "full": "Full · waitlist: {waitlist}",
+    "stream": "Live stream",
+    "join": "Sign up",
+    "joinWaitlist": "Join waitlist",
+    "signInToJoin": "Sign in to sign up",
+    "youAreIn": "✓ You're in",
+    "youAreWaitlisted": "You're on the waitlist",
+    "cancel": "Cancel",
+    "error": "Sign-up failed, please try again.",
+    "kind": {
+      "rating": "Rating game",
+      "fun": "Fun game",
+      "tournament": "Tournament",
+      "corporate": "Corporate game",
+      "kids": "Kids game"
+    }
   }
 }

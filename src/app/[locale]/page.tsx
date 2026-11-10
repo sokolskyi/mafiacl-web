@@ -16,10 +16,11 @@ function OrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "SportsOrganization",
     name: SITE_NAME,
+    alternateName: "MafiaCL Prague",
     url: SITE_URL,
     sport: "Mafia",
     foundingDate: "2011",
-    areaServed: "Praha",
+    areaServed: "Prague",
   };
   return (
     <script

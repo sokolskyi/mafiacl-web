@@ -96,8 +96,8 @@
       "description": "Adresa, jak se k nám dostat, parkování, telefon a sociální sítě."
     },
     "club": {
-      "title": "Klub MafiaCL {city}",
-      "description": "Hry, turnaje a hráči klubu MafiaCL ve městě {city}."
+      "title": "{club}",
+      "description": "Hry, turnaje a hráči klubu {club} ({city})."
     },
     "account": {
       "title": "Můj účet",
@@ -139,5 +139,26 @@
     "invalidEmail": "Zkontrolujte e-mail.",
     "tooMany": "Příliš mnoho pokusů. Zkuste to za pár minut.",
     "invalidCode": "Kód je neplatný nebo vypršel."
+  },
+  "games": {
+    "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
+    "lateFrom": "Od {time} minus body za pozdní příchod",
+    "seats": "Volná místa: {free} z {capacity}",
+    "full": "Plno · čekací listina: {waitlist}",
+    "stream": "Živý přenos",
+    "join": "Přihlásit se na hru",
+    "joinWaitlist": "Na čekací listinu",
+    "signInToJoin": "Přihlaste se a zapište se",
+    "youAreIn": "✓ Jste přihlášeni",
+    "youAreWaitlisted": "Jste na čekací listině",
+    "cancel": "Zrušit",
+    "error": "Zápis se nepovedl, zkuste to znovu.",
+    "kind": {
+      "rating": "Ratingová hra",
+      "fun": "Fun hra",
+      "tournament": "Turnaj",
+      "corporate": "Firemní hra",
+      "kids": "Dětská hra"
+    }
   }
 }

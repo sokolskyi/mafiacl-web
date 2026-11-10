@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/clubs/[c
     locale,
     key: "club",
     href: { pathname: "/clubs/[city]", params: { city } },
-    values: { city: c[locale] },
+    values: { club: c.club, city: c[locale] },
   });
 }
 
@@ -32,5 +32,5 @@ export default async function Page({ params }: PageProps<"/[locale]/clubs/[city]
   const c = getCity(city);
   if (!c) notFound();
   setRequestLocale(locale);
-  return <SectionPage locale={locale} pageKey="club" values={{ city: c[locale] }} />;
+  return <SectionPage locale={locale} pageKey="club" values={{ club: c.club, city: c[locale] }} />;
 }

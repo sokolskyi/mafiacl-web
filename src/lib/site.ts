@@ -54,9 +54,12 @@ export const FOOTER_NAV: SectionKey[] = [
   "contacts",
 ];
 
+/** Главный клуб сети (slug в базе). */
+export const MAIN_CLUB_SLUG = "mafiacl-prague";
+
 /** Города сети. Пока только Прага; Брно и Карловы Вары добавятся из базы. */
 export const CITIES = {
-  praha: { cs: "Praha", ru: "Прага", uk: "Прага", en: "Prague" },
+  prague: { club: "MafiaCL Prague", cs: "Praha", ru: "Прага", uk: "Прага", en: "Prague" },
 } as const;
 
 export type CitySlug = keyof typeof CITIES;
