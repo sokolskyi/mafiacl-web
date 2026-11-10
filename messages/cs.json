@@ -127,6 +127,17 @@
     "loginMethodsHint": "Propojte účty, abyste se do jednoho profilu mohli přihlásit čímkoli.",
     "linked": "propojeno",
     "link": "Propojit",
-    "linkError": "Propojení se nepovedlo. Tento účet už může patřit jinému profilu."
+    "linkError": "Propojení se nepovedlo. Tento účet už může patřit jinému profilu.",
+    "or": "nebo",
+    "email": "Váš e-mail",
+    "sendCode": "Poslat kód na e-mail",
+    "sending": "Odesílám…",
+    "codeSent": "Poslali jsme kód na {email}. Zadejte ho níže, nebo klikněte na odkaz v e-mailu.",
+    "code": "Kód z e-mailu",
+    "confirm": "Přihlásit se",
+    "checking": "Ověřuji…",
+    "invalidEmail": "Zkontrolujte e-mail.",
+    "tooMany": "Příliš mnoho pokusů. Zkuste to za pár minut.",
+    "invalidCode": "Kód je neplatný nebo vypršel."
   }
 }

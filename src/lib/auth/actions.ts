@@ -102,3 +102,53 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   revalidatePath("/", "layout");
   return { status: "saved" };
 }
+
+export type EmailState = {
+  step: "email" | "code";
+  email?: string;
+  error?: "invalidEmail" | "tooMany" | "invalidCode" | "error";
+};
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Шаг 1: письмо с 6-значным кодом и ссылкой. Аккаунт создаётся при первом входе. */
+export async function sendEmailCode(_prev: EmailState, formData: FormData): Promise<EmailState> {
+  const locale = toLocale(formData.get("locale"));
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) return { step: "email", error: "invalidEmail" };
+
+  const next = getPathname({ href: "/account", locale });
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      shouldCreateUser: true,
+      emailRedirectTo: `${await siteOrigin()}/auth/callback?next=${encodeURIComponent(next)}`,
+    },
+  });
+  if (error) {
+    const tooMany = error.status === 429 || error.code === "over_email_send_rate_limit";
+    if (!tooMany) console.error("sendEmailCode failed", { code: error.code, message: error.message });
+    return { step: "email", email, error: tooMany ? "tooMany" : "error" };
+  }
+  return { step: "code", email };
+}
+
+/** Шаг 2: код из письма — работает, даже если письмо открыто на другом устройстве. */
+export async function verifyEmailCode(_prev: EmailState, formData: FormData): Promise<EmailState> {
+  const locale = toLocale(formData.get("locale"));
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const token = String(formData.get("code") ?? "").replace(/\s/g, "");
+  if (!EMAIL_RE.test(email)) return { step: "email", error: "invalidEmail" };
+  if (!/^\d{6,10}$/.test(token)) return { step: "code", email, error: "invalidCode" };
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.verifyOtp({ email, token, type: "email" });
+  if (error) {
+    if (error.status !== 400 && error.status !== 403) {
+      console.error("verifyEmailCode failed", { code: error.code, message: error.message });
+    }
+    return { step: "code", email, error: "invalidCode" };
+  }
+  redirect(getPathname({ href: "/account", locale }));
+}

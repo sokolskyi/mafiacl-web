@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/routing";
 import { linkProvider, signInWithProvider, signOut } from "@/lib/auth/actions";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { EmailSignIn } from "./EmailSignIn";
 import { NicknameForm } from "./NicknameForm";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
@@ -35,6 +36,12 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
             <TelegramIcon />
           </ProviderButton>
         </div>
+        <div className="my-5 flex items-center gap-3 text-xs uppercase text-neutral-500">
+          <span className="h-px flex-1 bg-white/10" />
+          {t("or")}
+          <span className="h-px flex-1 bg-white/10" />
+        </div>
+        <EmailSignIn locale={locale} />
       </section>
     );
   }
