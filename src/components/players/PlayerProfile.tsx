@@ -100,6 +100,13 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               {" · "}
               {t("foulsLine", { avg: num(s.fouls / s.games) })}
             </p>
+            {(s.redVotes.total > 0 || s.blackVotes.total > 0) && (
+              <p className="mt-1 text-sm text-neutral-300">
+                {s.redVotes.total > 0 && t("redVotesLine", { pct: pct(s.redVotes.black, s.redVotes.total), n: s.redVotes.total })}
+                {s.redVotes.total > 0 && s.blackVotes.total > 0 && " · "}
+                {s.blackVotes.total > 0 && t("blackVotesLine", { pct: pct(s.blackVotes.red, s.blackVotes.total), n: s.blackVotes.total })}
+              </p>
+            )}
           </section>
 
           <section aria-labelledby="recent" className="mt-10">

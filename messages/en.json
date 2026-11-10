@@ -417,7 +417,18 @@
       "best": "best move",
       "day": "day",
       "finish": "result"
-    }
+    },
+    "voteFor": "Voting",
+    "voteForSeat": "For {seat}",
+    "whoVotes": "Who votes for {seat}. {name}? Mark the numbers.",
+    "votedForOther": "{voter} already voted for {seat}",
+    "voterSeat": "Vote by player {voter}",
+    "notVoted": "Not voted: {n}",
+    "restToLast": "The rest — for {seat}",
+    "outOneNamed": "{seat} is out",
+    "revote": "Record and revote",
+    "nobodyOut": "Record, nobody out",
+    "manualOut": "Out without marking votes"
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",
@@ -447,6 +458,8 @@
     "won": "win",
     "lost": "loss",
     "unrated": "unrated",
-    "myPage": "My player page"
+    "myPage": "My player page",
+    "redVotesLine": "As a civilian votes for black: {pct} ({n} votes)",
+    "blackVotesLine": "as mafia for red: {pct} ({n})"
   }
 }

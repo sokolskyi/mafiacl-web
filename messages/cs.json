@@ -417,7 +417,18 @@
       "best": "nejlepší tah",
       "day": "den",
       "finish": "výsledek"
-    }
+    },
+    "voteFor": "Hlasování",
+    "voteForSeat": "Pro {seat}",
+    "whoVotes": "Kdo hlasuje pro {seat}. {name}? Označte čísla.",
+    "votedForOther": "{voter} už hlasoval pro {seat}",
+    "voterSeat": "Hlas hráče {voter}",
+    "notVoted": "Nehlasovali: {n}",
+    "restToLast": "Ostatní — pro {seat}",
+    "outOneNamed": "Vypadl {seat}",
+    "revote": "Zapsat a hlasovat znovu",
+    "nobodyOut": "Zapsat, nikdo nevypadl",
+    "manualOut": "Vyřazení bez označení hlasů"
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",
@@ -447,6 +458,8 @@
     "won": "výhra",
     "lost": "prohra",
     "unrated": "mimo žebříček",
-    "myPage": "Moje stránka hráče"
+    "myPage": "Moje stránka hráče",
+    "redVotesLine": "Jako civilista hlasuje pro černé: {pct} ({n} hlasů)",
+    "blackVotesLine": "jako mafie pro červené: {pct} ({n})"
   }
 }

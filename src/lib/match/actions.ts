@@ -6,7 +6,7 @@ import { MATCHES_TAG } from "@/lib/players";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
-import { MatchError, isAction, replay, scores, type Action } from "./engine";
+import { MatchError, isAction, replay, scores, voteStats, type Action } from "./engine";
 import { MAX_SEATS, type SeatInfo } from "./types";
 
 // Все записи идут от имени вошедшего ведущего: права проверяет RLS (сотрудник клуба).
@@ -172,6 +172,7 @@ export async function finishMatch(input: {
   const seats = (m.seats as { profile_id?: string | null; name: string }[]) ?? [];
   if (seats.some((s) => !s?.name?.trim())) return { ok: false, code: "seats" };
 
+  const votes = voteStats(state);
   const rows = scores(state, adj).map((sc) => {
     const seat = sc.seat;
     return {
@@ -190,6 +191,8 @@ export async function finishMatch(input: {
       extra: sc.extra,
       penalty: sc.penalty,
       points: sc.total,
+      votes_black: votes[sc.seat]?.black ?? 0,
+      votes_red: votes[sc.seat]?.red ?? 0,
     };
   });
 

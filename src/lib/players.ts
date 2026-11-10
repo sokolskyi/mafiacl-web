@@ -40,6 +40,9 @@ export type PlayerPage = {
     bestMoveHits: number; // ЛХ с баллами (2 или 3 чёрных)
     bestMovePoints: number;
     fouls: number;
+    /** Поимённые голоса: красным — сколько раз в чёрных; чёрным — сколько раз в красных. */
+    redVotes: { black: number; total: number };
+    blackVotes: { red: number; total: number };
   };
   recent: PlayerGame[];
 };
@@ -66,7 +69,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     db
       .from("match_players")
       .select(
-        "seat, role, win, points, fouls, first_killed, best_move_points, matches!inner ( id, number, table_no, result, rated, finished_at, status, clubs ( name ) )",
+        "seat, role, win, points, fouls, first_killed, best_move_points, votes_black, votes_red, matches!inner ( id, number, table_no, result, rated, finished_at, status, clubs ( name ) )",
       )
       .eq("profile_id", p.id)
       .eq("matches.status", "finished")
@@ -100,6 +103,8 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   const empty = (): RoleStats => ({ games: 0, wins: 0, points: 0 });
   const byRole: Record<PlayerRole, RoleStats> = { civilian: empty(), sheriff: empty(), mafia: empty(), don: empty() };
   let fouls = 0;
+  const redVotes = { black: 0, total: 0 };
+  const blackVotes = { red: 0, total: 0 };
   for (const g of rated) {
     const s = byRole[g.role];
     s.games++;
@@ -107,7 +112,15 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     s.points += g.points;
   }
   for (const r of rows ?? []) {
-    if ((r.matches as unknown as { rated: boolean }).rated) fouls += r.fouls;
+    if (!(r.matches as unknown as { rated: boolean }).rated) continue;
+    fouls += r.fouls;
+    if (r.role === "mafia" || r.role === "don") {
+      blackVotes.red += r.votes_red;
+      blackVotes.total += r.votes_red + r.votes_black;
+    } else {
+      redVotes.black += r.votes_black;
+      redVotes.total += r.votes_red + r.votes_black;
+    }
   }
   const round = (n: number) => Math.round(n * 100) / 100;
   for (const s of Object.values(byRole)) s.points = round(s.points);
@@ -127,6 +140,8 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       bestMoveHits: rated.filter((g) => g.bestMovePoints > 0).length,
       bestMovePoints: round(rated.reduce((a, g) => a + g.bestMovePoints, 0)),
       fouls,
+      redVotes,
+      blackVotes,
     },
     recent: games.slice(0, 30),
   };

@@ -8,14 +8,18 @@ export type Role = "civilian" | "sheriff" | "mafia" | "don";
 export type Result = "civilians" | "mafia" | "draw";
 export type OutReason = "killed" | "voted" | "removed";
 
-export type Action =
+/** at — время хода (мс), бланк ставит сам: длительность партии, дней и ночей. */
+export type Action = ActionBody & { at?: number };
+
+type ActionBody =
   | { t: "role"; seat: number; role: Role }
   | { t: "start" } // нулевая ночь → нулевой день
   | { t: "foul"; seat: number }
   | { t: "unfoul"; seat: number }
   | { t: "nominate"; seat: number; by?: number }
   | { t: "unnominate"; seat: number }
-  | { t: "vote"; counts: Record<string, number> } // для протокола
+  // Голосование: counts — число голосов; voters — кто именно поднял руку за кандидата (номера мест).
+  | { t: "vote"; counts: Record<string, number>; voters?: Record<string, number[]> }
   | { t: "eliminate"; seats: number[]; reason: "voted" | "removed" }
   | { t: "night" } // день → ночь
   | { t: "shot"; seat: number | null } // null — промах
@@ -35,7 +39,7 @@ export type MatchState = {
   fouls: Record<number, number>;
   out: Record<number, { reason: OutReason; round: number }>;
   nominations: number[]; // выставленные в текущий день, по порядку
-  votes: { round: number; counts: Record<string, number> }[];
+  votes: { round: number; counts: Record<string, number>; voters?: Record<string, number[]> }[];
   shots: { round: number; seat: number | null }[];
   donChecks: { round: number; seat: number }[];
   sheriffChecks: { round: number; seat: number }[];
@@ -156,7 +160,20 @@ function apply(s: MatchState, a: Action): MatchState {
     }
     case "vote": {
       if (s.phase !== "day") throw new MatchError("phase");
-      n.votes.push({ round: s.round, counts: a.counts });
+      if (a.voters) {
+        const seen = new Set<number>();
+        for (const [target, list] of Object.entries(a.voters)) {
+          if (!s.nominations.includes(Number(target))) throw new MatchError("bad");
+          for (const v of list) {
+            if (!seatOk(s, v) || s.out[v] || seen.has(v)) throw new MatchError("bad");
+            seen.add(v);
+          }
+        }
+        const counts = Object.fromEntries(Object.entries(a.voters).map(([k, v]) => [k, v.length]));
+        n.votes.push({ round: s.round, counts, voters: a.voters });
+      } else {
+        n.votes.push({ round: s.round, counts: a.counts });
+      }
       return n;
     }
     case "eliminate": {
@@ -260,6 +277,23 @@ export function scores(
     const total = Math.round(((win ? rules.win : 0) + bm + extra - penalty) * 100) / 100;
     return { seat, win, bestMove: bm, extra, penalty, total };
   });
+}
+
+/** Сколько раз игрок голосовал в чёрных и в красных (по поимённым голосованиям). */
+export function voteStats(s: MatchState) {
+  const out: Record<number, { black: number; red: number }> = {};
+  for (const v of s.votes) {
+    if (!v.voters) continue;
+    for (const [target, list] of Object.entries(v.voters)) {
+      const black = isBlack(s.roles[Number(target)]);
+      for (const voter of list) {
+        out[voter] ??= { black: 0, red: 0 };
+        if (black) out[voter].black++;
+        else out[voter].red++;
+      }
+    }
+  }
+  return out;
 }
 
 export function isAction(x: unknown): x is Action {

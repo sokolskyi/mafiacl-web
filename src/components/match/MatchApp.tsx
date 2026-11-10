@@ -32,6 +32,11 @@ const ROLE_CLASS: Record<Role, string> = {
 
 type NightMode = "shot" | "don" | "sheriff" | "best";
 
+/** Время хода — вызывается только из обработчиков нажатий. */
+function stamp() {
+  return Date.now();
+}
+
 export type MatchAppProps = {
   id: number;
   number: number;
@@ -57,7 +62,8 @@ export function MatchApp(p: MatchAppProps) {
   const [saving, setSaving] = useState(0);
   const [modeChoice, setModeChoice] = useState<{ round: number; mode: NightMode } | null>(null);
   const [picks, setPicks] = useState<number[]>([]);
-  const [votesInput, setVotesInput] = useState<{ key: string; values: Record<number, string> }>({ key: "", values: {} });
+  // Поимённое голосование: за кого (номер) → кто поднял руку. Живёт до записи голосования.
+  const [ballot, setBallot] = useState<{ key: string; target: number | null; voters: Record<number, number[]> }>({ key: "", target: null, voters: {} });
   const [showRoles, setShowRolesState] = useState(p.initialShowRoles);
   const [rated, setRated] = useState(p.initialRated);
   const [adj, setAdj] = useState<Record<number, { extra: string; penalty: string }>>(() =>
@@ -116,7 +122,7 @@ export function MatchApp(p: MatchAppProps) {
       return;
     }
     setNotice(null);
-    const next = [...log, a];
+    const next = [...log, { ...a, at: stamp() }];
     setLog(next);
     // Начало игры фиксирует и рассадку.
     persist(next, a.t === "start" ? seats : undefined);
@@ -124,7 +130,11 @@ export function MatchApp(p: MatchAppProps) {
 
   function undo() {
     if (locked || !log.length) return;
-    const next = log.slice(0, -1);
+    // Шаги, записанные одним нажатием (голосование + выбывшие), отменяются вместе.
+    const lastAt = log[log.length - 1].at;
+    let cut = log.length - 1;
+    while (lastAt !== undefined && cut > 0 && log[cut - 1].at === lastAt) cut--;
+    const next = log.slice(0, cut);
     setLog(next);
     setNotice(null);
     persist(next);
@@ -167,11 +177,9 @@ export function MatchApp(p: MatchAppProps) {
   const nightMode: NightMode = modeChoice && modeChoice.round === state.round && !nightDone(modeChoice.mode) ? modeChoice.mode : autoMode;
   const setNightMode = (mode: NightMode) => setModeChoice({ round: state.round, mode });
 
-  // Голоса вводятся заново каждый день.
-  const voteKey = `${state.phase}-${state.round}`;
-  const counts = votesInput.key === voteKey ? votesInput.values : {};
-  const setCounts = (f: (c: Record<number, string>) => Record<number, string>) =>
-    setVotesInput({ key: voteKey, values: f(counts) });
+  // Бюллетень сбрасывается при смене дня и после каждой записи голосования.
+  const ballotKey = `${state.phase}-${state.round}-${state.votes.length}`;
+  const cur = ballot.key === ballotKey ? ballot : { key: ballotKey, target: null, voters: {} as Record<number, number[]> };
 
   const suggestion = suggestedResult(state);
   const roleCount = (r: Role) => Array.from({ length: 10 }, (_, i) => state.roles[i + 1] ?? "civilian").filter((x) => x === r).length;
@@ -202,27 +210,50 @@ export function MatchApp(p: MatchAppProps) {
 
   // --- голосование ---
   const nominees = state.nominations;
-  const tally = nominees.map((s) => ({ seat: s, votes: Number(counts[s] || 0) }));
+  const activeTarget = cur.target !== null && nominees.includes(cur.target) ? cur.target : nominees[0] ?? null;
+  const votedFor = (voter: number) => Number(Object.entries(cur.voters).find(([, l]) => l.includes(voter))?.[0] ?? 0);
+  const tally = nominees.map((s) => ({ seat: s, votes: cur.voters[s]?.length ?? 0 }));
   const maxVotes = Math.max(0, ...tally.map((x) => x.votes));
   const leaders = tally.filter((x) => x.votes === maxVotes && maxVotes > 0).map((x) => x.seat);
+  const unassigned = alive(state).filter((v) => !votedFor(v));
 
-  function recordVoteAndEliminate(seatsOut: number[]) {
-    if (tally.some((x) => x.votes > 0)) {
-      const c = Object.fromEntries(tally.map((x) => [String(x.seat), x.votes]));
-      const next1 = [...log, { t: "vote", counts: c } as Action];
-      try {
-        const s1 = tryApply(state, next1[next1.length - 1]);
-        tryApply(s1, { t: "eliminate", seats: seatsOut, reason: "voted" });
-      } catch (e) {
-        setNotice(t(`err.${e instanceof MatchError ? e.code : "bad"}`));
-        return;
-      }
-      const next = [...next1, { t: "eliminate", seats: seatsOut, reason: "voted" } as Action];
-      setLog(next);
-      persist(next);
-    } else {
-      dispatch({ t: "eliminate", seats: seatsOut, reason: "voted" });
+  function toggleVoter(voter: number) {
+    if (activeTarget === null) return;
+    const owner = votedFor(voter);
+    if (owner && owner !== activeTarget) return; // уже проголосовал за другого
+    const list = cur.voters[activeTarget] ?? [];
+    const nextList = list.includes(voter) ? list.filter((x) => x !== voter) : [...list, voter].sort((a, b) => a - b);
+    setBallot({ ...cur, target: activeTarget, voters: { ...cur.voters, [activeTarget]: nextList } });
+  }
+  function restToLast() {
+    const last = nominees[nominees.length - 1];
+    if (last === undefined) return;
+    const list = [...(cur.voters[last] ?? []), ...unassigned].sort((a, b) => a - b);
+    setBallot({ ...cur, target: last, voters: { ...cur.voters, [last]: list } });
+  }
+
+  /** Записать голосование (если отмечали руки) и, если нужно, выбывших. */
+  function commitVote(seatsOut: number[]) {
+    const hasVotes = Object.values(cur.voters).some((l) => l.length);
+    const steps: Action[] = [];
+    const at = stamp();
+    if (hasVotes) {
+      const voters = Object.fromEntries(nominees.map((s) => [String(s), cur.voters[s] ?? []]));
+      const counts = Object.fromEntries(nominees.map((s) => [String(s), voters[String(s)].length]));
+      steps.push({ t: "vote", counts, voters, at });
     }
+    if (seatsOut.length) steps.push({ t: "eliminate", seats: seatsOut, reason: "voted", at });
+    if (!steps.length) return;
+    try {
+      steps.reduce((st, a) => tryApply(st, a), state);
+    } catch (e) {
+      setNotice(t(`err.${e instanceof MatchError ? e.code : "bad"}`));
+      return;
+    }
+    setNotice(null);
+    const next = [...log, ...steps];
+    setLog(next);
+    persist(next);
   }
 
   const btn = "rounded px-3 py-2 text-sm font-semibold disabled:opacity-40";
@@ -376,29 +407,74 @@ export function MatchApp(p: MatchAppProps) {
           {nominees.length === 0 ? (
             <p className="text-sm text-neutral-500">{t("noNominations")}</p>
           ) : (
-            <ul className="space-y-2">
-              {nominees.map((s) => (
-                <li key={s} className="flex items-center gap-2">
-                  <span className="flex-1 font-semibold">{s}. {nameOf(s)}</span>
-                  <label className="sr-only" htmlFor={`v${s}`}>{t("votesFor", { seat: s })}</label>
-                  <input
-                    id={`v${s}`}
-                    inputMode="numeric"
-                    value={counts[s] ?? ""}
-                    onChange={(e) => setCounts((c) => ({ ...c, [s]: e.target.value.replace(/\D/g, "").slice(0, 2) }))}
-                    placeholder="0"
-                    className="w-16 rounded border border-white/20 bg-neutral-900 px-2 py-2 text-center"
-                  />
-                  <button className={btnSoft} onClick={() => recordVoteAndEliminate([s])}>{t("outOne")}</button>
-                </li>
-              ))}
-            </ul>
-          )}
-          {leaders.length > 1 && (
-            <div className="rounded border border-amber-500/30 p-3 text-sm">
-              <p>{t("tie", { seats: leaders.join(", ") })}</p>
-              <button className={`${btnSoft} mt-2`} onClick={() => recordVoteAndEliminate(leaders)}>{t("outAll", { seats: leaders.join(", ") })}</button>
-            </div>
+            <>
+              <div className="flex flex-wrap gap-2" role="tablist" aria-label={t("voteFor")}>
+                {tally.map((x) => (
+                  <button
+                    key={x.seat}
+                    role="tab"
+                    aria-selected={activeTarget === x.seat}
+                    onClick={() => setBallot({ ...cur, target: x.seat })}
+                    className={`${btn} ${activeTarget === x.seat ? "bg-red-600" : "bg-white/10"}`}
+                  >
+                    {t("voteForSeat", { seat: x.seat })} · {x.votes}
+                  </button>
+                ))}
+              </div>
+              {activeTarget !== null && (
+                <div className="rounded border border-white/10 p-3">
+                  <p className="text-sm text-neutral-300">{t("whoVotes", { seat: activeTarget, name: nameOf(activeTarget) })}</p>
+                  <div className="mt-2 grid grid-cols-5 gap-2">
+                    {alive(state).map((v) => {
+                      const owner = votedFor(v);
+                      const mine = owner === activeTarget;
+                      return (
+                        <button
+                          key={v}
+                          onClick={() => toggleVoter(v)}
+                          disabled={!!owner && !mine}
+                          aria-pressed={mine}
+                          aria-label={owner && !mine ? t("votedForOther", { voter: v, seat: owner }) : t("voterSeat", { voter: v })}
+                          className={`h-11 rounded font-mono text-lg font-bold ${mine ? "bg-red-600" : owner ? "bg-white/5 text-neutral-600" : "bg-white/10 hover:bg-white/20"}`}
+                        >
+                          {v}
+                          {owner && !mine ? <span className="ml-0.5 text-[10px] align-top">→{owner}</span> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-2 text-xs text-neutral-500">{t("notVoted", { n: unassigned.length })}</p>
+                  {unassigned.length > 0 && nominees.length > 1 && (
+                    <button className={`${btnSoft} mt-2`} onClick={restToLast}>
+                      {t("restToLast", { seat: nominees[nominees.length - 1] })}
+                    </button>
+                  )}
+                </div>
+              )}
+              <div className="flex flex-wrap gap-2">
+                {leaders.length === 1 && (
+                  <button className={btnMain} onClick={() => commitVote(leaders)}>{t("outOneNamed", { seat: leaders[0] })}</button>
+                )}
+                {leaders.length > 1 && (
+                  <>
+                    <p className="w-full text-sm text-amber-300">{t("tie", { seats: leaders.join(", ") })}</p>
+                    <button className={btnSoft} onClick={() => commitVote([])}>{t("revote")}</button>
+                    <button className={btnMain} onClick={() => commitVote(leaders)}>{t("outAll", { seats: leaders.join(", ") })}</button>
+                  </>
+                )}
+                <button className={btnSoft} onClick={() => commitVote([])} disabled={!Object.values(cur.voters).some((l) => l.length)}>
+                  {t("nobodyOut")}
+                </button>
+              </div>
+              <details className="text-sm">
+                <summary className="cursor-pointer text-neutral-400">{t("manualOut")}</summary>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {nominees.map((s) => (
+                    <button key={s} className={btnSoft} onClick={() => commitVote([s])}>{t("outOneNamed", { seat: s })}</button>
+                  ))}
+                </div>
+              </details>
+            </>
           )}
           <div className="flex flex-wrap gap-2">
             <button className={btnMain} onClick={() => dispatch({ t: "night" })}>{t("toNight")}</button>
@@ -549,7 +625,10 @@ function describe(a: Action, t: ReturnType<typeof useTranslations>) {
     case "unfoul": return `${t("log.unfoul")} ${a.seat}`;
     case "nominate": return `${t("log.nominate")} ${a.seat}`;
     case "unnominate": return `${t("log.unnominate")} ${a.seat}`;
-    case "vote": return `${t("log.vote")} ${Object.entries(a.counts).map(([k, v]) => `${k}:${v}`).join(" ")}`;
+    case "vote":
+      return a.voters
+        ? `${t("log.vote")} ${Object.entries(a.voters).map(([k, v]) => `${k}←${v.join(",") || "—"}`).join("  ")}`
+        : `${t("log.vote")} ${Object.entries(a.counts).map(([k, v]) => `${k}:${v}`).join(" ")}`;
     case "eliminate": return `${t("log.eliminate")} ${a.seats.join(", ")}`;
     case "night": return t("log.night");
     case "shot": return `${t("log.shot")} ${a.seat ?? t("miss")}`;
