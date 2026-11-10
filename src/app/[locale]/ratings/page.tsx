@@ -2,8 +2,7 @@ import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
-import { RatingTable, type RatingSort } from "@/components/rating/RatingTable";
-import { FIRST_SEASON } from "@/lib/rating";
+import { RatingTable } from "@/components/rating/RatingTable";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/ratings">) {
   const { locale } = (await params) as { locale: Locale };
@@ -28,12 +27,13 @@ export default async function Page({ params, searchParams }: PageProps<"/[locale
 async function Filtered({ locale, searchParams }: { locale: Locale; searchParams: PageProps<"/[locale]/ratings">["searchParams"] }) {
   const sp = await searchParams;
   const one = (v: string | string[] | undefined) => (typeof v === "string" ? v : undefined);
-  const nowYear = Number(new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Europe/Prague" }).format(new Date()));
-  const y = Number(one(sp.season));
-  const season = Number.isInteger(y) && y >= FIRST_SEASON && y <= nowYear ? y : nowYear;
-  const s = Number(one(sp.series));
-  const series = Number.isInteger(s) && s > 0 ? s : null;
-  const sortRaw = one(sp.sort);
-  const sort: RatingSort = sortRaw === "avg" || sortRaw === "winrate" ? sortRaw : "points";
-  return <RatingTable locale={locale} season={season} series={series} sort={sort} />;
+  const season = Number(one(sp.season));
+  const rating = Number(one(sp.rating));
+  return (
+    <RatingTable
+      locale={locale}
+      season={Number.isInteger(season) && season > 0 ? season : null}
+      rating={Number.isInteger(rating) && rating > 0 ? rating : null}
+    />
+  );
 }

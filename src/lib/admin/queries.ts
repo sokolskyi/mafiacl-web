@@ -86,14 +86,14 @@ export async function getAdminGame(id: number) {
     .from("games")
     .select(
       `id, club_id, venue_id, starts_at, status, kind, title, number, capacity, price_czk, stream_url, info_url, late_after,
-       priority_until, allocated_at, final_at, finalized_at, table_size, max_capacity,
+       priority_until, allocated_at, final_at, finalized_at, table_size, max_capacity, final_rating_id,
        game_schedules ( number_style ), clubs ( name, cities ( timezone ) )`,
     )
     .eq("id", id)
     .maybeSingle();
   if (error || !game) return null;
 
-  const [{ data: signups }, { data: venues }] = await Promise.all([
+  const [{ data: signups }, { data: venues }, { data: ratings }] = await Promise.all([
     supabase
       .from("game_signups")
       .select(
@@ -103,6 +103,11 @@ export async function getAdminGame(id: number) {
       .neq("status", "cancelled")
       .order("created_at"),
     supabase.from("venues").select("id, name").eq("club_id", game.club_id).eq("is_active", true).order("name"),
+    supabase
+      .from("season_ratings")
+      .select("id, name, seasons!inner ( name, club_id, number )")
+      .eq("seasons.club_id", game.club_id)
+      .order("id", { ascending: false }),
   ]);
 
   const club = game.clubs as unknown as { name: string; cities: { timezone: string } | null };
@@ -152,6 +157,7 @@ export async function getAdminGame(id: number) {
       };
     }),
     venues: venues ?? [],
+    ratings: (ratings ?? []).map((r) => ({ id: r.id as number, name: `${(r.seasons as unknown as { name: string }).name} · ${r.name}` })),
   };
 }
 

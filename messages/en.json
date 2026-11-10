@@ -218,7 +218,9 @@
       "amount": "Amount, Kč",
       "amountHint": "defaults to the plan price",
       "note": "Note",
-      "siteNickname": "Nickname on the site"
+      "siteNickname": "Nickname on the site",
+      "finalRating": "Rating final",
+      "notFinal": "— regular evening —"
     },
     "status": {
       "draft": "Draft",
@@ -465,17 +467,7 @@
   "rating": {
     "filters": "Rating filters",
     "season": "Season",
-    "series": "Series",
-    "allSeries": "All games",
-    "sortBy": "Sort by",
-    "sort": {
-      "points": "Points",
-      "avg": "Avg. points",
-      "winrate": "Win rate"
-    },
-    "minGames": "Ranking by average and win rate needs at least {n} games; others are listed below in grey.",
     "empty": "No rated games played this season yet.",
-    "caption": "Club rating, season {season}",
     "player": "Player",
     "games": "Games",
     "wins": "Wins",
@@ -483,8 +475,17 @@
     "sheriff": "Sheriff",
     "black": "Mafia",
     "bestMove": "BM",
-    "avg": "Avg.",
     "points": "Points",
-    "note": "Counts rated games from the electronic sheet for players with a site account. Sheriff and mafia — wins / games in the role. BM — best move points."
+    "note": "Counts rated games from the electronic sheet for players with a site account. Sheriff and mafia — wins / games in the role. BM — best move points. “+N” next to games — final games.",
+    "noSeasons": "No seasons set up yet.",
+    "period": "{from} – {to}",
+    "played": "games played: {matches}, evenings: {evenings}",
+    "formulaSum": "Rating is the sum of game points.",
+    "formulaWinrate": "Rating = win points × win rate + bonuses + best move − penalties.",
+    "threshold": "Ranked from {pct} % of the season's games: currently {n} games. Others are listed below in grey.",
+    "final": "Final on {date}: top {size} play, final games count ×{coef}.",
+    "prize": "Prize pool now: {sum} Kč ({ppg} Kč per game + {ppe} Kč per mini tournament).",
+    "finalist": "final",
+    "rating": "Rating"
   }
 }

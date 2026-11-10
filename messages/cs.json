@@ -218,7 +218,9 @@
       "amount": "Částka, Kč",
       "amountHint": "výchozí — cena typu",
       "note": "Poznámka",
-      "siteNickname": "Přezdívka na webu"
+      "siteNickname": "Přezdívka na webu",
+      "finalRating": "Finále žebříčku",
+      "notFinal": "— běžný večer —"
     },
     "status": {
       "draft": "Koncept",
@@ -465,17 +467,7 @@
   "rating": {
     "filters": "Filtry žebříčku",
     "season": "Sezóna",
-    "series": "Série",
-    "allSeries": "Všechny hry",
-    "sortBy": "Řazení",
-    "sort": {
-      "points": "Body",
-      "avg": "Průměr",
-      "winrate": "Úspěšnost"
-    },
-    "minGames": "Do pořadí podle průměru a úspěšnosti se počítá od {n} her, ostatní šedě níže.",
     "empty": "V této sezóně zatím žádné odehrané hry do žebříčku.",
-    "caption": "Žebříček klubu, sezóna {season}",
     "player": "Hráč",
     "games": "Her",
     "wins": "Výher",
@@ -483,8 +475,17 @@
     "sheriff": "Šerif",
     "black": "Mafie",
     "bestMove": "NT",
-    "avg": "Průměr",
     "points": "Body",
-    "note": "Počítají se hry do žebříčku z elektronického zápisu u hráčů s účtem na webu. Šerif a mafie — výhry / hry v roli. NT — body za nejlepší tah."
+    "note": "Počítají se hry do žebříčku z elektronického zápisu u hráčů s účtem na webu. Šerif a mafie — výhry / hry v roli. NT — body za nejlepší tah. „+N“ u her — hry finále.",
+    "noSeasons": "Sezóny zatím nejsou založené.",
+    "period": "{from} – {to}",
+    "played": "odehraných her: {matches}, večerů: {evenings}",
+    "formulaSum": "Žebříček — součet bodů za hry.",
+    "formulaWinrate": "Žebříček = body za výhry × úspěšnost + bonusy + nejlepší tah − tresty.",
+    "threshold": "Do pořadí od {pct} % her sezóny: teď je to {n} her. Ostatní šedě níže.",
+    "final": "Finále {date}: hraje prvních {size}, koeficient her finále {coef}.",
+    "prize": "Výherní fond teď: {sum} Kč ({ppg} Kč za hru + {ppe} Kč za mini-turnaj).",
+    "finalist": "finále",
+    "rating": "Žebříček"
   }
 }

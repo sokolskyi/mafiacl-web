@@ -1,8 +1,21 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { gameTitle, type Localized } from "@/lib/games";
 import { MATCHES_TAG } from "@/lib/players";
+
+export type SeasonRatingInfo = {
+  id: number;
+  name: string;
+  formula: "sum" | "winrate";
+  minShare: number;
+  finalCoef: number;
+  finalSize: number | null;
+  finalOn: string | null;
+  prizePerGame: number | null;
+  prizePerEvening: number | null;
+};
+
+export type Season = { id: number; number: number; name: string; startsOn: string; endsOn: string; ratings: SeasonRatingInfo[] };
 
 export type RatingRow = {
   profileId: string;
@@ -10,67 +23,90 @@ export type RatingRow = {
   avatarUrl: string | null;
   games: number;
   wins: number;
+  finals: number;
+  rating: number;
   points: number;
-  bestMovePoints: number;
+  bestMove: number;
   sheriffGames: number;
   sheriffWins: number;
   blackGames: number;
   blackWins: number;
 };
 
-export type Series = { id: number; title: Localized };
-
-/** Первый сезон на новом сайте. */
-export const FIRST_SEASON = 2026;
-/** Для сортировки по среднему баллу и проценту побед нужно сыграть хотя бы столько партий. */
-export const MIN_GAMES = 5;
-
-export async function getRating(clubSlug: string, season: number, scheduleId: number | null): Promise<RatingRow[]> {
+/** Сезоны клуба (новые сверху) с их рейтингами. */
+export async function getSeasons(clubSlug: string): Promise<Season[]> {
   "use cache";
   cacheTag(MATCHES_TAG);
-  cacheLife("minutes");
-  if (!isSupabaseConfigured) return [];
-  const db = createPublicClient();
-  const { data, error } = await db.rpc("club_rating", {
-    p_club_slug: clubSlug,
-    p_from: `${season}-01-01`,
-    p_to: `${season}-12-31`,
-    p_schedule_id: scheduleId,
-  });
-  if (error) {
-    console.error("getRating failed", { code: error.code, message: error.message });
-    return [];
-  }
-  return ((data ?? []) as Record<string, unknown>[]).map((r) => ({
-    profileId: r.profile_id as string,
-    nickname: r.nickname as string,
-    avatarUrl: (r.avatar_url as string | null) ?? null,
-    games: Number(r.games),
-    wins: Number(r.wins),
-    points: Number(r.points),
-    bestMovePoints: Number(r.best_move_points),
-    sheriffGames: Number(r.sheriff_games),
-    sheriffWins: Number(r.sheriff_wins),
-    blackGames: Number(r.black_games),
-    blackWins: Number(r.black_wins),
-  }));
-}
-
-/** Серии клуба (регулярные игры) для фильтра рейтинга. */
-export async function getSeries(clubSlug: string): Promise<Series[]> {
-  "use cache";
   cacheLife("hours");
   if (!isSupabaseConfigured) return [];
   const db = createPublicClient();
-  const { data } = await db
-    .from("game_schedules")
-    .select("id, title, weekday, clubs!inner ( slug )")
+  const { data, error } = await db
+    .from("seasons")
+    .select(
+      "id, number, name, starts_on, ends_on, clubs!inner ( slug ), season_ratings ( id, name, formula, min_share, final_coef, final_size, final_on, prize_per_game, prize_per_evening, sort_order )",
+    )
     .eq("clubs.slug", clubSlug)
-    .eq("is_active", true)
-    .order("weekday");
-  return (data ?? []).map((s) => ({ id: s.id, title: (s.title ?? {}) as Localized }));
+    .order("number", { ascending: false });
+  if (error) {
+    console.error("getSeasons failed", { code: error.code, message: error.message });
+    return [];
+  }
+  return (data ?? []).map((s) => ({
+    id: s.id,
+    number: s.number,
+    name: s.name,
+    startsOn: s.starts_on,
+    endsOn: s.ends_on,
+    ratings: ((s.season_ratings ?? []) as Record<string, unknown>[])
+      .sort((a, b) => Number(a.sort_order) - Number(b.sort_order))
+      .map((r) => ({
+        id: Number(r.id),
+        name: String(r.name),
+        formula: r.formula === "winrate" ? "winrate" : "sum",
+        minShare: Number(r.min_share),
+        finalCoef: Number(r.final_coef),
+        finalSize: r.final_size === null ? null : Number(r.final_size),
+        finalOn: (r.final_on as string | null) ?? null,
+        prizePerGame: r.prize_per_game === null ? null : Number(r.prize_per_game),
+        prizePerEvening: r.prize_per_evening === null ? null : Number(r.prize_per_evening),
+      })),
+  }));
 }
 
-export function seriesName(s: Series, locale: keyof Localized) {
-  return gameTitle(s.title[locale] ?? s.title.cs ?? "", null, "arabic");
+export async function getSeasonRating(ratingId: number): Promise<{ rows: RatingRow[]; matches: number; evenings: number }> {
+  "use cache";
+  cacheTag(MATCHES_TAG);
+  cacheLife("minutes");
+  if (!isSupabaseConfigured) return { rows: [], matches: 0, evenings: 0 };
+  const db = createPublicClient();
+  const [{ data, error }, { data: totals }] = await Promise.all([
+    db.rpc("season_rating", { p_rating_id: ratingId }),
+    db.rpc("season_rating_totals", { p_rating_id: ratingId }),
+  ]);
+  if (error) console.error("getSeasonRating failed", { code: error.code, message: error.message });
+  const t = ((totals ?? []) as { matches: number; evenings: number }[])[0];
+  return {
+    matches: Number(t?.matches ?? 0),
+    evenings: Number(t?.evenings ?? 0),
+    rows: ((data ?? []) as Record<string, unknown>[]).map((r) => ({
+      profileId: r.profile_id as string,
+      nickname: r.nickname as string,
+      avatarUrl: (r.avatar_url as string | null) ?? null,
+      games: Number(r.games),
+      wins: Number(r.wins),
+      finals: Number(r.finals),
+      rating: Number(r.rating),
+      points: Number(r.points),
+      bestMove: Number(r.best_move),
+      sheriffGames: Number(r.sheriff_games),
+      sheriffWins: Number(r.sheriff_wins),
+      blackGames: Number(r.black_games),
+      blackWins: Number(r.black_wins),
+    })),
+  };
+}
+
+/** Текущий сезон: последний начавшийся. */
+export function currentSeason(seasons: Season[], today: string) {
+  return seasons.find((s) => s.startsOn <= today) ?? seasons[seasons.length - 1] ?? null;
 }

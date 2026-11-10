@@ -6,6 +6,7 @@ import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { GAMES_TAG } from "@/lib/games";
+import { MATCHES_TAG } from "@/lib/players";
 import { MEMBERSHIP_PLANS, PAYMENT_METHODS, membershipEnd, type MembershipPlan } from "@/lib/memberships";
 import { localInputToIso } from "./time";
 
@@ -55,11 +56,13 @@ export async function updateGame(formData: FormData) {
   const infoUrl = optUrl(formData.get("infoUrl"));
   const venueRaw = String(formData.get("venueId") ?? "");
   const venueId = venueRaw === "" ? null : int(venueRaw, 1, Number.MAX_SAFE_INTEGER);
+  const finalRaw = String(formData.get("finalRatingId") ?? "");
+  const finalRatingId = finalRaw === "" ? null : int(finalRaw, 1, Number.MAX_SAFE_INTEGER);
 
   if (
     !startsAt || !capacity || (numberRaw !== "" && !number) || (price !== null && !(price >= 0)) ||
     !(STATUSES as readonly string[]).includes(status) || streamUrl === undefined || infoUrl === undefined ||
-    (venueRaw !== "" && !venueId)
+    (venueRaw !== "" && !venueId) || (finalRaw !== "" && !finalRatingId)
   ) {
     redirect(gamePath(locale, id, "error=invalid"));
   }
@@ -67,7 +70,7 @@ export async function updateGame(formData: FormData) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("games")
-    .update({ starts_at: startsAt, capacity, number, price_czk: price, status, stream_url: streamUrl, info_url: infoUrl, venue_id: venueId })
+    .update({ starts_at: startsAt, capacity, number, price_czk: price, status, stream_url: streamUrl, info_url: infoUrl, venue_id: venueId, final_rating_id: finalRatingId })
     .eq("id", id)
     .select("id");
   if (error || !data?.length) {
@@ -75,6 +78,7 @@ export async function updateGame(formData: FormData) {
     redirect(gamePath(locale, id, "error=save"));
   }
   updateTag(GAMES_TAG);
+  updateTag(MATCHES_TAG);
   redirect(gamePath(locale, id, "saved=1"));
 }
 

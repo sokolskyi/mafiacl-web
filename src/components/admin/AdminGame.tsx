@@ -21,7 +21,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
 
   const data = await getAdminGame(id);
   if (!data || !ctx.clubs.some((c) => c.id === data.game.club_id)) notFound();
-  const { game, signups, venues } = data;
+  const { game, signups, venues, ratings } = data;
   const matches = await getGameMatches(game.id);
   const tm = await getTranslations({ locale, namespace: "match" });
 
@@ -204,6 +204,12 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
             <select name="venueId" defaultValue={game.venue_id ?? ""} className={input}>
               <option value="">—</option>
               {venues.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+            </select>
+          </label>
+          <label className="text-sm">{t("fields.finalRating")}
+            <select name="finalRatingId" defaultValue={game.final_rating_id ?? ""} className={input}>
+              <option value="">{t("fields.notFinal")}</option>
+              {ratings.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
             </select>
           </label>
           <label className="text-sm">{t("fields.number")}
