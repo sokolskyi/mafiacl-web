@@ -96,7 +96,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           ].map(([k, v]) => (
             <div key={k} className="rounded-lg border border-white/10 bg-neutral-950 p-4">
               <dt className="text-sm text-neutral-400">{k}</dt>
-              <dd className="mt-1 text-3xl font-black">{v}</dd>
+              <dd className={`mt-1 font-black ${v.length > 6 ? "text-2xl" : "text-3xl"}`}>{v}</dd>
             </div>
           ))}
         </dl>
