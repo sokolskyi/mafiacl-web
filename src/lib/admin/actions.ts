@@ -161,3 +161,55 @@ export async function changeSignup(formData: FormData) {
   // Подтверждение сверх лимита триггер оставит в листе ожидания — сообщаем об этом.
   redirect(gamePath(locale, gameId, op === "confirm" && data[0].status !== "confirmed" ? "error=full" : undefined));
 }
+
+const STAFF_ROLES = ["admin", "host"] as const;
+
+/** Владелец клуба: выдать роль игроку по нику (игрок должен уже войти на сайт и указать ник). */
+export async function addStaff(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const role = String(formData.get("role"));
+  // «*» в PostgREST — тоже подстановочный знак; в нике его быть не должно.
+  if (!clubId || nickname.length < 2 || nickname.length > 32 || nickname.includes("*") || !(STAFF_ROLES as readonly string[]).includes(role)) {
+    redirect(`${back}?error=invalid#team`);
+  }
+
+  const supabase = await createClient();
+  // Точное совпадение без учёта регистра: экранируем спецсимволы ILIKE.
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  if (!found || found.length !== 1) redirect(`${back}?error=noPlayer#team`);
+
+  const { error } = await supabase.from("club_staff").insert({ club_id: clubId, profile_id: found[0].id, role });
+  if (error && error.code !== "23505") {
+    console.error("addStaff failed", { clubId, role, code: error.code, message: error.message });
+    redirect(`${back}?error=save#team`);
+  }
+  redirect(`${back}?team=1#team`);
+}
+
+export async function removeStaff(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const profileId = String(formData.get("profileId") ?? "");
+  const role = String(formData.get("role"));
+  if (!clubId || !/^[0-9a-f-]{36}$/.test(profileId) || !(STAFF_ROLES as readonly string[]).includes(role)) {
+    redirect(`${back}?error=invalid#team`);
+  }
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("club_staff")
+    .delete()
+    .eq("club_id", clubId)
+    .eq("profile_id", profileId)
+    .eq("role", role);
+  if (error) {
+    console.error("removeStaff failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#team`);
+  }
+  redirect(`${back}#team`);
+}

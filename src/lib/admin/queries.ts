@@ -122,3 +122,16 @@ export async function getAdminGame(id: number) {
     venues: venues ?? [],
   };
 }
+
+export async function getClubStaff(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("club_staff")
+    .select("profile_id, role, profiles ( nickname, display_name )")
+    .eq("club_id", clubId)
+    .order("role");
+  return (data ?? []).map((r) => {
+    const p = r.profiles as unknown as { nickname: string | null; display_name: string | null } | null;
+    return { profileId: r.profile_id, role: r.role as StaffRole, name: p?.nickname ?? p?.display_name ?? "—" };
+  });
+}

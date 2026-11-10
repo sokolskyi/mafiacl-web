@@ -199,7 +199,9 @@
       "number": "Číslo v sérii",
       "price": "Vstupné, Kč",
       "streamUrl": "Odkaz na přenos",
-      "infoUrl": "Stránka turnaje (mafgame apod.)"
+      "infoUrl": "Stránka turnaje (mafgame apod.)",
+      "nickname": "Přezdívka hráče",
+      "role": "Role"
     },
     "status": {
       "draft": "Koncept",
@@ -211,7 +213,17 @@
     "errors": {
       "invalid": "Zkontrolujte vyplněná pole.",
       "save": "Nepodařilo se uložit (nebo nemáte oprávnění).",
-      "full": "Hra je plná — hráč zůstal na čekací listině. Zvyšte počet míst."
+      "full": "Hra je plná — hráč zůstal na čekací listině. Zvyšte počet míst.",
+      "noPlayer": "Hráč s touto přezdívkou nenalezen. Ať se přihlásí na webu a vyplní přezdívku."
+    },
+    "team": "Tým · {club}",
+    "addStaff": "Přidat",
+    "teamAdded": "Role přidělena.",
+    "teamHint": "Hráč se musí nejdřív přihlásit na webu a vyplnit přezdívku v účtu. Moderátor vede hry a zápis, admin navíc spravuje místa a turnaje.",
+    "roles": {
+      "owner": "vlastník",
+      "admin": "admin",
+      "host": "moderátor"
     }
   }
 }

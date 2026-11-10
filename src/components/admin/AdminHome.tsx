@@ -2,12 +2,12 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { createGame } from "@/lib/admin/actions";
-import { getAdminGames, getStaffContext } from "@/lib/admin/queries";
+import { addStaff, createGame, removeStaff } from "@/lib/admin/actions";
+import { getAdminGames, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
 
 /** Читает сессию — только внутри <Suspense>. */
-export async function AdminHome({ locale, error }: { locale: Locale; error?: string }) {
+export async function AdminHome({ locale, error, team }: { locale: Locale; error?: string; team?: boolean }) {
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
   const ctx = await getStaffContext();
@@ -27,7 +27,12 @@ export async function AdminHome({ locale, error }: { locale: Locale; error?: str
 
   return (
     <div className="mt-10 space-y-12">
-      {error && <p role="alert" className="text-red-400">{t(`errors.${error === "invalid" ? "invalid" : "save"}`)}</p>}
+      {error && (
+        <p role="alert" className="text-red-400">
+          {t(`errors.${error === "invalid" || error === "noPlayer" ? error : "save"}`)}
+        </p>
+      )}
+      {team && <p role="status" className="text-green-400">{t("teamAdded")}</p>}
 
       <section>
         <h2 className="text-xl font-bold">{t("games")}</h2>
@@ -94,6 +99,48 @@ export async function AdminHome({ locale, error }: { locale: Locale; error?: str
           </form>
         </section>
       ))}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner"))
+          .map(async (club) => {
+            const staff = await getClubStaff(club.id);
+            return (
+              <section key={`team-${club.id}`} id="team">
+                <h2 className="text-xl font-bold">{t("team", { club: club.name })}</h2>
+                <ul className="mt-4 max-w-xl divide-y divide-white/10 rounded border border-white/10">
+                  {staff.map((m) => (
+                    <li key={`${m.profileId}-${m.role}`} className="flex items-center gap-3 px-4 py-2">
+                      <span className="flex-1">{m.name}</span>
+                      <span className="text-sm text-neutral-400">{t(`roles.${m.role}`)}</span>
+                      {m.role !== "owner" && (
+                        <form action={removeStaff}>
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="clubId" value={club.id} />
+                          <input type="hidden" name="profileId" value={m.profileId} />
+                          <input type="hidden" name="role" value={m.role} />
+                          <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                        </form>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <form action={addStaff} className="mt-4 flex max-w-xl flex-wrap gap-2">
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="clubId" value={club.id} />
+                  <label htmlFor={`nick-${club.id}`} className="sr-only">{t("fields.nickname")}</label>
+                  <input id={`nick-${club.id}`} name="nickname" required minLength={2} maxLength={32} placeholder={t("fields.nickname")} className={`flex-1 ${input}`} />
+                  <select name="role" defaultValue="host" aria-label={t("fields.role")} className={input}>
+                    <option value="host">{t("roles.host")}</option>
+                    <option value="admin">{t("roles.admin")}</option>
+                  </select>
+                  <button className="rounded bg-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-700">{t("addStaff")}</button>
+                </form>
+                <p className="mt-2 text-sm text-neutral-400">{t("teamHint")}</p>
+              </section>
+            );
+          }),
+      )}
     </div>
   );
 }

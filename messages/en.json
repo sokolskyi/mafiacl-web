@@ -199,7 +199,9 @@
       "number": "Number in series",
       "price": "Price, CZK",
       "streamUrl": "Stream link",
-      "infoUrl": "Tournament page (mafgame etc.)"
+      "infoUrl": "Tournament page (mafgame etc.)",
+      "nickname": "Player nickname",
+      "role": "Role"
     },
     "status": {
       "draft": "Draft",
@@ -211,7 +213,17 @@
     "errors": {
       "invalid": "Please check the fields.",
       "save": "Could not save (or no permission).",
-      "full": "The game is full — the player stays on the waitlist. Increase the seats."
+      "full": "The game is full — the player stays on the waitlist. Increase the seats.",
+      "noPlayer": "No player with this nickname. Ask them to sign in and set it in their account."
+    },
+    "team": "Team · {club}",
+    "addStaff": "Add",
+    "teamAdded": "Role granted.",
+    "teamHint": "The player must first sign in and set a nickname. A host runs games and sign-ups; an admin also manages venues and tournaments.",
+    "roles": {
+      "owner": "owner",
+      "admin": "admin",
+      "host": "host"
     }
   }
 }
