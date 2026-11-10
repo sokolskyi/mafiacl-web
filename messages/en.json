@@ -139,7 +139,11 @@
     "invalidEmail": "Please check the e-mail address.",
     "tooMany": "Too many attempts. Try again in a few minutes.",
     "invalidCode": "The code is invalid or has expired.",
-    "admin": "Club admin →"
+    "admin": "Club admin →",
+    "botTitle": "Club Telegram bot",
+    "botHint": "Reminders 3 hours before a game, a message when a seat opens up, and sign-up right in Telegram.",
+    "botConnect": "Connect Telegram",
+    "botOn": "Telegram connected"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -214,7 +218,9 @@
       "invalid": "Please check the fields.",
       "save": "Could not save (or no permission).",
       "full": "The game is full — the player stays on the waitlist. Increase the seats.",
-      "noPlayer": "No player with this nickname. Ask them to sign in and set it in their account."
+      "noPlayer": "No player with this nickname. Ask them to sign in and set it in their account.",
+      "bot": "Telegram rejected the request. Check the bot token and that the bot is a channel admin.",
+      "channel": "Channel is not set (TELEGRAM_CHANNEL_ID)."
     },
     "team": "Team · {club}",
     "addStaff": "Add",
@@ -224,6 +230,12 @@
       "owner": "owner",
       "admin": "admin",
       "host": "host"
-    }
+    },
+    "botTitle": "Telegram bot",
+    "botHint": "Connects @mafiaclub_prague_bot to the website: sign-ups, reminders, notifications. Needed once (and again after moving to mafiacl.com).",
+    "botSetup": "Connect bot",
+    "botReady": "Bot connected. Send it /start.",
+    "announce": "Announce in Telegram channel",
+    "announced": "Announcement sent to the channel."
   }
 }

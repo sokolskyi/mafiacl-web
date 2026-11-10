@@ -6,6 +6,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { Link } from "@/i18n/navigation";
 import { EmailSignIn } from "./EmailSignIn";
 import { NicknameForm } from "./NicknameForm";
+import { connectTelegram } from "@/lib/telegram/actions";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError }: { locale: Locale; authError: boolean }) {
@@ -57,6 +58,12 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
     .from("club_staff")
     .select("club_id", { count: "exact", head: true })
     .eq("profile_id", userId);
+  const { data: priv } = await supabase
+    .from("profile_private")
+    .select("telegram_chat_id")
+    .eq("profile_id", userId)
+    .maybeSingle();
+  const telegramOn = Boolean(priv?.telegram_chat_id);
   const { data: ids } = await supabase.auth.getUserIdentities();
   const linked = new Set((ids?.identities ?? []).map((i) => i.provider));
   const methods = [
@@ -116,6 +123,21 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
             </li>
           ))}
         </ul>
+      </section>
+      <section className="mt-10 max-w-md">
+        <h2 className="text-sm font-semibold">{t("botTitle")}</h2>
+        <p className="mt-1 text-sm text-neutral-400">{t("botHint")}</p>
+        {telegramOn ? (
+          <p className="mt-3 text-sm text-green-400">✓ {t("botOn")}</p>
+        ) : (
+          <form action={connectTelegram} className="mt-3">
+            <input type="hidden" name="locale" value={locale} />
+            <button type="submit" className="flex items-center gap-2 rounded bg-[#229ED9] px-4 py-2 font-semibold hover:bg-[#1f91c7]">
+              <TelegramIcon />
+              {t("botConnect")}
+            </button>
+          </form>
+        )}
       </section>
       <form action={signOut} className="mt-10">
         <input type="hidden" name="locale" value={locale} />

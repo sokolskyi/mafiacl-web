@@ -4,10 +4,11 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
 import { addGuest, changeSignup, updateGame } from "@/lib/admin/actions";
+import { announceGame } from "@/lib/telegram/actions";
 import { getAdminGame, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
 
-type Flags = { saved?: string; created?: string; error?: string };
+type Flags = { saved?: string; created?: string; error?: string; announced?: string };
 
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminGame({ locale, id, flags }: { locale: Locale; id: number; flags: Flags }) {
@@ -56,7 +57,17 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
       <h2 className="text-3xl font-black">{title}</h2>
       {flags.saved && <p role="status" className="text-green-400">{t("saved")}</p>}
       {flags.created && <p role="status" className="text-green-400">{t("created")}</p>}
-      {flags.error && <p role="alert" className="text-red-400">{t(`errors.${flags.error === "invalid" || flags.error === "full" ? flags.error : "save"}`)}</p>}
+      {flags.announced && <p role="status" className="text-green-400">{t("announced")}</p>}
+      {flags.error && (
+        <p role="alert" className="text-red-400">
+          {t(`errors.${["invalid", "full", "bot", "channel"].includes(flags.error) ? flags.error : "save"}`)}
+        </p>
+      )}
+      <form action={announceGame}>
+        <input type="hidden" name="locale" value={locale} />
+        <input type="hidden" name="gameId" value={game.id} />
+        <button className="rounded bg-[#229ED9] px-4 py-2 text-sm font-semibold hover:bg-[#1f91c7]">{t("announce")}</button>
+      </form>
 
       <section>
         <h3 className="text-lg font-bold">{t("players", { confirmed: confirmed.length, capacity: game.capacity })}</h3>

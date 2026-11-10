@@ -139,7 +139,11 @@
     "invalidEmail": "Zkontrolujte e-mail.",
     "tooMany": "Příliš mnoho pokusů. Zkuste to za pár minut.",
     "invalidCode": "Kód je neplatný nebo vypršel.",
-    "admin": "Správa klubu →"
+    "admin": "Správa klubu →",
+    "botTitle": "Telegram-bot klubu",
+    "botHint": "Připomínky 3 hodiny před hrou, zpráva o uvolněném místě a zápis na hry přímo v Telegramu.",
+    "botConnect": "Připojit Telegram",
+    "botOn": "Telegram připojen"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -214,7 +218,9 @@
       "invalid": "Zkontrolujte vyplněná pole.",
       "save": "Nepodařilo se uložit (nebo nemáte oprávnění).",
       "full": "Hra je plná — hráč zůstal na čekací listině. Zvyšte počet míst.",
-      "noPlayer": "Hráč s touto přezdívkou nenalezen. Ať se přihlásí na webu a vyplní přezdívku."
+      "noPlayer": "Hráč s touto přezdívkou nenalezen. Ať se přihlásí na webu a vyplní přezdívku.",
+      "bot": "Telegram odmítl požadavek. Zkontrolujte token bota a že je bot adminem kanálu.",
+      "channel": "Není nastaven kanál (TELEGRAM_CHANNEL_ID)."
     },
     "team": "Tým · {club}",
     "addStaff": "Přidat",
@@ -224,6 +230,12 @@
       "owner": "vlastník",
       "admin": "admin",
       "host": "moderátor"
-    }
+    },
+    "botTitle": "Telegram-bot",
+    "botHint": "Připojí bota @mafiaclub_prague_bot k webu: zápis, připomínky, oznámení. Stačí jednou (a po přesunu na mafiacl.com znovu).",
+    "botSetup": "Připojit bota",
+    "botReady": "Bot je připojen. Napište mu /start.",
+    "announce": "Oznámit v Telegram kanálu",
+    "announced": "Oznámení odesláno do kanálu."
   }
 }

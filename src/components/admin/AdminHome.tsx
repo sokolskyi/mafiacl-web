@@ -3,11 +3,12 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
 import { addStaff, createGame, removeStaff } from "@/lib/admin/actions";
+import { setupBot } from "@/lib/telegram/actions";
 import { getAdminGames, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { isoToLocalInput } from "@/lib/admin/time";
 
 /** Читает сессию — только внутри <Suspense>. */
-export async function AdminHome({ locale, error, team }: { locale: Locale; error?: string; team?: boolean }) {
+export async function AdminHome({ locale, error, team, bot }: { locale: Locale; error?: string; team?: boolean; bot?: boolean }) {
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
   const ctx = await getStaffContext();
@@ -29,10 +30,11 @@ export async function AdminHome({ locale, error, team }: { locale: Locale; error
     <div className="mt-10 space-y-12">
       {error && (
         <p role="alert" className="text-red-400">
-          {t(`errors.${error === "invalid" || error === "noPlayer" ? error : "save"}`)}
+          {t(`errors.${error === "invalid" || error === "noPlayer" || error === "bot" ? error : "save"}`)}
         </p>
       )}
       {team && <p role="status" className="text-green-400">{t("teamAdded")}</p>}
+      {bot && <p role="status" className="text-green-400">{t("botReady")}</p>}
 
       <section>
         <h2 className="text-xl font-bold">{t("games")}</h2>
@@ -99,6 +101,17 @@ export async function AdminHome({ locale, error, team }: { locale: Locale; error
           </form>
         </section>
       ))}
+
+      {ctx.clubs.some((c) => c.roles.includes("owner")) && (
+        <section>
+          <h2 className="text-xl font-bold">{t("botTitle")}</h2>
+          <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("botHint")}</p>
+          <form action={setupBot} className="mt-3">
+            <input type="hidden" name="locale" value={locale} />
+            <button className="rounded bg-[#229ED9] px-4 py-2 font-semibold hover:bg-[#1f91c7]">{t("botSetup")}</button>
+          </form>
+        </section>
+      )}
 
       {await Promise.all(
         ctx.clubs

@@ -32,7 +32,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   return (
     <>
       <h1 className="text-4xl font-black tracking-tight">{t("title")}</h1>
-      <AdminGame locale={locale} id={n} flags={{ saved: flag("saved"), created: flag("created"), error: flag("error") }} />
+      <AdminGame locale={locale} id={n} flags={{ saved: flag("saved"), created: flag("created"), error: flag("error"), announced: flag("announced") }} />
     </>
   );
 }
