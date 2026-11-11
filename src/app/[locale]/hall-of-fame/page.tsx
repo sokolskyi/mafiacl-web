@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const tp = await getTranslations({ locale, namespace: "pages" });
   const t = await getTranslations({ locale, namespace: "hall" });
   const rows = await getHallOfFame(MAIN_CLUB_SLUG);
-  const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(n);
+  const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-16">

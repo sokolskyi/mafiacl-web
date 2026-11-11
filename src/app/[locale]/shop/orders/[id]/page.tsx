@@ -10,6 +10,7 @@ import { paymentMode } from "@/lib/shop/payment";
 import { loc, money } from "@/lib/shop/queries";
 import type { Localized } from "@/lib/games";
 import { ClearCartOnMount } from "@/components/shop/ClearCartOnMount";
+import { variantText } from "@/components/shop/variant-label";
 
 export const metadata: Metadata = { title: "Order", robots: { index: false, follow: false } };
 
@@ -72,7 +73,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
           <li key={i.id} className="flex flex-wrap items-baseline justify-between gap-2 py-3">
             <span>
               <span className="font-semibold">{loc(i.name as Localized, locale)}</span>
-              {i.variant_label && <span className="text-neutral-400"> · {i.variant_label}</span>}
+              {i.variant_label && <span className="text-neutral-400"> · {variantText(i.variant_label, t)}</span>}
               {i.color && <span className="text-neutral-400"> · {i.color}</span>}
               {i.nickname && <span className="text-neutral-400"> · {t("nickname")}: {i.nickname}</span>}
               <span className="text-neutral-400"> × {i.qty}</span>

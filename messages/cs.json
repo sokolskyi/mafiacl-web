@@ -605,7 +605,11 @@
     "colorField": "Barva",
     "colorPlaceholder": "např. bílé, potisk vínový",
     "colorHint": "Napište barvu (a barvu potisku, pokud na ní záleží). Pokud nebude k dispozici, ozveme se vám.",
-    "photo": "Fotka"
+    "photo": "Fotka",
+    "cut": "Střih",
+    "size": "Velikost",
+    "cutMen": "Pánské",
+    "cutWomen": "Dámské"
   },
   "adminShop": {
     "title": "Obchod",
@@ -658,7 +662,7 @@
       "plan": "Délka permanentky",
       "planHint": "Jen pro permanentky.",
       "variants": "Varianty a sklad",
-      "variantsHint": "Jedna na řádek: „M = 5“. Bez čísla — sklad se nesleduje. Prázdné — jedna varianta.",
+      "variantsHint": "Jedna na řádek: „M = 5“. Bez čísla — sklad se nesleduje. Prázdné — jedna varianta. Pro střih pište „men M“ nebo „women S“.",
       "stockNow": "sklad: {count}",
       "active": "Zobrazit v obchodě",
       "photos": "Fotky produktu",

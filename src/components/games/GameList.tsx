@@ -91,7 +91,7 @@ export async function GameList({
             {g.priceCzk !== null && (
               <p className="mt-1 text-sm text-neutral-300">
                 {t("price", {
-                  price: new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(g.priceCzk),
+                  price: new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(g.priceCzk),
                 })}
               </p>
             )}

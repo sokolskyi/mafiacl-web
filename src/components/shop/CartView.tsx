@@ -9,7 +9,7 @@ export function CartView({ signedIn, error }: { signedIn: boolean; error?: strin
   const t = useTranslations("shop");
   const locale = useLocale();
   const items = useCart();
-  const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(v);
+  const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(v);
   const total = items.reduce((s, i) => s + i.priceCzk * i.qty, 0);
 
   if (items.length === 0) {

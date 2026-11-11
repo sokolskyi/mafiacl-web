@@ -605,7 +605,11 @@
     "colorField": "Colour",
     "colorPlaceholder": "e.g. white with burgundy print",
     "colorHint": "Tell us the colour (and print colour if it matters). If it's not available, we'll get in touch.",
-    "photo": "Photo"
+    "photo": "Photo",
+    "cut": "Cut",
+    "size": "Size",
+    "cutMen": "Men's",
+    "cutWomen": "Women's"
   },
   "adminShop": {
     "title": "Shop",
@@ -658,7 +662,7 @@
       "plan": "Membership term",
       "planHint": "Memberships only.",
       "variants": "Variants and stock",
-      "variantsHint": "One per line: “M = 5”. No number — stock not tracked. Empty — a single variant.",
+      "variantsHint": "One per line: “M = 5”. No number — stock not tracked. Empty — a single variant. For cuts write “men M” or “women S”.",
       "stockNow": "stock: {count}",
       "active": "Show in shop",
       "photos": "Product photos",

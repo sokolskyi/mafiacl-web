@@ -6,6 +6,7 @@ import { getAdminOrders, getAdminProducts, type AdminProduct } from "@/lib/admin
 import { markOrderPaid, saveProduct, setOrderStatus, setProductActive } from "@/lib/admin/shop-actions";
 import { loc, money } from "@/lib/shop/queries";
 import { PhotoField } from "./PhotoUpload";
+import { variantText } from "@/components/shop/variant-label";
 
 const input = "mt-1 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
 const LANGS = ["cs", "ru", "uk", "en"] as const;
@@ -13,6 +14,7 @@ const LANGS = ["cs", "ru", "uk", "en"] as const;
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminShop({ locale, saved, orderPaid, error }: { locale: Locale; saved?: boolean; orderPaid?: boolean; error?: string }) {
   const t = await getTranslations({ locale, namespace: "adminShop" });
+  const ts = await getTranslations({ locale, namespace: "shop" });
   const ctx = await getStaffContext();
   if (!ctx) return <p className="mt-10"><Link href="/account" className="text-red-400 underline">{t("signIn")}</Link></p>;
   const clubs = ctx.clubs.filter((c) => c.roles.some((r) => r === "owner" || r === "admin" || r === "host"));
@@ -46,7 +48,7 @@ export async function AdminShop({ locale, saved, orderPaid, error }: { locale: L
                       <p className="text-sm text-neutral-300">
                         {o.items
                           .map((i) => {
-                            const extra = [i.label, i.color, i.nickname ? `${t("nick")}: ${i.nickname}` : ""].filter(Boolean).join(", ");
+                            const extra = [i.label ? variantText(i.label, (k) => ts(k)) : "", i.color, i.nickname ? `${t("nick")}: ${i.nickname}` : ""].filter(Boolean).join(", ");
                             return `${loc(i.name, locale)}${extra ? ` (${extra})` : ""} × ${i.qty}`;
                           })
                           .join("; ")}

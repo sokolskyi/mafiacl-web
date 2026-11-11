@@ -29,7 +29,7 @@ export function loc(value: Localized | null | undefined, locale: Locale) {
 }
 
 export function money(locale: Locale, value: number) {
-  return new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(value);
+  return new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(value);
 }
 
 /** Витрина клуба: активные товары с вариантами (кешируется, сбрасывается при заказах и правках). */

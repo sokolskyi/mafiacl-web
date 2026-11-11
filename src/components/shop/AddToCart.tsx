@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { addToCart } from "./cart-store";
+import { splitCut, variantText } from "./variant-label";
 
 type Props = {
   productId: number;
@@ -29,16 +30,51 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
   const field = "mt-1 w-full max-w-sm rounded border border-white/30 bg-neutral-900 px-3 py-2.5 outline-none focus:border-red-500";
   const current = variants.find((v) => v.id === variantId);
   const labelled = variants.length > 1 || variants[0]?.label !== "";
+  // Если все варианты — «крой + размер», показываем два выбора: крой, затем размер.
+  const cutMode = variants.length > 0 && variants.every((v) => splitCut(v.label));
+  const cuts = cutMode ? (["men", "women"] as const).filter((c) => variants.some((v) => splitCut(v.label)?.cut === c)) : [];
+  const currentCut = current ? splitCut(current.label)?.cut : cuts[0];
+  const shown = cutMode ? variants.filter((v) => splitCut(v.label)?.cut === currentCut) : variants;
 
   if (available.length === 0) return <p className="font-semibold text-neutral-400">{t("soldOut")}</p>;
 
   return (
     <div className="space-y-4">
+      {cutMode && (
+        <fieldset>
+          <legend className="mb-2 text-sm font-semibold text-neutral-300">{t("cut")}</legend>
+          <div className="flex flex-wrap gap-2">
+            {cuts.map((c) => (
+              <label
+                key={c}
+                className={`inline-flex min-h-11 cursor-pointer items-center justify-center rounded-full border px-5 text-sm font-semibold has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-white ${
+                  currentCut === c ? "border-white bg-white text-black" : "border-white/40 hover:bg-white/10"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="cut"
+                  className="sr-only"
+                  checked={currentCut === c}
+                  onChange={() => {
+                    const size = current ? splitCut(current.label)?.size : undefined;
+                    const same = available.find((v) => v.label === `${c} ${size}`);
+                    const first = available.find((v) => splitCut(v.label)?.cut === c);
+                    setVariantId((same ?? first)?.id ?? null);
+                    setAdded(false);
+                  }}
+                />
+                {t(c === "men" ? "cutMen" : "cutWomen")}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
       {labelled && (
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold text-neutral-300">{t("choose")}</legend>
+          <legend className="mb-2 text-sm font-semibold text-neutral-300">{cutMode ? t("size") : t("choose")}</legend>
           <div className="flex flex-wrap gap-2">
-            {variants.map((v) => {
+            {shown.map((v) => {
               const out = v.stock !== null && v.stock <= 0;
               return (
                 <label
@@ -58,7 +94,7 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
                       setAdded(false);
                     }}
                   />
-                  {v.label}
+                  {cutMode ? splitCut(v.label)?.size : v.label}
                 </label>
               );
             })}
@@ -112,7 +148,7 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
               variantId,
               productId,
               name,
-              label: current?.label ?? "",
+              label: current ? variantText(current.label, t) : "",
               priceCzk,
               imageUrl,
               kind,

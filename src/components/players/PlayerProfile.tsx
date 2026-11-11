@@ -33,7 +33,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const titles = (await getTitles(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
   const prizes = (await getPrizes(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
   const prizeTotal = prizes.reduce((a, x) => a + x.amount, 0);
-  const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(n);
+  const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
   const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
 
   return (

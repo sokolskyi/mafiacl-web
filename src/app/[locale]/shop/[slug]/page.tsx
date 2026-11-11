@@ -10,7 +10,13 @@ import { AddToCart } from "@/components/shop/AddToCart";
 import { Gallery } from "@/components/shop/Gallery";
 import { createClient } from "@/lib/supabase/server";
 
-export const metadata: Metadata = { title: "Shop" };
+export async function generateMetadata({ params }: PageProps<"/[locale]/shop/[slug]">): Promise<Metadata> {
+  const { locale, slug } = (await params) as { locale: Locale; slug: string };
+  const product = await getProduct(MAIN_CLUB_SLUG, slug);
+  if (!product) return { title: "Shop" };
+  const images = product.images.slice(0, 1);
+  return { title: loc(product.name, locale), description: loc(product.description, locale) || undefined, openGraph: { images } };
+}
 
 type Props = PageProps<"/[locale]/shop/[slug]">;
 

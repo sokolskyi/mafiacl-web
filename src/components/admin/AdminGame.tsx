@@ -40,7 +40,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
   const fmt = (iso: string) =>
     new Intl.DateTimeFormat(locale, { timeZone: game.timezone, weekday: "short", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
   const queueOpen = !!game.priority_until && !game.allocated_at;
-  const money = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", maximumFractionDigits: 0 }).format(n);
+  const money = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
   const input = "mt-1 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
 
   const Row = ({ s, n }: { s: (typeof signups)[number]; n: number }) => (
