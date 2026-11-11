@@ -19,6 +19,7 @@ function OrganizationJsonLd() {
     name: SITE_NAME,
     alternateName: "MafiaCL Prague",
     url: SITE_URL,
+    logo: `${SITE_URL}/brand/mafiacl-mark-light.png`,
     sport: "Mafia",
     foundingDate: "2011",
     areaServed: "Prague",

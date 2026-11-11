@@ -12,8 +12,9 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3">
-        <Link href="/" className="text-lg font-black tracking-tight">
-          Mafia<span className="text-red-600">CL</span>
+        <Link href="/" className="flex-none" aria-label="MafiaCL">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width={112} height={40} className="h-10 w-auto" />
         </Link>
         <nav aria-label={c("menu")} className="hidden flex-1 gap-4 text-sm lg:flex">
           {MAIN_NAV.map((key) => (

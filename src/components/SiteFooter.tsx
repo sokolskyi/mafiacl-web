@@ -11,9 +11,8 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
     <footer className="mt-24 border-t border-white/10 text-sm text-neutral-400">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
         <div>
-          <p className="text-base font-black text-white">
-            Mafia<span className="text-red-600">CL</span>
-          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/mafiacl-prague-dark.svg" alt="MafiaCL Prague, since 2011" width={176} height={95} className="h-24 w-auto" />
           <p className="mt-1">{c("tagline")}</p>
         </div>
         <ul className="space-y-1">
