@@ -16,7 +16,19 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width={112} height={40} className="h-10 w-auto" />
         </Link>
-        <nav aria-label={c("menu")} className="hidden flex-1 gap-x-5 text-sm lg:flex">
+        <details className="group relative xl:hidden">
+          <summary className="inline-flex min-h-11 cursor-pointer list-none items-center rounded-full border border-white/55 px-4 text-sm font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
+            {c("menu")}
+          </summary>
+          <nav aria-label={c("menu")} className="absolute left-0 top-full z-50 mt-2 grid min-w-56 gap-0 rounded-lg border border-white/15 bg-neutral-950 p-2 shadow-xl">
+            {MAIN_NAV.map((key) => (
+              <Link key={key} href={SECTIONS[key]} className="inline-flex min-h-11 items-center rounded px-3 font-semibold hover:bg-white/10">
+                {t(key)}
+              </Link>
+            ))}
+          </nav>
+        </details>
+        <nav aria-label={c("menu")} className="hidden flex-1 gap-x-5 text-sm xl:flex">
           {MAIN_NAV.map((key) => (
             <Link key={key} href={SECTIONS[key]} className="inline-flex min-h-11 items-center font-semibold text-neutral-300 hover:text-white">
               {t(key)}
