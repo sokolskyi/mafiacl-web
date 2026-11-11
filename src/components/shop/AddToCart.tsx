@@ -12,13 +12,21 @@ type Props = {
   imageUrl: string | null;
   kind: "merch" | "membership";
   variants: { id: number; label: string; stock: number | null }[];
+  askNickname?: boolean;
+  askColor?: boolean;
+  /** Ник игрока из профиля — подставляем в поле «ник». */
+  defaultNickname?: string;
 };
 
-export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants }: Props) {
+export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants, askNickname, askColor, defaultNickname }: Props) {
   const t = useTranslations("shop");
   const available = variants.filter((v) => v.stock === null || v.stock > 0);
   const [variantId, setVariantId] = useState<number | null>(available[0]?.id ?? null);
   const [added, setAdded] = useState(false);
+  const [nickname, setNickname] = useState(defaultNickname ?? "");
+  const [color, setColor] = useState("");
+  const missing = (askNickname && !nickname.trim()) || (askColor && !color.trim());
+  const field = "mt-1 w-full max-w-sm rounded border border-white/30 bg-neutral-900 px-3 py-2.5 outline-none focus:border-red-500";
   const current = variants.find((v) => v.id === variantId);
   const labelled = variants.length > 1 || variants[0]?.label !== "";
 
@@ -57,16 +65,60 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants 
           </div>
         </fieldset>
       )}
+      {askNickname && (
+        <label className="block text-sm font-semibold text-neutral-300">
+          {t("nicknameField")}
+          <input
+            value={nickname}
+            onChange={(e) => {
+              setNickname(e.target.value);
+              setAdded(false);
+            }}
+            maxLength={32}
+            required
+            autoComplete="nickname"
+            className={field}
+          />
+          <span className="mt-1 block text-xs font-normal text-neutral-400">{t("nicknameHint")}</span>
+        </label>
+      )}
+      {askColor && (
+        <label className="block text-sm font-semibold text-neutral-300">
+          {t("colorField")}
+          <input
+            value={color}
+            onChange={(e) => {
+              setColor(e.target.value);
+              setAdded(false);
+            }}
+            maxLength={40}
+            required
+            placeholder={t("colorPlaceholder")}
+            className={field}
+          />
+          <span className="mt-1 block text-xs font-normal text-neutral-400">{t("colorHint")}</span>
+        </label>
+      )}
       {current && current.stock !== null && current.stock > 0 && current.stock <= 5 && (
         <p className="text-sm text-amber-400">{t("fewLeft", { count: current.stock })}</p>
       )}
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
-          disabled={variantId === null}
+          disabled={variantId === null || missing}
           onClick={() => {
-            if (variantId === null) return;
-            addToCart({ variantId, productId, name, label: current?.label ?? "", priceCzk, imageUrl, kind });
+            if (variantId === null || missing) return;
+            addToCart({
+              variantId,
+              productId,
+              name,
+              label: current?.label ?? "",
+              priceCzk,
+              imageUrl,
+              kind,
+              nickname: askNickname ? nickname.trim().slice(0, 32) : undefined,
+              color: askColor ? color.trim().slice(0, 40) : undefined,
+            });
             setAdded(true);
           }}
           className="min-h-12 rounded-full bg-red-600 px-8 font-bold text-white hover:bg-red-500 disabled:opacity-50"

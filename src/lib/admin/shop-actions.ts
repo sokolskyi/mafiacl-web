@@ -6,6 +6,8 @@ import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { SHOP_TAG } from "@/lib/shop/queries";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { getStaffContext } from "@/lib/admin/queries";
 
 // Действия идут от имени вошедшего сотрудника: права (владелец/админ — товары,
 // владелец/админ/ведущий — заказы) проверяет RLS в базе.
@@ -40,15 +42,29 @@ function localized(formData: FormData, prefix: string) {
   }
   return out;
 }
-function httpsUrl(value: FormDataEntryValue | null) {
-  const v = String(value ?? "").trim();
-  if (!v) return null;
+const LOCAL_IMAGE = /^\/[a-z0-9][a-z0-9/_.-]*\.(webp|jpg|jpeg|png|avif)$/;
+function imageRef(v: string) {
+  if (LOCAL_IMAGE.test(v)) return v;
   try {
     const u = new URL(v);
     return u.protocol === "https:" ? u.toString() : undefined;
   } catch {
     return undefined;
   }
+}
+/** Фото: по ссылке на строку, первая — главная. undefined — есть неверная ссылка. */
+function imageList(value: FormDataEntryValue | null) {
+  const lines = String(value ?? "")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const out: string[] = [];
+  for (const l of lines) {
+    const r = imageRef(l);
+    if (!r) return undefined;
+    if (!out.includes(r)) out.push(r);
+  }
+  return out.slice(0, 13);
 }
 /** «M = 5» — по строке на вариант; без числа — остаток не считаем. */
 function parseVariants(raw: string) {
@@ -97,25 +113,29 @@ export async function saveProduct(formData: FormData) {
   const name = localized(formData, "name");
   const description = localized(formData, "description");
   const price = Number(String(formData.get("price") ?? "").replace(",", "."));
-  const image = httpsUrl(formData.get("imageUrl"));
+  const images = imageList(formData.get("images"));
+  const askNickname = formData.get("askNickname") === "on";
+  const askColor = formData.get("askColor") === "on";
   const sort = Number(formData.get("sort") || 100);
   const active = formData.get("active") === "on";
   const variants = parseVariants(String(formData.get("variants") ?? ""));
 
   if (
     !Number.isInteger(clubId) || clubId < 1 || Object.keys(name).length === 0 ||
-    !Number.isFinite(price) || price < 0 || price > 1000000 || image === undefined ||
+    !Number.isFinite(price) || price < 0 || price > 1000000 || images === undefined ||
     !Number.isInteger(sort) || sort < 0 || sort > 100000 || variants === null
   ) {
     redirect(back(locale, "error=invalid"));
   }
 
+  const image = images?.[0] ?? null;
+  const gallery = images?.slice(1) ?? [];
   const supabase = await createClient();
   let productId = id;
   if (id) {
     const { data, error } = await supabase
       .from("shop_products")
-      .update({ name, description: Object.keys(description).length ? description : null, price_czk: price, image_url: image, active, sort })
+      .update({ name, description: Object.keys(description).length ? description : null, price_czk: price, image_url: image, gallery, ask_nickname: askNickname, ask_color: askColor, active, sort })
       .eq("id", id)
       .select("id");
     if (error || !data?.length) {
@@ -137,6 +157,9 @@ export async function saveProduct(formData: FormData) {
         description: Object.keys(description).length ? description : null,
         price_czk: price,
         image_url: image,
+        gallery,
+        ask_nickname: askNickname,
+        ask_color: askColor,
         active,
         sort,
       })
@@ -207,4 +230,28 @@ export async function setOrderStatus(formData: FormData) {
   }
   updateTag(SHOP_TAG);
   redirect(back(locale));
+}
+
+/**
+ * Загрузка фото товара: сервер проверяет, что это владелец/админ клуба, и выдаёт одноразовые
+ * ссылки на загрузку в хранилище. Файл идёт из браузера прямо в Supabase (уже сжатый).
+ */
+export async function createPhotoUploads(clubId: number, count: number) {
+  const ctx = await getStaffContext();
+  const club = ctx?.clubs.find((c) => c.id === clubId);
+  if (!club || !club.roles.some((r) => r === "owner" || r === "admin")) return { error: "forbidden" as const };
+  const n = Math.min(Math.max(Math.trunc(count), 1), 12);
+
+  const admin = createAdminClient();
+  const uploads: { path: string; token: string; publicUrl: string }[] = [];
+  for (let i = 0; i < n; i++) {
+    const path = `club-${clubId}/${crypto.randomUUID()}.webp`;
+    const { data, error } = await admin.storage.from("shop").createSignedUploadUrl(path);
+    if (error || !data) {
+      console.error("createPhotoUploads failed", { clubId, message: error?.message });
+      return { error: "failed" as const };
+    }
+    uploads.push({ path: data.path, token: data.token, publicUrl: admin.storage.from("shop").getPublicUrl(data.path).data.publicUrl });
+  }
+  return { uploads };
 }

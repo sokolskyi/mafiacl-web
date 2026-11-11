@@ -5,6 +5,7 @@ import { getStaffContext } from "@/lib/admin/queries";
 import { getAdminOrders, getAdminProducts, type AdminProduct } from "@/lib/admin/shop-queries";
 import { markOrderPaid, saveProduct, setOrderStatus, setProductActive } from "@/lib/admin/shop-actions";
 import { loc, money } from "@/lib/shop/queries";
+import { PhotoField } from "./PhotoUpload";
 
 const input = "mt-1 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
 const LANGS = ["cs", "ru", "uk", "en"] as const;
@@ -43,7 +44,12 @@ export async function AdminShop({ locale, saved, orderPaid, error }: { locale: L
                         <span className="rounded bg-white/10 px-2 py-0.5 text-xs">{t(`status.${o.status}`)}</span>
                       </div>
                       <p className="text-sm text-neutral-300">
-                        {o.items.map((i) => `${loc(i.name, locale)}${i.label ? ` (${i.label})` : ""} × ${i.qty}`).join(", ")}
+                        {o.items
+                          .map((i) => {
+                            const extra = [i.label, i.color, i.nickname ? `${t("nick")}: ${i.nickname}` : ""].filter(Boolean).join(", ");
+                            return `${loc(i.name, locale)}${extra ? ` (${extra})` : ""} × ${i.qty}`;
+                          })
+                          .join("; ")}
                       </p>
                       {o.status === "pending" && (
                         <div className="flex flex-wrap items-center gap-3">
@@ -146,9 +152,16 @@ function ProductForm({ t, locale, clubId, product }: { t: T; locale: Locale; clu
       <label className="text-sm">{t("fields.sort")}
         <input name="sort" type="number" min={0} defaultValue={product?.sort ?? 100} className={input} />
       </label>
-      <label className="text-sm sm:col-span-2">{t("fields.image")}
-        <input name="imageUrl" type="url" placeholder="https://…" defaultValue={product?.imageUrl ?? ""} className={input} />
-        <span className="mt-1 block text-xs text-neutral-500">{t("fields.imageHint")}</span>
+      <PhotoField
+        clubId={clubId}
+        initial={[product?.imageUrl, ...(product?.gallery ?? [])].filter((x): x is string => Boolean(x))}
+        labels={{ label: t("fields.photos"), hint: t("fields.photosHint"), upload: t("fields.upload"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }}
+      />
+      <label className="flex items-center gap-2 text-sm">
+        <input type="checkbox" name="askNickname" defaultChecked={product?.askNickname ?? false} className="h-4 w-4" /> {t("fields.askNickname")}
+      </label>
+      <label className="flex items-center gap-2 text-sm">
+        <input type="checkbox" name="askColor" defaultChecked={product?.askColor ?? false} className="h-4 w-4" /> {t("fields.askColor")}
       </label>
       {!product && (
         <>

@@ -577,7 +577,8 @@
       "gone": "One of the items is no longer available.",
       "save": "Could not place the order. Please try again.",
       "pending": "You already have 3 unpaid orders. Pay for or cancel one of them.",
-      "banned": "Orders are closed for your account. Please contact the organiser."
+      "banned": "Orders are closed for your account. Please contact the organiser.",
+      "options": "Please add the nickname and colour for items that need them."
     },
     "order": "Order #{id}",
     "status": {
@@ -596,7 +597,15 @@
     "cancelOrder": "Cancel order",
     "membershipActive": "Your membership is active.",
     "toAccount": "Open account",
-    "pickup": "Pick up your order at the club at the next game."
+    "pickup": "Pick up your order at the club at the next game.",
+    "nickname": "Nickname",
+    "color": "Colour",
+    "nicknameField": "Nickname to print",
+    "nicknameHint": "How your nickname should appear. We filled in your player nickname — you can change it.",
+    "colorField": "Colour",
+    "colorPlaceholder": "e.g. white with burgundy print",
+    "colorHint": "Tell us the colour (and print colour if it matters). If it's not available, we'll get in touch.",
+    "photo": "Photo"
   },
   "adminShop": {
     "title": "Shop",
@@ -651,12 +660,20 @@
       "variants": "Variants and stock",
       "variantsHint": "One per line: “M = 5”. No number — stock not tracked. Empty — a single variant.",
       "stockNow": "stock: {count}",
-      "active": "Show in shop"
+      "active": "Show in shop",
+      "photos": "Product photos",
+      "photosHint": "The first photo is the main one. Upload from your computer or phone (resized automatically) or paste https:// links, one per line.",
+      "upload": "Upload photos",
+      "uploading": "Uploading…",
+      "uploadFailed": "Upload failed. Please try again.",
+      "askNickname": "Ask for a nickname to print",
+      "askColor": "Ask for a colour"
     },
     "plans": {
       "month": "1 month",
       "quarter": "3 months",
       "year": "Year (until 31 Dec)"
-    }
+    },
+    "nick": "nickname"
   }
 }

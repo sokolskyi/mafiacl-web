@@ -7,7 +7,8 @@ import type { Locale } from "@/i18n/routing";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getProduct, loc, money } from "@/lib/shop/queries";
 import { AddToCart } from "@/components/shop/AddToCart";
-import { ProductImage } from "@/components/shop/ShopGrid";
+import { Gallery } from "@/components/shop/Gallery";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Shop" };
 
@@ -32,6 +33,18 @@ async function Inner({ params }: Pick<Props, "params">) {
   if (!product) notFound();
   const name = loc(product.name, locale);
 
+  // Ник для печати подставляем из профиля, если покупатель вошёл.
+  let defaultNickname: string | undefined;
+  if (product.askNickname) {
+    const supabase = await createClient();
+    const { data: claims } = await supabase.auth.getClaims();
+    const uid = claims?.claims.sub;
+    if (uid) {
+      const { data: prof } = await supabase.from("profiles").select("nickname").eq("id", uid).maybeSingle();
+      defaultNickname = prof?.nickname ?? undefined;
+    }
+  }
+
   return (
     <>
       <p>
@@ -40,7 +53,7 @@ async function Inner({ params }: Pick<Props, "params">) {
         </Link>
       </p>
       <div className="mt-4 grid gap-10 md:grid-cols-2">
-        <ProductImage product={product} locale={locale} className="aspect-square w-full rounded-lg" />
+        <Gallery images={product.images} alt={name} label={t("photo")} />
         <div>
           <h1 className="text-5xl sm:text-6xl">{name}</h1>
           <p className="mt-4 font-display text-5xl font-extrabold">{money(locale, product.priceCzk)}</p>
@@ -53,6 +66,9 @@ async function Inner({ params }: Pick<Props, "params">) {
               imageUrl={product.imageUrl}
               kind={product.kind}
               variants={product.variants}
+              askNickname={product.askNickname}
+              askColor={product.askColor}
+              defaultNickname={defaultNickname}
             />
           </div>
           {product.kind === "membership" && <p className="mt-6 text-sm text-neutral-400">{t("membershipNote")}</p>}

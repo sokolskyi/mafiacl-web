@@ -10,8 +10,15 @@ export type CartItem = {
   priceCzk: number;
   imageUrl: string | null;
   kind: "merch" | "membership";
+  /** Ник для печати и цвет — если товар их спрашивает. */
+  nickname?: string;
+  color?: string;
   qty: number;
 };
+
+/** Одна строка корзины = вариант + ник + цвет (две футболки с разными никами — разные строки). */
+export const cartKey = (i: Pick<CartItem, "variantId" | "nickname" | "color">) =>
+  `${i.variantId}|${i.nickname ?? ""}|${i.color ?? ""}`;
 
 const KEY = "mafiacl-cart";
 const EMPTY: CartItem[] = [];
@@ -33,6 +40,8 @@ function sanitize(raw: unknown): CartItem[] {
       priceCzk: Number(i.priceCzk) || 0,
       imageUrl: typeof i.imageUrl === "string" ? i.imageUrl : null,
       kind: i.kind === "membership" ? "membership" : "merch",
+      nickname: typeof i.nickname === "string" && i.nickname.trim() ? i.nickname.trim().slice(0, 32) : undefined,
+      color: typeof i.color === "string" && i.color.trim() ? i.color.trim().slice(0, 40) : undefined,
       qty: Math.min(i.qty as number, 20),
     });
   }
@@ -81,7 +90,7 @@ export function useCart() {
 
 export function addToCart(item: Omit<CartItem, "qty">) {
   const items = [...load()];
-  const found = items.find((x) => x.variantId === item.variantId);
+  const found = items.find((x) => cartKey(x) === cartKey(item));
   if (found) {
     // Абонемент — один на заказ.
     if (item.kind === "merch") found.qty = Math.min(found.qty + 1, 20);
@@ -91,8 +100,8 @@ export function addToCart(item: Omit<CartItem, "qty">) {
   }
 }
 
-export function setQty(variantId: number, qty: number) {
-  save(load().flatMap((x) => (x.variantId !== variantId ? [x] : qty < 1 ? [] : [{ ...x, qty: Math.min(qty, 20) }])));
+export function setQty(key: string, qty: number) {
+  save(load().flatMap((x) => (cartKey(x) !== key ? [x] : qty < 1 ? [] : [{ ...x, qty: Math.min(qty, 20) }])));
 }
 
 export function clearCart() {

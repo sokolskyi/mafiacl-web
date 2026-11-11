@@ -27,7 +27,7 @@ export async function ShopGrid({ products, locale }: { products: Product[]; loca
         const soldOut = p.variants.length > 0 && p.variants.every((v) => v.stock !== null && v.stock <= 0);
         return (
           <li key={p.id} className="relative flex flex-col overflow-hidden rounded-lg border border-white/15 bg-neutral-950/60 focus-within:outline focus-within:outline-2 focus-within:outline-white">
-            <ProductImage product={p} locale={locale} className="aspect-[4/3] w-full" />
+            <ProductImage product={p} locale={locale} className="aspect-[4/5] w-full object-top" />
             <div className="flex flex-1 flex-col p-5">
               <h2 className="text-lg font-bold">
                 <Link href={{ pathname: "/shop/[slug]", params: { slug: p.slug } }} className="after:absolute after:inset-0 hover:underline">

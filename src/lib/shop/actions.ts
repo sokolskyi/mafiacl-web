@@ -26,13 +26,18 @@ const orderPath = (locale: Locale, id: number, flag?: string) => {
 /** Оформить заказ из корзины. Цены и остатки берутся из базы, не из браузера. */
 export async function checkout(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
-  let items: { variantId: number; qty: number }[] = [];
+  let items: { variantId: number; qty: number; nickname?: string; color?: string }[] = [];
   try {
     const raw = JSON.parse(String(formData.get("items") ?? "[]"));
     if (Array.isArray(raw)) {
       items = raw
         .slice(0, 20)
-        .map((x) => ({ variantId: Number(x?.variantId), qty: Number(x?.qty) }))
+        .map((x) => ({
+          variantId: Number(x?.variantId),
+          qty: Number(x?.qty),
+          nickname: typeof x?.nickname === "string" ? x.nickname.trim().slice(0, 32) : undefined,
+          color: typeof x?.color === "string" ? x.color.trim().slice(0, 40) : undefined,
+        }))
         .filter((x) => Number.isInteger(x.variantId) && x.variantId > 0 && Number.isInteger(x.qty) && x.qty >= 1 && x.qty <= 20);
     }
   } catch {
@@ -57,7 +62,7 @@ export async function checkout(formData: FormData) {
   if (error || typeof orderId !== "number") {
     const msg = error?.message ?? "";
     console.error("shop_create_order failed", { code: error?.code, message: msg });
-    redirect(cartPath(locale, msg.includes("out_of_stock") ? "error=stock" : msg.includes("not_available") ? "error=gone" : msg.includes("too_many_pending") ? "error=pending" : msg.includes("banned") ? "error=banned" : "error=save"));
+    redirect(cartPath(locale, msg.includes("out_of_stock") ? "error=stock" : msg.includes("not_available") ? "error=gone" : msg.includes("too_many_pending") ? "error=pending" : msg.includes("banned") ? "error=banned" : msg.includes("missing_options") ? "error=options" : "error=save"));
   }
   updateTag(SHOP_TAG);
   redirect(orderPath(locale, orderId, "placed=1"));

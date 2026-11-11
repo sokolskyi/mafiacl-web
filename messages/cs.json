@@ -577,7 +577,8 @@
       "gone": "Jedna z položek už není k dispozici.",
       "save": "Objednávku se nepodařilo vytvořit. Zkuste to znovu.",
       "pending": "Máte už 3 nezaplacené objednávky. Jednu zaplaťte nebo zrušte.",
-      "banned": "Objednávky jsou pro váš účet uzavřeny. Obraťte se na pořadatele."
+      "banned": "Objednávky jsou pro váš účet uzavřeny. Obraťte se na pořadatele.",
+      "options": "Doplňte přezdívku a barvu u položek, kde jsou potřeba."
     },
     "order": "Objednávka č. {id}",
     "status": {
@@ -596,7 +597,15 @@
     "cancelOrder": "Zrušit objednávku",
     "membershipActive": "Permanentka je aktivní.",
     "toAccount": "Otevřít účet",
-    "pickup": "Objednávku si vyzvedněte v klubu na nejbližší hře."
+    "pickup": "Objednávku si vyzvedněte v klubu na nejbližší hře.",
+    "nickname": "Přezdívka",
+    "color": "Barva",
+    "nicknameField": "Přezdívka k potisku",
+    "nicknameHint": "Jak má být přezdívka napsaná. Doplnili jsme vaši herní přezdívku — můžete ji změnit.",
+    "colorField": "Barva",
+    "colorPlaceholder": "např. bílé, potisk vínový",
+    "colorHint": "Napište barvu (a barvu potisku, pokud na ní záleží). Pokud nebude k dispozici, ozveme se vám.",
+    "photo": "Fotka"
   },
   "adminShop": {
     "title": "Obchod",
@@ -651,12 +660,20 @@
       "variants": "Varianty a sklad",
       "variantsHint": "Jedna na řádek: „M = 5“. Bez čísla — sklad se nesleduje. Prázdné — jedna varianta.",
       "stockNow": "sklad: {count}",
-      "active": "Zobrazit v obchodě"
+      "active": "Zobrazit v obchodě",
+      "photos": "Fotky produktu",
+      "photosHint": "První fotka je hlavní. Nahrajte z počítače nebo telefonu (automaticky zmenšíme) nebo vložte odkazy https://, jeden na řádek.",
+      "upload": "Nahrát fotky",
+      "uploading": "Nahráváme…",
+      "uploadFailed": "Nahrání se nezdařilo. Zkuste to znovu.",
+      "askNickname": "Ptát se na přezdívku k potisku",
+      "askColor": "Ptát se na barvu"
     },
     "plans": {
       "month": "1 měsíc",
       "quarter": "3 měsíce",
       "year": "Rok (do 31. 12.)"
-    }
+    },
+    "nick": "přezdívka"
   }
 }

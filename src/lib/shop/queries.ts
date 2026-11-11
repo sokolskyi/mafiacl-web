@@ -15,6 +15,10 @@ export type Product = {
   description: Localized | null;
   priceCzk: number;
   imageUrl: string | null;
+  /** Все фото: первое — главное. */
+  images: string[];
+  askNickname: boolean;
+  askColor: boolean;
   variants: Variant[];
 };
 
@@ -38,7 +42,7 @@ export async function getProducts(clubSlug: string): Promise<Product[]> {
   const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("shop_products")
-    .select("id, slug, kind, name, description, price_czk, image_url, sort, clubs!inner ( slug ), shop_variants ( id, label, stock, sort )")
+    .select("id, slug, kind, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, sort, clubs!inner ( slug ), shop_variants ( id, label, stock, sort )")
     .eq("clubs.slug", clubSlug)
     .order("sort")
     .order("id");
@@ -54,6 +58,9 @@ export async function getProducts(clubSlug: string): Promise<Product[]> {
     description: (p.description ?? null) as Localized | null,
     priceCzk: Number(p.price_czk),
     imageUrl: p.image_url,
+    images: [p.image_url, ...(p.gallery ?? [])].filter((x): x is string => Boolean(x)),
+    askNickname: p.ask_nickname,
+    askColor: p.ask_color,
     variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock })),
   }));
 }
