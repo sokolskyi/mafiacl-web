@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -37,6 +37,8 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   const data = await getTournament(slug);
   if (!data) notFound();
   const x = data.tournament;
+  // У турнира своя готовая страница на нашем домене (MCL Europe, Kings) — открываем её.
+  if (x.infoUrl?.startsWith("/")) redirect(x.infoUrl);
   const time = x.startsAt ? new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Prague" }).format(new Date(x.startsAt)) : null;
   const desc = loc(x.description, locale);
   const sp = await searchParams;

@@ -32,9 +32,14 @@ export async function TournamentCards({ items, locale }: { items: Tournament[]; 
               {x.status === "cancelled" && <span className="rounded bg-neutral-700 px-2 py-0.5">{t("status.cancelled")}</span>}
             </p>
             <h3 className="mt-3 text-xl font-bold">
-              <Link href={{ pathname: "/tournaments/[slug]", params: { slug: x.slug } }} className="after:absolute after:inset-0 hover:underline">
-                {x.name}
-              </Link>
+              {x.infoUrl?.startsWith("/") ? (
+                // Готовая страница турнира на нашем домене (MCL, Kings).
+                <a href={x.infoUrl} className="after:absolute after:inset-0 hover:underline">{x.name}</a>
+              ) : (
+                <Link href={{ pathname: "/tournaments/[slug]", params: { slug: x.slug } }} className="after:absolute after:inset-0 hover:underline">
+                  {x.name}
+                </Link>
+              )}
             </h3>
             <p className="mt-1 text-neutral-300">{tournamentDates(x, locale)}</p>
             {(x.city || x.venueName) && <p className="mt-1 text-sm text-neutral-400">📍 {[x.venueName, x.city].filter(Boolean).join(", ")}</p>}

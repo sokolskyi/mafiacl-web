@@ -14,5 +14,6 @@ export default async function proxy(request: NextRequest) {
 
 export const config = {
   // Всё, кроме API, служебных файлов Next.js и файлов с расширением (картинки, sitemap.xml, robots.txt).
-  matcher: "/((?!api|auth|stream|_next|_vercel|.*\\..*).*)",
+  // Плюс разделы старого сайта, которые проксируются как есть (next.config.ts): mcl, seasons и их файлы.
+  matcher: "/((?!api|auth|stream|_next|_vercel|mcl|seasons|public|static|club|assets|.*\\..*).*)",
 };
