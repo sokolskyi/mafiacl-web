@@ -671,7 +671,9 @@
       "uploading": "Nahráváme…",
       "uploadFailed": "Nahrání se nezdařilo. Zkuste to znovu.",
       "askNickname": "Ptát se na přezdívku k potisku",
-      "askColor": "Ptát se na barvu"
+      "askColor": "Ptát se na barvu",
+      "variantPhotos": "Fotky podle variant",
+      "variantPhotosHint": "Má-li varianta vlastní fotky (např. každý hrnek), nahrajte je sem — zobrazí se při výběru varianty."
     },
     "plans": {
       "month": "1 měsíc",

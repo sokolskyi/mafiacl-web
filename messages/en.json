@@ -671,7 +671,9 @@
       "uploading": "Uploading…",
       "uploadFailed": "Upload failed. Please try again.",
       "askNickname": "Ask for a nickname to print",
-      "askColor": "Ask for a colour"
+      "askColor": "Ask for a colour",
+      "variantPhotos": "Photos per variant",
+      "variantPhotosHint": "If a variant has its own photos (e.g. each mug), upload them here — they show when that variant is chosen."
     },
     "plans": {
       "month": "1 month",

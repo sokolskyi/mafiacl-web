@@ -12,17 +12,23 @@ type Props = {
   priceCzk: number;
   imageUrl: string | null;
   kind: "merch" | "membership";
-  variants: { id: number; label: string; stock: number | null }[];
+  variants: { id: number; label: string; stock: number | null; images?: string[] }[];
   askNickname?: boolean;
   askColor?: boolean;
   /** Ник игрока из профиля — подставляем в поле «ник». */
   defaultNickname?: string;
+  /** Сообщаем наружу, какой вариант выбран (чтобы показать его фото). */
+  onVariantChange?: (id: number | null) => void;
 };
 
-export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants, askNickname, askColor, defaultNickname }: Props) {
+export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants, askNickname, askColor, defaultNickname, onVariantChange }: Props) {
   const t = useTranslations("shop");
   const available = variants.filter((v) => v.stock === null || v.stock > 0);
-  const [variantId, setVariantId] = useState<number | null>(available[0]?.id ?? null);
+  const [variantId, setVariantIdState] = useState<number | null>(available[0]?.id ?? null);
+  const setVariantId = (id: number | null) => {
+    setVariantIdState(id);
+    onVariantChange?.(id);
+  };
   const [added, setAdded] = useState(false);
   const [nickname, setNickname] = useState(defaultNickname ?? "");
   const [color, setColor] = useState("");

@@ -174,7 +174,23 @@ export async function saveProduct(formData: FormData) {
 
   // Абонемент и товар без размеров — один безымянный вариант.
   const list = variants.length ? variants : [{ label: "", stock: null as number | null }];
-  const ok = await syncVariants(productId as number, list);
+  let ok = await syncVariants(productId as number, list);
+
+  // Свои фото у вариантов: поля vimg_<id>.
+  for (const [key, value] of formData.entries()) {
+    const m = /^vimg_(\d+)$/.exec(key);
+    if (!m) continue;
+    const imgs = imageList(value);
+    if (imgs === undefined) {
+      ok = false;
+      continue;
+    }
+    const { error } = await supabase.from("shop_variants").update({ images: imgs.slice(0, 12) }).eq("id", Number(m[1])).eq("product_id", productId as number);
+    if (error) {
+      console.error("variant images failed", { variantId: m[1], code: error.code, message: error.message });
+      ok = false;
+    }
+  }
   updateTag(SHOP_TAG);
   redirect(back(locale, ok ? "saved=1" : "error=save"));
 }

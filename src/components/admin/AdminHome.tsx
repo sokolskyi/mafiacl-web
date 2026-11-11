@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -13,6 +14,7 @@ import { isoToLocalInput } from "@/lib/admin/time";
 export async function AdminHome({
   locale, error, team, bot, membership,
 }: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: string }) {
+  await connection(); // админка всегда по запросу: дата, сессия
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
   const ctx = await getStaffContext();

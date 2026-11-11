@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { createPhotoUploads } from "@/lib/admin/shop-actions";
 
@@ -20,11 +20,15 @@ async function toWebp(file: File): Promise<Blob> {
 
 type Labels = { label: string; hint: string; upload: string; uploading: string; failed: string };
 
-export function PhotoField({ clubId, initial, labels }: { clubId: number; initial: string[]; labels: Labels }) {
+export function PhotoField({ clubId, initial, labels, name = "images" }: { clubId: number; initial: string[]; labels: Labels; name?: string }) {
   const [text, setText] = useState(initial.join("\n"));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  // Уникальные id: на странице несколько форм товаров, у каждой своё поле фото.
+  const uid = useId();
+  const fieldId = `images-${uid}`;
+  const fileId = `file-${uid}`;
   const preview = text.split("\n").map((s) => s.trim()).filter(Boolean);
 
   async function onFiles(files: FileList | null) {
@@ -56,7 +60,7 @@ export function PhotoField({ clubId, initial, labels }: { clubId: number; initia
 
   return (
     <div className="text-sm sm:col-span-2">
-      <label htmlFor={`images-${clubId}-${initial[0] ?? "new"}`}>{labels.label}</label>
+      <label htmlFor={fieldId}>{labels.label}</label>
       {preview.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {preview.map((src) => (
@@ -66,16 +70,16 @@ export function PhotoField({ clubId, initial, labels }: { clubId: number; initia
         </div>
       )}
       <textarea
-        id={`images-${clubId}-${initial[0] ?? "new"}`}
-        name="images"
+        id={fieldId}
+        name={name}
         rows={3}
         value={text}
         onChange={(e) => setText(e.target.value)}
         className="mt-2 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 font-mono text-xs outline-none focus:border-red-500"
       />
       <div className="mt-2 flex flex-wrap items-center gap-3">
-        <input ref={fileRef} type="file" accept="image/*" multiple className="sr-only" id={`file-${clubId}-${initial[0] ?? "new"}`} onChange={(e) => onFiles(e.target.files)} />
-        <label htmlFor={`file-${clubId}-${initial[0] ?? "new"}`} className={`inline-flex min-h-10 cursor-pointer items-center rounded border border-white/40 px-4 font-semibold hover:bg-white/10 ${busy ? "pointer-events-none opacity-60" : ""}`}>
+        <input ref={fileRef} type="file" accept="image/*" multiple className="sr-only" id={fileId} onChange={(e) => onFiles(e.target.files)} />
+        <label htmlFor={fileId} className={`inline-flex min-h-10 cursor-pointer items-center rounded border border-white/40 px-4 font-semibold hover:bg-white/10 ${busy ? "pointer-events-none opacity-60" : ""}`}>
           {busy ? labels.uploading : labels.upload}
         </label>
         {error && <span role="alert" className="text-red-400">{labels.failed}</span>}

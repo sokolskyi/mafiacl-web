@@ -6,8 +6,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getProduct, loc, money } from "@/lib/shop/queries";
-import { AddToCart } from "@/components/shop/AddToCart";
-import { Gallery } from "@/components/shop/Gallery";
+import { ProductBuy } from "@/components/shop/ProductBuy";
 import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/shop/[slug]">): Promise<Metadata> {
@@ -58,28 +57,26 @@ async function Inner({ params }: Pick<Props, "params">) {
           ← {t("toShop")}
         </Link>
       </p>
-      <div className="mt-4 grid gap-10 md:grid-cols-2">
-        <Gallery images={product.images} alt={name} label={t("photo")} />
-        <div>
-          <h1 className="text-5xl sm:text-6xl">{name}</h1>
-          <p className="mt-4 font-display text-5xl font-extrabold">{money(locale, product.priceCzk)}</p>
-          {product.description && <p className="mt-5 max-w-prose text-lg text-neutral-300">{loc(product.description, locale)}</p>}
-          <div className="mt-8">
-            <AddToCart
-              productId={product.id}
-              name={name}
-              priceCzk={product.priceCzk}
-              imageUrl={product.imageUrl}
-              kind={product.kind}
-              variants={product.variants}
-              askNickname={product.askNickname}
-              askColor={product.askColor}
-              defaultNickname={defaultNickname}
-            />
-          </div>
-          {product.kind === "membership" && <p className="mt-6 text-sm text-neutral-400">{t("membershipNote")}</p>}
-        </div>
-      </div>
+      <ProductBuy
+        header={
+          <>
+            <h1 className="text-5xl sm:text-6xl">{name}</h1>
+            <p className="mt-4 font-display text-5xl font-extrabold">{money(locale, product.priceCzk)}</p>
+            {product.description && <p className="mt-5 max-w-prose text-lg text-neutral-300">{loc(product.description, locale)}</p>}
+          </>
+        }
+        footer={product.kind === "membership" ? <p className="mt-6 text-sm text-neutral-400">{t("membershipNote")}</p> : undefined}
+        photoLabel={t("photo")}
+        productId={product.id}
+        name={name}
+        priceCzk={product.priceCzk}
+        images={product.images}
+        kind={product.kind}
+        variants={product.variants}
+        askNickname={product.askNickname}
+        askColor={product.askColor}
+        defaultNickname={defaultNickname}
+      />
     </>
   );
 }

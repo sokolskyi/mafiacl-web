@@ -6,7 +6,7 @@ import type { Localized } from "@/lib/games";
 
 export const SHOP_TAG = "shop";
 
-export type Variant = { id: number; label: string; stock: number | null };
+export type Variant = { id: number; label: string; stock: number | null; images: string[] };
 export type Product = {
   id: number;
   slug: string;
@@ -42,7 +42,7 @@ export async function getProducts(clubSlug: string): Promise<Product[]> {
   const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("shop_products")
-    .select("id, slug, kind, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, sort, clubs!inner ( slug ), shop_variants ( id, label, stock, sort )")
+    .select("id, slug, kind, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, sort, clubs!inner ( slug ), shop_variants ( id, label, stock, sort, images )")
     .eq("clubs.slug", clubSlug)
     .order("sort")
     .order("id");
@@ -61,7 +61,7 @@ export async function getProducts(clubSlug: string): Promise<Product[]> {
     images: [p.image_url, ...(p.gallery ?? [])].filter((x): x is string => Boolean(x)),
     askNickname: p.ask_nickname,
     askColor: p.ask_color,
-    variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock })),
+    variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock, images: v.images ?? [] })),
   }));
 }
 

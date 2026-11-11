@@ -16,14 +16,14 @@ export type AdminProduct = {
   askColor: boolean;
   active: boolean;
   sort: number;
-  variants: { id: number; label: string; stock: number | null }[];
+  variants: { id: number; label: string; stock: number | null; images: string[] }[];
 };
 
 export async function getAdminProducts(clubId: number): Promise<AdminProduct[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("shop_products")
-    .select("id, slug, kind, membership_plan, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, active, sort, shop_variants ( id, label, stock, sort )")
+    .select("id, slug, kind, membership_plan, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, active, sort, shop_variants ( id, label, stock, sort, images )")
     .eq("club_id", clubId)
     .order("sort")
     .order("id");
@@ -45,7 +45,7 @@ export async function getAdminProducts(clubId: number): Promise<AdminProduct[]> 
     askColor: p.ask_color,
     active: p.active,
     sort: p.sort,
-    variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock })),
+    variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock, images: v.images ?? [] })),
   }));
 }
 

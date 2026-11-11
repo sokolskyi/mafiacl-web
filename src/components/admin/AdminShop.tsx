@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -13,6 +14,7 @@ const LANGS = ["cs", "ru", "uk", "en"] as const;
 
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminShop({ locale, saved, orderPaid, error }: { locale: Locale; saved?: boolean; orderPaid?: boolean; error?: string }) {
+  await connection(); // админка всегда по запросу: дата, сессия
   const t = await getTranslations({ locale, namespace: "adminShop" });
   const ts = await getTranslations({ locale, namespace: "shop" });
   const ctx = await getStaffContext();
@@ -186,6 +188,25 @@ function ProductForm({ t, locale, clubId, product }: { t: T; locale: Locale; clu
           <textarea name="variants" rows={4} defaultValue={variantsText} placeholder={"S = 10\nM = 10\nL = 5"} className={`${input} font-mono`} />
           <span className="mt-1 block text-xs text-neutral-500">{t("fields.variantsHint")}{single !== null && ` (${t("fields.stockNow", { count: single })})`}</span>
         </label>
+      )}
+      {product && product.variants.some((v) => v.label !== "") && (
+        <details className="rounded border border-white/10 p-3 text-sm sm:col-span-2">
+          <summary className="cursor-pointer font-semibold">{t("fields.variantPhotos")}</summary>
+          <p className="mt-1 text-xs text-neutral-500">{t("fields.variantPhotosHint")}</p>
+          <div className="mt-3 grid gap-4">
+            {product.variants
+              .filter((v) => v.label !== "")
+              .map((v) => (
+                <PhotoField
+                  key={v.id}
+                  clubId={clubId}
+                  name={`vimg_${v.id}`}
+                  initial={v.images}
+                  labels={{ label: v.label, hint: "", upload: t("fields.upload"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }}
+                />
+              ))}
+          </div>
+        </details>
       )}
       <label className="flex items-center gap-2 text-sm sm:col-span-2">
         <input type="checkbox" name="active" defaultChecked={product?.active ?? true} className="h-4 w-4" /> {t("fields.active")}
