@@ -57,12 +57,12 @@ export async function GameList({
           <li
             key={g.id}
             id={`game-${g.id}`}
-            className="flex flex-col rounded-lg border border-white/10 bg-neutral-950 p-5"
+            className="flex flex-col rounded-lg border border-white/15 bg-neutral-950/60 p-6"
           >
             <p className="text-sm text-neutral-400 first-letter:uppercase">
               <time dateTime={g.startsAt}>{day}</time>
             </p>
-            <h2 className="mt-1 text-2xl font-black">
+            <h2 className="mt-1 font-display text-4xl font-extrabold uppercase leading-none">
               {time} · {title}
             </h2>
             {late && <p className="mt-1 text-sm text-amber-400">{t("lateFrom", { time: late })}</p>}
@@ -108,7 +108,7 @@ export async function GameList({
 
             <div className="mt-auto pt-5">
               {!me ? (
-                <div className="h-10" aria-hidden="true" />
+                <div className="h-12" aria-hidden="true" />
               ) : mine ? (
                 <form action={leaveGame} className="flex items-center justify-between gap-3">
                   <input type="hidden" name="locale" value={locale} />
@@ -132,7 +132,7 @@ export async function GameList({
                   <input type="hidden" name="gameId" value={g.id} />
                   <button
                     type="submit"
-                    className="h-10 w-full rounded bg-red-600 px-4 font-semibold hover:bg-red-500"
+                    className="min-h-12 w-full rounded-full bg-red-600 px-6 font-bold text-white hover:bg-red-500"
                   >
                     {!me.signedIn ? t("signInToJoin") : queueOpen || free > 0 ? t("join") : t("joinWaitlist")}
                   </button>

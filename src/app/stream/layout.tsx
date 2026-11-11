@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "MafiaCL stream", robots: { index: fa
 export default function StreamLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" style={{ background: "transparent" }}>
-      <body style={{ background: "transparent" }} className="overflow-hidden text-white antialiased">
+      <body data-stream style={{ background: "transparent" }} className="overflow-hidden text-white antialiased">
         {children}
       </body>
     </html>

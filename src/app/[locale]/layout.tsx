@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#2a050b",
   colorScheme: "dark",
 };
 
@@ -32,7 +32,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
 
   return (
     <html lang={locale}>
-      <body className="min-h-dvh bg-black text-white antialiased">
+      <body className="min-h-dvh antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SiteHeader locale={locale} />
           {children}

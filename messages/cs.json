@@ -521,7 +521,15 @@
   "home": {
     "playerOfWeek": "Hráč týdne",
     "winnerOf": "Vítěz: {title}, {date}",
-    "winnerStats": "{points} bodů · výher {wins} z {games}"
+    "winnerStats": "{points} bodů · výher {wins} z {games}",
+    "kicker": "Praha · od 2011",
+    "tagline": "Hra, ve které žiješ",
+    "lead": "Klub sportovní mafie v Praze. Hrajeme v úterý a v neděli — přihlášení na webu.",
+    "cta": "Přihlásit se na hru",
+    "nextGames": "Nejbližší hry",
+    "allGames": "Všechny hry",
+    "ratingLink": "Žebříček sezóny",
+    "hallLink": "Síň slávy"
   },
   "hall": {
     "back": "Žebříčky",

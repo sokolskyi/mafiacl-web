@@ -521,7 +521,15 @@
   "home": {
     "playerOfWeek": "Гравець тижня",
     "winnerOf": "Переможець: {title}, {date}",
-    "winnerStats": "{points} балів · перемог {wins} з {games}"
+    "winnerStats": "{points} балів · перемог {wins} з {games}",
+    "kicker": "Прага · з 2011",
+    "tagline": "Гра, в якій ти живеш",
+    "lead": "Клуб спортивної мафії в Празі. Граємо щовівторка та щонеділі — запис на сайті.",
+    "cta": "Записатися на гру",
+    "nextGames": "Найближчі ігри",
+    "allGames": "Усі ігри",
+    "ratingLink": "Рейтинг сезону",
+    "hallLink": "Зала слави"
   },
   "hall": {
     "back": "Рейтинги",

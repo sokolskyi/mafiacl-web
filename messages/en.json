@@ -521,7 +521,15 @@
   "home": {
     "playerOfWeek": "Player of the week",
     "winnerOf": "Winner of {title}, {date}",
-    "winnerStats": "{points} points · {wins} wins in {games} games"
+    "winnerStats": "{points} points · {wins} wins in {games} games",
+    "kicker": "Prague · since 2011",
+    "tagline": "The game you live in",
+    "lead": "A sport mafia club in Prague. We play on Tuesdays and Sundays — sign up on the site.",
+    "cta": "Sign up for a game",
+    "nextGames": "Upcoming games",
+    "allGames": "All games",
+    "ratingLink": "Season rating",
+    "hallLink": "Hall of Fame"
   },
   "hall": {
     "back": "Ratings",
