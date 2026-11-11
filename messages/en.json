@@ -234,7 +234,15 @@
       "titleLabelHint": "e.g. Season IV",
       "wonOn": "Date",
       "prizeLabelHint": "e.g. Season V final, 1st place",
-      "reason": "Reason (visible to the team only)"
+      "reason": "Reason (visible to the team only)",
+      "partnerName": "Name",
+      "partnerUrl": "Website",
+      "partnerDescription": "Description",
+      "logo": "Logo",
+      "logoHint": "A file from your computer/phone or an https:// link.",
+      "uploadLogo": "Upload logo",
+      "uploading": "Uploading…",
+      "uploadFailed": "Upload failed. Please try again."
     },
     "status": {
       "draft": "Draft",
@@ -310,7 +318,10 @@
     "bans": "Blocked players — {club}",
     "bansHint": "A blocked player can't sign up for games (including via the bot) or place orders. Their future sign-ups and unpaid orders are removed at once.",
     "ban": "Block",
-    "unban": "Unblock"
+    "unban": "Unblock",
+    "partners": "Partners — {club}",
+    "partnersHint": "Shown on the Partners page. Open a partner to edit or remove it.",
+    "addPartner": "Add partner"
   },
   "match": {
     "matches": "Games tonight",
@@ -681,5 +692,8 @@
       "year": "Year (until 31 Dec)"
     },
     "nick": "nickname"
+  },
+  "partners": {
+    "empty": "The club's partners will appear here soon."
   }
 }

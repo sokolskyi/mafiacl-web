@@ -230,3 +230,20 @@ export async function getClubBans(clubId: number) {
     return { profileId: r.profile_id, reason: r.reason, createdAt: r.created_at, name: p?.nickname ?? p?.display_name ?? "—" };
   });
 }
+
+export async function getClubPartners(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("partners")
+    .select("id, name, url, logo_url, description, active, sort")
+    .eq("club_id", clubId)
+    .order("sort")
+    .order("id");
+  return (data ?? []).map((p) => ({
+    id: p.id,
+    name: p.name,
+    url: p.url,
+    logoUrl: p.logo_url,
+    description: (p.description ?? {}) as Record<string, string>,
+  }));
+}

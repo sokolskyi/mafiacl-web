@@ -40,6 +40,7 @@ export const MAIN_NAV: SectionKey[] = [
   "blog",
   "corporate",
   "shop",
+  "partners",
 ];
 
 /** Подвал: всё остальное. */
@@ -47,7 +48,6 @@ export const FOOTER_NAV: SectionKey[] = [
   "kids",
   "gallery",
   "documents",
-  "partners",
   "reviews",
   "franchise",
   "faq",

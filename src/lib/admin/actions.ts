@@ -5,6 +5,7 @@ import { updateTag } from "next/cache";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
+import { PARTNERS_TAG } from "@/lib/partners";
 import { GAMES_TAG } from "@/lib/games";
 import { MATCHES_TAG } from "@/lib/players";
 import { TITLES_TAG } from "@/lib/badges";
@@ -501,4 +502,61 @@ export async function unbanPlayer(formData: FormData) {
     redirect(`${back}?error=save#bans`);
   }
   redirect(`${back}#bans`);
+}
+
+// ---------------------------------------------------------------------------
+// Партнёры (владелец/админ): название, сайт, логотип, описание на 4 языках.
+// ---------------------------------------------------------------------------
+
+const PARTNER_LANGS = ["cs", "ru", "uk", "en"] as const;
+const LOCAL_IMG = /^\/[a-z0-9][a-z0-9/_.-]*\.(webp|jpg|jpeg|png|avif)$/;
+function safeHttps(v: string) {
+  try {
+    const u = new URL(v);
+    return u.protocol === "https:" ? u.toString() : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function savePartner(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const partnerId = int(formData.get("partnerId"), 1, Number.MAX_SAFE_INTEGER);
+  const name = String(formData.get("name") ?? "").trim().slice(0, 80);
+  const urlRaw = String(formData.get("url") ?? "").trim();
+  const url = urlRaw ? safeHttps(urlRaw.startsWith("http") ? urlRaw : `https://${urlRaw}`) : null;
+  const logoRaw = String(formData.get("images") ?? "").split("\n").map((s) => s.trim()).filter(Boolean)[0] ?? "";
+  const logo = logoRaw ? (LOCAL_IMG.test(logoRaw) ? logoRaw : safeHttps(logoRaw)) : null;
+  const description: Record<string, string> = {};
+  for (const l of PARTNER_LANGS) {
+    const v = String(formData.get(`description_${l}`) ?? "").trim().slice(0, 400);
+    if (v) description[l] = v;
+  }
+  if (!clubId || !name || (urlRaw && !url) || (logoRaw && !logo)) redirect(`${back}?error=invalid#partners`);
+
+  const supabase = await createClient();
+  const row = { name, url, logo_url: logo, description: Object.keys(description).length ? description : null };
+  const { error } = partnerId
+    ? await supabase.from("partners").update(row).eq("id", partnerId)
+    : await supabase.from("partners").insert({ ...row, club_id: clubId });
+  if (error) {
+    console.error("savePartner failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#partners`);
+  }
+  updateTag(PARTNERS_TAG);
+  redirect(`${back}#partners`);
+}
+
+export async function removePartner(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#partners`;
+  const id = int(formData.get("partnerId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  const { error } = await supabase.from("partners").delete().eq("id", id);
+  if (error) console.error("removePartner failed", { id, code: error.code, message: error.message });
+  updateTag(PARTNERS_TAG);
+  redirect(back);
 }

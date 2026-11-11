@@ -234,7 +234,15 @@
       "titleLabelHint": "např. IV. sezóna",
       "wonOn": "Datum",
       "prizeLabelHint": "např. Finále V. sezóny, 1. místo",
-      "reason": "Důvod (vidí jen tým)"
+      "reason": "Důvod (vidí jen tým)",
+      "partnerName": "Název",
+      "partnerUrl": "Web",
+      "partnerDescription": "Popis",
+      "logo": "Logo",
+      "logoHint": "Soubor z počítače/telefonu nebo odkaz https://.",
+      "uploadLogo": "Nahrát logo",
+      "uploading": "Nahráváme…",
+      "uploadFailed": "Nahrání se nezdařilo. Zkuste to znovu."
     },
     "status": {
       "draft": "Koncept",
@@ -310,7 +318,10 @@
     "bans": "Zablokovaní hráči — {club}",
     "bansHint": "Zablokovaný hráč se nemůže zapisovat na hry (ani přes bota) ani objednávat. Jeho budoucí zápisy a nezaplacené objednávky se hned zruší.",
     "ban": "Zablokovat",
-    "unban": "Odblokovat"
+    "unban": "Odblokovat",
+    "partners": "Partneři — {club}",
+    "partnersHint": "Zobrazují se na stránce Partneři. Rozbalte partnera pro úpravu nebo smazání.",
+    "addPartner": "Přidat partnera"
   },
   "match": {
     "matches": "Hry večera",
@@ -681,5 +692,8 @@
       "year": "Rok (do 31. 12.)"
     },
     "nick": "přezdívka"
+  },
+  "partners": {
+    "empty": "Brzy tu budou partneři klubu."
   }
 }

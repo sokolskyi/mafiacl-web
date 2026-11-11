@@ -3,12 +3,13 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addPrize, addStaff, banPlayer, unbanPlayer, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubBans, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubPartners, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
+import { PhotoField } from "./PhotoUpload";
 
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminHome({
@@ -348,6 +349,66 @@ export async function AdminHome({
                   <button className="rounded bg-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-700">{t("addStaff")}</button>
                 </form>
                 <p className="mt-2 text-sm text-neutral-400">{t("teamHint")}</p>
+              </section>
+            );
+          }),
+      )}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const partners = await getClubPartners(club.id);
+            const photoLabels = { label: t("fields.logo"), hint: t("fields.logoHint"), upload: t("fields.uploadLogo"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") };
+            const PartnerFields = ({ p }: { p?: (typeof partners)[number] }) => (
+              <>
+                <input type="hidden" name="locale" value={locale} />
+                <input type="hidden" name="clubId" value={club.id} />
+                {p && <input type="hidden" name="partnerId" value={p.id} />}
+                <label className="text-sm">{t("fields.partnerName")}
+                  <input name="name" required maxLength={80} defaultValue={p?.name ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.partnerUrl")}
+                  <input name="url" placeholder="https://…" defaultValue={p?.url ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <PhotoField clubId={club.id} initial={p?.logoUrl ? [p.logoUrl] : []} labels={photoLabels} />
+                {(["cs", "ru", "uk", "en"] as const).map((l) => (
+                  <label key={l} className="text-sm">{t("fields.partnerDescription")} · {l.toUpperCase()}
+                    <textarea name={`description_${l}`} rows={2} maxLength={400} defaultValue={p?.description[l] ?? ""} className={`mt-1 w-full ${input}`} />
+                  </label>
+                ))}
+              </>
+            );
+            return (
+              <section key={`partners-${club.id}`} id="partners">
+                <h2 className="text-xl font-bold">{t("partners", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("partnersHint")}</p>
+                <div className="mt-4 max-w-3xl space-y-3">
+                  {partners.map((p) => (
+                    <details key={p.id} className="rounded border border-white/10">
+                      <summary className="flex cursor-pointer items-center gap-3 px-4 py-3">
+                        <span className="flex-1 font-semibold">{p.name}</span>
+                        {p.url && <span className="text-sm text-neutral-400">{p.url.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")}</span>}
+                      </summary>
+                      <div className="border-t border-white/10 p-4">
+                        <form action={savePartner} className="grid gap-3 sm:grid-cols-2">
+                          <PartnerFields p={p} />
+                          <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("save")}</button>
+                        </form>
+                        <form action={removePartner} className="mt-3">
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="partnerId" value={p.id} />
+                          <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                        </form>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+                <h3 className="mt-6 font-bold">{t("addPartner")}</h3>
+                <form action={savePartner} className="mt-3 grid max-w-3xl gap-3 rounded border border-white/10 p-4 sm:grid-cols-2">
+                  <PartnerFields />
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addPartner")}</button>
+                </form>
               </section>
             );
           }),
