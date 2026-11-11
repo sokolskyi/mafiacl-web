@@ -247,3 +247,35 @@ export async function getClubPartners(clubId: number) {
     description: (p.description ?? {}) as Record<string, string>,
   }));
 }
+
+export async function getClubHosts(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("hosts")
+    .select("id, nickname, name, languages, playing_since, hosting_since, photo_url, bio, sort")
+    .eq("club_id", clubId)
+    .order("sort")
+    .order("id");
+  return (data ?? []).map((h) => ({
+    id: h.id,
+    nickname: h.nickname,
+    name: h.name,
+    languages: (h.languages ?? []) as string[],
+    playingSince: h.playing_since,
+    hostingSince: h.hosting_since,
+    photoUrl: h.photo_url,
+    bio: (h.bio ?? {}) as Record<string, string>,
+    sort: h.sort,
+  }));
+}
+
+export async function getCorporateRequests(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("corporate_requests")
+    .select("id, name, company, contact, event_date, guests, format, language, message, status, created_at")
+    .eq("club_id", clubId)
+    .order("created_at", { ascending: false })
+    .limit(30);
+  return data ?? [];
+}

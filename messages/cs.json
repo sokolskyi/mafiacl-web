@@ -16,7 +16,8 @@
     "reviews": "Recenze",
     "faq": "FAQ",
     "contacts": "Kontakty",
-    "account": "Můj účet"
+    "account": "Můj účet",
+    "hosts": "Moderátoři"
   },
   "common": {
     "comingSoon": "Stránka se připravuje.",
@@ -106,6 +107,10 @@
     "hallOfFame": {
       "title": "Síň slávy",
       "description": "Šampioni sezón, vítězové MafiaCL Kings, výhry v mini-turnajích a výhry hráčů klubu."
+    },
+    "hosts": {
+      "title": "Moderátoři klubu",
+      "description": "Kdo vede hry MafiaCL a v jakých jazycích."
     }
   },
   "account": {
@@ -242,7 +247,15 @@
       "logoHint": "Soubor z počítače/telefonu nebo odkaz https://.",
       "uploadLogo": "Nahrát logo",
       "uploading": "Nahráváme…",
-      "uploadFailed": "Nahrání se nezdařilo. Zkuste to znovu."
+      "uploadFailed": "Nahrání se nezdařilo. Zkuste to znovu.",
+      "hostName": "Jméno",
+      "playingSince": "Hraje od (rok)",
+      "hostingSince": "Moderuje od (rok)",
+      "hostLanguages": "V jakých jazycích moderuje",
+      "hostPhoto": "Fotka",
+      "uploadPhoto": "Nahrát fotku",
+      "hostBio": "Pár slov o sobě",
+      "sort": "Pořadí (méně = výš)"
     },
     "status": {
       "draft": "Koncept",
@@ -321,7 +334,34 @@
     "unban": "Odblokovat",
     "partners": "Partneři — {club}",
     "partnersHint": "Zobrazují se na stránce Partneři. Rozbalte partnera pro úpravu nebo smazání.",
-    "addPartner": "Přidat partnera"
+    "addPartner": "Přidat partnera",
+    "requests": "Poptávky firemních akcí — {club}",
+    "noRequests": "Zatím žádné poptávky.",
+    "requestStatus": "Stav",
+    "requestStatuses": {
+      "new": "Nová",
+      "in_progress": "Řeší se",
+      "done": "Proběhlo",
+      "rejected": "Zamítnuto"
+    },
+    "guestsN": "{count} hostů",
+    "hosts": "Moderátoři — {club}",
+    "hostsHint": "Zobrazují se na stránce Moderátoři a na stránce firemních akcí. Pokud přezdívka odpovídá účtu hráče, karta vede na jeho profil.",
+    "addHost": "Přidat moderátora",
+    "formats": {
+      "teambuilding": "Teambuilding",
+      "party": "Slavnostní večírek",
+      "birthday": "Narozeniny",
+      "office": "U klienta",
+      "club": "V klubu",
+      "other": "Jiné"
+    },
+    "langs": {
+      "cs": "čeština",
+      "ru": "ruština",
+      "uk": "ukrajinština",
+      "en": "angličtina"
+    }
   },
   "match": {
     "matches": "Hry večera",
@@ -695,5 +735,155 @@
   },
   "partners": {
     "empty": "Brzy tu budou partneři klubu."
+  },
+  "corporate": {
+    "lead": "Hra, po které spolu kolegové mluví jinak. Moderátor klubu povede večer mafie pro váš tým — u nás v klubu, ve vaší kanceláři nebo v restauraci.",
+    "ctaRequest": "Poslat poptávku",
+    "ctaHosts": "Naši moderátoři",
+    "whyTitle": "Proč mafie na firemní akci funguje",
+    "why": {
+      "0": {
+        "title": "Ledy roztají za 10 minut",
+        "text": "Už v první hře se lidé přou, smějí a poznávají se z nové stránky."
+      },
+      "1": {
+        "title": "Pravidla znát nemusíte",
+        "text": "Moderátor vše vysvětlí za pět minut, každý dostane nápovědu ke své roli."
+      },
+      "2": {
+        "title": "Od 6 lidí výš",
+        "text": "Jeden stůl nebo několik stolů najednou — přizpůsobíme velikosti skupiny."
+      },
+      "3": {
+        "title": "Ve vašem jazyce",
+        "text": "Hrajeme česky, anglicky, rusky i ukrajinsky — podle moderátora."
+      }
+    },
+    "formatsTitle": "Formáty",
+    "formats": {
+      "teambuilding": {
+        "title": "Teambuilding",
+        "text": "Hra a krátký rozbor: jak se tým domlouvá, komu věří a jak rozhoduje."
+      },
+      "party": {
+        "title": "Vánoční a slavnostní večírek",
+        "text": "Atmosféra noirové detektivky, hudba, ocenění nejlepších hráčů večera."
+      },
+      "birthday": {
+        "title": "Narozeniny",
+        "text": "Scénář kolem oslavence a překvapení přímo ve hře."
+      },
+      "office": {
+        "title": "Přijedeme k vám",
+        "text": "Do kanceláře, restaurace nebo chalupy — rekvizity vezeme s sebou."
+      },
+      "club": {
+        "title": "U nás v klubu",
+        "text": "Hotový herní sál v Praze: stoly, světla, zvuk — stačí přijít s týmem."
+      },
+      "other": {
+        "title": "Jiné",
+        "text": ""
+      }
+    },
+    "includedTitle": "Co je v ceně",
+    "included": {
+      "0": "Profesionální moderátor klubu",
+      "1": "Masky, karty rolí a čísla hráčů",
+      "2": "Hudba a herní časomíra",
+      "3": "Ocenění nejlepších hráčů večera",
+      "4": "Na přání: masky a trička s přezdívkami účastníků",
+      "5": "Na přání: fotograf"
+    },
+    "stepsTitle": "Jak to probíhá",
+    "steps": {
+      "0": {
+        "title": "Poptávka",
+        "text": "Nechte kontakt a pár slov o akci."
+      },
+      "1": {
+        "title": "Hovor",
+        "text": "Domluvíme datum, místo, počet hostů, jazyk a formát."
+      },
+      "2": {
+        "title": "Smlouva a faktura",
+        "text": "Pracujeme s firmami: vystavíme fakturu, platba převodem."
+      },
+      "3": {
+        "title": "Hra",
+        "text": "Moderátor přijede dřív a vše připraví — vy jen hrajete."
+      }
+    },
+    "priceTitle": "Cena",
+    "price": "Záleží na formátu, místě, délce a počtu hostů. Napište nám a pošleme kalkulaci na míru.",
+    "faqTitle": "Časté dotazy",
+    "faq": {
+      "0": {
+        "q": "Kolik lidí je potřeba?",
+        "a": "Hrát se dá od 6 lidí. Při větším počtu hostů vedeme několik stolů najednou."
+      },
+      "1": {
+        "q": "Jak dlouho večer trvá?",
+        "a": "Obvykle 2–3 hodiny, za tu dobu stihneme několik her. Jedna hra trvá 30–60 minut."
+      },
+      "2": {
+        "q": "Musí někdo znát pravidla?",
+        "a": "Ne. Moderátor pravidla vysvětlí na začátku a první hru vede jako tréninkovou."
+      },
+      "3": {
+        "q": "V jakém jazyce hrajeme?",
+        "a": "Česky, anglicky, rusky nebo ukrajinsky. Jazyky moderátorů najdete níže."
+      },
+      "4": {
+        "q": "Můžete přijet k nám?",
+        "a": "Ano, do kanceláře, restaurace nebo jiného místa v Praze, rekvizity přivezeme."
+      },
+      "5": {
+        "q": "Jak dlouho dopředu rezervovat?",
+        "a": "Ideálně 2–4 týdny předem, na prosinec ještě dřív — předvánoční termíny rychle mizí."
+      }
+    },
+    "hostsTitle": "Moderátoři",
+    "hostsLead": "Zvýrazněné jsou jazyky, ve kterých moderátor hru povede.",
+    "form": {
+      "title": "Poptávka firemní akce",
+      "lead": "Odpovíme během pracovního dne.",
+      "name": "Vaše jméno",
+      "company": "Firma (nepovinné)",
+      "contact": "Telefon, e-mail nebo Telegram",
+      "date": "Datum (přibližně)",
+      "guests": "Počet hostů",
+      "format": "Formát",
+      "language": "Jazyk hry",
+      "any": "Nezáleží",
+      "message": "Poznámka",
+      "send": "Odeslat poptávku",
+      "sending": "Odesíláme…",
+      "sent": "Děkujeme! Poptávku máme a brzy se ozveme.",
+      "consent": "Odesláním souhlasíte, že vás budeme kontaktovat na uvedený kontakt.",
+      "errors": {
+        "invalid": "Vyplňte jméno a kontakt.",
+        "tooMany": "Příliš mnoho poptávek za sebou. Zkuste to později nebo nám napište přímo.",
+        "save": "Odeslání se nezdařilo. Zkuste to znovu."
+      }
+    }
+  },
+  "hosts": {
+    "empty": "Brzy tu budou moderátoři.",
+    "playingSince": "hraje od {year}",
+    "hostingSince": "moderuje od {year}",
+    "languages": "Jazyky",
+    "lang": {
+      "cs": "čeština",
+      "ru": "ruština",
+      "uk": "ukrajinština",
+      "en": "angličtina"
+    },
+    "code": {
+      "cs": "CZ",
+      "ru": "RU",
+      "uk": "UA",
+      "en": "EN"
+    }
   }
 }

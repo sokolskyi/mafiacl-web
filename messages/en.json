@@ -16,7 +16,8 @@
     "reviews": "Reviews",
     "faq": "FAQ",
     "contacts": "Contacts",
-    "account": "Account"
+    "account": "Account",
+    "hosts": "Hosts"
   },
   "common": {
     "comingSoon": "This page is coming soon.",
@@ -106,6 +107,10 @@
     "hallOfFame": {
       "title": "Hall of fame",
       "description": "Season champions, MafiaCL Kings winners, mini tournament wins and prize money of club players."
+    },
+    "hosts": {
+      "title": "Club hosts",
+      "description": "Who runs MafiaCL games and in which languages."
     }
   },
   "account": {
@@ -242,7 +247,15 @@
       "logoHint": "A file from your computer/phone or an https:// link.",
       "uploadLogo": "Upload logo",
       "uploading": "Uploading…",
-      "uploadFailed": "Upload failed. Please try again."
+      "uploadFailed": "Upload failed. Please try again.",
+      "hostName": "Name",
+      "playingSince": "Playing since (year)",
+      "hostingSince": "Hosting since (year)",
+      "hostLanguages": "Languages they host in",
+      "hostPhoto": "Photo",
+      "uploadPhoto": "Upload photo",
+      "hostBio": "A few words about them",
+      "sort": "Order (lower = higher)"
     },
     "status": {
       "draft": "Draft",
@@ -321,7 +334,34 @@
     "unban": "Unblock",
     "partners": "Partners — {club}",
     "partnersHint": "Shown on the Partners page. Open a partner to edit or remove it.",
-    "addPartner": "Add partner"
+    "addPartner": "Add partner",
+    "requests": "Company event requests — {club}",
+    "noRequests": "No requests yet.",
+    "requestStatus": "Status",
+    "requestStatuses": {
+      "new": "New",
+      "in_progress": "In progress",
+      "done": "Done",
+      "rejected": "Declined"
+    },
+    "guestsN": "{count} guests",
+    "hosts": "Hosts — {club}",
+    "hostsHint": "Shown on the Hosts page and the company events page. If the nickname matches a player account, the card links to their profile.",
+    "addHost": "Add host",
+    "formats": {
+      "teambuilding": "Team building",
+      "party": "Festive party",
+      "birthday": "Birthday",
+      "office": "At client's venue",
+      "club": "At the club",
+      "other": "Other"
+    },
+    "langs": {
+      "cs": "Czech",
+      "ru": "Russian",
+      "uk": "Ukrainian",
+      "en": "English"
+    }
   },
   "match": {
     "matches": "Games tonight",
@@ -695,5 +735,155 @@
   },
   "partners": {
     "empty": "The club's partners will appear here soon."
+  },
+  "corporate": {
+    "lead": "A game that gets colleagues talking to each other in a new way. A club host runs a mafia night for your team — at our club, in your office or at a restaurant.",
+    "ctaRequest": "Send a request",
+    "ctaHosts": "Our hosts",
+    "whyTitle": "Why mafia works for company events",
+    "why": {
+      "0": {
+        "title": "The ice breaks in 10 minutes",
+        "text": "In the very first game people argue, laugh and see each other in a new light."
+      },
+      "1": {
+        "title": "No need to know the rules",
+        "text": "The host explains everything in five minutes, and everyone gets a role card with hints."
+      },
+      "2": {
+        "title": "From 6 people up",
+        "text": "One table or several running at once — we adapt to the size of your group."
+      },
+      "3": {
+        "title": "In your language",
+        "text": "We host in English, Czech, Russian and Ukrainian — depending on the host."
+      }
+    },
+    "formatsTitle": "Formats",
+    "formats": {
+      "teambuilding": {
+        "title": "Team building",
+        "text": "A game plus a short debrief: how the team negotiates, whom it trusts and how it decides."
+      },
+      "party": {
+        "title": "Christmas and festive parties",
+        "text": "Noir detective atmosphere, music and awards for the evening's best players."
+      },
+      "birthday": {
+        "title": "Birthday",
+        "text": "A scenario built around the birthday person, with a surprise inside the game."
+      },
+      "office": {
+        "title": "We come to you",
+        "text": "Your office, a restaurant or a country house — we bring all the props."
+      },
+      "club": {
+        "title": "At our club",
+        "text": "A ready-made game room in Prague: tables, lights, sound — just bring your team."
+      },
+      "other": {
+        "title": "Other",
+        "text": ""
+      }
+    },
+    "includedTitle": "What's included",
+    "included": {
+      "0": "A professional club host",
+      "1": "Masks, role cards and player numbers",
+      "2": "Music and a game timer",
+      "3": "Awards for the evening's best players",
+      "4": "Optional: masks and T-shirts with players' nicknames",
+      "5": "Optional: a photographer"
+    },
+    "stepsTitle": "How it works",
+    "steps": {
+      "0": {
+        "title": "Request",
+        "text": "Leave a contact and a few words about the event."
+      },
+      "1": {
+        "title": "Call",
+        "text": "We agree the date, venue, number of guests, language and format."
+      },
+      "2": {
+        "title": "Contract and invoice",
+        "text": "We work with companies: we issue an invoice, payment by transfer."
+      },
+      "3": {
+        "title": "Game",
+        "text": "The host arrives early and sets everything up — you just play."
+      }
+    },
+    "priceTitle": "Price",
+    "price": "It depends on the format, venue, length and number of guests. Write to us and we'll send a quote for your event.",
+    "faqTitle": "FAQ",
+    "faq": {
+      "0": {
+        "q": "How many people do we need?",
+        "a": "You can play from 6 people. For larger groups we run several tables at once."
+      },
+      "1": {
+        "q": "How long does it take?",
+        "a": "Usually 2–3 hours, enough for several games. One game lasts 30–60 minutes."
+      },
+      "2": {
+        "q": "Does anyone need to know the rules?",
+        "a": "No. The host explains the rules at the start and runs the first game as practice."
+      },
+      "3": {
+        "q": "Which language do we play in?",
+        "a": "English, Czech, Russian or Ukrainian. Each host's languages are shown below."
+      },
+      "4": {
+        "q": "Can you come to us?",
+        "a": "Yes — to your office, a restaurant or another venue in Prague, props included."
+      },
+      "5": {
+        "q": "How far ahead should we book?",
+        "a": "Ideally 2–4 weeks ahead, and even earlier for December: pre-Christmas dates go fast."
+      }
+    },
+    "hostsTitle": "Hosts",
+    "hostsLead": "Highlighted are the languages each host can run the game in.",
+    "form": {
+      "title": "Company event request",
+      "lead": "We reply within one working day.",
+      "name": "Your name",
+      "company": "Company (optional)",
+      "contact": "Phone, e-mail or Telegram",
+      "date": "Date (approx.)",
+      "guests": "Number of guests",
+      "format": "Format",
+      "language": "Game language",
+      "any": "Any",
+      "message": "Comment",
+      "send": "Send request",
+      "sending": "Sending…",
+      "sent": "Thank you! We've got your request and will be in touch soon.",
+      "consent": "By sending the request you agree that we contact you via the details provided.",
+      "errors": {
+        "invalid": "Please add your name and a contact.",
+        "tooMany": "Too many requests in a row. Try again later or contact us directly.",
+        "save": "Could not send. Please try again."
+      }
+    }
+  },
+  "hosts": {
+    "empty": "Our hosts will appear here soon.",
+    "playingSince": "playing since {year}",
+    "hostingSince": "hosting since {year}",
+    "languages": "Languages",
+    "lang": {
+      "cs": "Czech",
+      "ru": "Russian",
+      "uk": "Ukrainian",
+      "en": "English"
+    },
+    "code": {
+      "cs": "CZ",
+      "ru": "RU",
+      "uk": "UA",
+      "en": "EN"
+    }
   }
 }

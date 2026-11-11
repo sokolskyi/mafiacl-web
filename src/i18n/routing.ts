@@ -37,6 +37,7 @@ export const routing = defineRouting({
     },
     "/kids": { cs: "/detska-mafie", ru: "/detskaya-mafiya", uk: "/dytiacha-mafiia", en: "/kids-mafia" },
     "/franchise": { cs: "/franchiza", ru: "/franshiza", uk: "/franshyza", en: "/franchise" },
+    "/hosts": { cs: "/moderatori", ru: "/vedushchie", uk: "/vedutchi", en: "/hosts" },
     "/partners": { cs: "/partneri", ru: "/partnery", uk: "/partnery", en: "/partners" },
     "/reviews": { cs: "/recenze", ru: "/otzyvy", uk: "/vidhuky", en: "/reviews" },
     "/faq": "/faq",

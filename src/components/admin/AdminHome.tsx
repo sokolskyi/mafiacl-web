@@ -3,10 +3,10 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, saveHost, removeHost, setRequestStatus, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubBans, getClubPartners, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubPartners, getClubHosts, getCorporateRequests, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
@@ -350,6 +350,117 @@ export async function AdminHome({
                 </form>
                 <p className="mt-2 text-sm text-neutral-400">{t("teamHint")}</p>
               </section>
+            );
+          }),
+      )}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const [requests, hosts] = await Promise.all([getCorporateRequests(club.id), getClubHosts(club.id)]);
+            const fmt = new Intl.DateTimeFormat(locale, { timeZone: club.timezone, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+            const HostFields = ({ h }: { h?: (typeof hosts)[number] }) => (
+              <>
+                <input type="hidden" name="locale" value={locale} />
+                <input type="hidden" name="clubId" value={club.id} />
+                {h && <input type="hidden" name="hostId" value={h.id} />}
+                <label className="text-sm">{t("fields.nickname")}
+                  <input name="nickname" required maxLength={32} defaultValue={h?.nickname ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.hostName")}
+                  <input name="name" required maxLength={60} defaultValue={h?.name ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.playingSince")}
+                  <input name="playingSince" type="number" min={1990} max={2100} placeholder="2015" defaultValue={h?.playingSince ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.hostingSince")}
+                  <input name="hostingSince" type="number" min={1990} max={2100} placeholder="2018" defaultValue={h?.hostingSince ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <fieldset className="text-sm sm:col-span-2">
+                  <legend>{t("fields.hostLanguages")}</legend>
+                  <div className="mt-1 flex flex-wrap gap-4">
+                    {(["cs", "ru", "uk", "en"] as const).map((l) => (
+                      <label key={l} className="flex items-center gap-2">
+                        <input type="checkbox" name={`lang_${l}`} defaultChecked={h?.languages.includes(l) ?? false} className="h-4 w-4" /> {t(`langs.${l}`)}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <PhotoField clubId={club.id} initial={h?.photoUrl ? [h.photoUrl] : []} labels={{ label: t("fields.hostPhoto"), hint: t("fields.logoHint"), upload: t("fields.uploadPhoto"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }} />
+                {(["cs", "ru", "uk", "en"] as const).map((l) => (
+                  <label key={l} className="text-sm">{t("fields.hostBio")} · {l.toUpperCase()}
+                    <textarea name={`bio_${l}`} rows={2} maxLength={300} defaultValue={h?.bio[l] ?? ""} className={`mt-1 w-full ${input}`} />
+                  </label>
+                ))}
+                <label className="text-sm">{t("fields.sort")}
+                  <input name="sort" type="number" min={0} defaultValue={h?.sort ?? 100} className={`mt-1 w-full ${input}`} />
+                </label>
+              </>
+            );
+            return (
+              <div key={`hr-${club.id}`} className="space-y-12">
+                <section id="requests">
+                  <h2 className="text-xl font-bold">{t("requests", { club: club.name })}</h2>
+                  <ul className="mt-4 max-w-3xl divide-y divide-white/10 rounded border border-white/10">
+                    {requests.map((r) => (
+                      <li key={r.id} className="space-y-1 px-4 py-3">
+                        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                          <span className="font-bold">{r.name}</span>
+                          {r.company && <span className="text-neutral-300">{r.company}</span>}
+                          <span className="font-mono text-sm">{r.contact}</span>
+                          <span className="ml-auto text-xs text-neutral-500">{fmt.format(new Date(r.created_at))}</span>
+                        </div>
+                        <p className="text-sm text-neutral-400">
+                          {[r.event_date, r.guests ? t("guestsN", { count: r.guests }) : null, r.format ? t(`formats.${r.format}`) : null, r.language ? t(`langs.${r.language}`) : null].filter(Boolean).join(" · ")}
+                        </p>
+                        {r.message && <p className="whitespace-pre-line text-sm text-neutral-300">{r.message}</p>}
+                        <form action={setRequestStatus} className="flex items-center gap-2 pt-1">
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="requestId" value={r.id} />
+                          <select name="status" defaultValue={r.status} aria-label={t("requestStatus")} className="rounded border border-white/20 bg-neutral-900 px-2 py-1 text-sm">
+                            {(["new", "in_progress", "done", "rejected"] as const).map((s) => <option key={s} value={s}>{t(`requestStatuses.${s}`)}</option>)}
+                          </select>
+                          <button className="rounded bg-neutral-800 px-3 py-1 text-sm font-semibold hover:bg-neutral-700">{t("save")}</button>
+                        </form>
+                      </li>
+                    ))}
+                    {requests.length === 0 && <li className="px-4 py-3 text-neutral-500">{t("noRequests")}</li>}
+                  </ul>
+                </section>
+
+                <section id="hosts">
+                  <h2 className="text-xl font-bold">{t("hosts", { club: club.name })}</h2>
+                  <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("hostsHint")}</p>
+                  <div className="mt-4 max-w-3xl space-y-3">
+                    {hosts.map((h) => (
+                      <details key={h.id} className="rounded border border-white/10">
+                        <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
+                          <span className="font-semibold">{h.nickname}</span>
+                          <span className="flex-1 text-sm text-neutral-400">{h.name}</span>
+                          <span className="text-xs uppercase text-neutral-400">{h.languages.join(" · ")}</span>
+                        </summary>
+                        <div className="border-t border-white/10 p-4">
+                          <form action={saveHost} className="grid gap-3 sm:grid-cols-2">
+                            <HostFields h={h} />
+                            <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("save")}</button>
+                          </form>
+                          <form action={removeHost} className="mt-3">
+                            <input type="hidden" name="locale" value={locale} />
+                            <input type="hidden" name="hostId" value={h.id} />
+                            <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                          </form>
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                  <h3 className="mt-6 font-bold">{t("addHost")}</h3>
+                  <form action={saveHost} className="mt-3 grid max-w-3xl gap-3 rounded border border-white/10 p-4 sm:grid-cols-2">
+                    <HostFields />
+                    <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addHost")}</button>
+                  </form>
+                </section>
+              </div>
             );
           }),
       )}

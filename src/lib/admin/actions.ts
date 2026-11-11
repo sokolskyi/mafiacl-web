@@ -6,6 +6,7 @@ import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { PARTNERS_TAG } from "@/lib/partners";
+import { HOSTS_TAG, HOST_LANGS } from "@/lib/hosts";
 import { GAMES_TAG } from "@/lib/games";
 import { MATCHES_TAG } from "@/lib/players";
 import { TITLES_TAG } from "@/lib/badges";
@@ -558,5 +559,86 @@ export async function removePartner(formData: FormData) {
   const { error } = await supabase.from("partners").delete().eq("id", id);
   if (error) console.error("removePartner failed", { id, code: error.code, message: error.message });
   updateTag(PARTNERS_TAG);
+  redirect(back);
+}
+
+// ---------------------------------------------------------------------------
+// Ведущие (владелец/админ): ник, имя, языки, с какого года играет/ведёт, фото.
+// ---------------------------------------------------------------------------
+
+function year(v: FormDataEntryValue | null) {
+  const n = Number(String(v ?? "").trim());
+  return Number.isInteger(n) && n >= 1990 && n <= 2100 ? n : null;
+}
+
+export async function saveHost(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const hostId = int(formData.get("hostId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim().slice(0, 32);
+  const name = String(formData.get("name") ?? "").trim().slice(0, 60);
+  const languages = HOST_LANGS.filter((l) => formData.get(`lang_${l}`) === "on");
+  const photoRaw = String(formData.get("images") ?? "").split("\n").map((x) => x.trim()).filter(Boolean)[0] ?? "";
+  const photo = photoRaw ? (LOCAL_IMG.test(photoRaw) ? photoRaw : safeHttps(photoRaw)) : null;
+  const sort = int(formData.get("sort"), 0, 100000) ?? 100;
+  const bio: Record<string, string> = {};
+  for (const l of PARTNER_LANGS) {
+    const v = String(formData.get(`bio_${l}`) ?? "").trim().slice(0, 300);
+    if (v) bio[l] = v;
+  }
+  if (!clubId || !nickname || !name || (photoRaw && !photo)) redirect(`${back}?error=invalid#hosts`);
+
+  const supabase = await createClient();
+  // Привязка к аккаунту игрока по нику — чтобы карточка вела на его профиль.
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  const profileId = found?.length === 1 ? (found[0].id as string) : null;
+
+  const row = {
+    nickname,
+    name,
+    languages,
+    playing_since: year(formData.get("playingSince")),
+    hosting_since: year(formData.get("hostingSince")),
+    photo_url: photo,
+    bio: Object.keys(bio).length ? bio : null,
+    sort,
+    profile_id: profileId,
+  };
+  const { error } = hostId
+    ? await supabase.from("hosts").update(row).eq("id", hostId)
+    : await supabase.from("hosts").insert({ ...row, club_id: clubId });
+  if (error) {
+    console.error("saveHost failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#hosts`);
+  }
+  updateTag(HOSTS_TAG);
+  redirect(`${back}#hosts`);
+}
+
+export async function removeHost(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#hosts`;
+  const id = int(formData.get("hostId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  const { error } = await supabase.from("hosts").delete().eq("id", id);
+  if (error) console.error("removeHost failed", { id, code: error.code, message: error.message });
+  updateTag(HOSTS_TAG);
+  redirect(back);
+}
+
+const REQUEST_STATUSES = ["new", "in_progress", "done", "rejected"] as const;
+
+export async function setRequestStatus(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#requests`;
+  const id = int(formData.get("requestId"), 1, Number.MAX_SAFE_INTEGER);
+  const status = String(formData.get("status"));
+  if (!id || !(REQUEST_STATUSES as readonly string[]).includes(status)) redirect(back);
+  const supabase = await createClient();
+  const { error } = await supabase.from("corporate_requests").update({ status }).eq("id", id);
+  if (error) console.error("setRequestStatus failed", { id, code: error.code, message: error.message });
   redirect(back);
 }
