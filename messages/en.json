@@ -922,8 +922,8 @@
         "text": "We train your hosts to club standards and let them practise at games in Prague."
       },
       "3": {
-        "title": "Tournaments and league",
-        "text": "Your players join the network's shared rating and tournaments: Premier League, Kings, Champions League."
+        "title": "Your own league, a shared Kings",
+        "text": "Your club gets its own rating and its own Premier League — e.g. Premier League MafiaCL Brno, just as we have Premier League MafiaCL Prague. The MafiaCL Kings tournament is shared by all clubs in the network."
       },
       "4": {
         "title": "Launch and marketing",
@@ -969,7 +969,7 @@
       },
       "4": {
         "title": "Regular games and league",
-        "text": "The club plays on schedule and joins network tournaments."
+        "text": "The club plays on schedule, runs its own Premier League and sends players to the shared MafiaCL Kings tournament."
       }
     },
     "priceTitle": "Terms",
