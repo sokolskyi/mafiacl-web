@@ -93,7 +93,8 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   const userId = claims?.claims.sub;
   if (!userId) return { status: "error" };
 
-  const { error } = await supabase.from("profiles").update({ nickname }).eq("id", userId);
+  const city = String(formData.get("city") ?? "").trim().slice(0, 60) || null;
+  const { error } = await supabase.from("profiles").update({ nickname, city }).eq("id", userId);
   if (error) {
     if (error.code === "23505") return { status: "taken" };
     console.error("updateNickname failed", { code: error.code, message: error.message });

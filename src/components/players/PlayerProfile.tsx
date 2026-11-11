@@ -52,7 +52,10 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
             {player.nickname}
             {badge && <span className="ml-2 text-3xl" aria-label={t("badges")}>{badge}</span>}
           </h1>
-          <p className="mt-1 text-sm text-neutral-400">{t("since", { date: since })}</p>
+          <p className="mt-1 text-sm text-neutral-400">
+            {player.city && <span>📍 {player.city} · </span>}
+            {t("since", { date: since })}
+          </p>
           {titles.length > 0 && (
             <ul className="mt-2 flex flex-wrap gap-2">
               {titles.map((x) => (

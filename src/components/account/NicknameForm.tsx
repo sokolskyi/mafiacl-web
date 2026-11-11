@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { updateNickname, type ProfileState } from "@/lib/auth/actions";
 
-export function NicknameForm({ current }: { current: string | null }) {
+export function NicknameForm({ current, city }: { current: string | null; city: string | null }) {
   const t = useTranslations("account");
   const [state, action, pending] = useActionState<ProfileState, FormData>(updateNickname, {
     status: "idle",
@@ -38,6 +38,19 @@ export function NicknameForm({ current }: { current: string | null }) {
       <p id="nickname-hint" className="mt-2 text-sm text-neutral-400">
         {t("nicknameHint")}
       </p>
+      <label htmlFor="city" className="mt-5 block text-sm font-semibold">
+        {t("city")}
+      </label>
+      <input
+        id="city"
+        name="city"
+        defaultValue={city ?? ""}
+        maxLength={60}
+        autoComplete="address-level2"
+        placeholder={t("cityPlaceholder")}
+        className="mt-2 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
+      />
+      <p className="mt-2 text-sm text-neutral-400">{t("cityHint")}</p>
       <p id="nickname-status" role="status" className="mt-2 text-sm">
         {state.status === "saved" && <span className="text-green-400">{t("saved")}</span>}
         {state.status !== "idle" && state.status !== "saved" && (

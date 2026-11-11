@@ -155,7 +155,10 @@
     "botOn": "Telegram připojen",
     "myPage": "Moje stránka hráče",
     "checkingBot": "Ověřujeme, že nejste robot…",
-    "captcha": "Ověření se nezdařilo. Obnovte stránku a zkuste to znovu."
+    "captcha": "Ověření se nezdařilo. Obnovte stránku a zkuste to znovu.",
+    "city": "Město",
+    "cityPlaceholder": "např. Praha",
+    "cityHint": "Zobrazuje se ve vašem hráčském profilu. Můžete nechat prázdné."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",

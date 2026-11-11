@@ -155,7 +155,10 @@
     "botOn": "Telegram connected",
     "myPage": "My player page",
     "checkingBot": "Checking you're not a bot…",
-    "captcha": "The bot check failed. Reload the page and try again."
+    "captcha": "The bot check failed. Reload the page and try again.",
+    "city": "City",
+    "cityPlaceholder": "e.g. Prague",
+    "cityHint": "Shown on your player profile. You can leave it empty."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",

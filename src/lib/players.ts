@@ -29,6 +29,7 @@ export type PlayerPage = {
   id: string;
   nickname: string;
   avatarUrl: string | null;
+  city: string | null;
   since: string;
   staff: { club: string; role: string }[];
   stats: {
@@ -58,7 +59,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   const pattern = nick.replace(/[\\%_]/g, (c) => `\\${c}`);
   const { data: profiles } = await db
     .from("profiles")
-    .select("id, nickname, avatar_url, created_at")
+    .select("id, nickname, avatar_url, city, created_at")
     .ilike("nickname", pattern)
     .limit(2);
   const p = profiles?.length === 1 ? profiles[0] : null;
@@ -129,6 +130,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     id: p.id,
     nickname: p.nickname,
     avatarUrl: p.avatar_url,
+    city: p.city ?? null,
     since: p.created_at,
     staff: (staff ?? []).map((s) => ({ club: (s.clubs as unknown as { name: string } | null)?.name ?? "", role: s.role })),
     stats: {
