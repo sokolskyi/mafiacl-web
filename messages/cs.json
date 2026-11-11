@@ -265,7 +265,25 @@
       "reviewDate": "Kdy (měsíc)",
       "reviewBody": "Text recenze",
       "reviewPhoto": "Fotka autora",
-      "reviewActive": "Zobrazit na webu"
+      "reviewActive": "Zobrazit na webu",
+      "tName": "Název",
+      "tSeries": "Série",
+      "tStatus": "Stav",
+      "tStartsOn": "Začátek",
+      "tEndsOn": "Konec",
+      "tTime": "Čas začátku",
+      "tCity": "Město",
+      "tVenue": "Místo (název)",
+      "tAddress": "Adresa",
+      "tOrganizer": "Pořadatel, pokud turnaj není náš",
+      "tOrganizerHint": "Prázdné — turnaj našeho klubu. Jinak třeba „Mafia Club Berlin“: turnaj se zobrazí jako „účastníme se“.",
+      "tRegistration": "Registrace",
+      "tRegUrl": "Odkaz na registraci",
+      "tClosesAt": "Registrace do",
+      "tCapacity": "Míst (nepovinné)",
+      "tPrice": "Startovné, Kč",
+      "tCover": "Obálka",
+      "tDescription": "Ohlášení"
     },
     "status": {
       "draft": "Koncept",
@@ -389,7 +407,30 @@
     "testimonials": "Recenze firemních akcí — {club}",
     "testimonialsHint": "Zobrazují se na stránce firemní mafie. Firma je nepovinná: u narozenin stačí jméno a příležitost.",
     "addTestimonial": "Přidat recenzi",
-    "hiddenItem": "skrytá"
+    "hiddenItem": "skrytá",
+    "tournamentsAdmin": "Turnaje — {club}",
+    "tournamentsHint": "Koncept vidíte jen v administraci. Aby se turnaj objevil na webu, nastavte stav „Ohlášen“. Registrace: „u nás na webu“ — hráči se přihlásí sami; „odkazem“ — tlačítko vede třeba na mafgame.org.",
+    "addTournament": "Přidat turnaj",
+    "tOpenPage": "Otevřít stránku turnaje",
+    "tRegCount": "{count} přihl.",
+    "tSeries": {
+      "club": "Klubový turnaj",
+      "kings": "MafiaCL Kings",
+      "mcl_europe": "MCL Europe",
+      "other": "Jiné"
+    },
+    "tStatuses": {
+      "draft": "Koncept",
+      "announced": "Ohlášen",
+      "running": "Probíhá",
+      "finished": "Skončil",
+      "cancelled": "Zrušen"
+    },
+    "tReg": {
+      "none": "Bez registrace",
+      "internal": "U nás na webu",
+      "external": "Odkazem"
+    }
   },
   "match": {
     "matches": "Hry večera",
@@ -1037,6 +1078,51 @@
         "tooMany": "Příliš mnoho poptávek za sebou. Zkuste to později nebo nám napište přímo.",
         "save": "Odeslání se nezdařilo. Zkuste to znovu."
       }
+    }
+  },
+  "tournaments": {
+    "upcoming": "Nejbližší",
+    "noUpcoming": "Zatím žádná ohlášení — sledujte novinky.",
+    "past": "Proběhlé",
+    "all": "Všechny turnaje",
+    "ours": "Klubový turnaj",
+    "weTakePart": "Účastníme se",
+    "organizer": "Pořadatel: {name}",
+    "when": "Kdy",
+    "where": "Kde",
+    "fee": "Startovné",
+    "free": "Zdarma",
+    "registration": "Registrace",
+    "regOk": "Hotovo!",
+    "regError": "Registrace se nezdařila. Zkuste to znovu.",
+    "regBanned": "Registrace na turnaje klubu je pro vás uzavřena. Obraťte se na pořadatele.",
+    "regClosed": "Registrace je uzavřena.",
+    "regNone": "Registrace není potřeba nebo bude ohlášena později.",
+    "regExternal": "Registrace na {host}",
+    "seats": "Obsazeno: {taken} z {capacity}",
+    "registeredCount": "Registrováno: {count}",
+    "closesAt": "registrace do {date}",
+    "youRegistered": "Jste registrováni ✓",
+    "youWaitlist": "Jste na čekací listině",
+    "cancel": "Zrušit registraci",
+    "register": "Zaregistrovat se",
+    "signInToRegister": "Přihlásit se a zaregistrovat",
+    "participants": "Účastníci",
+    "waitlist": "Čekací listina",
+    "kingsLead": "MafiaCL Kings — hlavní turnaj roku: nejlepší hráči sezóny, společný pro všechny kluby sítě.",
+    "kingsSoon": "Ohlášení dalšího Kings se objeví zde.",
+    "hallOfFame": "Síň slávy",
+    "series": {
+      "club": "Klubový turnaj",
+      "kings": "MafiaCL Kings",
+      "mcl_europe": "MCL Europe",
+      "other": "Turnaj"
+    },
+    "status": {
+      "announced": "Ohlášen",
+      "running": "Probíhá",
+      "finished": "Skončil",
+      "cancelled": "Zrušen"
     }
   }
 }

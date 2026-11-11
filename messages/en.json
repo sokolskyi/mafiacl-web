@@ -265,7 +265,25 @@
       "reviewDate": "When (month)",
       "reviewBody": "Review text",
       "reviewPhoto": "Author's photo",
-      "reviewActive": "Show on the website"
+      "reviewActive": "Show on the website",
+      "tName": "Name",
+      "tSeries": "Series",
+      "tStatus": "Status",
+      "tStartsOn": "Start date",
+      "tEndsOn": "End date",
+      "tTime": "Start time",
+      "tCity": "City",
+      "tVenue": "Venue (name)",
+      "tAddress": "Address",
+      "tOrganizer": "Organiser, if not our tournament",
+      "tOrganizerHint": "Empty — our club's tournament. Otherwise e.g. “Mafia Club Berlin”: shown as “we take part”.",
+      "tRegistration": "Registration",
+      "tRegUrl": "Registration link",
+      "tClosesAt": "Registration until",
+      "tCapacity": "Seats (optional)",
+      "tPrice": "Entry fee, Kč",
+      "tCover": "Cover",
+      "tDescription": "Announcement"
     },
     "status": {
       "draft": "Draft",
@@ -389,7 +407,30 @@
     "testimonials": "Company event reviews — {club}",
     "testimonialsHint": "Shown on the company mafia page. Company is optional: for a birthday, a name and the occasion are enough.",
     "addTestimonial": "Add review",
-    "hiddenItem": "hidden"
+    "hiddenItem": "hidden",
+    "tournamentsAdmin": "Tournaments — {club}",
+    "tournamentsHint": "Drafts are visible only in admin. To publish a tournament, set the status to “Announced”. Registration: “on our site” — players sign up themselves; “via link” — the button goes to e.g. mafgame.org.",
+    "addTournament": "Add tournament",
+    "tOpenPage": "Open tournament page",
+    "tRegCount": "{count} registered",
+    "tSeries": {
+      "club": "Club tournament",
+      "kings": "MafiaCL Kings",
+      "mcl_europe": "MCL Europe",
+      "other": "Other"
+    },
+    "tStatuses": {
+      "draft": "Draft",
+      "announced": "Announced",
+      "running": "Running",
+      "finished": "Finished",
+      "cancelled": "Cancelled"
+    },
+    "tReg": {
+      "none": "No registration",
+      "internal": "On our site",
+      "external": "Via link"
+    }
   },
   "match": {
     "matches": "Games tonight",
@@ -1037,6 +1078,51 @@
         "tooMany": "Too many requests in a row. Try again later or contact us directly.",
         "save": "Could not send. Please try again."
       }
+    }
+  },
+  "tournaments": {
+    "upcoming": "Upcoming",
+    "noUpcoming": "No announcements yet — stay tuned.",
+    "past": "Past",
+    "all": "All tournaments",
+    "ours": "Club tournament",
+    "weTakePart": "We take part",
+    "organizer": "Organiser: {name}",
+    "when": "When",
+    "where": "Where",
+    "fee": "Entry fee",
+    "free": "Free",
+    "registration": "Registration",
+    "regOk": "Done!",
+    "regError": "Registration failed. Please try again.",
+    "regBanned": "Registration for this club's tournaments is closed for you. Please contact the organiser.",
+    "regClosed": "Registration is closed.",
+    "regNone": "No registration needed, or it will be announced later.",
+    "regExternal": "Register on {host}",
+    "seats": "Seats taken: {taken} of {capacity}",
+    "registeredCount": "Registered: {count}",
+    "closesAt": "registration until {date}",
+    "youRegistered": "You're registered ✓",
+    "youWaitlist": "You're on the waitlist",
+    "cancel": "Cancel registration",
+    "register": "Register",
+    "signInToRegister": "Sign in to register",
+    "participants": "Participants",
+    "waitlist": "Waitlist",
+    "kingsLead": "MafiaCL Kings — the main tournament of the year: the season's best players, shared by all clubs in the network.",
+    "kingsSoon": "The next Kings announcement will appear here.",
+    "hallOfFame": "Hall of fame",
+    "series": {
+      "club": "Club tournament",
+      "kings": "MafiaCL Kings",
+      "mcl_europe": "MCL Europe",
+      "other": "Tournament"
+    },
+    "status": {
+      "announced": "Announced",
+      "running": "Running",
+      "finished": "Finished",
+      "cancelled": "Cancelled"
     }
   }
 }

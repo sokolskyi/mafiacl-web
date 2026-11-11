@@ -290,3 +290,20 @@ export async function getClubTestimonials(clubId: number) {
     .order("id", { ascending: false });
   return data ?? [];
 }
+
+export async function getClubTournaments(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("tournaments")
+    .select("id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, tournament_registrations ( status, profiles ( nickname ) )")
+    .eq("club_id", clubId)
+    .order("starts_on", { ascending: false })
+    .limit(40);
+  return (data ?? []).map((t) => ({
+    ...t,
+    description: (t.description ?? {}) as Record<string, string>,
+    regs: ((t.tournament_registrations ?? []) as unknown as { status: string; profiles: { nickname: string | null } | null }[])
+      .filter((r) => r.status !== "cancelled")
+      .map((r) => ({ status: r.status, nickname: r.profiles?.nickname ?? "—" })),
+  }));
+}

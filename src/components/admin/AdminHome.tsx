@@ -3,10 +3,10 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, saveTournament, removeTournament, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubBans, getClubPartners, getClubHosts, getCorporateRequests, getClubTestimonials, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubPartners, getClubHosts, getCorporateRequests, getClubTestimonials, getClubTournaments, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
@@ -349,6 +349,126 @@ export async function AdminHome({
                   <button className="rounded bg-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-700">{t("addStaff")}</button>
                 </form>
                 <p className="mt-2 text-sm text-neutral-400">{t("teamHint")}</p>
+              </section>
+            );
+          }),
+      )}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const tournaments = await getClubTournaments(club.id);
+            const timeOf = (iso: string | null) => (iso ? isoToLocalInput(iso, club.timezone).slice(11, 16) : "");
+            const TFields = ({ x }: { x?: (typeof tournaments)[number] }) => (
+              <>
+                <input type="hidden" name="locale" value={locale} />
+                <input type="hidden" name="clubId" value={club.id} />
+                <input type="hidden" name="timezone" value={club.timezone} />
+                {x && <input type="hidden" name="tournamentId" value={x.id} />}
+                <label className="text-sm sm:col-span-2">{t("fields.tName")}
+                  <input name="name" required maxLength={120} defaultValue={x?.name ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tSeries")}
+                  <select name="series" defaultValue={x?.series ?? "club"} className={`mt-1 w-full ${input}`}>
+                    {(["club", "kings", "mcl_europe", "other"] as const).map((v) => <option key={v} value={v}>{t(`tSeries.${v}`)}</option>)}
+                  </select>
+                </label>
+                <label className="text-sm">{t("fields.tStatus")}
+                  <select name="status" defaultValue={x?.status ?? "draft"} className={`mt-1 w-full ${input}`}>
+                    {(["draft", "announced", "running", "finished", "cancelled"] as const).map((v) => <option key={v} value={v}>{t(`tStatuses.${v}`)}</option>)}
+                  </select>
+                </label>
+                <label className="text-sm">{t("fields.tStartsOn")}
+                  <input name="startsOn" type="date" required defaultValue={x?.starts_on ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tEndsOn")}
+                  <input name="endsOn" type="date" defaultValue={x?.ends_on ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tTime")}
+                  <input name="startTime" type="time" defaultValue={timeOf(x?.starts_at ?? null)} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tCity")}
+                  <input name="city" maxLength={80} defaultValue={x?.city ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tVenue")}
+                  <input name="venueName" maxLength={120} defaultValue={x?.venue_name ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tAddress")}
+                  <input name="venueAddress" maxLength={200} defaultValue={x?.venue_address ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm sm:col-span-2">{t("fields.tOrganizer")}
+                  <input name="organizer" maxLength={120} defaultValue={x?.organizer ?? ""} className={`mt-1 w-full ${input}`} />
+                  <span className="mt-1 block text-xs text-neutral-500">{t("fields.tOrganizerHint")}</span>
+                </label>
+                <label className="text-sm">{t("fields.tRegistration")}
+                  <select name="registration" defaultValue={x?.registration ?? "none"} className={`mt-1 w-full ${input}`}>
+                    {(["none", "internal", "external"] as const).map((v) => <option key={v} value={v}>{t(`tReg.${v}`)}</option>)}
+                  </select>
+                </label>
+                <label className="text-sm">{t("fields.tRegUrl")}
+                  <input name="registrationUrl" placeholder="https://mafgame.org/…" defaultValue={x?.registration_url ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tClosesAt")}
+                  <input name="closesAt" type="datetime-local" defaultValue={x?.registration_closes_at ? isoToLocalInput(x.registration_closes_at, club.timezone) : ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tCapacity")}
+                  <input name="capacity" type="number" min={1} max={1000} defaultValue={x?.capacity ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tPrice")}
+                  <input name="price" type="number" min={0} step="1" defaultValue={x?.price_czk ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <PhotoField clubId={club.id} initial={x?.cover_url ? [x.cover_url] : []} labels={{ label: t("fields.tCover"), hint: t("fields.logoHint"), upload: t("fields.uploadPhoto"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }} />
+                {(["cs", "ru", "uk", "en"] as const).map((l) => (
+                  <label key={l} className="text-sm sm:col-span-2">{t("fields.tDescription")} · {l.toUpperCase()}
+                    <textarea name={`description_${l}`} rows={4} maxLength={5000} defaultValue={x?.description[l] ?? ""} className={`mt-1 w-full ${input}`} />
+                  </label>
+                ))}
+              </>
+            );
+            return (
+              <section key={`tour-${club.id}`} id="tournaments">
+                <h2 className="text-xl font-bold">{t("tournamentsAdmin", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("tournamentsHint")}</p>
+                <div className="mt-4 max-w-3xl space-y-3">
+                  {tournaments.map((x) => (
+                    <details key={x.id} className="rounded border border-white/10">
+                      <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
+                        <span className="font-semibold">{x.name}</span>
+                        <span className="text-sm text-neutral-400">{x.starts_on}</span>
+                        <span className="flex-1" />
+                        <span className="rounded bg-white/10 px-2 py-0.5 text-xs">{t(`tStatuses.${x.status}`)}</span>
+                        {x.registration === "internal" && <span className="text-xs text-neutral-400">{t("tRegCount", { count: x.regs.length })}</span>}
+                      </summary>
+                      <div className="space-y-4 border-t border-white/10 p-4">
+                        {x.status !== "draft" && (
+                          <p className="text-sm">
+                            <Link href={{ pathname: "/tournaments/[slug]", params: { slug: x.slug } }} className="underline">{t("tOpenPage")}</Link>
+                          </p>
+                        )}
+                        {x.regs.length > 0 && (
+                          <p className="text-sm text-neutral-300">
+                            {x.regs.map((r) => (r.status === "waitlist" ? `(${r.nickname})` : r.nickname)).join(", ")}
+                          </p>
+                        )}
+                        <form action={saveTournament} className="grid gap-3 sm:grid-cols-2">
+                          <TFields x={x} />
+                          <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("save")}</button>
+                        </form>
+                        <form action={removeTournament}>
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="tournamentId" value={x.id} />
+                          <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                        </form>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+                <h3 className="mt-6 font-bold">{t("addTournament")}</h3>
+                <form action={saveTournament} className="mt-3 grid max-w-3xl gap-3 rounded border border-white/10 p-4 sm:grid-cols-2">
+                  <TFields />
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addTournament")}</button>
+                </form>
               </section>
             );
           }),

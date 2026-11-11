@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PARTNERS_TAG } from "@/lib/partners";
 import { HOSTS_TAG, HOST_LANGS } from "@/lib/hosts";
 import { TESTIMONIALS_TAG, EVENT_TYPES } from "@/lib/testimonials";
+import { TOURNAMENTS_TAG, SERIES } from "@/lib/tournaments";
 import { GAMES_TAG } from "@/lib/games";
 import { MATCHES_TAG } from "@/lib/players";
 import { TITLES_TAG } from "@/lib/badges";
@@ -688,5 +689,113 @@ export async function removeTestimonial(formData: FormData) {
   const { error } = await supabase.from("testimonials").delete().eq("id", id);
   if (error) console.error("removeTestimonial failed", { id, code: error.code, message: error.message });
   updateTag(TESTIMONIALS_TAG);
+  redirect(back);
+}
+
+// ---------------------------------------------------------------------------
+// Турниры (владелец/админ): анонс, даты, место, регистрация у нас или по ссылке.
+// ---------------------------------------------------------------------------
+
+const T_STATUSES = ["draft", "announced", "running", "finished", "cancelled"] as const;
+const T_REG = ["none", "external", "internal"] as const;
+
+function tSlug(name: string, startsOn: string) {
+  const base = name
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 50);
+  const year = startsOn.slice(0, 4);
+  return `${base || "turnaj"}-${year}`.replace(/^-/, "");
+}
+
+export async function saveTournament(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const id = int(formData.get("tournamentId"), 1, Number.MAX_SAFE_INTEGER);
+  const tz = String(formData.get("timezone") ?? "Europe/Prague");
+  const name = String(formData.get("name") ?? "").trim().slice(0, 120);
+  const seriesRaw = String(formData.get("series") ?? "club");
+  const statusRaw = String(formData.get("status") ?? "draft");
+  const regRaw = String(formData.get("registration") ?? "none");
+  const startsOn = String(formData.get("startsOn") ?? "");
+  const endsOn = String(formData.get("endsOn") ?? "") || null;
+  const time = String(formData.get("startTime") ?? "");
+  const closesRaw = String(formData.get("closesAt") ?? "");
+  const regUrlRaw = String(formData.get("registrationUrl") ?? "").trim();
+  const registration_url = regUrlRaw ? safeHttps(regUrlRaw.startsWith("http") ? regUrlRaw : `https://${regUrlRaw}`) : null;
+  const coverRaw = String(formData.get("images") ?? "").split("\n").map((x) => x.trim()).filter(Boolean)[0] ?? "";
+  const cover_url = coverRaw ? (LOCAL_IMG.test(coverRaw) ? coverRaw : safeHttps(coverRaw)) : null;
+  const capacity = int(formData.get("capacity"), 1, 1000);
+  const priceRaw = String(formData.get("price") ?? "").trim();
+  const price_czk = priceRaw === "" ? null : Number(priceRaw.replace(",", "."));
+  const description: Record<string, string> = {};
+  for (const l of PARTNER_LANGS) {
+    const v = String(formData.get(`description_${l}`) ?? "").trim().slice(0, 5000);
+    if (v) description[l] = v;
+  }
+  const date = /^\d{4}-\d{2}-\d{2}$/;
+  if (
+    !clubId || !name || !date.test(startsOn) || (endsOn && (!date.test(endsOn) || endsOn < startsOn)) ||
+    !(SERIES as readonly string[]).includes(seriesRaw) || !(T_STATUSES as readonly string[]).includes(statusRaw) ||
+    !(T_REG as readonly string[]).includes(regRaw) || (regUrlRaw && !registration_url) || (regRaw === "external" && !registration_url) ||
+    (coverRaw && !cover_url) || (price_czk !== null && (!Number.isFinite(price_czk) || price_czk < 0))
+  ) {
+    redirect(`${back}?error=invalid#tournaments`);
+  }
+  const starts_at = /^\d{2}:\d{2}$/.test(time) ? localInputToIso(`${startsOn}T${time}`, tz) : null;
+  const registration_closes_at = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(closesRaw) ? localInputToIso(closesRaw, tz) : null;
+
+  const row = {
+    name,
+    series: seriesRaw,
+    status: statusRaw,
+    starts_on: startsOn,
+    ends_on: endsOn,
+    starts_at,
+    city: String(formData.get("city") ?? "").trim().slice(0, 80) || null,
+    venue_name: String(formData.get("venueName") ?? "").trim().slice(0, 120) || null,
+    venue_address: String(formData.get("venueAddress") ?? "").trim().slice(0, 200) || null,
+    organizer: String(formData.get("organizer") ?? "").trim().slice(0, 120) || null,
+    description: Object.keys(description).length ? description : null,
+    cover_url,
+    registration: regRaw,
+    registration_url,
+    registration_closes_at,
+    capacity,
+    price_czk,
+  };
+  const supabase = await createClient();
+  let error;
+  if (id) {
+    ({ error } = await supabase.from("tournaments").update(row).eq("id", id));
+  } else {
+    let slug = tSlug(name, startsOn);
+    ({ error } = await supabase.from("tournaments").insert({ ...row, club_id: clubId, slug }));
+    if (error?.code === "23505") {
+      slug = `${slug}-${Math.random().toString(36).slice(2, 6)}`;
+      ({ error } = await supabase.from("tournaments").insert({ ...row, club_id: clubId, slug }));
+    }
+  }
+  if (error) {
+    console.error("saveTournament failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#tournaments`);
+  }
+  updateTag(TOURNAMENTS_TAG);
+  redirect(`${back}#tournaments`);
+}
+
+export async function removeTournament(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#tournaments`;
+  const id = int(formData.get("tournamentId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  const { error } = await supabase.from("tournaments").delete().eq("id", id);
+  if (error) console.error("removeTournament failed", { id, code: error.code, message: error.message });
+  updateTag(TOURNAMENTS_TAG);
   redirect(back);
 }
