@@ -3,10 +3,10 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, saveHost, removeHost, setRequestStatus, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubBans, getClubPartners, getClubHosts, getCorporateRequests, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubPartners, getClubHosts, getCorporateRequests, getClubTestimonials, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
@@ -358,7 +358,39 @@ export async function AdminHome({
         ctx.clubs
           .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
           .map(async (club) => {
-            const [requests, hosts] = await Promise.all([getCorporateRequests(club.id), getClubHosts(club.id)]);
+            const [requests, hosts, reviews] = await Promise.all([getCorporateRequests(club.id), getClubHosts(club.id), getClubTestimonials(club.id)]);
+            const ReviewFields = ({ r }: { r?: (typeof reviews)[number] }) => (
+              <>
+                <input type="hidden" name="locale" value={locale} />
+                <input type="hidden" name="clubId" value={club.id} />
+                {r && <input type="hidden" name="testimonialId" value={r.id} />}
+                <label className="text-sm">{t("fields.reviewAuthor")}
+                  <input name="author" required maxLength={80} defaultValue={r?.author ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.reviewCompany")}
+                  <input name="company" maxLength={120} defaultValue={r?.company ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.reviewEvent")}
+                  <select name="eventType" defaultValue={r?.event_type ?? ""} className={`mt-1 w-full ${input}`}>
+                    <option value="">—</option>
+                    {(["teambuilding", "party", "birthday", "office", "club", "other"] as const).map((f) => <option key={f} value={f}>{t(`formats.${f}`)}</option>)}
+                  </select>
+                </label>
+                <label className="text-sm">{t("fields.reviewDate")}
+                  <input name="eventDate" type="month" defaultValue={r?.event_date?.slice(0, 7) ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm sm:col-span-2">{t("fields.reviewBody")}
+                  <textarea name="body" required rows={4} maxLength={1500} defaultValue={r?.body ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <PhotoField clubId={club.id} initial={r?.photo_url ? [r.photo_url] : []} labels={{ label: t("fields.reviewPhoto"), hint: t("fields.logoHint"), upload: t("fields.uploadPhoto"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }} />
+                <label className="text-sm">{t("fields.sort")}
+                  <input name="sort" type="number" min={0} defaultValue={r?.sort ?? 100} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" name="active" defaultChecked={r?.active ?? true} className="h-4 w-4" /> {t("fields.reviewActive")}
+                </label>
+              </>
+            );
             const fmt = new Intl.DateTimeFormat(locale, { timeZone: club.timezone, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
             const HostFields = ({ h }: { h?: (typeof hosts)[number] }) => (
               <>
@@ -467,6 +499,38 @@ export async function AdminHome({
                   <form action={saveHost} className="mt-3 grid max-w-3xl gap-3 rounded border border-white/10 p-4 sm:grid-cols-2">
                     <HostFields />
                     <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addHost")}</button>
+                  </form>
+                </section>
+
+                <section id="testimonials">
+                  <h2 className="text-xl font-bold">{t("testimonials", { club: club.name })}</h2>
+                  <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("testimonialsHint")}</p>
+                  <div className="mt-4 max-w-3xl space-y-3">
+                    {reviews.map((r) => (
+                      <details key={r.id} className="rounded border border-white/10">
+                        <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
+                          <span className="font-semibold">{r.author}</span>
+                          <span className="flex-1 truncate text-sm text-neutral-400">{r.company ?? (r.event_type ? t(`formats.${r.event_type}`) : "")}</span>
+                          {!r.active && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
+                        </summary>
+                        <div className="border-t border-white/10 p-4">
+                          <form action={saveTestimonial} className="grid gap-3 sm:grid-cols-2">
+                            <ReviewFields r={r} />
+                            <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("save")}</button>
+                          </form>
+                          <form action={removeTestimonial} className="mt-3">
+                            <input type="hidden" name="locale" value={locale} />
+                            <input type="hidden" name="testimonialId" value={r.id} />
+                            <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                          </form>
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                  <h3 className="mt-6 font-bold">{t("addTestimonial")}</h3>
+                  <form action={saveTestimonial} className="mt-3 grid max-w-3xl gap-3 rounded border border-white/10 p-4 sm:grid-cols-2">
+                    <ReviewFields />
+                    <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addTestimonial")}</button>
                   </form>
                 </section>
               </div>

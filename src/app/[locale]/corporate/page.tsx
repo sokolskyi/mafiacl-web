@@ -6,6 +6,8 @@ import { getHosts } from "@/lib/hosts";
 import { Link } from "@/i18n/navigation";
 import { HostCards } from "@/components/HostCards";
 import { CorporateForm } from "@/components/corporate/CorporateForm";
+import { Testimonials } from "@/components/corporate/Testimonials";
+import { getTestimonials } from "@/lib/testimonials";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/corporate">) {
   const { locale } = (await params) as { locale: Locale };
@@ -23,7 +25,7 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "corporate" });
   const p = await getTranslations({ locale, namespace: "pages" });
-  const hosts = await getHosts(MAIN_CLUB_SLUG);
+  const [hosts, reviews] = await Promise.all([getHosts(MAIN_CLUB_SLUG), getTestimonials(MAIN_CLUB_SLUG)]);
   const h2 = "font-display text-4xl font-extrabold uppercase sm:text-5xl";
 
   return (
@@ -102,6 +104,13 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
           </ol>
         </div>
       </section>
+
+      {reviews.length > 0 && (
+        <section id="reviews" className="mt-20 scroll-mt-24" aria-labelledby="reviews-title">
+          <h2 id="reviews-title" className={h2}>{t("reviewsTitle")}</h2>
+          <Testimonials items={reviews} locale={locale} />
+        </section>
+      )}
 
       <section id="hosts" className="mt-20 scroll-mt-24" aria-labelledby="hosts-title">
         <h2 id="hosts-title" className={h2}>{t("hostsTitle")}</h2>

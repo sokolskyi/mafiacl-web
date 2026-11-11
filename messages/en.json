@@ -258,7 +258,14 @@
       "hostPhoto": "Photo",
       "uploadPhoto": "Upload photo",
       "hostBio": "A few words about them",
-      "sort": "Order (lower = higher)"
+      "sort": "Order (lower = higher)",
+      "reviewAuthor": "Author's name",
+      "reviewCompany": "Company (optional)",
+      "reviewEvent": "Occasion",
+      "reviewDate": "When (month)",
+      "reviewBody": "Review text",
+      "reviewPhoto": "Author's photo",
+      "reviewActive": "Show on the website"
     },
     "status": {
       "draft": "Draft",
@@ -378,7 +385,11 @@
       "club": "I already run a mafia club",
       "player": "I play mafia",
       "new": "No experience yet"
-    }
+    },
+    "testimonials": "Company event reviews — {club}",
+    "testimonialsHint": "Shown on the company mafia page. Company is optional: for a birthday, a name and the occasion are enough.",
+    "addTestimonial": "Add review",
+    "hiddenItem": "hidden"
   },
   "match": {
     "matches": "Games tonight",
@@ -883,7 +894,8 @@
         "tooMany": "Too many requests in a row. Try again later or contact us directly.",
         "save": "Could not send. Please try again."
       }
-    }
+    },
+    "reviewsTitle": "Reviews"
   },
   "hosts": {
     "empty": "Our hosts will appear here soon.",

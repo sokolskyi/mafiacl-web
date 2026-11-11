@@ -7,6 +7,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { PARTNERS_TAG } from "@/lib/partners";
 import { HOSTS_TAG, HOST_LANGS } from "@/lib/hosts";
+import { TESTIMONIALS_TAG, EVENT_TYPES } from "@/lib/testimonials";
 import { GAMES_TAG } from "@/lib/games";
 import { MATCHES_TAG } from "@/lib/players";
 import { TITLES_TAG } from "@/lib/badges";
@@ -640,5 +641,52 @@ export async function setRequestStatus(formData: FormData) {
   const supabase = await createClient();
   const { error } = await supabase.from("corporate_requests").update({ status }).eq("id", id);
   if (error) console.error("setRequestStatus failed", { id, code: error.code, message: error.message });
+  redirect(back);
+}
+
+// ---------------------------------------------------------------------------
+// Отзывы о корпоративах (владелец/админ).
+// ---------------------------------------------------------------------------
+
+export async function saveTestimonial(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const id = int(formData.get("testimonialId"), 1, Number.MAX_SAFE_INTEGER);
+  const author = String(formData.get("author") ?? "").trim().slice(0, 80);
+  const body = String(formData.get("body") ?? "").trim().slice(0, 1500);
+  const company = String(formData.get("company") ?? "").trim().slice(0, 120) || null;
+  const typeRaw = String(formData.get("eventType") ?? "");
+  const event_type = (EVENT_TYPES as readonly string[]).includes(typeRaw) ? typeRaw : null;
+  const dateRaw = String(formData.get("eventDate") ?? "");
+  const event_date = /^\d{4}-\d{2}$/.test(dateRaw) ? `${dateRaw}-01` : /^\d{4}-\d{2}-\d{2}$/.test(dateRaw) ? dateRaw : null;
+  const photoRaw = String(formData.get("images") ?? "").split("\n").map((x) => x.trim()).filter(Boolean)[0] ?? "";
+  const photo = photoRaw ? (LOCAL_IMG.test(photoRaw) ? photoRaw : safeHttps(photoRaw)) : null;
+  const sort = int(formData.get("sort"), 0, 100000) ?? 100;
+  const active = formData.get("active") === "on";
+  if (!clubId || !author || !body || (photoRaw && !photo)) redirect(`${back}?error=invalid#testimonials`);
+
+  const supabase = await createClient();
+  const row = { author, body, company, event_type, event_date, photo_url: photo, sort, active };
+  const { error } = id
+    ? await supabase.from("testimonials").update(row).eq("id", id)
+    : await supabase.from("testimonials").insert({ ...row, club_id: clubId });
+  if (error) {
+    console.error("saveTestimonial failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#testimonials`);
+  }
+  updateTag(TESTIMONIALS_TAG);
+  redirect(`${back}#testimonials`);
+}
+
+export async function removeTestimonial(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#testimonials`;
+  const id = int(formData.get("testimonialId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  const { error } = await supabase.from("testimonials").delete().eq("id", id);
+  if (error) console.error("removeTestimonial failed", { id, code: error.code, message: error.message });
+  updateTag(TESTIMONIALS_TAG);
   redirect(back);
 }

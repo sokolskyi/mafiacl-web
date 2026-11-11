@@ -258,7 +258,14 @@
       "hostPhoto": "Fotka",
       "uploadPhoto": "Nahrát fotku",
       "hostBio": "Pár slov o sobě",
-      "sort": "Pořadí (méně = výš)"
+      "sort": "Pořadí (méně = výš)",
+      "reviewAuthor": "Jméno autora",
+      "reviewCompany": "Firma (nepovinné)",
+      "reviewEvent": "Příležitost",
+      "reviewDate": "Kdy (měsíc)",
+      "reviewBody": "Text recenze",
+      "reviewPhoto": "Fotka autora",
+      "reviewActive": "Zobrazit na webu"
     },
     "status": {
       "draft": "Koncept",
@@ -378,7 +385,11 @@
       "club": "Už mám klub mafie",
       "player": "Hraji mafii",
       "new": "Zatím bez zkušeností"
-    }
+    },
+    "testimonials": "Recenze firemních akcí — {club}",
+    "testimonialsHint": "Zobrazují se na stránce firemní mafie. Firma je nepovinná: u narozenin stačí jméno a příležitost.",
+    "addTestimonial": "Přidat recenzi",
+    "hiddenItem": "skrytá"
   },
   "match": {
     "matches": "Hry večera",
@@ -883,7 +894,8 @@
         "tooMany": "Příliš mnoho poptávek za sebou. Zkuste to později nebo nám napište přímo.",
         "save": "Odeslání se nezdařilo. Zkuste to znovu."
       }
-    }
+    },
+    "reviewsTitle": "Recenze"
   },
   "hosts": {
     "empty": "Brzy tu budou moderátoři.",
