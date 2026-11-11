@@ -45,6 +45,12 @@ export async function AdminHome({
         </p>
       )}
 
+      <p>
+        <Link href="/admin/shop" className="inline-flex min-h-11 items-center rounded-full border border-white/55 px-5 font-semibold hover:bg-white/10">
+          {t("shopLink")}
+        </Link>
+      </p>
+
       <section>
         <h2 className="text-xl font-bold">{t("games")}</h2>
         <ul className="mt-4 divide-y divide-white/10 rounded border border-white/10">

@@ -21,6 +21,14 @@ export const routing = defineRouting({
     "/blog": "/blog",
     "/gallery": { cs: "/galerie", ru: "/galereya", uk: "/halereia", en: "/gallery" },
     "/shop": { cs: "/obchod", ru: "/magazin", uk: "/mahazyn", en: "/shop" },
+    "/shop/cart": { cs: "/obchod/kosik", ru: "/magazin/korzina", uk: "/mahazyn/kosh", en: "/shop/cart" },
+    "/shop/orders/[id]": {
+      cs: "/obchod/objednavky/[id]",
+      ru: "/magazin/zakazy/[id]",
+      uk: "/mahazyn/zamovlennia/[id]",
+      en: "/shop/orders/[id]",
+    },
+    "/shop/[slug]": { cs: "/obchod/[slug]", ru: "/magazin/[slug]", uk: "/mahazyn/[slug]", en: "/shop/[slug]" },
     "/corporate": {
       cs: "/firemni-mafie",
       ru: "/korporativnaya-mafiya",
@@ -37,6 +45,7 @@ export const routing = defineRouting({
     "/account": { cs: "/ucet", ru: "/kabinet", uk: "/kabinet", en: "/account" },
     "/players/[nick]": { cs: "/hraci/[nick]", ru: "/igroki/[nick]", uk: "/hravtsi/[nick]", en: "/players/[nick]" },
     "/admin": "/admin",
+    "/admin/shop": "/admin/shop",
     "/admin/games/[id]": "/admin/games/[id]",
     "/admin/matches/[id]": "/admin/matches/[id]",
   },

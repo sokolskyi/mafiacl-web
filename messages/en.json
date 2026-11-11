@@ -65,7 +65,7 @@
     },
     "shop": {
       "title": "Shop",
-      "description": "Passes, gift vouchers and club merch."
+      "description": "Memberships, merch and gifts from the club."
     },
     "corporate": {
       "title": "Corporate mafia in Prague",
@@ -300,7 +300,8 @@
     },
     "prizes": "Prizes · {club}",
     "prizesHint": "Cash prizes for players: season final, MafiaCl Arena rounds, etc. Shown on the player page and in the hall of fame.",
-    "addPrize": "Add prize"
+    "addPrize": "Add prize",
+    "shopLink": "Shop: products and orders"
   },
   "match": {
     "matches": "Games tonight",
@@ -540,5 +541,111 @@
     "evenings": "Mini tournament wins",
     "prize": "Prize money",
     "legend": "⭐ — Premier League season champion, 👑 — MafiaCL Kings winner, ⚜️ — mini tournament wins (since season V, from the electronic sheet)."
+  },
+  "shop": {
+    "soldOut": "Sold out",
+    "choose": "Choose an option",
+    "fewLeft": "{count} left",
+    "addToCart": "Add to cart",
+    "added": "Added to cart",
+    "goToCart": "Go to cart",
+    "cart": "Cart",
+    "toShop": "Back to shop",
+    "empty": "No products yet — coming soon.",
+    "cartEmpty": "Your cart is empty.",
+    "qty": "Quantity",
+    "less": "Less",
+    "more": "More",
+    "remove": "Remove",
+    "clear": "Clear cart",
+    "total": "Total",
+    "placeOrder": "Place order",
+    "signInToOrder": "Sign in to place an order.",
+    "signIn": "Sign in",
+    "membershipNote": "A membership is activated automatically once the order is paid.",
+    "errors": {
+      "stock": "Some items ran out. Update your cart and try again.",
+      "gone": "One of the items is no longer available.",
+      "save": "Could not place the order. Please try again."
+    },
+    "order": "Order #{id}",
+    "status": {
+      "pending": "Awaiting payment",
+      "paid": "Paid",
+      "fulfilled": "Handed over",
+      "cancelled": "Cancelled"
+    },
+    "orderPlaced": "Order placed.",
+    "orderPaid": "Payment received. Thank you!",
+    "pay": "Payment",
+    "payDemo": "Pay (test)",
+    "payDemoHint": "Test mode: no money is charged.",
+    "payOnline": "Online card payment is coming soon.",
+    "payOnSite": "Pay at the club — a staff member will mark the order as paid.",
+    "cancelOrder": "Cancel order",
+    "membershipActive": "Your membership is active.",
+    "toAccount": "Open account",
+    "pickup": "Pick up your order at the club at the next game."
+  },
+  "adminShop": {
+    "title": "Shop",
+    "signIn": "Sign in",
+    "noAccess": "No access.",
+    "back": "Back to admin",
+    "saved": "Saved.",
+    "orderPaid": "Payment recorded.",
+    "errors": {
+      "invalid": "Check the fields: Czech name, price, https:// image link and numeric stock are required.",
+      "duplicate": "A product with this name already exists.",
+      "save": "Could not save."
+    },
+    "orders": "Orders — {club}",
+    "noOrders": "No orders yet.",
+    "status": {
+      "pending": "Awaiting payment",
+      "paid": "Paid",
+      "fulfilled": "Handed over",
+      "cancelled": "Cancelled"
+    },
+    "pay": {
+      "cash": "Cash",
+      "card": "Card",
+      "transfer": "Transfer"
+    },
+    "method": "Payment method",
+    "markPaid": "Paid",
+    "cancel": "Cancel",
+    "fulfil": "Handed over",
+    "products": "Products — {club}",
+    "productsHint": "Open a product to change its price, description, stock or hide it. The form for a new product is below. The Czech name is required; other languages are optional.",
+    "kindMerch": "Merch",
+    "kindMembership": "Membership",
+    "active": "visible",
+    "hidden": "hidden",
+    "hide": "Hide from shop",
+    "show": "Show in shop",
+    "addProduct": "New product",
+    "add": "Add product",
+    "save": "Save",
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "price": "Price, Kč",
+      "sort": "Order (lower = higher)",
+      "image": "Photo link",
+      "imageHint": "Image address starting with https://.",
+      "kind": "Type",
+      "plan": "Membership term",
+      "planHint": "Memberships only.",
+      "variants": "Variants and stock",
+      "variantsHint": "One per line: “M = 5”. No number — stock not tracked. Empty — a single variant.",
+      "stockNow": "stock: {count}",
+      "active": "Show in shop"
+    },
+    "plans": {
+      "month": "1 month",
+      "quarter": "3 months",
+      "year": "Year (until 31 Dec)"
+    }
   }
 }

@@ -65,7 +65,7 @@
     },
     "shop": {
       "title": "Obchod",
-      "description": "Permanentky, dárkové poukazy a merch klubu."
+      "description": "Permanentky, merch a dárky z klubu."
     },
     "corporate": {
       "title": "Firemní mafie v Praze",
@@ -300,7 +300,8 @@
     },
     "prizes": "Výhry · {club}",
     "prizesHint": "Peněžní výhry hráčům: finále sezóny, kola MafiaCl Arena apod. Zobrazí se v profilu hráče a v síni slávy.",
-    "addPrize": "Přidat výhru"
+    "addPrize": "Přidat výhru",
+    "shopLink": "Obchod: produkty a objednávky"
   },
   "match": {
     "matches": "Hry večera",
@@ -540,5 +541,111 @@
     "evenings": "Výhry v mini-turnajích",
     "prize": "Výhry",
     "legend": "⭐ — šampion sezóny Premier League, 👑 — vítěz MafiaCL Kings, ⚜️ — výhry v mini-turnajích (od V. sezóny, podle elektronického zápisu)."
+  },
+  "shop": {
+    "soldOut": "Vyprodáno",
+    "choose": "Vyberte variantu",
+    "fewLeft": "Zbývá {count}",
+    "addToCart": "Do košíku",
+    "added": "Přidáno do košíku",
+    "goToCart": "Přejít do košíku",
+    "cart": "Košík",
+    "toShop": "Zpět do obchodu",
+    "empty": "Zatím tu nic není — brzy přibude.",
+    "cartEmpty": "Košík je prázdný.",
+    "qty": "Množství",
+    "less": "Méně",
+    "more": "Více",
+    "remove": "Odebrat",
+    "clear": "Vyprázdnit košík",
+    "total": "Celkem",
+    "placeOrder": "Objednat",
+    "signInToOrder": "Pro objednávku se přihlaste.",
+    "signIn": "Přihlásit se",
+    "membershipNote": "Permanentka se aktivuje automaticky po zaplacení objednávky.",
+    "errors": {
+      "stock": "Něco došlo. Aktualizujte košík a zkuste to znovu.",
+      "gone": "Jedna z položek už není k dispozici.",
+      "save": "Objednávku se nepodařilo vytvořit. Zkuste to znovu."
+    },
+    "order": "Objednávka č. {id}",
+    "status": {
+      "pending": "Čeká na zaplacení",
+      "paid": "Zaplaceno",
+      "fulfilled": "Vydáno",
+      "cancelled": "Zrušeno"
+    },
+    "orderPlaced": "Objednávka vytvořena.",
+    "orderPaid": "Platba proběhla. Děkujeme!",
+    "pay": "Platba",
+    "payDemo": "Zaplatit (test)",
+    "payDemoHint": "Testovací režim: peníze se nestrhávají.",
+    "payOnline": "Platba kartou online bude brzy k dispozici.",
+    "payOnSite": "Zaplaťte v klubu — obsluha platbu označí.",
+    "cancelOrder": "Zrušit objednávku",
+    "membershipActive": "Permanentka je aktivní.",
+    "toAccount": "Otevřít účet",
+    "pickup": "Objednávku si vyzvedněte v klubu na nejbližší hře."
+  },
+  "adminShop": {
+    "title": "Obchod",
+    "signIn": "Přihlásit se",
+    "noAccess": "Bez přístupu.",
+    "back": "Zpět do administrace",
+    "saved": "Uloženo.",
+    "orderPaid": "Platba zaznamenána.",
+    "errors": {
+      "invalid": "Zkontrolujte pole: český název, cena, odkaz na fotku s https:// a čísla skladu.",
+      "duplicate": "Produkt s tímto názvem už existuje.",
+      "save": "Uložení se nezdařilo."
+    },
+    "orders": "Objednávky — {club}",
+    "noOrders": "Zatím žádné objednávky.",
+    "status": {
+      "pending": "Čeká na zaplacení",
+      "paid": "Zaplaceno",
+      "fulfilled": "Vydáno",
+      "cancelled": "Zrušeno"
+    },
+    "pay": {
+      "cash": "Hotově",
+      "card": "Kartou",
+      "transfer": "Převodem"
+    },
+    "method": "Způsob platby",
+    "markPaid": "Zaplaceno",
+    "cancel": "Zrušit",
+    "fulfil": "Vydáno",
+    "products": "Produkty — {club}",
+    "productsHint": "Rozbalte produkt a změňte cenu, popis, sklad nebo ho skryjte. Níže je formulář pro nový produkt. Český název je povinný, ostatní jazyky nepovinné.",
+    "kindMerch": "Merch",
+    "kindMembership": "Permanentka",
+    "active": "viditelný",
+    "hidden": "skrytý",
+    "hide": "Skrýt z obchodu",
+    "show": "Zobrazit v obchodě",
+    "addProduct": "Nový produkt",
+    "add": "Přidat produkt",
+    "save": "Uložit",
+    "fields": {
+      "name": "Název",
+      "description": "Popis",
+      "price": "Cena, Kč",
+      "sort": "Pořadí (méně = výš)",
+      "image": "Odkaz na fotku",
+      "imageHint": "Adresa obrázku začínající https://.",
+      "kind": "Typ",
+      "plan": "Délka permanentky",
+      "planHint": "Jen pro permanentky.",
+      "variants": "Varianty a sklad",
+      "variantsHint": "Jedna na řádek: „M = 5“. Bez čísla — sklad se nesleduje. Prázdné — jedna varianta.",
+      "stockNow": "sklad: {count}",
+      "active": "Zobrazit v obchodě"
+    },
+    "plans": {
+      "month": "1 měsíc",
+      "quarter": "3 měsíce",
+      "year": "Rok (do 31. 12.)"
+    }
   }
 }
