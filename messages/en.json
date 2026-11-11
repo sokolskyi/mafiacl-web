@@ -335,7 +335,7 @@
     "partners": "Partners — {club}",
     "partnersHint": "Shown on the Partners page. Open a partner to edit or remove it.",
     "addPartner": "Add partner",
-    "requests": "Company event requests — {club}",
+    "requests": "Requests — {club}",
     "noRequests": "No requests yet.",
     "requestStatus": "Status",
     "requestStatuses": {
@@ -361,6 +361,20 @@
       "ru": "Russian",
       "uk": "Ukrainian",
       "en": "English"
+    },
+    "requestKinds": {
+      "corporate": "Company event",
+      "franchise": "Franchise"
+    },
+    "venueKinds": {
+      "yes": "I have one",
+      "looking": "Looking",
+      "no": "Not yet"
+    },
+    "expKinds": {
+      "club": "I already run a mafia club",
+      "player": "I play mafia",
+      "new": "No experience yet"
     }
   },
   "match": {
@@ -884,6 +898,127 @@
       "ru": "RU",
       "uk": "UA",
       "en": "EN"
+    }
+  },
+  "franchise": {
+    "kicker": "MafiaCL franchise",
+    "lead": "Open a sports mafia club in your city — with our brand, a ready-made club platform and the experience of a Prague club that has been playing since 2011.",
+    "cta": "Send a request",
+    "getTitle": "What you get",
+    "get": {
+      "0": {
+        "title": "Brand and style",
+        "text": "Logo, visual identity, masks, role cards, merch and social media templates."
+      },
+      "1": {
+        "title": "Club platform",
+        "text": "A club page on the website, schedule and game sign-ups, a Telegram bot with reminders, a digital game sheet with a host screen and stream overlay, ratings and seasons, a shop and memberships with online payment."
+      },
+      "2": {
+        "title": "Host training",
+        "text": "We train your hosts to club standards and let them practise at games in Prague."
+      },
+      "3": {
+        "title": "Tournaments and league",
+        "text": "Your players join the network's shared rating and tournaments: Premier League, Kings, Champions League."
+      },
+      "4": {
+        "title": "Launch and marketing",
+        "text": "We help with the first games, announcements and your first players."
+      },
+      "5": {
+        "title": "Support",
+        "text": "We're on hand for rules, judging, the platform and events."
+      }
+    },
+    "incomeTitle": "Where a club's income comes from",
+    "income": {
+      "0": "Regular games and memberships",
+      "1": "Tournaments",
+      "2": "Company and private events",
+      "3": "Merch: T-shirts, masks, mugs",
+      "4": "Training and kids' mafia"
+    },
+    "needTitle": "What we need from you",
+    "need": {
+      "0": "A venue or partner space: a bar, café or anti-café",
+      "1": "A team: you and one or two future hosts",
+      "2": "Willingness to learn and play to club standards",
+      "3": "A starting budget for props and launch"
+    },
+    "stepsTitle": "How to open a club",
+    "steps": {
+      "0": {
+        "title": "Request and call",
+        "text": "We get to know each other and talk about your city and plans."
+      },
+      "1": {
+        "title": "Contract and venue",
+        "text": "We agree terms and pick a place to play."
+      },
+      "2": {
+        "title": "Training",
+        "text": "We train the hosts and set up the club platform."
+      },
+      "3": {
+        "title": "First game",
+        "text": "We run the opening together with you."
+      },
+      "4": {
+        "title": "Regular games and league",
+        "text": "The club plays on schedule and joins network tournaments."
+      }
+    },
+    "priceTitle": "Terms",
+    "price": "Terms and pricing are agreed individually — they depend on the city and the club format. Send a request and we'll explain everything on a call.",
+    "faqTitle": "FAQ",
+    "faq": {
+      "0": {
+        "q": "Do I need mafia experience?",
+        "a": "No. We train you and your hosts, and run the first games together."
+      },
+      "1": {
+        "q": "How many people do I need to start?",
+        "a": "You and one or two hosts. We'll help you gather players at launch."
+      },
+      "2": {
+        "q": "Can the club run inside a bar or café?",
+        "a": "Yes — a partner venue is a common and convenient option."
+      },
+      "3": {
+        "q": "Which cities can I open in?",
+        "a": "We consider any city — in Czechia and beyond."
+      },
+      "4": {
+        "q": "How much does it cost?",
+        "a": "It depends on the city and format. We'll tell you on a call after your request."
+      }
+    },
+    "form": {
+      "title": "Franchise request",
+      "lead": "We'll get in touch to get to know you and discuss details.",
+      "name": "Your name",
+      "contact": "Phone, e-mail or Telegram",
+      "city": "City",
+      "venue": "Venue",
+      "venueYes": "I have one",
+      "venueLooking": "Looking",
+      "venueNo": "Not yet",
+      "experience": "Experience",
+      "expClub": "I already run a mafia club",
+      "expPlayer": "I play mafia",
+      "expNew": "No experience yet",
+      "choose": "Not specified",
+      "message": "Tell us about yourself and your plans",
+      "send": "Send request",
+      "sending": "Sending…",
+      "sent": "Thank you! We've got your request and will be in touch soon.",
+      "consent": "By sending the request you agree that we contact you via the details provided.",
+      "errors": {
+        "invalid": "Please add your name, a contact and the city.",
+        "tooMany": "Too many requests in a row. Try again later or contact us directly.",
+        "save": "Could not send. Please try again."
+      }
     }
   }
 }

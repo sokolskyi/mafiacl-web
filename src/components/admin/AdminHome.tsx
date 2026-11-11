@@ -406,13 +406,22 @@ export async function AdminHome({
                     {requests.map((r) => (
                       <li key={r.id} className="space-y-1 px-4 py-3">
                         <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                          <span className={`rounded px-2 py-0.5 text-xs font-semibold ${r.kind === "franchise" ? "bg-amber-500/20 text-amber-200" : "bg-white/10"}`}>{t(`requestKinds.${r.kind}`)}</span>
                           <span className="font-bold">{r.name}</span>
+                          {r.city && <span className="text-neutral-300">{r.city}</span>}
                           {r.company && <span className="text-neutral-300">{r.company}</span>}
                           <span className="font-mono text-sm">{r.contact}</span>
                           <span className="ml-auto text-xs text-neutral-500">{fmt.format(new Date(r.created_at))}</span>
                         </div>
                         <p className="text-sm text-neutral-400">
-                          {[r.event_date, r.guests ? t("guestsN", { count: r.guests }) : null, r.format ? t(`formats.${r.format}`) : null, r.language ? t(`langs.${r.language}`) : null].filter(Boolean).join(" · ")}
+                          {[
+                            r.event_date,
+                            r.guests ? t("guestsN", { count: r.guests }) : null,
+                            r.format ? t(`formats.${r.format}`) : null,
+                            r.language ? t(`langs.${r.language}`) : null,
+                            (r.details as { venue?: string } | null)?.venue ? t(`venueKinds.${(r.details as { venue: string }).venue}`) : null,
+                            (r.details as { experience?: string } | null)?.experience ? t(`expKinds.${(r.details as { experience: string }).experience}`) : null,
+                          ].filter(Boolean).join(" · ")}
                         </p>
                         {r.message && <p className="whitespace-pre-line text-sm text-neutral-300">{r.message}</p>}
                         <form action={setRequestStatus} className="flex items-center gap-2 pt-1">

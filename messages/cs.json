@@ -335,7 +335,7 @@
     "partners": "Partneři — {club}",
     "partnersHint": "Zobrazují se na stránce Partneři. Rozbalte partnera pro úpravu nebo smazání.",
     "addPartner": "Přidat partnera",
-    "requests": "Poptávky firemních akcí — {club}",
+    "requests": "Poptávky — {club}",
     "noRequests": "Zatím žádné poptávky.",
     "requestStatus": "Stav",
     "requestStatuses": {
@@ -361,6 +361,20 @@
       "ru": "ruština",
       "uk": "ukrajinština",
       "en": "angličtina"
+    },
+    "requestKinds": {
+      "corporate": "Firemní akce",
+      "franchise": "Franšíza"
+    },
+    "venueKinds": {
+      "yes": "Mám",
+      "looking": "Hledám",
+      "no": "Zatím ne"
+    },
+    "expKinds": {
+      "club": "Už mám klub mafie",
+      "player": "Hraji mafii",
+      "new": "Zatím bez zkušeností"
     }
   },
   "match": {
@@ -884,6 +898,127 @@
       "ru": "RU",
       "uk": "UA",
       "en": "EN"
+    }
+  },
+  "franchise": {
+    "kicker": "Franšíza MafiaCL",
+    "lead": "Otevřete klub sportovní mafie ve svém městě — se značkou, hotovou platformou klubu a zkušenostmi pražského klubu, který hraje od roku 2011.",
+    "cta": "Poslat poptávku",
+    "getTitle": "Co získáte",
+    "get": {
+      "0": {
+        "title": "Značka a styl",
+        "text": "Logo, vizuální styl, masky, karty rolí, merch a šablony pro sociální sítě."
+      },
+      "1": {
+        "title": "Platforma klubu",
+        "text": "Stránka klubu na webu, rozpis a přihlašování na hry, Telegram bot s připomínkami, elektronický herní list s obrazovkou moderátora a přenosem, žebříčky a sezóny, obchod a permanentky s online platbou."
+      },
+      "2": {
+        "title": "Školení moderátorů",
+        "text": "Připravíme vaše moderátory podle standardů klubu a dáme jim praxi na hrách v Praze."
+      },
+      "3": {
+        "title": "Turnaje a liga",
+        "text": "Vaši hráči se dostanou do společného žebříčku a turnajů sítě: Premier League, Kings, Champions League."
+      },
+      "4": {
+        "title": "Start a marketing",
+        "text": "Pomůžeme s prvními hrami, ohlášením a prvními hráči."
+      },
+      "5": {
+        "title": "Podpora",
+        "text": "Jsme k dispozici pro pravidla, rozhodování, platformu i akce."
+      }
+    },
+    "incomeTitle": "Z čeho má klub příjmy",
+    "income": {
+      "0": "Pravidelné hry a permanentky",
+      "1": "Turnaje",
+      "2": "Firemní a soukromé akce",
+      "3": "Merch: trička, masky, hrnky",
+      "4": "Školení a dětská mafie"
+    },
+    "needTitle": "Co potřebujeme od vás",
+    "need": {
+      "0": "Prostor nebo partnerský podnik: bar, kavárna, antikavárna",
+      "1": "Tým: vy a jeden až dva budoucí moderátoři",
+      "2": "Chuť se učit a hrát podle standardů klubu",
+      "3": "Počáteční rozpočet na rekvizity a start"
+    },
+    "stepsTitle": "Jak otevřít klub",
+    "steps": {
+      "0": {
+        "title": "Poptávka a hovor",
+        "text": "Seznámíme se a probereme město a vaše plány."
+      },
+      "1": {
+        "title": "Smlouva a prostor",
+        "text": "Domluvíme podmínky a vybereme místo pro hry."
+      },
+      "2": {
+        "title": "Školení",
+        "text": "Připravíme moderátory a nastavíme platformu klubu."
+      },
+      "3": {
+        "title": "První hra",
+        "text": "Otevření proběhne společně s vámi."
+      },
+      "4": {
+        "title": "Pravidelné hry a liga",
+        "text": "Klub hraje podle rozpisu a účastní se turnajů sítě."
+      }
+    },
+    "priceTitle": "Podmínky",
+    "price": "Podmínky a cenu domlouváme individuálně — záleží na městě a formátu klubu. Pošlete poptávku a vše vysvětlíme na hovoru.",
+    "faqTitle": "Časté dotazy",
+    "faq": {
+      "0": {
+        "q": "Potřebuji zkušenost s mafií?",
+        "a": "Ne. Vás i moderátory zaškolíme a první hry povedeme spolu."
+      },
+      "1": {
+        "q": "Kolik lidí je potřeba na start?",
+        "a": "Vy a jeden až dva moderátoři. S prvními hráči pomůžeme."
+      },
+      "2": {
+        "q": "Lze klub spojit s barem nebo kavárnou?",
+        "a": "Ano, partnerský podnik je častá a praktická varianta."
+      },
+      "3": {
+        "q": "Ve kterých městech lze klub otevřít?",
+        "a": "Zvažujeme jakékoli město — v Česku i v zahraničí."
+      },
+      "4": {
+        "q": "Kolik to stojí?",
+        "a": "Záleží na městě a formátu. Řekneme vám to na hovoru po poptávce."
+      }
+    },
+    "form": {
+      "title": "Poptávka franšízy",
+      "lead": "Ozveme se, abychom se seznámili a probrali detaily.",
+      "name": "Vaše jméno",
+      "contact": "Telefon, e-mail nebo Telegram",
+      "city": "Město",
+      "venue": "Prostor",
+      "venueYes": "Mám",
+      "venueLooking": "Hledám",
+      "venueNo": "Zatím ne",
+      "experience": "Zkušenost",
+      "expClub": "Už mám klub mafie",
+      "expPlayer": "Hraji mafii",
+      "expNew": "Zatím bez zkušeností",
+      "choose": "Neuvedeno",
+      "message": "Napište něco o sobě a plánech",
+      "send": "Odeslat poptávku",
+      "sending": "Odesíláme…",
+      "sent": "Děkujeme! Poptávku máme a brzy se ozveme.",
+      "consent": "Odesláním souhlasíte, že vás budeme kontaktovat na uvedený kontakt.",
+      "errors": {
+        "invalid": "Vyplňte jméno, kontakt a město.",
+        "tooMany": "Příliš mnoho poptávek za sebou. Zkuste to později nebo nám napište přímo.",
+        "save": "Odeslání se nezdařilo. Zkuste to znovu."
+      }
     }
   }
 }

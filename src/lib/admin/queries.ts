@@ -273,7 +273,7 @@ export async function getCorporateRequests(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("corporate_requests")
-    .select("id, name, company, contact, event_date, guests, format, language, message, status, created_at")
+    .select("id, kind, city, details, name, company, contact, event_date, guests, format, language, message, status, created_at")
     .eq("club_id", clubId)
     .order("created_at", { ascending: false })
     .limit(30);
