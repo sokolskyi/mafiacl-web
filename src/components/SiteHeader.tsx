@@ -11,7 +11,7 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/15 bg-neutral-950/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:gap-6">
         <Link href="/" className="flex-none" aria-label="MafiaCL">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width={112} height={40} className="h-10 w-auto" />
@@ -26,6 +26,11 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
                 {t(key)}
               </Link>
             ))}
+            <div className="mt-1 border-t border-white/15 px-3 py-3 sm:hidden">
+              <Suspense fallback={<span className="block w-[148px]" aria-hidden="true" />}>
+                <LocaleSwitcher label={c("language")} />
+              </Suspense>
+            </div>
           </nav>
         </details>
         <nav aria-label={c("menu")} className="hidden flex-1 gap-x-5 text-sm xl:flex">
@@ -37,9 +42,11 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
         </nav>
         <div className="ml-auto flex items-center gap-3">
           {/* Переключатель читает адрес страницы — на динамических страницах он догружается. */}
-          <Suspense fallback={<span className="w-[148px]" aria-hidden="true" />}>
-            <LocaleSwitcher label={c("language")} />
-          </Suspense>
+          <div className="hidden sm:block">
+            <Suspense fallback={<span className="block w-[148px]" aria-hidden="true" />}>
+              <LocaleSwitcher label={c("language")} />
+            </Suspense>
+          </div>
           <Link
             href="/account"
             className="inline-flex min-h-11 items-center rounded-full border border-white/55 px-5 text-sm font-semibold hover:bg-white/10"
