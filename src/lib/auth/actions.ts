@@ -106,7 +106,7 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
 export type EmailState = {
   step: "email" | "code";
   email?: string;
-  error?: "invalidEmail" | "tooMany" | "invalidCode" | "error";
+  error?: "invalidEmail" | "tooMany" | "invalidCode" | "captcha" | "error";
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -116,6 +116,7 @@ export async function sendEmailCode(_prev: EmailState, formData: FormData): Prom
   const locale = toLocale(formData.get("locale"));
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   if (!EMAIL_RE.test(email) || email.length > 254) return { step: "email", error: "invalidEmail" };
+  const captchaToken = String(formData.get("captchaToken") ?? "").slice(0, 4096) || undefined;
 
   const next = getPathname({ href: "/account", locale });
   const supabase = await createClient();
@@ -123,13 +124,15 @@ export async function sendEmailCode(_prev: EmailState, formData: FormData): Prom
     email,
     options: {
       shouldCreateUser: true,
+      captchaToken,
       emailRedirectTo: `${await siteOrigin()}/auth/callback?next=${encodeURIComponent(next)}`,
     },
   });
   if (error) {
     const tooMany = error.status === 429 || error.code === "over_email_send_rate_limit";
-    if (!tooMany) console.error("sendEmailCode failed", { code: error.code, message: error.message });
-    return { step: "email", email, error: tooMany ? "tooMany" : "error" };
+    const captcha = error.code === "captcha_failed" || /captcha/i.test(error.message);
+    if (!tooMany && !captcha) console.error("sendEmailCode failed", { code: error.code, message: error.message });
+    return { step: "email", email, error: tooMany ? "tooMany" : captcha ? "captcha" : "error" };
   }
   return { step: "code", email };
 }

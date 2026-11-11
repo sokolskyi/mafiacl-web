@@ -148,7 +148,9 @@
     "botHint": "Reminders 3 hours before a game, a message when a seat opens up, and sign-up right in Telegram.",
     "botConnect": "Connect Telegram",
     "botOn": "Telegram connected",
-    "myPage": "My player page"
+    "myPage": "My player page",
+    "checkingBot": "Checking you're not a bot…",
+    "captcha": "The bot check failed. Reload the page and try again."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -174,7 +176,9 @@
     "info": "Tournament page",
     "queueOpen": "Pre-registration: {count} · line-up set {until}",
     "queueHint": "Pass holders go first. Confirmation comes on Monday; with 20 players there's a second table.",
-    "youAreQueued": "You're in the queue"
+    "youAreQueued": "You're in the queue",
+    "signupBanned": "You can't sign up for this club's games. Please contact the organiser.",
+    "signupError": "Sign-up failed. Please try again."
   },
   "admin": {
     "title": "Club admin",
@@ -229,7 +233,8 @@
       "titleLabel": "For",
       "titleLabelHint": "e.g. Season IV",
       "wonOn": "Date",
-      "prizeLabelHint": "e.g. Season V final, 1st place"
+      "prizeLabelHint": "e.g. Season V final, 1st place",
+      "reason": "Reason (visible to the team only)"
     },
     "status": {
       "draft": "Draft",
@@ -301,7 +306,11 @@
     "prizes": "Prizes · {club}",
     "prizesHint": "Cash prizes for players: season final, MafiaCl Arena rounds, etc. Shown on the player page and in the hall of fame.",
     "addPrize": "Add prize",
-    "shopLink": "Shop: products and orders"
+    "shopLink": "Shop: products and orders",
+    "bans": "Blocked players — {club}",
+    "bansHint": "A blocked player can't sign up for games (including via the bot) or place orders. Their future sign-ups and unpaid orders are removed at once.",
+    "ban": "Block",
+    "unban": "Unblock"
   },
   "match": {
     "matches": "Games tonight",
@@ -566,7 +575,9 @@
     "errors": {
       "stock": "Some items ran out. Update your cart and try again.",
       "gone": "One of the items is no longer available.",
-      "save": "Could not place the order. Please try again."
+      "save": "Could not place the order. Please try again.",
+      "pending": "You already have 3 unpaid orders. Pay for or cancel one of them.",
+      "banned": "Orders are closed for your account. Please contact the organiser."
     },
     "order": "Order #{id}",
     "status": {

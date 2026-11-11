@@ -459,3 +459,46 @@ export async function removePrize(formData: FormData) {
   updateTag(TITLES_TAG);
   redirect(back);
 }
+
+// ---------------------------------------------------------------------------
+// Блокировка игроков (владелец/админ): запись на игры и заказы закрыты,
+// будущие записи и неоплаченные заказы снимаются автоматически (это делает база).
+// ---------------------------------------------------------------------------
+
+export async function banPlayer(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const reason = String(formData.get("reason") ?? "").trim().slice(0, 200) || null;
+  if (!clubId || nickname.length < 2 || nickname.length > 32 || nickname.includes("*")) redirect(`${back}?error=invalid#bans`);
+
+  const supabase = await createClient();
+  const pattern = nickname.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const { data: found } = await supabase.from("profiles").select("id").ilike("nickname", pattern).limit(2);
+  if (!found || found.length !== 1) redirect(`${back}?error=noPlayer#bans`);
+
+  const { error } = await supabase.from("club_bans").insert({ club_id: clubId, profile_id: found[0].id, reason });
+  if (error && error.code !== "23505") {
+    console.error("banPlayer failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#bans`);
+  }
+  updateTag(GAMES_TAG);
+  redirect(`${back}#bans`);
+}
+
+export async function unbanPlayer(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const profileId = String(formData.get("profileId") ?? "");
+  if (!clubId || !/^[0-9a-f-]{36}$/.test(profileId)) redirect(`${back}?error=invalid#bans`);
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("club_bans").delete().eq("club_id", clubId).eq("profile_id", profileId);
+  if (error) {
+    console.error("unbanPlayer failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#bans`);
+  }
+  redirect(`${back}#bans`);
+}

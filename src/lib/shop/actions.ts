@@ -57,7 +57,7 @@ export async function checkout(formData: FormData) {
   if (error || typeof orderId !== "number") {
     const msg = error?.message ?? "";
     console.error("shop_create_order failed", { code: error?.code, message: msg });
-    redirect(cartPath(locale, msg.includes("out_of_stock") ? "error=stock" : msg.includes("not_available") ? "error=gone" : "error=save"));
+    redirect(cartPath(locale, msg.includes("out_of_stock") ? "error=stock" : msg.includes("not_available") ? "error=gone" : msg.includes("too_many_pending") ? "error=pending" : msg.includes("banned") ? "error=banned" : "error=save"));
   }
   updateTag(SHOP_TAG);
   redirect(orderPath(locale, orderId, "placed=1"));

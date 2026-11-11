@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
+import { Turnstile, captchaEnabled } from "./Turnstile";
 import { sendEmailCode, verifyEmailCode, type EmailState } from "@/lib/auth/actions";
 
 export function EmailSignIn({ locale }: { locale: string }) {
@@ -10,6 +11,7 @@ export function EmailSignIn({ locale }: { locale: string }) {
   const [checked, verify, verifying] = useActionState<EmailState, FormData>(verifyEmailCode, {
     step: "code",
   });
+  const [captcha, setCaptcha] = useState("");
 
   const input =
     "w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
@@ -63,8 +65,10 @@ export function EmailSignIn({ locale }: { locale: string }) {
         aria-describedby="email-status"
         className={input}
       />
-      <button type="submit" disabled={sending} className={button}>
-        {sending ? t("sending") : t("sendCode")}
+      <input type="hidden" name="captchaToken" value={captcha} />
+      <Turnstile onToken={setCaptcha} resetKey={sent} lang={locale} />
+      <button type="submit" disabled={sending || (captchaEnabled && !captcha)} className={button}>
+        {sending ? t("sending") : captchaEnabled && !captcha ? t("checkingBot") : t("sendCode")}
       </button>
       <p id="email-status" role="status" className="text-sm text-red-400">
         {sent.error && t(sent.error)}

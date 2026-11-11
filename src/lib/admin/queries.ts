@@ -217,3 +217,16 @@ export async function getClubStaff(clubId: number) {
     return { profileId: r.profile_id, role: r.role as StaffRole, name: p?.nickname ?? p?.display_name ?? "—" };
   });
 }
+
+export async function getClubBans(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("club_bans")
+    .select("profile_id, reason, created_at, profiles!club_bans_profile_id_fkey ( nickname, display_name )")
+    .eq("club_id", clubId)
+    .order("created_at", { ascending: false });
+  return (data ?? []).map((r) => {
+    const p = r.profiles as unknown as { nickname: string | null; display_name: string | null } | null;
+    return { profileId: r.profile_id, reason: r.reason, createdAt: r.created_at, name: p?.nickname ?? p?.display_name ?? "—" };
+  });
+}

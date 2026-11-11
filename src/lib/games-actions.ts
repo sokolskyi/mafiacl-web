@@ -32,6 +32,7 @@ export async function joinGame(formData: FormData) {
   const { error } = await supabase.from("game_signups").insert({ game_id: gameId, profile_id: userId });
   // 23505 — уже записан: считаем успехом.
   if (error && error.code !== "23505") {
+    if (error.message.includes("banned")) redirect(`${back}?signup=banned`);
     console.error("joinGame failed", { gameId, code: error.code, message: error.message });
     redirect(`${back}?signup=error`);
   }

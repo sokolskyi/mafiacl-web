@@ -121,12 +121,16 @@ async function handleCallback(db: SupabaseClient, origin: string, q: NonNullable
         .insert({ game_id: gameId, profile_id: linked.profileId })
         .select("status")
         .single();
-      if (error && error.code !== "23505") throw new Error(`join: ${error.message}`);
-      notice =
-        data?.status === "waitlist" ? t(lang, "waitlisted")
-        : data?.status === "queued" ? t(lang, "queued")
-        : t(lang, "joined");
-      alert = data?.status === "queued";
+      if (error?.message.includes("banned")) {
+        notice = t(lang, "banned");
+      } else {
+        if (error && error.code !== "23505") throw new Error(`join: ${error.message}`);
+        notice =
+          data?.status === "waitlist" ? t(lang, "waitlisted")
+          : data?.status === "queued" ? t(lang, "queued")
+          : t(lang, "joined");
+        alert = data?.status === "queued";
+      }
     }
   } else {
     const { error } = await db

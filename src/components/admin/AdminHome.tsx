@@ -2,10 +2,10 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addPrize, addStaff, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { addPrize, addStaff, banPlayer, unbanPlayer, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 
@@ -346,6 +346,45 @@ export async function AdminHome({
                   <button className="rounded bg-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-700">{t("addStaff")}</button>
                 </form>
                 <p className="mt-2 text-sm text-neutral-400">{t("teamHint")}</p>
+              </section>
+            );
+          }),
+      )}
+
+      {await Promise.all(
+        ctx.clubs
+          .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
+          .map(async (club) => {
+            const bans = await getClubBans(club.id);
+            return (
+              <section key={`bans-${club.id}`} id="bans">
+                <h2 className="text-xl font-bold">{t("bans", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("bansHint")}</p>
+                {bans.length > 0 && (
+                  <ul className="mt-4 max-w-xl divide-y divide-white/10 rounded border border-white/10">
+                    {bans.map((b) => (
+                      <li key={b.profileId} className="flex flex-wrap items-center gap-3 px-4 py-2">
+                        <span className="font-semibold">{b.name}</span>
+                        {b.reason && <span className="flex-1 text-sm text-neutral-400">{b.reason}</span>}
+                        <form action={unbanPlayer} className="ml-auto">
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="clubId" value={club.id} />
+                          <input type="hidden" name="profileId" value={b.profileId} />
+                          <button className="text-sm text-sky-400 hover:underline">{t("unban")}</button>
+                        </form>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <form action={banPlayer} className="mt-4 flex max-w-xl flex-wrap gap-2">
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="clubId" value={club.id} />
+                  <label htmlFor={`ban-${club.id}`} className="sr-only">{t("fields.nickname")}</label>
+                  <input id={`ban-${club.id}`} name="nickname" required minLength={2} maxLength={32} placeholder={t("fields.nickname")} className={`w-40 ${input}`} />
+                  <label htmlFor={`ban-r-${club.id}`} className="sr-only">{t("fields.reason")}</label>
+                  <input id={`ban-r-${club.id}`} name="reason" maxLength={200} placeholder={t("fields.reason")} className={`flex-1 ${input}`} />
+                  <button className="rounded bg-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-700">{t("ban")}</button>
+                </form>
               </section>
             );
           }),

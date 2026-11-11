@@ -28,7 +28,7 @@ export function CartView({ signedIn, error }: { signedIn: boolean; error?: strin
       <div>
         {error && (
           <p role="alert" className="mb-4 rounded border border-red-400/50 bg-red-600/15 p-3 text-sm text-red-300">
-            {t(`errors.${error === "stock" || error === "gone" ? error : "save"}`)}
+            {t(`errors.${error === "stock" || error === "gone" || error === "pending" || error === "banned" ? error : "save"}`)}
           </p>
         )}
         <ul className="divide-y divide-white/15 border-y border-white/15">
