@@ -295,7 +295,7 @@ export async function getClubTournaments(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("tournaments")
-    .select("id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, tournament_registrations ( status, profiles ( nickname ) )")
+    .select("id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url, tournament_registrations ( status, profiles ( nickname ) )")
     .eq("club_id", clubId)
     .order("starts_on", { ascending: false })
     .limit(40);

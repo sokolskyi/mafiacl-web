@@ -38,6 +38,7 @@ export async function TournamentCards({ items, locale }: { items: Tournament[]; 
             </h3>
             <p className="mt-1 text-neutral-300">{tournamentDates(x, locale)}</p>
             {(x.city || x.venueName) && <p className="mt-1 text-sm text-neutral-400">📍 {[x.venueName, x.city].filter(Boolean).join(", ")}</p>}
+            {x.winners[0] && <p className="mt-auto pt-3 text-sm font-semibold">🥇 {x.winners[0]}</p>}
           </div>
         </li>
       ))}

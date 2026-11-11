@@ -26,13 +26,18 @@ export type Tournament = {
   registrationUrl: string | null;
   registrationClosesAt: string | null;
   capacity: number | null;
+  /** Взнос в валюте currency (поле в базе исторически называется price_czk). */
   priceCzk: number | null;
+  currency: "CZK" | "EUR";
+  prizeFund: number | null;
+  winners: string[];
+  infoUrl: string | null;
 };
 
 export type Registration = { profileId: string; nickname: string; status: "registered" | "waitlist" };
 
 const COLS =
-  "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk";
+  "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url";
 
 type Row = Record<string, unknown>;
 function map(t: Row): Tournament {
@@ -56,6 +61,10 @@ function map(t: Row): Tournament {
     registrationClosesAt: (t.registration_closes_at as string) ?? null,
     capacity: (t.capacity as number) ?? null,
     priceCzk: t.price_czk === null || t.price_czk === undefined ? null : Number(t.price_czk),
+    currency: (t.currency as "CZK" | "EUR") ?? "CZK",
+    prizeFund: t.prize_fund === null || t.prize_fund === undefined ? null : Number(t.prize_fund),
+    winners: (t.winners as string[]) ?? [],
+    infoUrl: (t.info_url as string) ?? null,
   };
 }
 
@@ -98,4 +107,8 @@ export async function getTournament(slug: string): Promise<{ tournament: Tournam
       status: r.status as Registration["status"],
     })),
   };
+}
+
+export function formatMoney(locale: string, value: number, currency: "CZK" | "EUR") {
+  return new Intl.NumberFormat(locale, { style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(value);
 }

@@ -281,9 +281,13 @@
       "tRegUrl": "Registration link",
       "tClosesAt": "Registration until",
       "tCapacity": "Seats (optional)",
-      "tPrice": "Entry fee, Kč",
+      "tPrice": "Entry fee",
       "tCover": "Cover",
-      "tDescription": "Announcement"
+      "tDescription": "Announcement",
+      "tCurrency": "Currency",
+      "tPrize": "Prize fund",
+      "tInfoUrl": "“More details” link (tables, rating)",
+      "tWinners": "Winners, comma-separated: 1st, 2nd, 3rd"
     },
     "status": {
       "draft": "Draft",
@@ -1123,6 +1127,11 @@
       "running": "Running",
       "finished": "Finished",
       "cancelled": "Cancelled"
-    }
+    },
+    "prizeFund": "Prize fund",
+    "players": "Players",
+    "winners": "Winners",
+    "moreInfo": "More details: tables and rating",
+    "results": "Results on {host}"
   }
 }

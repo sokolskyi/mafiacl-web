@@ -281,9 +281,13 @@
       "tRegUrl": "Odkaz na registraci",
       "tClosesAt": "Registrace do",
       "tCapacity": "Míst (nepovinné)",
-      "tPrice": "Startovné, Kč",
+      "tPrice": "Startovné",
       "tCover": "Obálka",
-      "tDescription": "Ohlášení"
+      "tDescription": "Ohlášení",
+      "tCurrency": "Měna",
+      "tPrize": "Cenový fond",
+      "tInfoUrl": "Odkaz „Více“ (tabulky, žebříček)",
+      "tWinners": "Medailisté oddělení čárkou: 1., 2., 3. místo"
     },
     "status": {
       "draft": "Koncept",
@@ -1123,6 +1127,11 @@
       "running": "Probíhá",
       "finished": "Skončil",
       "cancelled": "Zrušen"
-    }
+    },
+    "prizeFund": "Cenový fond",
+    "players": "Hráčů",
+    "winners": "Medailisté",
+    "moreInfo": "Více: tabulky a žebříček",
+    "results": "Výsledky na {host}"
   }
 }

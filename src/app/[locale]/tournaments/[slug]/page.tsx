@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { getTournament, type Registration, type Tournament } from "@/lib/tournaments";
-import { loc, money } from "@/lib/shop/queries";
+import { formatMoney, getTournament, type Registration, type Tournament } from "@/lib/tournaments";
+import { loc } from "@/lib/shop/queries";
 import { createClient } from "@/lib/supabase/server";
 import { registerTournament, cancelTournament } from "@/lib/tournament-actions";
 import { tournamentDates } from "@/components/tournaments/TournamentCards";
@@ -57,7 +57,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
       </p>
       <h1 className="mt-3 text-5xl sm:text-6xl">{x.name}</h1>
 
-      <dl className="mt-6 grid gap-4 sm:grid-cols-3">
+      <dl className="mt-6 grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
         <div>
           <dt className="text-sm text-neutral-400">{t("when")}</dt>
           <dd className="text-lg font-semibold">{tournamentDates(x, locale)}{time && `, ${time}`}</dd>
@@ -78,13 +78,55 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
         {x.priceCzk !== null && (
           <div>
             <dt className="text-sm text-neutral-400">{t("fee")}</dt>
-            <dd className="text-lg font-semibold">{x.priceCzk === 0 ? t("free") : money(locale, x.priceCzk)}</dd>
+            <dd className="text-lg font-semibold">{x.priceCzk === 0 ? t("free") : formatMoney(locale, x.priceCzk, x.currency)}</dd>
+          </div>
+        )}
+        {x.prizeFund !== null && (
+          <div>
+            <dt className="text-sm text-neutral-400">{t("prizeFund")}</dt>
+            <dd className="text-lg font-semibold">{formatMoney(locale, x.prizeFund, x.currency)}</dd>
+          </div>
+        )}
+        {x.capacity !== null && (
+          <div>
+            <dt className="text-sm text-neutral-400">{t("players")}</dt>
+            <dd className="text-lg font-semibold">{x.capacity}</dd>
           </div>
         )}
       </dl>
 
+      {x.winners.length > 0 && (
+        <section className="mt-10" aria-labelledby="winners">
+          <h2 id="winners" className="font-display text-3xl font-extrabold uppercase">{t("winners")}</h2>
+          <ol className="mt-4 grid gap-3 sm:grid-cols-3">
+            {x.winners.slice(0, 3).map((w, i) => (
+              <li key={w} className="flex items-center gap-3 rounded-lg border border-white/15 bg-neutral-950/60 p-4">
+                <span aria-hidden="true" className="text-3xl">{["🥇", "🥈", "🥉"][i]}</span>
+                <span className="text-lg font-bold">{w}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
       {desc && <div className="mt-8 max-w-prose whitespace-pre-line text-lg leading-relaxed text-neutral-200">{desc}</div>}
 
+      {(x.infoUrl || (x.status === "finished" && x.registrationUrl)) && (
+        <p className="mt-8 flex flex-wrap gap-3">
+          {x.infoUrl && (
+            <a href={x.infoUrl} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center rounded-full border border-white/55 px-6 font-bold hover:bg-white/10">
+              {t("moreInfo")} ↗
+            </a>
+          )}
+          {x.status === "finished" && x.registrationUrl && (
+            <a href={x.registrationUrl} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center rounded-full border border-white/55 px-6 font-bold hover:bg-white/10">
+              {t("results", { host: new URL(x.registrationUrl).hostname.replace(/^www\./, "") })} ↗
+            </a>
+          )}
+        </p>
+      )}
+
+      {(x.status === "announced" || x.status === "running") && (
       <section id="registration" className="mt-12 scroll-mt-24 rounded-2xl border border-white/15 bg-neutral-950/60 p-6">
         <h2 className="font-display text-3xl font-extrabold uppercase">{t("registration")}</h2>
         {sp.reg === "ok" && <p role="status" className="mt-3 text-green-300">{t("regOk")}</p>}
@@ -92,6 +134,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
         {sp.reg === "banned" && <p role="alert" className="mt-3 text-red-300">{t("regBanned")}</p>}
         <RegistrationBlock x={x} registrations={data.registrations} locale={locale} />
       </section>
+      )}
     </article>
   );
 }

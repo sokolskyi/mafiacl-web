@@ -732,6 +732,12 @@ export async function saveTournament(formData: FormData) {
   const capacity = int(formData.get("capacity"), 1, 1000);
   const priceRaw = String(formData.get("price") ?? "").trim();
   const price_czk = priceRaw === "" ? null : Number(priceRaw.replace(",", "."));
+  const currency = formData.get("currency") === "EUR" ? "EUR" : "CZK";
+  const prizeRaw = String(formData.get("prizeFund") ?? "").trim();
+  const prize_fund = prizeRaw === "" ? null : Number(prizeRaw.replace(",", "."));
+  const winners = String(formData.get("winners") ?? "").split(/[,\n]/).map((w) => w.trim().slice(0, 40)).filter(Boolean).slice(0, 10);
+  const infoRaw = String(formData.get("infoUrl") ?? "").trim();
+  const info_url = infoRaw ? safeHttps(infoRaw.startsWith("http") ? infoRaw : `https://${infoRaw}`) : null;
   const description: Record<string, string> = {};
   for (const l of PARTNER_LANGS) {
     const v = String(formData.get(`description_${l}`) ?? "").trim().slice(0, 5000);
@@ -742,7 +748,8 @@ export async function saveTournament(formData: FormData) {
     !clubId || !name || !date.test(startsOn) || (endsOn && (!date.test(endsOn) || endsOn < startsOn)) ||
     !(SERIES as readonly string[]).includes(seriesRaw) || !(T_STATUSES as readonly string[]).includes(statusRaw) ||
     !(T_REG as readonly string[]).includes(regRaw) || (regUrlRaw && !registration_url) || (regRaw === "external" && !registration_url) ||
-    (coverRaw && !cover_url) || (price_czk !== null && (!Number.isFinite(price_czk) || price_czk < 0))
+    (coverRaw && !cover_url) || (price_czk !== null && (!Number.isFinite(price_czk) || price_czk < 0)) ||
+    (prize_fund !== null && (!Number.isFinite(prize_fund) || prize_fund < 0)) || (infoRaw && !info_url)
   ) {
     redirect(`${back}?error=invalid#tournaments`);
   }
@@ -767,6 +774,10 @@ export async function saveTournament(formData: FormData) {
     registration_closes_at,
     capacity,
     price_czk,
+    currency,
+    prize_fund,
+    winners,
+    info_url,
   };
   const supabase = await createClient();
   let error;

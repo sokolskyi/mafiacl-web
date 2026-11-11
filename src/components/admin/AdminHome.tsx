@@ -418,6 +418,21 @@ export async function AdminHome({
                 <label className="text-sm">{t("fields.tPrice")}
                   <input name="price" type="number" min={0} step="1" defaultValue={x?.price_czk ?? ""} className={`mt-1 w-full ${input}`} />
                 </label>
+                <label className="text-sm">{t("fields.tCurrency")}
+                  <select name="currency" defaultValue={x?.currency ?? "CZK"} className={`mt-1 w-full ${input}`}>
+                    <option value="CZK">Kč</option>
+                    <option value="EUR">€</option>
+                  </select>
+                </label>
+                <label className="text-sm">{t("fields.tPrize")}
+                  <input name="prizeFund" type="number" min={0} step="1" defaultValue={x?.prize_fund ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.tInfoUrl")}
+                  <input name="infoUrl" placeholder="https://…" defaultValue={x?.info_url ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm sm:col-span-2">{t("fields.tWinners")}
+                  <input name="winners" placeholder="TOPS, Maverick, Korolevich" defaultValue={(x?.winners ?? []).join(", ")} className={`mt-1 w-full ${input}`} />
+                </label>
                 <PhotoField clubId={club.id} initial={x?.cover_url ? [x.cover_url] : []} labels={{ label: t("fields.tCover"), hint: t("fields.logoHint"), upload: t("fields.uploadPhoto"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }} />
                 {(["cs", "ru", "uk", "en"] as const).map((l) => (
                   <label key={l} className="text-sm sm:col-span-2">{t("fields.tDescription")} · {l.toUpperCase()}
