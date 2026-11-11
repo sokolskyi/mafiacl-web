@@ -23,6 +23,7 @@ export async function submitCorporateRequest(_prev: CorporateState, formData: Fo
   const contact = String(formData.get("contact") ?? "").trim().slice(0, 120);
   if (!name || contact.length < 3) return { error: "invalid" };
   const company = String(formData.get("company") ?? "").trim().slice(0, 120) || null;
+  const city = String(formData.get("city") ?? "").trim().slice(0, 80) || null;
   const dateRaw = String(formData.get("date") ?? "");
   const event_date = /^\d{4}-\d{2}-\d{2}$/.test(dateRaw) ? dateRaw : null;
   const guestsN = Number(formData.get("guests"));
@@ -50,7 +51,7 @@ export async function submitCorporateRequest(_prev: CorporateState, formData: Fo
   if (!club) return { error: "save" };
   const { data: row, error } = await db
     .from("corporate_requests")
-    .insert({ club_id: club.id, name, company, contact, event_date, guests, format, language, message, site_locale: siteLocale, ip_hash: ipHash })
+    .insert({ club_id: club.id, name, company, city, contact, event_date, guests, format, language, message, site_locale: siteLocale, ip_hash: ipHash })
     .select("id")
     .single();
   if (error || !row) {
@@ -61,7 +62,7 @@ export async function submitCorporateRequest(_prev: CorporateState, formData: Fo
   // Сообщаем владельцу и админам клуба в Telegram (если они привязали бота). Ошибка здесь не мешает заявке.
   await notifyStaff(club.id, [
     `🎩 <b>Заявка на корпоратив №${row.id}</b>`,
-    `${escapeHtml(name)}${company ? ` · ${escapeHtml(company)}` : ""}`,
+    `${escapeHtml(name)}${company ? ` · ${escapeHtml(company)}` : ""}${city ? ` · 📍 ${escapeHtml(city)}` : ""}`,
     `📞 ${escapeHtml(contact)}`,
     [event_date && `📅 ${event_date}`, guests && `👥 ${guests}`, format && `🎯 ${format}`, language && `🗣 ${language}`].filter(Boolean).join("  "),
     message ? `💬 ${escapeHtml(message.slice(0, 600))}` : "",

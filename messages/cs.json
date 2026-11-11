@@ -69,8 +69,8 @@
       "description": "Permanentky, merch a dárky z klubu."
     },
     "corporate": {
-      "title": "Firemní mafie v Praze",
-      "description": "Teambuilding a firemní akce s hrou mafie a profesionálním moderátorem."
+      "title": "Firemní mafie ve vašem městě",
+      "description": "Teambuildingy a firemní akce s mafií a profesionálním moderátorem — v Praze i téměř v jakémkoli městě světa."
     },
     "kids": {
       "title": "Dětská mafie",
@@ -784,7 +784,7 @@
       },
       "3": {
         "title": "Ve vašem jazyce",
-        "text": "Hrajeme česky, anglicky, rusky i ukrajinsky — podle moderátora."
+        "text": "Čeština, angličtina, ruština, ukrajinština i další — moderátora vybereme podle týmu."
       }
     },
     "formatsTitle": "Formáty",
@@ -863,8 +863,8 @@
         "a": "Česky, anglicky, rusky nebo ukrajinsky. Jazyky moderátorů najdete níže."
       },
       "4": {
-        "q": "Můžete přijet k nám?",
-        "a": "Ano, do kanceláře, restaurace nebo jiného místa v Praze, rekvizity přivezeme."
+        "q": "Můžete přijet k nám nebo do jiného města?",
+        "a": "Ano. Přijedeme do kanceláře, restaurace nebo jinam a rekvizity přivezeme. Kromě Prahy hrajeme téměř v jakémkoli městě Evropy i světa — s moderátory z naší sítě."
       },
       "5": {
         "q": "Jak dlouho dopředu rezervovat?",
@@ -893,9 +893,12 @@
         "invalid": "Vyplňte jméno a kontakt.",
         "tooMany": "Příliš mnoho poptávek za sebou. Zkuste to později nebo nám napište přímo.",
         "save": "Odeslání se nezdařilo. Zkuste to znovu."
-      }
+      },
+      "city": "Město"
     },
-    "reviewsTitle": "Recenze"
+    "reviewsTitle": "Recenze",
+    "geoTitle": "Kde hrajeme",
+    "geo": "V Praze sami, v dalších městech s moderátory z naší sítě partnerských klubů. Hru připravíme téměř v každé evropské metropoli a po celé Evropě, ale také v USA, Kanadě, Austrálii, Kazachstánu a jinde. Napište město a najdeme moderátora v potřebném jazyce."
   },
   "hosts": {
     "empty": "Brzy tu budou moderátoři.",

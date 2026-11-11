@@ -67,6 +67,14 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
         </ul>
       </section>
 
+      <section className="mt-20 rounded-2xl border border-white/15 bg-neutral-950/50 p-6 sm:p-10" aria-labelledby="geo">
+        <h2 id="geo" className={h2}>
+          <span aria-hidden="true" className="mr-3">🌍</span>
+          {t("geoTitle")}
+        </h2>
+        <p className="mt-4 max-w-3xl text-lg text-neutral-200">{t("geo")}</p>
+      </section>
+
       <section className="mt-20 grid gap-12 lg:grid-cols-2">
         <div>
           <h2 className={h2}>{t("includedTitle")}</h2>

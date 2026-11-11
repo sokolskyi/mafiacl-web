@@ -47,9 +47,13 @@ export function CorporateForm({ locale }: { locale: string }) {
         {t("company")}
         <input name="company" maxLength={120} autoComplete="organization" className={field} />
       </label>
-      <label className="text-sm font-semibold sm:col-span-2">
+      <label className="text-sm font-semibold">
         {t("contact")} *
         <input name="contact" required minLength={3} maxLength={120} autoComplete="email" className={field} />
+      </label>
+      <label className="text-sm font-semibold">
+        {t("city")}
+        <input name="city" maxLength={80} autoComplete="address-level2" className={field} />
       </label>
       <label className="text-sm font-semibold">
         {t("date")}

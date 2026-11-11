@@ -69,8 +69,8 @@
       "description": "Memberships, merch and gifts from the club."
     },
     "corporate": {
-      "title": "Corporate mafia in Prague",
-      "description": "Team building and corporate events with a mafia game and a professional host."
+      "title": "Company mafia in your city",
+      "description": "Team building and company events with mafia and a professional host — in Prague and almost any city in the world."
     },
     "kids": {
       "title": "Kids mafia",
@@ -784,7 +784,7 @@
       },
       "3": {
         "title": "In your language",
-        "text": "We host in English, Czech, Russian and Ukrainian — depending on the host."
+        "text": "English, Czech, Russian, Ukrainian and more — we'll match a host to your team."
       }
     },
     "formatsTitle": "Formats",
@@ -863,8 +863,8 @@
         "a": "English, Czech, Russian or Ukrainian. Each host's languages are shown below."
       },
       "4": {
-        "q": "Can you come to us?",
-        "a": "Yes — to your office, a restaurant or another venue in Prague, props included."
+        "q": "Can you come to us or to another city?",
+        "a": "Yes. We come to your office, a restaurant or another venue and bring the props. Besides Prague, we run games in almost any city in Europe and the world — with hosts from our network."
       },
       "5": {
         "q": "How far ahead should we book?",
@@ -893,9 +893,12 @@
         "invalid": "Please add your name and a contact.",
         "tooMany": "Too many requests in a row. Try again later or contact us directly.",
         "save": "Could not send. Please try again."
-      }
+      },
+      "city": "City"
     },
-    "reviewsTitle": "Reviews"
+    "reviewsTitle": "Reviews",
+    "geoTitle": "Where we play",
+    "geo": "In Prague we host ourselves; elsewhere we work with hosts from our network of partner clubs. We can run a game in almost any European capital and across Europe, as well as in the USA, Canada, Australia, Kazakhstan and beyond. Tell us the city and we'll find a host in the right language."
   },
   "hosts": {
     "empty": "Our hosts will appear here soon.",
