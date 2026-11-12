@@ -7,6 +7,7 @@ import { HostCards } from "@/components/HostCards";
 import { CorporateForm } from "@/components/corporate/CorporateForm";
 import { Testimonials } from "@/components/corporate/Testimonials";
 import { getTestimonials } from "@/lib/testimonials";
+import { CORPORATE_PHOTOS } from "@/lib/corporatePhotos";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/corporate">) {
   const { locale } = (await params) as { locale: Locale };
@@ -14,9 +15,10 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/corporat
 }
 
 const WHY = ["0", "1", "2", "3"] as const;
-const FORMATS = ["teambuilding", "party", "birthday", "office", "club"] as const;
+const FORMATS = ["teambuilding", "party", "birthday", "friends", "hens", "turnkey", "office", "club"] as const;
 const INCLUDED = ["0", "1", "2", "3", "5"] as const;
-const STEPS = ["0", "1", "2", "3"] as const;
+const STEPS = ["0", "1", "2", "3", "4", "5"] as const;
+const OTHER = ["quiz", "pubquiz"] as const;
 const FAQ = ["0", "1", "2", "3", "4", "5"] as const;
 
 export default async function Page({ params }: PageProps<"/[locale]/corporate">) {
@@ -57,7 +59,7 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
 
       <section className="mt-20" aria-labelledby="formats">
         <h2 id="formats" className={h2}>{t("formatsTitle")}</h2>
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {FORMATS.map((k) => (
             <li key={k} className="rounded-lg border border-white/15 bg-neutral-950/50 p-6">
               <h3 className="text-xl font-bold">{t(`formats.${k}.title`)}</h3>
@@ -107,6 +109,20 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
         </div>
       </section>
 
+      {CORPORATE_PHOTOS.length > 0 && (
+        <section className="mt-20" aria-labelledby="looks">
+          <h2 id="looks" className={h2}>{t("looksTitle")}</h2>
+          <ul className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-3">
+            {CORPORATE_PHOTOS.map((ph, i) => (
+              <li key={ph.src} className={i === 0 ? "col-span-2 row-span-2" : ""}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={ph.src} alt={ph.alt} loading="lazy" className="h-full w-full rounded-lg object-cover" />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {reviews.length > 0 && (
         <section id="reviews" className="mt-20 scroll-mt-24" aria-labelledby="reviews-title">
           <h2 id="reviews-title" className={h2}>{t("reviewsTitle")}</h2>
@@ -141,6 +157,20 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
         <div className="mt-8">
           <CorporateForm locale={locale} />
         </div>
+      </section>
+
+      <section className="mt-20" aria-labelledby="other-formats">
+        <h2 id="other-formats" className={h2}>{t("otherTitle")}</h2>
+        <p className="mt-3 max-w-3xl text-lg text-neutral-300">{t("otherLead")}</p>
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+          {OTHER.map((k) => (
+            <li key={k} className="rounded-lg border border-white/15 bg-neutral-950/50 p-6">
+              <h3 className="text-xl font-bold">{t(`other.${k}.title`)}</h3>
+              <p className="mt-2 text-neutral-300">{t(`other.${k}.text`)}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-neutral-400">{t("otherHow")}</p>
       </section>
     </main>
   );

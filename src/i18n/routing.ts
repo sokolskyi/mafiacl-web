@@ -48,6 +48,7 @@ export const routing = defineRouting({
     "/about/team": { cs: "/o-klubu/tym", ru: "/o-klube/struktura", uk: "/pro-klub/struktura", en: "/about/team" },
     "/about/promotions": { cs: "/o-klubu/akce", ru: "/o-klube/aktsii", uk: "/pro-klub/aktsii", en: "/about/promotions" },
     "/about/bans": { cs: "/o-klubu/bany", ru: "/o-klube/bany", uk: "/pro-klub/bany", en: "/about/bans" },
+    "/about/gala": { cs: "/o-klubu/gala-night", ru: "/o-klube/gala-night", uk: "/pro-klub/gala-night", en: "/about/gala-night" },
     "/faq": "/faq",
     "/contacts": { cs: "/kontakty", ru: "/kontakty", uk: "/kontakty", en: "/contacts" },
     "/clubs/[city]": { cs: "/kluby/[city]", ru: "/kluby/[city]", uk: "/kluby/[city]", en: "/clubs/[city]" },

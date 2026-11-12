@@ -4,7 +4,7 @@
     "kings": "Kings",
     "tournaments": "Tournaments",
     "ratings": "Ratings",
-    "learn": "Rules",
+    "learn": "New players",
     "documents": "Documents",
     "blog": "Blog",
     "gallery": "Gallery",
@@ -50,8 +50,8 @@
       "description": "Current season, points table, season results, hall of fame."
     },
     "learn": {
-      "title": "Mafia game rules",
-      "description": "Rules, roles, rule commentary and the club's tips for beginners."
+      "title": "For new players",
+      "description": "How to play mafia for the first time: what sport mafia is, the roles, how a game goes and table etiquette."
     },
     "documents": {
       "title": "Documents",
@@ -91,7 +91,7 @@
     },
     "faq": {
       "title": "FAQ",
-      "description": "What age mafia suits, how many players, how long a game lasts, parking, card payment."
+      "description": "Do I need to know the rules, can I come alone, how long a game lasts, when and where we play, how to sign up and what it costs."
     },
     "contacts": {
       "title": "Contacts",
@@ -136,6 +136,10 @@
     "aboutBans": {
       "title": "MafiaCL bans",
       "description": "Players who are barred from MafiaCL Prague games."
+    },
+    "aboutGala": {
+      "title": "MafiaCL Gala Night",
+      "description": "The MafiaCL club's annual party and awards: categories, 2024 and 2025 winners, photo albums."
     }
   },
   "account": {
@@ -416,7 +420,10 @@
       "birthday": "Birthday",
       "office": "At client's venue",
       "club": "At the club",
-      "other": "Other"
+      "other": "Other",
+      "friends": "With friends",
+      "hens": "Hen / stag",
+      "turnkey": "Turnkey"
     },
     "langs": {
       "cs": "Czech",
@@ -915,6 +922,18 @@
       "other": {
         "title": "Other",
         "text": ""
+      },
+      "friends": {
+        "title": "Party with friends",
+        "text": "Bring your crowd — the host runs several games and the slyest players get awards."
+      },
+      "hens": {
+        "title": "Hen / stag party",
+        "text": "A fun scenario with surprise roles and special attention to the guest of honour."
+      },
+      "turnkey": {
+        "title": "Turnkey",
+        "text": "We handle everything: venue, host, props, music, awards and, if you like, a photographer."
       }
     },
     "includedTitle": "What's included",
@@ -930,19 +949,27 @@
     "steps": {
       "0": {
         "title": "Request",
-        "text": "Leave a contact and a few words about the event."
+        "text": "Leave your contact and a few words about the event."
       },
       "1": {
-        "title": "Call",
-        "text": "We agree the date, venue, number of guests, language and format."
+        "title": "Format and venue",
+        "text": "We'll call to pick a scenario for the occasion and group size and decide where to play: at your place or a club partner's venue."
       },
       "2": {
-        "title": "Contract and invoice",
-        "text": "We work with companies: we issue an invoice, payment by transfer."
+        "title": "Language",
+        "text": "English, Czech, Russian or Ukrainian — whatever suits your team."
       },
       "3": {
-        "title": "Game",
-        "text": "The host arrives early and sets everything up — you just play."
+        "title": "Host",
+        "text": "We'll match a host who speaks your language — or pick one yourself from the cards below."
+      },
+      "4": {
+        "title": "Contract and invoice",
+        "text": "We work with companies: we issue an invoice, payment by bank transfer."
+      },
+      "5": {
+        "title": "The game",
+        "text": "The host arrives early and sets everything up — all you do is play."
       }
     },
     "priceTitle": "Price",
@@ -1001,7 +1028,21 @@
     },
     "reviewsTitle": "Reviews",
     "geoTitle": "Where we play",
-    "geo": "We run company events not only in Prague and across the Czech Republic, but in other cities and countries too. Tell us where and when you're planning the event, and we'll let you know what's possible in your city."
+    "geo": "We run company events not only in Prague and across the Czech Republic, but in other cities and countries too. Tell us where and when you're planning the event, and we'll let you know what's possible in your city.",
+    "looksTitle": "What it looks like",
+    "otherTitle": "Other formats",
+    "otherLead": "Besides mafia, our partners run quiz games for teams — in Ukrainian and Russian.",
+    "other": {
+      "quiz": {
+        "title": "“What? Where? When?”",
+        "text": "A team game with a host: logic and general-knowledge questions, a minute to discuss and a running score."
+      },
+      "pubquiz": {
+        "title": "Pub quiz",
+        "text": "Several rounds of questions on different topics — light, competitive and good for any group."
+      }
+    },
+    "otherHow": "Want one of these? Send a request with the “Other” format and say so in the comment — we'll pass it to our partners and come back with options."
   },
   "hosts": {
     "empty": "Our hosts will appear here soon.",
@@ -1295,7 +1336,8 @@
       "hall": "Hall of fame",
       "promotions": "Offers",
       "bans": "Bans",
-      "contacts": "Contacts"
+      "contacts": "Contacts",
+      "gala": "Gala Night"
     },
     "cards": {
       "history": "Kremenchuk, Kharkiv, Prague: the club's journey since 2011.",
@@ -1304,7 +1346,8 @@
       "hall": "Season champions, Kings and mini-tournament winners.",
       "promotions": "Current offers and special deals.",
       "bans": "Players who are barred from club games.",
-      "contacts": "How to sign up, where we play and how to reach us."
+      "contacts": "How to sign up, where we play and how to reach us.",
+      "gala": "The club's annual awards: categories and winners of 2024 and 2025."
     },
     "history": {
       "title": "Club history",
@@ -1484,6 +1527,33 @@
       },
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history."
+    },
+    "gala": {
+      "title": "MafiaCL Gala Night",
+      "lead": "Every December the club closes the year with a party: a dress code, festive games and awards for the best players and hosts in the club's categories.",
+      "programTitle": "The evening",
+      "program": [
+        "Awards in the club's categories",
+        "Festive mafia games",
+        "Dress code and photos to remember",
+        "An evening with players and hosts"
+      ],
+      "dressCode": "Dress code: {code}",
+      "nominationsTitle": "Categories and winners",
+      "nominations": {
+        "bestHost": "Best host",
+        "breakthrough": "Breakthrough of the year",
+        "newcomer": "Newcomer of the year",
+        "diplomat": "Diplomat",
+        "mysterious": "Most mysterious player",
+        "improv": "Improviser",
+        "patient": "Most patient",
+        "leader": "Leader",
+        "creative": "Creative",
+        "comfortable": "Most pleasant player"
+      },
+      "album": "Photo album",
+      "post": "Telegram post"
     }
   },
   "reviews": {
@@ -1550,5 +1620,157 @@
     "mclLink": "MCL Europe standings and series",
     "footer": "This review is built automatically from the club's rating data. Full tables are on the season page:",
     "kingsLink": "MafiaCL Kings"
+  },
+  "learn": {
+    "lead": "Never played before? That's fine — most of our players once came for the first time too. Here's everything worth knowing before your first game.",
+    "ctaPlay": "Sign up for a game",
+    "ctaFaq": "FAQ",
+    "firstTitle": "Your first game",
+    "first": {
+      "0": {
+        "title": "Pick a game",
+        "text": "The schedule is on the Play page. The easiest start is a Tuesday mini-tournament or the Sunday MafiaCL Arena."
+      },
+      "1": {
+        "title": "Sign up",
+        "text": "Sign up on the site or message us on Telegram. You don't need to know the rules."
+      },
+      "2": {
+        "title": "Come a bit early",
+        "text": "10–15 minutes before the start: meet the host and players and take your seat."
+      },
+      "3": {
+        "title": "Play",
+        "text": "The host explains the rules and helps along the way. The first games are for getting the hang of it — mistakes are fine."
+      }
+    },
+    "whatTitle": "What is sport mafia",
+    "what": "A team game of logic, attention and persuasion. Ten players sit at the table with a host who acts as judge. Roles are dealt secretly, everyone has a number and equal time to speak, and decisions are made by vote. You don't need to act: listening, noticing details and arguing your case matter more. A game lasts about an hour and results count towards the club rating.",
+    "rolesTitle": "Roles",
+    "rolesLead": "Each game has 7 civilians and 3 mafia. Only you know your role.",
+    "roles": {
+      "civilian": {
+        "team": "Red team · 6 players",
+        "title": "Civilian",
+        "text": "Doesn't know who the mafia are. Their weapons are logic, attention and the vote."
+      },
+      "sheriff": {
+        "team": "Red team · 1 player",
+        "title": "Sheriff",
+        "text": "Checks one player every night and learns whether they are mafia."
+      },
+      "mafia": {
+        "team": "Black team · 2 players",
+        "title": "Mafia",
+        "text": "Knows their partners. At night they choose together whom to eliminate; by day they pose as civilians."
+      },
+      "don": {
+        "team": "Black team · 1 player",
+        "title": "Don",
+        "text": "Head of the mafia: shoots with the team and hunts for the Sheriff every night."
+      }
+    },
+    "flowTitle": "How a game goes",
+    "flow": {
+      "0": {
+        "title": "Roles are dealt",
+        "text": "Everyone secretly draws a role card and puts on a mask when the host calls night."
+      },
+      "1": {
+        "title": "First night",
+        "text": "The mafia open their eyes and silently agree on their plan. The Sheriff and the Don show themselves to the host."
+      },
+      "2": {
+        "title": "Day",
+        "text": "Each player in turn has a minute to speak and can nominate someone they suspect."
+      },
+      "3": {
+        "title": "Vote",
+        "text": "The player with the most votes leaves the table and gets a farewell minute."
+      },
+      "4": {
+        "title": "Night",
+        "text": "The mafia shoot, the Don looks for the Sheriff, the Sheriff checks. In the morning the host announces who is out. Civilians win when no mafia are left; the mafia win when they equal the civilians in number."
+      }
+    },
+    "etiquetteTitle": "Table etiquette",
+    "etiquette": {
+      "0": "Speak only during your time — don't interrupt others.",
+      "1": "Mask on at night: no peeking and no gestures.",
+      "2": "Phones away during the game.",
+      "3": "No oaths, bets or appeals to anything outside the game.",
+      "4": "Respect your opponents and the host's decisions.",
+      "5": "The host gives fouls for violations; on the fourth foul a player leaves the table."
+    },
+    "codeNote": "More about the club's values and ethics —",
+    "codeLink": "Club code",
+    "moreTitle": "Want to dig deeper?",
+    "more": "Our YouTube channel has recorded games and tournaments with commentary, and Telegram has announcements, results and club news. But the best way to learn is to come and play."
+  },
+  "faq": {
+    "lead": "Answers to the questions people ask most before their first game.",
+    "groups": {
+      "start": "Before your first game",
+      "games": "Games and signing up",
+      "other": "Other"
+    },
+    "items": {
+      "rules": {
+        "q": "Do I need to know the rules?",
+        "a": "No. The host explains them before the game and helps along the way. A short version is on the For new players page."
+      },
+      "alone": {
+        "q": "Can I come alone?",
+        "a": "Yes, most people do. You get to know each other quickly at the table — that's what the game is for."
+      },
+      "players": {
+        "q": "How many people play at a table?",
+        "a": "Ten players and a host. If more sign up, we open a second table."
+      },
+      "duration": {
+        "q": "How long does it take?",
+        "a": "One game takes about an hour. A club evening is several games in a row, so plan on 3–4 hours."
+      },
+      "age": {
+        "q": "What's the minimum age?",
+        "a": "Club games are for adults. For children and teenagers we have a separate format — kids' mafia."
+      },
+      "when": {
+        "q": "When and where do you play?",
+        "a": "Tuesdays at 18:45 — mini-tournaments at Aura Shisha & Karaoke; Sundays at 14:00 — MafiaCL Arena at POP PAUSE Popcorn Café. The current schedule is on the Play page."
+      },
+      "signup": {
+        "q": "How do I sign up?",
+        "a": "On the Play page or via our Telegram bot. Tuesdays use pre-registration: membership holders get priority, everyone else is confirmed in order."
+      },
+      "price": {
+        "q": "How much does it cost?",
+        "a": "The price is listed in each game's announcement. Regular players can get a membership: it gives priority when signing up and covers the evening fee."
+      },
+      "season": {
+        "q": "What are the season and rating?",
+        "a": "Every game earns points towards the season rating. The season's best players reach the final and compete for the club championship."
+      },
+      "language": {
+        "q": "What language do you play in?",
+        "a": "Club games are usually in Russian and Ukrainian. Corporate events are also run in English and Czech."
+      },
+      "corporate": {
+        "q": "Can we book a game for our company?",
+        "a": "Yes: corporate events, birthdays, parties with friends — at your place or a partner venue. Details and requests are on the Corporate page."
+      },
+      "kids": {
+        "q": "Do you have games for children?",
+        "a": "Yes, kids' mafia — with adapted rules and a host, birthdays included."
+      },
+      "contact": {
+        "q": "Still have a question?",
+        "a": "Message the club's founder on Telegram @Yes1911 — we'll reply."
+      }
+    },
+    "still": "Didn't find your answer? Message us — or just come to a game.",
+    "toLearn": "For new players",
+    "toPlay": "Game schedule",
+    "ask": "Ask on Telegram"
   }
 }

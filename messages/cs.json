@@ -4,7 +4,7 @@
     "kings": "Kings",
     "tournaments": "Turnaje",
     "ratings": "Žebříčky",
-    "learn": "Pravidla",
+    "learn": "Pro nováčky",
     "documents": "Dokumenty",
     "blog": "Blog",
     "gallery": "Galerie",
@@ -50,8 +50,8 @@
       "description": "Aktuální sezóna, tabulka bodů, výsledky sezón, síň slávy."
     },
     "learn": {
-      "title": "Pravidla hry mafie",
-      "description": "Pravidla, role, komentáře k pravidlům a tipy klubu pro začátečníky."
+      "title": "Pro nováčky",
+      "description": "Jak si poprvé zahrát mafii: co je sportovní mafie, role, průběh hry a pravidla chování u stolu."
     },
     "documents": {
       "title": "Dokumenty",
@@ -91,7 +91,7 @@
     },
     "faq": {
       "title": "Časté dotazy",
-      "description": "Pro jaký věk je mafie, kolik hráčů, jak dlouho hra trvá, parkování, platba kartou."
+      "description": "Je potřeba znát pravidla, můžu přijít sám, jak dlouho hra trvá, kdy a kde hrajeme, jak se přihlásit a kolik to stojí."
     },
     "contacts": {
       "title": "Kontakty",
@@ -136,6 +136,10 @@
     "aboutBans": {
       "title": "Bany klubu MafiaCL",
       "description": "Hráči, kteří mají zakázaný přístup na hry klubu MafiaCL Prague."
+    },
+    "aboutGala": {
+      "title": "MafiaCL Gala Night",
+      "description": "Každoroční večírek a vyhlášení klubu MafiaCL: kategorie, vítězové let 2024 a 2025, fotoalba."
     }
   },
   "account": {
@@ -416,7 +420,10 @@
       "birthday": "Narozeniny",
       "office": "U klienta",
       "club": "V klubu",
-      "other": "Jiné"
+      "other": "Jiné",
+      "friends": "S přáteli",
+      "hens": "Rozlučka",
+      "turnkey": "Na klíč"
     },
     "langs": {
       "cs": "čeština",
@@ -915,6 +922,18 @@
       "other": {
         "title": "Jiné",
         "text": ""
+      },
+      "friends": {
+        "title": "Večírek s přáteli",
+        "text": "Sežeňte partu — moderátor odehraje několik her a nejmazanější hráči dostanou ocenění."
+      },
+      "hens": {
+        "title": "Rozlučka se svobodou",
+        "text": "Zábavný scénář s překvapivými rolemi a zvláštní pozorností pro oslavence."
+      },
+      "turnkey": {
+        "title": "Na klíč",
+        "text": "Postaráme se o vše: prostor, moderátora, rekvizity, hudbu, ocenění a na přání i fotografa."
       }
     },
     "includedTitle": "Co je v ceně",
@@ -930,19 +949,27 @@
     "steps": {
       "0": {
         "title": "Poptávka",
-        "text": "Nechte kontakt a pár slov o akci."
+        "text": "Nechte nám kontakt a pár slov o akci."
       },
       "1": {
-        "title": "Hovor",
-        "text": "Domluvíme datum, místo, počet hostů, jazyk a formát."
+        "title": "Formát a místo",
+        "text": "Zavoláme si, vybereme scénář podle příležitosti a počtu hostů a domluvíme, kde hrát: u vás, nebo u partnerů klubu."
       },
       "2": {
+        "title": "Výběr jazyka",
+        "text": "Čeština, angličtina, ruština nebo ukrajinština — jak to vašemu týmu vyhovuje."
+      },
+      "3": {
+        "title": "Výběr moderátora",
+        "text": "Doporučíme moderátora, který mluví vaším jazykem — nebo si ho vyberte sami z karet níže."
+      },
+      "4": {
         "title": "Smlouva a faktura",
         "text": "Pracujeme s firmami: vystavíme fakturu, platba převodem."
       },
-      "3": {
+      "5": {
         "title": "Hra",
-        "text": "Moderátor přijede dřív a vše připraví — vy jen hrajete."
+        "text": "Moderátor přijede dřív a vše připraví — vy už jen hrajete."
       }
     },
     "priceTitle": "Cena",
@@ -1001,7 +1028,21 @@
     },
     "reviewsTitle": "Recenze",
     "geoTitle": "Kde hrajeme",
-    "geo": "Firemní akce pořádáme nejen v Praze a po celém Česku, ale i v dalších městech a zemích. Napište, kde a kdy akci plánujete, — řekneme vám, co je ve vašem městě možné."
+    "geo": "Firemní akce pořádáme nejen v Praze a po celém Česku, ale i v dalších městech a zemích. Napište, kde a kdy akci plánujete, — řekneme vám, co je ve vašem městě možné.",
+    "looksTitle": "Jak to vypadá",
+    "otherTitle": "Další formáty",
+    "otherLead": "Kromě mafie pořádají naši partneři znalostní hry pro týmy — v ukrajinštině a ruštině.",
+    "other": {
+      "quiz": {
+        "title": "„Co? Kde? Kdy?“",
+        "text": "Týmová hra s moderátorem: otázky na logiku a všeobecný přehled, minuta na poradu a průběžné skóre."
+      },
+      "pubquiz": {
+        "title": "Pub kvíz",
+        "text": "Několik kol otázek z různých oblastí — lehké, soutěživé a vhodné pro každou partu."
+      }
+    },
+    "otherHow": "Chcete takovou hru? Pošlete poptávku s formátem „Jiné“ a napište to do komentáře — předáme to partnerům a ozveme se s možnostmi."
   },
   "hosts": {
     "empty": "Brzy tu budou moderátoři.",
@@ -1295,7 +1336,8 @@
       "hall": "Síň slávy",
       "promotions": "Akce",
       "bans": "Bany",
-      "contacts": "Kontakty"
+      "contacts": "Kontakty",
+      "gala": "Gala Night"
     },
     "cards": {
       "history": "Kremenčuk, Charkov, Praha: cesta klubu od roku 2011.",
@@ -1304,7 +1346,8 @@
       "hall": "Šampioni sezón, vítězové Kings a mini-turnajů.",
       "promotions": "Aktuální akce a speciální nabídky.",
       "bans": "Hráči, kteří mají zakázaný přístup na hry klubu.",
-      "contacts": "Jak se přihlásit, kde hrajeme a jak nás kontaktovat."
+      "contacts": "Jak se přihlásit, kde hrajeme a jak nás kontaktovat.",
+      "gala": "Každoroční vyhlášení klubu: kategorie a vítězové 2024 a 2025."
     },
     "history": {
       "title": "Historie klubu",
@@ -1484,6 +1527,33 @@
       },
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón."
+    },
+    "gala": {
+      "title": "MafiaCL Gala Night",
+      "lead": "Každý prosinec klub zakončuje rok večírkem: dress code, sváteční hry a ocenění pro nejlepší hráče a moderátory v kategoriích klubu.",
+      "programTitle": "Jak večer probíhá",
+      "program": [
+        "Vyhlášení v kategoriích klubu",
+        "Sváteční hry mafie",
+        "Dress code a fotky na památku",
+        "Večer s hráči a moderátory"
+      ],
+      "dressCode": "Dress code: {code}",
+      "nominationsTitle": "Kategorie a vítězové",
+      "nominations": {
+        "bestHost": "Nejlepší moderátor",
+        "breakthrough": "Objev roku",
+        "newcomer": "Nováček roku",
+        "diplomat": "Diplomat",
+        "mysterious": "Nejzáhadnější hráč",
+        "improv": "Improvizátor",
+        "patient": "Nejtrpělivější",
+        "leader": "Lídr",
+        "creative": "Kreativita",
+        "comfortable": "Nejpříjemnější hráč"
+      },
+      "album": "Fotoalbum",
+      "post": "Příspěvek na Telegramu"
     }
   },
   "reviews": {
@@ -1550,5 +1620,157 @@
     "mclLink": "Žebříček a série MCL Europe",
     "footer": "Přehled se sestavuje automaticky z dat žebříčků klubu. Celé tabulky najdete na stránce sezóny",
     "kingsLink": "MafiaCL Kings"
+  },
+  "learn": {
+    "lead": "Ještě jste nehráli? Nevadí — většina našich hráčů jednou přišla poprvé. Tady je vše, co se hodí vědět před první hrou.",
+    "ctaPlay": "Přihlásit se na hru",
+    "ctaFaq": "Časté dotazy",
+    "firstTitle": "Jak si zahrát poprvé",
+    "first": {
+      "0": {
+        "title": "Vyberte hru",
+        "text": "Rozpis je na stránce Hrát. Nejsnáz se začíná na úterním mini-turnaji nebo nedělní MafiaCL Arena."
+      },
+      "1": {
+        "title": "Přihlaste se",
+        "text": "Přihlaste se na webu nebo nám napište na Telegram. Pravidla znát nemusíte."
+      },
+      "2": {
+        "title": "Přijďte o chvíli dřív",
+        "text": "10–15 minut před začátkem: seznámíte se s moderátorem a hráči a zaujmete místo u stolu."
+      },
+      "3": {
+        "title": "Hrajte",
+        "text": "Moderátor vysvětlí pravidla a poradí během hry. První hry jsou na rozkoukání — chybovat se smí."
+      }
+    },
+    "whatTitle": "Co je sportovní mafie",
+    "what": "Týmová hra na logiku, pozornost a umění přesvědčit. U stolu sedí 10 hráčů a moderátor-rozhodčí. Role se rozdávají tajně, každý má své číslo a stejný čas na řeč a rozhoduje se hlasováním. Hrát divadlo není nutné: důležitější je poslouchat, všímat si detailů a argumentovat. Hra trvá asi hodinu a výsledky se počítají do klubového žebříčku.",
+    "rolesTitle": "Role",
+    "rolesLead": "V každé hře je 7 civilistů a 3 mafiáni. Svou roli znáte jen vy.",
+    "roles": {
+      "civilian": {
+        "team": "Červený tým · 6 hráčů",
+        "title": "Civilista",
+        "text": "Neví, kdo je mafie. Jeho zbraní je logika, pozornost a hlasování."
+      },
+      "sheriff": {
+        "team": "Červený tým · 1 hráč",
+        "title": "Šerif",
+        "text": "Každou noc prověří jednoho hráče a zjistí, zda je mafián."
+      },
+      "mafia": {
+        "team": "Černý tým · 2 hráči",
+        "title": "Mafie",
+        "text": "Zná své parťáky. V noci s nimi vybírá, koho vyřadit, a ve dne se vydává za civilistu."
+      },
+      "don": {
+        "team": "Černý tým · 1 hráč",
+        "title": "Don",
+        "text": "Šéf mafie: střílí s týmem a každou noc hledá Šerifa."
+      }
+    },
+    "flowTitle": "Jak hra probíhá",
+    "flow": {
+      "0": {
+        "title": "Rozdání rolí",
+        "text": "Každý si tajně vytáhne kartu role a nasadí masku, když moderátor vyhlásí noc."
+      },
+      "1": {
+        "title": "Seznamovací noc",
+        "text": "Mafie otevře oči a beze slov se domluví na postupu. Šerif a Don se ukážou moderátorovi."
+      },
+      "2": {
+        "title": "Den",
+        "text": "Každý hráč má postupně minutu na řeč a může nominovat toho, koho podezírá."
+      },
+      "3": {
+        "title": "Hlasování",
+        "text": "Hráč s nejvíce hlasy opouští stůl a dostane minutu na rozloučenou."
+      },
+      "4": {
+        "title": "Noc",
+        "text": "Mafie střílí, Don hledá Šerifa, Šerif prověřuje. Ráno moderátor oznámí, kdo vypadl. Civilisté vyhrávají, když u stolu nezbude žádný mafián; mafie, když je jí stejně jako civilistů."
+      }
+    },
+    "etiquetteTitle": "Pravidla chování u stolu",
+    "etiquette": {
+      "0": "Mluvte jen ve svém čase — neskákejte ostatním do řeči.",
+      "1": "V noci maska na očích: nekoukejte a negestikulujte.",
+      "2": "Telefon během hry uklizený.",
+      "3": "Žádné přísahy, sázky ani odkazy na věci mimo hru.",
+      "4": "Respektujte soupeře i rozhodnutí moderátora.",
+      "5": "Za porušení dává moderátor fauly, při čtvrtém faulu hráč opouští stůl."
+    },
+    "codeNote": "Více o hodnotách a etice klubu —",
+    "codeLink": "Kodex klubu",
+    "moreTitle": "Chcete se ponořit hlouběji?",
+    "more": "Na našem YouTube kanálu najdete záznamy her a turnajů s komentářem, na Telegramu oznámení, výsledky a novinky klubu. Nejlíp se ale naučíte, když přijdete a zahrajete si."
+  },
+  "faq": {
+    "lead": "Odpovědi na otázky, které se nejčastěji objevují před první hrou.",
+    "groups": {
+      "start": "Před první hrou",
+      "games": "Hry a přihlášení",
+      "other": "Ostatní"
+    },
+    "items": {
+      "rules": {
+        "q": "Musím znát pravidla?",
+        "a": "Ne. Moderátor je vysvětlí před hrou a poradí během ní. Stručně jsou pravidla na stránce Pro nováčky."
+      },
+      "alone": {
+        "q": "Můžu přijít sám?",
+        "a": "Ano, většina lidí chodí sama. U stolu se rychle seznámíte — k tomu hra je."
+      },
+      "players": {
+        "q": "Kolik lidí hraje u stolu?",
+        "a": "10 hráčů a moderátor. Když se přihlásí víc lidí, otevřeme druhý stůl."
+      },
+      "duration": {
+        "q": "Jak dlouho hra trvá?",
+        "a": "Jedna hra trvá asi hodinu. Klubový večer je několik her za sebou, počítejte tedy se 3–4 hodinami."
+      },
+      "age": {
+        "q": "Od kolika let se dá hrát?",
+        "a": "Klubové hry jsou pro dospělé. Pro děti a teenagery máme zvláštní formát — dětskou mafii."
+      },
+      "when": {
+        "q": "Kdy a kde se hraje?",
+        "a": "V úterý v 18:45 — mini-turnaje v Aura Shisha & Karaoke, v neděli ve 14:00 — MafiaCL Arena v POP PAUSE Popcorn Café. Aktuální rozpis je na stránce Hrát."
+      },
+      "signup": {
+        "q": "Jak se přihlásit?",
+        "a": "Na stránce Hrát nebo přes našeho Telegram bota. Na úterý platí předregistrace: držitelé permanentky mají přednost, ostatní dostávají potvrzení v pořadí přihlášení."
+      },
+      "price": {
+        "q": "Kolik to stojí?",
+        "a": "Cena je uvedena v oznámení každé hry. Pro pravidelné hráče je permanentka: dává přednost při přihlášení a pokrývá poplatek za večer."
+      },
+      "season": {
+        "q": "Co je sezóna a žebříček?",
+        "a": "Každá hra přináší body do žebříčku sezóny. Nejlepší hráči sezóny postupují do finále a bojují o titul mistra klubu."
+      },
+      "language": {
+        "q": "V jakém jazyce hrajete?",
+        "a": "Klubové hry obvykle probíhají v ruštině a ukrajinštině. Firemní akce vedeme i v angličtině a češtině."
+      },
+      "corporate": {
+        "q": "Můžeme si objednat hru pro firmu?",
+        "a": "Ano: firemní akce, narozeniny, večírky s přáteli — u vás nebo u partnerů. Podrobnosti a poptávka jsou na stránce Firemní akce."
+      },
+      "kids": {
+        "q": "Máte hry pro děti?",
+        "a": "Ano, dětskou mafii — s upravenými pravidly a moderátorem, i na narozeniny."
+      },
+      "contact": {
+        "q": "Máte další otázku?",
+        "a": "Napište zakladateli klubu na Telegram @Yes1911 — odpovíme."
+      }
+    },
+    "still": "Nenašli jste odpověď? Napište nám — nebo prostě přijďte na hru.",
+    "toLearn": "Pro nováčky",
+    "toPlay": "Rozpis her",
+    "ask": "Zeptat se na Telegramu"
   }
 }

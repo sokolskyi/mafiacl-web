@@ -3,7 +3,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const TESTIMONIALS_TAG = "testimonials";
-export const EVENT_TYPES = ["teambuilding", "party", "birthday", "office", "club", "other"] as const;
+export const EVENT_TYPES = ["teambuilding", "party", "birthday", "friends", "hens", "turnkey", "office", "club", "other"] as const;
 export type EventType = (typeof EVENT_TYPES)[number];
 
 export type Testimonial = {

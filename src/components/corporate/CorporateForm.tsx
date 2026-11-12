@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { submitCorporateRequest, type CorporateState } from "@/lib/corporate-actions";
 
-const FORMATS = ["teambuilding", "party", "birthday", "office", "club", "other"] as const;
+const FORMATS = ["teambuilding", "party", "birthday", "friends", "hens", "turnkey", "office", "club", "other"] as const;
 const LANGS = ["cs", "ru", "uk", "en"] as const;
 
 export function CorporateForm({ locale }: { locale: string }) {

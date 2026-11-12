@@ -7,6 +7,7 @@ export const ABOUT_PAGES = [
   { key: "code", href: "/about/code" },
   { key: "team", href: "/about/team" },
   { key: "hall", href: "/hall-of-fame" },
+  { key: "gala", href: "/about/gala" },
   { key: "promotions", href: "/about/promotions" },
   { key: "bans", href: "/about/bans" },
   { key: "contacts", href: "/contacts" },

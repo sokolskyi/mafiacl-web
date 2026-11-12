@@ -8,7 +8,7 @@ import { isBotConfigured, sendMessage, escapeHtml } from "@/lib/telegram/api";
 
 export type CorporateState = { ok?: boolean; error?: "invalid" | "tooMany" | "save" };
 
-const FORMATS = ["teambuilding", "party", "birthday", "office", "club", "other"] as const;
+const FORMATS = ["teambuilding", "party", "birthday", "friends", "hens", "turnkey", "office", "club", "other"] as const;
 const LANGS = ["cs", "ru", "uk", "en"] as const;
 
 /** Заявка на корпоратив с открытой страницы: защита от ботов — скрытое поле и лимиты по IP и в целом. */

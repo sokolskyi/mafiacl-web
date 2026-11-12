@@ -510,7 +510,7 @@ export async function AdminHome({
                 <label className="text-sm">{t("fields.reviewEvent")}
                   <select name="eventType" defaultValue={r?.event_type ?? ""} className={`mt-1 w-full ${input}`}>
                     <option value="">—</option>
-                    {(["teambuilding", "party", "birthday", "office", "club", "other"] as const).map((f) => <option key={f} value={f}>{t(`formats.${f}`)}</option>)}
+                    {(["teambuilding", "party", "birthday", "friends", "hens", "turnkey", "office", "club", "other"] as const).map((f) => <option key={f} value={f}>{t(`formats.${f}`)}</option>)}
                   </select>
                 </label>
                 <label className="text-sm">{t("fields.reviewDate")}
