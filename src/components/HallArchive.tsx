@@ -56,7 +56,9 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                 <p className={h3}>{t("catSeason")}</p>
                 <ul className="mt-3 grid gap-4 sm:grid-cols-2">
                   {seasons.map((e) => (
-                    <li key={e.id} className="rounded-lg border border-amber-400/40 bg-neutral-950/60 p-5">
+                    <li key={e.id} className="overflow-hidden rounded-lg border border-amber-400/40 bg-neutral-950/60">
+                      {e.photos.length > 0 && <Photos photos={e.photos} alt={`${t("seasonTitle", { n: e.season ?? "" })} · ${e.places[0] ?? ""}`} />}
+                      <div className="p-5">
                       <p className="font-display text-2xl font-extrabold uppercase">{t("seasonTitle", { n: e.season ?? "" })}</p>
                       <ol className="mt-2 space-y-1">
                         {e.places.map((p, i) => (
@@ -64,6 +66,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                         ))}
                       </ol>
                       {e.note && <p className="mt-2 text-sm text-neutral-400">{e.note}</p>}
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -122,5 +125,28 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
       })}
       <p className="mt-10 text-sm text-neutral-500">{t("archiveSource")}</p>
     </section>
+  );
+}
+
+/** Фото к записи архива: первое крупно, остальные — миниатюры; клик открывает оригинал. */
+function Photos({ photos, alt }: { photos: string[]; alt: string }) {
+  const [first, ...rest] = photos;
+  return (
+    <div>
+      <a href={first} target="_blank" rel="noopener" className="block">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={first} alt={alt} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+      </a>
+      {rest.length > 0 && (
+        <div className="flex gap-1 bg-black/40 p-1">
+          {rest.map((src, i) => (
+            <a key={src} href={src} target="_blank" rel="noopener" className="block flex-1">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt={`${alt} · ${i + 2}`} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

@@ -9,11 +9,21 @@ import { loc } from "@/lib/shop/queries";
 import { createClient } from "@/lib/supabase/server";
 import { registerTournament, cancelTournament } from "@/lib/tournament-actions";
 import { tournamentDates } from "@/components/tournaments/TournamentCards";
+import { BrandPage } from "@/components/tournaments/BrandViews";
+import { brandBySlug, brandOf } from "@/lib/tournamentBrands";
+import { getTournaments } from "@/lib/tournaments";
+import { getHallArchive } from "@/lib/hallArchive";
+import { MAIN_CLUB_SLUG } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/tournaments/[slug]">;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
+  const brand = brandBySlug(slug);
+  if (brand) {
+    const t = await getTranslations({ locale, namespace: "tournaments" });
+    return { title: t(`brands.${brand.key}.name`), description: t(`brands.${brand.key}.about`) };
+  }
   const data = await getTournament(slug);
   if (!data) return { title: "Tournament" };
   const d = data.tournament;
@@ -34,6 +44,11 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "tournaments" });
+  const brand = brandBySlug(slug);
+  if (brand) {
+    const [all, hall] = await Promise.all([getTournaments(MAIN_CLUB_SLUG), getHallArchive(MAIN_CLUB_SLUG)]);
+    return <BrandPage brand={brand} tournaments={all} hall={hall} locale={locale} />;
+  }
   const data = await getTournament(slug);
   if (!data) notFound();
   const x = data.tournament;
@@ -42,11 +57,20 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   const time = x.startsAt ? new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Prague" }).format(new Date(x.startsAt)) : null;
   const desc = loc(x.description, locale);
   const sp = await searchParams;
+  const ownBrand = brandOf(x.name);
 
   return (
     <article>
       <p>
         <Link href="/tournaments" className="inline-flex min-h-11 items-center text-sm text-neutral-300 hover:underline">← {t("all")}</Link>
+        {ownBrand && (
+          <>
+            <span aria-hidden="true" className="mx-2 text-neutral-500">/</span>
+            <Link href={{ pathname: "/tournaments/[slug]", params: { slug: ownBrand.slug } }} className="inline-flex min-h-11 items-center text-sm text-neutral-300 hover:underline">
+              {t("allEditions", { name: t(`brands.${ownBrand.key}.name`) })}
+            </Link>
+          </>
+        )}
       </p>
       {x.coverUrl && (
         // eslint-disable-next-line @next/next/no-img-element

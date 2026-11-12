@@ -71,7 +71,7 @@
     },
     "corporate": {
       "title": "Company mafia in your city",
-      "description": "Team building and company events with mafia and a professional host — in Prague and almost any city in the world."
+      "description": "Team building and company events with mafia and a professional host — in Prague, across the Czech Republic and abroad."
     },
     "kids": {
       "title": "Kids mafia",
@@ -868,7 +868,7 @@
     "empty": "The club's partners will appear here soon."
   },
   "corporate": {
-    "lead": "A game that gets colleagues talking to each other in a new way. A club host runs a mafia night for your team — at our club, in your office or at a restaurant.",
+    "lead": "A game that gets colleagues talking to each other in a new way. A club host runs a mafia night for your team — in your office, at a café or restaurant, or at one of our partner venues.",
     "ctaRequest": "Send a request",
     "ctaHosts": "Our hosts",
     "whyTitle": "Why mafia works for company events",
@@ -906,11 +906,11 @@
       },
       "office": {
         "title": "We come to you",
-        "text": "Your office, a restaurant or a country house — we bring all the props."
+        "text": "Your office, a café, a restaurant or a country house — we bring all the props."
       },
       "club": {
-        "title": "At our club",
-        "text": "A ready-made game room in Prague: tables, lights, sound — just bring your team."
+        "title": "Partner venue",
+        "text": "No space of your own? We'll suggest a café, bar or restaurant from the club's partners — with a separate table or room for the game."
       },
       "other": {
         "title": "Other",
@@ -967,7 +967,7 @@
       },
       "4": {
         "q": "Can you come to us or to another city?",
-        "a": "Yes. We come to your office, a restaurant or another venue and bring the props. Besides Prague, we run games in almost any city in Europe and the world — with hosts from our network."
+        "a": "Yes. We come to your office, a café, a restaurant or another venue and bring the props — or suggest one of our partner venues. We run games beyond the Czech Republic, in other cities and countries too: just mention it in your request."
       },
       "5": {
         "q": "How far ahead should we book?",
@@ -1001,7 +1001,7 @@
     },
     "reviewsTitle": "Reviews",
     "geoTitle": "Where we play",
-    "geo": "In Prague we host ourselves; elsewhere we work with hosts from our network of partner clubs. We can run a game in almost any European capital and across Europe, as well as in the USA, Canada, Australia, Kazakhstan and beyond. Tell us the city and we'll find a host in the right language."
+    "geo": "We run company events not only in Prague and across the Czech Republic, but in other cities and countries too. Tell us where and when you're planning the event, and we'll let you know what's possible in your city."
   },
   "hosts": {
     "empty": "Our hosts will appear here soon.",
@@ -1190,7 +1190,99 @@
     "players": "Players",
     "winners": "Winners",
     "moreInfo": "More details: tables and rating",
-    "results": "Results on {host}"
+    "results": "Results on {host}",
+    "clubTournaments": "Club tournaments",
+    "archiveTitle": "Archive: Kharkiv",
+    "archiveLead": "Tournaments the club ran in Kharkiv before 2022.",
+    "brandStats": "{count, plural, one {# edition} other {# editions}} · since {year}",
+    "nextOn": "Next: {date}",
+    "notAnnounced": "Not announced yet. Follow the club’s news.",
+    "previousYears": "Previous years",
+    "detailsAndRegistration": "Details and registration",
+    "projectPage": "Project page",
+    "allEditions": "{name}: all years",
+    "brands": {
+      "championship": {
+        "name": "MafiaCL Championship",
+        "about": "The club’s annual championship since 2013: first in Kharkiv, in Prague since 2023."
+      },
+      "centralCup": {
+        "name": "Central Cup",
+        "about": "The club’s autumn tournament in Prague since 2023, part of the Four Seasons series."
+      },
+      "winners": {
+        "name": "Tournament of Winners",
+        "about": "A tournament open only to winners of the club’s mini-tournaments."
+      },
+      "kings": {
+        "name": "MafiaCL Kings",
+        "about": "The year-end tournament for the top players of the club’s ratings."
+      },
+      "mcl": {
+        "name": "Mafia Champions League",
+        "about": "A league of qualifying series in different cities plus a final: in Ukraine since 2016, MCL Europe since 2022."
+      },
+      "battle": {
+        "name": "Battle of Champions",
+        "about": "A tournament where only tournament winners play."
+      },
+      "centralEuroCup": {
+        "name": "Central Euro Cup",
+        "about": "A series of qualifying stages with a final in Prague."
+      },
+      "protocol": {
+        "name": "MafiaCL Protocol 4",
+        "about": "A tournament with pair and individual standings."
+      },
+      "czechMeHard": {
+        "name": "Czech me hard",
+        "about": "The club’s Prague tournament since 2025."
+      },
+      "worldChampionship": {
+        "name": "Mafia World Championship",
+        "about": "The Mafgame federation world championship, hosted by the club in Prague."
+      },
+      "gameOfMasks": {
+        "name": "Game of Masks",
+        "about": "A tournament with individual and team standings."
+      },
+      "teamEuro": {
+        "name": "Team European Championship",
+        "about": "A team tournament hosted by the club in Prague."
+      },
+      "euromaf": {
+        "name": "EUROMAF",
+        "about": "The first FIIM tournament in Prague: all fees went to support Ukraine."
+      },
+      "cityLeague": {
+        "name": "City League",
+        "about": "Series between clubs from different cities."
+      },
+      "slobozhanshchyna": {
+        "name": "Sloboda Cup",
+        "about": "The club’s main summer tournament in Kharkiv, 2014–2021."
+      },
+      "kharkivCup": {
+        "name": "MafiaCL Kharkiv Cup",
+        "about": "The club’s birthday tournament with individual and pair standings."
+      },
+      "marathon": {
+        "name": "Mafia Marathon",
+        "about": "A 24-hour non-stop pair tournament."
+      },
+      "ust": {
+        "name": "Ukrainian Students Tournament",
+        "about": "A student tournament in Kharkiv."
+      },
+      "studentLeague": {
+        "name": "Student League",
+        "about": "The club’s student league in Kharkiv."
+      },
+      "mafiaStars": {
+        "name": "Mafia Stars",
+        "about": "The Mafia Stars project tournament: Kharkiv, then Mafia Stars Ukraine and Europe."
+      }
+    }
   },
   "about": {
     "title": "About the club",

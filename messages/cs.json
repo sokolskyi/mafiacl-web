@@ -71,7 +71,7 @@
     },
     "corporate": {
       "title": "Firemní mafie ve vašem městě",
-      "description": "Teambuildingy a firemní akce s mafií a profesionálním moderátorem — v Praze i téměř v jakémkoli městě světa."
+      "description": "Teambuildingy a firemní akce s mafií a profesionálním moderátorem — v Praze, po celém Česku i v zahraničí."
     },
     "kids": {
       "title": "Dětská mafie",
@@ -868,7 +868,7 @@
     "empty": "Brzy tu budou partneři klubu."
   },
   "corporate": {
-    "lead": "Hra, po které spolu kolegové mluví jinak. Moderátor klubu povede večer mafie pro váš tým — u nás v klubu, ve vaší kanceláři nebo v restauraci.",
+    "lead": "Hra, po které spolu kolegové mluví jinak. Moderátor klubu povede večer mafie pro váš tým — ve vaší kanceláři, v kavárně či restauraci, nebo v prostorách některého z našich partnerů.",
     "ctaRequest": "Poslat poptávku",
     "ctaHosts": "Naši moderátoři",
     "whyTitle": "Proč mafie na firemní akci funguje",
@@ -906,11 +906,11 @@
       },
       "office": {
         "title": "Přijedeme k vám",
-        "text": "Do kanceláře, restaurace nebo chalupy — rekvizity vezeme s sebou."
+        "text": "Do kanceláře, kavárny, restaurace nebo na chalupu — rekvizity vezeme s sebou."
       },
       "club": {
-        "title": "U nás v klubu",
-        "text": "Hotový herní sál v Praze: stoly, světla, zvuk — stačí přijít s týmem."
+        "title": "U našich partnerů",
+        "text": "Nemáte vlastní prostor? Nabídneme kavárnu, bar nebo restauraci z řad partnerů klubu — se samostatným stolem či sálem pro hru."
       },
       "other": {
         "title": "Jiné",
@@ -967,7 +967,7 @@
       },
       "4": {
         "q": "Můžete přijet k nám nebo do jiného města?",
-        "a": "Ano. Přijedeme do kanceláře, restaurace nebo jinam a rekvizity přivezeme. Kromě Prahy hrajeme téměř v jakémkoli městě Evropy i světa — s moderátory z naší sítě."
+        "a": "Ano. Přijedeme do kanceláře, kavárny, restaurace nebo jinam a rekvizity přivezeme — případně nabídneme prostory našich partnerů. Hrajeme nejen v Česku, ale i v dalších městech a zemích: uveďte to v poptávce."
       },
       "5": {
         "q": "Jak dlouho dopředu rezervovat?",
@@ -1001,7 +1001,7 @@
     },
     "reviewsTitle": "Recenze",
     "geoTitle": "Kde hrajeme",
-    "geo": "V Praze sami, v dalších městech s moderátory z naší sítě partnerských klubů. Hru připravíme téměř v každé evropské metropoli a po celé Evropě, ale také v USA, Kanadě, Austrálii, Kazachstánu a jinde. Napište město a najdeme moderátora v potřebném jazyce."
+    "geo": "Firemní akce pořádáme nejen v Praze a po celém Česku, ale i v dalších městech a zemích. Napište, kde a kdy akci plánujete, — řekneme vám, co je ve vašem městě možné."
   },
   "hosts": {
     "empty": "Brzy tu budou moderátoři.",
@@ -1190,7 +1190,99 @@
     "players": "Hráčů",
     "winners": "Medailisté",
     "moreInfo": "Více: tabulky a žebříček",
-    "results": "Výsledky na {host}"
+    "results": "Výsledky na {host}",
+    "clubTournaments": "Turnaje klubu",
+    "archiveTitle": "Archiv: Charkov",
+    "archiveLead": "Turnaje, které klub pořádal v Charkově do roku 2022.",
+    "brandStats": "{count, plural, one {# ročník} few {# ročníky} other {# ročníků}} · od roku {year}",
+    "nextOn": "Další: {date}",
+    "notAnnounced": "Zatím neohlášeno. Sledujte novinky klubu.",
+    "previousYears": "Předchozí ročníky",
+    "detailsAndRegistration": "Podrobnosti a registrace",
+    "projectPage": "Stránka projektu",
+    "allEditions": "{name}: všechny ročníky",
+    "brands": {
+      "championship": {
+        "name": "MafiaCL Championship",
+        "about": "Každoroční šampionát klubu od roku 2013: nejdřív v Charkově, od roku 2023 v Praze."
+      },
+      "centralCup": {
+        "name": "Central Cup",
+        "about": "Podzimní turnaj klubu v Praze od roku 2023, součást série Four Seasons."
+      },
+      "winners": {
+        "name": "Turnaj vítězů",
+        "about": "Turnaj, kam postupují jen vítězové klubových mini-turnajů."
+      },
+      "kings": {
+        "name": "MafiaCL Kings",
+        "about": "Závěrečný turnaj roku pro nejlepší hráče klubových žebříčků."
+      },
+      "mcl": {
+        "name": "Mafia Champions League",
+        "about": "Liga kvalifikačních sérií v různých městech a finále: od roku 2016 na Ukrajině, od roku 2022 MCL Europe."
+      },
+      "battle": {
+        "name": "Bitva šampionů",
+        "about": "Turnaj, ve kterém hrají jen vítězové turnajů."
+      },
+      "centralEuroCup": {
+        "name": "Central Euro Cup",
+        "about": "Série kvalifikačních kol a finále v Praze."
+      },
+      "protocol": {
+        "name": "MafiaCL Protocol 4",
+        "about": "Turnaj s párovým i individuálním hodnocením."
+      },
+      "czechMeHard": {
+        "name": "Czech me hard",
+        "about": "Klubový turnaj v Praze od roku 2025."
+      },
+      "worldChampionship": {
+        "name": "Mafia World Championship",
+        "about": "Mistrovství světa federace Mafgame, které klub uspořádal v Praze."
+      },
+      "gameOfMasks": {
+        "name": "Game of Masks",
+        "about": "Turnaj s individuálním i týmovým hodnocením."
+      },
+      "teamEuro": {
+        "name": "Týmové mistrovství Evropy",
+        "about": "Týmový turnaj, který klub uspořádal v Praze."
+      },
+      "euromaf": {
+        "name": "EUROMAF",
+        "about": "První turnaj FIIM v Praze: všechny startovné šlo na podporu Ukrajiny."
+      },
+      "cityLeague": {
+        "name": "City League",
+        "about": "Série mezi kluby z různých měst."
+      },
+      "slobozhanshchyna": {
+        "name": "Pohár Slobožanščiny",
+        "about": "Hlavní letní turnaj klubu v Charkově, 2014–2021."
+      },
+      "kharkivCup": {
+        "name": "MafiaCL Kharkiv Cup",
+        "about": "Turnaj k narozeninám klubu s individuálním i párovým hodnocením."
+      },
+      "marathon": {
+        "name": "Maf-maraton",
+        "about": "Párový turnaj na 24 hodin bez přestávky."
+      },
+      "ust": {
+        "name": "Ukrainian Students Tournament",
+        "about": "Studentský turnaj v Charkově."
+      },
+      "studentLeague": {
+        "name": "Student League",
+        "about": "Studentská liga klubu v Charkově."
+      },
+      "mafiaStars": {
+        "name": "Mafia Stars",
+        "about": "Turnaj projektu Mafia Stars: Charkov, poté Mafia Stars Ukraine a Europe."
+      }
+    }
   },
   "about": {
     "title": "O klubu",

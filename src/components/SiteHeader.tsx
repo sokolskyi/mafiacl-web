@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { MAIN_NAV, SECTIONS } from "@/lib/site";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { MobileMenu } from "./MobileMenu";
 
 export async function SiteHeader({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "nav" });
@@ -16,7 +17,7 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width={112} height={40} className="h-10 w-auto" />
         </Link>
-        <details className="group relative xl:hidden">
+        <MobileMenu className="group relative xl:hidden">
           <summary className="inline-flex min-h-11 cursor-pointer list-none items-center rounded-full border border-white/55 px-4 text-sm font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
             {c("menu")}
           </summary>
@@ -32,7 +33,7 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
               </Suspense>
             </div>
           </nav>
-        </details>
+        </MobileMenu>
         <nav aria-label={c("menu")} className="hidden flex-1 gap-x-5 text-sm xl:flex">
           {MAIN_NAV.map((key) => (
             <Link key={key} href={SECTIONS[key]} className="inline-flex min-h-11 items-center font-semibold text-neutral-300 hover:text-white">
