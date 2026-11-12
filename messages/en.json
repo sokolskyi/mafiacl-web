@@ -1230,6 +1230,12 @@
           "text": "A season that lasts the whole year. Club players represent Kharkiv with two teams at the Team World Mafia Championship in Kyiv."
         },
         {
+          "year": "2021",
+          "place": "Europe",
+          "title": "Mafia Stars Europe",
+          "text": "The fifth and final season of the club's tournament series: qualifying series in several cities, semi-finals and a 20-player final on 9–10 October 2021. A 4★ Mafia World Tour event with about 180 participants."
+        },
+        {
           "year": "2022",
           "place": "Prague",
           "title": "MafiaCL in Prague",
@@ -1360,7 +1366,8 @@
       "socialText": "Game announcements, photos, results and streams.",
       "projectsTitle": "Club projects",
       "projects": {
-        "mcl": "Mafia Champions League Europe — the club's European tournament series with the final in Prague."
+        "mcl": "Mafia Champions League Europe — the club's European tournament series with the final in Prague.",
+        "stars": "The club's tournament series: qualifying series in different cities, semi-finals and a 20-player final. Five seasons, the last in 2021 with the final on 9–10 October 2021."
       },
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history."

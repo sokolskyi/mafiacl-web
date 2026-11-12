@@ -32,7 +32,8 @@ export const PROJECTS: { key: "mcl" | "stars"; name: string; href?: string; link
   },
   {
     key: "stars",
-    name: "Mafia Stars",
+    name: "Mafia Stars Europe",
+    href: "https://mafiaworldtour.com/tournaments/1310",
     links: [
       { kind: "telegram", label: "@mafiastarsw", href: "https://t.me/mafiastarsw" },
       { kind: "instagram", label: "@mafiastarsw", href: "https://www.instagram.com/mafiastarsw/" },

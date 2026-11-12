@@ -1230,6 +1230,12 @@
           "text": "Sezóna dlouhá celý rok. Hráči klubu reprezentují Charkov dvěma týmy na týmovém mistrovství světa v mafii v Kyjevě."
         },
         {
+          "year": "2021",
+          "place": "Evropa",
+          "title": "Mafia Stars Europe",
+          "text": "Pátá a poslední sezóna turnajové série klubu: kvalifikační série v různých městech, semifinále a finále pro 20 hráčů 9.–10. října 2021. Turnaj 4★ v sérii Mafia World Tour, zhruba 180 účastníků."
+        },
+        {
           "year": "2022",
           "place": "Praha",
           "title": "MafiaCL v Praze",
@@ -1360,7 +1366,8 @@
       "socialText": "Pozvánky na hry, fotky, výsledky a přenosy.",
       "projectsTitle": "Projekty klubu",
       "projects": {
-        "mcl": "Mafia Champions League Europe — turnajová série klubu po Evropě s finále v Praze."
+        "mcl": "Mafia Champions League Europe — turnajová série klubu po Evropě s finále v Praze.",
+        "stars": "Turnajová série klubu: kvalifikační série v různých městech, semifinále a finále pro 20 hráčů. Pět sezón, poslední v roce 2021, finále 9.–10. října 2021."
       },
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón."
