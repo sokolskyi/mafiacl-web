@@ -19,12 +19,10 @@ export const BRANDS = [
   { key: "gameOfMasks", slug: "game-of-masks", match: /game of masks/i },
   { key: "teamEuro", slug: "team-european-championship", match: /командный чемпионат европы/i },
   { key: "euromaf", slug: "euromaf", match: /euromaf/i },
-  { key: "cityLeague", slug: "city-league", match: /city league/i },
   { key: "slobozhanshchyna", slug: "kubok-slobozhanshchyny", match: /кубок слобожанщины/i },
   { key: "kharkivCup", slug: "mafiacl-kharkiv-cup", match: /kharkiv cup/i },
   { key: "marathon", slug: "maf-marathon", match: /маф-марафон/i },
   { key: "ust", slug: "ukrainian-students-tournament", match: /ukrainian students tournament/i },
-  { key: "studentLeague", slug: "student-league", match: /student league/i },
   { key: "mafiaStars", slug: "mafia-stars", match: /mafia stars/i },
 ] as const;
 

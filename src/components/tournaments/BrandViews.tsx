@@ -34,7 +34,7 @@ export async function BrandGrid({ tournaments, hall, locale }: { tournaments: To
 
   const card = ({ b, eds }: { b: Brand; eds: Edition[] }) => {
     const next = eds.find(isUpcoming);
-    const last = eds.find((e) => !isUpcoming(e) && e.places[0]);
+    const winners = eds.filter((e) => !isUpcoming(e) && e.places[0]);
     const first = eds[eds.length - 1].year;
     return (
       <li key={b.key} className="relative flex flex-col rounded-lg border border-white/15 bg-neutral-950/60 p-5 focus-within:outline focus-within:outline-2 focus-within:outline-white">
@@ -43,13 +43,20 @@ export async function BrandGrid({ tournaments, hall, locale }: { tournaments: To
             {t(`brands.${b.key}.name`)}
           </Link>
         </h3>
-        <p className="mt-2 text-sm text-neutral-300">{t(`brands.${b.key}.about`)}</p>
+        {winners.length > 0 && (
+          <ul className="mt-2 space-y-0.5 text-sm">
+            {winners.map((e) => (
+              <li key={e.year}>
+                <span className="text-neutral-400">{e.year}</span> 🥇 <span className="font-semibold">{e.places[0]}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-3 text-sm text-neutral-300">{t(`brands.${b.key}.about`)}</p>
         <p className="mt-3 text-sm text-neutral-400">{t("brandStats", { count: eds.length, year: first })}</p>
         <div className="mt-auto pt-3 text-sm">
           {next ? (
             <p className="font-semibold text-red-300">{t("nextOn", { date: tournamentDates(next.tournament!, locale) })}</p>
-          ) : last ? (
-            <p className="font-semibold">🥇 {last.places[0]} <span className="font-normal text-neutral-400">({last.year})</span></p>
           ) : null}
         </div>
       </li>

@@ -1,7 +1,7 @@
 {
   "nav": {
     "play": "Hrát",
-    "kings": "Kings",
+    "kings": "MafiaCL Kings",
     "tournaments": "Turnaje",
     "ratings": "Žebříčky",
     "learn": "Pro nováčky",
@@ -1429,7 +1429,7 @@
         {
           "title": "U herního stolu",
           "items": [
-            "Hrajeme podle pravidel FIIM a reglementu turnaje; nuance pravidel oznamujeme před začátkem her.",
+            "Hrajeme podle pravidel klasické mafie a reglementu turnaje; nuance pravidel oznamujeme před začátkem her.",
             "Vykáme si a řeč končíme slovem „Děkuji“.",
             "Sázky, přísahy a odvolávání se na vnější okolnosti jsou zakázané — tým za ně prohrává.",
             "V noci žádná gesta ani zvuky: dotyk nad stolem znamená vyloučení, pod stolem faul.",
@@ -1530,15 +1530,14 @@
     },
     "gala": {
       "title": "MafiaCL Gala Night",
-      "lead": "Každý prosinec klub zakončuje rok večírkem: dress code, sváteční hry a ocenění pro nejlepší hráče a moderátory v kategoriích klubu.",
+      "lead": "Každý prosinec klub zakončuje rok večírkem: sváteční hry a ocenění pro nejlepší hráče a moderátory v kategoriích klubu.",
       "programTitle": "Jak večer probíhá",
       "program": [
         "Vyhlášení v kategoriích klubu",
         "Sváteční hry mafie",
-        "Dress code a fotky na památku",
+        "Fotky na památku",
         "Večer s hráči a moderátory"
       ],
-      "dressCode": "Dress code: {code}",
       "nominationsTitle": "Kategorie a vítězové",
       "nominations": {
         "bestHost": "Nejlepší moderátor",

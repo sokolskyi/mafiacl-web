@@ -16,9 +16,6 @@ export type GalaNomination = (typeof GALA_NOMINATIONS)[number];
 export type GalaNight = {
   year: number;
   date: string;
-  venue: string;
-  address?: string;
-  dressCode: string;
   winners: Partial<Record<GalaNomination, string>>;
   albumUrl?: string;
   postUrl?: string;
@@ -28,9 +25,6 @@ export const GALA_NIGHTS: GalaNight[] = [
   {
     year: 2025,
     date: "2025-12-24",
-    venue: "Myata lounge",
-    address: "nám. 14. října 1278/1, Praha 5 – Smíchov",
-    dressCode: "Creative Black Tie",
     winners: {
       bestHost: "Espresso Martini",
       breakthrough: "DOVOD",
@@ -49,9 +43,6 @@ export const GALA_NIGHTS: GalaNight[] = [
   {
     year: 2024,
     date: "2024-12-17",
-    venue: "Aura Shisha & Karaoke",
-    address: "Cimburkova 402/10, Praha 3 – Žižkov",
-    dressCode: "Creative Black Tie",
     winners: {
       bestHost: "Trinity",
       breakthrough: "qUAest0r",

@@ -1,7 +1,7 @@
 {
   "nav": {
     "play": "Play",
-    "kings": "Kings",
+    "kings": "MafiaCL Kings",
     "tournaments": "Tournaments",
     "ratings": "Ratings",
     "learn": "New players",
@@ -1429,7 +1429,7 @@
         {
           "title": "At the table",
           "items": [
-            "We play by FIIM rules and the tournament regulations; rule nuances are announced before the games start.",
+            "We play by classic mafia rules and the tournament regulations; rule nuances are announced before the games start.",
             "We address each other formally and end every speech with “Thank you”.",
             "Bets, oaths and appeals to outside circumstances are forbidden — the team loses the game for them.",
             "No gestures or sounds at night: touching above the table means removal, below the table a foul.",
@@ -1530,15 +1530,14 @@
     },
     "gala": {
       "title": "MafiaCL Gala Night",
-      "lead": "Every December the club closes the year with a party: a dress code, festive games and awards for the best players and hosts in the club's categories.",
+      "lead": "Every December the club closes the year with a party: festive games and awards for the best players and hosts in the club's categories.",
       "programTitle": "The evening",
       "program": [
         "Awards in the club's categories",
         "Festive mafia games",
-        "Dress code and photos to remember",
+        "Photos to remember",
         "An evening with players and hosts"
       ],
-      "dressCode": "Dress code: {code}",
       "nominationsTitle": "Categories and winners",
       "nominations": {
         "bestHost": "Best host",

@@ -38,11 +38,7 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
           <h2 id={`gala-${g.year}`} className="font-display text-4xl font-extrabold uppercase sm:text-5xl">
             Gala Night <span className="text-amber-300">{g.year}</span>
           </h2>
-          <p className="mt-3 text-neutral-300">
-            {date.format(new Date(`${g.date}T12:00:00Z`))} · {g.venue}
-            {g.address && <span className="text-neutral-400"> · {g.address}</span>}
-          </p>
-          <p className="mt-1 text-sm text-neutral-400">{t("dressCode", { code: g.dressCode })}</p>
+          <p className="mt-3 text-neutral-300">{date.format(new Date(`${g.date}T12:00:00Z`))}</p>
           <h3 className="mt-6 text-sm font-semibold uppercase tracking-widest text-neutral-400">{t("nominationsTitle")}</h3>
           <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {GALA_NOMINATIONS.filter((n) => g.winners[n]).map((n) => (

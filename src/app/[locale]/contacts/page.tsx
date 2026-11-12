@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getVenues } from "@/lib/venues";
 import { loc } from "@/lib/shop/queries";
-import { CLUB_SOCIAL, KHARKIV_SOCIAL, PROJECTS, SIGNUP_CONTACTS, type SocialLink } from "@/lib/social";
+import { CLUB_SOCIAL, KHARKIV_SOCIAL, SIGNUP_CONTACTS, type SocialLink } from "@/lib/social";
 import { AboutHeader, AboutNav } from "@/components/about/AboutNav";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/contacts">) {
@@ -75,21 +75,6 @@ export default async function Page({ params }: PageProps<"/[locale]/contacts">) 
                   {t("map")}
                 </a>
               )}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="projects" className="mt-14">
-        <h2 id="projects" className={h2}>{t("projectsTitle")}</h2>
-        <ul className="mt-6 grid gap-5 sm:grid-cols-2">
-          {PROJECTS.map((p) => (
-            <li key={p.key} className="rounded-lg border border-white/15 bg-neutral-950/60 p-6">
-              <p className="font-display text-2xl font-extrabold uppercase">
-                {p.href ? <a href={p.href} className="hover:underline">{p.name}</a> : p.name}
-              </p>
-              {t.has(`projects.${p.key}`) && <p className="mt-2 text-neutral-300">{t(`projects.${p.key}`)}</p>}
-              {links(p.links)}
             </li>
           ))}
         </ul>
