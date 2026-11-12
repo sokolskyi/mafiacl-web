@@ -11,9 +11,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   // /mcl/ должен остаться со слешем: страница грузит файлы относительными путями.
   skipTrailingSlashRedirect: true,
-  async redirects() {
-    return [{ source: "/mcl", destination: "/mcl/", permanent: false }];
-  },
+  // /mcl без слэша → /mcl/ делает src/proxy.ts (здесь redirect матчит и /mcl/, получается петля).
   async rewrites() {
     return [
       { source: "/mcl/", destination: `${LEGACY}/mcl/` },
