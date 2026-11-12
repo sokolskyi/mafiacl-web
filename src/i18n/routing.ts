@@ -20,6 +20,7 @@ export const routing = defineRouting({
     "/learn": { cs: "/pravidla", ru: "/pravila", uk: "/pravyla", en: "/rules" },
     "/documents": { cs: "/dokumenty", ru: "/dokumenty", uk: "/dokumenty", en: "/documents" },
     "/blog": "/blog",
+    "/blog/[slug]": "/blog/[slug]",
     "/gallery": { cs: "/galerie", ru: "/galereya", uk: "/halereia", en: "/gallery" },
     "/shop": { cs: "/obchod", ru: "/magazin", uk: "/mahazyn", en: "/shop" },
     "/shop/cart": { cs: "/obchod/kosik", ru: "/magazin/korzina", uk: "/mahazyn/kosh", en: "/shop/cart" },

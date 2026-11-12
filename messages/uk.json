@@ -59,7 +59,7 @@
     },
     "blog": {
       "title": "Блог і новини",
-      "description": "Новини клубу, статті про мафію та матеріали гравців."
+      "description": "Щомісячні огляди сезону за всіма рейтингами клубу, новини й статті про мафію."
     },
     "gallery": {
       "title": "Галерея",
@@ -473,7 +473,13 @@
     "promotions": "Акції — {club}",
     "promotionsHint": "Показуються в розділі «Про клуб» → «Акції». Прострочені можна приховати або видалити.",
     "addPromotion": "Додати акцію",
-    "promoUntilShort": "до {date}"
+    "promoUntilShort": "до {date}",
+    "reviews": "Огляди сезону — {club}",
+    "reviewsHint": "Огляд збирається сам 1-го числа щомісяця за всіма рейтингами (Premier League, Arena, Kings, MCL) і публікується в блозі. Кнопка збирає огляд за поточний місяць просто зараз; 1-го числа він оновиться підсумковими цифрами.",
+    "generateReview": "Зібрати огляд за поточний місяць",
+    "reviewPartial": "на середину місяця",
+    "hideReview": "Приховати",
+    "showReview": "Показати"
   },
   "match": {
     "matches": "Партії вечора",
@@ -1372,5 +1378,70 @@
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Архів клубу харківських часів: фото, ігри й історія сезонів."
     }
+  },
+  "reviews": {
+    "listTitle": "Огляди сезону",
+    "listLead": "Щомісяця — підсумки всіх рейтингів клубу: лідери, хто піднявся, хто в зоні проходу на MafiaCL Kings.",
+    "listEmpty": "Перший огляд з’явиться 1-го числа наступного місяця.",
+    "kicker": "Огляд сезону",
+    "partialShort": "проміжний",
+    "back": "Блог",
+    "title": "Огляд сезону: {month}",
+    "metaDescription": "Огляд сезону MafiaCL за {month}: лідери Premier League, MafiaCL Arena та рейтингів Kings, рух у таблицях і серії MCL Europe.",
+    "asOfFinal": "Підсумки на {date}",
+    "asOfPartial": "Проміжний огляд на {date} — підсумковий з’явиться 1-го числа",
+    "comparedWith": "порівняння з оглядом за {month}",
+    "seasonTitle": "Сезон Kings {title}",
+    "kingsEvent": "{title} — {date}: до турніру {days, plural, one {# день} few {# дні} many {# днів} other {# дня}}.",
+    "kingsPrize": "Призовий фонд — {prize} €.",
+    "gamesPlayed": "Зіграно за сезон: Premier League — {premier}, MafiaCL Arena — {arena} ігор.",
+    "tournamentsPlayers": "Турнірів клубу — {tournaments}, гравців у всіх рейтингах — {players}.",
+    "leader": "Лідер — {name} ({value}).",
+    "newLeader": "Новий лідер — {name} ({value}): змінив на першому місці {previous}.",
+    "climber": "Ривок місяця — {name}: з {from}-го на {to}-те місце.",
+    "newcomers": "{count, plural, one {Новачок} other {Новачки}} в топ-10: {names}.",
+    "zone": "{count, plural, one {Путівку до MafiaCL Kings зараз тримає} other {У зоні проходу до MafiaCL Kings (топ-#)}}: {names}.",
+    "colPlayer": "Гравець",
+    "colMove": "Рух",
+    "moveNew": "новий",
+    "rankings": {
+      "premier": {
+        "title": "Premier League",
+        "short": "Premier",
+        "about": "Вівторкові міні-турніри клубу.",
+        "value": "Рейтинг",
+        "count": "Ігор"
+      },
+      "arena": {
+        "title": "MafiaCL Arena",
+        "short": "Arena",
+        "about": "Недільні ігри Arena.",
+        "value": "Рейтинг",
+        "count": "Ігор"
+      },
+      "mafiacl": {
+        "title": "Kings: представники клубу",
+        "short": "Kings",
+        "about": "Бали гравців клубу на рейтингових турнірах mafgame.",
+        "value": "Бали",
+        "count": "Турнірів"
+      },
+      "represent": {
+        "title": "Kings: турніри клубу",
+        "short": "Турніри",
+        "about": "Бали всіх гравців на турнірах, які проводить клуб.",
+        "value": "Бали",
+        "count": "Турнірів"
+      }
+    },
+    "mclTitle": "MCL Europe {year}",
+    "mclSeries": "{date}, {city}: серію виграв {name} ({score}).",
+    "mclSemi": "{date}, {city}: півфінал виграв {name} ({score}).",
+    "mclNoSeries": "Цього місяця серій MCL не було.",
+    "mclSquad": "Склад фіналу ({count}): {names}.",
+    "mclFinal": "Фінал — {date}, Прага.",
+    "mclLink": "Залік і серії MCL Europe",
+    "footer": "Огляд збирається автоматично за даними рейтингів клубу. Повні таблиці — на сторінці сезону",
+    "kingsLink": "MafiaCL Kings"
   }
 }

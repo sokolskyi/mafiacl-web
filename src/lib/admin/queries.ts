@@ -326,3 +326,20 @@ export async function getClubPromotions(clubId: number) {
     sort: p.sort,
   }));
 }
+
+export async function getClubReviews(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("season_reviews")
+    .select("id, month, published, generated_at, data")
+    .eq("club_id", clubId)
+    .order("month", { ascending: false })
+    .limit(24);
+  return (data ?? []).map((r) => ({
+    id: r.id as number,
+    month: String(r.month).slice(0, 7),
+    published: r.published as boolean,
+    generatedAt: r.generated_at as string,
+    partial: Boolean((r.data as { partial?: boolean } | null)?.partial),
+  }));
+}

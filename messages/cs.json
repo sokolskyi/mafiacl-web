@@ -59,7 +59,7 @@
     },
     "blog": {
       "title": "Blog a novinky",
-      "description": "Novinky klubu, články o mafii a příspěvky hráčů."
+      "description": "Měsíční přehledy sezóny ve všech žebříčcích klubu, novinky a články o mafii."
     },
     "gallery": {
       "title": "Galerie",
@@ -473,7 +473,13 @@
     "promotions": "Akce — {club}",
     "promotionsHint": "Zobrazují se v sekci „O klubu“ → „Akce“. Prošlé akce můžete skrýt nebo smazat.",
     "addPromotion": "Přidat akci",
-    "promoUntilShort": "do {date}"
+    "promoUntilShort": "do {date}",
+    "reviews": "Přehledy sezóny — {club}",
+    "reviewsHint": "Přehled se sestaví sám 1. dne každého měsíce ze všech žebříčků (Premier League, Arena, Kings, MCL) a vyjde na blogu. Tlačítko sestaví přehled za aktuální měsíc hned teď; 1. dne se aktualizuje konečnými čísly.",
+    "generateReview": "Sestavit přehled za aktuální měsíc",
+    "reviewPartial": "v polovině měsíce",
+    "hideReview": "Skrýt",
+    "showReview": "Zobrazit"
   },
   "match": {
     "matches": "Hry večera",
@@ -1372,5 +1378,70 @@
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón."
     }
+  },
+  "reviews": {
+    "listTitle": "Přehledy sezóny",
+    "listLead": "Každý měsíc výsledky všech žebříčků klubu: lídři, kdo stoupl a kdo je v postupové zóně na MafiaCL Kings.",
+    "listEmpty": "První přehled vyjde 1. dne příštího měsíce.",
+    "kicker": "Přehled sezóny",
+    "partialShort": "průběžný",
+    "back": "Blog",
+    "title": "Přehled sezóny: {month}",
+    "metaDescription": "Přehled sezóny MafiaCL za {month}: lídři Premier League, MafiaCL Arena a žebříčků Kings, pohyby v tabulkách a série MCL Europe.",
+    "asOfFinal": "Stav k {date}",
+    "asOfPartial": "Průběžný přehled k {date} — konečný vyjde 1. dne měsíce",
+    "comparedWith": "srovnání s přehledem za {month}",
+    "seasonTitle": "Sezóna Kings {title}",
+    "kingsEvent": "{title} — {date}: do turnaje {days, plural, one {zbývá # den} few {zbývají # dny} many {zbývá # dne} other {zbývá # dní}}.",
+    "kingsPrize": "Výhry — {prize} €.",
+    "gamesPlayed": "Odehráno za sezónu: Premier League — {premier}, MafiaCL Arena — {arena} her.",
+    "tournamentsPlayers": "Turnajů klubu — {tournaments}, hráčů ve všech žebříčcích — {players}.",
+    "leader": "Lídr — {name} ({value}).",
+    "newLeader": "Nový lídr — {name} ({value}): na prvním místě vystřídal hráče {previous}.",
+    "climber": "Skok měsíce — {name}: z {from}. na {to}. místo.",
+    "newcomers": "{count, plural, one {Nováček} other {Nováčci}} v top 10: {names}.",
+    "zone": "{count, plural, one {Postup na MafiaCL Kings teď drží} other {V postupové zóně na MafiaCL Kings (top #)}}: {names}.",
+    "colPlayer": "Hráč",
+    "colMove": "Pohyb",
+    "moveNew": "nový",
+    "rankings": {
+      "premier": {
+        "title": "Premier League",
+        "short": "Premier",
+        "about": "Úterní mini-turnaje klubu.",
+        "value": "Rating",
+        "count": "Her"
+      },
+      "arena": {
+        "title": "MafiaCL Arena",
+        "short": "Arena",
+        "about": "Nedělní hry Arena.",
+        "value": "Rating",
+        "count": "Her"
+      },
+      "mafiacl": {
+        "title": "Kings: reprezentanti klubu",
+        "short": "Kings",
+        "about": "Body hráčů klubu na ratingových turnajích mafgame.",
+        "value": "Body",
+        "count": "Turnajů"
+      },
+      "represent": {
+        "title": "Kings: turnaje klubu",
+        "short": "Turnaje",
+        "about": "Body všech hráčů na turnajích, které klub pořádá.",
+        "value": "Body",
+        "count": "Turnajů"
+      }
+    },
+    "mclTitle": "MCL Europe {year}",
+    "mclSeries": "{date}, {city}: sérii vyhrál {name} ({score}).",
+    "mclSemi": "{date}, {city}: semifinále vyhrál {name} ({score}).",
+    "mclNoSeries": "Tento měsíc se žádná série MCL nehrála.",
+    "mclSquad": "Finalisté ({count}): {names}.",
+    "mclFinal": "Finále — {date}, Praha.",
+    "mclLink": "Žebříček a série MCL Europe",
+    "footer": "Přehled se sestavuje automaticky z dat žebříčků klubu. Celé tabulky najdete na stránce sezóny",
+    "kingsLink": "MafiaCL Kings"
   }
 }

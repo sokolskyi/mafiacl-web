@@ -3,10 +3,12 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
+import { generateReviewNow, setReviewPublished } from "@/lib/reviews/actions";
+import { reviewSlug } from "@/lib/reviews/types";
 import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, savePromotion, removePromotion, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, saveTournament, removeTournament, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubBans, getClubPartners, getClubPromotions, getClubHosts, getCorporateRequests, getClubTestimonials, getClubTournaments, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubPartners, getClubPromotions, getClubReviews, getClubHosts, getCorporateRequests, getClubTestimonials, getClubTournaments, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
@@ -688,7 +690,7 @@ export async function AdminHome({
         ctx.clubs
           .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
           .map(async (club) => {
-            const [partners, promos] = await Promise.all([getClubPartners(club.id), getClubPromotions(club.id)]);
+            const [partners, promos, reviews] = await Promise.all([getClubPartners(club.id), getClubPromotions(club.id), getClubReviews(club.id)]);
             const PromoFields = ({ p }: { p?: (typeof promos)[number] }) => (
               <>
                 <input type="hidden" name="locale" value={locale} />
@@ -737,6 +739,31 @@ export async function AdminHome({
             );
             return (
               <div key={`partners-${club.id}`} className="space-y-12">
+              <section id="reviews">
+                <h2 className="text-xl font-bold">{t("reviews", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("reviewsHint")}</p>
+                <form action={generateReviewNow} className="mt-4">
+                  <input type="hidden" name="locale" value={locale} />
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500">{t("generateReview")}</button>
+                </form>
+                {reviews.length > 0 && (
+                  <ul className="mt-4 max-w-xl divide-y divide-white/10 rounded border border-white/10">
+                    {reviews.map((r) => (
+                      <li key={r.id} className="flex flex-wrap items-center gap-3 px-4 py-2">
+                        <Link href={{ pathname: "/blog/[slug]", params: { slug: reviewSlug(r.month) } }} className="font-semibold hover:underline">{r.month}</Link>
+                        {r.partial && <span className="rounded bg-amber-500/20 px-2 py-0.5 text-xs text-amber-200">{t("reviewPartial")}</span>}
+                        {!r.published && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
+                        <form action={setReviewPublished} className="ml-auto">
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="reviewId" value={r.id} />
+                          <input type="hidden" name="published" value={r.published ? "0" : "1"} />
+                          <button className="text-sm text-sky-400 hover:underline">{r.published ? t("hideReview") : t("showReview")}</button>
+                        </form>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
               <section id="promotions">
                 <h2 className="text-xl font-bold">{t("promotions", { club: club.name })}</h2>
                 <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("promotionsHint")}</p>

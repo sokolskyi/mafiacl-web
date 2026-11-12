@@ -59,7 +59,7 @@
     },
     "blog": {
       "title": "Blog and news",
-      "description": "Club news, articles about mafia and posts by players."
+      "description": "Monthly season reviews across all club ratings, news and articles about mafia."
     },
     "gallery": {
       "title": "Gallery",
@@ -473,7 +473,13 @@
     "promotions": "Offers — {club}",
     "promotionsHint": "Shown under About → Offers. Hide or delete expired ones.",
     "addPromotion": "Add offer",
-    "promoUntilShort": "until {date}"
+    "promoUntilShort": "until {date}",
+    "reviews": "Season reviews — {club}",
+    "reviewsHint": "A review is put together automatically on the 1st of every month from all ratings (Premier League, Arena, Kings, MCL) and published on the blog. The button builds this month's review right now; on the 1st it is updated with the final numbers.",
+    "generateReview": "Build this month's review",
+    "reviewPartial": "mid-month",
+    "hideReview": "Hide",
+    "showReview": "Show"
   },
   "match": {
     "matches": "Games tonight",
@@ -1372,5 +1378,70 @@
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history."
     }
+  },
+  "reviews": {
+    "listTitle": "Season reviews",
+    "listLead": "Every month: the state of all club ratings — leaders, biggest climbers and who's in the MafiaCL Kings qualifying zone.",
+    "listEmpty": "The first review will appear on the 1st of next month.",
+    "kicker": "Season review",
+    "partialShort": "interim",
+    "back": "Blog",
+    "title": "Season review: {month}",
+    "metaDescription": "MafiaCL season review for {month}: Premier League, MafiaCL Arena and Kings rating leaders, table movements and MCL Europe series.",
+    "asOfFinal": "Standings as of {date}",
+    "asOfPartial": "Interim review as of {date} — the final one comes on the 1st",
+    "comparedWith": "compared with {month}",
+    "seasonTitle": "Kings season {title}",
+    "kingsEvent": "{title} — {date}: {days, plural, one {# day} other {# days}} to go.",
+    "kingsPrize": "Prize fund: €{prize}.",
+    "gamesPlayed": "Played this season: Premier League — {premier}, MafiaCL Arena — {arena} games.",
+    "tournamentsPlayers": "Club tournaments — {tournaments}, players across all ratings — {players}.",
+    "leader": "Leader: {name} ({value}).",
+    "newLeader": "New leader: {name} ({value}), taking first place from {previous}.",
+    "climber": "Climber of the month: {name}, from {from} to {to}.",
+    "newcomers": "{count, plural, one {New in the top 10} other {New in the top 10}}: {names}.",
+    "zone": "{count, plural, one {Currently holding the MafiaCL Kings spot} other {In the MafiaCL Kings zone (top #)}}: {names}.",
+    "colPlayer": "Player",
+    "colMove": "Move",
+    "moveNew": "new",
+    "rankings": {
+      "premier": {
+        "title": "Premier League",
+        "short": "Premier",
+        "about": "The club's Tuesday mini-tournaments.",
+        "value": "Rating",
+        "count": "Games"
+      },
+      "arena": {
+        "title": "MafiaCL Arena",
+        "short": "Arena",
+        "about": "Sunday Arena games.",
+        "value": "Rating",
+        "count": "Games"
+      },
+      "mafiacl": {
+        "title": "Kings: club representatives",
+        "short": "Kings",
+        "about": "Club players' points at rated mafgame tournaments.",
+        "value": "Points",
+        "count": "Tournaments"
+      },
+      "represent": {
+        "title": "Kings: club tournaments",
+        "short": "Tournaments",
+        "about": "All players' points at tournaments run by the club.",
+        "value": "Points",
+        "count": "Tournaments"
+      }
+    },
+    "mclTitle": "MCL Europe {year}",
+    "mclSeries": "{date}, {city}: series won by {name} ({score}).",
+    "mclSemi": "{date}, {city}: semi-final won by {name} ({score}).",
+    "mclNoSeries": "No MCL series were played this month.",
+    "mclSquad": "Finalists ({count}): {names}.",
+    "mclFinal": "Final: {date}, Prague.",
+    "mclLink": "MCL Europe standings and series",
+    "footer": "This review is built automatically from the club's rating data. Full tables are on the season page:",
+    "kingsLink": "MafiaCL Kings"
   }
 }
