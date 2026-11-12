@@ -1340,20 +1340,30 @@
       "lead": "Game sign-ups, questions about memberships, tournaments and corporate events — message us and we'll reply.",
       "kinds": {
         "telegram": "Telegram",
-        "phone": "Phone",
         "instagram": "Instagram",
-        "youtube": "YouTube"
-      },
-      "hints": {
-        "telegram": "Sign-ups and questions — the fastest way",
-        "phone": "Call",
-        "instagram": "Club photos and news",
-        "youtube": "Streams and game recordings"
+        "facebook": "Facebook",
+        "youtube": "YouTube",
+        "phone": "Phone"
       },
       "venuesTitle": "Where we play",
       "map": "Open in maps",
       "corporate": "Want a game for your company or a party?",
-      "corporateLink": "Corporate mafia"
+      "corporateLink": "Corporate mafia",
+      "notes": {
+        "en": "in English",
+        "channel": "channel",
+        "dm": "direct messages"
+      },
+      "signupTitle": "Sign-ups and questions",
+      "signupText": "Game sign-ups, memberships, tournaments and corporate events — message or call the club's founder.",
+      "socialTitle": "MafiaCL Prague on social media",
+      "socialText": "Game announcements, photos, results and streams.",
+      "projectsTitle": "Club projects",
+      "projects": {
+        "mcl": "Mafia Champions League Europe — the club's European tournament series with the final in Prague."
+      },
+      "kharkivTitle": "MafiaCL Kharkiv",
+      "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history."
     }
   }
 }

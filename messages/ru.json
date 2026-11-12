@@ -1340,20 +1340,30 @@
       "lead": "Запись на игры, вопросы об абонементах, турнирах и корпоративах — пишите, ответим.",
       "kinds": {
         "telegram": "Telegram",
-        "phone": "Телефон",
         "instagram": "Instagram",
-        "youtube": "YouTube"
-      },
-      "hints": {
-        "telegram": "Запись и вопросы — самый быстрый способ",
-        "phone": "Звонок",
-        "instagram": "Фото и новости клуба",
-        "youtube": "Трансляции и записи игр"
+        "facebook": "Facebook",
+        "youtube": "YouTube",
+        "phone": "Телефон"
       },
       "venuesTitle": "Где мы играем",
       "map": "Открыть на карте",
       "corporate": "Хотите игру для своей компании или на праздник?",
-      "corporateLink": "Корпоративная мафия"
+      "corporateLink": "Корпоративная мафия",
+      "notes": {
+        "en": "на английском",
+        "channel": "канал",
+        "dm": "личные сообщения"
+      },
+      "signupTitle": "Запись и вопросы",
+      "signupText": "Запись на игры, абонементы, турниры и корпоративы — напишите или позвоните основателю клуба.",
+      "socialTitle": "MafiaCL Prague в соцсетях",
+      "socialText": "Анонсы игр, фото, результаты и трансляции.",
+      "projectsTitle": "Проекты клуба",
+      "projects": {
+        "mcl": "Mafia Champions League Europe — турнирная серия клуба по Европе с финалом в Праге."
+      },
+      "kharkivTitle": "MafiaCL Kharkiv",
+      "kharkivText": "Архив клуба времён Харькова: фото, игры и история сезонов."
     }
   }
 }

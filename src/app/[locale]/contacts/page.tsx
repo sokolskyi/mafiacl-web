@@ -5,15 +5,8 @@ import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getVenues } from "@/lib/venues";
 import { loc } from "@/lib/shop/queries";
+import { CLUB_SOCIAL, KHARKIV_SOCIAL, PROJECTS, SIGNUP_CONTACTS, type SocialLink } from "@/lib/social";
 import { AboutHeader, AboutNav } from "@/components/about/AboutNav";
-
-/** Публичные контакты клуба (те же, что на страницах MCL и в анонсах). */
-const CONTACTS = [
-  { key: "telegram", label: "@Yes1911", href: "https://t.me/Yes1911" },
-  { key: "phone", label: "+420 773 194 945", href: "tel:+420773194945" },
-  { key: "instagram", label: "@mafia_clp_e", href: "https://www.instagram.com/mafia_clp_e/" },
-  { key: "youtube", label: "@YeSMafiaShow", href: "https://www.youtube.com/@YeSMafiaShow" },
-] as const;
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/contacts">) {
   const { locale } = (await params) as { locale: Locale };
@@ -26,27 +19,43 @@ export default async function Page({ params }: PageProps<"/[locale]/contacts">) 
   const t = await getTranslations({ locale, namespace: "about.contacts" });
   const venues = await getVenues(MAIN_CLUB_SLUG);
   const weekday = new Intl.DateTimeFormat(locale, { weekday: "long", timeZone: "UTC" });
-  // 2024-01-01 — понедельник: weekday 1..7 (ISO) → дата этой недели.
+  // 1 января 2024 — понедельник: ISO-день недели 1..7 → день этой недели.
   const dayName = (d: number) => weekday.format(new Date(Date.UTC(2024, 0, d)));
+  const h2 = "font-display text-3xl font-extrabold uppercase";
+
+  const links = (list: SocialLink[]) => (
+    <ul className="mt-3 space-y-2">
+      {list.map((c) => (
+        <li key={c.href}>
+          <span className="text-sm text-neutral-400">{t(`kinds.${c.kind}`)}{c.note ? ` · ${t(`notes.${c.note}`)}` : ""}: </span>
+          <a href={c.href} className="font-semibold hover:underline" {...(c.href.startsWith("https") ? { target: "_blank", rel: "noopener" } : {})}>
+            {c.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <AboutNav locale={locale} current="contacts" />
       <AboutHeader title={t("title")} lead={t("lead")} />
 
-      <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {CONTACTS.map((c) => (
-          <li key={c.key} className="rounded-lg border border-white/15 bg-neutral-950/60 p-5">
-            <p className="text-sm uppercase tracking-widest text-neutral-400">{t(`kinds.${c.key}`)}</p>
-            <a href={c.href} className="mt-2 block break-words text-xl font-bold hover:underline" {...(c.href.startsWith("https") ? { target: "_blank", rel: "noopener" } : {})}>
-              {c.label}
-            </a>
-            <p className="mt-1 text-sm text-neutral-400">{t(`hints.${c.key}`)}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-10 grid gap-5 md:grid-cols-2">
+        <section aria-labelledby="signup" className="rounded-lg border border-red-500/40 bg-neutral-950/60 p-6">
+          <h2 id="signup" className={h2}>{t("signupTitle")}</h2>
+          <p className="mt-2 text-neutral-300">{t("signupText")}</p>
+          {links(SIGNUP_CONTACTS)}
+        </section>
+        <section aria-labelledby="social" className="rounded-lg border border-white/15 bg-neutral-950/60 p-6">
+          <h2 id="social" className={h2}>{t("socialTitle")}</h2>
+          <p className="mt-2 text-neutral-300">{t("socialText")}</p>
+          {links(CLUB_SOCIAL)}
+        </section>
+      </div>
 
       <section aria-labelledby="venues" className="mt-14">
-        <h2 id="venues" className="font-display text-3xl font-extrabold uppercase">{t("venuesTitle")}</h2>
+        <h2 id="venues" className={h2}>{t("venuesTitle")}</h2>
         <ul className="mt-6 grid gap-5 sm:grid-cols-2">
           {venues.map((v) => (
             <li key={v.id} className="rounded-lg border border-white/15 bg-neutral-950/60 p-6">
@@ -69,6 +78,27 @@ export default async function Page({ params }: PageProps<"/[locale]/contacts">) 
             </li>
           ))}
         </ul>
+      </section>
+
+      <section aria-labelledby="projects" className="mt-14">
+        <h2 id="projects" className={h2}>{t("projectsTitle")}</h2>
+        <ul className="mt-6 grid gap-5 sm:grid-cols-2">
+          {PROJECTS.map((p) => (
+            <li key={p.key} className="rounded-lg border border-white/15 bg-neutral-950/60 p-6">
+              <p className="font-display text-2xl font-extrabold uppercase">
+                {p.href ? <a href={p.href} className="hover:underline">{p.name}</a> : p.name}
+              </p>
+              {t.has(`projects.${p.key}`) && <p className="mt-2 text-neutral-300">{t(`projects.${p.key}`)}</p>}
+              {links(p.links)}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="kharkiv" className="mt-14 max-w-xl">
+        <h2 id="kharkiv" className={h2}>{t("kharkivTitle")}</h2>
+        <p className="mt-2 text-neutral-300">{t("kharkivText")}</p>
+        {links(KHARKIV_SOCIAL)}
       </section>
 
       <p className="mt-12 text-lg text-neutral-300">

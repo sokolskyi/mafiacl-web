@@ -1340,20 +1340,30 @@
       "lead": "Přihlášky na hry, dotazy k permanentkám, turnajům a firemním akcím — napište nám, odpovíme.",
       "kinds": {
         "telegram": "Telegram",
-        "phone": "Telefon",
         "instagram": "Instagram",
-        "youtube": "YouTube"
-      },
-      "hints": {
-        "telegram": "Přihlášky a dotazy — nejrychlejší cesta",
-        "phone": "Volání",
-        "instagram": "Fotky a novinky klubu",
-        "youtube": "Přenosy a záznamy her"
+        "facebook": "Facebook",
+        "youtube": "YouTube",
+        "phone": "Telefon"
       },
       "venuesTitle": "Kde hrajeme",
       "map": "Otevřít na mapě",
       "corporate": "Chcete hru pro svou firmu nebo na oslavu?",
-      "corporateLink": "Firemní mafie"
+      "corporateLink": "Firemní mafie",
+      "notes": {
+        "en": "anglicky",
+        "channel": "kanál",
+        "dm": "soukromé zprávy"
+      },
+      "signupTitle": "Přihlášky a dotazy",
+      "signupText": "Přihlášky na hry, permanentky, turnaje a firemní akce — napište nebo zavolejte zakladateli klubu.",
+      "socialTitle": "MafiaCL Prague na sítích",
+      "socialText": "Pozvánky na hry, fotky, výsledky a přenosy.",
+      "projectsTitle": "Projekty klubu",
+      "projects": {
+        "mcl": "Mafia Champions League Europe — turnajová série klubu po Evropě s finále v Praze."
+      },
+      "kharkivTitle": "MafiaCL Kharkiv",
+      "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón."
     }
   }
 }

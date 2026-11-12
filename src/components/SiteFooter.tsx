@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { FOOTER_NAV, MAIN_NAV, SECTIONS } from "@/lib/site";
+import { CLUB_SOCIAL } from "@/lib/social";
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "nav" });
@@ -14,6 +15,15 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/mafiacl-prague-dark.svg" alt="MafiaCL Prague, since 2011" width={176} height={95} className="h-24 w-auto" />
           <p className="mt-1">{c("tagline")}</p>
+          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+            {CLUB_SOCIAL.filter((l) => l.note !== "en").map((l) => (
+              <li key={l.href}>
+                <a href={l.href} target="_blank" rel="noopener" className="hover:text-white">
+                  {l.kind === "youtube" ? "YouTube" : l.kind === "telegram" ? "Telegram" : l.kind === "instagram" ? "Instagram" : "Facebook"}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         <ul className="space-y-1">
           {MAIN_NAV.map((key) => (
