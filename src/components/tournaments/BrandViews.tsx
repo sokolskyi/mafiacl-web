@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { formatMoney } from "@/lib/tournaments";
-import { BRANDS, editionsOf, isActiveBrand, isUpcoming, type Brand, type Edition } from "@/lib/tournamentBrands";
+import { BRANDS, editionsOf, isActiveBrand, isUpcoming, regionOf, type Brand, type Edition } from "@/lib/tournamentBrands";
 import type { Tournament } from "@/lib/tournaments";
 import type { HallEntry } from "@/lib/hallArchive";
 import { tournamentDates } from "./TournamentCards";
@@ -22,6 +22,16 @@ function EditionLink({ e, children, className }: { e: Edition; children: React.R
     <Link href={{ pathname: "/tournaments/[slug]", params: { slug: t.slug } }} className={`${className ?? ""} hover:underline`}>
       {children}
     </Link>
+  );
+}
+
+function RegionBadge({ e, show }: { e: Edition; show: boolean }) {
+  const r = show ? regionOf(e) : null;
+  if (!r) return null;
+  return (
+    <span className={`ml-1.5 inline-block rounded px-1.5 py-px align-middle text-[10px] font-bold leading-4 ${r === "EU" ? "bg-blue-500/25 text-blue-200" : "bg-yellow-400/20 text-yellow-200"}`}>
+      {r}
+    </span>
   );
 }
 
@@ -46,8 +56,9 @@ export async function BrandGrid({ tournaments, hall, locale }: { tournaments: To
         {winners.length > 0 && (
           <ul className="mt-2 space-y-0.5 text-sm">
             {winners.map((e) => (
-              <li key={e.year}>
+              <li key={e.key}>
                 <span className="text-neutral-400">{e.year}</span> 🥇 <span className="font-semibold">{e.places[0]}</span>
+                <RegionBadge e={e} show={b.key === "mcl"} />
               </li>
             ))}
           </ul>
@@ -154,6 +165,7 @@ export async function BrandPage({ brand, tournaments, hall, locale }: { brand: B
                 <div>
                   <p className="text-lg font-bold">
                     <EditionLink e={e} className={e.tournament ? "underline decoration-white/30 underline-offset-4" : undefined}>{e.title}</EditionLink>
+                    <RegionBadge e={e} show={brand.key === "mcl"} />
                     {e.city && <span className="ml-2 text-sm font-normal text-neutral-400">· {e.city}</span>}
                   </p>
                   {e.places.length > 0 && (
