@@ -135,14 +135,14 @@ function Photos({ photos, alt }: { photos: string[]; alt: string }) {
     <div>
       <a href={first} target="_blank" rel="noopener" className="block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={first} alt={alt} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+        <img src={first} alt={alt} loading="lazy" className="aspect-[3/2] w-full object-cover object-[50%_25%]" />
       </a>
       {rest.length > 0 && (
         <div className="flex gap-1 bg-black/40 p-1">
           {rest.map((src, i) => (
             <a key={src} href={src} target="_blank" rel="noopener" className="block flex-1">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={`${alt} · ${i + 2}`} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+              <img src={src} alt={`${alt} · ${i + 2}`} loading="lazy" className="aspect-[3/2] w-full object-cover object-[50%_25%]" />
             </a>
           ))}
         </div>
