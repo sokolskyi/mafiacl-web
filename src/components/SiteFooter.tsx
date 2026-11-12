@@ -19,7 +19,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             {CLUB_SOCIAL.filter((l) => l.note !== "en").map((l) => (
               <li key={l.href}>
                 <a href={l.href} target="_blank" rel="noopener" className="hover:text-white">
-                  {l.kind === "youtube" ? "YouTube" : l.kind === "telegram" ? "Telegram" : l.kind === "instagram" ? "Instagram" : "Facebook"}
+                  {l.kind === "youtube" ? "YouTube" : l.kind === "twitch" ? "Twitch" : l.kind === "telegram" ? "Telegram" : l.kind === "instagram" ? "Instagram" : "Facebook"}
                 </a>
               </li>
             ))}

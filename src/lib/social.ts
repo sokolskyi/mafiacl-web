@@ -1,6 +1,6 @@
 /** Публичные контакты и соцсети клуба и его проектов. */
 
-export type SocialKind = "telegram" | "instagram" | "facebook" | "youtube" | "phone";
+export type SocialKind = "telegram" | "instagram" | "facebook" | "youtube" | "twitch" | "phone";
 export type SocialLink = { kind: SocialKind; label: string; href: string; note?: "en" | "channel" | "dm" };
 
 /** Запись на игры и вопросы — напрямую основателю. */
@@ -16,6 +16,7 @@ export const CLUB_SOCIAL: SocialLink[] = [
   { kind: "instagram", label: "@mafia_clp_e", href: "https://www.instagram.com/mafia_clp_e/", note: "en" },
   { kind: "facebook", label: "mafiaclprague", href: "https://www.facebook.com/mafiaclprague" },
   { kind: "youtube", label: "mafiaclK", href: "https://www.youtube.com/user/mafiaclK" },
+  { kind: "twitch", label: "Mafiacl", href: "https://www.twitch.tv/Mafiacl" },
 ];
 
 /** Проекты клуба. */
