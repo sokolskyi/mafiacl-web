@@ -720,7 +720,18 @@
     "kings": "MafiaCL Kings winner",
     "evenings": "Mini tournament wins",
     "prize": "Prize money",
-    "legend": "⭐ — Premier League season champion, 👑 — MafiaCL Kings winner, ⚜️ — mini tournament wins (since season V, from the electronic sheet)."
+    "legend": "⭐ — Premier League season champion, 👑 — MafiaCL Kings winner, ⚜️ — mini tournament wins (since season V, from the electronic sheet).",
+    "archiveTitle": "Club archive by year",
+    "archiveLead": "Results of MafiaCL seasons, tournaments and mini-tournaments since 2012, year by year. Players are listed by their game nicknames.",
+    "topTitle": "Most decorated",
+    "topLine": "seasons: {seasons} · tournaments: {tournaments} · mini-tournaments: {minis}",
+    "yearsNav": "Years",
+    "catSeason": "Club season champion",
+    "catTournament": "Tournaments",
+    "catAchievement": "Club players' achievements",
+    "catMini": "Season {n} mini-tournaments",
+    "seasonTitle": "Season {n}",
+    "archiveSource": "The archive is compiled from the club's VKontakte posts (vk.com/mafiacl). Spotted a mistake or a gap? Let us know."
   },
   "shop": {
     "soldOut": "Sold out",

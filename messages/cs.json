@@ -720,7 +720,18 @@
     "kings": "Vítěz MafiaCL Kings",
     "evenings": "Výhry v mini-turnajích",
     "prize": "Výhry",
-    "legend": "⭐ — šampion sezóny Premier League, 👑 — vítěz MafiaCL Kings, ⚜️ — výhry v mini-turnajích (od V. sezóny, podle elektronického zápisu)."
+    "legend": "⭐ — šampion sezóny Premier League, 👑 — vítěz MafiaCL Kings, ⚜️ — výhry v mini-turnajích (od V. sezóny, podle elektronického zápisu).",
+    "archiveTitle": "Archiv klubu podle let",
+    "archiveLead": "Výsledky sezón, turnajů a mini-turnajů MafiaCL od roku 2012 — podle let. Hráči jsou uvedeni podle herních přezdívek.",
+    "topTitle": "Nejúspěšnější hráči",
+    "topLine": "sezóny: {seasons} · turnaje: {tournaments} · mini-turnaje: {minis}",
+    "yearsNav": "Roky",
+    "catSeason": "Šampion sezóny klubu",
+    "catTournament": "Turnaje",
+    "catAchievement": "Úspěchy hráčů klubu",
+    "catMini": "Mini-turnaje {n}. sezóny",
+    "seasonTitle": "{n}. sezóna",
+    "archiveSource": "Archiv je sestaven z příspěvků klubu na VKontakte (vk.com/mafiacl). Našli jste chybu nebo mezeru? Napište nám."
   },
   "shop": {
     "soldOut": "Vyprodáno",

@@ -5,6 +5,8 @@ import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getHallOfFame } from "@/lib/badges";
 import { AboutNav } from "@/components/about/AboutNav";
+import { getHallArchive } from "@/lib/hallArchive";
+import { HallArchive } from "@/components/HallArchive";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = (await params) as { locale: Locale };
@@ -16,7 +18,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   setRequestLocale(locale);
   const tp = await getTranslations({ locale, namespace: "pages" });
   const t = await getTranslations({ locale, namespace: "hall" });
-  const rows = await getHallOfFame(MAIN_CLUB_SLUG);
+  const [rows, archive] = await Promise.all([getHallOfFame(MAIN_CLUB_SLUG), getHallArchive(MAIN_CLUB_SLUG)]);
   const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
 
   return (
@@ -60,6 +62,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <p className="mt-4 text-xs text-neutral-500">{t("legend")}</p>
         </div>
       )}
+      <HallArchive entries={archive} locale={locale} />
     </main>
   );
 }
