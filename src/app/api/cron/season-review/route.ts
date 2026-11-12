@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { currentMonth, generateReview, previousMonth } from "@/lib/reviews/save";
 import { REVIEWS_TAG } from "@/lib/reviews/queries";
+import { postReview } from "@/lib/reviews/telegram";
 
 export const maxDuration = 120;
 
@@ -25,6 +26,14 @@ export async function POST(request: NextRequest) {
   try {
     const result = body.current ? await generateReview(currentMonth(), true) : await generateReview(previousMonth(), false);
     revalidateTag(REVIEWS_TAG, { expire: 0 });
+    // Итоговый обзор месяца сразу уходит в канал MafiaCL Kings (если бот — админ канала).
+    if (!body.current) {
+      try {
+        await postReview(result.month, request.nextUrl.origin);
+      } catch (e) {
+        console.error("season review: channel post failed", { message: e instanceof Error ? e.message : String(e) });
+      }
+    }
     console.info("season review", result);
     return Response.json(result);
   } catch (e) {

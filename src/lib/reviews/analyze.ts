@@ -1,4 +1,4 @@
-import { KINGS_ZONE, type RankRow, type RankingKey, type ReviewData } from "@/lib/reviews/types";
+import { KINGS_ZONE, RANKINGS, type RankRow, type RankingKey, type ReviewData } from "@/lib/reviews/types";
 
 export type RankingInsight = {
   key: RankingKey;
@@ -15,7 +15,7 @@ const norm = (s: string) => s.trim().toLowerCase();
 /** Сравнить рейтинг с прошлым обзором: смена лидера, кто поднялся сильнее всех, новички в топ-10. */
 export function analyze(review: ReviewData, previous: ReviewData | null): RankingInsight[] {
   const out: RankingInsight[] = [];
-  for (const key of Object.keys(review.rankings) as RankingKey[]) {
+  for (const key of RANKINGS) {
     const cur = review.rankings[key];
     if (!cur?.length) continue;
     const prev = previous?.rankings[key] ?? null;

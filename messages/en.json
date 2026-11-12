@@ -475,11 +475,13 @@
     "addPromotion": "Add offer",
     "promoUntilShort": "until {date}",
     "reviews": "Season reviews — {club}",
-    "reviewsHint": "A review is put together automatically on the 1st of every month from all ratings (Premier League, Arena, Kings, MCL) and published on the blog. The button builds this month's review right now; on the 1st it is updated with the final numbers.",
+    "reviewsHint": "A review is put together automatically on the 1st of every month from all ratings (Premier League, Arena, Kings, MCL) and published on the blog. The button builds this month's review right now; on the 1st it is updated with the final numbers. The final review is posted straight to the @mafiaclkings Telegram channel (the bot must be a channel admin).",
     "generateReview": "Build this month's review",
     "reviewPartial": "mid-month",
     "hideReview": "Hide",
-    "showReview": "Show"
+    "showReview": "Show",
+    "postReview": "Post to @mafiaclkings",
+    "reviewPosted": "posted ✓"
   },
   "match": {
     "matches": "Games tonight",
@@ -1373,7 +1375,8 @@
       "projectsTitle": "Club projects",
       "projects": {
         "mcl": "Mafia Champions League Europe — the club's European tournament series with the final in Prague.",
-        "stars": "The club's tournament series: qualifying series in different cities, semi-finals and a 20-player final. Five seasons, the last in 2021 with the final on 9–10 October 2021."
+        "stars": "The club's tournament series: qualifying series in different cities, semi-finals and a 20-player final. Five seasons, the last in 2021 with the final on 9–10 October 2021.",
+        "kings": "The club's main end-of-season tournament. The channel posts monthly rating summaries and the qualifying zone."
       },
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history."

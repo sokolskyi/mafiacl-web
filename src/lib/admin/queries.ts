@@ -331,7 +331,7 @@ export async function getClubReviews(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("season_reviews")
-    .select("id, month, published, generated_at, data")
+    .select("id, month, published, generated_at, posted_at, data")
     .eq("club_id", clubId)
     .order("month", { ascending: false })
     .limit(24);
@@ -341,5 +341,6 @@ export async function getClubReviews(clubId: number) {
     published: r.published as boolean,
     generatedAt: r.generated_at as string,
     partial: Boolean((r.data as { partial?: boolean } | null)?.partial),
+    postedAt: (r.posted_at as string | null) ?? null,
   }));
 }

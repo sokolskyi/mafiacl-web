@@ -475,11 +475,13 @@
     "addPromotion": "Přidat akci",
     "promoUntilShort": "do {date}",
     "reviews": "Přehledy sezóny — {club}",
-    "reviewsHint": "Přehled se sestaví sám 1. dne každého měsíce ze všech žebříčků (Premier League, Arena, Kings, MCL) a vyjde na blogu. Tlačítko sestaví přehled za aktuální měsíc hned teď; 1. dne se aktualizuje konečnými čísly.",
+    "reviewsHint": "Přehled se sestaví sám 1. dne každého měsíce ze všech žebříčků (Premier League, Arena, Kings, MCL) a vyjde na blogu. Tlačítko sestaví přehled za aktuální měsíc hned teď; 1. dne se aktualizuje konečnými čísly. Konečný přehled se hned odešle do Telegram kanálu @mafiaclkings (bot musí být adminem kanálu).",
     "generateReview": "Sestavit přehled za aktuální měsíc",
     "reviewPartial": "v polovině měsíce",
     "hideReview": "Skrýt",
-    "showReview": "Zobrazit"
+    "showReview": "Zobrazit",
+    "postReview": "Odeslat do @mafiaclkings",
+    "reviewPosted": "v kanálu ✓"
   },
   "match": {
     "matches": "Hry večera",
@@ -1373,7 +1375,8 @@
       "projectsTitle": "Projekty klubu",
       "projects": {
         "mcl": "Mafia Champions League Europe — turnajová série klubu po Evropě s finále v Praze.",
-        "stars": "Turnajová série klubu: kvalifikační série v různých městech, semifinále a finále pro 20 hráčů. Pět sezón, poslední v roce 2021, finále 9.–10. října 2021."
+        "stars": "Turnajová série klubu: kvalifikační série v různých městech, semifinále a finále pro 20 hráčů. Pět sezón, poslední v roce 2021, finále 9.–10. října 2021.",
+        "kings": "Hlavní turnaj klubu na konci sezóny. Na kanálu měsíční přehledy žebříčků a postupové zóny."
       },
       "kharkivTitle": "MafiaCL Kharkiv",
       "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón."

@@ -19,7 +19,13 @@ export const CLUB_SOCIAL: SocialLink[] = [
 ];
 
 /** Проекты клуба. */
-export const PROJECTS: { key: "mcl" | "stars"; name: string; href?: string; links: SocialLink[] }[] = [
+export const PROJECTS: { key: "kings" | "mcl" | "stars"; name: string; href?: string; links: SocialLink[] }[] = [
+  {
+    key: "kings",
+    name: "MafiaCL Kings",
+    href: "/kings",
+    links: [{ kind: "telegram", label: "@mafiaclkings", href: "https://t.me/mafiaclkings", note: "channel" }],
+  },
   {
     key: "mcl",
     name: "MCL Europe",

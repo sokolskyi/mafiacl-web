@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { updateTag } from "next/cache";
 import { getPathname } from "@/i18n/navigation";
@@ -8,6 +9,7 @@ import { getStaffContext } from "@/lib/admin/queries";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { REVIEWS_TAG } from "@/lib/reviews/queries";
 import { currentMonth, generateReview } from "@/lib/reviews/save";
+import { postReview } from "@/lib/reviews/telegram";
 
 function toLocale(value: FormDataEntryValue | null): Locale {
   const v = String(value ?? "");
@@ -47,4 +49,30 @@ export async function setReviewPublished(formData: FormData) {
   if (error) console.error("setReviewPublished failed", { id, code: error.code, message: error.message });
   updateTag(REVIEWS_TAG);
   redirect(back);
+}
+
+async function origin() {
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  const proto = h.get("x-forwarded-proto") ?? (host?.startsWith("localhost") ? "http" : "https");
+  return `${proto}://${host}`;
+}
+
+/** Кнопка в админке: отправить обзор в Telegram-канал MafiaCL Kings (только owner/admin). */
+export async function postReviewNow(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}`;
+  const month = String(formData.get("month") ?? "");
+  if (!/^\d{4}-\d{2}$/.test(month)) redirect(`${back}#reviews`);
+  const ctx = await getStaffContext();
+  const club = ctx?.clubs.find((c) => c.slug === MAIN_CLUB_SLUG);
+  if (!club || !(club.roles.includes("owner") || club.roles.includes("admin"))) redirect(`${back}?error=forbidden#reviews`);
+  try {
+    await postReview(month, await origin());
+  } catch (e) {
+    console.error("postReviewNow failed", { month, message: e instanceof Error ? e.message : String(e) });
+    redirect(`${back}?error=bot#reviews`);
+  }
+  updateTag(REVIEWS_TAG);
+  redirect(`${back}?posted=1#reviews`);
 }

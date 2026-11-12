@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { generateReviewNow, setReviewPublished } from "@/lib/reviews/actions";
+import { generateReviewNow, postReviewNow, setReviewPublished } from "@/lib/reviews/actions";
 import { reviewSlug } from "@/lib/reviews/types";
 import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, savePromotion, removePromotion, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, saveTournament, removeTournament, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
@@ -753,7 +753,15 @@ export async function AdminHome({
                         <Link href={{ pathname: "/blog/[slug]", params: { slug: reviewSlug(r.month) } }} className="font-semibold hover:underline">{r.month}</Link>
                         {r.partial && <span className="rounded bg-amber-500/20 px-2 py-0.5 text-xs text-amber-200">{t("reviewPartial")}</span>}
                         {!r.published && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
-                        <form action={setReviewPublished} className="ml-auto">
+                        {r.postedAt && <span className="text-xs text-green-400">{t("reviewPosted")}</span>}
+                        {r.published && (
+                          <form action={postReviewNow} className="ml-auto">
+                            <input type="hidden" name="locale" value={locale} />
+                            <input type="hidden" name="month" value={r.month} />
+                            <button className="text-sm text-sky-400 hover:underline">{t("postReview")}</button>
+                          </form>
+                        )}
+                        <form action={setReviewPublished} className={r.published ? "" : "ml-auto"}>
                           <input type="hidden" name="locale" value={locale} />
                           <input type="hidden" name="reviewId" value={r.id} />
                           <input type="hidden" name="published" value={r.published ? "0" : "1"} />
