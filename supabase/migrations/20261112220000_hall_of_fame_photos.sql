@@ -12,3 +12,5 @@ update public.hall_of_fame set photos = array['/hall/2012-season-1-champion.jpg'
  where category = 'season' and year = 2012 and season = 'I' and city = 'Харьков';
 update public.hall_of_fame set photos = array['/hall/2015-season-5-sarkazm.jpg','/hall/2015-season-5-podium.jpg','/hall/2015-season-5-finalists.jpg'], note = 'финал 20.12.2015'
  where category = 'season' and year = 2015 and season = 'V' and city = 'Харьков';
+update public.hall_of_fame set photos = array['/hall/2016-season-6-din.jpg','/hall/2016-season-6-podium.jpg','/hall/2016-season-6-finalists.jpg']
+ where category = 'season' and year = 2016 and season = 'VI' and city = 'Харьков';
