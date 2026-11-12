@@ -48,7 +48,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
         return (
           <section key={y} id={`y${y}`} aria-labelledby={`yh${y}`} className="mt-12 scroll-mt-24 border-t border-white/10 pt-8">
             <h3 id={`yh${y}`} className="font-display text-4xl font-extrabold text-red-400">
-              {y} <span className="text-base font-normal uppercase tracking-widest text-neutral-400">· {list[0].city}</span>
+              {y} <span className="text-base font-normal uppercase tracking-widest text-neutral-400">· {[...new Set(list.map((e) => e.city))].join(" · ")}</span>
             </h3>
 
             {seasons.length > 0 && (
