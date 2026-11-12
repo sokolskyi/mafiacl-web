@@ -88,7 +88,7 @@ export function regionOf(e: Edition): "EU" | "UA" | null {
   if (/europe/i.test(t)) return "EU";
   if (/ukrain|україн|украин/i.test(t)) return "UA";
   const c = e.city ?? e.tournament?.city ?? "";
-  if (/харк|kharkiv|charkov|kyiv|киев|київ/i.test(c)) return "UA";
+  if (/харьк|харків|kharkiv|charkov|kyiv|киев|київ/i.test(c)) return "UA";
   if (/праг|praha|prague/i.test(c)) return "EU";
   return null;
 }
