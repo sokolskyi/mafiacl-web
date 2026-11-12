@@ -24,7 +24,8 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "corporate" });
   const p = await getTranslations({ locale, namespace: "pages" });
-  const [hosts, reviews] = await Promise.all([getHosts(MAIN_CLUB_SLUG), getTestimonials(MAIN_CLUB_SLUG)]);
+  const [people, reviews] = await Promise.all([getHosts(MAIN_CLUB_SLUG), getTestimonials(MAIN_CLUB_SLUG)]);
+  const hosts = people.filter((h) => h.teamRoles.includes("host"));
   const h2 = "font-display text-4xl font-extrabold uppercase sm:text-5xl";
 
   return (

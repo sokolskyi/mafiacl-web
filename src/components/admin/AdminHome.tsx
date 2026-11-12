@@ -3,10 +3,10 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
-import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, saveTournament, removeTournament, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
+import { addPrize, addStaff, banPlayer, unbanPlayer, savePartner, removePartner, savePromotion, removePromotion, saveHost, removeHost, setRequestStatus, saveTestimonial, removeTestimonial, saveTournament, removeTournament, addTitle, removePrize, createGame, grantMembership, linkMembership, removeMembership, removeStaff, removeTitle } from "@/lib/admin/actions";
 import { getPrizes, getTitles } from "@/lib/badges";
 import { setupBot } from "@/lib/telegram/actions";
-import { getAdminGames, getClubBans, getClubPartners, getClubHosts, getCorporateRequests, getClubTestimonials, getClubTournaments, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
+import { getAdminGames, getClubBans, getClubPartners, getClubPromotions, getClubHosts, getCorporateRequests, getClubTestimonials, getClubTournaments, getClubMemberships, getClubStaff, getStaffContext } from "@/lib/admin/queries";
 import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
@@ -545,6 +545,16 @@ export async function AdminHome({
                   <input name="hostingSince" type="number" min={1990} max={2100} placeholder="2018" defaultValue={h?.hostingSince ?? ""} className={`mt-1 w-full ${input}`} />
                 </label>
                 <fieldset className="text-sm sm:col-span-2">
+                  <legend>{t("fields.teamRoles")}</legend>
+                  <div className="mt-1 flex flex-wrap gap-4">
+                    {(["founder", "admin", "host"] as const).map((r) => (
+                      <label key={r} className="flex items-center gap-2">
+                        <input type="checkbox" name={`role_${r}`} defaultChecked={h ? h.teamRoles.includes(r) : r === "host"} className="h-4 w-4" /> {t(`teamRoles.${r}`)}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <fieldset className="text-sm sm:col-span-2">
                   <legend>{t("fields.hostLanguages")}</legend>
                   <div className="mt-1 flex flex-wrap gap-4">
                     {(["cs", "ru", "uk", "en"] as const).map((l) => (
@@ -614,6 +624,7 @@ export async function AdminHome({
                         <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
                           <span className="font-semibold">{h.nickname}</span>
                           <span className="flex-1 text-sm text-neutral-400">{h.name}</span>
+                          <span className="text-xs text-neutral-400">{h.teamRoles.map((r) => t(`teamRoles.${r}`)).join(", ")}</span>
                           <span className="text-xs uppercase text-neutral-400">{h.languages.join(" · ")}</span>
                         </summary>
                         <div className="border-t border-white/10 p-4">
@@ -677,7 +688,33 @@ export async function AdminHome({
         ctx.clubs
           .filter((club) => club.roles.includes("owner") || club.roles.includes("admin"))
           .map(async (club) => {
-            const partners = await getClubPartners(club.id);
+            const [partners, promos] = await Promise.all([getClubPartners(club.id), getClubPromotions(club.id)]);
+            const PromoFields = ({ p }: { p?: (typeof promos)[number] }) => (
+              <>
+                <input type="hidden" name="locale" value={locale} />
+                <input type="hidden" name="clubId" value={club.id} />
+                {p && <input type="hidden" name="promotionId" value={p.id} />}
+                {(["cs", "ru", "uk", "en"] as const).map((l) => (
+                  <label key={`t-${l}`} className="text-sm">{t("fields.promoTitle")} · {l.toUpperCase()}
+                    <input name={`title_${l}`} maxLength={120} defaultValue={p?.title[l] ?? ""} className={`mt-1 w-full ${input}`} />
+                  </label>
+                ))}
+                {(["cs", "ru", "uk", "en"] as const).map((l) => (
+                  <label key={`b-${l}`} className="text-sm">{t("fields.promoBody")} · {l.toUpperCase()}
+                    <textarea name={`body_${l}`} rows={3} maxLength={1000} defaultValue={p?.body[l] ?? ""} className={`mt-1 w-full ${input}`} />
+                  </label>
+                ))}
+                <label className="text-sm">{t("fields.promoUntil")}
+                  <input name="validUntil" type="date" defaultValue={p?.validUntil ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="text-sm">{t("fields.sort")}
+                  <input name="sort" type="number" min={0} defaultValue={p?.sort ?? 100} className={`mt-1 w-full ${input}`} />
+                </label>
+                <label className="flex items-center gap-2 text-sm sm:col-span-2">
+                  <input type="checkbox" name="active" defaultChecked={p?.active ?? true} className="h-4 w-4" /> {t("fields.promoActive")}
+                </label>
+              </>
+            );
             const photoLabels = { label: t("fields.logo"), hint: t("fields.logoHint"), upload: t("fields.uploadLogo"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") };
             const PartnerFields = ({ p }: { p?: (typeof partners)[number] }) => (
               <>
@@ -699,7 +736,39 @@ export async function AdminHome({
               </>
             );
             return (
-              <section key={`partners-${club.id}`} id="partners">
+              <div key={`partners-${club.id}`} className="space-y-12">
+              <section id="promotions">
+                <h2 className="text-xl font-bold">{t("promotions", { club: club.name })}</h2>
+                <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("promotionsHint")}</p>
+                <div className="mt-4 max-w-3xl space-y-3">
+                  {promos.map((p) => (
+                    <details key={p.id} className="rounded border border-white/10">
+                      <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
+                        <span className="flex-1 font-semibold">{p.title[locale] ?? p.title.ru ?? Object.values(p.title)[0]}</span>
+                        {p.validUntil && <span className="text-sm text-neutral-400">{t("promoUntilShort", { date: p.validUntil })}</span>}
+                        {!p.active && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
+                      </summary>
+                      <div className="border-t border-white/10 p-4">
+                        <form action={savePromotion} className="grid gap-3 sm:grid-cols-2">
+                          <PromoFields p={p} />
+                          <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("save")}</button>
+                        </form>
+                        <form action={removePromotion} className="mt-3">
+                          <input type="hidden" name="locale" value={locale} />
+                          <input type="hidden" name="promotionId" value={p.id} />
+                          <button className="text-sm text-neutral-500 hover:text-red-400">{t("remove")}</button>
+                        </form>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+                <h3 className="mt-6 font-bold">{t("addPromotion")}</h3>
+                <form action={savePromotion} className="mt-3 grid max-w-3xl gap-3 rounded border border-white/10 p-4 sm:grid-cols-2">
+                  <PromoFields />
+                  <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addPromotion")}</button>
+                </form>
+              </section>
+              <section id="partners">
                 <h2 className="text-xl font-bold">{t("partners", { club: club.name })}</h2>
                 <p className="mt-1 max-w-2xl text-sm text-neutral-400">{t("partnersHint")}</p>
                 <div className="mt-4 max-w-3xl space-y-3">
@@ -729,6 +798,7 @@ export async function AdminHome({
                   <button className="rounded bg-red-600 px-4 py-2 font-semibold hover:bg-red-500 sm:col-span-2">{t("addPartner")}</button>
                 </form>
               </section>
+              </div>
             );
           }),
       )}

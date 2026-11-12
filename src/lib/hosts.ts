@@ -6,6 +6,8 @@ import type { Localized } from "@/lib/games";
 export const HOSTS_TAG = "hosts";
 export const HOST_LANGS = ["cs", "ru", "uk", "en"] as const;
 export type HostLang = (typeof HOST_LANGS)[number];
+export const TEAM_ROLES = ["founder", "admin", "host"] as const;
+export type TeamRole = (typeof TEAM_ROLES)[number];
 
 export type Host = {
   id: number;
@@ -17,6 +19,7 @@ export type Host = {
   photoUrl: string | null;
   bio: Localized | null;
   profileNick: string | null;
+  teamRoles: TeamRole[];
 };
 
 /** Ведущие клуба (кеш; сбрасывается при правках в админке). */
@@ -28,7 +31,7 @@ export async function getHosts(clubSlug: string): Promise<Host[]> {
   const db = createPublicClient();
   const { data, error } = await db
     .from("hosts")
-    .select("id, nickname, name, languages, playing_since, hosting_since, photo_url, bio, sort, profiles ( nickname ), clubs!inner ( slug )")
+    .select("id, nickname, name, languages, playing_since, hosting_since, photo_url, bio, sort, team_roles, profiles ( nickname ), clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
     .eq("active", true)
     .order("sort")
@@ -44,5 +47,6 @@ export async function getHosts(clubSlug: string): Promise<Host[]> {
     photoUrl: h.photo_url,
     bio: (h.bio ?? null) as Localized | null,
     profileNick: (h.profiles as unknown as { nickname: string | null } | null)?.nickname ?? null,
+    teamRoles: (h.team_roles ?? ["host"]).filter((r: string): r is TeamRole => (TEAM_ROLES as readonly string[]).includes(r)),
   }));
 }

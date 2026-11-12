@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getHallOfFame } from "@/lib/badges";
+import { AboutNav } from "@/components/about/AboutNav";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = (await params) as { locale: Locale };
@@ -20,6 +21,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-16">
+      <AboutNav locale={locale} current="hall" />
       <p><Link href="/ratings" className="text-sm text-neutral-400 hover:text-white">← {t("back")}</Link></p>
       <h1 className="mt-2 text-4xl font-black tracking-tight sm:text-5xl">{tp("hallOfFame.title")}</h1>
       <p className="mt-4 max-w-2xl text-lg text-neutral-300">{tp("hallOfFame.description")}</p>

@@ -17,7 +17,8 @@
     "faq": "FAQ",
     "contacts": "Kontakty",
     "account": "Můj účet",
-    "hosts": "Moderátoři"
+    "hosts": "Moderátoři",
+    "about": "O klubu"
   },
   "common": {
     "comingSoon": "Stránka se připravuje.",
@@ -111,6 +112,30 @@
     "hosts": {
       "title": "Moderátoři klubu",
       "description": "Kdo vede hry MafiaCL a v jakých jazycích."
+    },
+    "about": {
+      "title": "O klubu MafiaCL",
+      "description": "Historie klubu od roku 2011, kodex a pravidla chování, struktura klubu, síň slávy, akce, bany a kontakty."
+    },
+    "aboutHistory": {
+      "title": "Historie klubu MafiaCL",
+      "description": "MafiaCL od roku 2011: Kremenčuk, Charkov, Praha — sezóny, šampioni a turnaje klubu."
+    },
+    "aboutCode": {
+      "title": "Kodex klubu MafiaCL",
+      "description": "Hodnoty klubu, etika u herního stolu a pravidla chování na hrách MafiaCL."
+    },
+    "aboutTeam": {
+      "title": "Struktura klubu MafiaCL",
+      "description": "Zakladatel, administrátor a moderátoři klubu MafiaCL Prague."
+    },
+    "aboutPromotions": {
+      "title": "Akce klubu MafiaCL",
+      "description": "Aktuální akce a speciální nabídky klubu MafiaCL Prague."
+    },
+    "aboutBans": {
+      "title": "Bany klubu MafiaCL",
+      "description": "Hráči, kteří mají zakázaný přístup na hry klubu MafiaCL Prague."
     }
   },
   "account": {
@@ -287,7 +312,12 @@
       "tCurrency": "Měna",
       "tPrize": "Cenový fond",
       "tInfoUrl": "Odkaz „Více“ (tabulky, žebříček)",
-      "tWinners": "Medailisté oddělení čárkou: 1., 2., 3. místo"
+      "tWinners": "Medailisté oddělení čárkou: 1., 2., 3. místo",
+      "teamRoles": "Role ve struktuře klubu",
+      "promoTitle": "Název",
+      "promoBody": "Podmínky",
+      "promoUntil": "Platí do (nepovinné)",
+      "promoActive": "Zobrazit na webu"
     },
     "status": {
       "draft": "Koncept",
@@ -434,7 +464,16 @@
       "none": "Bez registrace",
       "internal": "U nás na webu",
       "external": "Odkazem"
-    }
+    },
+    "teamRoles": {
+      "founder": "Zakladatel",
+      "admin": "Administrátor",
+      "host": "Moderátor"
+    },
+    "promotions": "Akce — {club}",
+    "promotionsHint": "Zobrazují se v sekci „O klubu“ → „Akce“. Prošlé akce můžete skrýt nebo smazat.",
+    "addPromotion": "Přidat akci",
+    "promoUntilShort": "do {date}"
   },
   "match": {
     "matches": "Hry večera",
@@ -1133,5 +1172,182 @@
     "winners": "Medailisté",
     "moreInfo": "Více: tabulky a žebříček",
     "results": "Výsledky na {host}"
+  },
+  "about": {
+    "title": "O klubu",
+    "navLabel": "Sekce „O klubu“",
+    "lead": "MafiaCL je klub sportovní mafie od roku 2011. Najdete tu historii klubu, náš kodex, lidi, kteří hry dělají, a vše, co se hodí vědět před první návštěvou.",
+    "tabs": {
+      "history": "Historie",
+      "code": "Kodex",
+      "team": "Struktura",
+      "hall": "Síň slávy",
+      "promotions": "Akce",
+      "bans": "Bany",
+      "contacts": "Kontakty"
+    },
+    "cards": {
+      "history": "Kremenčuk, Charkov, Praha: cesta klubu od roku 2011.",
+      "code": "Hodnoty klubu, etika u stolu a pravidla chování na hrách.",
+      "team": "Zakladatel, administrátor a moderátoři klubu.",
+      "hall": "Šampioni sezón, vítězové Kings a mini-turnajů.",
+      "promotions": "Aktuální akce a speciální nabídky.",
+      "bans": "Hráči, kteří mají zakázaný přístup na hry klubu.",
+      "contacts": "Jak se přihlásit, kde hrajeme a jak nás kontaktovat."
+    },
+    "history": {
+      "title": "Historie klubu",
+      "lead": "MafiaCL hraje od roku 2011. Klub vystřídal tři města, ale to hlavní zůstalo: férová sportovní mafie, silní moderátoři a lidé, ke kterým se chce vracet.",
+      "steps": [
+        {
+          "year": "2011",
+          "place": "Kremenčuk",
+          "title": "Začátek: MafiaCL Kremenchug",
+          "text": "V ukrajinském Kremenčuku vzniká MafiaCL — první klub tohoto jména. Jeho zakladatelem je YeS (Ievgen Sokolskyi)."
+        },
+        {
+          "year": "2012",
+          "place": "Charkov",
+          "title": "Stěhování do Charkova",
+          "text": "Klub pokračuje v Charkově. Vznikají ratingové sezóny, mini-turnaje, kodex klubu, studentská liga a otevřené lekce školy mafie."
+        },
+        {
+          "year": "2014",
+          "place": "Charkov",
+          "title": "IV. sezóna — nejdelší",
+          "text": "205 ratingových her a 33 mini-turnajů. Mafie vyhrála 110 her, civilisté 95. Šampionem sezóny se stal Persik, druhý byl Sarkasm, třetí Din. Ve stejném roce získává YeS titul velmistra FIIM."
+        },
+        {
+          "year": "2015",
+          "place": "Charkov · Kyjev",
+          "title": "V. sezóna a mistrovství světa",
+          "text": "Sezóna dlouhá celý rok. Hráči klubu reprezentují Charkov dvěma týmy na týmovém mistrovství světa v mafii v Kyjevě."
+        },
+        {
+          "year": "2022",
+          "place": "Praha",
+          "title": "MafiaCL v Praze",
+          "text": "Klub začíná hrát v Praze a buduje novou komunitu — hráče z Česka, Ukrajiny a z celé Evropy."
+        },
+        {
+          "year": "2026",
+          "place": "Praha",
+          "title": "Dnes",
+          "text": "V úterý mini-turnaje Premier League v AURA, v neděli MafiaCL Arena v POP PAUSE. V listopadu hostí Praha finále MCL Europe 2026 a v lednu 2027 MafiaCL Kings, hlavní turnaj klubu."
+        }
+      ]
+    },
+    "code": {
+      "title": "Kodex klubu",
+      "lead": "Stručný přehled toho, jak hrajeme a jak se v klubu chováme. Kodex platí na všech hrách a turnajích MafiaCL.",
+      "valuesTitle": "Hodnoty klubu",
+      "values": [
+        {
+          "name": "Respekt",
+          "text": "K hráčům, moderátorovi i podniku. Přeme se argumenty, ne osobními útoky."
+        },
+        {
+          "name": "Důvěra",
+          "text": "Férová hra bez domluv, sázek a přísah. Rozhodnutí moderátora u stolu přijímáme."
+        },
+        {
+          "name": "Soustředění",
+          "text": "Dokud běží hra, jsme ve hře: bez telefonů, hovorů a cizích předmětů na stole."
+        },
+        {
+          "name": "Odpovědnost",
+          "text": "Za svou přihlášku, svůj čas a svá slova — u stolu i po hře."
+        }
+      ],
+      "parts": [
+        {
+          "title": "U herního stolu",
+          "items": [
+            "Hrajeme podle pravidel FIIM a reglementu turnaje; nuance pravidel oznamujeme před začátkem her.",
+            "Vykáme si a řeč končíme slovem „Děkuji“.",
+            "Sázky, přísahy a odvolávání se na vnější okolnosti jsou zakázané — tým za ně prohrává.",
+            "V noci žádná gesta ani zvuky: dotyk nad stolem znamená vyloučení, pod stolem faul.",
+            "Odešel jsi od stolu — nasaď poker face: jakékoli slovo nebo gesto po odchodu může být považováno za nápovědu.",
+            "Na stole jen to, co je potřeba ke hře: telefony, sluchátka, mince a jiné věci uklízíme."
+          ]
+        },
+        {
+          "title": "Pravidla chování v klubu",
+          "intro": "Trochu vážně a trochu s humorem — z našich starých klubových plakátů.",
+          "items": [
+            "Přihlásili jste se — přijďte včas: za pozdní příchod je pokuta podle reglementu, na 10. hráče nečekáme.",
+            "Nemůžete přijít — zrušte přihlášku předem, ať místo dostane jiný hráč.",
+            "Křičí racci na pláži, ne hráči mafie. Během hry je u všech stolů ticho.",
+            "Bez vulgarismů. Urážka hráče znamená ban.",
+            "Jsme hosty u partnerů: respektujeme podnik, personál i ostatní hosty.",
+            "Zůstali jste na rozbor po hře — skvělé. Sporné momenty řešíme po hře, ne během ní."
+          ]
+        },
+        {
+          "title": "Moderátor a sporné situace",
+          "items": [
+            "Rozhodnutí moderátora u stolu je konečné. Vysvětlit ho lze po hře.",
+            "Pokud s rozhodnutím nesouhlasíte, obraťte se po hře na organizátora: situaci posoudíme podle reglementu.",
+            "Moderátor může udělit napomenutí, faul nebo hráče vyloučit od stolu."
+          ]
+        },
+        {
+          "title": "Porušení kodexu",
+          "items": [
+            "Za hrubé nebo opakované porušení může vedení klubu hráči zakázat přístup na hry klubu.",
+            "Seznam platných banů je zveřejněn v sekci „Bany“."
+          ]
+        }
+      ]
+    },
+    "team": {
+      "title": "Struktura klubu",
+      "lead": "Lidé, kteří dělají MafiaCL: zakladatel klubu, administrátor a moderátoři.",
+      "roles": {
+        "founder": "Zakladatel",
+        "admin": "Administrátor",
+        "host": "Moderátoři"
+      },
+      "roleText": {
+        "founder": "Založil klub v roce 2011 a stará se o jeho rozvoj, turnaje a partnerství.",
+        "admin": "Přihlášky na hry, permanentky, platby a dotazy hráčů.",
+        "host": "Moderují hry a turnaje klubu. Zvýrazněné jsou jazyky, ve kterých moderátor hru povede."
+      }
+    },
+    "promotions": {
+      "title": "Akce",
+      "lead": "Speciální nabídky klubu pro nové i stálé hráče.",
+      "empty": "Momentálně neprobíhají žádné akce.",
+      "emptyLink": "Sledujte novinky klubu",
+      "until": "Platí do {date}"
+    },
+    "bans": {
+      "title": "Bany",
+      "lead": "Hráči, kterým vedení klubu zakázalo přístup na hry MafiaCL.",
+      "codeNote": "Ban se uděluje za hrubé nebo opakované porušení kodexu klubu.",
+      "codeLink": "Kodex klubu",
+      "empty": "Momentálně nemá ban nikdo.",
+      "since": "od {date}"
+    },
+    "contacts": {
+      "title": "Kontakty",
+      "lead": "Přihlášky na hry, dotazy k permanentkám, turnajům a firemním akcím — napište nám, odpovíme.",
+      "kinds": {
+        "telegram": "Telegram",
+        "phone": "Telefon",
+        "instagram": "Instagram",
+        "youtube": "YouTube"
+      },
+      "hints": {
+        "telegram": "Přihlášky a dotazy — nejrychlejší cesta",
+        "phone": "Volání",
+        "instagram": "Fotky a novinky klubu",
+        "youtube": "Přenosy a záznamy her"
+      },
+      "venuesTitle": "Kde hrajeme",
+      "map": "Otevřít na mapě",
+      "corporate": "Chcete hru pro svou firmu nebo na oslavu?",
+      "corporateLink": "Firemní mafie"
+    }
   }
 }

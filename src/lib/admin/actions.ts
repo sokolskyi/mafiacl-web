@@ -6,7 +6,9 @@ import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { PARTNERS_TAG } from "@/lib/partners";
-import { HOSTS_TAG, HOST_LANGS } from "@/lib/hosts";
+import { HOSTS_TAG, HOST_LANGS, TEAM_ROLES } from "@/lib/hosts";
+import { BANS_TAG } from "@/lib/bans";
+import { PROMOTIONS_TAG } from "@/lib/promotions";
 import { TESTIMONIALS_TAG, EVENT_TYPES } from "@/lib/testimonials";
 import { TOURNAMENTS_TAG, SERIES } from "@/lib/tournaments";
 import { GAMES_TAG } from "@/lib/games";
@@ -488,6 +490,7 @@ export async function banPlayer(formData: FormData) {
     redirect(`${back}?error=save#bans`);
   }
   updateTag(GAMES_TAG);
+  updateTag(BANS_TAG);
   redirect(`${back}#bans`);
 }
 
@@ -504,6 +507,7 @@ export async function unbanPlayer(formData: FormData) {
     console.error("unbanPlayer failed", { clubId, code: error.code, message: error.message });
     redirect(`${back}?error=save#bans`);
   }
+  updateTag(BANS_TAG);
   redirect(`${back}#bans`);
 }
 
@@ -581,6 +585,7 @@ export async function saveHost(formData: FormData) {
   const nickname = String(formData.get("nickname") ?? "").trim().slice(0, 32);
   const name = String(formData.get("name") ?? "").trim().slice(0, 60);
   const languages = HOST_LANGS.filter((l) => formData.get(`lang_${l}`) === "on");
+  const teamRoles = TEAM_ROLES.filter((r) => formData.get(`role_${r}`) === "on");
   const photoRaw = String(formData.get("images") ?? "").split("\n").map((x) => x.trim()).filter(Boolean)[0] ?? "";
   const photo = photoRaw ? (LOCAL_IMG.test(photoRaw) ? photoRaw : safeHttps(photoRaw)) : null;
   const sort = int(formData.get("sort"), 0, 100000) ?? 100;
@@ -589,7 +594,7 @@ export async function saveHost(formData: FormData) {
     const v = String(formData.get(`bio_${l}`) ?? "").trim().slice(0, 300);
     if (v) bio[l] = v;
   }
-  if (!clubId || !nickname || !name || (photoRaw && !photo)) redirect(`${back}?error=invalid#hosts`);
+  if (!clubId || !nickname || !name || (photoRaw && !photo) || teamRoles.length === 0) redirect(`${back}?error=invalid#hosts`);
 
   const supabase = await createClient();
   // Привязка к аккаунту игрока по нику — чтобы карточка вела на его профиль.
@@ -607,6 +612,7 @@ export async function saveHost(formData: FormData) {
     bio: Object.keys(bio).length ? bio : null,
     sort,
     profile_id: profileId,
+    team_roles: teamRoles,
   };
   const { error } = hostId
     ? await supabase.from("hosts").update(row).eq("id", hostId)
@@ -808,5 +814,52 @@ export async function removeTournament(formData: FormData) {
   const { error } = await supabase.from("tournaments").delete().eq("id", id);
   if (error) console.error("removeTournament failed", { id, code: error.code, message: error.message });
   updateTag(TOURNAMENTS_TAG);
+  redirect(back);
+}
+
+// ---------------------------------------------------------------------------
+// Акции клуба (раздел «О клубе» → «Акции»)
+
+export async function savePromotion(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = getPathname({ href: "/admin", locale });
+  const clubId = int(formData.get("clubId"), 1, Number.MAX_SAFE_INTEGER);
+  const promoId = int(formData.get("promotionId"), 1, Number.MAX_SAFE_INTEGER);
+  const title: Record<string, string> = {};
+  const body: Record<string, string> = {};
+  for (const l of PARTNER_LANGS) {
+    const tv = String(formData.get(`title_${l}`) ?? "").trim().slice(0, 120);
+    const bv = String(formData.get(`body_${l}`) ?? "").trim().slice(0, 1000);
+    if (tv) title[l] = tv;
+    if (bv) body[l] = bv;
+  }
+  const until = String(formData.get("validUntil") ?? "").trim();
+  const validUntil = /^\d{4}-\d{2}-\d{2}$/.test(until) ? until : null;
+  const sort = int(formData.get("sort"), 0, 100000) ?? 100;
+  const active = formData.get("active") === "on";
+  if (!clubId || Object.keys(title).length === 0) redirect(`${back}?error=invalid#promotions`);
+
+  const supabase = await createClient();
+  const row = { title, body: Object.keys(body).length ? body : null, valid_until: validUntil, sort, active };
+  const { error } = promoId
+    ? await supabase.from("promotions").update(row).eq("id", promoId)
+    : await supabase.from("promotions").insert({ ...row, club_id: clubId });
+  if (error) {
+    console.error("savePromotion failed", { clubId, code: error.code, message: error.message });
+    redirect(`${back}?error=save#promotions`);
+  }
+  updateTag(PROMOTIONS_TAG);
+  redirect(`${back}#promotions`);
+}
+
+export async function removePromotion(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const back = `${getPathname({ href: "/admin", locale })}#promotions`;
+  const id = int(formData.get("promotionId"), 1, Number.MAX_SAFE_INTEGER);
+  if (!id) redirect(back);
+  const supabase = await createClient();
+  const { error } = await supabase.from("promotions").delete().eq("id", id);
+  if (error) console.error("removePromotion failed", { id, code: error.code, message: error.message });
+  updateTag(PROMOTIONS_TAG);
   redirect(back);
 }

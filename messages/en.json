@@ -17,7 +17,8 @@
     "faq": "FAQ",
     "contacts": "Contacts",
     "account": "Account",
-    "hosts": "Hosts"
+    "hosts": "Hosts",
+    "about": "About"
   },
   "common": {
     "comingSoon": "This page is coming soon.",
@@ -111,6 +112,30 @@
     "hosts": {
       "title": "Club hosts",
       "description": "Who runs MafiaCL games and in which languages."
+    },
+    "about": {
+      "title": "About MafiaCL",
+      "description": "The club's history since 2011, code of conduct, club structure, hall of fame, offers, bans and contacts."
+    },
+    "aboutHistory": {
+      "title": "MafiaCL club history",
+      "description": "MafiaCL since 2011: Kremenchuk, Kharkiv, Prague — the club's seasons, champions and tournaments."
+    },
+    "aboutCode": {
+      "title": "MafiaCL code of conduct",
+      "description": "Club values, table etiquette and house rules at MafiaCL games."
+    },
+    "aboutTeam": {
+      "title": "MafiaCL club structure",
+      "description": "Founder, administrator and hosts of MafiaCL Prague."
+    },
+    "aboutPromotions": {
+      "title": "MafiaCL offers",
+      "description": "Current offers and special deals at MafiaCL Prague."
+    },
+    "aboutBans": {
+      "title": "MafiaCL bans",
+      "description": "Players who are barred from MafiaCL Prague games."
     }
   },
   "account": {
@@ -287,7 +312,12 @@
       "tCurrency": "Currency",
       "tPrize": "Prize fund",
       "tInfoUrl": "“More details” link (tables, rating)",
-      "tWinners": "Winners, comma-separated: 1st, 2nd, 3rd"
+      "tWinners": "Winners, comma-separated: 1st, 2nd, 3rd",
+      "teamRoles": "Role in the club structure",
+      "promoTitle": "Title",
+      "promoBody": "Terms",
+      "promoUntil": "Valid until (optional)",
+      "promoActive": "Show on the site"
     },
     "status": {
       "draft": "Draft",
@@ -434,7 +464,16 @@
       "none": "No registration",
       "internal": "On our site",
       "external": "Via link"
-    }
+    },
+    "teamRoles": {
+      "founder": "Founder",
+      "admin": "Administrator",
+      "host": "Host"
+    },
+    "promotions": "Offers — {club}",
+    "promotionsHint": "Shown under About → Offers. Hide or delete expired ones.",
+    "addPromotion": "Add offer",
+    "promoUntilShort": "until {date}"
   },
   "match": {
     "matches": "Games tonight",
@@ -1133,5 +1172,182 @@
     "winners": "Winners",
     "moreInfo": "More details: tables and rating",
     "results": "Results on {host}"
+  },
+  "about": {
+    "title": "About the club",
+    "navLabel": "About the club",
+    "lead": "MafiaCL is a competitive mafia club founded in 2011. Here you'll find the club's history, our code, the people behind the games and everything worth knowing before your first visit.",
+    "tabs": {
+      "history": "History",
+      "code": "Code",
+      "team": "Structure",
+      "hall": "Hall of fame",
+      "promotions": "Offers",
+      "bans": "Bans",
+      "contacts": "Contacts"
+    },
+    "cards": {
+      "history": "Kremenchuk, Kharkiv, Prague: the club's journey since 2011.",
+      "code": "Club values, table etiquette and house rules.",
+      "team": "The club's founder, administrator and hosts.",
+      "hall": "Season champions, Kings and mini-tournament winners.",
+      "promotions": "Current offers and special deals.",
+      "bans": "Players who are barred from club games.",
+      "contacts": "How to sign up, where we play and how to reach us."
+    },
+    "history": {
+      "title": "Club history",
+      "lead": "MafiaCL has been playing since 2011. The club has moved through three cities, but the essentials stayed the same: fair competitive mafia, strong hosts and people you want to come back to.",
+      "steps": [
+        {
+          "year": "2011",
+          "place": "Kremenchuk",
+          "title": "The beginning: MafiaCL Kremenchug",
+          "text": "MafiaCL is born in Kremenchuk, Ukraine — the first club under this name, founded by YeS (Ievgen Sokolskyi)."
+        },
+        {
+          "year": "2012",
+          "place": "Kharkiv",
+          "title": "Moving to Kharkiv",
+          "text": "The club carries on in Kharkiv, adding rated seasons, mini-tournaments, a club code, a student league and open lessons of a mafia school."
+        },
+        {
+          "year": "2014",
+          "place": "Kharkiv",
+          "title": "Season IV — the longest one",
+          "text": "205 rated games and 33 mini-tournaments. The mafia won 110 games, the town 95. Season champion: Persik, runner-up Sarkasm, third Din. The same year YeS earns the FIIM grandmaster title."
+        },
+        {
+          "year": "2015",
+          "place": "Kharkiv · Kyiv",
+          "title": "Season V and the world championship",
+          "text": "A season that lasts the whole year. Club players represent Kharkiv with two teams at the Team World Mafia Championship in Kyiv."
+        },
+        {
+          "year": "2022",
+          "place": "Prague",
+          "title": "MafiaCL in Prague",
+          "text": "The club starts playing in Prague and builds a new community — players from Czechia, Ukraine and all over Europe."
+        },
+        {
+          "year": "2026",
+          "place": "Prague",
+          "title": "Today",
+          "text": "Tuesdays: Premier League mini-tournaments at AURA. Sundays: MafiaCL Arena at POP PAUSE. In November Prague hosts the MCL Europe 2026 final, and in January 2027 MafiaCL Kings, the club's main tournament."
+        }
+      ]
+    },
+    "code": {
+      "title": "Club code",
+      "lead": "A short set of rules on how we play and how we behave at the club. The code applies at every MafiaCL game and tournament.",
+      "valuesTitle": "Club values",
+      "values": [
+        {
+          "name": "Respect",
+          "text": "For players, the host and the venue. We argue with reasons, never with insults."
+        },
+        {
+          "name": "Trust",
+          "text": "Fair play with no deals, bets or oaths. We accept the host's decisions at the table."
+        },
+        {
+          "name": "Focus",
+          "text": "While the game is on, we're in it: no phones, side talk or stray objects on the table."
+        },
+        {
+          "name": "Responsibility",
+          "text": "For your sign-up, your time and your words — at the table and after the game."
+        }
+      ],
+      "parts": [
+        {
+          "title": "At the table",
+          "items": [
+            "We play by FIIM rules and the tournament regulations; rule nuances are announced before the games start.",
+            "We address each other formally and end every speech with “Thank you”.",
+            "Bets, oaths and appeals to outside circumstances are forbidden — the team loses the game for them.",
+            "No gestures or sounds at night: touching above the table means removal, below the table a foul.",
+            "Left the table? Poker face on: any word or gesture after leaving can count as a hint.",
+            "Only game items on the table: phones, earphones, coins and the like go away."
+          ]
+        },
+        {
+          "title": "House rules",
+          "intro": "A little serious and a little tongue-in-cheek — taken from our old club posters.",
+          "items": [
+            "Signed up? Be on time: lateness is penalised under the regulations, and we don't wait for the 10th player.",
+            "Can't make it? Cancel in advance so another player gets the seat.",
+            "Seagulls shout on the beach, mafia players don't. Silence at every table during a game.",
+            "No swearing. Insulting a player means a ban.",
+            "We're guests of our partners: respect the venue, its staff and other guests.",
+            "Staying for the post-game review — great. Disputes are discussed after the game, not during it."
+          ]
+        },
+        {
+          "title": "The host and disputes",
+          "items": [
+            "The host's decision at the table is final. It can be explained after the game.",
+            "If you disagree, talk to the organiser after the game: we'll review the situation under the regulations.",
+            "The host may give a warning, a foul or remove a player from the table."
+          ]
+        },
+        {
+          "title": "Breaking the code",
+          "items": [
+            "For serious or repeated violations, the club management may bar a player from club games.",
+            "The list of current bans is published under Bans."
+          ]
+        }
+      ]
+    },
+    "team": {
+      "title": "Club structure",
+      "lead": "The people behind MafiaCL: the club's founder, administrator and hosts.",
+      "roles": {
+        "founder": "Founder",
+        "admin": "Administrator",
+        "host": "Hosts"
+      },
+      "roleText": {
+        "founder": "Founded the club in 2011 and leads its growth, tournaments and partnerships.",
+        "admin": "Game sign-ups, memberships, payments and player questions.",
+        "host": "Run the club's games and tournaments. Highlighted languages are the ones a host can run a game in."
+      }
+    },
+    "promotions": {
+      "title": "Offers",
+      "lead": "Special deals from the club for new and regular players.",
+      "empty": "There are no active offers right now.",
+      "emptyLink": "Follow the club's news",
+      "until": "Valid until {date}"
+    },
+    "bans": {
+      "title": "Bans",
+      "lead": "Players whom the club management has barred from MafiaCL games.",
+      "codeNote": "A ban is given for serious or repeated violations of the club code.",
+      "codeLink": "Club code",
+      "empty": "Nobody is banned right now.",
+      "since": "since {date}"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "lead": "Game sign-ups, questions about memberships, tournaments and corporate events — message us and we'll reply.",
+      "kinds": {
+        "telegram": "Telegram",
+        "phone": "Phone",
+        "instagram": "Instagram",
+        "youtube": "YouTube"
+      },
+      "hints": {
+        "telegram": "Sign-ups and questions — the fastest way",
+        "phone": "Call",
+        "instagram": "Club photos and news",
+        "youtube": "Streams and game recordings"
+      },
+      "venuesTitle": "Where we play",
+      "map": "Open in maps",
+      "corporate": "Want a game for your company or a party?",
+      "corporateLink": "Corporate mafia"
+    }
   }
 }

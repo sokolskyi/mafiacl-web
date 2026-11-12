@@ -252,7 +252,7 @@ export async function getClubHosts(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("hosts")
-    .select("id, nickname, name, languages, playing_since, hosting_since, photo_url, bio, sort")
+    .select("id, nickname, name, languages, playing_since, hosting_since, photo_url, bio, sort, team_roles")
     .eq("club_id", clubId)
     .order("sort")
     .order("id");
@@ -266,6 +266,7 @@ export async function getClubHosts(clubId: number) {
     photoUrl: h.photo_url,
     bio: (h.bio ?? {}) as Record<string, string>,
     sort: h.sort,
+    teamRoles: (h.team_roles ?? ["host"]) as string[],
   }));
 }
 
@@ -305,5 +306,23 @@ export async function getClubTournaments(clubId: number) {
     regs: ((t.tournament_registrations ?? []) as unknown as { status: string; profiles: { nickname: string | null } | null }[])
       .filter((r) => r.status !== "cancelled")
       .map((r) => ({ status: r.status, nickname: r.profiles?.nickname ?? "—" })),
+  }));
+}
+
+export async function getClubPromotions(clubId: number) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("promotions")
+    .select("id, title, body, valid_until, active, sort")
+    .eq("club_id", clubId)
+    .order("sort")
+    .order("id");
+  return (data ?? []).map((p) => ({
+    id: p.id,
+    title: (p.title ?? {}) as Record<string, string>,
+    body: (p.body ?? {}) as Record<string, string>,
+    validUntil: p.valid_until as string | null,
+    active: p.active,
+    sort: p.sort,
   }));
 }

@@ -5,7 +5,7 @@ import { HOST_LANGS, type Host } from "@/lib/hosts";
 import { loc } from "@/lib/shop/queries";
 
 /** Карточки ведущих: ник, имя, стаж, языки (на которых ведёт — подсвечены). */
-export async function HostCards({ hosts, locale }: { hosts: Host[]; locale: Locale }) {
+export async function HostCards({ hosts, locale, showLanguages = true }: { hosts: Host[]; locale: Locale; showLanguages?: boolean }) {
   const t = await getTranslations({ locale, namespace: "hosts" });
   if (hosts.length === 0) return <p className="mt-6 text-neutral-400">{t("empty")}</p>;
   return (
@@ -38,21 +38,25 @@ export async function HostCards({ hosts, locale }: { hosts: Host[]; locale: Loca
                   .join(" · ")}
               </p>
             )}
-            <p className="sr-only">{t("languages")}: {h.languages.map((l) => t(`lang.${l}`)).join(", ")}</p>
-            <ul aria-hidden="true" className="mt-3 flex flex-wrap gap-1.5">
-              {HOST_LANGS.map((l) => {
-                const on = h.languages.includes(l);
-                return (
-                  <li
-                    key={l}
-                    title={t(`lang.${l}`)}
-                    className={`rounded px-2 py-0.5 text-xs font-bold uppercase ${on ? "bg-white text-black" : "border border-white/15 text-neutral-600 line-through"}`}
-                  >
-                    {t(`code.${l}`)}
-                  </li>
-                );
-              })}
-            </ul>
+            {showLanguages && h.languages.length > 0 && (
+              <>
+              <p className="sr-only">{t("languages")}: {h.languages.map((l) => t(`lang.${l}`)).join(", ")}</p>
+              <ul aria-hidden="true" className="mt-3 flex flex-wrap gap-1.5">
+                {HOST_LANGS.map((l) => {
+                  const on = h.languages.includes(l);
+                  return (
+                    <li
+                      key={l}
+                      title={t(`lang.${l}`)}
+                      className={`rounded px-2 py-0.5 text-xs font-bold uppercase ${on ? "bg-white text-black" : "border border-white/15 text-neutral-600 line-through"}`}
+                    >
+                      {t(`code.${l}`)}
+                    </li>
+                  );
+                })}
+              </ul>
+              </>
+            )}
             {h.bio && <p className="mt-3 text-sm text-neutral-300">{loc(h.bio, locale)}</p>}
           </div>
         </li>

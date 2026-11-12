@@ -27,6 +27,7 @@ export const SECTIONS = {
   reviews: "/reviews",
   faq: "/faq",
   contacts: "/contacts",
+  about: "/about",
 } as const satisfies Record<string, AppPathname>;
 
 export type SectionKey = keyof typeof SECTIONS;
@@ -42,6 +43,7 @@ export const MAIN_NAV: SectionKey[] = [
   "corporate",
   "shop",
   "partners",
+  "about",
 ];
 
 /** Подвал: всё остальное. */
