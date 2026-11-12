@@ -3,7 +3,6 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getHosts } from "@/lib/hosts";
-import { Link } from "@/i18n/navigation";
 import { HostCards } from "@/components/HostCards";
 import { CorporateForm } from "@/components/corporate/CorporateForm";
 import { Testimonials } from "@/components/corporate/Testimonials";
@@ -16,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/corporat
 
 const WHY = ["0", "1", "2", "3"] as const;
 const FORMATS = ["teambuilding", "party", "birthday", "office", "club"] as const;
-const INCLUDED = ["0", "1", "2", "3", "4", "5"] as const;
+const INCLUDED = ["0", "1", "2", "3", "5"] as const;
 const STEPS = ["0", "1", "2", "3"] as const;
 const FAQ = ["0", "1", "2", "3", "4", "5"] as const;
 
@@ -82,13 +81,7 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
             {INCLUDED.map((k) => (
               <li key={k} className="flex gap-3 text-lg">
                 <span aria-hidden="true" className="text-red-400">✦</span>
-                <span>
-                  {k === "4" ? (
-                    <Link href="/shop" className="underline decoration-white/40 underline-offset-4 hover:decoration-white">{t(`included.${k}`)}</Link>
-                  ) : (
-                    t(`included.${k}`)
-                  )}
-                </span>
+                <span>{t(`included.${k}`)}</span>
               </li>
             ))}
           </ul>
