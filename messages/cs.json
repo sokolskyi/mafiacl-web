@@ -738,7 +738,8 @@
     "catAchievement": "Úspěchy hráčů klubu",
     "catMini": "Mini-turnaje {n}. sezóny",
     "seasonTitle": "{n}. sezóna",
-    "archiveSource": "Archiv je sestaven z příspěvků klubu na VKontakte (vk.com/mafiacl a skupiny klubových turnajů), v Telegramu (t.me/mafia_cl, t.me/mafia_clp) a v tabulkách FIIM (fiim.world) a Mafgame (mafgame.org). Našli jste chybu nebo mezeru? Napište nám."
+    "archiveSource": "Archiv je sestaven z příspěvků klubu na VKontakte (vk.com/mafiacl a skupiny klubových turnajů), v Telegramu (t.me/mafia_cl, t.me/mafia_clp) a v tabulkách FIIM (fiim.world) a Mafgame (mafgame.org). Našli jste chybu nebo mezeru? Napište nám.",
+    "seasonStars": "{count, plural, one {# titul mistra sezóny} few {# tituly mistra sezóny} other {# titulů mistra sezóny}}"
   },
   "shop": {
     "soldOut": "Vyprodáno",
@@ -1381,13 +1382,43 @@
           "year": "2015",
           "place": "Charkov · Kyjev",
           "title": "V. sezóna a mistrovství světa",
-          "text": "Sezóna dlouhá celý rok. Hráči klubu reprezentují Charkov dvěma týmy na týmovém mistrovství světa v mafii v Kyjevě."
+          "text": "Sezóna dlouhá celý rok. Hráči klubu reprezentují Charkov dvěma týmy na týmovém mistrovství světa v mafii v Kyjevě. Pohár Slobožanščiny přivítá 60 účastníků z 16 měst."
+        },
+        {
+          "year": "2016",
+          "place": "Charkov",
+          "title": "VI. sezóna a start Mafia Champions League",
+          "text": "Rekordní sezóna s 370 ratingovými hrami, šampion Din. Startuje první sezóna Mafia Champions League — ligy kvalifikačních sérií a finále. Na Pohár Slobožanščiny přijíždí 60 hráčů ze 13 měst a poprvé se konají Mafia Stars a Maf-maraton, párový turnaj na 24 hodin."
+        },
+        {
+          "year": "2017",
+          "place": "Charkov",
+          "title": "Pohár Slobožanščiny pro 80 hráčů",
+          "text": "Hlavní letní turnaj klubu přivítá 80 účastníků, vítězí Sarkasm. První finále Mafia Champions League: 105 her za sezónu, šampion Din. Poprvé se koná Ukrainian Students Tournament a šampionem VII. sezóny se stává Flash."
+        },
+        {
+          "year": "2018",
+          "place": "Charkov",
+          "title": "Druhý rok po sobě 80 hráčů",
+          "text": "Pohár Slobožanščiny opět přivítá 80 účastníků, vítěz 22. Mafia Stars se rozšiřuje na celou Ukrajinu jako Mafia Stars Ukraine a vyhrává ji Flash. MCL 2017/2018 vyhrává Benjamin, VIII. sezónu Snow."
+        },
+        {
+          "year": "2019",
+          "place": "Charkov",
+          "title": "Liga roste",
+          "text": "Mafia Champions League 2018/2019: 106 her za sezónu a výherní fond 8 000 UAH, vítězí Shershen. Flash podruhé za sebou vyhrává Mafia Stars Ukraine."
+        },
+        {
+          "year": "2020",
+          "place": "Charkov",
+          "title": "Mafia Champions League 2019/2020",
+          "text": "116 her za sezónu a výherní fond 10 000 UAH, šampion Kira. Pohár Slobožanščiny vyhrává Marta."
         },
         {
           "year": "2021",
           "place": "Evropa",
           "title": "Mafia Stars Europe",
-          "text": "Pátá a poslední sezóna turnajové série klubu: kvalifikační série v různých městech, semifinále a finále pro 20 hráčů 9.–10. října 2021. Turnaj 4★ v sérii Mafia World Tour, zhruba 180 účastníků."
+          "text": "Pátá a poslední sezóna turnajové série klubu: kvalifikační série v různých městech, semifinále a finále pro 20 hráčů 9.–10. října 2021. Turnaj 4★ v sérii Mafia World Tour, zhruba 180 účastníků. Ve stejném roce proběhne poslední sezóna Mafia Champions League na Ukrajině: 136 her a výherní fond 12 000 UAH, vítěz Shershen."
         },
         {
           "year": "2022",

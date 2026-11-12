@@ -7,6 +7,7 @@ import { getVenues } from "@/lib/venues";
 import { loc } from "@/lib/shop/queries";
 import { CLUB_SOCIAL, KHARKIV_SOCIAL, SIGNUP_CONTACTS, type SocialLink } from "@/lib/social";
 import { AboutHeader, AboutNav } from "@/components/about/AboutNav";
+import { SocialIcon } from "@/components/SocialIcon";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/contacts">) {
   const { locale } = (await params) as { locale: Locale };
@@ -26,7 +27,8 @@ export default async function Page({ params }: PageProps<"/[locale]/contacts">) 
   const links = (list: SocialLink[]) => (
     <ul className="mt-3 space-y-2">
       {list.map((c) => (
-        <li key={c.href}>
+        <li key={c.href} className="flex flex-wrap items-center gap-x-1.5">
+          <SocialIcon kind={c.kind} className="h-4 w-4 text-neutral-300" />
           <span className="text-sm text-neutral-400">{t(`kinds.${c.kind}`)}{c.note ? ` · ${t(`notes.${c.note}`)}` : ""}: </span>
           <a href={c.href} className="font-semibold hover:underline" {...(c.href.startsWith("https") ? { target: "_blank", rel: "noopener" } : {})}>
             {c.label}

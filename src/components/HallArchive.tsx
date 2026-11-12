@@ -23,7 +23,14 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
           {top.map((r, i) => (
             <li key={r.name} className="flex items-baseline gap-3">
               <span className="w-6 text-right font-mono text-neutral-400">{i + 1}</span>
-              <span className="font-semibold">{r.name}</span>
+              <span className="font-semibold">
+                {r.name}
+                {r.seasons > 0 && (
+                  <span className="ml-1" role="img" aria-label={t("seasonStars", { count: r.seasons })} title={t("seasonStars", { count: r.seasons })}>
+                    {"⭐".repeat(r.seasons)}
+                  </span>
+                )}
+              </span>
               <span className="text-sm text-neutral-400">{t("topLine", { seasons: r.seasons, tournaments: r.tournaments, minis: r.minis })}</span>
             </li>
           ))}

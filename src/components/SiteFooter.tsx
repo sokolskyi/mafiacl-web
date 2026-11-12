@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { FOOTER_NAV, MAIN_NAV, SECTIONS } from "@/lib/site";
 import { CLUB_SOCIAL } from "@/lib/social";
+import { SocialIcon } from "@/components/SocialIcon";
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "nav" });
@@ -18,7 +19,8 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
             {CLUB_SOCIAL.filter((l) => l.note !== "en").map((l) => (
               <li key={l.href}>
-                <a href={l.href} target="_blank" rel="noopener" className="hover:text-white">
+                <a href={l.href} target="_blank" rel="noopener" className="inline-flex min-h-8 items-center gap-1.5 hover:text-white">
+                  <SocialIcon kind={l.kind} />
                   {l.kind === "youtube" ? "YouTube" : l.kind === "twitch" ? "Twitch" : l.kind === "telegram" ? "Telegram" : l.kind === "instagram" ? "Instagram" : "Facebook"}
                 </a>
               </li>

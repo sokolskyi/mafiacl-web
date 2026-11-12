@@ -738,7 +738,8 @@
     "catAchievement": "Club players' achievements",
     "catMini": "Season {n} mini-tournaments",
     "seasonTitle": "Season {n}",
-    "archiveSource": "The archive is compiled from the club's posts on VKontakte (vk.com/mafiacl and the club tournament groups), Telegram (t.me/mafia_cl, t.me/mafia_clp) and FIIM (fiim.world) and Mafgame (mafgame.org) tables. Spotted a mistake or a gap? Let us know."
+    "archiveSource": "The archive is compiled from the club's posts on VKontakte (vk.com/mafiacl and the club tournament groups), Telegram (t.me/mafia_cl, t.me/mafia_clp) and FIIM (fiim.world) and Mafgame (mafgame.org) tables. Spotted a mistake or a gap? Let us know.",
+    "seasonStars": "{count, plural, one {# season title} other {# season titles}}"
   },
   "shop": {
     "soldOut": "Sold out",
@@ -1381,13 +1382,43 @@
           "year": "2015",
           "place": "Kharkiv · Kyiv",
           "title": "Season V and the world championship",
-          "text": "A season that lasts the whole year. Club players represent Kharkiv with two teams at the Team World Mafia Championship in Kyiv."
+          "text": "A season that lasts the whole year. Club players represent Kharkiv with two teams at the Team World Mafia Championship in Kyiv. The Slobozhanshchyna Cup draws 60 participants from 16 cities."
+        },
+        {
+          "year": "2016",
+          "place": "Kharkiv",
+          "title": "Season VI and the launch of Mafia Champions League",
+          "text": "A record season with 370 rated games; champion: Din. The first season of Mafia Champions League starts — a league of qualifying series and a final. The Slobozhanshchyna Cup brings together 60 players from 13 cities, and Mafia Stars and the Maf-Marathon, a 24-hour pairs tournament, are held for the first time."
+        },
+        {
+          "year": "2017",
+          "place": "Kharkiv",
+          "title": "An 80-player Slobozhanshchyna Cup",
+          "text": "The club's main summer tournament draws 80 participants; Sarkasm wins. The first Mafia Champions League final: 105 games in the season, champion Din. The first Ukrainian Students Tournament is held, and Flash becomes Season VII champion."
+        },
+        {
+          "year": "2018",
+          "place": "Kharkiv",
+          "title": "80 players for the second year running",
+          "text": "The Slobozhanshchyna Cup again draws 80 participants; the winner is 22. Mafia Stars goes national as Mafia Stars Ukraine, won by Flash. Benjamin wins MCL 2017/2018 and Snow wins Season VIII."
+        },
+        {
+          "year": "2019",
+          "place": "Kharkiv",
+          "title": "The league grows",
+          "text": "Mafia Champions League 2018/2019: 106 games in the season and a 8,000 UAH prize fund; Shershen wins. Flash wins Mafia Stars Ukraine for the second year in a row."
+        },
+        {
+          "year": "2020",
+          "place": "Kharkiv",
+          "title": "Mafia Champions League 2019/2020",
+          "text": "116 games in the season and a 10,000 UAH prize fund; champion: Kira. Marta wins the Slobozhanshchyna Cup."
         },
         {
           "year": "2021",
           "place": "Europe",
           "title": "Mafia Stars Europe",
-          "text": "The fifth and final season of the club's tournament series: qualifying series in several cities, semi-finals and a 20-player final on 9–10 October 2021. A 4★ Mafia World Tour event with about 180 participants."
+          "text": "The fifth and final season of the club's tournament series: qualifying series in several cities, semi-finals and a 20-player final on 9–10 October 2021. A 4★ Mafia World Tour event with about 180 participants. The same year brings the last Mafia Champions League season in Ukraine: 136 games and a 12,000 UAH prize fund, won by Shershen."
         },
         {
           "year": "2022",
