@@ -228,9 +228,9 @@
     "invalidLink": "Check your profile links: each must point to that service’s site.",
     "profilesTitle": "Profiles on rating sites",
     "profilesHint": "Paste links to your profiles — they will show as buttons on your player page. Optional.",
-    "nicknameRule": "You can change your nickname yourself once a year; more often only with the club owner’s approval.",
-    "nicknamePending": "Your request for the nickname “{nick}” is waiting for the club owner’s approval.",
-    "nicknameRequested": "Saved. The new nickname is waiting for the club owner’s approval — you can change it yourself once a year."
+    "nicknameRule": "You can change your nickname once a year. More often only with the club administration’s approval.",
+    "nicknamePending": "Your request for the nickname “{nick}” is waiting for the club administration’s approval.",
+    "nicknameRequested": "Saved. The new nickname will appear once the club administration approves it."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",

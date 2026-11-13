@@ -228,9 +228,9 @@
     "invalidLink": "Zkontrolujte odkazy na profily: každý musí vést na web své služby.",
     "profilesTitle": "Profily na webech žebříčků",
     "profilesHint": "Vložte odkazy na své profily — na vaší stránce hráče se objeví jako tlačítka. Můžete nechat prázdné.",
-    "nicknameRule": "Přezdívku si můžete sami změnit jednou za rok; častěji jen se souhlasem majitele klubu.",
-    "nicknamePending": "Žádost o přezdívku „{nick}“ čeká na schválení majitelem klubu.",
-    "nicknameRequested": "Uloženo. Nová přezdívka čeká na schválení majitelem klubu — sami ji můžete měnit jednou za rok."
+    "nicknameRule": "Přezdívku můžete změnit jednou za rok. Častěji jen po dohodě s vedením klubu.",
+    "nicknamePending": "Žádost o přezdívku „{nick}“ čeká na schválení vedením klubu.",
+    "nicknameRequested": "Uloženo. Nová přezdívka se objeví po schválení vedením klubu."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
