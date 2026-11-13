@@ -9,11 +9,23 @@ import { getReview } from "@/lib/reviews/queries";
 import { analyze } from "@/lib/reviews/analyze";
 import { KINGS_ZONE } from "@/lib/reviews/types";
 import { dayMonth, daysBetween, fmtNum, fullDate, monthTitle } from "@/components/reviews/format";
+import { getApprovedPost, paragraphs, postIdOf } from "@/lib/blog-posts";
 
 const monthOf = (slug: string) => /^season-review-(\d{4}-\d{2})$/.exec(slug)?.[1] ?? null;
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[slug]">) {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
+  const postId = postIdOf(slug);
+  if (postId) {
+    const post = await getApprovedPost(postId);
+    if (!post) return {};
+    return {
+      title: post.title,
+      description: paragraphs(post.body)[0]?.slice(0, 160),
+      alternates: alternatesFor({ pathname: "/blog/[slug]", params: { slug } }, locale),
+      robots: NOINDEX ? { index: false, follow: false } : undefined,
+    };
+  }
   const month = monthOf(slug);
   if (!month) return {};
   const t = await getTranslations({ locale, namespace: "reviews" });
@@ -39,6 +51,8 @@ export default function Page({ params }: PageProps<"/[locale]/blog/[slug]">) {
 async function Review({ params }: Pick<PageProps<"/[locale]/blog/[slug]">, "params">) {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
   setRequestLocale(locale);
+  const postId = postIdOf(slug);
+  if (postId) return <Post id={postId} locale={locale} />;
   const month = monthOf(slug);
   if (!month) notFound();
   const found = await getReview(MAIN_CLUB_SLUG, month);
@@ -172,5 +186,31 @@ async function Review({ params }: Pick<PageProps<"/[locale]/blog/[slug]">, "para
         <Link href="/kings" className="underline underline-offset-4 hover:text-white">{t("kingsLink")}</Link>
       </p>
     </>
+  );
+}
+
+/** Статья игрока (одобрена админом). Текст — простые абзацы, без HTML. */
+async function Post({ id, locale }: { id: number; locale: Locale }) {
+  const post = await getApprovedPost(id);
+  if (!post) notFound();
+  const t = await getTranslations({ locale, namespace: "blogPosts" });
+  const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(post.approvedAt));
+  return (
+    <article lang={post.lang}>
+      <p>
+        <Link href="/blog" className="text-sm text-neutral-400 hover:text-white">← {t("back")}</Link>
+      </p>
+      <p className="mt-6 text-sm uppercase tracking-widest text-red-300">{t("kicker")}</p>
+      <h1 className="mt-1 text-4xl font-black tracking-tight sm:text-5xl">{post.title}</h1>
+      <p className="mt-3 text-neutral-400">
+        {post.author ? (
+          <Link href={{ pathname: "/players/[nick]", params: { nick: post.author } }} className="font-semibold text-neutral-200 hover:underline">{post.author}</Link>
+        ) : "—"}
+        {" · "}{date}
+      </p>
+      <div className="mt-8 max-w-prose space-y-5 text-lg leading-relaxed text-neutral-200">
+        {paragraphs(post.body).map((p, i) => <p key={i} className="whitespace-pre-line">{p}</p>)}
+      </div>
+    </article>
   );
 }

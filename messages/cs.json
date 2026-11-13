@@ -2380,14 +2380,14 @@
       "eveningWin": "Výhra v mini-turnaji",
       "milestone": "{n} her v klubu",
       "referral": "Přivedli jste kamaráda a zahrál si",
-      "blog": "Článek na blog klubu (jeden za rok, po schválení)",
+      "blog": "Článek na blog klubu — za první schválený v roce",
       "birthday": "Narozeniny — dárek při návštěvě webu",
       "coin": "Mince Respect (soutěže, dárky)",
       "coinValue": "hodnota na minci",
       "bestMove3": "Nejlepší tah: uhodli jste všechny tři černé",
-      "streak": "{n} večerů v řadě v sérii (aspoň 1 hra)"
+      "streak": "{n} klubových večerů po sobě (aspoň 1 hra)"
     },
-    "earnNote": "Hry, nejlepší tah, série a narozeninový dárek se připisují samy. Série se počítá podle jednoho rozpisu — např. úterky po sobě; po 10 večerech se počítá znovu. Bonus za kamaráda a článek připisuje klub.",
+    "earnNote": "Hry, nejlepší tah, série, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda připisuje klub.",
     "spend": {
       "evening": "Herní večer",
       "eveningValue": "celý: 300 Kč = 150 Respect",
@@ -2479,5 +2479,43 @@
     "printHint": "Zde jsou jen neaktivované kódy. Tisk: Ctrl/Cmd + P — na listu zůstanou jen nálepky.",
     "ledgerTitle": "Poslední pohyby",
     "ledgerEmpty": "Zatím nic."
+  },
+  "blogPosts": {
+    "title": "Článek na blog klubu",
+    "hint": "Napište článek o mafii: rozbor hry, tipy, historie klubu. Po schválení administrátorem se objeví na blogu a za první schválený článek v roce získáte 15 Respect.",
+    "sent": "Článek byl odeslán ke schválení.",
+    "errors": {
+      "invalid": "Zkontrolujte nadpis (5–140 znaků) a text (alespoň 300 znaků).",
+      "unverified": "Články lze psát po schválení účtu.",
+      "tooMany": "Ke schválení už čekají 2 vaše články — počkejte na rozhodnutí.",
+      "error": "Odeslání se nezdařilo. Zkuste to znovu."
+    },
+    "status": {
+      "pending": "čeká na schválení",
+      "approved": "zveřejněn",
+      "rejected": "zamítnut"
+    },
+    "write": "Napsat článek",
+    "fieldTitle": "Nadpis",
+    "fieldLang": "Jazyk článku",
+    "fieldBody": "Text",
+    "bodyHint": "Alespoň {min} znaků. Prázdný řádek = nový odstavec.",
+    "submit": "Odeslat ke schválení",
+    "lang": {
+      "cs": "čeština",
+      "ru": "ruština",
+      "uk": "ukrajinština",
+      "en": "angličtina"
+    },
+    "adminTitle": "Články ke schválení ({n})",
+    "adminHint": "Schválený článek se hned objeví na blogu. Za první schválený článek v roce autor automaticky získá 15 Respect.",
+    "note": "Komentář pro autora (nepovinné)",
+    "approve": "Zveřejnit",
+    "reject": "Zamítnout",
+    "listTitle": "Články hráčů",
+    "listInvite": "Chcete napsat článek?",
+    "listInviteLink": "V účtu",
+    "back": "Blog",
+    "kicker": "Článek hráče"
   }
 }

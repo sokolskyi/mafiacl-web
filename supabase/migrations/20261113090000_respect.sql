@@ -288,3 +288,6 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 -- Дополнение (MCP: birthday_and_respect_rules): profile_private.birthday (+ заявка на смену через админа),
 -- birthday_set / birthday_decide / birthday_requests / respect_birthday_check (+10 при первом входе после ДР),
 -- статья — раз в год (ref blog:YYYY), лучший ход «три чёрных» +1, серии вечеров одного расписания: 4 подряд +1, 10 подряд +3.
+-- Дополнение (MCP: blog_posts_and_club_streaks): таблица blog_posts (статьи игроков, модерация админом),
+-- триггер начисляет +15 Respect за первую одобренную статью в году (ref blog:YYYY);
+-- серии считаются по всем клубным вечерам подряд (rating/fun/tournament), а не по одному расписанию.

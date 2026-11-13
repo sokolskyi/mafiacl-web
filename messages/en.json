@@ -2380,14 +2380,14 @@
       "eveningWin": "Winning a mini-tournament",
       "milestone": "{n} games at the club",
       "referral": "You brought a friend and they played",
-      "blog": "An article for the club blog (one a year, after approval)",
+      "blog": "Club blog article — for your first approved one each year",
       "birthday": "Birthday — a gift when you visit the site",
       "coin": "Respect coin (prize draws, gifts)",
       "coinValue": "value on the coin",
       "bestMove3": "Best move: you named all three black players",
-      "streak": "{n} nights in a row in a series (at least 1 game)"
+      "streak": "{n} club nights in a row (at least 1 game)"
     },
-    "earnNote": "Games, best moves, streaks and the birthday gift are added automatically. A streak counts within one schedule — e.g. Tuesdays in a row; after 10 nights it starts again. The club adds the bonuses for a friend and an article.",
+    "earnNote": "Games, best moves, streaks, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. The club adds the bonus for a friend.",
     "spend": {
       "evening": "Game night",
       "eveningValue": "in full: 300 Kč = 150 Respect",
@@ -2479,5 +2479,43 @@
     "printHint": "Only unused codes are shown. To print: Ctrl/Cmd + P — only the stickers stay on the sheet.",
     "ledgerTitle": "Recent activity",
     "ledgerEmpty": "Nothing yet."
+  },
+  "blogPosts": {
+    "title": "Article for the club blog",
+    "hint": "Write an article about mafia: a game breakdown, tips, club history. Once an administrator approves it, it appears on the blog, and your first approved article each year earns you 15 Respect.",
+    "sent": "Your article has been sent for review.",
+    "errors": {
+      "invalid": "Check the title (5–140 characters) and the text (at least 300 characters).",
+      "unverified": "You can write articles once your account is approved.",
+      "tooMany": "You already have 2 articles waiting for review — please wait for a decision.",
+      "error": "Could not send. Please try again."
+    },
+    "status": {
+      "pending": "in review",
+      "approved": "published",
+      "rejected": "rejected"
+    },
+    "write": "Write an article",
+    "fieldTitle": "Title",
+    "fieldLang": "Article language",
+    "fieldBody": "Text",
+    "bodyHint": "At least {min} characters. An empty line starts a new paragraph.",
+    "submit": "Send for review",
+    "lang": {
+      "cs": "Czech",
+      "ru": "Russian",
+      "uk": "Ukrainian",
+      "en": "English"
+    },
+    "adminTitle": "Articles in review ({n})",
+    "adminHint": "An approved article appears on the blog right away. The author automatically gets 15 Respect for their first approved article each year.",
+    "note": "Comment to the author (optional)",
+    "approve": "Publish",
+    "reject": "Reject",
+    "listTitle": "Player articles",
+    "listInvite": "Want to write an article?",
+    "listInviteLink": "In your account",
+    "back": "Blog",
+    "kicker": "Player article"
   }
 }

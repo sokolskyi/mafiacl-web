@@ -20,7 +20,7 @@ export default async function Page({ params, searchParams }: PageProps<"/[locale
     <SectionPage locale={locale} pageKey="account">
       <Suspense fallback={<p className="mt-10 text-neutral-500">{t("loading")}</p>}>
         <AuthError searchParams={searchParams}>
-          {(authError) => <AccountPanel locale={locale} authError={authError} />}
+          {(authError, post) => <AccountPanel locale={locale} authError={authError} post={post} />}
         </AuthError>
       </Suspense>
     </SectionPage>
@@ -33,8 +33,8 @@ async function AuthError({
   children,
 }: {
   searchParams: PageProps<"/[locale]/account">["searchParams"];
-  children: (authError: boolean) => React.ReactNode;
+  children: (authError: boolean, post?: string) => React.ReactNode;
 }) {
   const sp = await searchParams;
-  return children(sp.auth === "error");
+  return children(sp.auth === "error", typeof sp.post === "string" ? sp.post : undefined);
 }

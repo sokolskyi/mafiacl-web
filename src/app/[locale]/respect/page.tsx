@@ -37,7 +37,7 @@ export default async function Page({ params, searchParams }: Props) {
     ...RESPECT_EARN.milestones.map((m) => [t("earn.milestone", { n: m.games }), m.bonus] as [string, number]),
     [t("earn.birthday"), RESPECT_EARN.birthday],
     [t("earn.referral"), RESPECT_MANUAL.referral],
-    [t("earn.blog"), RESPECT_MANUAL.blog],
+    [t("earn.blog"), RESPECT_EARN.blog],
   ];
 
   return (

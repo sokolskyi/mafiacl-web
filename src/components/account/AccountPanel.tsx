@@ -14,9 +14,10 @@ import { connectTelegram } from "@/lib/telegram/actions";
 import { getOptionalProviders } from "@/lib/auth/providers";
 import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
+import { AccountBlog } from "./AccountBlog";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
-export async function AccountPanel({ locale, authError }: { locale: Locale; authError: boolean }) {
+export async function AccountPanel({ locale, authError, post }: { locale: Locale; authError: boolean; post?: string }) {
   const t = await getTranslations({ locale, namespace: "account" });
   if (!isSupabaseConfigured) return <p className="mt-10 text-neutral-400">{t("notConfigured")}</p>;
 
@@ -163,6 +164,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
         </div>
       )}
       <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} markeryId={profile?.markery_id ?? null} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} />
+      {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>
         <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>

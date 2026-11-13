@@ -15,6 +15,8 @@ export const RESPECT_EARN = {
   streak10: 3,
   /** Первый вход в кабинет после дня рождения. */
   birthday: 10,
+  /** Первая одобренная статья в блог за календарный год. */
+  blog: 15,
   milestones: [
     { games: 50, bonus: 25 },
     { games: 100, bonus: 50 },
@@ -24,7 +26,7 @@ export const RESPECT_EARN = {
 } as const;
 
 /** Бонусы, которые начисляет клуб вручную (суммы по умолчанию в админке). */
-export const RESPECT_MANUAL = { referral: 30, blog: 15, bonus: 10, adjust: 0 } as const;
+export const RESPECT_MANUAL = { referral: 30, bonus: 10, adjust: 0 } as const;
 export type ManualReason = keyof typeof RESPECT_MANUAL;
 
 /** Какую долю заказа можно оплатить Respect. */

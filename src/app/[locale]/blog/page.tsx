@@ -7,6 +7,7 @@ import { getReviews } from "@/lib/reviews/queries";
 import { reviewSlug } from "@/lib/reviews/types";
 import { monthTitle } from "@/components/reviews/format";
 import { MASTERCLASSES, MASTERCLASS_PLAYLIST } from "@/lib/masterclasses";
+import { getApprovedPosts, paragraphs, postSlug } from "@/lib/blog-posts";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/blog">) {
   const { locale } = (await params) as { locale: Locale };
@@ -20,6 +21,9 @@ export default async function Page({ params }: PageProps<"/[locale]/blog">) {
   const t = await getTranslations({ locale, namespace: "reviews" });
   const reviews = await getReviews(MAIN_CLUB_SLUG);
   const tb = await getTranslations({ locale, namespace: "blog" });
+  const tpost = await getTranslations({ locale, namespace: "blogPosts" });
+  const posts = await getApprovedPosts();
+  const dateFmt = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" });
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <h1 className="text-4xl font-black tracking-tight sm:text-5xl">{tp("blog.title")}</h1>
@@ -53,6 +57,29 @@ export default async function Page({ params }: PageProps<"/[locale]/blog">) {
           </ul>
         )}
       </section>
+
+      {posts.length > 0 && (
+        <section aria-labelledby="posts" className="mt-16">
+          <h2 id="posts" className="font-display text-3xl font-extrabold uppercase">{tpost("listTitle")}</h2>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.map((p) => (
+              <li key={p.id}>
+                <Link
+                  href={{ pathname: "/blog/[slug]", params: { slug: postSlug(p.id) } }}
+                  className="block h-full rounded-lg border border-white/15 bg-neutral-950/60 p-6 hover:border-red-500/70"
+                >
+                  <p className="text-sm text-neutral-400">{p.author ?? "—"} · {dateFmt.format(new Date(p.approvedAt))}{p.lang !== locale && ` · ${p.lang.toUpperCase()}`}</p>
+                  <p className="mt-1 text-xl font-bold">{p.title}</p>
+                  <p className="mt-2 line-clamp-3 text-neutral-300">{paragraphs(p.body)[0]}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-sm text-neutral-400">
+            {tpost("listInvite")} <Link href="/account" className="underline hover:text-white">{tpost("listInviteLink")}</Link>
+          </p>
+        </section>
+      )}
 
       <section aria-labelledby="masterclasses" className="mt-16">
         <h2 id="masterclasses" className="font-display text-3xl font-extrabold uppercase">{tb("masterclassesTitle")}</h2>
