@@ -23,7 +23,7 @@ export async function MemberRequests({ locale, notice }: { locale: Locale; notic
             {r.displayName && <span className="ml-2 text-sm font-normal text-neutral-400">{r.displayName}</span>}
           </p>
           <p className="text-sm text-neutral-400">
-            {[r.email, t(`provider.${["google", "facebook", "custom:telegram", "email"].includes(r.provider) ? r.provider.replace("custom:", "") : "other"}`), date.format(new Date(r.createdAt)), r.telegramLinked ? t("botLinked") : null]
+            {[r.email, t(`provider.${["google", "facebook", "custom:telegram", "email", "apple", "azure"].includes(r.provider) ? r.provider.replace("custom:", "") : "other"}`), date.format(new Date(r.createdAt)), r.telegramLinked ? t("botLinked") : null]
               .filter(Boolean)
               .join(" · ")}
           </p>

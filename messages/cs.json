@@ -204,7 +204,9 @@
     "warNotice": "Náš klub odsuzuje ruskou agresi proti Ukrajině. Osoby s bydlištěm v Rusku a Bělorusku se proto na našem webu nemohou registrovat.",
     "verificationPending": "Váš účet čeká na schválení klubem. Do té doby se nelze zapisovat na hry, vše ostatní už funguje.",
     "verificationRejected": "Klub váš účet neschválil. Pokud jde o omyl, napište pořadateli.",
-    "verificationBotHint": "Připojte níže Telegram bota — dáme vám vědět, až účet schválíme."
+    "verificationBotHint": "Připojte níže Telegram bota — dáme vám vědět, až účet schválíme.",
+    "apple": "Přihlásit přes Apple",
+    "microsoft": "Přihlásit přes Microsoft"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -526,7 +528,9 @@
         "facebook": "Facebook",
         "telegram": "Telegram",
         "email": "e-mail",
-        "other": "jiný způsob"
+        "other": "jiný způsob",
+        "apple": "Apple",
+        "azure": "Microsoft"
       }
     }
   },

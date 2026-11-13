@@ -21,15 +21,17 @@ async function siteOrigin() {
 }
 
 /** Разрешённые способы входа (Telegram — свой OIDC-провайдер в Supabase). */
-const PROVIDERS = ["google", "facebook", "custom:telegram"] as const;
+const PROVIDERS = ["google", "facebook", "custom:telegram", "apple", "azure"] as const;
 type Provider = (typeof PROVIDERS)[number];
 
 const SCOPES: Partial<Record<Provider, string>> = {
   facebook: "email public_profile",
   "custom:telegram": "openid profile",
+  // Supabase требует от Microsoft адрес почты — без scope email вход не пройдёт
+  azure: "email",
 };
 
-/** Кнопки «Войти через Google / Facebook / Telegram». */
+/** Кнопки «Войти через Google / Facebook / Telegram / Apple / Microsoft». */
 export async function signInWithProvider(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
   const raw = String(formData.get("provider") ?? "");

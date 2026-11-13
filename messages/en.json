@@ -204,7 +204,9 @@
     "warNotice": "Our club condemns Russia's aggression against Ukraine. Therefore, people residing in Russia or Belarus cannot register on our website.",
     "verificationPending": "Your account is waiting for the club's approval. Until then you can't sign up for games; everything else already works.",
     "verificationRejected": "The club did not approve your account. If this is a mistake, please contact the organiser.",
-    "verificationBotHint": "Connect the Telegram bot below and we'll let you know once you're approved."
+    "verificationBotHint": "Connect the Telegram bot below and we'll let you know once you're approved.",
+    "apple": "Sign in with Apple",
+    "microsoft": "Sign in with Microsoft"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -526,7 +528,9 @@
         "facebook": "Facebook",
         "telegram": "Telegram",
         "email": "e-mail",
-        "other": "other"
+        "other": "other",
+        "apple": "Apple",
+        "azure": "Microsoft"
       }
     }
   },

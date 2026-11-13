@@ -11,6 +11,7 @@ import { recordSignupCountry } from "@/lib/members";
 import { formatMemberNo } from "@/lib/memberNo";
 import { PlayerShare } from "@/components/players/PlayerShare";
 import { connectTelegram } from "@/lib/telegram/actions";
+import { getOptionalProviders } from "@/lib/auth/providers";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError }: { locale: Locale; authError: boolean }) {
@@ -20,6 +21,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
   const userId = data?.claims.sub;
+  const optional = await getOptionalProviders();
 
   if (!userId) {
     return (
@@ -41,6 +43,16 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           <ProviderButton locale={locale} provider="custom:telegram" label={t("telegram")} className="bg-[#229ED9] text-white hover:bg-[#1f91c7]">
             <TelegramIcon />
           </ProviderButton>
+          {optional.includes("apple") && (
+            <ProviderButton locale={locale} provider="apple" label={t("apple")} className="bg-black text-white ring-1 ring-white/40 hover:bg-neutral-900">
+              <AppleIcon />
+            </ProviderButton>
+          )}
+          {optional.includes("azure") && (
+            <ProviderButton locale={locale} provider="azure" label={t("microsoft")} className="bg-[#2F2F2F] text-white hover:bg-[#3a3a3a]">
+              <MicrosoftIcon />
+            </ProviderButton>
+          )}
         </div>
         <div className="my-5 flex items-center gap-3 text-xs uppercase text-neutral-500">
           <span className="h-px flex-1 bg-white/10" />
@@ -81,6 +93,8 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
     { provider: "google", label: "Google", icon: <GoogleIcon /> },
     { provider: "facebook", label: "Facebook", icon: <FacebookIcon /> },
     { provider: "custom:telegram", label: "Telegram", icon: <TelegramIcon /> },
+    ...(optional.includes("apple") || linked.has("apple") ? [{ provider: "apple", label: "Apple", icon: <AppleIcon /> }] : []),
+    ...(optional.includes("azure") || linked.has("azure") ? [{ provider: "azure", label: "Microsoft", icon: <MicrosoftIcon /> }] : []),
   ];
 
   return (
@@ -213,6 +227,25 @@ function FacebookIcon() {
   return (
     <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
       <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z" />
+    </svg>
+  );
+}
+
+function AppleIcon() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16.37 12.74c-.02-2.33 1.9-3.45 1.99-3.5-1.08-1.59-2.77-1.8-3.37-1.83-1.43-.15-2.8.84-3.53.84-.73 0-1.85-.82-3.04-.8-1.56.02-3 .91-3.8 2.31-1.62 2.81-.41 6.97 1.17 9.25.77 1.12 1.69 2.37 2.9 2.33 1.16-.05 1.6-.75 3.01-.75 1.4 0 1.8.75 3.03.73 1.25-.02 2.04-1.14 2.8-2.26.88-1.3 1.25-2.55 1.27-2.62-.03-.01-2.43-.93-2.45-3.7zM14.06 5.9c.64-.78 1.07-1.85.95-2.92-.92.04-2.04.61-2.7 1.39-.59.69-1.11 1.78-.97 2.83 1.03.08 2.07-.52 2.72-1.3z" />
+    </svg>
+  );
+}
+
+function MicrosoftIcon() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+      <path fill="#F25022" d="M1 1h10.5v10.5H1z" />
+      <path fill="#7FBA00" d="M12.5 1H23v10.5H12.5z" />
+      <path fill="#00A4EF" d="M1 12.5h10.5V23H1z" />
+      <path fill="#FFB900" d="M12.5 12.5H23V23H12.5z" />
     </svg>
   );
 }
