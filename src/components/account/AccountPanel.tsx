@@ -167,7 +167,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
       )}
       <AvatarField
         initial={profile?.avatar_url ?? null}
-        labels={{ title: t("photo"), hint: t("photoHint"), upload: t("photoUpload"), change: t("photoChange"), remove: t("photoRemove"), uploading: t("photoUploading"), failed: t("photoFailed"), saved: t("photoSaved") }}
+        labels={{ title: t("photo"), hint: t("photoHint"), upload: t("photoUpload"), change: t("photoChange"), remove: t("photoRemove"), uploading: t("photoUploading"), failed: t("photoFailed"), saved: t("photoSaved"), cropHint: t("photoCropHint"), zoom: t("photoZoom"), save: t("photoSave"), cancel: t("photoCancel") }}
       />
       <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
       {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}

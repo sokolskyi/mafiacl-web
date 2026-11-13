@@ -318,11 +318,10 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                       {a.isCurrent && <span className="ml-2 rounded bg-red-500/25 px-1.5 text-xs font-semibold uppercase text-red-200">{t("archiveCurrent")}</span>}
                     </td>
                     <td>
-                      {/* Если был финал сезона, место — по итогам финала; место по очкам — мелко рядом. */}
+                      {/* Если был финал сезона, место — по итогам финала. */}
                       {a.finalPlace ? (
                         <>
                           <span title={t("archiveFinal")}>{["🥇", "🥈", "🥉"][a.finalPlace - 1] ?? ""} {a.finalPlace}</span>
-                          {a.finalPlace !== a.rank && <span className="ml-1 text-xs text-neutral-500">{t("archiveByPoints", { n: a.rank })}</span>}
                         </>
                       ) : (
                         a.rank

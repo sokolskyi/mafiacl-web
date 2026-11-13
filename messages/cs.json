@@ -232,13 +232,17 @@
     "nicknamePending": "Žádost o přezdívku „{nick}“ čeká na schválení vedením klubu.",
     "nicknameRequested": "Uloženo. Nová přezdívka se objeví po schválení vedením klubu.",
     "photo": "Fotka hráče",
-    "photoHint": "Čtvercová fotka obličeje: objeví se na vaší stránce hráče, v žebříčcích a na tabulkách přenosu. Ořízneme ji na střed sami.",
+    "photoHint": "Fotka se objeví na vaší stránce hráče, v žebříčcích a na tabulkách přenosu. Po výběru souboru můžete výřez posunout a přiblížit.",
     "photoUpload": "Nahrát fotku",
     "photoChange": "Vyměnit fotku",
     "photoRemove": "Odebrat",
     "photoUploading": "Nahráváme…",
     "photoFailed": "Fotku se nepodařilo nahrát. Zkuste jinou.",
-    "photoSaved": "Fotka uložena."
+    "photoSaved": "Fotka uložena.",
+    "photoCropHint": "Posuňte fotku tak, aby byl obličej v kruhu. Přiblížíte a oddálíte posuvníkem, kolečkem myši nebo dvěma prsty.",
+    "photoZoom": "Přiblížení",
+    "photoSave": "Uložit fotku",
+    "photoCancel": "Zrušit"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -828,8 +832,7 @@
     "archiveFKFull": "Zabit jako první, podíl her",
     "archiveExtra": "Bonus/hra",
     "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna",
-    "aliases": "Hrál také jako: {names}",
-    "archiveByPoints": "podle bodů: {n}"
+    "aliases": "Hrál také jako: {names}"
   },
   "rating": {
     "filters": "Filtry žebříčku",

@@ -232,13 +232,17 @@
     "nicknamePending": "Your request for the nickname “{nick}” is waiting for the club administration’s approval.",
     "nicknameRequested": "Saved. The new nickname will appear once the club administration approves it.",
     "photo": "Player photo",
-    "photoHint": "A square photo of your face: it appears on your player page, in ratings and on stream overlays. We crop it to the centre for you.",
+    "photoHint": "The photo appears on your player page, in ratings and on stream overlays. After picking a file you can move and zoom the frame.",
     "photoUpload": "Upload photo",
     "photoChange": "Change photo",
     "photoRemove": "Remove",
     "photoUploading": "Uploading…",
     "photoFailed": "Could not upload the photo. Try another one.",
-    "photoSaved": "Photo saved."
+    "photoSaved": "Photo saved.",
+    "photoCropHint": "Drag the photo so your face is inside the circle. Zoom with the slider, the mouse wheel or two fingers.",
+    "photoZoom": "Zoom",
+    "photoSave": "Save photo",
+    "photoCancel": "Cancel"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -828,8 +832,7 @@
     "archiveFKFull": "Killed first, share of games",
     "archiveExtra": "Extra/game",
     "miniTitleSeason": "Mini-tournament {n} · season {season}",
-    "aliases": "Also played as: {names}",
-    "archiveByPoints": "by points: {n}"
+    "aliases": "Also played as: {names}"
   },
   "rating": {
     "filters": "Rating filters",
