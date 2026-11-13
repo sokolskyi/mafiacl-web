@@ -214,7 +214,17 @@
     "microsoft": "Sign in with Microsoft",
     "markery": "Profile on markery.online",
     "markeryHint": "Link to your stats on markery.online — a button will appear on your player page. Optional.",
-    "invalidMarkery": "This doesn’t look like a markery.online link: paste a link with playerId=… or the player number."
+    "invalidMarkery": "This doesn’t look like a markery.online link: paste a link with playerId=… or the player number.",
+    "birthday": "Date of birth",
+    "birthdayHint": "Required. On your birthday the club gives you 10 Respect. Later, only an administrator can change the date.",
+    "birthdayChangeHint": "If the date is wrong, enter the correct one — an administrator will check and confirm it.",
+    "birthdayPending": "Your date change request has been sent to an administrator.",
+    "birthdayRequested": "Saved. The new date of birth is waiting for an administrator to confirm.",
+    "birthdayRequired": "Enter your date of birth.",
+    "invalidBirthday": "Check your date of birth.",
+    "birthdayMissing": "Add your date of birth to your profile — it is a required field.",
+    "birthdayMissingLink": "Fill in",
+    "birthdayGreeting": "{name}, MafiaCL wishes you a happy birthday! Thank you for being with us — here are 10 Respect from the club."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -555,7 +565,13 @@
       "invalid": "Check the nicknames: both are required and must differ.",
       "remove": "Remove {alias} → {canonical}"
     },
-    "respectLink": "Respect: adjustments and coins"
+    "respectLink": "Respect: adjustments and coins",
+    "birthdays": {
+      "title": "Date of birth changes",
+      "hint": "A player wants to change their date of birth. Check and confirm.",
+      "approve": "Confirm",
+      "reject": "Reject"
+    }
   },
   "match": {
     "matches": "Games tonight",
@@ -2364,13 +2380,14 @@
       "eveningWin": "Winning a mini-tournament",
       "milestone": "{n} games at the club",
       "referral": "You brought a friend and they played",
-      "blog": "An article for the club blog",
-      "birthday": "Birthday",
-      "review": "A review of the club or a corporate event",
+      "blog": "An article for the club blog (one a year, after approval)",
+      "birthday": "Birthday — a gift when you visit the site",
       "coin": "Respect coin (prize draws, gifts)",
-      "coinValue": "value on the coin"
+      "coinValue": "value on the coin",
+      "bestMove3": "Best move: you named all three black players",
+      "streak": "{n} nights in a row in a series (at least 1 game)"
     },
-    "earnNote": "Games are counted automatically once the host closes the game sheet. Bonuses for a friend, an article, a birthday and a review are added by the club.",
+    "earnNote": "Games, best moves, streaks and the birthday gift are added automatically. A streak counts within one schedule — e.g. Tuesdays in a row; after 10 nights it starts again. The club adds the bonuses for a friend and an article.",
     "spend": {
       "evening": "Game night",
       "eveningValue": "in full: 300 Kč = 150 Respect",
@@ -2417,14 +2434,17 @@
       "spend_shop": "Order payment",
       "refund": "Refund",
       "adjust": "Adjustment",
-      "expire": "Expired (12 months without games)"
+      "expire": "Expired (12 months without games)",
+      "best_move": "Best move: three black",
+      "streak": "Streak of nights"
     },
     "orderTitle": "Pay part of the order with Respect",
     "orderHint": "You can use up to {max} Respect — a {czk} Kč discount. This can be done once; if you cancel the order, the Respect comes back.",
     "orderAmount": "How much Respect to use",
     "orderApply": "Apply",
     "orderApplied": "Respect applied, the order total is reduced.",
-    "orderPaidWith": "Paid with Respect:"
+    "orderPaidWith": "Paid with Respect:",
+    "streakNote": "{n} nights in a row"
   },
   "adminRespect": {
     "title": "Respect",
@@ -2436,7 +2456,8 @@
       "invalid": "Check the fields.",
       "noPlayer": "No player with this nickname.",
       "insufficient": "The player does not have enough Respect to deduct.",
-      "save": "Could not save."
+      "save": "Could not save.",
+      "blogYear": "This player has already received the article bonus this year."
     },
     "adjustTitle": "Add or deduct",
     "adjustHint": "A bonus for a friend, a birthday, an article, a review, or any correction. To deduct, enter a negative number. Games and milestones are added by the site itself.",

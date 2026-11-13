@@ -31,11 +31,13 @@ export default async function Page({ params, searchParams }: Props) {
     [t("earn.final"), RESPECT_EARN.final],
     [t("earn.firstGame"), RESPECT_EARN.firstGame],
     [t("earn.eveningWin"), RESPECT_EARN.eveningWin],
+    [t("earn.bestMove3"), RESPECT_EARN.bestMove3],
+    [t("earn.streak", { n: 4 }), RESPECT_EARN.streak4],
+    [t("earn.streak", { n: 10 }), RESPECT_EARN.streak10],
     ...RESPECT_EARN.milestones.map((m) => [t("earn.milestone", { n: m.games }), m.bonus] as [string, number]),
+    [t("earn.birthday"), RESPECT_EARN.birthday],
     [t("earn.referral"), RESPECT_MANUAL.referral],
     [t("earn.blog"), RESPECT_MANUAL.blog],
-    [t("earn.birthday"), RESPECT_MANUAL.birthday],
-    [t("earn.review"), RESPECT_MANUAL.review],
   ];
 
   return (

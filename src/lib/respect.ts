@@ -8,6 +8,13 @@ export const RESPECT_EARN = {
   final: 3,
   firstGame: 20,
   eveningWin: 5,
+  /** Лучший ход: первый убитый назвал всех трёх чёрных. */
+  bestMove3: 1,
+  /** Серии вечеров одного расписания (вторники, воскресенья): 4 подряд и 10 подряд. */
+  streak4: 1,
+  streak10: 3,
+  /** Первый вход в кабинет после дня рождения. */
+  birthday: 10,
   milestones: [
     { games: 50, bonus: 25 },
     { games: 100, bonus: 50 },
@@ -17,14 +24,14 @@ export const RESPECT_EARN = {
 } as const;
 
 /** Бонусы, которые начисляет клуб вручную (суммы по умолчанию в админке). */
-export const RESPECT_MANUAL = { referral: 30, birthday: 10, blog: 15, review: 10, bonus: 10, adjust: 0 } as const;
+export const RESPECT_MANUAL = { referral: 30, blog: 15, bonus: 10, adjust: 0 } as const;
 export type ManualReason = keyof typeof RESPECT_MANUAL;
 
 /** Какую долю заказа можно оплатить Respect. */
 export const RESPECT_SHARE = { merch: 0.5, membership: 0.3 } as const;
 
 export type RespectReason =
-  | "game" | "first_game" | "milestone" | "evening_win" | "bonus" | "referral" | "birthday" | "blog" | "review"
+  | "game" | "first_game" | "milestone" | "evening_win" | "best_move" | "streak" | "bonus" | "referral" | "birthday" | "blog" | "review"
   | "code" | "spend_game" | "spend_shop" | "refund" | "adjust" | "expire";
 
 /** Сколько Respect стоит вечер с такой ценой. */

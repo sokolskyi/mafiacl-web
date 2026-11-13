@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 function toLocale(value: FormDataEntryValue | null): Locale {
   const v = String(value ?? "");
@@ -84,7 +85,7 @@ export async function signOut(formData: FormData) {
   redirect(getPathname({ href: "/account", locale }));
 }
 
-export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "taken" | "error" };
+export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidBirthday" | "birthdayRequired" | "birthdayRequested" | "taken" | "error" };
 
 /** Ник игрока: 2–32 символа, без пробелов по краям, уникален без учёта регистра. */
 export async function updateNickname(_prev: ProfileState, formData: FormData): Promise<ProfileState> {
@@ -102,14 +103,26 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   const markeryMatch = markeryRaw.match(/playerId=(\d{1,8})/i) ?? markeryRaw.match(/^(\d{1,8})$/);
   if (markeryRaw && !markeryMatch) return { status: "invalidMarkery" };
   const markery_id = markeryMatch ? Number(markeryMatch[1]) || null : null;
+  // Дата рождения обязательна; уже заданную меняет только админ (здесь — заявка на смену).
+  const birthdayRaw = String(formData.get("birthday") ?? "").trim();
+  if (birthdayRaw && !/^\d{4}-\d{2}-\d{2}$/.test(birthdayRaw)) return { status: "invalidBirthday" };
+  const { data: priv } = await supabase.from("profile_private").select("birthday").eq("profile_id", userId).maybeSingle();
+  if (!priv?.birthday && !birthdayRaw) return { status: "birthdayRequired" };
+
   const { error } = await supabase.from("profiles").update({ nickname, city, markery_id }).eq("id", userId);
   if (error) {
     if (error.code === "23505") return { status: "taken" };
     console.error("updateNickname failed", { code: error.code, message: error.message });
     return { status: "error" };
   }
+  let requested = false;
+  if (birthdayRaw && birthdayRaw !== priv?.birthday) {
+    const { data: res, error: bErr } = await createAdminClient().rpc("birthday_set", { p_profile: userId, p_date: birthdayRaw });
+    if (bErr) return { status: bErr.message.includes("invalid") ? "invalidBirthday" : "error" };
+    requested = res === "requested";
+  }
   revalidatePath("/", "layout");
-  return { status: "saved" };
+  return { status: requested ? "birthdayRequested" : "saved" };
 }
 
 export type EmailState = {

@@ -107,8 +107,9 @@ export async function adjustRespect(formData: FormData) {
   if (!p) redirect(`${back}?error=noPlayer`);
   const { error } = await admin.rpc("respect_adjust", { p_club: club.id, p_profile: p.id, p_amount: amount, p_reason: reason, p_note: note, p_by: ctx.userId });
   if (error) {
-    if (!error.message.includes("insufficient")) console.error("respect_adjust failed", { code: error.code, message: error.message });
-    redirect(`${back}?error=${error.message.includes("insufficient") ? "insufficient" : "save"}`);
+    const kind = error.message.includes("insufficient") ? "insufficient" : error.message.includes("blog_year") ? "blogYear" : "save";
+    if (kind === "save") console.error("respect_adjust failed", { code: error.code, message: error.message });
+    redirect(`${back}?error=${kind}`);
   }
   redirect(`${back}?saved=1`);
 }

@@ -214,7 +214,17 @@
     "microsoft": "Přihlásit přes Microsoft",
     "markery": "Profil na markery.online",
     "markeryHint": "Odkaz na vaši statistiku na markery.online — v profilu hráče se objeví tlačítko. Můžete nechat prázdné.",
-    "invalidMarkery": "Nevypadá to jako odkaz na markery.online: potřebujeme odkaz s playerId=… nebo číslo hráče."
+    "invalidMarkery": "Nevypadá to jako odkaz na markery.online: potřebujeme odkaz s playerId=… nebo číslo hráče.",
+    "birthday": "Datum narození",
+    "birthdayHint": "Povinné. K narozeninám vám klub daruje 10 Respect. Datum pak lze změnit jen přes administrátora.",
+    "birthdayChangeHint": "Pokud datum nesedí, zadejte správné — administrátor ho zkontroluje a potvrdí.",
+    "birthdayPending": "Žádost o změnu data byla odeslána administrátorovi.",
+    "birthdayRequested": "Uloženo. Nové datum narození čeká na potvrzení administrátora.",
+    "birthdayRequired": "Zadejte datum narození.",
+    "invalidBirthday": "Zkontrolujte datum narození.",
+    "birthdayMissing": "Doplňte v profilu datum narození — je to povinné pole.",
+    "birthdayMissingLink": "Vyplnit",
+    "birthdayGreeting": "{name}, klub MafiaCL vám přeje vše nejlepší k narozeninám! Děkujeme, že jste s námi — darujeme vám 10 Respect."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -555,7 +565,13 @@
       "invalid": "Zkontrolujte přezdívky: obě jsou povinné a nesmí být stejné.",
       "remove": "Zrušit {alias} → {canonical}"
     },
-    "respectLink": "Respect: připsání a mince"
+    "respectLink": "Respect: připsání a mince",
+    "birthdays": {
+      "title": "Změna data narození",
+      "hint": "Hráč chce změnit datum narození. Zkontrolujte a potvrďte.",
+      "approve": "Potvrdit",
+      "reject": "Zamítnout"
+    }
   },
   "match": {
     "matches": "Hry večera",
@@ -2364,13 +2380,14 @@
       "eveningWin": "Výhra v mini-turnaji",
       "milestone": "{n} her v klubu",
       "referral": "Přivedli jste kamaráda a zahrál si",
-      "blog": "Článek na blog klubu",
-      "birthday": "Narozeniny",
-      "review": "Recenze klubu nebo firemní akce",
+      "blog": "Článek na blog klubu (jeden za rok, po schválení)",
+      "birthday": "Narozeniny — dárek při návštěvě webu",
       "coin": "Mince Respect (soutěže, dárky)",
-      "coinValue": "hodnota na minci"
+      "coinValue": "hodnota na minci",
+      "bestMove3": "Nejlepší tah: uhodli jste všechny tři černé",
+      "streak": "{n} večerů v řadě v sérii (aspoň 1 hra)"
     },
-    "earnNote": "Hry se započítají samy poté, co moderátor uzavře herní protokol. Bonusy za kamaráda, článek, narozeniny a recenzi připisuje klub.",
+    "earnNote": "Hry, nejlepší tah, série a narozeninový dárek se připisují samy. Série se počítá podle jednoho rozpisu — např. úterky po sobě; po 10 večerech se počítá znovu. Bonus za kamaráda a článek připisuje klub.",
     "spend": {
       "evening": "Herní večer",
       "eveningValue": "celý: 300 Kč = 150 Respect",
@@ -2417,14 +2434,17 @@
       "spend_shop": "Platba objednávky",
       "refund": "Vrácení",
       "adjust": "Úprava",
-      "expire": "Propadlo (12 měsíců bez her)"
+      "expire": "Propadlo (12 měsíců bez her)",
+      "best_move": "Nejlepší tah: tři černí",
+      "streak": "Série večerů"
     },
     "orderTitle": "Zaplatit část objednávky Respectem",
     "orderHint": "Můžete odečíst až {max} Respect — sleva {czk} Kč. Odečíst lze jednou; při zrušení objednávky se Respect vrátí.",
     "orderAmount": "Kolik Respectu odečíst",
     "orderApply": "Odečíst",
     "orderApplied": "Respect odečten, částka objednávky snížena.",
-    "orderPaidWith": "Zaplaceno Respectem:"
+    "orderPaidWith": "Zaplaceno Respectem:",
+    "streakNote": "{n} večerů v řadě"
   },
   "adminRespect": {
     "title": "Respect",
@@ -2436,7 +2456,8 @@
       "invalid": "Zkontrolujte pole.",
       "noPlayer": "Hráč s touto přezdívkou nebyl nalezen.",
       "insufficient": "Hráč nemá dost Respectu na odečtení.",
-      "save": "Nepodařilo se uložit."
+      "save": "Nepodařilo se uložit.",
+      "blogYear": "Bonus za článek už tento hráč letos dostal."
     },
     "adjustTitle": "Připsat nebo odečíst",
     "adjustHint": "Bonus za kamaráda, narozeniny, článek, recenzi nebo jakákoli úprava. Pro odečtení zadejte záporné číslo. Hry a jubilea připisuje web sám.",

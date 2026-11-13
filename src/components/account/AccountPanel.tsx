@@ -12,6 +12,7 @@ import { formatMemberNo } from "@/lib/memberNo";
 import { PlayerShare } from "@/components/players/PlayerShare";
 import { connectTelegram } from "@/lib/telegram/actions";
 import { getOptionalProviders } from "@/lib/auth/providers";
+import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
@@ -81,10 +82,16 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
     .eq("profile_id", userId);
   const { data: priv } = await supabase
     .from("profile_private")
-    .select("telegram_chat_id")
+    .select("telegram_chat_id, birthday, birthday_request")
     .eq("profile_id", userId)
     .maybeSingle();
   const telegramOn = Boolean(priv?.telegram_chat_id);
+  // Первый вход после дня рождения: база начисляет подарок и говорит, показывать ли поздравление.
+  let birthdayGreeting = false;
+  if (profile?.verification === "approved" && priv?.birthday && isAdminConfigured) {
+    const { data: show } = await createAdminClient().rpc("respect_birthday_check", { p_profile: userId });
+    birthdayGreeting = show === true;
+  }
   if (profile?.verification === "pending") {
     await recordSignupCountry(userId, (await headers()).get("x-vercel-ip-country"));
   }
@@ -123,6 +130,18 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           {profile.verification === "pending" && !telegramOn && <> {t("verificationBotHint")}</>}
         </p>
       )}
+      {birthdayGreeting && (
+        <p role="status" className="mt-6 max-w-xl rounded-lg border border-yellow-500/50 bg-yellow-500/10 p-4 text-yellow-100">
+          <span aria-hidden="true">🎉 </span>
+          {t("birthdayGreeting", { name })}
+        </p>
+      )}
+      {!priv?.birthday && (
+        <p role="status" className="mt-6 max-w-xl rounded border border-amber-400/40 bg-amber-500/10 p-4 text-sm text-amber-100">
+          {t("birthdayMissing")}{" "}
+          <a href="#birthday" className="font-semibold underline">{t("birthdayMissingLink")}</a>
+        </p>
+      )}
       {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} />}
       {(staffRoles ?? 0) > 0 && (
         <p className="mt-6">
@@ -143,7 +162,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           <PlayerShare locale={locale} nickname={profile.nickname} />
         </div>
       )}
-      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} markeryId={profile?.markery_id ?? null} />
+      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} markeryId={profile?.markery_id ?? null} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} />
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>
         <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>

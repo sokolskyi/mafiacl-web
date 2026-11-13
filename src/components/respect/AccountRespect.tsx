@@ -29,7 +29,7 @@ export async function AccountRespect({ locale, userId }: { locale: Locale; userI
               <span className="w-14 shrink-0 text-neutral-500">{date.format(new Date(h.createdAt))}</span>
               <span className="flex-1">
                 {t(`reason.${h.reason}`)}
-                {h.note && <span className="text-neutral-400"> · {h.reason === "milestone" ? t("milestoneNote", { n: h.note }) : h.note}</span>}
+                {h.note && <span className="text-neutral-400"> · {h.reason === "milestone" ? t("milestoneNote", { n: h.note }) : h.reason === "streak" ? t("streakNote", { n: h.note }) : h.note}</span>}
               </span>
               <RespectAmount n={h.amount} sign className={h.amount > 0 ? "font-semibold text-green-400" : "font-semibold text-neutral-300"} />
             </li>

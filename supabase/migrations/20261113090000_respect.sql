@@ -285,3 +285,6 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 -- с ежедневным pg_cron 'respect-expire' (сгорание через 12 месяцев без партий) и снятие начисления
 -- за партию у игрока, которого убрали из бланка при исправлении (в respect_award_match).
 -- И public.respect_outstanding(bigint[]) — сумма Respect на руках у игроков клуба (только service_role).
+-- Дополнение (MCP: birthday_and_respect_rules): profile_private.birthday (+ заявка на смену через админа),
+-- birthday_set / birthday_decide / birthday_requests / respect_birthday_check (+10 при первом входе после ДР),
+-- статья — раз в год (ref blog:YYYY), лучший ход «три чёрных» +1, серии вечеров одного расписания: 4 подряд +1, 10 подряд +3.

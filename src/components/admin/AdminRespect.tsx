@@ -35,13 +35,13 @@ export async function AdminRespect({ locale, flags }: { locale: Locale; flags: F
   );
   const input = "rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
   const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Prague" });
-  const errorKey = flags.error && ["invalid", "noPlayer", "insufficient"].includes(flags.error) ? flags.error : flags.error ? "save" : null;
+  const errorKey = flags.error && ["invalid", "noPlayer", "insufficient", "blogYear"].includes(flags.error) ? flags.error : flags.error ? "save" : null;
 
   return (
     <div className="mt-6 space-y-12">
       <p className="print:hidden"><Link href="/admin" className="text-sm text-neutral-400 hover:text-white">← {t("back")}</Link></p>
       {flags.saved && <p role="status" className="text-green-400 print:hidden">{t("saved")}</p>}
-      {errorKey && <p role="alert" className="text-red-400 print:hidden">{t(`errors.${errorKey as "invalid" | "noPlayer" | "insufficient" | "save"}`)}</p>}
+      {errorKey && <p role="alert" className="text-red-400 print:hidden">{t(`errors.${errorKey as "invalid" | "noPlayer" | "insufficient" | "blogYear" | "save"}`)}</p>}
 
       <p className="text-neutral-300 print:hidden">
         {t("outstanding")}: <RespectAmount n={outstanding} className="text-2xl font-black text-yellow-200" />

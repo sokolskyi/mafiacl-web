@@ -14,6 +14,7 @@ import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
 import { MemberRequests } from "./MemberRequests";
 import { AliasesAdmin } from "./AliasesAdmin";
+import { BirthdayRequests } from "./BirthdayRequests";
 
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminHome({
@@ -55,6 +56,7 @@ export async function AdminHome({
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
         <MemberRequests locale={locale} notice={member} />
       )}
+      {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && <BirthdayRequests locale={locale} />}
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
         <AliasesAdmin locale={locale} notice={alias} />
       )}
