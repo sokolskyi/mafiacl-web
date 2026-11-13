@@ -4,6 +4,7 @@ import type { PlayerPage, PlayerRole } from "@/lib/players";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getPlayerOfWeek, getSeasons } from "@/lib/rating";
 import { badgeOf, belongsTo, getBadges, getPrizes, getTitles } from "@/lib/badges";
+import { PlayerShare } from "./PlayerShare";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -84,6 +85,9 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               ))}
             </p>
           )}
+        </div>
+        <div className="sm:ml-auto sm:self-start">
+          <PlayerShare locale={locale} nickname={player.nickname} games={s.games} />
         </div>
       </header>
 

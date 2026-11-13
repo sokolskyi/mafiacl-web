@@ -686,7 +686,9 @@
       "season_champion": "Season champion",
       "kings_winner": "MafiaCL Kings winner"
     },
-    "prizeMoney": "Prize money"
+    "prizeMoney": "Prize money",
+    "shareCta": "my stats at the mafia club",
+    "shareClub": "MafiaCL Prague"
   },
   "rating": {
     "filters": "Rating filters",
@@ -2198,5 +2200,14 @@
         ]
       }
     ]
+  },
+  "share": {
+    "button": "Share",
+    "story": "Story (vertical)",
+    "post": "Post (horizontal)",
+    "link": "Page link",
+    "copied": "Link copied",
+    "saved": "Image saved",
+    "error": "Something went wrong, please try again"
   }
 }

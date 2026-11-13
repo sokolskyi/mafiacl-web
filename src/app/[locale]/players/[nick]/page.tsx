@@ -36,7 +36,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: absoluteUrl(href, locale),
-      ...(player.avatarUrl ? { images: [{ url: player.avatarUrl }] } : {}),
+      images: [
+        {
+          url: `/api/share/player?${new URLSearchParams({ nick: player.nickname, f: "post", l: locale, v: String(player.stats.games) })}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     // Пока у игрока нет партий, страница пустая — не отдаём её в поиск.
     ...(NOINDEX || player.stats.games === 0 ? { robots: { index: false, follow: true } } : {}),

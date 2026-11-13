@@ -686,7 +686,9 @@
       "season_champion": "Šampion sezóny",
       "kings_winner": "Vítěz MafiaCL Kings"
     },
-    "prizeMoney": "Výhry"
+    "prizeMoney": "Výhry",
+    "shareCta": "moje statistiky v klubu mafie",
+    "shareClub": "MafiaCL Prague"
   },
   "rating": {
     "filters": "Filtry žebříčku",
@@ -2198,5 +2200,14 @@
         ]
       }
     ]
+  },
+  "share": {
+    "button": "Sdílet",
+    "story": "Story (na výšku)",
+    "post": "Příspěvek (na šířku)",
+    "link": "Odkaz na stránku",
+    "copied": "Odkaz zkopírován",
+    "saved": "Obrázek uložen",
+    "error": "Nepovedlo se, zkuste to znovu"
   }
 }

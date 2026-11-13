@@ -6,6 +6,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { Link } from "@/i18n/navigation";
 import { EmailSignIn } from "./EmailSignIn";
 import { NicknameForm } from "./NicknameForm";
+import { PlayerShare } from "@/components/players/PlayerShare";
 import { connectTelegram } from "@/lib/telegram/actions";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
@@ -101,6 +102,11 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
             {t("myPage")}
           </Link>
         </p>
+      )}
+      {profile?.nickname && (
+        <div className="mt-3">
+          <PlayerShare locale={locale} nickname={profile.nickname} />
+        </div>
       )}
       <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} />
       <section className="mt-10 max-w-md">
