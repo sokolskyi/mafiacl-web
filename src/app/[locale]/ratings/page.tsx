@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { RatingTable } from "@/components/rating/RatingTable";
+import { ArchiveSeasons } from "@/components/rating/ArchiveSeasons";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/ratings">) {
   const { locale } = (await params) as { locale: Locale };
@@ -20,6 +21,7 @@ export default async function Page({ params, searchParams }: PageProps<"/[locale
       <Suspense fallback={<p className="mt-10 text-neutral-500">…</p>}>
         <Filtered locale={locale} searchParams={searchParams} />
       </Suspense>
+      <ArchiveSeasons locale={locale} />
     </main>
   );
 }
