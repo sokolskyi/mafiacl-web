@@ -6,6 +6,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { Link } from "@/i18n/navigation";
 import { EmailSignIn } from "./EmailSignIn";
 import { NicknameForm } from "./NicknameForm";
+import { AvatarField } from "./AvatarField";
 import { headers } from "next/headers";
 import { recordSignupCountry } from "@/lib/members";
 import { formatMemberNo } from "@/lib/memberNo";
@@ -164,6 +165,10 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           <PlayerShare locale={locale} nickname={profile.nickname} />
         </div>
       )}
+      <AvatarField
+        initial={profile?.avatar_url ?? null}
+        labels={{ title: t("photo"), hint: t("photoHint"), upload: t("photoUpload"), change: t("photoChange"), remove: t("photoRemove"), uploading: t("photoUploading"), failed: t("photoFailed"), saved: t("photoSaved") }}
+      />
       <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
       {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
       <section className="mt-10 max-w-md">

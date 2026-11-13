@@ -230,7 +230,15 @@
     "profilesHint": "Paste links to your profiles — they will show as buttons on your player page. Optional.",
     "nicknameRule": "You can change your nickname once a year. More often only with the club administration’s approval.",
     "nicknamePending": "Your request for the nickname “{nick}” is waiting for the club administration’s approval.",
-    "nicknameRequested": "Saved. The new nickname will appear once the club administration approves it."
+    "nicknameRequested": "Saved. The new nickname will appear once the club administration approves it.",
+    "photo": "Player photo",
+    "photoHint": "A square photo of your face: it appears on your player page, in ratings and on stream overlays. We crop it to the centre for you.",
+    "photoUpload": "Upload photo",
+    "photoChange": "Change photo",
+    "photoRemove": "Remove",
+    "photoUploading": "Uploading…",
+    "photoFailed": "Could not upload the photo. Try another one.",
+    "photoSaved": "Photo saved."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -790,7 +798,7 @@
     "top10": "Season top 10: {n}",
     "markery": "Tournaments on markery.online",
     "avgExtraLine": "average extra points per game: {avg}",
-    "bestPlayerLine": "best player of the game: {n}",
+    "bestPlayerLine": "best player: {n}",
     "compareTitle": "Compared with the club",
     "compareLead": "Premier League, all seasons. Compared with players who have 30+ games (10+ in a role).",
     "compareMetric": "Metric",
@@ -820,7 +828,8 @@
     "archiveFKFull": "Killed first, share of games",
     "archiveExtra": "Extra/game",
     "miniTitleSeason": "Mini-tournament {n} · season {season}",
-    "aliases": "Also played as: {names}"
+    "aliases": "Also played as: {names}",
+    "archiveByPoints": "by points: {n}"
   },
   "rating": {
     "filters": "Rating filters",

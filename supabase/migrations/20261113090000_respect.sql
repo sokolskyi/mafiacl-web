@@ -303,3 +303,5 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 --   shop_order_items.membership_until; shop_create_order берёт цену на сегодня (private.shop_price_on),
 --   годовой 2027: до 15.02 — 9900, 16.02–15.03 — 10900, 16.03–30.04 — 9900, май — 9000, июнь–июль — 7500,
 --   август–сентябрь — 5500, с октября не продаётся; действует до 31.12.2027.
+-- Через MCP применена миграция avatars_bucket_and_membership_respect_v2: бакет avatars (фото игрока),
+--   Respect за абонемент вместо скидок 50 % на турнир/серию: месяц +15, 3 месяца +50, год +200, особый срок — 15 за 30 дней.

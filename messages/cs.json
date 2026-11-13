@@ -230,7 +230,15 @@
     "profilesHint": "Vložte odkazy na své profily — na vaší stránce hráče se objeví jako tlačítka. Můžete nechat prázdné.",
     "nicknameRule": "Přezdívku můžete změnit jednou za rok. Častěji jen po dohodě s vedením klubu.",
     "nicknamePending": "Žádost o přezdívku „{nick}“ čeká na schválení vedením klubu.",
-    "nicknameRequested": "Uloženo. Nová přezdívka se objeví po schválení vedením klubu."
+    "nicknameRequested": "Uloženo. Nová přezdívka se objeví po schválení vedením klubu.",
+    "photo": "Fotka hráče",
+    "photoHint": "Čtvercová fotka obličeje: objeví se na vaší stránce hráče, v žebříčcích a na tabulkách přenosu. Ořízneme ji na střed sami.",
+    "photoUpload": "Nahrát fotku",
+    "photoChange": "Vyměnit fotku",
+    "photoRemove": "Odebrat",
+    "photoUploading": "Nahráváme…",
+    "photoFailed": "Fotku se nepodařilo nahrát. Zkuste jinou.",
+    "photoSaved": "Fotka uložena."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -790,7 +798,7 @@
     "top10": "Top 10 sezóny: {n}",
     "markery": "Turnaje na markery.online",
     "avgExtraLine": "průměrné bonusové body za hru: {avg}",
-    "bestPlayerLine": "nejlepší hráč hry: {n}",
+    "bestPlayerLine": "nejlepší hráč: {n}",
     "compareTitle": "Srovnání s klubem",
     "compareLead": "Premier League za všechny sezóny. Srovnáváme s hráči, kteří mají aspoň 30 her (v roli aspoň 10).",
     "compareMetric": "Ukazatel",
@@ -820,7 +828,8 @@
     "archiveFKFull": "Zabit jako první, podíl her",
     "archiveExtra": "Bonus/hra",
     "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna",
-    "aliases": "Hrál také jako: {names}"
+    "aliases": "Hrál také jako: {names}",
+    "archiveByPoints": "podle bodů: {n}"
   },
   "rating": {
     "filters": "Filtry žebříčku",

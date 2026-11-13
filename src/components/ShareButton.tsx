@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Labels = {
   button: string;
@@ -35,6 +35,27 @@ export function ShareButton({
   const [busy, setBusy] = useState(false);
   const pageUrl = () => (url ? new URL(url, location.origin).href : location.href);
   const blobs = useRef<Partial<Record<"story" | "post", Promise<Blob>>>>({});
+  const menu = useRef<HTMLDetailsElement>(null);
+  const close = () => menu.current?.removeAttribute("open");
+
+  // Меню закрывается после выбора, по клику мимо и по Esc.
+  useEffect(() => {
+    const onDown = (e: PointerEvent) => {
+      if (menu.current?.open && !menu.current.contains(e.target as Node)) close();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menu.current?.open) {
+        close();
+        menu.current.querySelector("summary")?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
 
   // Картинки начинаем грузить при открытии меню: Safari разрешает системное меню
   // только сразу после нажатия, долгое ожидание сети его ломает.
@@ -53,6 +74,7 @@ export function ShareButton({
 
   async function shareImage(f: "story" | "post") {
     if (!images) return;
+    close();
     setBusy(true);
     setStatus("");
     try {
@@ -82,6 +104,7 @@ export function ShareButton({
   }
 
   async function shareLink() {
+    close();
     setStatus("");
     const link = pageUrl();
     if (navigator.share) {
@@ -104,7 +127,7 @@ export function ShareButton({
 
   return (
     <div className="inline-block">
-      <details className="relative" onToggle={(e) => (e.currentTarget as HTMLDetailsElement).open && prefetch()}>
+      <details ref={menu} className="relative" onToggle={(e) => (e.currentTarget as HTMLDetailsElement).open && prefetch()}>
         <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-white/55 px-4 text-sm font-semibold hover:bg-white/10 [&::-webkit-details-marker]:hidden">
           <ShareIcon />
           {labels.button}
