@@ -1908,11 +1908,6 @@
         "host": "Host",
         "critical": "Critical situation"
       }
-    },
-    "masterclasses": {
-      "title": "Masterclasses",
-      "lead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",
-      "all": "Full playlist on YouTube"
     }
   },
   "faq": {
@@ -2381,7 +2376,10 @@
   "blog": {
     "interviewsTitle": "Interviews",
     "interviewsLead": "Conversations with top players — Masters of Mafia according to FIIM and Mafgame. Videos on the club’s YouTube channel (in Russian).",
-    "interviewsAll": "All interviews on YouTube"
+    "interviewsAll": "All interviews on YouTube",
+    "masterclassesTitle": "Masterclasses",
+    "masterclassesLead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",
+    "masterclassesAll": "Full playlist on YouTube"
   },
   "respect": {
     "rate": "1 Respect = {czk} Kč",

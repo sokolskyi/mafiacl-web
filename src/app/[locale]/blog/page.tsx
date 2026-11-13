@@ -6,7 +6,7 @@ import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getReviews } from "@/lib/reviews/queries";
 import { reviewSlug } from "@/lib/reviews/types";
 import { monthTitle } from "@/components/reviews/format";
-import { INTERVIEWS, INTERVIEW_PLAYLIST } from "@/lib/masterclasses";
+import { INTERVIEWS, INTERVIEW_PLAYLIST, MASTERCLASSES, MASTERCLASS_PLAYLIST } from "@/lib/masterclasses";
 import { YouTubeCards } from "@/components/YouTubeCards";
 import { getApprovedPosts, paragraphs, postSlug } from "@/lib/blog-posts";
 
@@ -88,6 +88,14 @@ export default async function Page({ params }: PageProps<"/[locale]/blog">) {
         </section>
       )}
 
+      <YouTubeCards
+        id="masterclasses"
+        title={tb("masterclassesTitle")}
+        lead={tb("masterclassesLead")}
+        allLabel={tb("masterclassesAll")}
+        items={MASTERCLASSES}
+        playlist={MASTERCLASS_PLAYLIST}
+      />
       <YouTubeCards
         id="interviews"
         title={tb("interviewsTitle")}

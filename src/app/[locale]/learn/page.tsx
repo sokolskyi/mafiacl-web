@@ -3,8 +3,6 @@ import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { BASICS, SCHOOL, SEVEN } from "@/lib/learnVideos";
-import { MASTERCLASSES, MASTERCLASS_PLAYLIST } from "@/lib/masterclasses";
-import { YouTubeCards } from "@/components/YouTubeCards";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/learn">) {
   const { locale } = (await params) as { locale: Locale };
@@ -147,17 +145,6 @@ export default async function Page({ params }: PageProps<"/[locale]/learn">) {
           <a href={SEVEN.playlist} target="_blank" rel="noopener" className={pill}>{t("videos.playlist")} ↗</a>
         </p>
       </section>
-
-      <YouTubeCards
-        id="masterclasses"
-        title={t("masterclasses.title")}
-        lead={t("masterclasses.lead")}
-        allLabel={t("masterclasses.all")}
-        items={MASTERCLASSES}
-        playlist={MASTERCLASS_PLAYLIST}
-        className="mt-20"
-        headingClass={h2}
-      />
 
       <section className="mt-20" aria-labelledby="etiquette">
         <h2 id="etiquette" className={h2}>{t("etiquetteTitle")}</h2>

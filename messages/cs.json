@@ -1908,11 +1908,6 @@
         "host": "Moderátor",
         "critical": "Kritická situace"
       }
-    },
-    "masterclasses": {
-      "title": "Masterclassy",
-      "lead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
-      "all": "Celý playlist na YouTube"
     }
   },
   "faq": {
@@ -2381,7 +2376,10 @@
   "blog": {
     "interviewsTitle": "Rozhovory",
     "interviewsLead": "Rozhovory s nejsilnějšími hráči — mistry mafie podle FIIM a Mafgame. Videa na YouTube kanálu klubu (rusky).",
-    "interviewsAll": "Všechny rozhovory na YouTube"
+    "interviewsAll": "Všechny rozhovory na YouTube",
+    "masterclassesTitle": "Masterclassy",
+    "masterclassesLead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
+    "masterclassesAll": "Celý playlist na YouTube"
   },
   "respect": {
     "rate": "1 Respect = {czk} Kč",
