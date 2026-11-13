@@ -1815,7 +1815,7 @@
     "asOf": "Sezóna stále běží — tabulka k {date}.",
     "qualifiedNote": "Šedě: hráči, kteří odehráli méně her, než žebříček sezóny vyžaduje.",
     "legend": "Bonus — body navíc od moderátora. NH — nejlepší hráč. PZ — první zabitý. NT3 a NT2 — nejlepší tah: uhodnuti tři nebo dva černí hráči. Podle rolí — výhry/prohry.",
-    "championNote": "Šampiona sezóny určuje finále —",
+    "championNote": "Vítěz a medailisté se určují ve finále, ne podle žebříčku — žebříček rozhoduje, kdo do finále postoupí. Všechny sezóny —",
     "hallLink": "Síň slávy",
     "player": "Hráč",
     "points": "Body",
@@ -1834,6 +1834,22 @@
     "mafia": "Mafie",
     "sheriff": "Šerif",
     "don": "Don",
-    "source": "Data převzata z"
+    "source": "Data převzata z",
+    "finalTitle": "Výsledky finále",
+    "finalAhead": "Finále sezóny teprve bude — rozhodne o medailistech.",
+    "finalUnknown": "Výsledky finále zatím nejsou doplněny.",
+    "place": "{n}. místo:",
+    "scoringTitle": "Jak se počítá žebříček",
+    "scoringFormula": "Žebříček = (body + extra) ÷ hry × 100 + {coef} × hry, zaokrouhleno dolů.",
+    "scoringQualify": "Do hodnocení se počítá, kdo odehrál víc než 1/5 všech her sezóny — od {min} her.",
+    "ruleWin": "Tým vyhrál",
+    "ruleLoss": "Tým prohrál",
+    "ruleFirstKilled": "První zabitý (PZ)",
+    "ruleBestMove": "Nejlepší tah {n}/3",
+    "ruleBestMoveSheriff": "Nejlepší tah šerifa {n}/3",
+    "ruleBestPlayer": "Nejlepší hráč: {v}.",
+    "ruleButtons": "Extra body od moderátora: {v}.",
+    "ruleTeamNote": "Role — body za výhru. PZ a nejlepší tah podle výsledku týmu prvního zabitého; 2/3 znamená, že dva ze tří jmenovaných byli černí.",
+    "formulaRaw": "Vzorec na the-mafia.net"
   }
 }

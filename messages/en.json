@@ -1815,7 +1815,7 @@
     "asOf": "The season is still running — table as of {date}.",
     "qualifiedNote": "Greyed out: players with fewer games than the season rating requires.",
     "legend": "Bonus — extra points from the host. BP — best player. FK — first killed. BM3 and BM2 — best move with three or two black players guessed. By role — wins/losses.",
-    "championNote": "The season champion is decided in the final —",
+    "championNote": "The champion and medallists are decided in the final, not by the rating — the rating decides who reaches the final. All seasons —",
     "hallLink": "Hall of fame",
     "player": "Player",
     "points": "Points",
@@ -1834,6 +1834,22 @@
     "mafia": "Mafia",
     "sheriff": "Sheriff",
     "don": "Don",
-    "source": "Data imported from"
+    "source": "Data imported from",
+    "finalTitle": "Final results",
+    "finalAhead": "The season final is still ahead — it decides the medals.",
+    "finalUnknown": "Final results not added yet.",
+    "place": "Place {n}:",
+    "scoringTitle": "How the rating is calculated",
+    "scoringFormula": "Rating = (points + extra) ÷ games × 100 + {coef} × games, rounded down.",
+    "scoringQualify": "To qualify, a player must play more than 1/5 of all season games — {min} games or more.",
+    "ruleWin": "Team won",
+    "ruleLoss": "Team lost",
+    "ruleFirstKilled": "First killed (FK)",
+    "ruleBestMove": "Best move {n}/3",
+    "ruleBestMoveSheriff": "Sheriff's best move {n}/3",
+    "ruleBestPlayer": "Best player: {v}.",
+    "ruleButtons": "Host's extra points: {v}.",
+    "ruleTeamNote": "Roles — points for a win. FK and best move depend on the result for the first killed player's team; 2/3 means two of the three named players were black.",
+    "formulaRaw": "Formula on the-mafia.net"
   }
 }

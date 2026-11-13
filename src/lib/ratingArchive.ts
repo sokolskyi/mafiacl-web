@@ -4,6 +4,26 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const RATING_ARCHIVE_TAG = "rating-archive";
 
+/** Пара баллов: [команда игрока победила, команда проиграла]. */
+export type Pair = [number, number];
+
+/** Правила подсчёта сезона (как в настройках рейтинга на the-mafia.net). */
+export type Scoring = {
+  /** Баллы за победу по ролям; за поражение — 0. */
+  win: { civ: number; mafia: number; sheriff: number; don: number };
+  /** Первый убитый. */
+  pu: Pair;
+  /** Лучший ход: сколько из трёх названных оказались чёрными (0–3). */
+  lh: Record<"0" | "1" | "2" | "3", Pair>;
+  lhSheriff: Record<"0" | "1" | "2" | "3", Pair>;
+  bestPlayer: number | null;
+  buttons: number[];
+  /** Надбавка за количество игр: + gamesCoef × игры. */
+  gamesCoef: number;
+  /** В зачёт: игр больше, чем всего игр сезона / minShareDiv. */
+  minShareDiv: number;
+};
+
 export type ArchiveSeason = {
   id: number;
   number: number;
@@ -14,9 +34,12 @@ export type ArchiveSeason = {
   civWins: number;
   mafiaWins: number;
   formula: string | null;
+  scoring: Scoring | null;
   sourceUrl: string | null;
   asOf: string | null;
   isCurrent: boolean;
+  /** Призёры финала сезона (из зала славы): чемпион определяется в финале, не по рейтингу. */
+  final: string[];
 };
 
 export type WL = { w: number; l: number };
@@ -49,12 +72,16 @@ type SeasonRow = {
   civ_wins: number;
   mafia_wins: number;
   formula: string | null;
+  scoring: Scoring | null;
   source_url: string | null;
   as_of: string | null;
   is_current: boolean;
 };
 
-const toSeason = (r: SeasonRow): ArchiveSeason => ({
+const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+const PRAGUE = "Прага";
+
+const toSeason = (r: SeasonRow, finals: Map<string, string[]>): ArchiveSeason => ({
   id: r.id,
   number: r.number,
   slug: r.slug,
@@ -64,48 +91,58 @@ const toSeason = (r: SeasonRow): ArchiveSeason => ({
   civWins: r.civ_wins,
   mafiaWins: r.mafia_wins,
   formula: r.formula,
+  scoring: r.scoring,
   sourceUrl: r.source_url,
   asOf: r.as_of,
   isCurrent: r.is_current,
+  final: r.is_current ? [] : (finals.get(ROMAN[r.number] ?? "") ?? []),
 });
 
-const SEASON_COLS = "id, number, slug, title, year, games, civ_wins, mafia_wins, formula, source_url, as_of, is_current, clubs!inner ( slug )";
+/** Призёры финалов пражских сезонов из зала славы: «I» → [1-е, 2-е, 3-е место]. */
+async function getPragueFinals(db: ReturnType<typeof createPublicClient>, clubSlug: string): Promise<Map<string, string[]>> {
+  const { data, error } = await db
+    .from("hall_of_fame")
+    .select("season, places, clubs!inner ( slug )")
+    .eq("clubs.slug", clubSlug)
+    .eq("category", "season")
+    .eq("city", PRAGUE);
+  if (error) console.error("getPragueFinals failed", { code: error.code, message: error.message });
+  return new Map((data ?? []).filter((r) => r.season).map((r) => [r.season as string, (r.places ?? []) as string[]]));
+}
 
-/** Сезоны рейтинга Premier League (архив с the-mafia.net), свежие сначала, с лидером каждого. */
-export async function getArchiveSeasons(clubSlug: string): Promise<(ArchiveSeason & { leaders: string[] })[]> {
+const SEASON_COLS = "id, number, slug, title, year, games, civ_wins, mafia_wins, formula, scoring, source_url, as_of, is_current, clubs!inner ( slug )";
+
+/** Сезоны рейтинга Premier League (архив с the-mafia.net), свежие сначала, с призёрами финала. */
+export async function getArchiveSeasons(clubSlug: string): Promise<ArchiveSeason[]> {
   "use cache";
   cacheTag(RATING_ARCHIVE_TAG);
+  cacheTag("hall-archive");
   cacheLife("days");
   if (!isSupabaseConfigured) return [];
   const db = createPublicClient();
-  const { data, error } = await db.from("rating_archive").select(SEASON_COLS).eq("clubs.slug", clubSlug).order("number", { ascending: false });
+  const [{ data, error }, finals] = await Promise.all([
+    db.from("rating_archive").select(SEASON_COLS).eq("clubs.slug", clubSlug).order("number", { ascending: false }),
+    getPragueFinals(db, clubSlug),
+  ]);
   if (error) console.error("getArchiveSeasons failed", { code: error.code, message: error.message });
-  const seasons = ((data ?? []) as unknown as SeasonRow[]).map(toSeason);
-  if (seasons.length === 0) return [];
-  const { data: top } = await db
-    .from("rating_archive_rows")
-    .select("archive_id, rank, nickname")
-    .in("archive_id", seasons.map((s) => s.id))
-    .eq("qualified", true)
-    .lte("rank", 3)
-    .order("rank");
-  return seasons.map((s) => ({
-    ...s,
-    leaders: (top ?? []).filter((r) => r.archive_id === s.id).map((r) => r.nickname as string),
-  }));
+  return ((data ?? []) as unknown as SeasonRow[]).map((r) => toSeason(r, finals));
 }
 
 /** Один сезон архива с полной таблицей. */
 export async function getArchiveSeason(clubSlug: string, slug: string): Promise<{ season: ArchiveSeason; rows: ArchiveRow[] } | null> {
   "use cache";
   cacheTag(RATING_ARCHIVE_TAG);
+  cacheTag("hall-archive");
   cacheLife("days");
   if (!isSupabaseConfigured) return null;
   const db = createPublicClient();
-  const { data, error } = await db.from("rating_archive").select(SEASON_COLS).eq("clubs.slug", clubSlug).eq("slug", slug).maybeSingle();
+  const [{ data, error }, finals] = await Promise.all([
+    db.from("rating_archive").select(SEASON_COLS).eq("clubs.slug", clubSlug).eq("slug", slug).maybeSingle(),
+    getPragueFinals(db, clubSlug),
+  ]);
   if (error) console.error("getArchiveSeason failed", { code: error.code, message: error.message });
   if (!data) return null;
-  const season = toSeason(data as unknown as SeasonRow);
+  const season = toSeason(data as unknown as SeasonRow, finals);
   const { data: rows, error: e2 } = await db
     .from("rating_archive_rows")
     .select("rank, nickname, points, extra, games, wins, best_player, first_killed, best_move3, best_move2, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, qualified")

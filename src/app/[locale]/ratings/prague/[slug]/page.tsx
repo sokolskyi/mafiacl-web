@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getArchiveSeason, type WL } from "@/lib/ratingArchive";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
+import { ScoringRules } from "@/components/rating/ScoringRules";
 
 type Props = PageProps<"/[locale]/ratings/prague/[slug]">;
 
@@ -58,14 +59,31 @@ async function Inner({ params }: Pick<Props, "params">) {
       </p>
       {s.isCurrent && s.asOf && <p className="mt-1 text-sm text-yellow-300">{t("asOf", { date: date.format(new Date(`${s.asOf}T12:00:00Z`)) })}</p>}
 
-      <section className="mt-6 rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
-        {s.formula ? <p className="whitespace-pre-line">{s.formula}</p> : null}
-        <p className={s.formula ? "mt-2" : ""}>{t("qualifiedNote")}</p>
-        <p className="mt-2">{t("legend")}</p>
-        <p className="mt-2">
+      <section className="mt-6 rounded-lg border border-yellow-400/30 bg-yellow-400/5 p-4" aria-labelledby="final-title">
+        <h2 id="final-title" className="text-lg font-bold">{t("finalTitle")}</h2>
+        {s.final.length > 0 ? (
+          <ol className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-base">
+            {s.final.slice(0, 3).map((n, i) => (
+              <li key={n}>
+                <span aria-hidden="true">{["🥇", "🥈", "🥉"][i]}</span> <span className="sr-only">{t("place", { n: i + 1 })}</span>
+                <span className="font-semibold">{n}</span>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="mt-2 text-neutral-300">{s.isCurrent ? t("finalAhead") : t("finalUnknown")}</p>
+        )}
+        <p className="mt-2 text-sm text-neutral-400">
           {t("championNote")}{" "}
           <Link href="/hall-of-fame" className="underline underline-offset-4 hover:text-white">{t("hallLink")}</Link>
         </p>
+      </section>
+
+      {s.scoring && <ScoringRules locale={locale} scoring={s.scoring} formula={s.formula} games={s.games} />}
+
+      <section className="mt-6 rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
+        <p>{t("qualifiedNote")}</p>
+        <p className="mt-2">{t("legend")}</p>
       </section>
 
       <div className="mt-8 overflow-x-auto">
@@ -94,7 +112,6 @@ async function Inner({ params }: Pick<Props, "params">) {
               <tr key={r.rank} className={r.qualified ? "" : "text-neutral-500"}>
                 <td className="py-2 font-mono">{r.rank}</td>
                 <td className="font-semibold">
-                  {r.qualified && r.rank <= 3 && <span aria-hidden="true" className="mr-1">{["🥇", "🥈", "🥉"][r.rank - 1]}</span>}
                   {r.nickname}
                 </td>
                 <td className={`${cell} font-mono text-base font-black ${r.qualified ? "text-white" : ""}`}>{num.format(r.points)}</td>

@@ -26,15 +26,21 @@ export async function ArchiveSeasons({ locale }: { locale: Locale }) {
               </Link>
             </h3>
             <p className="mt-1 text-sm text-neutral-400">{t("gamesCount", { count: s.games })}</p>
-            {s.leaders.length > 0 && (
-              <ol className="mt-3 space-y-0.5 text-sm">
-                {s.leaders.map((n, i) => (
-                  <li key={n}>
-                    <span aria-hidden="true">{["🥇", "🥈", "🥉"][i]}</span> <span className="font-semibold">{n}</span>
-                  </li>
-                ))}
-              </ol>
-            )}
+            {s.final.length > 0 ? (
+              <>
+                <p className="mt-3 text-xs uppercase tracking-wide text-neutral-500">{t("finalTitle")}</p>
+                <ol className="mt-1 space-y-0.5 text-sm">
+                  {s.final.slice(0, 3).map((n, i) => (
+                    <li key={n}>
+                      <span aria-hidden="true">{["🥇", "🥈", "🥉"][i]}</span> <span className="sr-only">{t("place", { n: i + 1 })}</span>
+                      <span className="font-semibold">{n}</span>
+                    </li>
+                  ))}
+                </ol>
+              </>
+            ) : s.isCurrent ? (
+              <p className="mt-3 text-sm text-neutral-400">{t("finalAhead")}</p>
+            ) : null}
           </li>
         ))}
       </ul>
