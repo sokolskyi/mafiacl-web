@@ -16,6 +16,7 @@ type Format = keyof typeof SIZE;
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_COLOR: Record<PlayerRole, string> = { civilian: "#f87171", sheriff: "#fde047", mafia: "#e5e5e5", don: "#e5e5e5" };
 const RED = "#dc2626";
+const FONT = "SSC-latin, SSC-latin-ext, SSC-cyrillic";
 const BG = "linear-gradient(160deg, #2a050b 0%, #0a0a0a 55%, #000 100%)";
 
 let fontsPromise: Promise<{ name: string; data: Buffer; weight: 400 | 800; style: "normal" }[]> | null = null;
@@ -23,7 +24,8 @@ function fonts() {
   fontsPromise ??= Promise.all(
     (["latin", "latin-ext", "cyrillic"] as const).flatMap((subset) =>
       ([400, 800] as const).map(async (weight) => ({
-        name: "Sofia Sans Condensed",
+        // Своё имя на каждый набор символов: шрифты с одинаковым именем Satori не сочетает.
+        name: `SSC-${subset}`,
         data: await readFile(join(process.cwd(), "assets/fonts", `sofia-sans-condensed-${subset}-${weight}-normal.woff`)),
         weight,
         style: "normal" as const,
@@ -129,7 +131,13 @@ export async function GET(request: NextRequest) {
     <div style={{ display: "flex", flexWrap: "wrap", gap: 14 * k, justifyContent: story ? "center" : "flex-start" }}>
       {titles.map((x) => (
         <div key={x.id} style={{ display: "flex", padding: `${8 * k}px ${22 * k}px`, borderRadius: 14 * k, background: "rgba(234,179,8,0.18)", color: "#fef08a", fontSize: 34 * k }}>
-          {x.kind === "season_champion" ? "⭐" : "👑"} {t(`title.${x.kind}`)} · {x.label}
+          <svg width={30 * k} height={30 * k} viewBox="0 0 24 24" style={{ marginRight: 10 * k, marginTop: 4 * k }}>
+            <path
+              fill="#facc15"
+              d={x.kind === "season_champion" ? "M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z" : "M3 18h18l-1.5-10-4.5 4-3-7-3 7-4.5-4z"}
+            />
+          </svg>
+          {t(`title.${x.kind}`)} · {x.label}
         </div>
       ))}
     </div>
@@ -140,22 +148,22 @@ export async function GET(request: NextRequest) {
   const Footer = <div style={{ display: "flex", fontSize: 34 * k, color: "#a3a3a3" }}>mafiacl.com · {t("shareCta")}</div>;
 
   const body = story ? (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", height: "100%", padding: "90px 80px", background: BG, color: "#fff", fontFamily: "Sofia Sans Condensed" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", height: "100%", padding: "80px 80px 70px", background: BG, color: "#fff", fontFamily: FONT }}>
       {Logo}
-      <div style={{ display: "flex", marginTop: 90 }}>
-        <Avatar size={340} />
+      <div style={{ display: "flex", marginTop: 70 }}>
+        <Avatar size={320} />
       </div>
       <div style={{ display: "flex", marginTop: 40, fontSize: 130, fontWeight: 800, lineHeight: 1, textAlign: "center" }}>{player.nickname}</div>
       <div style={{ display: "flex", marginTop: 20, fontSize: 40, color: "#a3a3a3" }}>
         {[player.city, t("shareClub")].filter(Boolean).join(" · ")}
       </div>
       <div style={{ display: "flex", marginTop: 28 }}>{Titles}</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%", marginTop: 60 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%", marginTop: 48 }}>
         <div style={{ display: "flex", gap: 24 }}>{stats.slice(0, 2).map(StatBox)}</div>
         <div style={{ display: "flex", gap: 24 }}>{stats.slice(2).map(StatBox)}</div>
       </div>
       {s.games > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", width: "100%", marginTop: 60, gap: 24 }}>
+        <div style={{ display: "flex", flexDirection: "column", width: "100%", marginTop: 48, gap: 24 }}>
           <div style={{ display: "flex", fontSize: 44, fontWeight: 800 }}>{t("byRole")}</div>
           {Roles}
         </div>
@@ -164,7 +172,7 @@ export async function GET(request: NextRequest) {
       {Footer}
     </div>
   ) : (
-    <div style={{ display: "flex", width: "100%", height: "100%", padding: "48px 56px", gap: 48, background: BG, color: "#fff", fontFamily: "Sofia Sans Condensed" }}>
+    <div style={{ display: "flex", width: "100%", height: "100%", padding: "48px 56px", gap: 48, background: BG, color: "#fff", fontFamily: FONT }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", width: 300 }}>
         {Logo}
         <Avatar size={250} />
@@ -185,7 +193,6 @@ export async function GET(request: NextRequest) {
   return new ImageResponse(body, {
     ...SIZE[format],
     fonts: fontData,
-    emoji: "twemoji",
     headers: { "Cache-Control": "public, max-age=300, s-maxage=600" },
   });
 }
