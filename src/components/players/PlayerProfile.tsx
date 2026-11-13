@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import type { PlayerPage, PlayerRole } from "@/lib/players";
+import { headlineStats, type PlayerPage, type PlayerRole } from "@/lib/players";
+import { Link } from "@/i18n/navigation";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getPlayerOfWeek, getSeasons } from "@/lib/rating";
 import { badgeOf, belongsTo, getBadges, getPrizes, getTitles } from "@/lib/badges";
@@ -97,10 +98,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         <h2 id="stats" className="sr-only">{t("stats")}</h2>
         <dl className={`grid grid-cols-2 gap-3 ${prizeTotal ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
           {[
-            [t("games"), String(s.games)],
-            [t("winRate"), pct(s.wins, s.games)],
-            [t("points"), num(s.points)],
-            [t("avgPoints"), s.games ? num(s.points / s.games) : "—"],
+            ...headlineStats(player, (key) => t(key), locale),
             ...(prizeTotal ? [[t("prizeMoney"), czk(prizeTotal)]] : []),
           ].map(([k, v]) => (
             <div key={k} className="rounded-lg border border-white/10 bg-neutral-950 p-4">
@@ -127,8 +125,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         </section>
       )}
 
-      {s.games > 0 && (
-        <>
+      {s.decided > 0 && (
           <section aria-labelledby="roles" className="mt-10">
             <h2 id="roles" className="text-xl font-bold">{t("byRole")}</h2>
             <div className="mt-4 overflow-x-auto">
@@ -139,7 +136,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                     <th className="font-normal">{t("games")}</th>
                     <th className="font-normal">{t("wins")}</th>
                     <th className="font-normal">{t("winRate")}</th>
-                    <th className="font-normal">{t("points")}</th>
+                    {s.siteGames > 0 && <th className="font-normal">{t("points")}</th>}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
@@ -151,7 +148,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                         <td>{x.games}</td>
                         <td>{x.wins}</td>
                         <td>{pct(x.wins, x.games)}</td>
-                        <td>{num(x.points)}</td>
+                        {s.siteGames > 0 && <td>{num(x.points)}</td>}
                       </tr>
                     );
                   })}
@@ -159,9 +156,10 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               </table>
             </div>
             <p className="mt-4 text-sm text-neutral-300">
-              {t("bestMoveLine", { killed: s.firstKilled, hits: s.bestMoveHits, points: num(s.bestMovePoints) })}
-              {" · "}
-              {t("foulsLine", { avg: num(s.fouls / s.games) })}
+              {s.siteGames > 0
+                ? t("bestMoveLine", { killed: s.firstKilled, hits: s.bestMoveHits, points: num(s.bestMovePoints) })
+                : t("bestMoveLineShort", { killed: s.firstKilled, hits: s.bestMoveHits })}
+              {s.siteGames > 0 && <>{" · "}{t("foulsLine", { avg: num(s.fouls / s.siteGames) })}</>}
             </p>
             {(s.redVotes.total > 0 || s.blackVotes.total > 0) && (
               <p className="mt-1 text-sm text-neutral-300">
@@ -171,7 +169,46 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               </p>
             )}
           </section>
+      )}
 
+      {player.archive.length > 0 && (
+        <section aria-labelledby="archive" className="mt-10">
+          <h2 id="archive" className="text-xl font-bold">{t("archiveTitle")}</h2>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[32rem] text-left text-sm">
+              <thead className="text-neutral-400">
+                <tr>
+                  <th className="py-2 font-normal">{t("archiveSeason")}</th>
+                  <th className="font-normal">{t("archivePlace")}</th>
+                  <th className="font-normal">{t("games")}</th>
+                  <th className="font-normal">{t("winRate")}</th>
+                  <th className="text-right font-normal">{t("archiveRating")}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {player.archive.map((a) => (
+                  <tr key={a.slug}>
+                    <td className="py-2">
+                      <Link href={{ pathname: "/ratings/prague/[slug]", params: { slug: a.slug } }} className="font-semibold hover:underline">{a.title}</Link>
+                      <span className="ml-2 text-neutral-500">{a.year}</span>
+                      {a.isCurrent && <span className="ml-2 rounded bg-red-500/25 px-1.5 text-xs font-semibold uppercase text-red-200">{t("archiveCurrent")}</span>}
+                    </td>
+                    <td>
+                      {a.finalPlace ? <span title={t("archiveFinal")}>{["🥇", "🥈", "🥉"][a.finalPlace - 1] ?? `№${a.finalPlace}`} </span> : null}
+                      {a.rank}
+                    </td>
+                    <td>{a.games}</td>
+                    <td>{a.wins === null ? "—" : pct(a.wins, a.games)}</td>
+                    <td className="text-right font-mono font-bold">{num(a.points)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {s.siteGames > 0 && (
           <section aria-labelledby="recent" className="mt-10">
             <h2 id="recent" className="text-xl font-bold">{t("recent")}</h2>
             <div className="mt-4 overflow-x-auto">
@@ -204,7 +241,6 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               </table>
             </div>
           </section>
-        </>
       )}
     </article>
   );

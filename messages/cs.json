@@ -720,7 +720,16 @@
     },
     "prizeMoney": "Výhry",
     "shareCta": "moje statistiky v klubu mafie",
-    "shareClub": "MafiaCL Prague"
+    "shareClub": "MafiaCL Prague",
+    "seasonsCount": "Sezón v žebříčcích",
+    "bestPlace": "Nejlepší místo",
+    "archiveTitle": "Žebříčky sezón",
+    "archiveSeason": "Sezóna",
+    "archivePlace": "Místo",
+    "archiveRating": "Hodnocení",
+    "archiveCurrent": "probíhá",
+    "archiveFinal": "Místo ve finále sezóny",
+    "bestMoveLineShort": "Zabit jako první: {killed} · nejlepší tah s body: {hits}"
   },
   "rating": {
     "filters": "Filtry žebříčku",

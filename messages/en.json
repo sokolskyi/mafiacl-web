@@ -720,7 +720,16 @@
     },
     "prizeMoney": "Prize money",
     "shareCta": "my stats at the mafia club",
-    "shareClub": "MafiaCL Prague"
+    "shareClub": "MafiaCL Prague",
+    "seasonsCount": "Rated seasons",
+    "bestPlace": "Best place",
+    "archiveTitle": "Season ratings",
+    "archiveSeason": "Season",
+    "archivePlace": "Place",
+    "archiveRating": "Rating",
+    "archiveCurrent": "ongoing",
+    "archiveFinal": "Place in the season final",
+    "bestMoveLineShort": "Killed first: {killed} · best move with points: {hits}"
   },
   "rating": {
     "filters": "Rating filters",

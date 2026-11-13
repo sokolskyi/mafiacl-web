@@ -720,7 +720,16 @@
     },
     "prizeMoney": "Призовые",
     "shareCta": "моя статистика в клубе мафии",
-    "shareClub": "MafiaCL Prague"
+    "shareClub": "MafiaCL Prague",
+    "seasonsCount": "Сезонов в рейтингах",
+    "bestPlace": "Лучшее место",
+    "archiveTitle": "Рейтинги сезонов",
+    "archiveSeason": "Сезон",
+    "archivePlace": "Место",
+    "archiveRating": "Рейтинг",
+    "archiveCurrent": "идёт",
+    "archiveFinal": "Место в финале сезона",
+    "bestMoveLineShort": "Первым убит: {killed} · лучший ход с баллами: {hits}"
   },
   "rating": {
     "filters": "Фильтры рейтинга",

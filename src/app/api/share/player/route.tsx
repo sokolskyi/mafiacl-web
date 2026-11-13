@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
-import { getPlayer, type PlayerRole } from "@/lib/players";
+import { getPlayer, headlineStats, type PlayerRole } from "@/lib/players";
 import { getTitles, belongsTo } from "@/lib/badges";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { formatMemberNo } from "@/lib/memberNo";
@@ -80,14 +80,8 @@ export async function GET(request: NextRequest) {
   const titles = allTitles.filter((x) => belongsTo(x, player.id, player.nickname)).slice(0, 4);
 
   const s = player.stats;
-  const num = (n: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n);
   const pct = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)}%` : "—");
-  const stats: [string, string][] = [
-    [t("games"), String(s.games)],
-    [t("winRate"), pct(s.wins, s.games)],
-    [t("points"), num(s.points)],
-    [t("avgPoints"), s.games ? num(s.points / s.games) : "—"],
-  ];
+  const stats = headlineStats(player, (key) => t(key), locale);
   const story = format === "story";
   const k = story ? 1 : 0.62; // масштаб шрифтов и отступов для горизонтальной карточки
 
