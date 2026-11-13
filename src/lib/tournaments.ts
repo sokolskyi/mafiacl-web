@@ -32,12 +32,14 @@ export type Tournament = {
   prizeFund: number | null;
   winners: string[];
   infoUrl: string | null;
+  /** Плейлист на YouTube-канале клуба. */
+  videoUrl: string | null;
 };
 
 export type Registration = { profileId: string; nickname: string; status: "registered" | "waitlist" };
 
 const COLS =
-  "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url";
+  "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url, video_url";
 
 type Row = Record<string, unknown>;
 function map(t: Row): Tournament {
@@ -65,6 +67,7 @@ function map(t: Row): Tournament {
     prizeFund: t.prize_fund === null || t.prize_fund === undefined ? null : Number(t.prize_fund),
     winners: (t.winners as string[]) ?? [],
     infoUrl: (t.info_url as string) ?? null,
+    videoUrl: (t.video_url as string) ?? null,
   };
 }
 

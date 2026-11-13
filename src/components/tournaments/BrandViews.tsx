@@ -6,6 +6,7 @@ import { BRANDS, editionsOf, isActiveBrand, isUpcoming, regionOf, type Brand, ty
 import type { Tournament } from "@/lib/tournaments";
 import type { HallEntry } from "@/lib/hallArchive";
 import { tournamentDates } from "./TournamentCards";
+import { VideoLink } from "@/components/VideoLink";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
@@ -176,6 +177,7 @@ export async function BrandPage({ brand, tournaments, hall, locale }: { brand: B
                     </p>
                   )}
                   {e.note && <p className="mt-1 text-sm text-neutral-400">{e.note}</p>}
+                  <VideoLink url={e.videoUrl} locale={locale} />
                 </div>
               </li>
             ))}

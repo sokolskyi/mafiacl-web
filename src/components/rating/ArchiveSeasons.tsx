@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { VideoLink } from "@/components/VideoLink";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { ARCHIVE_LEAGUES, getArchiveSeasons } from "@/lib/ratingArchive";
@@ -48,6 +49,7 @@ export async function ArchiveSeasons({ locale }: { locale: Locale }) {
                 ) : s.isCurrent ? (
                   <p className="mt-3 text-sm text-neutral-400">{t("finalAhead")}</p>
                 ) : null}
+                <VideoLink url={s.videoUrl} locale={locale} className="mt-2" />
               </li>
               ))}
             </ul>

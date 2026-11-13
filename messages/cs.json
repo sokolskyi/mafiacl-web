@@ -26,7 +26,8 @@
     "language": "Jazyk",
     "rights": "Všechna práva vyhrazena.",
     "tagline": "Klub sportovní mafie",
-    "cityNotFound": "Klub v tomto městě zatím není."
+    "cityNotFound": "Klub v tomto městě zatím není.",
+    "video": "Videa na YouTube"
   },
   "pages": {
     "home": {
@@ -2236,5 +2237,11 @@
     "copied": "Odkaz zkopírován",
     "saved": "Obrázek uložen",
     "error": "Nepovedlo se, zkuste to znovu"
+  },
+  "blog": {
+    "masterclassesTitle": "Masterclassy",
+    "masterclassesLead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
+    "by": "Vede {author}",
+    "masterclassesAll": "Celý playlist na YouTube"
   }
 }

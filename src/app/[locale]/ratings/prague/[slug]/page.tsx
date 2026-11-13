@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { VideoLink } from "@/components/VideoLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -66,6 +67,11 @@ async function Inner({ params }: Pick<Props, "params">) {
           ? t("stats", { games: s.games, civ: s.civWins, civPct: pct(s.civWins, s.games), mafia: s.mafiaWins, mafiaPct: pct(s.mafiaWins, s.games) })
           : t("statsGames", { games: s.games })}
       </p>
+      {s.videoUrl && (
+        <p className="mt-4">
+          <VideoLink url={s.videoUrl} locale={locale} big />
+        </p>
+      )}
       {s.isCurrent && s.asOf && <p className="mt-1 text-sm text-yellow-300">{t("asOf", { date: date.format(new Date(`${s.asOf}T12:00:00Z`)) })}</p>}
 
       <section className="mt-6 rounded-lg border border-yellow-400/30 bg-yellow-400/5 p-4" aria-labelledby="final-title">

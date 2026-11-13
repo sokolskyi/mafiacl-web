@@ -45,6 +45,7 @@ export type Edition = {
   city: string | null;
   places: string[];
   note: string | null;
+  videoUrl: string | null;
   tournament: Tournament | null;
 };
 
@@ -71,12 +72,13 @@ export function editionsOf(brand: Brand, tournaments: Tournament[], hall: HallEn
         city: t.city ?? h?.city ?? null,
         places: h?.places.length ? h.places : t.winners,
         note: h?.note ?? null,
+        videoUrl: t.videoUrl ?? h?.videoUrl ?? null,
         tournament: t,
       });
     }
     for (const h of yh) {
       if (used.has(h.id)) continue;
-      out.push({ key: `h${h.id}`, year, title: h.title, city: h.city, places: h.places, note: h.note, tournament: null });
+      out.push({ key: `h${h.id}`, year, title: h.title, city: h.city, places: h.places, note: h.note, videoUrl: h.videoUrl, tournament: null });
     }
   }
   return out;

@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { topWinners, type HallEntry } from "@/lib/hallArchive";
+import { VideoLink } from "./VideoLink";
 
 const MEDAL = ["🥇", "🥈", "🥉"];
 
@@ -73,6 +74,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                         ))}
                       </ol>
                       {e.note && <p className="mt-2 text-sm text-neutral-400">{e.note}</p>}
+                      <VideoLink url={e.videoUrl} locale={locale} className="mt-2" />
                       </div>
                     </li>
                   ))}
@@ -93,6 +95,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                         ))}
                       </p>
                       {e.note && <p className="mt-1 text-sm text-neutral-400">{e.note}</p>}
+                      <VideoLink url={e.videoUrl} locale={locale} />
                     </li>
                   ))}
                 </ul>

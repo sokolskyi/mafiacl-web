@@ -14,6 +14,8 @@ export type HallEntry = {
   places: string[];
   note: string | null;
   photos: string[];
+  /** Плейлист на YouTube-канале клуба. */
+  videoUrl: string | null;
 };
 
 /** Архив зала славы по годам: сезоны, турниры, мини-турниры, достижения игроков клуба. */
@@ -25,7 +27,7 @@ export async function getHallArchive(clubSlug: string): Promise<HallEntry[]> {
   const db = createPublicClient();
   const { data, error } = await db
     .from("hall_of_fame")
-    .select("id, city, year, category, title, season, places, note, photos, sort, clubs!inner ( slug )")
+    .select("id, city, year, category, title, season, places, note, photos, video_url, sort, clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
     .order("year", { ascending: false })
     .order("sort");
@@ -40,6 +42,7 @@ export async function getHallArchive(clubSlug: string): Promise<HallEntry[]> {
     places: r.places ?? [],
     note: r.note,
     photos: r.photos ?? [],
+    videoUrl: r.video_url ?? null,
   }));
 }
 

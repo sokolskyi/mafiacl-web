@@ -26,7 +26,8 @@
     "language": "Language",
     "rights": "All rights reserved.",
     "tagline": "Sports mafia club",
-    "cityNotFound": "There is no club in this city yet."
+    "cityNotFound": "There is no club in this city yet.",
+    "video": "Videos on YouTube"
   },
   "pages": {
     "home": {
@@ -2236,5 +2237,11 @@
     "copied": "Link copied",
     "saved": "Image saved",
     "error": "Something went wrong, please try again"
+  },
+  "blog": {
+    "masterclassesTitle": "Masterclasses",
+    "masterclassesLead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",
+    "by": "By {author}",
+    "masterclassesAll": "Full playlist on YouTube"
   }
 }

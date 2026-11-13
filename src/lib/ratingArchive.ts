@@ -69,6 +69,8 @@ export type ArchiveSeason = {
   /** Призёры сезона: определяются финалом, а не местом в рейтинге. */
   final: string[];
   stats: SeasonStats | null;
+  /** Плейлист сезона на YouTube-канале клуба. */
+  videoUrl: string | null;
 };
 
 export type WL = { w: number; l: number };
@@ -114,6 +116,7 @@ type SeasonRow = {
   is_current: boolean;
   final_places: string[] | null;
   stats: SeasonStats | null;
+  video_url: string | null;
 };
 
 const toSeason = (r: SeasonRow): ArchiveSeason => ({
@@ -133,10 +136,11 @@ const toSeason = (r: SeasonRow): ArchiveSeason => ({
   isCurrent: r.is_current,
   final: r.is_current ? [] : (r.final_places ?? []),
   stats: r.stats,
+  videoUrl: r.video_url,
 });
 
 const SEASON_COLS =
-  "id, league, number, slug, title, year, games, civ_wins, mafia_wins, formula, scoring, source_url, as_of, is_current, final_places, stats, clubs!inner ( slug )";
+  "id, league, number, slug, title, year, games, civ_wins, mafia_wins, formula, scoring, source_url, as_of, is_current, final_places, stats, video_url, clubs!inner ( slug )";
 
 /** Сезоны всех лиг клуба, свежие сначала, с призёрами финала. */
 export async function getArchiveSeasons(clubSlug: string): Promise<ArchiveSeason[]> {

@@ -13,6 +13,7 @@ import { BrandPage } from "@/components/tournaments/BrandViews";
 import { brandBySlug, brandOf } from "@/lib/tournamentBrands";
 import { getTournaments } from "@/lib/tournaments";
 import { getHallArchive } from "@/lib/hallArchive";
+import { VideoLink } from "@/components/VideoLink";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/tournaments/[slug]">;
@@ -137,8 +138,9 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
 
       {desc && <div className="mt-8 max-w-prose whitespace-pre-line text-lg leading-relaxed text-neutral-200">{desc}</div>}
 
-      {(x.infoUrl || (x.status === "finished" && x.registrationUrl)) && (
+      {(x.infoUrl || x.videoUrl || (x.status === "finished" && x.registrationUrl)) && (
         <p className="mt-8 flex flex-wrap gap-3">
+          <VideoLink url={x.videoUrl} locale={locale} big />
           {x.infoUrl && (
             <a href={x.infoUrl} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center rounded-full border border-white/55 px-6 font-bold hover:bg-white/10">
               {t("moreInfo")} ↗
