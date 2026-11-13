@@ -20,6 +20,7 @@ const ROLE_CLASS: Record<PlayerRole, string> = {
 export async function PlayerProfile({ locale, player }: { locale: Locale; player: PlayerPage }) {
   const t = await getTranslations({ locale, namespace: "player" });
   const tm = await getTranslations({ locale, namespace: "match" });
+  const ta = await getTranslations({ locale, namespace: "ratingArchive" });
   const s = player.stats;
   const pct = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)} %` : "—");
   const num = (n: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n);
@@ -189,6 +190,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                 {player.archive.map((a) => (
                   <tr key={a.slug}>
                     <td className="py-2">
+                      <span className="text-neutral-400">{ta(`leagues.${a.league as "premier" | "mova" | "first"}.name`)} · </span>
                       <Link href={{ pathname: "/ratings/prague/[slug]", params: { slug: a.slug } }} className="font-semibold hover:underline">{a.title}</Link>
                       <span className="ml-2 text-neutral-500">{a.year}</span>
                       {a.isCurrent && <span className="ml-2 rounded bg-red-500/25 px-1.5 text-xs font-semibold uppercase text-red-200">{t("archiveCurrent")}</span>}
