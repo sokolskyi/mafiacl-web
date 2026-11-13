@@ -195,7 +195,8 @@
     "captcha": "Ověření se nezdařilo. Obnovte stránku a zkuste to znovu.",
     "city": "Město",
     "cityPlaceholder": "např. Praha",
-    "cityHint": "Zobrazuje se ve vašem hráčském profilu. Můžete nechat prázdné."
+    "cityHint": "Zobrazuje se ve vašem hráčském profilu. Můžete nechat prázdné.",
+    "warNotice": "Náš klub odsuzuje ruskou agresi proti Ukrajině. Osoby s bydlištěm v Rusku a Bělorusku se proto na našem webu nemohou registrovat."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",

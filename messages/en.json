@@ -195,7 +195,8 @@
     "captcha": "The bot check failed. Reload the page and try again.",
     "city": "City",
     "cityPlaceholder": "e.g. Prague",
-    "cityHint": "Shown on your player profile. You can leave it empty."
+    "cityHint": "Shown on your player profile. You can leave it empty.",
+    "warNotice": "Our club condemns Russia's aggression against Ukraine. Therefore, people residing in Russia or Belarus cannot register on our website."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",

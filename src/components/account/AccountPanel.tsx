@@ -45,6 +45,10 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           <span className="h-px flex-1 bg-white/10" />
         </div>
         <EmailSignIn locale={locale} />
+        <p className="mt-6 border-t border-white/10 pt-4 text-sm text-neutral-300">
+          <span aria-hidden="true">🇺🇦 </span>
+          {t("warNotice")}
+        </p>
       </section>
     );
   }
