@@ -49,6 +49,8 @@ async function Inner({ params }: Pick<Props, "params">) {
   const league = t(`leagues.${s.league}.name`);
   const isLeague = s.league !== "premier";
   const isSum = s.scoring?.formula === "sum";
+  const hasGames = rows.some((r) => r.games > 0);
+  const partial = new Set(s.stats?.partialGamesRanks ?? []);
   const sourceHost = s.sourceUrl ? (s.sourceUrl.includes("docs.google.com") ? "Google Sheets" : new URL(s.sourceUrl).hostname) : null;
 
   return (
@@ -103,7 +105,7 @@ async function Inner({ params }: Pick<Props, "params">) {
                 <th className="font-normal">{t("player")}</th>
                 <th className={head}>{isSum ? t("points") : t("rating")}</th>
                 {!isSum && <th className={head}>{t("points")}</th>}
-                {!isSum && <th className={head}>{t("games")}</th>}
+                {hasGames && <th className={head}>{t("games")}</th>}
                 <th className={head} title={t("finalPointsHint")}>{t("finalPoints")}</th>
               </tr>
             </thead>
@@ -122,7 +124,12 @@ async function Inner({ params }: Pick<Props, "params">) {
                   </td>
                   <td className={`${cell} font-mono text-base font-black ${r.qualified ? "text-white" : ""}`}>{num.format(r.points)}</td>
                   {!isSum && <td className={cell}>{r.score === null ? "—" : num.format(r.score)}</td>}
-                  {!isSum && <td className={cell}>{r.games}</td>}
+                  {hasGames && (
+                    <td className={cell}>
+                      {r.games > 0 ? r.games : "—"}
+                      {partial.has(r.rank) && <span title={t("partialGames")}>*</span>}
+                    </td>
+                  )}
                   <td className={cell}>{r.finalist ? num.format(r.finalPoints ?? 0) : "—"}</td>
                 </tr>
               ))}
@@ -178,6 +185,8 @@ async function Inner({ params }: Pick<Props, "params">) {
           </table>
         </div>
       )}
+
+      {partial.size > 0 && <p className="mt-3 text-sm text-neutral-400">* {t("partialGames")}</p>}
 
       {s.stats && <SeasonStatsBlock locale={locale} stats={s.stats} />}
 

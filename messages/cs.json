@@ -1886,6 +1886,10 @@
     "winBlack": "Černí",
     "winRed": "Červení",
     "winTotal": "Celkem",
-    "scoringFormulaNoExtra": "Žebříček = body ÷ hry × 100 + {coef} × hry, zaokrouhleno."
+    "scoringFormulaNoExtra": "Žebříček = body ÷ hry × 100 + {coef} × hry, zaokrouhleno.",
+    "hostsTitle": "Moderátoři sezóny",
+    "host": "Moderátor",
+    "hostedGames": "Odmoderováno her",
+    "partialGames": "Hry podle protokolů večerů; z večera 5. července 2024 se zachovaly jen výsledky, takže jeho účastníci mohli odehrát více her."
   }
 }

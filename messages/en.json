@@ -1886,6 +1886,10 @@
     "winBlack": "Black",
     "winRed": "Red",
     "winTotal": "Overall",
-    "scoringFormulaNoExtra": "Rating = points ÷ games × 100 + {coef} × games, rounded."
+    "scoringFormulaNoExtra": "Rating = points ÷ games × 100 + {coef} × games, rounded.",
+    "hostsTitle": "Season hosts",
+    "host": "Host",
+    "hostedGames": "Games hosted",
+    "partialGames": "Games are counted from the evening sheets; only totals survived for 5 July 2024, so its players may have played more games."
   }
 }

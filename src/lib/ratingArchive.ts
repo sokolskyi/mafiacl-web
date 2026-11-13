@@ -43,6 +43,10 @@ export type Scoring = {
 };
 
 export type SeasonStats = {
+  /** Ведущие сезона: сколько игр провёл каждый. */
+  hosts?: { n: string; games: number }[];
+  /** Места в таблице, у которых число игр неполное (часть вечеров сохранилась без разбивки по играм). */
+  partialGamesRanks?: number[];
   avgExtra?: { n: string; avg: number; median: number }[];
   winrate?: { n: string; black: number; red: number; total: number }[];
 };

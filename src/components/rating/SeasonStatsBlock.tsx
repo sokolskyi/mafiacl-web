@@ -9,10 +9,34 @@ export async function SeasonStatsBlock({ locale, stats }: { locale: Locale; stat
   const pct = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
   const head = "px-2 py-1.5 text-right font-normal";
   const cell = "px-2 py-1.5 text-right tabular-nums";
+  if (!stats.hosts?.length && !stats.avgExtra?.length && !stats.winrate?.length) return null;
   return (
     <section className="mt-10" aria-labelledby="season-stats">
       <h2 id="season-stats" className="text-2xl font-bold">{t("statsTitle")}</h2>
       <div className="mt-4 grid gap-8 lg:grid-cols-2">
+        {stats.hosts && stats.hosts.length > 0 && (
+          <div className="overflow-x-auto">
+            <h3 className="font-semibold">{t("hostsTitle")}</h3>
+            <table className="mt-2 w-full text-left text-sm">
+              <thead className="text-neutral-400">
+                <tr>
+                  <th className="w-8 py-1.5 font-normal">#</th>
+                  <th className="font-normal">{t("host")}</th>
+                  <th className={head}>{t("hostedGames")}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {stats.hosts.map((r, i) => (
+                  <tr key={r.n}>
+                    <td className="py-1.5 font-mono">{i + 1}</td>
+                    <td className="font-semibold">{r.n}</td>
+                    <td className={cell}>{r.games}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
         {stats.avgExtra && stats.avgExtra.length > 0 && (
           <div className="overflow-x-auto">
             <h3 className="font-semibold">{t("avgExtraTitle")}</h3>
