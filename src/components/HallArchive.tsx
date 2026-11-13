@@ -74,7 +74,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                         ))}
                       </ol>
                       {e.note && <p className="mt-2 text-sm text-neutral-400">{e.note}</p>}
-                      <VideoLink url={e.videoUrl} locale={locale} className="mt-2" />
+                      <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} className="mt-2" />
                       </div>
                     </li>
                   ))}
@@ -95,7 +95,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                         ))}
                       </p>
                       {e.note && <p className="mt-1 text-sm text-neutral-400">{e.note}</p>}
-                      <VideoLink url={e.videoUrl} locale={locale} />
+                      <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} />
                     </li>
                   ))}
                 </ul>

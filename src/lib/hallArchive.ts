@@ -1,6 +1,7 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { parseVideos, type VideoItem } from "@/lib/videos";
 
 export const HALL_ARCHIVE_TAG = "hall-archive";
 
@@ -16,6 +17,8 @@ export type HallEntry = {
   photos: string[];
   /** Плейлист на YouTube-канале клуба. */
   videoUrl: string | null;
+  /** Отдельные видео (дни, финал, серии). */
+  videos: VideoItem[];
 };
 
 /** Архив зала славы по годам: сезоны, турниры, мини-турниры, достижения игроков клуба. */
@@ -27,7 +30,7 @@ export async function getHallArchive(clubSlug: string): Promise<HallEntry[]> {
   const db = createPublicClient();
   const { data, error } = await db
     .from("hall_of_fame")
-    .select("id, city, year, category, title, season, places, note, photos, video_url, sort, clubs!inner ( slug )")
+    .select("id, city, year, category, title, season, places, note, photos, video_url, videos, sort, clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
     .order("year", { ascending: false })
     .order("sort");
@@ -43,6 +46,7 @@ export async function getHallArchive(clubSlug: string): Promise<HallEntry[]> {
     note: r.note,
     photos: r.photos ?? [],
     videoUrl: r.video_url ?? null,
+    videos: parseVideos(r.videos),
   }));
 }
 

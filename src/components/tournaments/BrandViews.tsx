@@ -177,7 +177,7 @@ export async function BrandPage({ brand, tournaments, hall, locale }: { brand: B
                     </p>
                   )}
                   {e.note && <p className="mt-1 text-sm text-neutral-400">{e.note}</p>}
-                  <VideoLink url={e.videoUrl} locale={locale} />
+                  <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} />
                 </div>
               </li>
             ))}

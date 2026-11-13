@@ -27,7 +27,11 @@
     "rights": "All rights reserved.",
     "tagline": "Sports mafia club",
     "cityNotFound": "There is no club in this city yet.",
-    "video": "Videos on YouTube"
+    "video": "Videos on YouTube",
+    "videoShort": "Video",
+    "videoDay": "Day {n}",
+    "videoFinal": "Final",
+    "videoSeries": "Series {n}"
   },
   "pages": {
     "home": {
@@ -1773,7 +1777,38 @@
     "codeNote": "More about the club's values and ethics —",
     "codeLink": "Club code",
     "moreTitle": "Want to dig deeper?",
-    "more": "Our YouTube channel has recorded games and tournaments with commentary, and Telegram has announcements, results and club news. But the best way to learn is to come and play."
+    "more": "Our YouTube channel has recorded games and tournaments with commentary, and Telegram has announcements, results and club news. But the best way to learn is to come and play.",
+    "videos": {
+      "title": "Videos for beginners",
+      "lead": "Rules, roles and first tips on our YouTube channel. The videos are in Russian.",
+      "schoolTitle": "Mafia School",
+      "schoolText": "A series of lessons: sport mafia rules and how to behave at the table.",
+      "basicsTitle": "What is the Mafia",
+      "basicsText": "Short clips on the basics: each role and each stage of the game on its own.",
+      "sevenTitle": "Mafia in 7 seconds",
+      "sevenText": "Experienced club players share their key tips, a few minutes each.",
+      "count": "{n} videos",
+      "playlist": "Full playlist",
+      "topics": {
+        "intro": "Introduction",
+        "mafiaGame": "What mafia is",
+        "history": "History",
+        "growth": "How it grew",
+        "essence": "The point of the game",
+        "order": "Game procedure",
+        "voting": "Voting",
+        "shootout": "Shootout",
+        "civilian": "Civilian",
+        "sheriff": "Sheriff",
+        "mafia": "Mafia",
+        "don": "Don",
+        "deal": "Mafia's night deal",
+        "kill": "The kill",
+        "rules": "Rules",
+        "host": "Host",
+        "critical": "Critical situation"
+      }
+    }
   },
   "faq": {
     "lead": "Answers to the questions people ask most before their first game.",

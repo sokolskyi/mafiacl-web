@@ -13,7 +13,7 @@ export const MASTERCLASSES: Masterclass[] = [
   { id: "dDMai9ILrR8", author: "Амахонда", title: "Выбор модели поведения за игровым столом", lang: "ru", length: "1:36:46" },
   { id: "lJce4O8vcrs", author: "Сарказм", title: "How to win as Red", lang: "en", length: "53:20" },
   { id: "Q4aWXT6BRO0", author: "Flash", title: "Игра лже-шерифом", lang: "ru", length: "48:28" },
-  { id: "Z-rpro1NjUA", author: "Bordeaux", title: "Playing for the Black Card", lang: "en", length: "59:32" },
+  { id: "Z-rpro1NjUA", author: "Бордо", title: "Playing for the Black Card", lang: "en", length: "59:32" },
   { id: "Oiwjp5wE7-Q", author: "Вольфрам", title: "How to win as Mafia", lang: "en", length: "52:19" },
   { id: "Guz1entTTF0", author: "Персик", title: "Логическая составляющая игры «мафия»", lang: "ru", length: "1:16:39" },
   { id: "aRfEf6TJ6yg", author: "RiT", title: "Математическая и позиционная составляющие игры", lang: "ru", length: "55:58" },

@@ -27,7 +27,11 @@
     "rights": "Všechna práva vyhrazena.",
     "tagline": "Klub sportovní mafie",
     "cityNotFound": "Klub v tomto městě zatím není.",
-    "video": "Videa na YouTube"
+    "video": "Videa na YouTube",
+    "videoShort": "Video",
+    "videoDay": "Den {n}",
+    "videoFinal": "Finále",
+    "videoSeries": "Série {n}"
   },
   "pages": {
     "home": {
@@ -1773,7 +1777,38 @@
     "codeNote": "Více o hodnotách a etice klubu —",
     "codeLink": "Kodex klubu",
     "moreTitle": "Chcete se ponořit hlouběji?",
-    "more": "Na našem YouTube kanálu najdete záznamy her a turnajů s komentářem, na Telegramu oznámení, výsledky a novinky klubu. Nejlíp se ale naučíte, když přijdete a zahrajete si."
+    "more": "Na našem YouTube kanálu najdete záznamy her a turnajů s komentářem, na Telegramu oznámení, výsledky a novinky klubu. Nejlíp se ale naučíte, když přijdete a zahrajete si.",
+    "videos": {
+      "title": "Videa pro nováčky",
+      "lead": "Pravidla, role a první tipy na našem YouTube kanálu. Videa jsou v ruštině.",
+      "schoolTitle": "Škola mafie",
+      "schoolText": "Série lekcí: pravidla sportovní mafie a jak se chovat u stolu.",
+      "basicsTitle": "What is the Mafia",
+      "basicsText": "Krátká videa o základech: každá role a každá fáze hry zvlášť.",
+      "sevenTitle": "Mafie za 7 sekund",
+      "sevenText": "Zkušení hráči klubu sdílejí své hlavní tipy, každý za pár minut.",
+      "count": "{n} videí",
+      "playlist": "Celý playlist",
+      "topics": {
+        "intro": "Úvod",
+        "mafiaGame": "Co je mafie",
+        "history": "Historie",
+        "growth": "Vývoj",
+        "essence": "Podstata hry",
+        "order": "Průběh hry",
+        "voting": "Hlasování",
+        "shootout": "Přestřelka",
+        "civilian": "Civilista",
+        "sheriff": "Šerif",
+        "mafia": "Mafie",
+        "don": "Don",
+        "deal": "Domluva mafie",
+        "kill": "Vražda",
+        "rules": "Pravidla",
+        "host": "Moderátor",
+        "critical": "Kritická situace"
+      }
+    }
   },
   "faq": {
     "lead": "Odpovědi na otázky, které se nejčastěji objevují před první hrou.",

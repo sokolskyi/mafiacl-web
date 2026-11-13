@@ -1,5 +1,6 @@
 import type { HallEntry } from "@/lib/hallArchive";
 import type { Tournament } from "@/lib/tournaments";
+import type { VideoItem } from "@/lib/videos";
 
 /**
  * Турниры клуба «без года»: Central Cup, Championship, Kings… Каждый турнир (из базы турниров или из
@@ -46,6 +47,7 @@ export type Edition = {
   places: string[];
   note: string | null;
   videoUrl: string | null;
+  videos: VideoItem[];
   tournament: Tournament | null;
 };
 
@@ -73,12 +75,13 @@ export function editionsOf(brand: Brand, tournaments: Tournament[], hall: HallEn
         places: h?.places.length ? h.places : t.winners,
         note: h?.note ?? null,
         videoUrl: t.videoUrl ?? h?.videoUrl ?? null,
+        videos: t.videos.length ? t.videos : (h?.videos ?? []),
         tournament: t,
       });
     }
     for (const h of yh) {
       if (used.has(h.id)) continue;
-      out.push({ key: `h${h.id}`, year, title: h.title, city: h.city, places: h.places, note: h.note, videoUrl: h.videoUrl, tournament: null });
+      out.push({ key: `h${h.id}`, year, title: h.title, city: h.city, places: h.places, note: h.note, videoUrl: h.videoUrl, videos: h.videos, tournament: null });
     }
   }
   return out;

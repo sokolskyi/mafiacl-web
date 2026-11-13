@@ -2,6 +2,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type { Localized } from "@/lib/games";
+import { parseVideos, type VideoItem } from "@/lib/videos";
 
 export const TOURNAMENTS_TAG = "tournaments";
 export const SERIES = ["club", "kings", "mcl_europe", "other"] as const;
@@ -34,12 +35,14 @@ export type Tournament = {
   infoUrl: string | null;
   /** Плейлист на YouTube-канале клуба. */
   videoUrl: string | null;
+  /** Отдельные видео (дни, финал, серии). */
+  videos: VideoItem[];
 };
 
 export type Registration = { profileId: string; nickname: string; status: "registered" | "waitlist" };
 
 const COLS =
-  "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url, video_url";
+  "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url, video_url, videos";
 
 type Row = Record<string, unknown>;
 function map(t: Row): Tournament {
@@ -68,6 +71,7 @@ function map(t: Row): Tournament {
     winners: (t.winners as string[]) ?? [],
     infoUrl: (t.info_url as string) ?? null,
     videoUrl: (t.video_url as string) ?? null,
+    videos: parseVideos(t.videos),
   };
 }
 
