@@ -293,3 +293,8 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 -- серии считаются по всем клубным вечерам подряд (rating/fun/tournament), а не по одному расписанию.
 -- Дополнение (MCP: profile_links_city_key_blog_images): profiles.links (профили на markery/ФИИМ/Mafgame/Emotion Games/iMafia),
 -- profiles.city хранит ключ города из списка сайта, blog_posts.images (до 4) и публичное хранилище 'blog'.
+
+-- Через MCP применена миграция nickname_rules_and_membership_respect:
+--   ник меняется сам раз в год (nickname_change), чаще — заявкой владельцу (nickname_requests / nickname_decide),
+--   старый ник становится старым ником игрока (player_aliases);
+--   Respect за оплаченный абонемент: месяц +10, 3 месяца +30, год +100, особый срок — 10 за 30 дней (ref membership:<id>).

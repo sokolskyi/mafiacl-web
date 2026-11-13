@@ -16,3 +16,12 @@ export const MASTERCLASSES: Masterclass[] = [
   { id: "Guz1entTTF0", author: "Персик", title: "Логическая составляющая игры «мафия»", lang: "ru", length: "1:16:39" },
   { id: "aRfEf6TJ6yg", author: "RiT", title: "Математическая и позиционная составляющие игры", lang: "ru", length: "55:58" },
 ];
+
+/** Интервью с YouTube-канала клуба (плейлист «Интервью»). */
+export const INTERVIEW_PLAYLIST = "https://www.youtube.com/playlist?list=PLtrPZrjZQNKd3gOfhnXTHHNO5sqTMwDg5";
+
+export const INTERVIEWS: Masterclass[] = [
+  { id: "pSei5wdLrgg", author: "Амахонда", title: "Магистр игры мафия по версии ФИИМ", lang: "ru", length: "31:16" },
+  { id: "vem4eJTng4I", author: "Шершень", title: "Магистр игры мафия по версии ФИИМ", lang: "ru", length: "42:32" },
+  { id: "Y1PNZXbGS2E", author: "Королевич", title: "Мастер мафии по версии Mafgame", lang: "ru", length: "1:31:42" },
+];

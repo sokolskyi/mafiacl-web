@@ -12,12 +12,14 @@ export function NicknameForm({
   links,
   birthday,
   birthdayRequest,
+  nicknameRequest,
 }: {
   current: string | null;
   city: string | null;
   links: ProfileLinks;
   birthday: string | null;
   birthdayRequest: string | null;
+  nicknameRequest: string | null;
 }) {
   const t = useTranslations("account");
   const locale = useLocale();
@@ -51,7 +53,8 @@ export function NicknameForm({
         </button>
       </div>
       <p id="nickname-hint" className="mt-2 text-sm text-neutral-400">
-        {t("nicknameHint")}
+        {t("nicknameHint")} {t("nicknameRule")}
+        {nicknameRequest && <span className="mt-1 block text-amber-300">{t("nicknamePending", { nick: nicknameRequest })}</span>}
       </p>
       <CityPicker
         name="city"
@@ -102,7 +105,8 @@ export function NicknameForm({
       <p id="nickname-status" role="status" className="mt-2 text-sm">
         {state.status === "saved" && <span className="text-green-400">{t("saved")}</span>}
         {state.status === "birthdayRequested" && <span className="text-green-400">{t("birthdayRequested")}</span>}
-        {state.status !== "idle" && state.status !== "saved" && state.status !== "birthdayRequested" && (
+        {state.status === "nicknameRequested" && <span className="text-green-400">{t("nicknameRequested")}</span>}
+        {state.status !== "idle" && state.status !== "saved" && state.status !== "birthdayRequested" && state.status !== "nicknameRequested" && (
           <span className="text-red-400">{t(state.status)}</span>
         )}
       </p>

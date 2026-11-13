@@ -20,9 +20,10 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
 
       <div className="mt-8 rounded-lg border border-red-500/40 bg-neutral-950/60 p-6">
         <h3 className="font-display text-2xl font-extrabold uppercase">{t("topTitle")}</h3>
-        <ol className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+        {/* Столбцами: 1, 2, 3… сверху вниз в первой колонке, дальше — во второй. */}
+        <ol className="mt-4 gap-x-8 sm:columns-2">
           {top.map((r, i) => (
-            <li key={r.name} className="flex items-baseline gap-3">
+            <li key={r.name} className="mb-2 flex break-inside-avoid items-baseline gap-3">
               <span className="w-6 text-right font-mono text-neutral-400">{i + 1}</span>
               <span className="font-semibold">
                 {r.name}

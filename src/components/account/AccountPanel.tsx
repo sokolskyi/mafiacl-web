@@ -84,7 +84,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
     .eq("profile_id", userId);
   const { data: priv } = await supabase
     .from("profile_private")
-    .select("telegram_chat_id, birthday, birthday_request")
+    .select("telegram_chat_id, birthday, birthday_request, nickname_request")
     .eq("profile_id", userId)
     .maybeSingle();
   const telegramOn = Boolean(priv?.telegram_chat_id);
@@ -164,7 +164,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           <PlayerShare locale={locale} nickname={profile.nickname} />
         </div>
       )}
-      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} />
+      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
       {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>

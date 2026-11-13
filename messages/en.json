@@ -227,7 +227,10 @@
     "invalidCity": "Pick a city from the list.",
     "invalidLink": "Check your profile links: each must point to that service’s site.",
     "profilesTitle": "Profiles on rating sites",
-    "profilesHint": "Paste links to your profiles — they will show as buttons on your player page. Optional."
+    "profilesHint": "Paste links to your profiles — they will show as buttons on your player page. Optional.",
+    "nicknameRule": "You can change your nickname yourself once a year; more often only with the club owner’s approval.",
+    "nicknamePending": "Your request for the nickname “{nick}” is waiting for the club owner’s approval.",
+    "nicknameRequested": "Saved. The new nickname is waiting for the club owner’s approval — you can change it yourself once a year."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -573,6 +576,13 @@
       "title": "Date of birth changes",
       "hint": "A player wants to change their date of birth. Check and confirm.",
       "approve": "Confirm",
+      "reject": "Reject"
+    },
+    "nicknames": {
+      "title": "Nickname change",
+      "hint": "This player has already changed their nickname this year. The new one appears after your approval; the old one stays in the archives as their former nickname.",
+      "lastChange": "last change: {date}",
+      "approve": "Approve",
       "reject": "Reject"
     }
   },
@@ -1898,6 +1908,11 @@
         "host": "Host",
         "critical": "Critical situation"
       }
+    },
+    "masterclasses": {
+      "title": "Masterclasses",
+      "lead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",
+      "all": "Full playlist on YouTube"
     }
   },
   "faq": {
@@ -2364,9 +2379,9 @@
     "error": "Something went wrong, please try again"
   },
   "blog": {
-    "masterclassesTitle": "Masterclasses",
-    "masterclassesLead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",
-    "masterclassesAll": "Full playlist on YouTube"
+    "interviewsTitle": "Interviews",
+    "interviewsLead": "Conversations with top players — Masters of Mafia according to FIIM and Mafgame. Videos on the club’s YouTube channel (in Russian).",
+    "interviewsAll": "All interviews on YouTube"
   },
   "respect": {
     "rate": "1 Respect = {czk} Kč",
@@ -2388,9 +2403,12 @@
       "coin": "Respect coin (prize draws, gifts)",
       "coinValue": "value on the coin",
       "bestMove3": "Best move: you named all three black players",
-      "streak": "{n} club nights in a row (at least 1 game)"
+      "streak": "{n} club nights in a row (at least 1 game)",
+      "membershipMonth": "One-month pass",
+      "membershipQuarter": "Three-month pass",
+      "membershipYear": "One-year pass"
     },
-    "earnNote": "Games, best moves, streaks, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. The club adds the bonus for a friend.",
+    "earnNote": "Games, best moves, streaks, passes, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. The club adds the bonus for a friend.",
     "spend": {
       "evening": "Game night",
       "eveningValue": "in full: 300 Kč = 150 Respect",
@@ -2419,7 +2437,7 @@
       "save": "Activation failed. Please try again.",
       "order": "Could not apply Respect. Check your balance and try again."
     },
-    "accountHint": "Earned for games at the club and at tournaments. Use it to pay for a game night, part of a pass or merch.",
+    "accountHint": "Earned for games at the club and at tournaments and for buying a pass. Use it to pay for a game night, part of a pass or merch.",
     "howItWorks": "How it works",
     "milestoneNote": "{n} games",
     "reason": {
@@ -2439,7 +2457,8 @@
       "adjust": "Adjustment",
       "expire": "Expired (12 months without games)",
       "best_move": "Best move: three black",
-      "streak": "Streak of nights"
+      "streak": "Streak of nights",
+      "membership": "Pass"
     },
     "orderTitle": "Pay part of the order with Respect",
     "orderHint": "You can use up to {max} Respect — a {czk} Kč discount. This can be done once; if you cancel the order, the Respect comes back.",
@@ -2447,7 +2466,12 @@
     "orderApply": "Apply",
     "orderApplied": "Respect applied, the order total is reduced.",
     "orderPaidWith": "Paid with Respect:",
-    "streakNote": "{n} nights in a row"
+    "streakNote": "{n} nights in a row",
+    "plans": {
+      "month": "1 month",
+      "quarter": "3 months",
+      "year": "1 year"
+    }
   },
   "adminRespect": {
     "title": "Respect",

@@ -3,7 +3,9 @@
 import { recordSignupCountry } from "@/lib/members";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { MATCHES_TAG } from "@/lib/players";
+import { ALIASES_TAG } from "@/lib/aliases";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
@@ -87,7 +89,7 @@ export async function signOut(formData: FormData) {
   redirect(getPathname({ href: "/account", locale }));
 }
 
-export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidCity" | "invalidLink" | "invalidBirthday" | "birthdayRequired" | "birthdayRequested" | "taken" | "error" };
+export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidCity" | "invalidLink" | "invalidBirthday" | "birthdayRequired" | "birthdayRequested" | "nicknameRequested" | "taken" | "error" };
 
 /** Ник игрока: 2–32 символа, без пробелов по краям, уникален без учёта регистра. */
 export async function updateNickname(_prev: ProfileState, formData: FormData): Promise<ProfileState> {
@@ -121,19 +123,33 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   const { data: priv } = await supabase.from("profile_private").select("birthday").eq("profile_id", userId).maybeSingle();
   if (!priv?.birthday && !birthdayRaw) return { status: "birthdayRequired" };
 
-  const { error } = await supabase.from("profiles").update({ nickname, city, markery_id, links }).eq("id", userId);
+  // Ник: раз в год — сразу, чаще — заявкой владельцу клуба (в базе: nickname_change).
+  const admin = createAdminClient();
+  const { data: nickRes, error: nErr } = await admin.rpc("nickname_change", { p_profile: userId, p_nick: nickname });
+  if (nErr) {
+    if (nErr.code === "23505") return { status: "taken" };
+    console.error("nickname_change failed", { code: nErr.code, message: nErr.message });
+    return { status: nErr.message.includes("invalid") ? "invalid" : "error" };
+  }
+  if (nickRes === "taken") return { status: "taken" };
+
+  const { error } = await supabase.from("profiles").update({ city, markery_id, links }).eq("id", userId);
   if (error) {
-    if (error.code === "23505") return { status: "taken" };
     console.error("updateNickname failed", { code: error.code, message: error.message });
     return { status: "error" };
   }
   let requested = false;
   if (birthdayRaw && birthdayRaw !== priv?.birthday) {
-    const { data: res, error: bErr } = await createAdminClient().rpc("birthday_set", { p_profile: userId, p_date: birthdayRaw });
+    const { data: res, error: bErr } = await admin.rpc("birthday_set", { p_profile: userId, p_date: birthdayRaw });
     if (bErr) return { status: bErr.message.includes("invalid") ? "invalidBirthday" : "error" };
     requested = res === "requested";
   }
   revalidatePath("/", "layout");
+  if (nickRes === "set") {
+    updateTag(MATCHES_TAG);
+    updateTag(ALIASES_TAG);
+  }
+  if (nickRes === "requested") return { status: "nicknameRequested" };
   return { status: requested ? "birthdayRequested" : "saved" };
 }
 

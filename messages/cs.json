@@ -227,7 +227,10 @@
     "invalidCity": "Vyberte město ze seznamu.",
     "invalidLink": "Zkontrolujte odkazy na profily: každý musí vést na web své služby.",
     "profilesTitle": "Profily na webech žebříčků",
-    "profilesHint": "Vložte odkazy na své profily — na vaší stránce hráče se objeví jako tlačítka. Můžete nechat prázdné."
+    "profilesHint": "Vložte odkazy na své profily — na vaší stránce hráče se objeví jako tlačítka. Můžete nechat prázdné.",
+    "nicknameRule": "Přezdívku si můžete sami změnit jednou za rok; častěji jen se souhlasem majitele klubu.",
+    "nicknamePending": "Žádost o přezdívku „{nick}“ čeká na schválení majitelem klubu.",
+    "nicknameRequested": "Uloženo. Nová přezdívka čeká na schválení majitelem klubu — sami ji můžete měnit jednou za rok."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -573,6 +576,13 @@
       "title": "Změna data narození",
       "hint": "Hráč chce změnit datum narození. Zkontrolujte a potvrďte.",
       "approve": "Potvrdit",
+      "reject": "Zamítnout"
+    },
+    "nicknames": {
+      "title": "Změna přezdívky",
+      "hint": "Hráč už letos přezdívku měnil. Nová se objeví po vašem schválení, stará zůstane v archivech jako jeho dřívější přezdívka.",
+      "lastChange": "minulá změna: {date}",
+      "approve": "Schválit",
       "reject": "Zamítnout"
     }
   },
@@ -1898,6 +1908,11 @@
         "host": "Moderátor",
         "critical": "Kritická situace"
       }
+    },
+    "masterclasses": {
+      "title": "Masterclassy",
+      "lead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
+      "all": "Celý playlist na YouTube"
     }
   },
   "faq": {
@@ -2364,9 +2379,9 @@
     "error": "Nepovedlo se, zkuste to znovu"
   },
   "blog": {
-    "masterclassesTitle": "Masterclassy",
-    "masterclassesLead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
-    "masterclassesAll": "Celý playlist na YouTube"
+    "interviewsTitle": "Rozhovory",
+    "interviewsLead": "Rozhovory s nejsilnějšími hráči — mistry mafie podle FIIM a Mafgame. Videa na YouTube kanálu klubu (rusky).",
+    "interviewsAll": "Všechny rozhovory na YouTube"
   },
   "respect": {
     "rate": "1 Respect = {czk} Kč",
@@ -2388,9 +2403,12 @@
       "coin": "Mince Respect (soutěže, dárky)",
       "coinValue": "hodnota na minci",
       "bestMove3": "Nejlepší tah: uhodli jste všechny tři černé",
-      "streak": "{n} klubových večerů po sobě (aspoň 1 hra)"
+      "streak": "{n} klubových večerů po sobě (aspoň 1 hra)",
+      "membershipMonth": "Permanentka na měsíc",
+      "membershipQuarter": "Permanentka na 3 měsíce",
+      "membershipYear": "Permanentka na rok"
     },
-    "earnNote": "Hry, nejlepší tah, série, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda připisuje klub.",
+    "earnNote": "Hry, nejlepší tah, série, permanentka, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda připisuje klub.",
     "spend": {
       "evening": "Herní večer",
       "eveningValue": "celý: 300 Kč = 150 Respect",
@@ -2419,7 +2437,7 @@
       "save": "Aktivace se nezdařila. Zkuste to znovu.",
       "order": "Respect se nepodařilo odečíst. Zkontrolujte zůstatek a zkuste to znovu."
     },
-    "accountHint": "Připisuje se za hry v klubu a na turnajích. Lze jím zaplatit večer, část permanentky nebo merche.",
+    "accountHint": "Připisuje se za hry v klubu a na turnajích a za nákup permanentky. Lze jím zaplatit večer, část permanentky nebo merche.",
     "howItWorks": "Jak to funguje",
     "milestoneNote": "{n} her",
     "reason": {
@@ -2439,7 +2457,8 @@
       "adjust": "Úprava",
       "expire": "Propadlo (12 měsíců bez her)",
       "best_move": "Nejlepší tah: tři černí",
-      "streak": "Série večerů"
+      "streak": "Série večerů",
+      "membership": "Permanentka"
     },
     "orderTitle": "Zaplatit část objednávky Respectem",
     "orderHint": "Můžete odečíst až {max} Respect — sleva {czk} Kč. Odečíst lze jednou; při zrušení objednávky se Respect vrátí.",
@@ -2447,7 +2466,12 @@
     "orderApply": "Odečíst",
     "orderApplied": "Respect odečten, částka objednávky snížena.",
     "orderPaidWith": "Zaplaceno Respectem:",
-    "streakNote": "{n} večerů v řadě"
+    "streakNote": "{n} večerů v řadě",
+    "plans": {
+      "month": "na měsíc",
+      "quarter": "na 3 měsíce",
+      "year": "na rok"
+    }
   },
   "adminRespect": {
     "title": "Respect",
