@@ -1804,13 +1804,13 @@
     "ask": "Ask on Telegram"
   },
   "ratingArchive": {
-    "listTitle": "Premier League seasons in Prague",
-    "listLead": "Full club rating tables for every season since 2022: points, bonuses, wins by role, best move.",
+    "listTitle": "Club rating archive in Prague",
+    "listLead": "Full rating tables for every season: Premier League since 2022, Liga Mova and First League since 2024.",
     "current": "current",
     "gamesCount": "{count, plural, one {# rated game} other {# rated games}}",
     "back": "Ratings",
-    "pageTitle": "Premier League Prague — {season} ({year})",
-    "pageDescription": "MafiaCL Prague club rating: {season}, {year}, {games} games — points, wins by role, best move.",
+    "pageTitle": "{league} Prague — {season} ({year})",
+    "pageDescription": "MafiaCL Prague rating, {league}: {season}, {year}, {games} games — table, final and medallists.",
     "stats": "Rated games: {games}. Town wins: {civ} ({civPct}), mafia wins: {mafia} ({mafiaPct}).",
     "asOf": "The season is still running — table as of {date}.",
     "qualifiedNote": "Greyed out: players with fewer games than the season rating requires.",
@@ -1850,6 +1850,41 @@
     "ruleBestPlayer": "Best player: {v}.",
     "ruleButtons": "Host's extra points: {v}.",
     "ruleTeamNote": "Roles — points for a win. FK and best move depend on the result for the first killed player's team; 2/3 means two of the three named players were black.",
-    "formulaRaw": "Formula on the-mafia.net"
+    "formulaRaw": "Formula on the-mafia.net",
+    "leagues": {
+      "premier": {
+        "name": "Premier League",
+        "about": "The club's main league: Tuesday mini-tournaments, rated on the-mafia.net."
+      },
+      "mova": {
+        "name": "Liga Mova",
+        "about": "The club league played in Ukrainian."
+      },
+      "first": {
+        "name": "First League",
+        "about": "A club league with its own rating and season final."
+      }
+    },
+    "statsGames": "Rated games: {games}.",
+    "legendLeague": "Rating follows the season formula; points are the total points scored. Final — points scored in the final games. 💫 — evening wins.",
+    "rating": "Rating",
+    "finalPoints": "Final",
+    "finalPointsHint": "Points in the final games",
+    "starsHint": "{count, plural, one {# evening win} other {# evening wins}}",
+    "championNoteLeague": "Medallists are the best-rated players of the final: anyone who didn't play the final can't win a prize. All seasons —",
+    "scoringFormulaSum": "Rating — total points over all season games.",
+    "scoringFormulaPerGame": "Rating = (points + {coef} per game) ÷ games × 100.",
+    "scoringQualifyPct": "To qualify, a player must play at least {pct}% of season games — {min} games or more.",
+    "scoringFinalCoef": "Points in the final games are multiplied by {v}.",
+    "ruleBestPlayerVote": "Best player: {v} per vote.",
+    "rulePenalty": "Host's penalty: {v}.",
+    "statsTitle": "Season statistics",
+    "avgExtraTitle": "Average extra points",
+    "avgExtra": "Average",
+    "medianExtra": "Median",
+    "winrateTitle": "Win rate",
+    "winBlack": "Black",
+    "winRed": "Red",
+    "winTotal": "Overall"
   }
 }

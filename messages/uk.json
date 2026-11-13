@@ -1804,13 +1804,13 @@
     "ask": "Запитати в Telegram"
   },
   "ratingArchive": {
-    "listTitle": "Сезони Premier League у Празі",
-    "listLead": "Повні таблиці рейтингу клубу за кожен сезон з 2022 року: бали, допи, перемоги за ролями, найкращий хід.",
+    "listTitle": "Архів рейтингів клубу в Празі",
+    "listLead": "Повні таблиці рейтингів за кожен сезон: Premier League з 2022 року, Liga Mova і First League з 2024 року.",
     "current": "поточний",
     "gamesCount": "{count, plural, one {# рейтингова гра} few {# рейтингові гри} many {# рейтингових ігор} other {# рейтингової гри}}",
     "back": "Рейтинги",
-    "pageTitle": "Premier League Прага — {season} ({year})",
-    "pageDescription": "Рейтинг клубу MafiaCL Prague: {season}, {year} рік, {games} ігор — бали, перемоги за ролями, найкращий хід.",
+    "pageTitle": "{league} Прага — {season} ({year})",
+    "pageDescription": "Рейтинг клубу MafiaCL Prague, {league}: {season}, {year} рік, {games} ігор — таблиця, фінал і призери.",
     "stats": "Ігор у рейтингу: {games}. Перемог мирних: {civ} ({civPct}), перемог мафії: {mafia} ({mafiaPct}).",
     "asOf": "Сезон триває — таблиця на {date}.",
     "qualifiedNote": "Сірим — гравці, які зіграли менше ігор, ніж потрібно для заліку рейтингу сезону.",
@@ -1850,6 +1850,41 @@
     "ruleBestPlayer": "Кращий гравець: {v}.",
     "ruleButtons": "Дод. бали від ведучого: {v}.",
     "ruleTeamNote": "Ролі — бали за перемогу. ПУ і кращий хід — за підсумком гри для команди першого убитого; 2/3 — двоє з трьох названих виявилися чорними.",
-    "formulaRaw": "Формула на the-mafia.net"
+    "formulaRaw": "Формула на the-mafia.net",
+    "leagues": {
+      "premier": {
+        "name": "Premier League",
+        "about": "Головна ліга клубу: міні-турніри по вівторках, рейтинг на the-mafia.net."
+      },
+      "mova": {
+        "name": "Liga Mova",
+        "about": "Ліга клубу, у якій грають українською мовою."
+      },
+      "first": {
+        "name": "First League",
+        "about": "Ліга клубу з власним рейтингом і фіналом сезону."
+      }
+    },
+    "statsGames": "Ігор у рейтингу: {games}.",
+    "legendLeague": "Рейтинг рахується за формулою сезону, бали — сума набраних балів. Фінал — бали, набрані у фінальних іграх. 💫 — перемоги в ігрових вечорах.",
+    "rating": "Рейтинг",
+    "finalPoints": "Фінал",
+    "finalPointsHint": "Бали у фінальних іграх",
+    "starsHint": "{count, plural, one {# перемога вечора} few {# перемоги вечора} many {# перемог вечора} other {# перемоги вечора}}",
+    "championNoteLeague": "Призери — найкращі за рейтингом серед гравців фіналу: хто не грав фінал, до призів не потрапляє. Усі сезони —",
+    "scoringFormulaSum": "Рейтинг — сума балів за всі ігри сезону.",
+    "scoringFormulaPerGame": "Рейтинг = (бали + {coef} за кожну гру) ÷ ігри × 100.",
+    "scoringQualifyPct": "До заліку потрапляють ті, хто зіграв не менше {pct}% ігор сезону — від {min} ігор.",
+    "scoringFinalCoef": "У фінальних іграх бали множаться на {v}.",
+    "ruleBestPlayerVote": "Кращий гравець: {v} за кожен голос.",
+    "rulePenalty": "Штраф ведучого: {v}.",
+    "statsTitle": "Статистика сезону",
+    "avgExtraTitle": "Середній доп",
+    "avgExtra": "Середній",
+    "medianExtra": "Медіана",
+    "winrateTitle": "Відсоток перемог",
+    "winBlack": "Чорні",
+    "winRed": "Червоні",
+    "winTotal": "Усього"
   }
 }

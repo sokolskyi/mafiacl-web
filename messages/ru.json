@@ -1804,13 +1804,13 @@
     "ask": "Спросить в Telegram"
   },
   "ratingArchive": {
-    "listTitle": "Сезоны Premier League в Праге",
-    "listLead": "Полные таблицы рейтинга клуба за каждый сезон с 2022 года: баллы, допы, победы по ролям, лучший ход.",
+    "listTitle": "Архив рейтингов клуба в Праге",
+    "listLead": "Полные таблицы рейтингов за каждый сезон: Premier League с 2022 года, Liga Mova и First League с 2024 года.",
     "current": "текущий",
     "gamesCount": "{count, plural, one {# рейтинговая игра} few {# рейтинговые игры} many {# рейтинговых игр} other {# рейтинговой игры}}",
     "back": "Рейтинги",
-    "pageTitle": "Premier League Прага — {season} ({year})",
-    "pageDescription": "Рейтинг клуба MafiaCL Prague: {season}, {year} год, {games} игр — баллы, победы по ролям, лучший ход.",
+    "pageTitle": "{league} Прага — {season} ({year})",
+    "pageDescription": "Рейтинг клуба MafiaCL Prague, {league}: {season}, {year} год, {games} игр — таблица, финал и призёры.",
     "stats": "Игр в рейтинге: {games}. Побед мирных: {civ} ({civPct}), побед мафии: {mafia} ({mafiaPct}).",
     "asOf": "Сезон продолжается — таблица на {date}.",
     "qualifiedNote": "Серым — игроки, которые сыграли меньше игр, чем нужно для зачёта рейтинга сезона.",
@@ -1850,6 +1850,41 @@
     "ruleBestPlayer": "Лучший игрок: {v}.",
     "ruleButtons": "Доп. баллы от ведущего: {v}.",
     "ruleTeamNote": "Роли — баллы за победу. ПУ и лучший ход — по итогу игры для команды первого убитого; 2/3 — двое из трёх названных оказались чёрными.",
-    "formulaRaw": "Формула на the-mafia.net"
+    "formulaRaw": "Формула на the-mafia.net",
+    "leagues": {
+      "premier": {
+        "name": "Premier League",
+        "about": "Главная лига клуба: мини-турниры по вторникам, рейтинг на the-mafia.net."
+      },
+      "mova": {
+        "name": "Liga Mova",
+        "about": "Лига клуба, в которой играют на украинском языке."
+      },
+      "first": {
+        "name": "First League",
+        "about": "Лига клуба со своим рейтингом и финалом сезона."
+      }
+    },
+    "statsGames": "Игр в рейтинге: {games}.",
+    "legendLeague": "Рейтинг считается по формуле сезона, баллы — сумма набранных баллов. Финал — баллы, набранные в финальных играх. 💫 — победы в игровых вечерах.",
+    "rating": "Рейтинг",
+    "finalPoints": "Финал",
+    "finalPointsHint": "Баллы в финальных играх",
+    "starsHint": "{count, plural, one {# победа вечера} few {# победы вечера} many {# побед вечера} other {# победы вечера}}",
+    "championNoteLeague": "Призёры — лучшие по рейтингу среди игроков финала: кто не играл финал, в призы не попадает. Все сезоны —",
+    "scoringFormulaSum": "Рейтинг — сумма баллов за все игры сезона.",
+    "scoringFormulaPerGame": "Рейтинг = (баллы + {coef} за каждую игру) ÷ игры × 100.",
+    "scoringQualifyPct": "В зачёт попадают те, кто сыграл не меньше {pct}% игр сезона — от {min} игр.",
+    "scoringFinalCoef": "В финальных играх баллы умножаются на {v}.",
+    "ruleBestPlayerVote": "Лучший игрок: {v} за каждый голос.",
+    "rulePenalty": "Штраф ведущего: {v}.",
+    "statsTitle": "Статистика сезона",
+    "avgExtraTitle": "Средний доп",
+    "avgExtra": "Средний",
+    "medianExtra": "Медиана",
+    "winrateTitle": "Процент побед",
+    "winBlack": "Чёрные",
+    "winRed": "Красные",
+    "winTotal": "Всего"
   }
 }

@@ -1804,13 +1804,13 @@
     "ask": "Zeptat se na Telegramu"
   },
   "ratingArchive": {
-    "listTitle": "Sezóny Premier League v Praze",
-    "listLead": "Kompletní tabulky klubového žebříčku za každou sezónu od roku 2022: body, bonusy, výhry podle rolí, nejlepší tah.",
+    "listTitle": "Archiv žebříčků klubu v Praze",
+    "listLead": "Kompletní tabulky žebříčků za každou sezónu: Premier League od roku 2022, Liga Mova a First League od roku 2024.",
     "current": "aktuální",
     "gamesCount": "{count, plural, one {# ratingová hra} few {# ratingové hry} other {# ratingových her}}",
     "back": "Žebříčky",
-    "pageTitle": "Premier League Praha — {season} ({year})",
-    "pageDescription": "Žebříček klubu MafiaCL Prague: {season}, rok {year}, {games} her — body, výhry podle rolí, nejlepší tah.",
+    "pageTitle": "{league} Praha — {season} ({year})",
+    "pageDescription": "Žebříček klubu MafiaCL Prague, {league}: {season}, rok {year}, {games} her — tabulka, finále a medailisté.",
     "stats": "Her v žebříčku: {games}. Výhry civilistů: {civ} ({civPct}), výhry mafie: {mafia} ({mafiaPct}).",
     "asOf": "Sezóna stále běží — tabulka k {date}.",
     "qualifiedNote": "Šedě: hráči, kteří odehráli méně her, než žebříček sezóny vyžaduje.",
@@ -1850,6 +1850,41 @@
     "ruleBestPlayer": "Nejlepší hráč: {v}.",
     "ruleButtons": "Extra body od moderátora: {v}.",
     "ruleTeamNote": "Role — body za výhru. PZ a nejlepší tah podle výsledku týmu prvního zabitého; 2/3 znamená, že dva ze tří jmenovaných byli černí.",
-    "formulaRaw": "Vzorec na the-mafia.net"
+    "formulaRaw": "Vzorec na the-mafia.net",
+    "leagues": {
+      "premier": {
+        "name": "Premier League",
+        "about": "Hlavní liga klubu: úterní mini-turnaje, žebříček na the-mafia.net."
+      },
+      "mova": {
+        "name": "Liga Mova",
+        "about": "Liga klubu, ve které se hraje ukrajinsky."
+      },
+      "first": {
+        "name": "First League",
+        "about": "Liga klubu s vlastním žebříčkem a finále sezóny."
+      }
+    },
+    "statsGames": "Her v žebříčku: {games}.",
+    "legendLeague": "Žebříček se počítá podle vzorce sezóny, body jsou součet získaných bodů. Finále — body z finálových her. 💫 — výhry herních večerů.",
+    "rating": "Žebříček",
+    "finalPoints": "Finále",
+    "finalPointsHint": "Body ve finálových hrách",
+    "starsHint": "{count, plural, one {# výhra večera} few {# výhry večera} other {# výher večera}}",
+    "championNoteLeague": "Medailisté jsou nejlépe hodnocení hráči finále: kdo finále nehrál, na ceny nedosáhne. Všechny sezóny —",
+    "scoringFormulaSum": "Žebříček — součet bodů za všechny hry sezóny.",
+    "scoringFormulaPerGame": "Žebříček = (body + {coef} za každou hru) ÷ hry × 100.",
+    "scoringQualifyPct": "Do hodnocení se počítá, kdo odehrál alespoň {pct} % her sezóny — od {min} her.",
+    "scoringFinalCoef": "Ve finálových hrách se body násobí {v}.",
+    "ruleBestPlayerVote": "Nejlepší hráč: {v} za každý hlas.",
+    "rulePenalty": "Trest od moderátora: {v}.",
+    "statsTitle": "Statistika sezóny",
+    "avgExtraTitle": "Průměrné extra body",
+    "avgExtra": "Průměr",
+    "medianExtra": "Medián",
+    "winrateTitle": "Procento výher",
+    "winBlack": "Černí",
+    "winRed": "Červení",
+    "winTotal": "Celkem"
   }
 }
