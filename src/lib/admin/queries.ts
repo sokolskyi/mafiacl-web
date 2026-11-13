@@ -119,8 +119,8 @@ export async function getAdminGame(id: number) {
   // Оплаты за эти записи и абонементы, действующие в день игры.
   const [{ data: payments }, { data: memberships }] = await Promise.all([
     rows.length
-      ? supabase.from("payments").select("id, signup_id, method, amount_czk, status").in("signup_id", rows.map((s) => s.id)).in("status", ["paid", "pending"])
-      : Promise.resolve({ data: [] as { id: number; signup_id: number | null; method: string; amount_czk: number; status: string }[] }),
+      ? supabase.from("payments").select("id, signup_id, method, amount_czk, status, provider_ref").in("signup_id", rows.map((s) => s.id)).in("status", ["paid", "pending"])
+      : Promise.resolve({ data: [] as { id: number; signup_id: number | null; method: string; amount_czk: number; status: string; provider_ref: string | null }[] }),
     profileIds.length
       ? supabase
           .from("memberships")
@@ -153,7 +153,7 @@ export async function getAdminGame(id: number) {
         isGuest: s.guest_name !== null,
         checkedIn: s.checked_in_at !== null,
         hasMembership: !!s.profile_id && members.has(s.profile_id),
-        payment: pay ? { id: pay.id, method: pay.method, amount: Number(pay.amount_czk), pending: pay.status === "pending" } : null,
+        payment: pay ? { id: pay.id, method: pay.method, amount: Number(pay.amount_czk), pending: pay.status === "pending", respect: pay.provider_ref === "respect" } : null,
       };
     }),
     venues: venues ?? [],

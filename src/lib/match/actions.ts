@@ -6,6 +6,7 @@ import { MATCHES_TAG } from "@/lib/players";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { MatchError, isAction, replay, scores, voteStats, type Action } from "./engine";
 import { MAX_SEATS, type SeatInfo } from "./types";
 
@@ -211,6 +212,11 @@ export async function finishMatch(input: {
   if (error) {
     console.error("finishMatch failed", { id, code: error.code, message: error.message });
     return { ok: false, code: "save" };
+  }
+  // Respect за партию: начисляет база, повторное сохранение итога не удваивает.
+  if (isAdminConfigured) {
+    const award = await createAdminClient().rpc("respect_award_match", { p_match: id });
+    if (award.error) console.error("respect_award_match failed", { id, code: award.error.code, message: award.error.message });
   }
   updateTag(MATCHES_TAG);
   return { ok: true };

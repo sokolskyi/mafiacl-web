@@ -26,6 +26,7 @@ export const SECTIONS = {
   hosts: "/hosts",
   reviews: "/reviews",
   faq: "/faq",
+  respect: "/respect",
   contacts: "/contacts",
   about: "/about",
 } as const satisfies Record<string, AppPathname>;
@@ -54,6 +55,7 @@ export const FOOTER_NAV: SectionKey[] = [
   "documents",
   "reviews",
   "franchise",
+  "respect",
   "faq",
   "contacts",
 ];

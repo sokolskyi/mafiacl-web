@@ -63,6 +63,11 @@ export async function AdminHome({
         <Link href="/admin/shop" className="inline-flex min-h-11 items-center rounded-full border border-white/55 px-5 font-semibold hover:bg-white/10">
           {t("shopLink")}
         </Link>
+        {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
+          <Link href="/admin/respect" className="ml-3 inline-flex min-h-11 items-center rounded-full border border-yellow-500/60 px-5 font-semibold text-yellow-200 hover:bg-yellow-500/10">
+            {t("respectLink")}
+          </Link>
+        )}
       </p>
 
       <section>

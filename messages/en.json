@@ -18,7 +18,8 @@
     "contacts": "Contacts",
     "account": "Account",
     "hosts": "Hosts",
-    "about": "About"
+    "about": "About",
+    "respect": "Respect"
   },
   "common": {
     "comingSoon": "This page is coming soon.",
@@ -108,7 +109,7 @@
     },
     "account": {
       "title": "My account",
-      "description": "Sign-ups, statistics, MafiaCL Coin and orders."
+      "description": "Sign-ups, stats, Respect and orders."
     },
     "hallOfFame": {
       "title": "Hall of fame",
@@ -153,6 +154,10 @@
     "emotionRules": {
       "title": "Emotion Games rules",
       "description": "Official Emotion Games sport mafia rules (edition of 4 October 2026) in short, section by section: roles, day and night, voting, key five, fouls, points and Ci compensation."
+    },
+    "respect": {
+      "title": "Respect — loyalty programme",
+      "description": "Play at the club and at tournaments, earn Respect and use it to pay for game nights, passes and merch."
     }
   },
   "account": {
@@ -360,7 +365,8 @@
       "noPlayer": "No player with this nickname. Ask them to sign in and set it in their account.",
       "bot": "Telegram rejected the request. Check the bot token and that the bot is a channel admin.",
       "channel": "Channel is not set (TELEGRAM_CHANNEL_ID).",
-      "matchNumber": "A game with this number already exists."
+      "matchNumber": "A game with this number already exists.",
+      "respect": "The player does not have enough Respect for this night."
     },
     "team": "Team · {club}",
     "addStaff": "Add",
@@ -400,7 +406,8 @@
       "gopay": "GoPay",
       "unpaid": "unpaid",
       "undo": "Remove payment mark",
-      "other": "other"
+      "other": "other",
+      "respectHint": "Deduct the player’s Respect for this night"
     },
     "notLinked": "not linked to an account",
     "link": "Link",
@@ -547,7 +554,8 @@
       "removed": "Link removed.",
       "invalid": "Check the nicknames: both are required and must differ.",
       "remove": "Remove {alias} → {canonical}"
-    }
+    },
+    "respectLink": "Respect: adjustments and coins"
   },
   "match": {
     "matches": "Games tonight",
@@ -2340,5 +2348,115 @@
     "masterclassesTitle": "Masterclasses",
     "masterclassesLead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",
     "masterclassesAll": "Full playlist on YouTube"
+  },
+  "respect": {
+    "rate": "1 Respect = {czk} Kč",
+    "balance": "Your balance",
+    "earnTitle": "How to earn",
+    "spendTitle": "What to spend it on",
+    "rulesTitle": "Rules",
+    "cta": "Sign up for a game",
+    "earn": {
+      "game": "A game at a club night",
+      "tournament": "A game at a tournament or series",
+      "final": "A game in the season final",
+      "firstGame": "Your first game at the club",
+      "eveningWin": "Winning a mini-tournament",
+      "milestone": "{n} games at the club",
+      "referral": "You brought a friend and they played",
+      "blog": "An article for the club blog",
+      "birthday": "Birthday",
+      "review": "A review of the club or a corporate event",
+      "coin": "Respect coin (prize draws, gifts)",
+      "coinValue": "value on the coin"
+    },
+    "earnNote": "Games are counted automatically once the host closes the game sheet. Bonuses for a friend, an article, a birthday and a review are added by the club.",
+    "spend": {
+      "evening": "Game night",
+      "eveningValue": "in full: 300 Kč = 150 Respect",
+      "merch": "Merch in the shop",
+      "membership": "Pass",
+      "upTo": "up to {pct}% of the price"
+    },
+    "rules": {
+      "verified": "Respect is earned by players with an approved account on the site.",
+      "expire": "Respect expires if you have not played for 12 months.",
+      "noCash": "Respect cannot be exchanged for money.",
+      "noTransfer": "Respect cannot be transferred to another player.",
+      "change": "The club may change the programme terms and will announce it in advance."
+    },
+    "redeemTitle": "Activate a coin",
+    "redeemHint": "Scan the QR on the coin or enter its code. Each code works once.",
+    "code": "Code from the coin",
+    "redeem": "Activate",
+    "redeemed": "Coin activated:",
+    "signInToRedeem": "Sign in to activate the coin",
+    "keepCode": "Code {code} stays in the address — scan the coin again after signing in.",
+    "errors": {
+      "used": "This code has already been activated.",
+      "notFound": "No such code. Check the letters and digits.",
+      "unverified": "You can activate a coin once the club approves your account.",
+      "save": "Activation failed. Please try again.",
+      "order": "Could not apply Respect. Check your balance and try again."
+    },
+    "accountHint": "Earned for games at the club and at tournaments. Use it to pay for a game night, part of a pass or merch.",
+    "howItWorks": "How it works",
+    "milestoneNote": "{n} games",
+    "reason": {
+      "game": "Game",
+      "first_game": "First game at the club",
+      "milestone": "Milestone",
+      "evening_win": "Mini-tournament win",
+      "bonus": "Club bonus",
+      "referral": "Brought a friend",
+      "birthday": "Birthday",
+      "blog": "Blog article",
+      "review": "Review",
+      "code": "Respect coin",
+      "spend_game": "Game night payment",
+      "spend_shop": "Order payment",
+      "refund": "Refund",
+      "adjust": "Adjustment",
+      "expire": "Expired (12 months without games)"
+    },
+    "orderTitle": "Pay part of the order with Respect",
+    "orderHint": "You can use up to {max} Respect — a {czk} Kč discount. This can be done once; if you cancel the order, the Respect comes back.",
+    "orderAmount": "How much Respect to use",
+    "orderApply": "Apply",
+    "orderApplied": "Respect applied, the order total is reduced.",
+    "orderPaidWith": "Paid with Respect:"
+  },
+  "adminRespect": {
+    "title": "Respect",
+    "back": "Back to admin",
+    "noAccess": "No access.",
+    "saved": "Saved.",
+    "outstanding": "Total held by players",
+    "errors": {
+      "invalid": "Check the fields.",
+      "noPlayer": "No player with this nickname.",
+      "insufficient": "The player does not have enough Respect to deduct.",
+      "save": "Could not save."
+    },
+    "adjustTitle": "Add or deduct",
+    "adjustHint": "A bonus for a friend, a birthday, an article, a review, or any correction. To deduct, enter a negative number. Games and milestones are added by the site itself.",
+    "nickname": "Player nickname",
+    "reasonField": "Reason",
+    "amount": "Amount",
+    "note": "Note (the player sees it)",
+    "apply": "Apply",
+    "codesTitle": "Respect coins",
+    "codesHint": "Each physical coin gets its own one-time code. Create a batch, open it and print the QR stickers. The player scans the QR, signs in and clicks “Activate”.",
+    "batch": "Batch name",
+    "batchPlaceholder": "e.g. Gala Night 2026",
+    "count": "Number of coins",
+    "faceValue": "Value",
+    "create": "Create codes",
+    "batchUsed": "{used} of {total} activated",
+    "open": "Open and print",
+    "batchTitle": "Batch “{batch}”",
+    "printHint": "Only unused codes are shown. To print: Ctrl/Cmd + P — only the stickers stay on the sheet.",
+    "ledgerTitle": "Recent activity",
+    "ledgerEmpty": "Nothing yet."
   }
 }

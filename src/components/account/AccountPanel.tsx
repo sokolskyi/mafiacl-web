@@ -12,6 +12,7 @@ import { formatMemberNo } from "@/lib/memberNo";
 import { PlayerShare } from "@/components/players/PlayerShare";
 import { connectTelegram } from "@/lib/telegram/actions";
 import { getOptionalProviders } from "@/lib/auth/providers";
+import { AccountRespect } from "@/components/respect/AccountRespect";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError }: { locale: Locale; authError: boolean }) {
@@ -122,6 +123,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           {profile.verification === "pending" && !telegramOn && <> {t("verificationBotHint")}</>}
         </p>
       )}
+      {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} />}
       {(staffRoles ?? 0) > 0 && (
         <p className="mt-6">
           <Link href="/admin" className="font-semibold text-red-400 hover:text-red-300">

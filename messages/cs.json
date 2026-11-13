@@ -18,7 +18,8 @@
     "contacts": "Kontakty",
     "account": "Můj účet",
     "hosts": "Moderátoři",
-    "about": "O klubu"
+    "about": "O klubu",
+    "respect": "Respect"
   },
   "common": {
     "comingSoon": "Stránka se připravuje.",
@@ -108,7 +109,7 @@
     },
     "account": {
       "title": "Můj účet",
-      "description": "Přihlášky, statistiky, MafiaCL Coin a objednávky."
+      "description": "Přihlášky, statistiky, Respect a objednávky."
     },
     "hallOfFame": {
       "title": "Síň slávy",
@@ -153,6 +154,10 @@
     "emotionRules": {
       "title": "Pravidla Emotion Games",
       "description": "Oficiální pravidla sportovní mafie Emotion Games (znění ze 4. 10. 2026) stručně a po oddílech: role, den a noc, hlasování, opěrná pětka, fauly, body a kompenzace Ci."
+    },
+    "respect": {
+      "title": "Respect — věrnostní program",
+      "description": "Hrajte v klubu a na turnajích, sbírejte Respect a plaťte jím herní večery, permanentky a merch."
     }
   },
   "account": {
@@ -360,7 +365,8 @@
       "noPlayer": "Hráč s touto přezdívkou nenalezen. Ať se přihlásí na webu a vyplní přezdívku.",
       "bot": "Telegram odmítl požadavek. Zkontrolujte token bota a že je bot adminem kanálu.",
       "channel": "Není nastaven kanál (TELEGRAM_CHANNEL_ID).",
-      "matchNumber": "Hra s tímto číslem už existuje."
+      "matchNumber": "Hra s tímto číslem už existuje.",
+      "respect": "Hráč nemá dost Respectu na tento večer."
     },
     "team": "Tým · {club}",
     "addStaff": "Přidat",
@@ -400,7 +406,8 @@
       "gopay": "GoPay",
       "unpaid": "nezaplaceno",
       "undo": "Zrušit označení platby",
-      "other": "jinak"
+      "other": "jinak",
+      "respectHint": "Odečíst hráči Respect za tento večer"
     },
     "notLinked": "nepropojeno s účtem",
     "link": "Propojit",
@@ -547,7 +554,8 @@
       "removed": "Propojení zrušeno.",
       "invalid": "Zkontrolujte přezdívky: obě jsou povinné a nesmí být stejné.",
       "remove": "Zrušit {alias} → {canonical}"
-    }
+    },
+    "respectLink": "Respect: připsání a mince"
   },
   "match": {
     "matches": "Hry večera",
@@ -2340,5 +2348,115 @@
     "masterclassesTitle": "Masterclassy",
     "masterclassesLead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
     "masterclassesAll": "Celý playlist na YouTube"
+  },
+  "respect": {
+    "rate": "1 Respect = {czk} Kč",
+    "balance": "Váš zůstatek",
+    "earnTitle": "Jak získat",
+    "spendTitle": "Za co utratit",
+    "rulesTitle": "Pravidla",
+    "cta": "Přihlásit se na hru",
+    "earn": {
+      "game": "Hra na klubovém večeru",
+      "tournament": "Hra na turnaji nebo sérii",
+      "final": "Hra ve finále sezóny",
+      "firstGame": "První hra v klubu",
+      "eveningWin": "Výhra v mini-turnaji",
+      "milestone": "{n} her v klubu",
+      "referral": "Přivedli jste kamaráda a zahrál si",
+      "blog": "Článek na blog klubu",
+      "birthday": "Narozeniny",
+      "review": "Recenze klubu nebo firemní akce",
+      "coin": "Mince Respect (soutěže, dárky)",
+      "coinValue": "hodnota na minci"
+    },
+    "earnNote": "Hry se započítají samy poté, co moderátor uzavře herní protokol. Bonusy za kamaráda, článek, narozeniny a recenzi připisuje klub.",
+    "spend": {
+      "evening": "Herní večer",
+      "eveningValue": "celý: 300 Kč = 150 Respect",
+      "merch": "Merch v obchodě",
+      "membership": "Permanentka",
+      "upTo": "až {pct} % ceny"
+    },
+    "rules": {
+      "verified": "Respect získávají hráči se schváleným účtem na webu.",
+      "expire": "Respect propadá, pokud jste 12 měsíců nehráli.",
+      "noCash": "Respect nelze vyměnit za peníze.",
+      "noTransfer": "Respect nelze převést na jiného hráče.",
+      "change": "Klub může podmínky programu měnit a oznámí to předem."
+    },
+    "redeemTitle": "Aktivovat minci",
+    "redeemHint": "Naskenujte QR na minci nebo zadejte kód z ní. Každý kód funguje jednou.",
+    "code": "Kód z mince",
+    "redeem": "Aktivovat",
+    "redeemed": "Mince aktivována:",
+    "signInToRedeem": "Přihlaste se a aktivujte minci",
+    "keepCode": "Kód {code} zůstane v adrese — po přihlášení minci naskenujte znovu.",
+    "errors": {
+      "used": "Tento kód už byl aktivován.",
+      "notFound": "Takový kód neexistuje. Zkontrolujte písmena a číslice.",
+      "unverified": "Minci lze aktivovat, až klub schválí váš účet.",
+      "save": "Aktivace se nezdařila. Zkuste to znovu.",
+      "order": "Respect se nepodařilo odečíst. Zkontrolujte zůstatek a zkuste to znovu."
+    },
+    "accountHint": "Připisuje se za hry v klubu a na turnajích. Lze jím zaplatit večer, část permanentky nebo merche.",
+    "howItWorks": "Jak to funguje",
+    "milestoneNote": "{n} her",
+    "reason": {
+      "game": "Hra",
+      "first_game": "První hra v klubu",
+      "milestone": "Jubileum",
+      "evening_win": "Výhra v mini-turnaji",
+      "bonus": "Bonus od klubu",
+      "referral": "Přivedený kamarád",
+      "birthday": "Narozeniny",
+      "blog": "Článek na blog",
+      "review": "Recenze",
+      "code": "Mince Respect",
+      "spend_game": "Platba za večer",
+      "spend_shop": "Platba objednávky",
+      "refund": "Vrácení",
+      "adjust": "Úprava",
+      "expire": "Propadlo (12 měsíců bez her)"
+    },
+    "orderTitle": "Zaplatit část objednávky Respectem",
+    "orderHint": "Můžete odečíst až {max} Respect — sleva {czk} Kč. Odečíst lze jednou; při zrušení objednávky se Respect vrátí.",
+    "orderAmount": "Kolik Respectu odečíst",
+    "orderApply": "Odečíst",
+    "orderApplied": "Respect odečten, částka objednávky snížena.",
+    "orderPaidWith": "Zaplaceno Respectem:"
+  },
+  "adminRespect": {
+    "title": "Respect",
+    "back": "Do administrace",
+    "noAccess": "Nemáte přístup.",
+    "saved": "Uloženo.",
+    "outstanding": "Celkem mají hráči",
+    "errors": {
+      "invalid": "Zkontrolujte pole.",
+      "noPlayer": "Hráč s touto přezdívkou nebyl nalezen.",
+      "insufficient": "Hráč nemá dost Respectu na odečtení.",
+      "save": "Nepodařilo se uložit."
+    },
+    "adjustTitle": "Připsat nebo odečíst",
+    "adjustHint": "Bonus za kamaráda, narozeniny, článek, recenzi nebo jakákoli úprava. Pro odečtení zadejte záporné číslo. Hry a jubilea připisuje web sám.",
+    "nickname": "Přezdívka hráče",
+    "reasonField": "Za co",
+    "amount": "Kolik",
+    "note": "Poznámka (hráč ji uvidí)",
+    "apply": "Provést",
+    "codesTitle": "Mince Respect",
+    "codesHint": "Každá fyzická mince má svůj jednorázový kód. Vytvořte dávku, otevřete ji a vytiskněte QR nálepky. Hráč naskenuje QR, přihlásí se a klikne na „Aktivovat“.",
+    "batch": "Název dávky",
+    "batchPlaceholder": "např. Gala Night 2026",
+    "count": "Počet mincí",
+    "faceValue": "Hodnota",
+    "create": "Vytvořit kódy",
+    "batchUsed": "aktivováno {used} z {total}",
+    "open": "Otevřít a tisknout",
+    "batchTitle": "Dávka „{batch}“",
+    "printHint": "Zde jsou jen neaktivované kódy. Tisk: Ctrl/Cmd + P — na listu zůstanou jen nálepky.",
+    "ledgerTitle": "Poslední pohyby",
+    "ledgerEmpty": "Zatím nic."
   }
 }

@@ -5,6 +5,9 @@ import type { Locale } from "@/i18n/routing";
 import { gameTitle } from "@/lib/games";
 import { addGuest, changeSignup, recordGamePayment, undoPayment, updateGame } from "@/lib/admin/actions";
 import { announceGame } from "@/lib/telegram/actions";
+import { payGameWithRespect } from "@/lib/respect-actions";
+import { respectForCzk } from "@/lib/respect";
+import { RespectAmount } from "@/components/respect/RespectAmount";
 import { createMatch } from "@/lib/match/actions";
 import { getGameMatches } from "@/lib/match/queries";
 import { getEveningStandings } from "@/lib/rating";
@@ -57,7 +60,9 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
             <input type="hidden" name="locale" value={locale} />
             <input type="hidden" name="gameId" value={game.id} />
             <input type="hidden" name="paymentId" value={s.payment.id} />
-            <span className="text-green-400">✓ {money(s.payment.amount)} · {t(`pay.${s.payment.method}`)}</span>
+            <span className="text-green-400">
+              ✓ {s.payment.respect ? <RespectAmount n={respectForCzk(s.payment.amount)} /> : <>{money(s.payment.amount)} · {t(`pay.${s.payment.method}`)}</>}
+            </span>
             {s.payment.method !== "gopay" && (
               <button aria-label={t("pay.undo")} title={t("pay.undo")} className="text-neutral-500 hover:text-red-400">×</button>
             )}
@@ -69,6 +74,11 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
             <input type="hidden" name="signupId" value={s.id} />
             <button name="method" value="cash" className="rounded bg-white/10 px-2 py-0.5 hover:bg-white/20">{t("pay.cash")}</button>
             <button name="method" value="card" className="rounded bg-white/10 px-2 py-0.5 hover:bg-white/20">{t("pay.card")}</button>
+            {s.profileId && Number(game.price_czk ?? 0) > 0 && (
+              <button formAction={payGameWithRespect} title={t("pay.respectHint")} className="rounded bg-yellow-500/20 px-2 py-0.5 text-yellow-200 hover:bg-yellow-500/30">
+                <RespectAmount n={respectForCzk(Number(game.price_czk))} />
+              </button>
+            )}
           </form>
         )
       )}
@@ -98,7 +108,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
       {flags.announced && <p role="status" className="text-green-400">{t("announced")}</p>}
       {flags.error && (
         <p role="alert" className="text-red-400">
-          {t(`errors.${["invalid", "full", "bot", "channel", "matchNumber"].includes(flags.error) ? flags.error : "save"}`)}
+          {t(`errors.${["invalid", "full", "bot", "channel", "matchNumber", "respect"].includes(flags.error) ? flags.error : "save"}`)}
         </p>
       )}
       <form action={announceGame}>
