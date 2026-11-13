@@ -20,6 +20,7 @@ export const routing = defineRouting({
     "/hall-of-fame": { cs: "/sin-slavy", ru: "/zal-slavy", uk: "/zal-slavy", en: "/hall-of-fame" },
     "/learn": { cs: "/pravidla", ru: "/pravila", uk: "/pravyla", en: "/rules" },
     "/documents": { cs: "/dokumenty", ru: "/dokumenty", uk: "/dokumenty", en: "/documents" },
+    "/documents/mafgame-rules": { cs: "/dokumenty/pravidla-mafgame", ru: "/dokumenty/pravila-mafgame", uk: "/dokumenty/pravyla-mafgame", en: "/documents/mafgame-rules" },
     "/blog": "/blog",
     "/blog/[slug]": "/blog/[slug]",
     "/gallery": { cs: "/galerie", ru: "/galereya", uk: "/halereia", en: "/gallery" },

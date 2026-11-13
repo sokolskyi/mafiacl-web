@@ -140,6 +140,10 @@
     "aboutGala": {
       "title": "MafiaCL Gala Night",
       "description": "The MafiaCL club's annual party and awards: categories, 2024 and 2025 winners, photo albums."
+    },
+    "mafgameRules": {
+      "title": "Mafgame game rules",
+      "description": "Mafgame federation sport mafia rules (edition of 1 July 2026) in short, section by section: roles, day and night, voting, best move, fouls and tournament points."
     }
   },
   "account": {
@@ -1891,5 +1895,149 @@
     "host": "Host",
     "hostedGames": "Games hosted",
     "partialGames": "Games are counted from the evening sheets; only totals survived for 5 July 2024, so its players may have played more games."
+  },
+  "rules": {
+    "title": "Mafgame game rules",
+    "lead": "A short summary of the Mafgame federation's sport mafia rules in our own words, split into sections so it reads well on a phone. Federation tournaments — including those the club hosts — are played under these rules. Club rating points follow each season's regulations.",
+    "edition": "Federation rules, edition of 1 July 2026.",
+    "sourceNote": "The official full text, including referee gestures and the complete list of penalties, is on the Mafgame federation website. Where they differ, the official text applies.",
+    "sourceLink": "Rules on mafgame.org",
+    "tocTitle": "Contents",
+    "moreTitle": "Other federation documents",
+    "more": {
+      "tournaments": "Tournament regulations",
+      "conduct": "Code of conduct",
+      "points": "How MAFGAME points are earned"
+    },
+    "sections": [
+      {
+        "id": "basics",
+        "title": "Basics",
+        "items": [
+          "Ten players at the table. Cards are dealt at random: 7 red (civilians, including the Sheriff) and 3 black (mafia, including the Don).",
+          "The game is run by the referee (host), who announces the start, every phase and the end. Side referees may assist.",
+          "Day (discussion and voting) and night (shooting, the Don's check, the Sheriff's check) alternate until the game ends.",
+          "Red wins when no black players are left. Black wins when there are as many black players as red, or more. The referee immediately announces “Stop game, red wins” or “…black wins”."
+        ]
+      },
+      {
+        "id": "table",
+        "title": "Table, equipment and language",
+        "items": [
+          "A table for 10, with a number plate and a mask at every seat. Music is needed for the night.",
+          "Finals and tournaments of 5 stars and above are played in Russian or English (except tournaments in Ukraine). Qualifying stages can be in any language that suits all players and referees, provided everyone is ready to switch to Russian or English in the final. Exceptions are agreed with the referee committee."
+        ]
+      },
+      {
+        "id": "players",
+        "title": "Players",
+        "items": [
+          "Before the game, players hand the referee their watches, sunglasses, phones and other items.",
+          "Equipment must not get in the way, offend anyone or give an advantage. Your own mask only with the table referee's permission. Special devices or a different night posture must be agreed with the head referee in advance."
+        ]
+      },
+      {
+        "id": "start",
+        "title": "Dealing and the first night",
+        "items": [
+          "Seats are drawn at random or taken from the tournament seating. At “night falls” everyone puts on their mask.",
+          "Hearing their number, a player shows it on their fingers, takes off the mask, looks at the card the referee counted out from the deck on the table, and puts the mask back on.",
+          "The deal night: black players take off their masks and meet — the only night they see each other. The Don shows himself with a gesture and sets the shooting order. All of this takes exactly 1 minute.",
+          "Then, on the referee's call, the Don and the Sheriff raise a hand without taking off their masks. After that — 30 seconds of free posture."
+        ]
+      },
+      {
+        "id": "day",
+        "title": "Day",
+        "items": [
+          "At “morning” the masks come off. Every player gets 1 minute to speak. Player 1 opens the first day; each next day is opened by the player after the one who opened the previous round.",
+          "Address players by nickname or number, and the referee as “Mr/Ms Referee” or “Host”. A speech ends with “pass” or “thank you”.",
+          "You can nominate one player per day, in the present tense: “I nominate number…”. The referee answers “accepted”. If several numbers are named, the first one not yet nominated is accepted. Nominations cannot be withdrawn.",
+          "After their farewell minute, a player leaves the table straight away. Gestures from those still at the table before the referee resumes the game are a foul."
+        ]
+      },
+      {
+        "id": "vote",
+        "title": "Voting",
+        "items": [
+          "Only nominated players are voted on, in the order they were nominated. The referee repeats the list twice before the vote.",
+          "A vote is a fist with the thumb up on the table, for about 1.5 seconds until “stop” or “thank you”; late votes do not count. Keep your hand on the table until the referee announces the count. You can vote for one candidate only; anyone who doesn't vote has their vote go to the last nominee.",
+          "On the first day there is no vote if only one player is nominated. From the second day on, a sole nominee leaves automatically.",
+          "The player with the most votes leaves the game. Their role is not revealed; they get a 1-minute farewell speech.",
+          "On a tie, the tied players get 30 seconds each, then a revote. If the same players tie again, the referee asks “all of them leave the table?”: they leave only if more than half vote for it.",
+          "With 9 players at the table, three cannot be voted out together (except after the third night if the Sheriff has made at least two checks). On the first day, half the table cannot be voted out.",
+          "The referee decides the vote count. In a dispute, they must call a technical pause straight away and review the stream; the decision after the review is final."
+        ]
+      },
+      {
+        "id": "night",
+        "title": "Night",
+        "items": [
+          "The referee counts numbers 1 to 10 and the black players “shoot” with eyes closed using a hand gesture. If all of them shoot the same player, that player is out in the morning and gets a farewell minute. Any mismatch or missing shot is a miss.",
+          "The Don (10 seconds) looks for the Sheriff: the referee repeats the number and shows “sheriff” or “not sheriff”. The Sheriff (10 seconds) checks a player: thumb up — red, thumb down — black. Each has one check per night.",
+          "Night posture: straight back, arms crossed on the shoulders, head tilted forward. At night you may not talk, whisper, touch others, eat or drink. The mask on an elastic band must cover the eyes tightly and must not be held with the hands; hats and glasses come off."
+        ]
+      },
+      {
+        "id": "best-move",
+        "title": "Best move",
+        "items": [
+          "The player killed on the first night after the deal names three numbers they believe are black, with 20 seconds to think. Then it's morning and their farewell minute.",
+          "Any extra information or addressing other players ends the best move: only the numbers already named count. Numbers cannot be changed, except for an obvious slip of the tongue.",
+          "If two or more players left the table on the first day, the player killed on the first night has no best move."
+        ]
+      },
+      {
+        "id": "fouls",
+        "title": "Fouls and penalties",
+        "items": [
+          "3 fouls — the player skips their next speech but can still nominate. A 4th or disqualifying foul — removal with no last word.",
+          "Foul: loud knocking, arguing with the referee and unethical behaviour, touching and excessive gestures during the day, talking outside your minute, pulling your hand away or campaigning during a vote, shouting.",
+          "Removal: insults (including veiled or joking ones about health, race, gender, orientation, religion, nationality, or mentions of suicide), breaking night rules, leaving the table without permission, crying, an incorrect voting gesture, swearing, peeking, speaking a language the table doesn't understand, non-game attempts to prove a role, citing the best move as proof, hidden whispering.",
+          "The other team wins: oaths, pleading, blackmail, threats, bribery and bets; appeals to religion or ethics (“God knows I'm red”); a Sheriff proving the role with night information; hints from the audience.",
+          "Removal from the tournament: deliberate peeking, insulting the referee, threats of violence."
+        ]
+      },
+      {
+        "id": "special",
+        "title": "Special situations",
+        "items": [
+          "After a removal for a 4th or disqualifying foul, the next vote does not take place (unless the removed player was leaving anyway — killed at night or voted out). If two or more players are removed in one phase, one vote is skipped.",
+          "Three nights in a row with nobody leaving — a draw. There is never a vote to remove everyone at the table. If a player leaves by the deciding vote or shot and the game ends, they get no last word.",
+          "Night removals are announced so as not to reveal roles. From the moment of the violation the player counts as a spectator: if they pass on information, their team loses."
+        ]
+      },
+      {
+        "id": "points",
+        "title": "Tournament points",
+        "items": [
+          "A win gives 0.75 points to every player of the team; a loss or a draw gives 0.",
+          "Best move by a red player or the Sheriff: three black — +0.4, two — +0.25.",
+          "Referee extra points — no more than 2.0 per game in total. A player gets +0.1 to +0.8 (+0.8 only with the referee committee's approval); a player on the losing team gets up to +0.5. No extra points on a draw. Best-move points count towards the same assessment.",
+          "Referee penalties of −0.2 or −0.4 for mistakes that hurt your own team (full list in the federation rules). Removal from the table — −0.5; costing your team the game — −0.75. Being late for a round — from −0.2 up to being replaced.",
+          "A red player or Sheriff killed on the first night gets compensation of up to 0.4 points when red loses; it grows with the number of such first-night kills over the tournament.",
+          "On equal points, the higher place goes to more extra points, then fewer penalties, more first-night deaths, more wins as Sheriff, then as Don, and finally earlier registration."
+        ]
+      },
+      {
+        "id": "protests",
+        "title": "Protests and replays",
+        "items": [
+          "A protest is written in the game record within 15 minutes of the end of the game. The head referee or the appeal committee reviews it, video included; the decision is final within the tournament.",
+          "If a non-game advantage or non-game proof of a role decided the game, the result may be changed and the player at fault gets −0.75.",
+          "A replay is ordered after an irreparable technical error by the referee or force majeure: seating changes, disciplinary penalties stay.",
+          "Appeals about extra points — only in writing to the table referee and within the set deadlines."
+        ]
+      }
+    ]
+  },
+  "documents": {
+    "lead": "The game rules our tournaments are played under, and the club's documents.",
+    "rulesText": "Mafgame federation sport mafia rules: roles, game flow, voting, fouls and points.",
+    "codeTitle": "Club code",
+    "codeText": "The club's values, table etiquette and rules of conduct at MafiaCL games.",
+    "learnTitle": "New players",
+    "learnText": "How to play for the first time: roles and how a game goes, in plain words.",
+    "source": "Source: {source}"
   }
 }

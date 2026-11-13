@@ -140,6 +140,10 @@
     "aboutGala": {
       "title": "MafiaCL Gala Night",
       "description": "Každoroční večírek a vyhlášení klubu MafiaCL: kategorie, vítězové let 2024 a 2025, fotoalba."
+    },
+    "mafgameRules": {
+      "title": "Pravidla hry Mafgame",
+      "description": "Pravidla sportovní mafie federace Mafgame (znění z 1. 7. 2026) stručně a po oddílech: role, den a noc, hlasování, nejlepší tah, fauly a turnajové body."
     }
   },
   "account": {
@@ -1891,5 +1895,149 @@
     "host": "Moderátor",
     "hostedGames": "Odmoderováno her",
     "partialGames": "Hry podle protokolů večerů; z večera 5. července 2024 se zachovaly jen výsledky, takže jeho účastníci mohli odehrát více her."
+  },
+  "rules": {
+    "title": "Pravidla hry Mafgame",
+    "lead": "Stručné shrnutí pravidel sportovní mafie federace Mafgame vlastními slovy — po oddílech, aby se dobře četla na telefonu. Podle těchto pravidel se hrají turnaje federace, včetně turnajů, které pořádá klub. Body klubových žebříčků se počítají podle řádu každé sezóny.",
+    "edition": "Pravidla federace ve znění z 1. července 2026.",
+    "sourceNote": "Oficiální a úplné znění včetně gest rozhodčího a kompletního seznamu trestů najdete na webu federace Mafgame. Při rozporu platí oficiální znění.",
+    "sourceLink": "Pravidla na mafgame.org",
+    "tocTitle": "Obsah",
+    "moreTitle": "Další dokumenty federace",
+    "more": {
+      "tournaments": "Turnajový řád",
+      "conduct": "Kodex chování",
+      "points": "Jak se získávají body MAFGAME"
+    },
+    "sections": [
+      {
+        "id": "basics",
+        "title": "Základy",
+        "items": [
+          "U stolu je 10 hráčů. Karty se rozdávají náhodně: 7 červených (civilisté, mezi nimi Šerif) a 3 černé (mafie, mezi nimi Don).",
+          "Hru řídí rozhodčí (moderátor): ohlašuje začátek, všechny fáze i konec hry. Pomáhat mu mohou pomocní rozhodčí.",
+          "Den (diskuse a hlasování) a noc (střelba, kontrola Dona, kontrola Šerifa) se střídají až do konce hry.",
+          "Červení vyhrávají, když u stolu nezůstane žádný černý. Černí vyhrávají, když je jich stejně jako červených nebo víc. Rozhodčí hned ohlásí: „Stop hra, vítězí červení“ nebo „…vítězí černí“."
+        ]
+      },
+      {
+        "id": "table",
+        "title": "Stůl, vybavení a jazyk",
+        "items": [
+          "Stůl pro 10 hráčů; u každého místa cedulka s číslem a maska. Na noc je potřeba hudba.",
+          "Finále a turnaje od 5 hvězd se hrají rusky nebo anglicky (kromě turnajů na Ukrajině). Kvalifikace v jakémkoli jazyce, který vyhovuje všem hráčům i rozhodčím, pokud jsou všichni připraveni hrát finále rusky nebo anglicky. Výjimky schvaluje komise rozhodčích."
+        ]
+      },
+      {
+        "id": "players",
+        "title": "Hráči",
+        "items": [
+          "Před hrou hráči odevzdají rozhodčímu hodinky, sluneční brýle, telefony a další předměty.",
+          "Vybavení nesmí překážet, urážet ani dávat výhodu. Vlastní maska jen se svolením rozhodčího stolu. Zvláštní zařízení nebo jiné noční držení těla je třeba předem domluvit s hlavním rozhodčím turnaje."
+        ]
+      },
+      {
+        "id": "start",
+        "title": "Rozdání a první noc",
+        "items": [
+          "Místa se losují nebo se přebírají z turnajového rozsazení. Na „nastává noc“ si všichni nasadí masky.",
+          "Hráč po zaznění svého čísla ukáže číslo na prstech, sundá masku, podívá se na kartu, kterou mu rozhodčí odpočítal z balíčku na stole, a masku si znovu nasadí.",
+          "Domluva: černí si sundají masky a seznámí se — je to jediná noc, kdy se vidí. Don se ukáže gestem a určí pořadí střelby. Na všechno je přesně 1 minuta.",
+          "Pak na pokyn rozhodčího Don a Šerif zvednou ruku, aniž by si sundali masky. Poté následuje 30 sekund volného sezení."
+        ]
+      },
+      {
+        "id": "day",
+        "title": "Den",
+        "items": [
+          "Na slovo „ráno“ se masky sundají. Každý hráč má 1 minutu na řeč. První den začíná hráč č. 1, každý další den ten, kdo sedí za tím, kdo začínal předchozí kolo.",
+          "Hráče oslovujeme přezdívkou nebo číslem, rozhodčího „pane/paní rozhodčí“ nebo „moderátore“. Řeč končí slovem „pas“ nebo „děkuji“.",
+          "Za den lze nominovat jednoho hráče, v přítomném čase: „nominuji č. …“. Rozhodčí odpoví „přijato“. Když hráč řekne víc čísel, platí první dosud nenominované. Nominaci nelze vzít zpět.",
+          "Po své poslední minutě hráč hned odchází od stolu. Gesta zbývajících hráčů, dokud rozhodčí nepokračuje ve hře, jsou faul."
+        ]
+      },
+      {
+        "id": "vote",
+        "title": "Hlasování",
+        "items": [
+          "Hlasuje se jen o nominovaných, v pořadí nominace. Před hlasováním rozhodčí dvakrát zopakuje seznam.",
+          "Hlas je pěst se zdviženým palcem na stole, asi 1,5 sekundy do slova „stop“ nebo „děkuji“; pozdní hlasy se nepočítají. Ruka zůstává na stole, dokud rozhodčí neohlásí počet hlasů. Hlasovat lze jen proti jednomu; kdo nehlasuje, jeho hlas připadne poslednímu nominovanému.",
+          "První den se při jediné nominaci nehlasuje. Od druhého dne jediný nominovaný odchází automaticky.",
+          "Hráč s většinou hlasů hru opouští. Role se neprozrazuje; dostane 1 minutu na rozloučení.",
+          "Při rovnosti mají sporní hráči po 30 sekundách a hlasuje se znovu. Pokud se hlasy znovu rozdělí mezi stejné hráče, rozhodčí položí otázku „mají stůl opustit všichni?“: odejdou jen tehdy, když je pro víc než polovina.",
+          "Při 9 hráčích nelze vyřadit tři najednou (kromě situace po třetí noci, pokud Šerif provedl aspoň dvě kontroly). První den nelze vyřadit polovinu stolu.",
+          "Počet hlasů určuje rozhodčí. Při sporu musí hned vyhlásit technickou pauzu a přehrát záznam přenosu; rozhodnutí po přehrání je konečné."
+        ]
+      },
+      {
+        "id": "night",
+        "title": "Noc",
+        "items": [
+          "Rozhodčí vyjmenuje čísla 1 až 10 a černí „střílejí“ se zavřenýma očima gestem ruky. Pokud všichni vystřelí na stejného hráče, ráno vypadá a dostane minutu na rozloučení. Jakýkoli rozdíl nebo chybějící výstřel je minutí.",
+          "Don (10 sekund) hledá Šerifa: rozhodčí zopakuje číslo a ukáže gesto „šerif“ nebo „není šerif“. Šerif (10 sekund) prověří hráče: palec nahoru — červený, dolů — černý. Každý má jednu kontrolu za noc.",
+          "Noční držení těla: rovná záda, ruce zkřížené na ramenou, hlava skloněná dopředu. V noci se nesmí mluvit, šeptat, dotýkat se ostatních, jíst ani pít. Maska na gumičce musí těsně zakrývat oči a nesmí se držet rukama; pokrývky hlavy a brýle se sundávají."
+        ]
+      },
+      {
+        "id": "best-move",
+        "title": "Nejlepší tah",
+        "items": [
+          "Hráč zabitý první noc po domluvě jmenuje tři čísla, která považuje za černá; na rozmyšlenou má 20 sekund. Pak následuje ráno a jeho minuta na rozloučení.",
+          "Jakákoli informace navíc nebo oslovení hráčů nejlepší tah ukončuje: platí jen již jmenovaná čísla. Čísla nelze měnit, kromě zjevného přeřeknutí.",
+          "Pokud první den opustili stůl dva nebo více hráčů, hráč zabitý první noc nejlepší tah nemá."
+        ]
+      },
+      {
+        "id": "fouls",
+        "title": "Fauly a tresty",
+        "items": [
+          "3 fauly — hráč vynechá nejbližší řeč, ale může nominovat. 4. nebo diskvalifikační faul — vyloučení bez posledního slova.",
+          "Faul: hlasité klepání, hádky s rozhodčím a neetické chování, dotyky a přehnaná gesta ve dne, mluvení mimo svou minutu, stažení ruky a agitace při hlasování, křik.",
+          "Vyloučení: urážky (i skryté a žertovné — týkající se zdraví, rasy, pohlaví, orientace, náboženství, národnosti, zmínky o sebevraždě), porušení nočního chování, svévolný odchod od stolu, pláč, nesprávná forma hlasu, sprostá slova, nakukování, řeč v jazyce, kterému stůl nerozumí, mimoherní pokusy dokázat roli, odvolávání se na nejlepší tah jako na důkaz, skryté šeptání.",
+          "Výhra druhého týmu: přísahy, prosby, vydírání, výhrůžky, uplácení a sázky; odvolávání se na náboženství a etiku („Bůh ví, že jsem červený“); dokazování role Šerifem pomocí noční informace; nápověda z publika.",
+          "Vyloučení z turnaje: úmyslné nakukování, urážka rozhodčího, výhrůžka násilím."
+        ]
+      },
+      {
+        "id": "special",
+        "title": "Zvláštní situace",
+        "items": [
+          "Po vyloučení za 4. nebo diskvalifikační faul se nejbližší hlasování nekoná (kromě případů, kdy vyloučený hráč stejně odcházel — zabit v noci nebo vyhlasován). Pokud jsou během jedné fáze vyloučeni dva a více hráčů, jedno hlasování se vynechá.",
+          "Tři noci po sobě bez vyřazeného hráče — remíza. Hlasování o vyřazení všech u stolu se nekoná. Pokud hráč odejde rozhodujícím hlasováním nebo výstřelem a hra skončí, poslední slovo nemá.",
+          "Noční vyloučení se ohlašují tak, aby neprozradila role. Od okamžiku porušení je hráč divákem: pokud předá informaci, jeho tým prohrává."
+        ]
+      },
+      {
+        "id": "points",
+        "title": "Turnajové body",
+        "items": [
+          "Výhra — 0,75 bodu každému hráči týmu, prohra a remíza — 0.",
+          "Nejlepší tah červeného nebo Šerifa: tři černí — +0,4, dva — +0,25.",
+          "Extra body od rozhodčího — celkem nejvýš 2,0 za hru. Hráč může dostat +0,1 až +0,8 (+0,8 jen se souhlasem komise rozhodčích), hráč poraženého týmu až +0,5. Při remíze se extra body nedávají. Body za nejlepší tah se do stejného hodnocení započítávají.",
+          "Tresty od rozhodčího −0,2 nebo −0,4 za chyby, které poškodily vlastní tým (úplný seznam v pravidlech federace). Vyloučení od stolu — −0,5, prohra týmu vinou hráče — −0,75. Pozdní příchod na kolo — od −0,2 až po náhradu hráče.",
+          "Červený hráč nebo Šerif zabitý první noc dostane při prohře červených kompenzaci až 0,4 bodu; roste s počtem takových výstřelů během turnaje.",
+          "Při rovnosti bodů je výš ten, kdo má víc extra bodů, pak méně trestů, víc úmrtí první noc, víc výher za Šerifa, pak za Dona a nakonec ten, kdo se dřív zaregistroval."
+        ]
+      },
+      {
+        "id": "protests",
+        "title": "Protesty a opakované hry",
+        "items": [
+          "Protest se zapisuje do protokolu hry nejpozději 15 minut po jejím konci. Posoudí ho hlavní rozhodčí nebo odvolací komise, i podle videa; rozhodnutí je v rámci turnaje konečné.",
+          "Pokud hru rozhodla mimoherní výhoda nebo mimoherní dokazování role, výsledek se může změnit a viník dostane −0,75.",
+          "Opakovaná hra se nařizuje při neopravitelné technické chybě rozhodčího nebo vyšší moci: rozsazení se mění, disciplinární tresty zůstávají.",
+          "Odvolání ohledně extra bodů — jen písemně rozhodčímu stolu a ve stanovených lhůtách."
+        ]
+      }
+    ]
+  },
+  "documents": {
+    "lead": "Pravidla hry, podle kterých se hrají turnaje, a dokumenty klubu.",
+    "rulesText": "Pravidla sportovní mafie federace Mafgame: role, průběh hry, hlasování, fauly a body.",
+    "codeTitle": "Kodex klubu",
+    "codeText": "Hodnoty klubu, etika u stolu a pravidla chování na hrách MafiaCL.",
+    "learnTitle": "Pro nováčky",
+    "learnText": "Jak hrát poprvé: role a průběh hry jednoduše.",
+    "source": "Zdroj: {source}"
   }
 }
