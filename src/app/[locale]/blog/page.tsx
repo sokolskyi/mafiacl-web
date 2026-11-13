@@ -73,7 +73,7 @@ export default async function Page({ params }: PageProps<"/[locale]/blog">) {
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-neutral-400">
-                    {tb("by", { author: m.author })}
+                    {m.author}
                     {m.lang === "en" && <span className="ml-2 rounded bg-white/10 px-1.5 text-xs font-semibold">EN</span>}
                   </p>
                   <p className="mt-1 font-semibold leading-snug">{m.title}</p>
