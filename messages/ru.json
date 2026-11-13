@@ -206,7 +206,10 @@
     "verificationRejected": "Клуб не одобрил ваш аккаунт. Если это ошибка, напишите организатору.",
     "verificationBotHint": "Подключите Telegram-бота ниже — пришлём уведомление, когда одобрим.",
     "apple": "Войти через Apple",
-    "microsoft": "Войти через Microsoft"
+    "microsoft": "Войти через Microsoft",
+    "markery": "Профиль на маркеры.онлайн",
+    "markeryHint": "Ссылка на вашу статистику на markery.online — в профиле игрока появится кнопка. Можно оставить пустым.",
+    "invalidMarkery": "Не похоже на ссылку markery.online: нужна ссылка с playerId=… или номер игрока."
   },
   "games": {
     "empty": "Ближайших игр пока нет. Следите за нашим Telegram.",
@@ -733,7 +736,41 @@
     "archiveRating": "Рейтинг",
     "archiveCurrent": "идёт",
     "archiveFinal": "Место в финале сезона",
-    "bestMoveLineShort": "Первым убит: {killed} · лучший ход с баллами: {hits}"
+    "bestMoveLineShort": "Первым убит: {killed} · лучший ход с баллами: {hits}",
+    "medalTitle": "{place} место",
+    "top10": "Топ-10 сезона: {n}",
+    "markery": "Турниры на маркеры.онлайн",
+    "avgExtraLine": "средний доп за игру: {avg}",
+    "bestPlayerLine": "лучший игрок партии: {n}",
+    "compareTitle": "Сравнение с клубом",
+    "compareLead": "Premier League за все сезоны. Сравниваем с игроками, у которых от 30 игр (в роли — от 10).",
+    "compareMetric": "Показатель",
+    "compareYou": "Игрок",
+    "compareMedian": "Медиана клуба",
+    "compareRank": "Среди игроков",
+    "topPct": "топ {n} %",
+    "belowMedian": "ниже медианы",
+    "compare": {
+      "winRate": "Процент побед",
+      "civilian": "За мирного",
+      "sheriff": "За шерифа",
+      "mafia": "За мафию",
+      "don": "За дона",
+      "avgExtra": "Средний доп за игру",
+      "firstKilled": "Первым убит, доля игр"
+    },
+    "awardsTitle": "Награды",
+    "awards": {
+      "season": "Сезоны",
+      "tournament": "Турниры",
+      "mini": "Мини-турниры"
+    },
+    "awardsAll": "Все призовые места ({n})",
+    "miniTitle": "Мини-турнир {n}",
+    "archiveFK": "ПУ",
+    "archiveFKFull": "Первым убит, доля игр",
+    "archiveExtra": "Доп/игра",
+    "miniTitleSeason": "Мини-турнир {n} · {season} сезон"
   },
   "rating": {
     "filters": "Фильтры рейтинга",

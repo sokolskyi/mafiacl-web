@@ -206,7 +206,10 @@
     "verificationRejected": "Клуб не схвалив ваш акаунт. Якщо це помилка, напишіть організатору.",
     "verificationBotHint": "Підключіть Telegram-бота нижче — надішлемо сповіщення, коли схвалимо.",
     "apple": "Увійти через Apple",
-    "microsoft": "Увійти через Microsoft"
+    "microsoft": "Увійти через Microsoft",
+    "markery": "Профіль на маркери.онлайн",
+    "markeryHint": "Посилання на вашу статистику на markery.online — у профілі гравця з’явиться кнопка. Можна залишити порожнім.",
+    "invalidMarkery": "Не схоже на посилання markery.online: потрібне посилання з playerId=… або номер гравця."
   },
   "games": {
     "empty": "Найближчих ігор поки немає. Стежте за нашим Telegram.",
@@ -733,7 +736,41 @@
     "archiveRating": "Рейтинг",
     "archiveCurrent": "триває",
     "archiveFinal": "Місце у фіналі сезону",
-    "bestMoveLineShort": "Першим убитий: {killed} · найкращий хід з балами: {hits}"
+    "bestMoveLineShort": "Першим убитий: {killed} · найкращий хід з балами: {hits}",
+    "medalTitle": "{place} місце",
+    "top10": "Топ-10 сезону: {n}",
+    "markery": "Турніри на маркери.онлайн",
+    "avgExtraLine": "середній доп за гру: {avg}",
+    "bestPlayerLine": "найкращий гравець партії: {n}",
+    "compareTitle": "Порівняння з клубом",
+    "compareLead": "Premier League за всі сезони. Порівнюємо з гравцями, у яких від 30 ігор (у ролі — від 10).",
+    "compareMetric": "Показник",
+    "compareYou": "Гравець",
+    "compareMedian": "Медіана клубу",
+    "compareRank": "Серед гравців",
+    "topPct": "топ {n} %",
+    "belowMedian": "нижче медіани",
+    "compare": {
+      "winRate": "Відсоток перемог",
+      "civilian": "За мирного",
+      "sheriff": "За шерифа",
+      "mafia": "За мафію",
+      "don": "За дона",
+      "avgExtra": "Середній доп за гру",
+      "firstKilled": "Першим убитий, частка ігор"
+    },
+    "awardsTitle": "Нагороди",
+    "awards": {
+      "season": "Сезони",
+      "tournament": "Турніри",
+      "mini": "Міні-турніри"
+    },
+    "awardsAll": "Усі призові місця ({n})",
+    "miniTitle": "Міні-турнір {n}",
+    "archiveFK": "ПУ",
+    "archiveFKFull": "Першим убитий, частка ігор",
+    "archiveExtra": "Доп/гра",
+    "miniTitleSeason": "Міні-турнір {n} · {season} сезон"
   },
   "rating": {
     "filters": "Фільтри рейтингу",

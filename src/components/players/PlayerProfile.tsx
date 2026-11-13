@@ -7,6 +7,10 @@ import { currentSeason, getEveningWinners, getPlayerOfWeek, getSeasons } from "@
 import { badgeOf, belongsTo, getBadges, getPrizes, getTitles } from "@/lib/badges";
 import { PlayerShare } from "./PlayerShare";
 import { formatMemberNo } from "@/lib/memberNo";
+import { getHallArchive } from "@/lib/hallArchive";
+import { getPremierTotals } from "@/lib/ratingArchive";
+import { awardsOf } from "@/lib/awards";
+import { compareWithClub } from "@/lib/clubCompare";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -38,6 +42,10 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const prizes = (await getPrizes(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
   const prizeTotal = prizes.reduce((a, x) => a + x.amount, 0);
   const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
+  const awards = awardsOf(await getHallArchive(MAIN_CLUB_SLUG), player.nickname);
+  const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG), player.nickname);
+  const top10 = player.archive.filter((a) => a.league === "premier" && !a.isCurrent && a.rank <= 10).length;
+  const share = (x: number) => `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(x * 100)} %`;
   const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
 
   return (
@@ -70,6 +78,18 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               ))}
             </ul>
           )}
+          {(awards.medals.some((n) => n > 0) || top10 > 0) && (
+            <p className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+              {awards.medals.map((n, i) =>
+                n > 0 ? (
+                  <span key={i} className="rounded bg-white/10 px-2 py-0.5 font-semibold" title={t("medalTitle", { place: i + 1 })}>
+                    <span aria-hidden="true">{["🥇", "🥈", "🥉"][i]}</span> <span className="sr-only">{t("medalTitle", { place: i + 1 })}: </span>{n}
+                  </span>
+                ) : null,
+              )}
+              {top10 > 0 && <span className="rounded bg-white/10 px-2 py-0.5 text-neutral-200">{t("top10", { n: top10 })}</span>}
+            </p>
+          )}
           {(isPotw || eveningWins > 0) && (
             <p className="mt-2 flex flex-wrap gap-2">
               {isPotw && <span className="rounded bg-yellow-500/20 px-2 py-0.5 text-xs font-bold text-yellow-300">⚜️ {t("playerOfWeek")}</span>}
@@ -90,8 +110,18 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
             </p>
           )}
         </div>
-        <div className="sm:ml-auto sm:self-start">
+        <div className="flex flex-wrap gap-2 sm:ml-auto sm:self-start">
           <PlayerShare locale={locale} nickname={player.nickname} games={s.games} />
+          {player.markeryId && (
+            <a
+              href={`https://markery.online/playerStatistics?playerId=${player.markeryId}`}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex min-h-11 items-center rounded-full border border-white/40 px-4 text-sm font-semibold hover:bg-white/10"
+            >
+              {t("markery")} ↗
+            </a>
+          )}
         </div>
       </header>
 
@@ -161,6 +191,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                 ? t("bestMoveLine", { killed: s.firstKilled, hits: s.bestMoveHits, points: num(s.bestMovePoints) })
                 : t("bestMoveLineShort", { killed: s.firstKilled, hits: s.bestMoveHits })}
               {s.siteGames > 0 && <>{" · "}{t("foulsLine", { avg: num(s.fouls / s.siteGames) })}</>}
+              {s.extraGames > 0 && <>{" · "}{t("avgExtraLine", { avg: num(s.extra / s.extraGames) })}</>}
+              {s.bestPlayer > 0 && <>{" · "}{t("bestPlayerLine", { n: s.bestPlayer })}</>}
             </p>
             {(s.redVotes.total > 0 || s.blackVotes.total > 0) && (
               <p className="mt-1 text-sm text-neutral-300">
@@ -170,6 +202,89 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               </p>
             )}
           </section>
+      )}
+
+      {compare.length > 0 && (
+        <section aria-labelledby="compare" className="mt-10">
+          <h2 id="compare" className="text-xl font-bold">{t("compareTitle")}</h2>
+          <p className="mt-1 text-sm text-neutral-400">{t("compareLead")}</p>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[28rem] text-left text-sm">
+              <thead className="text-neutral-400">
+                <tr>
+                  <th className="py-2 font-normal">{t("compareMetric")}</th>
+                  <th className="font-normal">{t("compareYou")}</th>
+                  <th className="font-normal">{t("compareMedian")}</th>
+                  <th className="font-normal">{t("compareRank")}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {compare.map((c) => {
+                  const fmt = (v: number) => (c.key === "avgExtra" ? num(Math.round(v * 100) / 100) : share(v));
+                  return (
+                    <tr key={c.key}>
+                      <td className="py-2 font-semibold">{t(`compare.${c.key}`)}</td>
+                      <td className="font-mono font-bold">{fmt(c.value)}</td>
+                      <td className="font-mono text-neutral-400">{fmt(c.median)}</td>
+                      <td>
+                        {c.top === null ? (
+                          <span className="text-neutral-500">—</span>
+                        ) : c.top <= 50 ? (
+                          <span className={c.top <= 10 ? "font-bold text-yellow-300" : "text-green-400"}>{t("topPct", { n: c.top })}</span>
+                        ) : (
+                          <span className="text-neutral-400">{t("belowMedian")}</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {awards.list.length > 0 && (
+        <section aria-labelledby="awards" className="mt-10">
+          <h2 id="awards" className="text-xl font-bold">{t("awardsTitle")}</h2>
+          <dl className="mt-4 grid gap-3 sm:grid-cols-3">
+            {(["season", "tournament", "mini"] as const).map((k) => (
+              <div key={k} className="rounded-lg border border-white/10 bg-neutral-950 p-4">
+                <dt className="text-sm text-neutral-400">{t(`awards.${k}`)}</dt>
+                <dd className="mt-1 flex gap-3 text-lg font-bold">
+                  {awards.counts[k].map((n, i) => (
+                    <span key={i} className={n ? "" : "opacity-30"}>
+                      <span aria-hidden="true">{["🥇", "🥈", "🥉"][i]}</span>
+                      <span className="sr-only">{t("medalTitle", { place: i + 1 })}: </span> {n}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          {awards.list.some((a) => a.category === "achievement") && (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {awards.list.filter((a) => a.category === "achievement").map((a) => (
+                <li key={a.id} className="rounded bg-yellow-500/15 px-2 py-0.5 text-sm text-yellow-200">🏅 {a.title} · {a.year}</li>
+              ))}
+            </ul>
+          )}
+          <details className="mt-4 rounded border border-white/10">
+            <summary className="cursor-pointer px-4 py-3 font-semibold">{t("awardsAll", { n: awards.list.filter((a) => a.place).length })}</summary>
+            <ul className="divide-y divide-white/10 border-t border-white/10 text-sm">
+              {awards.list.filter((a) => a.place).map((a) => (
+                <li key={a.id} className="flex items-center gap-3 px-4 py-2">
+                  <span aria-hidden="true">{["🥇", "🥈", "🥉"][(a.place ?? 1) - 1]}</span>
+                  <span className="sr-only">{t("medalTitle", { place: a.place ?? 1 })}:</span>
+                  <span className="w-12 text-neutral-400">{a.year}</span>
+                  <span className="flex-1">
+                    {a.category === "mini" ? (a.season ? t("miniTitleSeason", { n: a.title, season: a.season }) : t("miniTitle", { n: a.title })) : a.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </section>
       )}
 
       {player.archive.length > 0 && (
@@ -183,6 +298,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                   <th className="font-normal">{t("archivePlace")}</th>
                   <th className="font-normal">{t("games")}</th>
                   <th className="font-normal">{t("winRate")}</th>
+                  <th className="font-normal"><abbr title={t("archiveFKFull")} className="no-underline">{t("archiveFK")}</abbr></th>
+                  <th className="font-normal">{t("archiveExtra")}</th>
                   <th className="text-right font-normal">{t("archiveRating")}</th>
                 </tr>
               </thead>
@@ -201,6 +318,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                     </td>
                     <td>{a.games}</td>
                     <td>{a.wins === null ? "—" : pct(a.wins, a.games)}</td>
+                    <td>{a.firstKilled === null ? "—" : share(a.firstKilled)}</td>
+                    <td>{a.avgExtra === null ? "—" : num(Math.round(a.avgExtra * 100) / 100)}</td>
                     <td className="text-right font-mono font-bold">{num(a.points)}</td>
                   </tr>
                 ))}

@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { updateNickname, type ProfileState } from "@/lib/auth/actions";
 
-export function NicknameForm({ current, city }: { current: string | null; city: string | null }) {
+export function NicknameForm({ current, city, markeryId }: { current: string | null; city: string | null; markeryId: number | null }) {
   const t = useTranslations("account");
   const [state, action, pending] = useActionState<ProfileState, FormData>(updateNickname, {
     status: "idle",
@@ -51,6 +51,19 @@ export function NicknameForm({ current, city }: { current: string | null; city: 
         className="mt-2 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
       />
       <p className="mt-2 text-sm text-neutral-400">{t("cityHint")}</p>
+      <label htmlFor="markery" className="mt-5 block text-sm font-semibold">
+        {t("markery")}
+      </label>
+      <input
+        id="markery"
+        name="markery"
+        defaultValue={markeryId ? `https://markery.online/playerStatistics?playerId=${markeryId}` : ""}
+        maxLength={300}
+        inputMode="url"
+        placeholder="https://markery.online/playerStatistics?playerId=…"
+        className="mt-2 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
+      />
+      <p className="mt-2 text-sm text-neutral-400">{t("markeryHint")}</p>
       <p id="nickname-status" role="status" className="mt-2 text-sm">
         {state.status === "saved" && <span className="text-green-400">{t("saved")}</span>}
         {state.status !== "idle" && state.status !== "saved" && (

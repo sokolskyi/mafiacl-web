@@ -70,7 +70,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("nickname, display_name, avatar_url, city, verification, member_no")
+    .select("nickname, display_name, avatar_url, city, verification, member_no, markery_id")
     .eq("id", userId)
     .single();
   const name = profile?.nickname ?? profile?.display_name ?? "";
@@ -141,7 +141,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
           <PlayerShare locale={locale} nickname={profile.nickname} />
         </div>
       )}
-      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} />
+      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} markeryId={profile?.markery_id ?? null} />
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>
         <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>

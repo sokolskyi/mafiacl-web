@@ -206,7 +206,10 @@
     "verificationRejected": "The club did not approve your account. If this is a mistake, please contact the organiser.",
     "verificationBotHint": "Connect the Telegram bot below and we'll let you know once you're approved.",
     "apple": "Sign in with Apple",
-    "microsoft": "Sign in with Microsoft"
+    "microsoft": "Sign in with Microsoft",
+    "markery": "Profile on markery.online",
+    "markeryHint": "Link to your stats on markery.online — a button will appear on your player page. Optional.",
+    "invalidMarkery": "This doesn’t look like a markery.online link: paste a link with playerId=… or the player number."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -733,7 +736,41 @@
     "archiveRating": "Rating",
     "archiveCurrent": "ongoing",
     "archiveFinal": "Place in the season final",
-    "bestMoveLineShort": "Killed first: {killed} · best move with points: {hits}"
+    "bestMoveLineShort": "Killed first: {killed} · best move with points: {hits}",
+    "medalTitle": "Place {place}",
+    "top10": "Season top 10: {n}",
+    "markery": "Tournaments on markery.online",
+    "avgExtraLine": "average extra points per game: {avg}",
+    "bestPlayerLine": "best player of the game: {n}",
+    "compareTitle": "Compared with the club",
+    "compareLead": "Premier League, all seasons. Compared with players who have 30+ games (10+ in a role).",
+    "compareMetric": "Metric",
+    "compareYou": "Player",
+    "compareMedian": "Club median",
+    "compareRank": "Among players",
+    "topPct": "top {n}%",
+    "belowMedian": "below median",
+    "compare": {
+      "winRate": "Win rate",
+      "civilian": "As civilian",
+      "sheriff": "As sheriff",
+      "mafia": "As mafia",
+      "don": "As don",
+      "avgExtra": "Average extra points per game",
+      "firstKilled": "Killed first, share of games"
+    },
+    "awardsTitle": "Awards",
+    "awards": {
+      "season": "Seasons",
+      "tournament": "Tournaments",
+      "mini": "Mini-tournaments"
+    },
+    "awardsAll": "All podium places ({n})",
+    "miniTitle": "Mini-tournament {n}",
+    "archiveFK": "KF",
+    "archiveFKFull": "Killed first, share of games",
+    "archiveExtra": "Extra/game",
+    "miniTitleSeason": "Mini-tournament {n} · season {season}"
   },
   "rating": {
     "filters": "Rating filters",

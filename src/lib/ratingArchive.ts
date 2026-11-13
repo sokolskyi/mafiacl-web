@@ -203,3 +203,50 @@ export async function getArchiveSeason(clubSlug: string, slug: string): Promise<
     })),
   };
 }
+
+/** Сумма Premier League по игроку за все сезоны — для сравнения игрока с клубом. */
+export type PremierTotals = {
+  nickname: string;
+  games: number;
+  wins: number;
+  firstKilled: number;
+  extra: number;
+  civ: WL;
+  sheriff: WL;
+  mafia: WL;
+  don: WL;
+};
+
+/** Все игроки Premier League за все сезоны, по нику без учёта регистра. */
+export async function getPremierTotals(clubSlug: string): Promise<PremierTotals[]> {
+  "use cache";
+  cacheTag(RATING_ARCHIVE_TAG);
+  cacheLife("days");
+  if (!isSupabaseConfigured) return [];
+  const db = createPublicClient();
+  const { data, error } = await db
+    .from("rating_archive_rows")
+    .select("nickname, games, wins, first_killed, extra, civ_w, civ_l, sheriff_w, sheriff_l, mafia_w, mafia_l, don_w, don_l, rating_archive!inner ( league, clubs!inner ( slug ) )")
+    .eq("rating_archive.league", "premier")
+    .eq("rating_archive.clubs.slug", clubSlug)
+    .limit(5000);
+  if (error) console.error("getPremierTotals failed", { code: error.code, message: error.message });
+  const m = new Map<string, PremierTotals>();
+  for (const r of data ?? []) {
+    const k = r.nickname.toLowerCase();
+    const t = m.get(k) ?? {
+      nickname: r.nickname, games: 0, wins: 0, firstKilled: 0, extra: 0,
+      civ: { w: 0, l: 0 }, sheriff: { w: 0, l: 0 }, mafia: { w: 0, l: 0 }, don: { w: 0, l: 0 },
+    };
+    t.games += r.games;
+    t.wins += r.wins;
+    t.firstKilled += r.first_killed;
+    t.extra += Number(r.extra);
+    t.civ.w += r.civ_w; t.civ.l += r.civ_l;
+    t.sheriff.w += r.sheriff_w; t.sheriff.l += r.sheriff_l;
+    t.mafia.w += r.mafia_w; t.mafia.l += r.mafia_l;
+    t.don.w += r.don_w; t.don.l += r.don_l;
+    m.set(k, t);
+  }
+  return [...m.values()];
+}

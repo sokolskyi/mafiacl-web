@@ -84,7 +84,7 @@ export async function signOut(formData: FormData) {
   redirect(getPathname({ href: "/account", locale }));
 }
 
-export type ProfileState = { status: "idle" | "saved" | "invalid" | "taken" | "error" };
+export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "taken" | "error" };
 
 /** Ник игрока: 2–32 символа, без пробелов по краям, уникален без учёта регистра. */
 export async function updateNickname(_prev: ProfileState, formData: FormData): Promise<ProfileState> {
@@ -97,7 +97,12 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   if (!userId) return { status: "error" };
 
   const city = String(formData.get("city") ?? "").trim().slice(0, 60) || null;
-  const { error } = await supabase.from("profiles").update({ nickname, city }).eq("id", userId);
+  // Ссылка на профиль markery.online или просто номер игрока
+  const markeryRaw = String(formData.get("markery") ?? "").trim();
+  const markeryMatch = markeryRaw.match(/playerId=(\d{1,8})/i) ?? markeryRaw.match(/^(\d{1,8})$/);
+  if (markeryRaw && !markeryMatch) return { status: "invalidMarkery" };
+  const markery_id = markeryMatch ? Number(markeryMatch[1]) || null : null;
+  const { error } = await supabase.from("profiles").update({ nickname, city, markery_id }).eq("id", userId);
   if (error) {
     if (error.code === "23505") return { status: "taken" };
     console.error("updateNickname failed", { code: error.code, message: error.message });

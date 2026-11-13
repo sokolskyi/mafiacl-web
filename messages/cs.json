@@ -206,7 +206,10 @@
     "verificationRejected": "Klub váš účet neschválil. Pokud jde o omyl, napište pořadateli.",
     "verificationBotHint": "Připojte níže Telegram bota — dáme vám vědět, až účet schválíme.",
     "apple": "Přihlásit přes Apple",
-    "microsoft": "Přihlásit přes Microsoft"
+    "microsoft": "Přihlásit přes Microsoft",
+    "markery": "Profil na markery.online",
+    "markeryHint": "Odkaz na vaši statistiku na markery.online — v profilu hráče se objeví tlačítko. Můžete nechat prázdné.",
+    "invalidMarkery": "Nevypadá to jako odkaz na markery.online: potřebujeme odkaz s playerId=… nebo číslo hráče."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -733,7 +736,41 @@
     "archiveRating": "Hodnocení",
     "archiveCurrent": "probíhá",
     "archiveFinal": "Místo ve finále sezóny",
-    "bestMoveLineShort": "Zabit jako první: {killed} · nejlepší tah s body: {hits}"
+    "bestMoveLineShort": "Zabit jako první: {killed} · nejlepší tah s body: {hits}",
+    "medalTitle": "{place}. místo",
+    "top10": "Top 10 sezóny: {n}",
+    "markery": "Turnaje na markery.online",
+    "avgExtraLine": "průměrné bonusové body za hru: {avg}",
+    "bestPlayerLine": "nejlepší hráč hry: {n}",
+    "compareTitle": "Srovnání s klubem",
+    "compareLead": "Premier League za všechny sezóny. Srovnáváme s hráči, kteří mají aspoň 30 her (v roli aspoň 10).",
+    "compareMetric": "Ukazatel",
+    "compareYou": "Hráč",
+    "compareMedian": "Medián klubu",
+    "compareRank": "Mezi hráči",
+    "topPct": "top {n} %",
+    "belowMedian": "pod mediánem",
+    "compare": {
+      "winRate": "Procento výher",
+      "civilian": "Za civilistu",
+      "sheriff": "Za šerifa",
+      "mafia": "Za mafii",
+      "don": "Za dona",
+      "avgExtra": "Průměrné bonusové body za hru",
+      "firstKilled": "Zabit jako první, podíl her"
+    },
+    "awardsTitle": "Ocenění",
+    "awards": {
+      "season": "Sezóny",
+      "tournament": "Turnaje",
+      "mini": "Mini-turnaje"
+    },
+    "awardsAll": "Všechna umístění na stupních vítězů ({n})",
+    "miniTitle": "Mini-turnaj {n}",
+    "archiveFK": "PZ",
+    "archiveFKFull": "Zabit jako první, podíl her",
+    "archiveExtra": "Bonus/hra",
+    "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna"
   },
   "rating": {
     "filters": "Filtry žebříčku",

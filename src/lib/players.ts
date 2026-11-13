@@ -41,6 +41,10 @@ export type ArchiveLine = {
   points: number;
   /** Место по итогам финала сезона, если игрок в призёрах. */
   finalPlace: number | null;
+  /** Первый убиенный, доля от игр (только где таблица ведёт роли). */
+  firstKilled: number | null;
+  /** Средний доп за игру (только где таблица ведёт роли). */
+  avgExtra: number | null;
 };
 
 export type PlayerPage = {
@@ -51,6 +55,8 @@ export type PlayerPage = {
   since: string;
   /** Номер участника клуба (после верификации). */
   memberNo: number | null;
+  /** ID игрока на markery.online. */
+  markeryId: number | null;
   staff: { club: string; role: string }[];
   stats: {
     /** Все партии: сайт + архивные рейтинги сезонов. */
@@ -65,6 +71,11 @@ export type PlayerPage = {
     firstKilled: number;
     bestMoveHits: number; // ЛХ с баллами (2 или 3 чёрных)
     bestMovePoints: number;
+    /** «Лучший игрок» партии в таблицах сезонов. */
+    bestPlayer: number;
+    /** Сумма допов и число партий, по которым она известна (архив Premier League). */
+    extra: number;
+    extraGames: number;
     fouls: number;
     /** Поимённые голоса: красным — сколько раз в чёрных; чёрным — сколько раз в красных. */
     redVotes: { black: number; total: number };
@@ -86,7 +97,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   const pattern = nick.replace(/[\\%_]/g, (c) => `\\${c}`);
   const { data: profiles } = await db
     .from("profiles")
-    .select("id, nickname, avatar_url, city, created_at, member_no")
+    .select("id, nickname, avatar_url, city, created_at, member_no, markery_id")
     .ilike("nickname", pattern)
     .limit(2);
   const p = profiles?.length === 1 ? profiles[0] : null;
@@ -105,7 +116,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     db
       .from("rating_archive_rows")
       .select(
-        "rank, nickname, points, score, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places )",
+        "rank, nickname, points, score, extra, best_player, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places )",
       )
       .ilike("nickname", pattern)
       .limit(200),
@@ -167,6 +178,8 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   let archWins = 0;
   let archKilled = 0;
   let archBestMove = 0;
+  let archBestPlayer = 0;
+  let archExtra = 0;
   const archive: ArchiveLine[] = [];
   for (const r of arch ?? []) {
     const a = r.rating_archive as unknown as {
@@ -187,10 +200,12 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       }
       archDecided += r.games;
       archWins += r.wins;
+      archExtra += Number(r.extra);
     }
     archGames += r.games;
     archKilled += r.first_killed;
     archBestMove += r.best_move2 + r.best_move3;
+    archBestPlayer += r.best_player;
     const fp = a.is_current ? -1 : (a.final_places ?? []).findIndex((n) => n.toLowerCase() === p.nickname!.toLowerCase());
     archive.push({
       slug: a.slug,
@@ -203,6 +218,8 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       wins: detailed ? r.wins : null,
       points: Number(r.score ?? r.points),
       finalPlace: fp >= 0 ? fp + 1 : null,
+      firstKilled: detailed && r.games ? r.first_killed / r.games : null,
+      avgExtra: detailed && r.games ? Number(r.extra) / r.games : null,
     });
   }
   archive.sort((x, y) => y.year - x.year || x.title.localeCompare(y.title));
@@ -214,6 +231,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     city: p.city ?? null,
     since: p.created_at,
     memberNo: p.member_no ?? null,
+    markeryId: p.markery_id ?? null,
     staff: (staff ?? []).map((s) => ({ club: (s.clubs as unknown as { name: string } | null)?.name ?? "", role: s.role })),
     stats: {
       games: rated.length + archGames,
@@ -225,6 +243,9 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       firstKilled: rated.filter((g) => g.firstKilled).length + archKilled,
       bestMoveHits: rated.filter((g) => g.bestMovePoints > 0).length + archBestMove,
       bestMovePoints: round(rated.reduce((a, g) => a + g.bestMovePoints, 0)),
+      bestPlayer: archBestPlayer,
+      extra: round(archExtra),
+      extraGames: archDecided,
       fouls,
       redVotes,
       blackVotes,
