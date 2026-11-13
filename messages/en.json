@@ -144,6 +144,10 @@
     "mafgameRules": {
       "title": "Mafgame game rules",
       "description": "Mafgame federation sport mafia rules (edition of 1 July 2026) in short, section by section: roles, day and night, voting, best move, fouls and tournament points."
+    },
+    "emotionRules": {
+      "title": "Emotion Games rules",
+      "description": "Official Emotion Games sport mafia rules (edition of 4 October 2026) in short, section by section: roles, day and night, voting, key five, fouls, points and Ci compensation."
     }
   },
   "account": {
@@ -2038,6 +2042,161 @@
     "codeText": "The club's values, table etiquette and rules of conduct at MafiaCL games.",
     "learnTitle": "New players",
     "learnText": "How to play for the first time: roles and how a game goes, in plain words.",
-    "source": "Source: {source}"
+    "source": "Source: {source}",
+    "emotionText": "Official Emotion Games sport mafia rules: game flow, voting, key five, fouls, points and Ci."
+  },
+  "rulesEmotion": {
+    "title": "Emotion Games rules",
+    "lead": "A short summary of the official Emotion Games sport mafia rules in our own words, split into sections so it reads well on a phone. The rules are maintained by the Emotion Games referee department (RD).",
+    "edition": "Rules edition of 4 October 2026.",
+    "sourceNote": "The official full text, including the referee's gestures and the complete list of penalties, is on the Emotion Games referee department website. Where this summary differs, the official text applies.",
+    "sourceLink": "Rules on rd.emotion.games",
+    "tocTitle": "Contents",
+    "moreTitle": "Other Emotion Games documents",
+    "more": {
+      "documents": "All documents for players and organisers",
+      "tournaments": "Tournament regulations",
+      "comments": "Comments on the rules",
+      "ci": "Ci compensation",
+      "online": "Additions to the rules for online mafia"
+    },
+    "sections": [
+      {
+        "id": "basics",
+        "title": "Basics",
+        "items": [
+          "Ten players sit at the table. Cards are dealt at random: 7 red (town, including the Sheriff) and 3 black (mafia, including the Don).",
+          "The game is run by a certified referee, who may be helped by side referees. Day and night alternate until one team wins.",
+          "Red wins when no black players are left. Black wins when there are as many black players as red, or more.",
+          "A player is out when voted out during the day, shot at night, or given a disqualifying foul.",
+          "If after a vote black needs only one more successful shot to win, black wins straight away, with no night shooting."
+        ]
+      },
+      {
+        "id": "players",
+        "title": "Players, table and language",
+        "items": [
+          "Gear must not be dangerous, offensive or give an advantage. If the referee asks, phones are handed in before the game (silenced or switched off). Your own mask only after the referee has checked and approved it.",
+          "Hats, glasses and anything reflective come off before night.",
+          "Each seat has a number and a mask on an elastic band that fully covers the eyes. Night needs music.",
+          "Official languages of the game: Ukrainian, English and Russian."
+        ]
+      },
+      {
+        "id": "start",
+        "title": "Dealing and the first night",
+        "items": [
+          "The referee draws seats before the game, or they come from the tournament schedule. At \"night falls\" everyone puts on their mask.",
+          "Players take a card in turn with their eyes closed, look at the role and put the mask back on. Once the 10th player has a role, everyone takes the night position: arms crossed on the shoulders, head tilted forward about 45°.",
+          "The meeting: black players take off their masks and see each other — the only night they do. The Don identifies himself with a gesture and sets the shooting order. All of this takes exactly 1 minute.",
+          "Then 1 minute of relaxed position: the head stays tilted, but light hand movement and swaying to the music are allowed. After that morning comes."
+        ]
+      },
+      {
+        "id": "day",
+        "title": "Day",
+        "items": [
+          "Masks are off during the day and may not be put on. Each player has 1 minute. Player 1 opens day zero; each later day is opened by the player after the one who opened the previous round.",
+          "Players are addressed by nickname or number, the referee as \"Mr/Madam Referee\" or \"Host\". A speech ends with \"pass\" or \"thank you\".",
+          "Each day you may nominate one player, in the present tense: \"I nominate player No. …\". The referee confirms: \"accepted\"."
+        ]
+      },
+      {
+        "id": "vote",
+        "title": "Voting",
+        "items": [
+          "Before the vote the referee reads the nominees twice. Voting follows the order of nomination; from this moment gestures and campaigning are penalised, up to disqualification.",
+          "A vote is a fist placed upright on the table right after the number is called, before \"stop\" or \"thank you\" (about 1.5 seconds). Keep the hand on the table until the referee announces the count; a hand pulled back still counts.",
+          "You may vote for only one nominee. A player who does not vote gives the vote to the last nominee.",
+          "On day zero there is no vote if only one player is nominated. On later days a sole nominee receives all the votes.",
+          "On a tie, the tied players get 30 seconds each and there is a revote. If the votes split evenly between the same players again, the referee asks who wants all of them to leave: they go only if a majority votes for it.",
+          "With 9 players, three cannot be voted out together on the first day only — night falls straight away instead. The whole table can never be voted out.",
+          "The role of a player who leaves is not revealed; they get a 1-minute last word."
+        ]
+      },
+      {
+        "id": "night",
+        "title": "Night",
+        "items": [
+          "From the second night the mafia shoots: the referee counts from 1 to 10 and black players \"pull the trigger\" with a raised hand. If all black players shoot the same player, that player is killed; anything else is a miss.",
+          "Then the Don wakes up to look for the Sheriff, and after him the Sheriff checks any player. Each check takes no more than 10 seconds, one check per night.",
+          "At night you may not talk, sing, dance, touch others, eat, drink or smoke. You may not hold the mask with your hands."
+        ]
+      },
+      {
+        "id": "op",
+        "title": "Key five",
+        "items": [
+          "A red player killed on the first night may, within 30 seconds, name one to five numbers and their colours. Correct colours earn points, mistakes cost points.",
+          "A player who names no colour at all gets −0.1.",
+          "Named numbers cannot be changed or added to. If the player starts saying anything other than numbers, addresses the table or provokes a reaction, the key five is over.",
+          "There is no key five if two or more players were voted out on day zero."
+        ]
+      },
+      {
+        "id": "fouls",
+        "title": "Fouls and penalties",
+        "items": [
+          "A foul is given for things like speaking outside your minute (even a whisper or clear mouthing), excessive gestures, touching others during the day, knocking on the table, arguing with the referee, voting incorrectly, or gestures outside your own space.",
+          "Three fouls: the player stays silent in their next minute but may still nominate. A fourth foul: the player leaves at once with no last word.",
+          "A disqualifying foul means leaving the table at once: leaving without permission, touching at night, talking at night, insults, swearing, peeking, appealing to one's word of honour, God or other non-game values, requests about the key five, hidden whispering into someone's ear, switching to a foreign language to hide information, crying, or excessive emotion to prove a role.",
+          "The team loses the game for oaths and bets, blackmail, threats and bribery, hints from the audience, and for a Sheriff proving the role with night information.",
+          "Peeking or insulting the referee gets a player removed from the tournament."
+        ]
+      },
+      {
+        "id": "special",
+        "title": "Special situations",
+        "items": [
+          "If a player leaves with a fourth or disqualifying foul, the next vote is skipped (unless that player was being voted out or had been killed).",
+          "If nobody leaves the table for three nights in a row, the game is a draw after the third night.",
+          "A player with three fouls may speak in a tie-break, and gets 30 seconds in a guessing round of 3–4 players.",
+          "Once a vote or a kill decides the game, the referee announces the win at once; there is no last word.",
+          "The head referee together with the RD may order a replay: a wrong check shown, a shot counted wrongly, a mistaken disqualification, outside information leaking in, or force majeure."
+        ]
+      },
+      {
+        "id": "scoring",
+        "title": "Tournament points",
+        "items": [
+          "A win gives 1 point to every player of the winning team. A loss or a draw gives 0.",
+          "Disqualification from the table: −0.5 to the final rating; a team-loss penalty (PPK): −0.7.",
+          "Best move: three black players correctly named in the key five give +0.6, two give +0.4.",
+          "The referee may give extra points to up to seven players, 3.4 in total at most (3.6 with the head referee's approval). Winners get 0.2 to 1 (1.3 only with the head referee's approval), losers 0.2 to 0.8.",
+          "Referee points and best-move points do not add up — the larger one counts. Players at the table when a draw is declared get no extra points.",
+          "Destructive mistakes cost −0.3 or −0.5: for example voting out your own player in the critical round, a miss despite a clear call, a Sheriff making no checks, a Don who sets no shooting order. The full list is in the official text."
+        ]
+      },
+      {
+        "id": "ci",
+        "title": "Ci compensation",
+        "items": [
+          "A red player killed on the first night whose team then loses gets Ci compensation — their average extra points in full games of the same event.",
+          "With three full games or fewer, the extra points are divided by 3; after that, by the actual number of games.",
+          "Compensation raises the game result to the Ci level if the extra points and penalties for that game came out lower. If they are higher, the actual result counts."
+        ]
+      },
+      {
+        "id": "standings",
+        "title": "Standings and awards",
+        "items": [
+          "The final place is by the total of base and extra points. Ties are broken by extra points, then number of wins, fewer penalties, higher share of first-night kills, and finally by lot. Team standings work the same way.",
+          "MVP: the most extra points. Best red and Best black: total extra points in those roles. Most dangerous player: the most first-night kills.",
+          "A protest about a result must be filed in writing within 60 minutes after the referee enters the game. The head referee or the RD member on duty reviews it, video included; the decision is final."
+        ]
+      },
+      {
+        "id": "glossary",
+        "title": "Glossary",
+        "items": [
+          "Day zero — the first day after the mafia meeting. Day one — the one after it.",
+          "Critical round — when voting out a red player would give the mafia the win (usually with 7–8 players). Guessing round — with three or four players left.",
+          "Dynamic call — a shot target agreed during the day discussion.",
+          "Tie-break (\"car crash\") — equal votes. Splitting — deliberately sharing votes equally. Lift — all players who tied twice leave together.",
+          "Balance — voting out in turn two players who are certainly on different teams. Counterweight — voting out two players who call each other black.",
+          "RD — the Emotion Games referee department."
+        ]
+      }
+    ]
   }
 }

@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...Object.values(SECTIONS).map((href) => ({ href, priority: 0.7 })),
     { href: "/hall-of-fame", priority: 0.5 },
     { href: "/documents/mafgame-rules", priority: 0.5 },
+    { href: "/documents/emotion-games-rules", priority: 0.5 },
     ...Object.keys(CITIES).map((city) => ({
       href: { pathname: "/clubs/[city]" as const, params: { city } },
       priority: 0.8,

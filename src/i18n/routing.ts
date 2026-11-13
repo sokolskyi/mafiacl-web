@@ -21,6 +21,7 @@ export const routing = defineRouting({
     "/learn": { cs: "/pravidla", ru: "/pravila", uk: "/pravyla", en: "/rules" },
     "/documents": { cs: "/dokumenty", ru: "/dokumenty", uk: "/dokumenty", en: "/documents" },
     "/documents/mafgame-rules": { cs: "/dokumenty/pravidla-mafgame", ru: "/dokumenty/pravila-mafgame", uk: "/dokumenty/pravyla-mafgame", en: "/documents/mafgame-rules" },
+    "/documents/emotion-games-rules": { cs: "/dokumenty/pravidla-emotion-games", ru: "/dokumenty/pravila-emotion-games", uk: "/dokumenty/pravyla-emotion-games", en: "/documents/emotion-games-rules" },
     "/blog": "/blog",
     "/blog/[slug]": "/blog/[slug]",
     "/gallery": { cs: "/galerie", ru: "/galereya", uk: "/halereia", en: "/gallery" },

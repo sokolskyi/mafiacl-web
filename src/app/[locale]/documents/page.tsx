@@ -15,6 +15,7 @@ export default async function Page({ params }: PageProps<"/[locale]/documents">)
   const p = await getTranslations({ locale, namespace: "pages" });
   const cards = [
     { href: "/documents/mafgame-rules" as const, title: p("mafgameRules.title"), text: t("rulesText"), source: "mafgame.org" },
+    { href: "/documents/emotion-games-rules" as const, title: p("emotionRules.title"), text: t("emotionText"), source: "emotion.games" },
     { href: "/about/code" as const, title: t("codeTitle"), text: t("codeText") },
     { href: "/learn" as const, title: t("learnTitle"), text: t("learnText") },
   ];
