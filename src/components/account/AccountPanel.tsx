@@ -15,6 +15,7 @@ import { getOptionalProviders } from "@/lib/auth/providers";
 import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
 import { AccountBlog } from "./AccountBlog";
+import { parseProfileLinks } from "@/lib/profileLinks";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError, post }: { locale: Locale; authError: boolean; post?: string }) {
@@ -73,7 +74,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("nickname, display_name, avatar_url, city, verification, member_no, markery_id")
+    .select("nickname, display_name, avatar_url, city, verification, member_no, links")
     .eq("id", userId)
     .single();
   const name = profile?.nickname ?? profile?.display_name ?? "";
@@ -163,7 +164,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           <PlayerShare locale={locale} nickname={profile.nickname} />
         </div>
       )}
-      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} markeryId={profile?.markery_id ?? null} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} />
+      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} />
       {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>

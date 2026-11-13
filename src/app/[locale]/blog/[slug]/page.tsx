@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[sl
     return {
       title: post.title,
       description: paragraphs(post.body)[0]?.slice(0, 160),
+      openGraph: post.images[0] ? { images: [post.images[0]] } : undefined,
       alternates: alternatesFor({ pathname: "/blog/[slug]", params: { slug } }, locale),
       robots: NOINDEX ? { index: false, follow: false } : undefined,
     };
@@ -208,9 +209,23 @@ async function Post({ id, locale }: { id: number; locale: Locale }) {
         ) : "—"}
         {" · "}{date}
       </p>
+      {post.images[0] && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={post.images[0]} alt="" className="mt-8 max-h-[32rem] w-full rounded-lg object-cover" />
+      )}
       <div className="mt-8 max-w-prose space-y-5 text-lg leading-relaxed text-neutral-200">
         {paragraphs(post.body).map((p, i) => <p key={i} className="whitespace-pre-line">{p}</p>)}
       </div>
+      {post.images.length > 1 && (
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          {post.images.slice(1).map((src) => (
+            <li key={src}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt="" loading="lazy" className="w-full rounded-lg object-cover" />
+            </li>
+          ))}
+        </ul>
+      )}
     </article>
   );
 }

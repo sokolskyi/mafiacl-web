@@ -66,11 +66,17 @@ export default async function Page({ params }: PageProps<"/[locale]/blog">) {
               <li key={p.id}>
                 <Link
                   href={{ pathname: "/blog/[slug]", params: { slug: postSlug(p.id) } }}
-                  className="block h-full rounded-lg border border-white/15 bg-neutral-950/60 p-6 hover:border-red-500/70"
+                  className="block h-full overflow-hidden rounded-lg border border-white/15 bg-neutral-950/60 hover:border-red-500/70"
                 >
+                  {p.images[0] && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.images[0]} alt="" loading="lazy" className="aspect-video w-full object-cover" />
+                  )}
+                  <div className="p-6">
                   <p className="text-sm text-neutral-400">{p.author ?? "—"} · {dateFmt.format(new Date(p.approvedAt))}{p.lang !== locale && ` · ${p.lang.toUpperCase()}`}</p>
                   <p className="mt-1 text-xl font-bold">{p.title}</p>
                   <p className="mt-2 line-clamp-3 text-neutral-300">{paragraphs(p.body)[0]}</p>
+                  </div>
                 </Link>
               </li>
             ))}

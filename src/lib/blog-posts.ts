@@ -14,6 +14,8 @@ export type BlogPost = {
   body: string;
   approvedAt: string;
   author: string | null;
+  /** Первая — обложка. */
+  images: string[];
 };
 
 export const postSlug = (id: number) => `post-${id}`;
@@ -30,7 +32,7 @@ export async function getApprovedPosts(limit = 30): Promise<BlogPost[]> {
   if (!isSupabaseConfigured) return [];
   const { data, error } = await createPublicClient()
     .from("blog_posts")
-    .select("id, lang, title, body, approved_at, profiles!blog_posts_author_id_fkey ( nickname )")
+    .select("id, lang, title, body, images, approved_at, profiles!blog_posts_author_id_fkey ( nickname )")
     .eq("status", "approved")
     .order("approved_at", { ascending: false })
     .limit(limit);
@@ -45,14 +47,14 @@ export async function getApprovedPost(id: number): Promise<BlogPost | null> {
   if (!isSupabaseConfigured) return null;
   const { data } = await createPublicClient()
     .from("blog_posts")
-    .select("id, lang, title, body, approved_at, profiles!blog_posts_author_id_fkey ( nickname )")
+    .select("id, lang, title, body, images, approved_at, profiles!blog_posts_author_id_fkey ( nickname )")
     .eq("status", "approved")
     .eq("id", id)
     .maybeSingle();
   return data ? toPost(data) : null;
 }
 
-type Row = { id: number; lang: string; title: string; body: string; approved_at: string | null; profiles: unknown };
+type Row = { id: number; lang: string; title: string; body: string; images: string[] | null; approved_at: string | null; profiles: unknown };
 function toPost(r: Row): BlogPost {
   return {
     id: r.id,
@@ -61,6 +63,7 @@ function toPost(r: Row): BlogPost {
     body: r.body,
     approvedAt: r.approved_at ?? "",
     author: (r.profiles as { nickname: string | null } | null)?.nickname ?? null,
+    images: (r.images ?? []).filter((u) => u.startsWith("https://")),
   };
 }
 

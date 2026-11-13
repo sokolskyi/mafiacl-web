@@ -3,6 +3,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
 import { ALIASES_TAG, getAliases, namesOf } from "@/lib/aliases";
+import { parseProfileLinks, type ProfileLinks } from "@/lib/profileLinks";
 
 /** Тег кеша сыгранных партий: сбрасывается при сохранении итога партии. */
 export const MATCHES_TAG = "matches";
@@ -56,8 +57,8 @@ export type PlayerPage = {
   since: string;
   /** Номер участника клуба (после верификации). */
   memberNo: number | null;
-  /** ID игрока на markery.online. */
-  markeryId: number | null;
+  /** Профили на сайтах рейтингов (markery, ФИИМ, Mafgame, Emotion Games, iMafia). */
+  links: ProfileLinks;
   /** Старые ники игрока (архивы и зал славы засчитываются и под ними). */
   aliases: string[];
   staff: { club: string; role: string }[];
@@ -100,7 +101,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   const pattern = nick.replace(/[\\%_]/g, (c) => `\\${c}`);
   const { data: profiles } = await db
     .from("profiles")
-    .select("id, nickname, avatar_url, city, created_at, member_no, markery_id")
+    .select("id, nickname, avatar_url, city, created_at, member_no, links")
     .ilike("nickname", pattern)
     .limit(2);
   const p = profiles?.length === 1 ? profiles[0] : null;
@@ -240,7 +241,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     city: p.city ?? null,
     since: p.created_at,
     memberNo: p.member_no ?? null,
-    markeryId: p.markery_id ?? null,
+    links: parseProfileLinks(p.links),
     aliases: aliasNames,
     staff: (staff ?? []).map((s) => ({ club: (s.clubs as unknown as { name: string } | null)?.name ?? "", role: s.role })),
     stats: {

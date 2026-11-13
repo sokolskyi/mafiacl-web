@@ -291,3 +291,5 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 -- Дополнение (MCP: blog_posts_and_club_streaks): таблица blog_posts (статьи игроков, модерация админом),
 -- триггер начисляет +15 Respect за первую одобренную статью в году (ref blog:YYYY);
 -- серии считаются по всем клубным вечерам подряд (rating/fun/tournament), а не по одному расписанию.
+-- Дополнение (MCP: profile_links_city_key_blog_images): profiles.links (профили на markery/ФИИМ/Mafgame/Emotion Games/iMafia),
+-- profiles.city хранит ключ города из списка сайта, blog_posts.images (до 4) и публичное хранилище 'blog'.

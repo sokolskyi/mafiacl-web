@@ -1,23 +1,26 @@
 "use client";
 
 import { useActionState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { updateNickname, type ProfileState } from "@/lib/auth/actions";
+import { PROFILE_SERVICES, type ProfileLinks } from "@/lib/profileLinks";
+import { CityPicker } from "./CityPicker";
 
 export function NicknameForm({
   current,
   city,
-  markeryId,
+  links,
   birthday,
   birthdayRequest,
 }: {
   current: string | null;
   city: string | null;
-  markeryId: number | null;
+  links: ProfileLinks;
   birthday: string | null;
   birthdayRequest: string | null;
 }) {
   const t = useTranslations("account");
+  const locale = useLocale();
   const [state, action, pending] = useActionState<ProfileState, FormData>(updateNickname, {
     status: "idle",
   });
@@ -50,19 +53,15 @@ export function NicknameForm({
       <p id="nickname-hint" className="mt-2 text-sm text-neutral-400">
         {t("nicknameHint")}
       </p>
-      <label htmlFor="city" className="mt-5 block text-sm font-semibold">
-        {t("city")}
-      </label>
-      <input
-        id="city"
+      <CityPicker
         name="city"
-        defaultValue={city ?? ""}
-        maxLength={60}
-        autoComplete="address-level2"
+        initial={city}
+        locale={locale}
+        label={t("city")}
         placeholder={t("cityPlaceholder")}
-        className="mt-2 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
+        hint={t("cityHint")}
+        noMatch={t("cityNoMatch")}
       />
-      <p className="mt-2 text-sm text-neutral-400">{t("cityHint")}</p>
       <label htmlFor="birthday" className="mt-5 block text-sm font-semibold">
         {t("birthday")}
         {!birthday && <span className="text-red-400"> *</span>}
@@ -82,19 +81,24 @@ export function NicknameForm({
       <p id="birthday-hint" className="mt-2 text-sm text-neutral-400">
         {birthdayRequest ? t("birthdayPending") : birthday ? t("birthdayChangeHint") : t("birthdayHint")}
       </p>
-      <label htmlFor="markery" className="mt-5 block text-sm font-semibold">
-        {t("markery")}
-      </label>
-      <input
-        id="markery"
-        name="markery"
-        defaultValue={markeryId ? `https://markery.online/playerStatistics?playerId=${markeryId}` : ""}
-        maxLength={300}
-        inputMode="url"
-        placeholder="https://markery.online/playerStatistics?playerId=…"
-        className="mt-2 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
-      />
-      <p className="mt-2 text-sm text-neutral-400">{t("markeryHint")}</p>
+      <fieldset className="mt-6">
+        <legend className="text-sm font-semibold">{t("profilesTitle")}</legend>
+        <p className="mt-1 text-sm text-neutral-400">{t("profilesHint")}</p>
+        {PROFILE_SERVICES.map((svc) => (
+          <div key={svc.key} className="mt-3">
+            <label htmlFor={`link-${svc.key}`} className="block text-sm">{svc.label}</label>
+            <input
+              id={`link-${svc.key}`}
+              name={`link_${svc.key}`}
+              defaultValue={links[svc.key] ?? ""}
+              maxLength={300}
+              inputMode="url"
+              placeholder={svc.example}
+              className="mt-1 w-full rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
+            />
+          </div>
+        ))}
+      </fieldset>
       <p id="nickname-status" role="status" className="mt-2 text-sm">
         {state.status === "saved" && <span className="text-green-400">{t("saved")}</span>}
         {state.status === "birthdayRequested" && <span className="text-green-400">{t("birthdayRequested")}</span>}

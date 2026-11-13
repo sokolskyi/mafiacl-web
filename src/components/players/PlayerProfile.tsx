@@ -12,6 +12,8 @@ import { getPremierTotals } from "@/lib/ratingArchive";
 import { awardsOf } from "@/lib/awards";
 import { compareWithClub } from "@/lib/clubCompare";
 import { getAliases } from "@/lib/aliases";
+import { PROFILE_SERVICES } from "@/lib/profileLinks";
+import { cityLabel } from "@/lib/cities";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -68,7 +70,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           {player.aliases.length > 0 && <p className="mt-1 text-sm text-neutral-400">{t("aliases", { names: player.aliases.join(", ") })}</p>}
           <p className="mt-1 text-sm text-neutral-400">
             {player.memberNo && <span>ID {formatMemberNo(player.memberNo)} · </span>}
-            {player.city && <span>📍 {player.city} · </span>}
+            {player.city && <span>📍 {cityLabel(player.city, locale)} · </span>}
             {t("since", { date: since })}
           </p>
           {titles.length > 0 && (
@@ -114,16 +116,17 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         </div>
         <div className="flex flex-wrap gap-2 sm:ml-auto sm:self-start">
           <PlayerShare locale={locale} nickname={player.nickname} games={s.games} />
-          {player.markeryId && (
+          {PROFILE_SERVICES.filter((svc) => player.links[svc.key]).map((svc) => (
             <a
-              href={`https://markery.online/playerStatistics?playerId=${player.markeryId}`}
+              key={svc.key}
+              href={player.links[svc.key]}
               target="_blank"
-              rel="noopener"
+              rel="noopener nofollow"
               className="inline-flex min-h-11 items-center rounded-full border border-white/40 px-4 text-sm font-semibold hover:bg-white/10"
             >
-              {t("markery")} ↗
+              {svc.label} ↗
             </a>
-          )}
+          ))}
         </div>
       </header>
 

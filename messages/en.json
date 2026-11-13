@@ -204,16 +204,14 @@
     "checkingBot": "Checking you're not a bot…",
     "captcha": "The bot check failed. Reload the page and try again.",
     "city": "City",
-    "cityPlaceholder": "e.g. Prague",
-    "cityHint": "Shown on your player profile. You can leave it empty.",
+    "cityPlaceholder": "Start typing: Prague, Praha, Прага…",
+    "cityHint": "Pick your city from the list. Not there? Message the club and we will add it.",
     "warNotice": "Our club condemns Russia's aggression against Ukraine. Therefore, people residing in Russia or Belarus cannot register on our website.",
     "verificationPending": "Your account is waiting for the club's approval. Until then you can't sign up for games; everything else already works.",
     "verificationRejected": "The club did not approve your account. If this is a mistake, please contact the organiser.",
     "verificationBotHint": "Connect the Telegram bot below and we'll let you know once you're approved.",
     "apple": "Sign in with Apple",
     "microsoft": "Sign in with Microsoft",
-    "markery": "Profile on markery.online",
-    "markeryHint": "Link to your stats on markery.online — a button will appear on your player page. Optional.",
     "invalidMarkery": "This doesn’t look like a markery.online link: paste a link with playerId=… or the player number.",
     "birthday": "Date of birth",
     "birthdayHint": "Required. On your birthday the club gives you 10 Respect. Later, only an administrator can change the date.",
@@ -224,7 +222,12 @@
     "invalidBirthday": "Check your date of birth.",
     "birthdayMissing": "Add your date of birth to your profile — it is a required field.",
     "birthdayMissingLink": "Fill in",
-    "birthdayGreeting": "{name}, MafiaCL wishes you a happy birthday! Thank you for being with us — here are 10 Respect from the club."
+    "birthdayGreeting": "{name}, MafiaCL wishes you a happy birthday! Thank you for being with us — here are 10 Respect from the club.",
+    "cityNoMatch": "No such city in the list.",
+    "invalidCity": "Pick a city from the list.",
+    "invalidLink": "Check your profile links: each must point to that service’s site.",
+    "profilesTitle": "Profiles on rating sites",
+    "profilesHint": "Paste links to your profiles — they will show as buttons on your player page. Optional."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -2516,6 +2519,13 @@
     "listInvite": "Want to write an article?",
     "listInviteLink": "In your account",
     "back": "Blog",
-    "kicker": "Player article"
+    "kicker": "Player article",
+    "images": "Images (up to 4)",
+    "imagesHint": "The first becomes the article cover, the rest appear below the text.",
+    "imagesAdd": "Add an image",
+    "imagesUploading": "Uploading…",
+    "imagesFailed": "Could not upload the image. Please try again.",
+    "imagesRemove": "Remove image",
+    "imagesCover": "cover"
   }
 }

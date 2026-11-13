@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { submitPost } from "@/lib/blog-actions";
 import { POST_LANGS, POST_LIMITS, postSlug } from "@/lib/blog-posts";
+import { PostImagesField } from "./PostImagesField";
 
 /** Кабинет: статья в блог клуба — форма и мои статьи со статусом. */
 export async function AccountBlog({ locale, notice }: { locale: Locale; notice?: string }) {
@@ -63,6 +64,9 @@ export async function AccountBlog({ locale, notice }: { locale: Locale; notice?:
             <textarea name="body" required rows={12} minLength={POST_LIMITS.body[0]} maxLength={POST_LIMITS.body[1]} className={input} />
           </label>
           <p className="text-xs text-neutral-400">{t("bodyHint", { min: POST_LIMITS.body[0] })}</p>
+          <PostImagesField
+            labels={{ title: t("images"), hint: t("imagesHint"), add: t("imagesAdd"), uploading: t("imagesUploading"), failed: t("imagesFailed"), remove: t("imagesRemove"), cover: t("imagesCover") }}
+          />
           <button type="submit" className="min-h-11 rounded bg-red-600 px-5 font-semibold hover:bg-red-500">{t("submit")}</button>
         </form>
       </details>

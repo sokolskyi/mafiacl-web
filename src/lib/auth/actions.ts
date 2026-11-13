@@ -8,6 +8,8 @@ import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { cityByKey } from "@/lib/cities";
+import { PROFILE_SERVICES, normalizeProfileLink, type ProfileLinks } from "@/lib/profileLinks";
 
 function toLocale(value: FormDataEntryValue | null): Locale {
   const v = String(value ?? "");
@@ -85,7 +87,7 @@ export async function signOut(formData: FormData) {
   redirect(getPathname({ href: "/account", locale }));
 }
 
-export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidBirthday" | "birthdayRequired" | "birthdayRequested" | "taken" | "error" };
+export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidCity" | "invalidLink" | "invalidBirthday" | "birthdayRequired" | "birthdayRequested" | "taken" | "error" };
 
 /** Ник игрока: 2–32 символа, без пробелов по краям, уникален без учёта регистра. */
 export async function updateNickname(_prev: ProfileState, formData: FormData): Promise<ProfileState> {
@@ -97,11 +99,21 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   const userId = claims?.claims.sub;
   if (!userId) return { status: "error" };
 
-  const city = String(formData.get("city") ?? "").trim().slice(0, 60) || null;
-  // Ссылка на профиль markery.online или просто номер игрока
-  const markeryRaw = String(formData.get("markery") ?? "").trim();
-  const markeryMatch = markeryRaw.match(/playerId=(\d{1,8})/i) ?? markeryRaw.match(/^(\d{1,8})$/);
-  if (markeryRaw && !markeryMatch) return { status: "invalidMarkery" };
+  // Город — только из списка (ключ); старое значение свободным текстом можно оставить как есть.
+  const { data: currentProfile } = await supabase.from("profiles").select("city").eq("id", userId).maybeSingle();
+  const cityRaw = String(formData.get("city") ?? "").trim().slice(0, 60);
+  if (cityRaw && !cityByKey(cityRaw) && cityRaw !== currentProfile?.city) return { status: "invalidCity" };
+  const city = cityRaw || null;
+  // Профили на сайтах рейтингов: каждая ссылка — только на сайт своего сервиса.
+  const links: ProfileLinks = {};
+  for (const svc of PROFILE_SERVICES) {
+    const raw = String(formData.get(`link_${svc.key}`) ?? "").trim();
+    if (!raw) continue;
+    const norm = normalizeProfileLink(svc.key, raw);
+    if (!norm) return { status: "invalidLink" };
+    links[svc.key] = norm;
+  }
+  const markeryMatch = links.markery?.match(/playerId=(\d{1,8})/i);
   const markery_id = markeryMatch ? Number(markeryMatch[1]) || null : null;
   // Дата рождения обязательна; уже заданную меняет только админ (здесь — заявка на смену).
   const birthdayRaw = String(formData.get("birthday") ?? "").trim();
@@ -109,7 +121,7 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   const { data: priv } = await supabase.from("profile_private").select("birthday").eq("profile_id", userId).maybeSingle();
   if (!priv?.birthday && !birthdayRaw) return { status: "birthdayRequired" };
 
-  const { error } = await supabase.from("profiles").update({ nickname, city, markery_id }).eq("id", userId);
+  const { error } = await supabase.from("profiles").update({ nickname, city, markery_id, links }).eq("id", userId);
   if (error) {
     if (error.code === "23505") return { status: "taken" };
     console.error("updateNickname failed", { code: error.code, message: error.message });

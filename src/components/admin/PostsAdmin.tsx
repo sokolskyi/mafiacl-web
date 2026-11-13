@@ -8,7 +8,7 @@ import { paragraphs } from "@/lib/blog-posts";
 export async function PostsAdmin({ locale, clubIds }: { locale: Locale; clubIds: number[] }) {
   const { data } = await createAdminClient()
     .from("blog_posts")
-    .select("id, lang, title, body, created_at, profiles!blog_posts_author_id_fkey ( nickname )")
+    .select("id, lang, title, body, images, created_at, profiles!blog_posts_author_id_fkey ( nickname )")
     .in("club_id", clubIds)
     .eq("status", "pending")
     .order("created_at")
@@ -30,6 +30,14 @@ export async function PostsAdmin({ locale, clubIds }: { locale: Locale; clubIds:
                   {(p.profiles as unknown as { nickname: string | null } | null)?.nickname ?? "—"} · {p.lang.toUpperCase()} · {p.body.length}
                 </span>
               </summary>
+              {(p.images ?? []).length > 0 && (
+                <div className="flex flex-wrap gap-2 border-t border-white/10 px-4 py-3">
+                  {(p.images as string[]).map((src) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img key={src} src={src} alt="" className="h-24 w-36 rounded object-cover" />
+                  ))}
+                </div>
+              )}
               <div className="space-y-3 border-t border-white/10 px-4 py-3 text-neutral-200">
                 {paragraphs(p.body).map((x, i) => <p key={i} className="whitespace-pre-line">{x}</p>)}
               </div>

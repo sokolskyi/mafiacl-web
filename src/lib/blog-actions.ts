@@ -9,6 +9,10 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { BLOG_POSTS_TAG, POST_LANGS, POST_LIMITS } from "@/lib/blog-posts";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
+import { SUPABASE_URL } from "@/lib/supabase/env";
+
+const MAX_IMAGES = 4;
+const imagePrefix = (userId: string) => `${SUPABASE_URL}/storage/v1/object/public/blog/${userId}/`;
 
 function toLocale(value: FormDataEntryValue | null): Locale {
   const v = String(value ?? "");
@@ -32,6 +36,15 @@ export async function submitPost(formData: FormData) {
     !(POST_LANGS as readonly string[]).includes(lang)
   ) redirect(`${back}?post=invalid#blog`);
 
+  // Картинки — только загруженные этим игроком в хранилище блога.
+  const images = String(formData.get("images") ?? "")
+    .split("\n")
+    .map((x) => x.trim())
+    .filter(Boolean);
+  if (images.length > MAX_IMAGES || images.some((u) => !u.startsWith(imagePrefix(userId)) || !/^[\w\-/:.]+\.webp$/.test(u))) {
+    redirect(`${back}?post=invalid#blog`);
+  }
+
   const admin = createAdminClient();
   const [{ data: profile }, { data: club }, { count }] = await Promise.all([
     admin.from("profiles").select("verification").eq("id", userId).maybeSingle(),
@@ -40,7 +53,7 @@ export async function submitPost(formData: FormData) {
   ]);
   if (profile?.verification !== "approved" || !club) redirect(`${back}?post=unverified#blog`);
   if ((count ?? 0) >= 2) redirect(`${back}?post=tooMany#blog`);
-  const { error } = await admin.from("blog_posts").insert({ club_id: club.id, author_id: userId, lang, title, body });
+  const { error } = await admin.from("blog_posts").insert({ club_id: club.id, author_id: userId, lang, title, body, images });
   if (error) {
     console.error("submitPost failed", { code: error.code, message: error.message });
     redirect(`${back}?post=error#blog`);
@@ -71,4 +84,27 @@ export async function decidePost(formData: FormData) {
   }
   updateTag(BLOG_POSTS_TAG);
   redirect(`${back}#posts`);
+}
+
+/** Одноразовые ссылки для загрузки картинок к статье (до 4). Только одобренные игроки. */
+export async function createPostImageUploads(count: number) {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getClaims();
+  const userId = data?.claims.sub;
+  if (!userId) return { error: "forbidden" as const };
+  const admin = createAdminClient();
+  const { data: profile } = await admin.from("profiles").select("verification").eq("id", userId).maybeSingle();
+  if (profile?.verification !== "approved") return { error: "forbidden" as const };
+  const n = Math.min(Math.max(Math.trunc(count), 1), MAX_IMAGES);
+  const uploads: { path: string; token: string; publicUrl: string }[] = [];
+  for (let i = 0; i < n; i++) {
+    const path = `${userId}/${crypto.randomUUID()}.webp`;
+    const { data: up, error } = await admin.storage.from("blog").createSignedUploadUrl(path);
+    if (error || !up) {
+      console.error("createPostImageUploads failed", { message: error?.message });
+      return { error: "failed" as const };
+    }
+    uploads.push({ path: up.path, token: up.token, publicUrl: admin.storage.from("blog").getPublicUrl(up.path).data.publicUrl });
+  }
+  return { uploads };
 }

@@ -204,16 +204,14 @@
     "checkingBot": "Ověřujeme, že nejste robot…",
     "captcha": "Ověření se nezdařilo. Obnovte stránku a zkuste to znovu.",
     "city": "Město",
-    "cityPlaceholder": "např. Praha",
-    "cityHint": "Zobrazuje se ve vašem hráčském profilu. Můžete nechat prázdné.",
+    "cityPlaceholder": "Začněte psát: Praha, Prague, Прага…",
+    "cityHint": "Vyberte město ze seznamu. Chybí vaše město? Napište klubu, doplníme ho.",
     "warNotice": "Náš klub odsuzuje ruskou agresi proti Ukrajině. Osoby s bydlištěm v Rusku a Bělorusku se proto na našem webu nemohou registrovat.",
     "verificationPending": "Váš účet čeká na schválení klubem. Do té doby se nelze zapisovat na hry, vše ostatní už funguje.",
     "verificationRejected": "Klub váš účet neschválil. Pokud jde o omyl, napište pořadateli.",
     "verificationBotHint": "Připojte níže Telegram bota — dáme vám vědět, až účet schválíme.",
     "apple": "Přihlásit přes Apple",
     "microsoft": "Přihlásit přes Microsoft",
-    "markery": "Profil na markery.online",
-    "markeryHint": "Odkaz na vaši statistiku na markery.online — v profilu hráče se objeví tlačítko. Můžete nechat prázdné.",
     "invalidMarkery": "Nevypadá to jako odkaz na markery.online: potřebujeme odkaz s playerId=… nebo číslo hráče.",
     "birthday": "Datum narození",
     "birthdayHint": "Povinné. K narozeninám vám klub daruje 10 Respect. Datum pak lze změnit jen přes administrátora.",
@@ -224,7 +222,12 @@
     "invalidBirthday": "Zkontrolujte datum narození.",
     "birthdayMissing": "Doplňte v profilu datum narození — je to povinné pole.",
     "birthdayMissingLink": "Vyplnit",
-    "birthdayGreeting": "{name}, klub MafiaCL vám přeje vše nejlepší k narozeninám! Děkujeme, že jste s námi — darujeme vám 10 Respect."
+    "birthdayGreeting": "{name}, klub MafiaCL vám přeje vše nejlepší k narozeninám! Děkujeme, že jste s námi — darujeme vám 10 Respect.",
+    "cityNoMatch": "Takové město v seznamu není.",
+    "invalidCity": "Vyberte město ze seznamu.",
+    "invalidLink": "Zkontrolujte odkazy na profily: každý musí vést na web své služby.",
+    "profilesTitle": "Profily na webech žebříčků",
+    "profilesHint": "Vložte odkazy na své profily — na vaší stránce hráče se objeví jako tlačítka. Můžete nechat prázdné."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -2516,6 +2519,13 @@
     "listInvite": "Chcete napsat článek?",
     "listInviteLink": "V účtu",
     "back": "Blog",
-    "kicker": "Článek hráče"
+    "kicker": "Článek hráče",
+    "images": "Obrázky (až 4)",
+    "imagesHint": "První bude titulním obrázkem článku, ostatní budou pod textem.",
+    "imagesAdd": "Přidat obrázek",
+    "imagesUploading": "Nahráváme…",
+    "imagesFailed": "Obrázek se nepodařilo nahrát. Zkuste to znovu.",
+    "imagesRemove": "Odebrat obrázek",
+    "imagesCover": "titulní"
   }
 }
