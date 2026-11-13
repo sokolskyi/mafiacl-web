@@ -1,3 +1,4 @@
+import { PriceSchedule } from "./PriceSchedule";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -36,9 +37,14 @@ export async function ShopGrid({ products, locale }: { products: Product[]; loca
               </h2>
               {p.description && <p className="mt-1 text-sm text-neutral-400">{loc(p.description, locale)}</p>}
               <p className="mt-auto pt-4 flex items-baseline justify-between">
-                <span className="font-display text-3xl font-extrabold">{money(locale, p.priceCzk)}</span>
+                {p.onSale ? (
+                  <span className="font-display text-3xl font-extrabold">{money(locale, p.priceCzk)}</span>
+                ) : (
+                  <span className="font-semibold text-amber-300">{t("notOnSale")}</span>
+                )}
                 {soldOut && <span className="text-sm font-semibold text-amber-400">{t("soldOut")}</span>}
               </p>
+              <PriceSchedule product={p} locale={locale} compact />
             </div>
           </li>
         );

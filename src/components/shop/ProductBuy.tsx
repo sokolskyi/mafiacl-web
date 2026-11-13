@@ -20,6 +20,8 @@ export function ProductBuy(props: {
   askNickname: boolean;
   askColor: boolean;
   defaultNickname?: string;
+  /** Нет цены на сегодня — вместо кнопки показываем notOnSale. */
+  notOnSale?: ReactNode;
 }) {
   const firstAvailable = props.variants.find((v) => v.stock === null || v.stock > 0)?.id ?? null;
   const [variantId, setVariantId] = useState<number | null>(firstAvailable);
@@ -32,7 +34,7 @@ export function ProductBuy(props: {
       <div>
         {props.header}
         <div className="mt-8">
-          <AddToCart
+          {props.notOnSale ?? <AddToCart
             productId={props.productId}
             name={props.name}
             priceCzk={props.priceCzk}
@@ -43,7 +45,7 @@ export function ProductBuy(props: {
             askColor={props.askColor}
             defaultNickname={props.defaultNickname}
             onVariantChange={setVariantId}
-          />
+          />}
         </div>
         {props.footer}
       </div>

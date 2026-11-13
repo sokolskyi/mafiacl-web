@@ -27,7 +27,7 @@ export async function AdminShop({ locale, saved, orderPaid, error }: { locale: L
       <p><Link href="/admin" className="text-sm text-neutral-300 underline">← {t("back")}</Link></p>
       {saved && <p role="status" className="text-green-400">{t("saved")}</p>}
       {orderPaid && <p role="status" className="text-green-400">{t("orderPaid")}</p>}
-      {error && <p role="alert" className="text-red-400">{t(`errors.${error === "invalid" || error === "duplicate" ? error : "save"}`)}</p>}
+      {error && <p role="alert" className="text-red-400">{t(`errors.${error === "invalid" || error === "duplicate" || error === "schedule" ? error : "save"}`)}</p>}
 
       {await Promise.all(
         clubs.map(async (club) => {
@@ -132,6 +132,8 @@ function OrderButton({ locale, id, status, label, primary }: { locale: Locale; i
 
 type T = Awaited<ReturnType<typeof getTranslations>>;
 
+const dmy = (iso: string | null) => (iso ? iso.split("-").reverse().join(".") : "");
+
 function ProductForm({ t, locale, clubId, product }: { t: T; locale: Locale; clubId: number; product?: AdminProduct }) {
   const variantsText = product ? product.variants.filter((v) => v.label !== "").map((v) => `${v.label}${v.stock === null ? "" : ` = ${v.stock}`}`).join("\n") : "";
   const single = product?.variants.length === 1 && product.variants[0].label === "" ? product.variants[0].stock : null;
@@ -181,6 +183,20 @@ function ProductForm({ t, locale, clubId, product }: { t: T; locale: Locale; clu
             </select>
             <span className="mt-1 block text-xs text-neutral-500">{t("fields.planHint")}</span>
           </label>
+        </>
+      )}
+      {product && (
+        <>
+          <label className="text-sm sm:col-span-2">{t("fields.schedule")}
+            <textarea name="schedule" rows={4} defaultValue={product.schedule.map((r) => `${dmy(r.from)}–${dmy(r.until)} = ${r.priceCzk}`).join("\n")} placeholder={"–15.02.2027 = 9900\n16.02.2027–15.03.2027 = 10900"} className={`${input} font-mono`} />
+            <span className="mt-1 block text-xs text-neutral-500">{t("fields.scheduleHint")}</span>
+          </label>
+          {product.kind === "membership" && product.plan === "year" && (
+            <label className="text-sm">{t("fields.validUntil")}
+              <input name="validUntil" inputMode="numeric" placeholder="31.12.2027" pattern="\d{2}\.\d{2}\.\d{4}" defaultValue={dmy(product.validUntil)} className={input} />
+              <span className="mt-1 block text-xs text-neutral-500">{t("fields.validUntilHint")}</span>
+            </label>
+          )}
         </>
       )}
       {(!product || product.kind === "merch") && (

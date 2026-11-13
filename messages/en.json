@@ -941,7 +941,10 @@
     "cut": "Cut",
     "size": "Size",
     "cutMen": "Men's",
-    "cutWomen": "Women's"
+    "cutWomen": "Women's",
+    "priceUntil": "Price valid until {date}",
+    "nextPrice": "from {date}: {price}",
+    "notOnSale": "Not on sale right now"
   },
   "adminShop": {
     "title": "Shop",
@@ -953,7 +956,8 @@
     "errors": {
       "invalid": "Check the fields: Czech name, price, https:// image link and numeric stock are required.",
       "duplicate": "A product with this name already exists.",
-      "save": "Could not save."
+      "save": "Could not save.",
+      "schedule": "Check the date-based prices: format “DD.MM.YYYY–DD.MM.YYYY = price” and the pass end date."
     },
     "orders": "Orders — {club}",
     "noOrders": "No orders yet.",
@@ -1005,7 +1009,11 @@
       "askNickname": "Ask for a nickname to print",
       "askColor": "Ask for a colour",
       "variantPhotos": "Photos per variant",
-      "variantPhotosHint": "If a variant has its own photos (e.g. each mug), upload them here — they show when that variant is chosen."
+      "variantPhotosHint": "If a variant has its own photos (e.g. each mug), upload them here — they show when that variant is chosen.",
+      "schedule": "Prices by purchase date",
+      "scheduleHint": "One line per period: “16.02.2027–15.03.2027 = 10900”. Start or end may be left out: “–15.02.2027 = 9900”. If there are lines but none covers today, the item is not on sale. Empty — always the regular price.",
+      "validUntil": "Annual pass valid until",
+      "validUntilHint": "E.g. 31.12.2027. Empty — until 31 December of the purchase year."
     },
     "plans": {
       "month": "1 month",
@@ -2375,7 +2383,7 @@
   },
   "blog": {
     "interviewsTitle": "Interviews",
-    "interviewsLead": "Conversations with top players — Masters of Mafia according to FIIM and Mafgame. Videos on the club’s YouTube channel (in Russian).",
+    "interviewsLead": "Conversations with top players — Magisters of Mafia according to FIIM and Mafgame. Videos on the club’s YouTube channel (in Russian).",
     "interviewsAll": "All interviews on YouTube",
     "masterclassesTitle": "Masterclasses",
     "masterclassesLead": "The club's strongest players break the game down: logic, table maths, playing red and mafia, the false sheriff. Videos on the club's YouTube channel.",

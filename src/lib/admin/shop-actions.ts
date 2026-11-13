@@ -105,6 +105,30 @@ async function syncVariants(productId: number, variants: { label: string; stock:
   return ok;
 }
 
+const DMY = /^(\d{2})\.(\d{2})\.(\d{4})$/;
+function isoDate(dmy: string | undefined) {
+  if (!dmy) return null;
+  const m = DMY.exec(dmy);
+  if (!m) return undefined;
+  const iso = `${m[3]}-${m[2]}-${m[1]}`;
+  const d = new Date(`${iso}T00:00:00Z`);
+  return Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== iso ? undefined : iso;
+}
+
+/** «16.02.2027–15.03.2027 = 10900», начало или конец можно не писать. null — ошибка в строке. */
+function parseSchedule(text: string) {
+  const rows: { from: string | null; until: string | null; price: number }[] = [];
+  for (const line of text.split("\n").map((l) => l.trim()).filter(Boolean)) {
+    const m = /^(\d{2}\.\d{2}\.\d{4})?\s*[–—-]\s*(\d{2}\.\d{2}\.\d{4})?\s*=\s*(\d{1,7})$/.exec(line);
+    if (!m) return null;
+    const from = isoDate(m[1]);
+    const until = isoDate(m[2]);
+    if (from === undefined || until === undefined || (from && until && from > until)) return null;
+    rows.push({ from, until, price: Number(m[3]) });
+  }
+  return rows.length > 24 ? null : rows;
+}
+
 export async function saveProduct(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
   const idRaw = String(formData.get("productId") ?? "");
@@ -188,6 +212,22 @@ export async function saveProduct(formData: FormData) {
     const { error } = await supabase.from("shop_variants").update({ images: imgs.slice(0, 12) }).eq("id", Number(m[1])).eq("product_id", productId as number);
     if (error) {
       console.error("variant images failed", { variantId: m[1], code: error.code, message: error.message });
+      ok = false;
+    }
+  }
+  // Цены по датам и срок годового абонемента (только у уже созданного товара).
+  if (id && formData.has("schedule")) {
+    const schedule = parseSchedule(String(formData.get("schedule") ?? ""));
+    const validUntil = isoDate(String(formData.get("validUntil") ?? "").trim() || undefined);
+    const ctx = await getStaffContext();
+    const allowed = ctx?.clubs.some((c) => c.id === clubId && c.roles.some((r) => r === "owner" || r === "admin"));
+    if (!schedule || validUntil === undefined || !allowed) {
+      updateTag(SHOP_TAG);
+      redirect(back(locale, "error=schedule"));
+    }
+    const { error } = await createAdminClient().rpc("shop_set_price_schedule", { p_product: id, p_rows: schedule, p_valid_until: validUntil });
+    if (error) {
+      console.error("shop_set_price_schedule failed", { id, code: error.code, message: error.message });
       ok = false;
     }
   }

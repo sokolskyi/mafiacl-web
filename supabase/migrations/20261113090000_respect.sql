@@ -298,3 +298,8 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 --   ник меняется сам раз в год (nickname_change), чаще — заявкой владельцу (nickname_requests / nickname_decide),
 --   старый ник становится старым ником игрока (player_aliases);
 --   Respect за оплаченный абонемент: месяц +10, 3 месяца +30, год +100, особый срок — 10 за 30 дней (ref membership:<id>).
+-- Через MCP применены миграции shop_price_schedule и shop_set_price_schedule:
+--   shop_price_schedule (цены по датам покупки), shop_products.valid_until (до какого дня действует годовой),
+--   shop_order_items.membership_until; shop_create_order берёт цену на сегодня (private.shop_price_on),
+--   годовой 2027: до 15.02 — 9900, 16.02–15.03 — 10900, 16.03–30.04 — 9900, май — 9000, июнь–июль — 7500,
+--   август–сентябрь — 5500, с октября не продаётся; действует до 31.12.2027.

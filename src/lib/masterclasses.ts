@@ -23,5 +23,5 @@ export const INTERVIEW_PLAYLIST = "https://www.youtube.com/playlist?list=PLtrPZr
 export const INTERVIEWS: Masterclass[] = [
   { id: "pSei5wdLrgg", author: "Амахонда", title: "Магистр игры мафия по версии ФИИМ", lang: "ru", length: "31:16" },
   { id: "vem4eJTng4I", author: "Шершень", title: "Магистр игры мафия по версии ФИИМ", lang: "ru", length: "42:32" },
-  { id: "Y1PNZXbGS2E", author: "Королевич", title: "Мастер мафии по версии Mafgame", lang: "ru", length: "1:31:42" },
+  { id: "Y1PNZXbGS2E", author: "Королевич", title: "Магистр игры мафия по версии Mafgame", lang: "ru", length: "1:31:42" },
 ];

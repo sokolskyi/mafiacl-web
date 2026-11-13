@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getProduct, loc, money } from "@/lib/shop/queries";
+import { PriceSchedule } from "@/components/shop/PriceSchedule";
 import { ProductBuy } from "@/components/shop/ProductBuy";
 import { createClient } from "@/lib/supabase/server";
 
@@ -61,7 +62,8 @@ async function Inner({ params }: Pick<Props, "params">) {
         header={
           <>
             <h1 className="text-5xl sm:text-6xl">{name}</h1>
-            <p className="mt-4 font-display text-5xl font-extrabold">{money(locale, product.priceCzk)}</p>
+            {product.onSale && <p className="mt-4 font-display text-5xl font-extrabold">{money(locale, product.priceCzk)}</p>}
+            <PriceSchedule product={product} locale={locale} />
             {product.description && <p className="mt-5 max-w-prose text-lg text-neutral-300">{loc(product.description, locale)}</p>}
           </>
         }
@@ -76,6 +78,7 @@ async function Inner({ params }: Pick<Props, "params">) {
         askNickname={product.askNickname}
         askColor={product.askColor}
         defaultNickname={defaultNickname}
+        notOnSale={product.onSale ? undefined : <p className="text-lg font-semibold text-amber-300">{t("notOnSale")}</p>}
       />
     </>
   );

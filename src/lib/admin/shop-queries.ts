@@ -17,13 +17,17 @@ export type AdminProduct = {
   active: boolean;
   sort: number;
   variants: { id: number; label: string; stock: number | null; images: string[] }[];
+  /** До какого дня действует годовой абонемент (иначе — 31.12 года покупки). */
+  validUntil: string | null;
+  /** Цены по датам покупки. */
+  schedule: { from: string | null; until: string | null; priceCzk: number }[];
 };
 
 export async function getAdminProducts(clubId: number): Promise<AdminProduct[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("shop_products")
-    .select("id, slug, kind, membership_plan, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, active, sort, shop_variants ( id, label, stock, sort, images )")
+    .select("id, slug, kind, membership_plan, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, active, sort, valid_until, shop_variants ( id, label, stock, sort, images ), shop_price_schedule ( starts_on, ends_on, price_czk )")
     .eq("club_id", clubId)
     .order("sort")
     .order("id");
@@ -46,6 +50,10 @@ export async function getAdminProducts(clubId: number): Promise<AdminProduct[]> 
     active: p.active,
     sort: p.sort,
     variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock, images: v.images ?? [] })),
+    validUntil: p.valid_until,
+    schedule: [...(p.shop_price_schedule ?? [])]
+      .sort((a, b) => (a.starts_on ?? "").localeCompare(b.starts_on ?? ""))
+      .map((r) => ({ from: r.starts_on, until: r.ends_on, priceCzk: Number(r.price_czk) })),
   }));
 }
 

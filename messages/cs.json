@@ -941,7 +941,10 @@
     "cut": "Střih",
     "size": "Velikost",
     "cutMen": "Pánské",
-    "cutWomen": "Dámské"
+    "cutWomen": "Dámské",
+    "priceUntil": "Cena platí do {date}",
+    "nextPrice": "od {date} — {price}",
+    "notOnSale": "Momentálně se neprodává"
   },
   "adminShop": {
     "title": "Obchod",
@@ -953,7 +956,8 @@
     "errors": {
       "invalid": "Zkontrolujte pole: český název, cena, odkaz na fotku s https:// a čísla skladu.",
       "duplicate": "Produkt s tímto názvem už existuje.",
-      "save": "Uložení se nezdařilo."
+      "save": "Uložení se nezdařilo.",
+      "schedule": "Zkontrolujte ceny podle data: formát „DD.MM.RRRR–DD.MM.RRRR = cena“ a datum konce permanentky."
     },
     "orders": "Objednávky — {club}",
     "noOrders": "Zatím žádné objednávky.",
@@ -1005,7 +1009,11 @@
       "askNickname": "Ptát se na přezdívku k potisku",
       "askColor": "Ptát se na barvu",
       "variantPhotos": "Fotky podle variant",
-      "variantPhotosHint": "Má-li varianta vlastní fotky (např. každý hrnek), nahrajte je sem — zobrazí se při výběru varianty."
+      "variantPhotosHint": "Má-li varianta vlastní fotky (např. každý hrnek), nahrajte je sem — zobrazí se při výběru varianty.",
+      "schedule": "Ceny podle data nákupu",
+      "scheduleHint": "Jeden řádek na období: „16.02.2027–15.03.2027 = 10900“. Začátek nebo konec lze vynechat: „–15.02.2027 = 9900“. Pokud řádky existují a dnešní datum v nich není, položka se neprodává. Prázdné — vždy běžná cena.",
+      "validUntil": "Roční platí do",
+      "validUntilHint": "Např. 31.12.2027. Prázdné — do 31. prosince roku nákupu."
     },
     "plans": {
       "month": "1 měsíc",
@@ -2375,7 +2383,7 @@
   },
   "blog": {
     "interviewsTitle": "Rozhovory",
-    "interviewsLead": "Rozhovory s nejsilnějšími hráči — mistry mafie podle FIIM a Mafgame. Videa na YouTube kanálu klubu (rusky).",
+    "interviewsLead": "Rozhovory s nejsilnějšími hráči — magistry hry mafie podle FIIM a Mafgame. Videa na YouTube kanálu klubu (rusky).",
     "interviewsAll": "Všechny rozhovory na YouTube",
     "masterclassesTitle": "Masterclassy",
     "masterclassesLead": "Nejsilnější hráči klubu rozebírají hru: logiku, matematiku stolu, hru za červené i za mafii, falešného šerifa. Videa na YouTube kanálu klubu.",
