@@ -13,11 +13,12 @@ import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
 import { MemberRequests } from "./MemberRequests";
+import { AliasesAdmin } from "./AliasesAdmin";
 
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminHome({
-  locale, error, team, bot, membership, member,
-}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: string; member?: string }) {
+  locale, error, team, bot, membership, member, alias,
+}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: string; member?: string; alias?: string }) {
   await connection(); // админка всегда по запросу: дата, сессия
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
@@ -53,6 +54,9 @@ export async function AdminHome({
 
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
         <MemberRequests locale={locale} notice={member} />
+      )}
+      {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
+        <AliasesAdmin locale={locale} notice={alias} />
       )}
 
       <p>

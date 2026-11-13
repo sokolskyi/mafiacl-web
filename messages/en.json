@@ -535,6 +535,18 @@
         "apple": "Apple",
         "azure": "Microsoft"
       }
+    },
+    "aliases": {
+      "title": "Old player nicknames",
+      "hint": "If a player used another nickname or it is spelled differently (Latin and Cyrillic), link it to the current one — seasons, medals and the club comparison will count for the player. Click an old nickname to remove the link.",
+      "alias": "Old nickname",
+      "canonical": "Current nickname",
+      "add": "Link",
+      "list": "All links ({n})",
+      "saved": "Linked.",
+      "removed": "Link removed.",
+      "invalid": "Check the nicknames: both are required and must differ.",
+      "remove": "Remove {alias} → {canonical}"
     }
   },
   "match": {

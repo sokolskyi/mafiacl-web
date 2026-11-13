@@ -26,5 +26,5 @@ export default async function Page({ params, searchParams }: PageProps<"/[locale
 
 async function WithParams({ searchParams, locale }: { searchParams: PageProps<"/[locale]/admin">["searchParams"]; locale: Locale }) {
   const sp = await searchParams;
-  return <AdminHome locale={locale} error={typeof sp.error === "string" ? sp.error : undefined} team={sp.team === "1"} bot={sp.bot === "1"} membership={typeof sp.membership === "string" ? sp.membership : undefined} member={typeof sp.member === "string" ? sp.member : undefined} />;
+  return <AdminHome locale={locale} error={typeof sp.error === "string" ? sp.error : undefined} team={sp.team === "1"} bot={sp.bot === "1"} membership={typeof sp.membership === "string" ? sp.membership : undefined} member={typeof sp.member === "string" ? sp.member : undefined} alias={typeof sp.alias === "string" ? sp.alias : undefined} />;
 }

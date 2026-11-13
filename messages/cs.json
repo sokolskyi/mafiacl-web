@@ -535,6 +535,18 @@
         "apple": "Apple",
         "azure": "Microsoft"
       }
+    },
+    "aliases": {
+      "title": "Staré přezdívky hráčů",
+      "hint": "Pokud hráč hrál pod jinou přezdívkou nebo je zapsaná různě (latinkou a azbukou), propojte ji s aktuální — sezóny, medaile a srovnání s klubem se hráči započítají. Kliknutím na starou přezdívku propojení zrušíte.",
+      "alias": "Stará přezdívka",
+      "canonical": "Aktuální přezdívka",
+      "add": "Propojit",
+      "list": "Všechna propojení ({n})",
+      "saved": "Propojeno.",
+      "removed": "Propojení zrušeno.",
+      "invalid": "Zkontrolujte přezdívky: obě jsou povinné a nesmí být stejné.",
+      "remove": "Zrušit {alias} → {canonical}"
     }
   },
   "match": {
