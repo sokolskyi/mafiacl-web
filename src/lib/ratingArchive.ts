@@ -218,7 +218,7 @@ export type PremierTotals = {
 };
 
 /** Все игроки Premier League за все сезоны, по нику без учёта регистра. */
-export async function getPremierTotals(clubSlug: string): Promise<PremierTotals[]> {
+export async function getPremierTotals(clubSlug: string, aliases: { alias: string; canonical: string }[] = []): Promise<PremierTotals[]> {
   "use cache";
   cacheTag(RATING_ARCHIVE_TAG);
   cacheLife("days");
@@ -231,11 +231,13 @@ export async function getPremierTotals(clubSlug: string): Promise<PremierTotals[
     .eq("rating_archive.clubs.slug", clubSlug)
     .limit(5000);
   if (error) console.error("getPremierTotals failed", { code: error.code, message: error.message });
+  const toCanon = new Map(aliases.map((a) => [a.alias.toLowerCase(), a.canonical]));
   const m = new Map<string, PremierTotals>();
   for (const r of data ?? []) {
-    const k = r.nickname.toLowerCase();
+    const nick = toCanon.get(r.nickname.toLowerCase()) ?? r.nickname;
+    const k = nick.toLowerCase();
     const t = m.get(k) ?? {
-      nickname: r.nickname, games: 0, wins: 0, firstKilled: 0, extra: 0,
+      nickname: nick, games: 0, wins: 0, firstKilled: 0, extra: 0,
       civ: { w: 0, l: 0 }, sheriff: { w: 0, l: 0 }, mafia: { w: 0, l: 0 }, don: { w: 0, l: 0 },
     };
     t.games += r.games;

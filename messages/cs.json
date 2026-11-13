@@ -770,7 +770,8 @@
     "archiveFK": "PZ",
     "archiveFKFull": "Zabit jako první, podíl her",
     "archiveExtra": "Bonus/hra",
-    "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna"
+    "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna",
+    "aliases": "Hrál také jako: {names}"
   },
   "rating": {
     "filters": "Filtry žebříčku",

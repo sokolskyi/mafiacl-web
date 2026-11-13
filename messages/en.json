@@ -770,7 +770,8 @@
     "archiveFK": "KF",
     "archiveFKFull": "Killed first, share of games",
     "archiveExtra": "Extra/game",
-    "miniTitleSeason": "Mini-tournament {n} · season {season}"
+    "miniTitleSeason": "Mini-tournament {n} · season {season}",
+    "aliases": "Also played as: {names}"
   },
   "rating": {
     "filters": "Rating filters",

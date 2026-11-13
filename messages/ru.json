@@ -770,7 +770,8 @@
     "archiveFK": "ПУ",
     "archiveFKFull": "Первым убит, доля игр",
     "archiveExtra": "Доп/игра",
-    "miniTitleSeason": "Мини-турнир {n} · {season} сезон"
+    "miniTitleSeason": "Мини-турнир {n} · {season} сезон",
+    "aliases": "Также играл как: {names}"
   },
   "rating": {
     "filters": "Фильтры рейтинга",

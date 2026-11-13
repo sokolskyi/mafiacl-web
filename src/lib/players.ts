@@ -2,6 +2,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
+import { ALIASES_TAG, getAliases, namesOf } from "@/lib/aliases";
 
 /** Тег кеша сыгранных партий: сбрасывается при сохранении итога партии. */
 export const MATCHES_TAG = "matches";
@@ -57,6 +58,8 @@ export type PlayerPage = {
   memberNo: number | null;
   /** ID игрока на markery.online. */
   markeryId: number | null;
+  /** Старые ники игрока (архивы и зал славы засчитываются и под ними). */
+  aliases: string[];
   staff: { club: string; role: string }[];
   stats: {
     /** Все партии: сайт + архивные рейтинги сезонов. */
@@ -89,7 +92,7 @@ export type PlayerPage = {
 export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   "use cache";
   cacheTag(MATCHES_TAG);
-  cacheTag(RATING_ARCHIVE_TAG);
+  cacheTag(RATING_ARCHIVE_TAG, ALIASES_TAG);
   cacheLife("minutes");
   if (!isSupabaseConfigured || !nick || nick.length > 32) return null;
 
@@ -103,7 +106,10 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   const p = profiles?.length === 1 ? profiles[0] : null;
   if (!p?.nickname) return null;
 
-  const [{ data: staff }, { data: rows, error }, { data: arch, error: archError }] = await Promise.all([
+  const aliasNames = namesOf(await getAliases(), p.nickname).slice(1);
+  const ARCH_COLS =
+    "rank, nickname, points, score, extra, best_player, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places )";
+  const [{ data: staff }, { data: rows, error }, { data: archMain, error: archError }, { data: archAlias }] = await Promise.all([
     db.from("club_staff").select("role, clubs ( name )").eq("profile_id", p.id),
     db
       .from("match_players")
@@ -115,14 +121,17 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       .limit(5000),
     db
       .from("rating_archive_rows")
-      .select(
-        "rank, nickname, points, score, extra, best_player, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places )",
-      )
+      .select(ARCH_COLS)
       .ilike("nickname", pattern)
       .limit(200),
+    aliasNames.length
+      ? db.from("rating_archive_rows").select(ARCH_COLS).in("nickname", aliasNames).limit(200)
+      : Promise.resolve({ data: [] as never[] }),
   ]);
   if (error) console.error("getPlayer failed", { code: error.code, message: error.message });
   if (archError) console.error("getPlayer archive failed", { code: archError.code, message: archError.message });
+  const arch = [...(archMain ?? []), ...((archAlias ?? []) as NonNullable<typeof archMain>)];
+  const myNames = new Set([p.nickname, ...aliasNames].map((n) => n.toLowerCase()));
 
   const games: PlayerGame[] = (rows ?? []).map((r) => {
     const m = r.matches as unknown as {
@@ -206,7 +215,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     archKilled += r.first_killed;
     archBestMove += r.best_move2 + r.best_move3;
     archBestPlayer += r.best_player;
-    const fp = a.is_current ? -1 : (a.final_places ?? []).findIndex((n) => n.toLowerCase() === p.nickname!.toLowerCase());
+    const fp = a.is_current ? -1 : (a.final_places ?? []).findIndex((n) => myNames.has(n.toLowerCase()));
     archive.push({
       slug: a.slug,
       title: a.title,
@@ -232,6 +241,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     since: p.created_at,
     memberNo: p.member_no ?? null,
     markeryId: p.markery_id ?? null,
+    aliases: aliasNames,
     staff: (staff ?? []).map((s) => ({ club: (s.clubs as unknown as { name: string } | null)?.name ?? "", role: s.role })),
     stats: {
       games: rated.length + archGames,

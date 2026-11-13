@@ -11,6 +11,7 @@ import { getHallArchive } from "@/lib/hallArchive";
 import { getPremierTotals } from "@/lib/ratingArchive";
 import { awardsOf } from "@/lib/awards";
 import { compareWithClub } from "@/lib/clubCompare";
+import { getAliases } from "@/lib/aliases";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -42,8 +43,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const prizes = (await getPrizes(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
   const prizeTotal = prizes.reduce((a, x) => a + x.amount, 0);
   const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
-  const awards = awardsOf(await getHallArchive(MAIN_CLUB_SLUG), player.nickname);
-  const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG), player.nickname);
+  const awards = awardsOf(await getHallArchive(MAIN_CLUB_SLUG), [player.nickname, ...player.aliases]);
+  const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG, await getAliases()), player.nickname);
   const top10 = player.archive.filter((a) => a.league === "premier" && !a.isCurrent && a.rank <= 10).length;
   const share = (x: number) => `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(x * 100)} %`;
   const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
@@ -64,6 +65,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
             {player.nickname}
             {badge && <span className="ml-2 text-3xl" aria-label={t("badges")}>{badge}</span>}
           </h1>
+          {player.aliases.length > 0 && <p className="mt-1 text-sm text-neutral-400">{t("aliases", { names: player.aliases.join(", ") })}</p>}
           <p className="mt-1 text-sm text-neutral-400">
             {player.memberNo && <span>ID {formatMemberNo(player.memberNo)} · </span>}
             {player.city && <span>📍 {player.city} · </span>}
