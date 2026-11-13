@@ -196,7 +196,10 @@
     "city": "Město",
     "cityPlaceholder": "např. Praha",
     "cityHint": "Zobrazuje se ve vašem hráčském profilu. Můžete nechat prázdné.",
-    "warNotice": "Náš klub odsuzuje ruskou agresi proti Ukrajině. Osoby s bydlištěm v Rusku a Bělorusku se proto na našem webu nemohou registrovat."
+    "warNotice": "Náš klub odsuzuje ruskou agresi proti Ukrajině. Osoby s bydlištěm v Rusku a Bělorusku se proto na našem webu nemohou registrovat.",
+    "verificationPending": "Váš účet čeká na schválení klubem. Do té doby se nelze zapisovat na hry, vše ostatní už funguje.",
+    "verificationRejected": "Klub váš účet neschválil. Pokud jde o omyl, napište pořadateli.",
+    "verificationBotHint": "Připojte níže Telegram bota — dáme vám vědět, až účet schválíme."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -224,7 +227,8 @@
     "queueHint": "Předplatitelé mají přednost. Potvrzení přijde v pondělí; při 20 hráčích bude druhý stůl.",
     "youAreQueued": "Jste v pořadí",
     "signupBanned": "Na hry klubu se zapsat nemůžete. Obraťte se na pořadatele.",
-    "signupError": "Zápis se nezdařil. Zkuste to znovu."
+    "signupError": "Zápis se nezdařil. Zkuste to znovu.",
+    "signupUnverified": "Na hry se budete moci zapsat, jakmile klub schválí váš účet. Obvykle to je rychlé — stav uvidíte v profilu."
   },
   "admin": {
     "title": "Správa klubu",
@@ -497,7 +501,29 @@
     "hideReview": "Skrýt",
     "showReview": "Zobrazit",
     "postReview": "Odeslat do @mafiaclkings",
-    "reviewPosted": "v kanálu ✓"
+    "reviewPosted": "v kanálu ✓",
+    "members": {
+      "title": "Žádosti o ověření",
+      "hint": "Nové účty se nemohou zapisovat na hry, dokud je neschválíte. Po schválení hráč dostane trvalé ID.",
+      "empty": "Žádné nové žádosti.",
+      "approve": "Schválit",
+      "reject": "Zamítnout",
+      "noNick": "bez přezdívky",
+      "country": "Země podle IP",
+      "countryUnknown": "Země podle IP neznámá",
+      "flagged": "RU/BY: klub neregistruje obyvatele těchto zemí",
+      "botLinked": "bot připojen",
+      "rejectedTitle": "Zamítnuté ({count})",
+      "doneApproved": "Účet schválen.",
+      "doneRejected": "Žádost zamítnuta.",
+      "provider": {
+        "google": "Google",
+        "facebook": "Facebook",
+        "telegram": "Telegram",
+        "email": "e-mail",
+        "other": "jiný způsob"
+      }
+    }
   },
   "match": {
     "matches": "Hry večera",

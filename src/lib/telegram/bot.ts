@@ -123,6 +123,8 @@ async function handleCallback(db: SupabaseClient, origin: string, q: NonNullable
         .single();
       if (error?.message.includes("banned")) {
         notice = t(lang, "banned");
+      } else if (error?.message.includes("not_verified")) {
+        notice = t(lang, "notVerified");
       } else {
         if (error && error.code !== "23505") throw new Error(`join: ${error.message}`);
         notice =

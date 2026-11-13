@@ -196,7 +196,10 @@
     "city": "City",
     "cityPlaceholder": "e.g. Prague",
     "cityHint": "Shown on your player profile. You can leave it empty.",
-    "warNotice": "Our club condemns Russia's aggression against Ukraine. Therefore, people residing in Russia or Belarus cannot register on our website."
+    "warNotice": "Our club condemns Russia's aggression against Ukraine. Therefore, people residing in Russia or Belarus cannot register on our website.",
+    "verificationPending": "Your account is waiting for the club's approval. Until then you can't sign up for games; everything else already works.",
+    "verificationRejected": "The club did not approve your account. If this is a mistake, please contact the organiser.",
+    "verificationBotHint": "Connect the Telegram bot below and we'll let you know once you're approved."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -224,7 +227,8 @@
     "queueHint": "Pass holders go first. Confirmation comes on Monday; with 20 players there's a second table.",
     "youAreQueued": "You're in the queue",
     "signupBanned": "You can't sign up for this club's games. Please contact the organiser.",
-    "signupError": "Sign-up failed. Please try again."
+    "signupError": "Sign-up failed. Please try again.",
+    "signupUnverified": "You'll be able to sign up for games once the club approves your account. It's usually quick — check the status in your account."
   },
   "admin": {
     "title": "Club admin",
@@ -497,7 +501,29 @@
     "hideReview": "Hide",
     "showReview": "Show",
     "postReview": "Post to @mafiaclkings",
-    "reviewPosted": "posted ✓"
+    "reviewPosted": "posted ✓",
+    "members": {
+      "title": "Account requests",
+      "hint": "New accounts can't sign up for games until you approve them. On approval the player gets a permanent ID.",
+      "empty": "No new requests.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "noNick": "no nickname",
+      "country": "Country by IP",
+      "countryUnknown": "Country by IP unknown",
+      "flagged": "RU/BY: the club does not register residents of these countries",
+      "botLinked": "bot connected",
+      "rejectedTitle": "Rejected ({count})",
+      "doneApproved": "Account approved.",
+      "doneRejected": "Request rejected.",
+      "provider": {
+        "google": "Google",
+        "facebook": "Facebook",
+        "telegram": "Telegram",
+        "email": "e-mail",
+        "other": "other"
+      }
+    }
   },
   "match": {
     "matches": "Games tonight",

@@ -53,6 +53,7 @@ const T = {
   waitlisted: { cs: "Jste na čekací listině", ru: "Вы в листе ожидания", uk: "Ви в листі очікування", en: "You're on the waitlist" },
   left: { cs: "Zápis zrušen", ru: "Запись отменена", uk: "Запис скасовано", en: "Sign-up cancelled" },
   closed: { cs: "Zápis na tuto hru je uzavřen", ru: "Запись на эту игру закрыта", uk: "Запис на цю гру закрито", en: "Sign-up for this game is closed" },
+  notVerified: { cs: "Váš účet na webu ještě čeká na schválení klubem. Jakmile ho schválíme, budete se moci zapisovat.", ru: "Ваш аккаунт на сайте ещё ждёт одобрения клуба. Как только одобрим, можно будет записываться.", uk: "Ваш акаунт на сайті ще чекає схвалення клубу. Щойно схвалимо, можна буде записуватися.", en: "Your account is still waiting for the club's approval. Once approved, you'll be able to sign up." },
   banned: { cs: "Na hry klubu se zapsat nemůžete. Obraťte se na pořadatele.", ru: "Записаться на игры клуба нельзя. Обратитесь к организатору.", uk: "Записатися на ігри клубу не можна. Зверніться до організатора.", en: "You can't sign up for this club's games. Please contact the organiser." },
   error: { cs: "Něco se pokazilo, zkuste to znovu", ru: "Что-то пошло не так, попробуйте ещё раз", uk: "Щось пішло не так, спробуйте ще раз", en: "Something went wrong, try again" },
   seats: { cs: "{c}/{cap} míst", ru: "{c}/{cap} мест", uk: "{c}/{cap} місць", en: "{c}/{cap} seats" },

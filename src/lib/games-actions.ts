@@ -33,6 +33,7 @@ export async function joinGame(formData: FormData) {
   // 23505 — уже записан: считаем успехом.
   if (error && error.code !== "23505") {
     if (error.message.includes("banned")) redirect(`${back}?signup=banned`);
+    if (error.message.includes("not_verified")) redirect(`${back}?signup=unverified`);
     console.error("joinGame failed", { gameId, code: error.code, message: error.message });
     redirect(`${back}?signup=error`);
   }

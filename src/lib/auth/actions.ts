@@ -1,5 +1,6 @@
 "use server";
 
+import { recordSignupCountry } from "@/lib/members";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -154,5 +155,7 @@ export async function verifyEmailCode(_prev: EmailState, formData: FormData): Pr
     }
     return { step: "code", email, error: "invalidCode" };
   }
+  const { data: claims } = await supabase.auth.getClaims();
+  await recordSignupCountry(claims?.claims.sub, (await headers()).get("x-vercel-ip-country"));
   redirect(getPathname({ href: "/account", locale }));
 }

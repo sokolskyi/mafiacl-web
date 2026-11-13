@@ -5,6 +5,7 @@ import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getPlayerOfWeek, getSeasons } from "@/lib/rating";
 import { badgeOf, belongsTo, getBadges, getPrizes, getTitles } from "@/lib/badges";
 import { PlayerShare } from "./PlayerShare";
+import { formatMemberNo } from "@/lib/memberNo";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -54,6 +55,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
             {badge && <span className="ml-2 text-3xl" aria-label={t("badges")}>{badge}</span>}
           </h1>
           <p className="mt-1 text-sm text-neutral-400">
+            {player.memberNo && <span>ID {formatMemberNo(player.memberNo)} · </span>}
             {player.city && <span>📍 {player.city} · </span>}
             {t("since", { date: since })}
           </p>

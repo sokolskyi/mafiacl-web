@@ -34,11 +34,11 @@ export default async function Page({ params, searchParams }: PageProps<"/[locale
 /** Сообщение после неудачной записи (?signup=error|banned) — читает адрес, поэтому внутри <Suspense>. */
 async function SignupNotice({ searchParams, locale }: { searchParams: PageProps<"/[locale]/play">["searchParams"]; locale: Locale }) {
   const sp = await searchParams;
-  if (sp.signup !== "error" && sp.signup !== "banned") return null;
+  if (sp.signup !== "error" && sp.signup !== "banned" && sp.signup !== "unverified") return null;
   const t = await getTranslations({ locale, namespace: "games" });
   return (
     <p role="alert" className="mt-6 rounded border border-red-400/50 bg-red-600/15 p-3 text-sm text-red-200">
-      {t(sp.signup === "banned" ? "signupBanned" : "signupError")}
+      {t(sp.signup === "banned" ? "signupBanned" : sp.signup === "unverified" ? "signupUnverified" : "signupError")}
     </p>
   );
 }

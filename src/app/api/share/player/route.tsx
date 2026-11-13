@@ -7,6 +7,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { getPlayer, type PlayerRole } from "@/lib/players";
 import { getTitles, belongsTo } from "@/lib/badges";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
+import { formatMemberNo } from "@/lib/memberNo";
 
 /** Картинка для соцсетей с личной статистикой игрока: f=story (1080×1920) или f=post (1200×630). */
 
@@ -155,7 +156,7 @@ export async function GET(request: NextRequest) {
       </div>
       <div style={{ display: "flex", marginTop: 40, fontSize: 130, fontWeight: 800, lineHeight: 1, textAlign: "center" }}>{player.nickname}</div>
       <div style={{ display: "flex", marginTop: 20, fontSize: 40, color: "#a3a3a3" }}>
-        {[player.city, t("shareClub")].filter(Boolean).join(" · ")}
+        {[player.memberNo ? `ID ${formatMemberNo(player.memberNo)}` : null, player.city, t("shareClub")].filter(Boolean).join(" · ")}
       </div>
       <div style={{ display: "flex", marginTop: 28 }}>{Titles}</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%", marginTop: 48 }}>
@@ -181,7 +182,7 @@ export async function GET(request: NextRequest) {
       <div style={{ display: "flex", flexDirection: "column", flex: 1, gap: 22 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 20 }}>
           <div style={{ display: "flex", fontSize: 88, fontWeight: 800, lineHeight: 1 }}>{player.nickname}</div>
-          <div style={{ display: "flex", fontSize: 28, color: "#a3a3a3" }}>{[player.city, t("shareClub")].filter(Boolean).join(" · ")}</div>
+          <div style={{ display: "flex", fontSize: 28, color: "#a3a3a3" }}>{[player.memberNo ? `ID ${formatMemberNo(player.memberNo)}` : null, player.city, t("shareClub")].filter(Boolean).join(" · ")}</div>
         </div>
         {Titles}
         <div style={{ display: "flex", gap: 16 }}>{stats.map(StatBox)}</div>

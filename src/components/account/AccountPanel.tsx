@@ -6,6 +6,9 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { Link } from "@/i18n/navigation";
 import { EmailSignIn } from "./EmailSignIn";
 import { NicknameForm } from "./NicknameForm";
+import { headers } from "next/headers";
+import { recordSignupCountry } from "@/lib/members";
+import { formatMemberNo } from "@/lib/memberNo";
 import { PlayerShare } from "@/components/players/PlayerShare";
 import { connectTelegram } from "@/lib/telegram/actions";
 
@@ -55,7 +58,7 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("nickname, display_name, avatar_url, city")
+    .select("nickname, display_name, avatar_url, city, verification, member_no")
     .eq("id", userId)
     .single();
   const name = profile?.nickname ?? profile?.display_name ?? "";
@@ -69,6 +72,9 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
     .eq("profile_id", userId)
     .maybeSingle();
   const telegramOn = Boolean(priv?.telegram_chat_id);
+  if (profile?.verification === "pending") {
+    await recordSignupCountry(userId, (await headers()).get("x-vercel-ip-country"));
+  }
   const { data: ids } = await supabase.auth.getUserIdentities();
   const linked = new Set((ids?.identities ?? []).map((i) => i.provider));
   const methods = [
@@ -91,8 +97,17 @@ export async function AccountPanel({ locale, authError }: { locale: Locale; auth
             className="rounded-full"
           />
         )}
-        <p className="text-2xl font-bold">{t("hello", { name })}</p>
+        <div>
+          <p className="text-2xl font-bold">{t("hello", { name })}</p>
+          {profile?.member_no && <p className="text-sm text-neutral-400">ID {formatMemberNo(profile.member_no)}</p>}
+        </div>
       </div>
+      {profile && profile.verification !== "approved" && (
+        <p role="status" className={`mt-6 max-w-xl rounded border p-4 text-sm ${profile.verification === "rejected" ? "border-red-400/50 bg-red-600/15 text-red-200" : "border-amber-400/40 bg-amber-500/10 text-amber-100"}`}>
+          {t(profile.verification === "rejected" ? "verificationRejected" : "verificationPending")}
+          {profile.verification === "pending" && !telegramOn && <> {t("verificationBotHint")}</>}
+        </p>
+      )}
       {(staffRoles ?? 0) > 0 && (
         <p className="mt-6">
           <Link href="/admin" className="font-semibold text-red-400 hover:text-red-300">
