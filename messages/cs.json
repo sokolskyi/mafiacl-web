@@ -1885,6 +1885,7 @@
     "winrateTitle": "Procento výher",
     "winBlack": "Černí",
     "winRed": "Červení",
-    "winTotal": "Celkem"
+    "winTotal": "Celkem",
+    "scoringFormulaNoExtra": "Žebříček = body ÷ hry × 100 + {coef} × hry, zaokrouhleno."
   }
 }

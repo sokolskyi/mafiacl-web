@@ -1885,6 +1885,7 @@
     "winrateTitle": "Процент побед",
     "winBlack": "Чёрные",
     "winRed": "Красные",
-    "winTotal": "Всего"
+    "winTotal": "Всего",
+    "scoringFormulaNoExtra": "Рейтинг = баллы ÷ игры × 100 + {coef} × игры, с округлением."
   }
 }

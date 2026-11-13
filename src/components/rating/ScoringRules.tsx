@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n/routing";
 import type { Pair, Scoring } from "@/lib/ratingArchive";
 
 /** «Как считается рейтинг» сезона: формула, зачёт и таблица баллов. */
-export async function ScoringRules({ locale, scoring: sc, formula, games }: { locale: Locale; scoring: Scoring; formula: string | null; games: number }) {
+export async function ScoringRules({ locale, scoring: sc, formula, games, withExtra = true }: { locale: Locale; scoring: Scoring; formula: string | null; games: number; withExtra?: boolean }) {
   const t = await getTranslations({ locale, namespace: "ratingArchive" });
   const num = new Intl.NumberFormat(locale, { maximumFractionDigits: 2, signDisplay: "exceptZero" });
   const plain = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
@@ -31,7 +31,7 @@ export async function ScoringRules({ locale, scoring: sc, formula, games }: { lo
           ? t("scoringFormulaSum")
           : kind === "perGame"
             ? t("scoringFormulaPerGame", { coef: plain.format(sc.gamesCoef) })
-            : t("scoringFormula", { coef: plain.format(sc.gamesCoef) })}
+            : t(withExtra ? "scoringFormula" : "scoringFormulaNoExtra", { coef: plain.format(sc.gamesCoef) })}
       </p>
       {minGames !== null && (
         <p className="mt-1">{sc.minPct ? t("scoringQualifyPct", { pct: sc.minPct, min: minGames }) : t("scoringQualify", { min: minGames })}</p>

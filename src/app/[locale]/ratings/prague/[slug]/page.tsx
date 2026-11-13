@@ -86,7 +86,7 @@ async function Inner({ params }: Pick<Props, "params">) {
         </p>
       </section>
 
-      {s.scoring && <ScoringRules locale={locale} scoring={s.scoring} formula={s.formula} games={s.games} />}
+      {s.scoring && <ScoringRules locale={locale} scoring={s.scoring} formula={s.formula} games={s.games} withExtra={!isLeague} />}
 
       <section className="mt-6 rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
         {!isSum && <p>{t("qualifiedNote")}</p>}

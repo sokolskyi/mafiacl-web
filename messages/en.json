@@ -1885,6 +1885,7 @@
     "winrateTitle": "Win rate",
     "winBlack": "Black",
     "winRed": "Red",
-    "winTotal": "Overall"
+    "winTotal": "Overall",
+    "scoringFormulaNoExtra": "Rating = points ÷ games × 100 + {coef} × games, rounded."
   }
 }

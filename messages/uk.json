@@ -1885,6 +1885,7 @@
     "winrateTitle": "Відсоток перемог",
     "winBlack": "Чорні",
     "winRed": "Червоні",
-    "winTotal": "Усього"
+    "winTotal": "Усього",
+    "scoringFormulaNoExtra": "Рейтинг = бали ÷ ігри × 100 + {coef} × ігри, з округленням."
   }
 }
