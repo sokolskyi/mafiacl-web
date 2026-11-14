@@ -19,7 +19,8 @@
     "account": "Account",
     "hosts": "Hosts",
     "about": "About",
-    "respect": "Respect"
+    "respect": "Respect",
+    "players": "Players"
   },
   "common": {
     "comingSoon": "This page is coming soon.",
@@ -158,6 +159,10 @@
     "respect": {
       "title": "Respect — loyalty programme",
       "description": "Play at the club and at tournaments, earn Respect and use it to pay for game nights, passes and merch."
+    },
+    "players": {
+      "title": "Club players",
+      "description": "Every MafiaCL player: club games, seasons and tournaments. Find yourself or a rival and open their stats."
     }
   },
   "account": {
@@ -2570,5 +2575,27 @@
     "imagesFailed": "Could not upload the image. Please try again.",
     "imagesRemove": "Remove image",
     "imagesCover": "cover"
+  },
+  "playersPage": {
+    "total": "Players in total",
+    "club": "Played at the club",
+    "tournaments": "Played in tournaments",
+    "both": "Both",
+    "note": "Counted from season rating archives, the hall of fame and games on the site. Tournaments are counted by podium places in the hall of fame and site registrations, so there are actually more tournament players.",
+    "search": "Search by nickname",
+    "sort": "Sort",
+    "alpha": "A–Z",
+    "byGames": "By games",
+    "byMedals": "By medals",
+    "byPlace": "By best place",
+    "player": "Player",
+    "games": "Games",
+    "seasons": "Seasons",
+    "bestPlace": "Best place",
+    "medals": "Medals",
+    "minis": "Mini-tournaments",
+    "notRegistered": "not on the site",
+    "nothing": "Nobody found.",
+    "shown": "Shown: {n}"
   }
 }

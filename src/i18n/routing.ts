@@ -56,6 +56,7 @@ export const routing = defineRouting({
     "/contacts": { cs: "/kontakty", ru: "/kontakty", uk: "/kontakty", en: "/contacts" },
     "/clubs/[city]": { cs: "/kluby/[city]", ru: "/kluby/[city]", uk: "/kluby/[city]", en: "/clubs/[city]" },
     "/account": { cs: "/ucet", ru: "/kabinet", uk: "/kabinet", en: "/account" },
+    "/players": { cs: "/hraci", ru: "/igroki", uk: "/hravtsi", en: "/players" },
     "/players/[nick]": { cs: "/hraci/[nick]", ru: "/igroki/[nick]", uk: "/hravtsi/[nick]", en: "/players/[nick]" },
     "/respect": "/respect",
     "/admin": "/admin",

@@ -14,6 +14,7 @@ export const SECTIONS = {
   kings: "/kings",
   tournaments: "/tournaments",
   ratings: "/ratings",
+  players: "/players",
   learn: "/learn",
   documents: "/documents",
   blog: "/blog",
@@ -49,6 +50,7 @@ export const MAIN_NAV: SectionKey[] = [
 
 /** Подвал: всё остальное. */
 export const FOOTER_NAV: SectionKey[] = [
+  "players",
   "hosts",
   "kids",
   "gallery",

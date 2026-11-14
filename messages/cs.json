@@ -19,7 +19,8 @@
     "account": "Můj účet",
     "hosts": "Moderátoři",
     "about": "O klubu",
-    "respect": "Respect"
+    "respect": "Respect",
+    "players": "Hráči"
   },
   "common": {
     "comingSoon": "Stránka se připravuje.",
@@ -158,6 +159,10 @@
     "respect": {
       "title": "Respect — věrnostní program",
       "description": "Hrajte v klubu a na turnajích, sbírejte Respect a plaťte jím herní večery, permanentky a merch."
+    },
+    "players": {
+      "title": "Hráči klubu",
+      "description": "Všichni hráči MafiaCL: klubové hry, sezóny a turnaje. Najděte sebe nebo soupeře a otevřete statistiky."
     }
   },
   "account": {
@@ -2570,5 +2575,27 @@
     "imagesFailed": "Obrázek se nepodařilo nahrát. Zkuste to znovu.",
     "imagesRemove": "Odebrat obrázek",
     "imagesCover": "titulní"
+  },
+  "playersPage": {
+    "total": "Hráčů celkem",
+    "club": "Hráli v klubu",
+    "tournaments": "Hráli na turnajích",
+    "both": "Obojí",
+    "note": "Počítáme podle archivů žebříčků sezón, síně slávy a her na webu. Turnaje podle umístění v síni slávy a registrací na webu, turnajových hráčů je tedy ve skutečnosti víc.",
+    "search": "Hledat podle přezdívky",
+    "sort": "Řazení",
+    "alpha": "Abecedně",
+    "byGames": "Podle her",
+    "byMedals": "Podle medailí",
+    "byPlace": "Podle nejlepšího místa",
+    "player": "Hráč",
+    "games": "Her",
+    "seasons": "Sezón",
+    "bestPlace": "Nejlepší místo",
+    "medals": "Medaile",
+    "minis": "Mini-turnaje",
+    "notRegistered": "není na webu",
+    "nothing": "Nikoho jsme nenašli.",
+    "shown": "Zobrazeno: {n}"
   }
 }
