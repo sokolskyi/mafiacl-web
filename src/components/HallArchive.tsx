@@ -72,11 +72,15 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                       {e.photos.length > 0 && <Photos photos={e.photos} alt={`${t("seasonTitle", { n: e.season ?? "" })} · ${e.places[0] ?? ""}`} />}
                       <div className="p-5">
                       <p className="font-display text-2xl font-extrabold uppercase">{t("seasonTitle", { n: e.season ?? "" })}</p>
-                      <ol className="mt-2 space-y-1">
-                        {e.places.map((p, i) => (
-                          <li key={i} className={i === 0 ? "text-lg font-bold" : "text-neutral-200"}>{MEDAL[i]} {playerLinks(p, known)}</li>
-                        ))}
-                      </ol>
+                      {e.places.length > 0 ? (
+                        <ol className="mt-2 space-y-1">
+                          {e.places.map((p, i) => (
+                            <li key={i} className={i === 0 ? "text-lg font-bold" : "text-neutral-200"}>{MEDAL[i]} {playerLinks(p, known)}</li>
+                          ))}
+                        </ol>
+                      ) : (
+                        <p className="mt-2 text-lg text-neutral-300">{t("noFinal")}</p>
+                      )}
                       {e.note && <p className="mt-2 text-sm text-neutral-400">{e.note}</p>}
                       <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} className="mt-2" />
                       </div>

@@ -899,7 +899,8 @@
     "catMini": "Міні-турніри {n} сезону",
     "seasonTitle": "{n} сезон",
     "archiveSource": "Архів зібрано за публікаціями клубу ВКонтакте (vk.com/mafiacl і групи турнірів клубу), у Telegram (t.me/mafia_cl, t.me/mafia_clp) і за таблицями ФІІМ (fiim.world) та Mafgame (mafgame.org). Знайшли помилку чи пропуск — напишіть нам.",
-    "seasonStars": "{count, plural, one {# раз чемпіон сезону} few {# рази чемпіон сезону} many {# разів чемпіон сезону} other {# рази чемпіон сезону}}"
+    "seasonStars": "{count, plural, one {# раз чемпіон сезону} few {# рази чемпіон сезону} many {# разів чемпіон сезону} other {# рази чемпіон сезону}}",
+    "noFinal": "Фінал не проводився"
   },
   "shop": {
     "soldOut": "Немає в наявності",
