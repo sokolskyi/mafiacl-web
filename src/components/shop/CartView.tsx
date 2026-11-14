@@ -45,6 +45,11 @@ export function CartView({ signedIn, error }: { signedIn: boolean; error?: strin
                 {i.label && <p className="text-sm text-neutral-400">{i.label}</p>}
                 {i.nickname && <p className="text-sm text-neutral-300">{t("nickname")}: <span className="font-semibold">{i.nickname}</span></p>}
                 {i.color && <p className="text-sm text-neutral-300">{t("color")}: <span className="font-semibold">{i.color}</span></p>}
+                {i.kind === "membership" && (
+                  <p className="text-sm text-neutral-300">
+                    {i.startOn ? t("startsOn", { date: i.startOn.split("-").reverse().join(".") }) : t("startsNow")}
+                  </p>
+                )}
                 <p className="text-sm text-neutral-300">{money(i.priceCzk)}</p>
               </div>
               {i.kind === "merch" ? (
@@ -79,7 +84,7 @@ export function CartView({ signedIn, error }: { signedIn: boolean; error?: strin
         {signedIn ? (
           <form action={checkout} className="mt-5">
             <input type="hidden" name="locale" value={locale} />
-            <input type="hidden" name="items" value={JSON.stringify(items.map((i) => ({ variantId: i.variantId, qty: i.qty, nickname: i.nickname, color: i.color })))} />
+            <input type="hidden" name="items" value={JSON.stringify(items.map((i) => ({ variantId: i.variantId, qty: i.qty, nickname: i.nickname, color: i.color, startOn: i.startOn })))} />
             <button type="submit" className="min-h-12 w-full rounded-full bg-red-600 px-6 font-bold text-white hover:bg-red-500">
               {t("placeOrder")}
             </button>

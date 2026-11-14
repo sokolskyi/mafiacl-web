@@ -13,12 +13,14 @@ export type CartItem = {
   /** Ник для печати и цвет — если товар их спрашивает. */
   nickname?: string;
   color?: string;
+  /** Абонемент: дата начала (YYYY-MM-DD); пусто — сразу после оплаты. */
+  startOn?: string;
   qty: number;
 };
 
 /** Одна строка корзины = вариант + ник + цвет (две футболки с разными никами — разные строки). */
-export const cartKey = (i: Pick<CartItem, "variantId" | "nickname" | "color">) =>
-  `${i.variantId}|${i.nickname ?? ""}|${i.color ?? ""}`;
+export const cartKey = (i: Pick<CartItem, "variantId" | "nickname" | "color" | "startOn">) =>
+  `${i.variantId}|${i.nickname ?? ""}|${i.color ?? ""}|${i.startOn ?? ""}`;
 
 const KEY = "mafiacl-cart";
 const EMPTY: CartItem[] = [];
@@ -42,6 +44,7 @@ function sanitize(raw: unknown): CartItem[] {
       kind: i.kind === "membership" ? "membership" : "merch",
       nickname: typeof i.nickname === "string" && i.nickname.trim() ? i.nickname.trim().slice(0, 32) : undefined,
       color: typeof i.color === "string" && i.color.trim() ? i.color.trim().slice(0, 40) : undefined,
+      startOn: typeof i.startOn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(i.startOn) ? i.startOn : undefined,
       qty: Math.min(i.qty as number, 20),
     });
   }
@@ -89,7 +92,8 @@ export function useCart() {
 }
 
 export function addToCart(item: Omit<CartItem, "qty">) {
-  const items = [...load()];
+  // Абонемент одного вида — одна строка: новая дата начала заменяет прежнюю.
+  const items = item.kind === "membership" ? load().filter((x) => x.variantId !== item.variantId) : [...load()];
   const found = items.find((x) => cartKey(x) === cartKey(item));
   if (found) {
     // Абонемент — один на заказ.

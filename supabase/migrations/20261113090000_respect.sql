@@ -307,3 +307,5 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 --   Respect за абонемент вместо скидок 50 % на турнир/серию: месяц +15, 3 месяца +50, год +200, особый срок — 15 за 30 дней.
 -- Через MCP применена миграция hall_season_without_final: сезон в зале славы может быть без призёров;
 --   добавлен IX сезон (Харьков, 2019–2021) — финал не проводился.
+-- Через MCP применена миграция shop_membership_start_date: при покупке абонемента можно выбрать дату начала
+--   (shop_order_items.membership_from, завтра … +90 дней), по умолчанию — сразу после оплаты.

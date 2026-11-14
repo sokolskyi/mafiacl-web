@@ -963,7 +963,13 @@
     "cutWomen": "Dámské",
     "priceUntil": "Cena platí do {date}",
     "nextPrice": "od {date} — {price}",
-    "notOnSale": "Momentálně se neprodává"
+    "notOnSale": "Momentálně se neprodává",
+    "startNow": "Aktivovat hned po zaplacení",
+    "startOn": "Od kterého dne bude permanentka platit",
+    "startOnHint": "Například ode dne nejbližší hry. Datum lze zvolit v příštích 90 dnech.",
+    "startsOn": "Začne platit od {date}",
+    "startsNow": "Začne platit hned po zaplacení",
+    "startsOnOrder": "od {date}"
   },
   "adminShop": {
     "title": "Obchod",

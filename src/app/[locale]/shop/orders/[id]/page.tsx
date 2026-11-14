@@ -50,7 +50,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   // RLS: игрок видит только свои заказы.
   const { data: order } = await supabase
     .from("shop_orders")
-    .select("id, status, total_czk, respect_points, respect_czk, created_at, shop_order_items ( id, name, variant_label, nickname, color, qty, price_czk, product_id, shop_products ( kind ) )")
+    .select("id, status, total_czk, respect_points, respect_czk, created_at, shop_order_items ( id, name, variant_label, nickname, color, membership_from, qty, price_czk, product_id, shop_products ( kind ) )")
     .eq("id", orderId)
     .maybeSingle();
   if (!order) notFound();
@@ -90,6 +90,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
               <span className="font-semibold">{loc(i.name as Localized, locale)}</span>
               {i.variant_label && <span className="text-neutral-400"> · {variantText(i.variant_label, t)}</span>}
               {i.color && <span className="text-neutral-400"> · {i.color}</span>}
+              {i.membership_from && <span className="text-neutral-400"> · {t("startsOnOrder", { date: i.membership_from.split("-").reverse().join(".") })}</span>}
               {i.nickname && <span className="text-neutral-400"> · {t("nickname")}: {i.nickname}</span>}
               <span className="text-neutral-400"> × {i.qty}</span>
             </span>

@@ -32,7 +32,15 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
   const [added, setAdded] = useState(false);
   const [nickname, setNickname] = useState(defaultNickname ?? "");
   const [color, setColor] = useState("");
-  const missing = (askNickname && !nickname.trim()) || (askColor && !color.trim());
+  // Абонемент: по умолчанию начинает действовать сразу после оплаты; можно выбрать дату.
+  const [now, setNow] = useState(true);
+  const [startOn, setStartOn] = useState("");
+  // Допустимые даты начала: завтра … +90 дней (по Праге), считаем один раз.
+  const [range] = useState(() => {
+    const day = (offset: number) => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date(Date.now() + offset * 86_400_000));
+    return { min: day(1), max: day(90) };
+  });
+  const missing = (askNickname && !nickname.trim()) || (askColor && !color.trim()) || (kind === "membership" && !now && !startOn);
   const field = "mt-1 w-full max-w-sm rounded border border-white/30 bg-neutral-900 px-3 py-2.5 outline-none focus:border-red-500";
   const current = variants.find((v) => v.id === variantId);
   const labelled = variants.length > 1 || variants[0]?.label !== "";
@@ -141,6 +149,40 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
           <span className="mt-1 block text-xs font-normal text-neutral-400">{t("colorHint")}</span>
         </label>
       )}
+      {kind === "membership" && (
+        <fieldset className="space-y-2 text-sm">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3 font-semibold">
+            <input
+              type="checkbox"
+              checked={now}
+              onChange={(e) => {
+                setNow(e.target.checked);
+                setAdded(false);
+              }}
+              className="h-5 w-5 accent-red-600"
+            />
+            {t("startNow")}
+          </label>
+          {!now && (
+            <label className="block font-semibold text-neutral-300">
+              {t("startOn")}
+              <input
+                type="date"
+                value={startOn}
+                min={range.min}
+                max={range.max}
+                required
+                onChange={(e) => {
+                  setStartOn(e.target.value);
+                  setAdded(false);
+                }}
+                className={field}
+              />
+              <span className="mt-1 block text-xs font-normal text-neutral-400">{t("startOnHint")}</span>
+            </label>
+          )}
+        </fieldset>
+      )}
       {current && current.stock !== null && current.stock > 0 && current.stock <= 5 && (
         <p className="text-sm text-amber-400">{t("fewLeft", { count: current.stock })}</p>
       )}
@@ -160,6 +202,7 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
               kind,
               nickname: askNickname ? nickname.trim().slice(0, 32) : undefined,
               color: askColor ? color.trim().slice(0, 40) : undefined,
+              startOn: kind === "membership" && !now && startOn ? startOn : undefined,
             });
             setAdded(true);
           }}

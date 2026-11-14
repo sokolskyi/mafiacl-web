@@ -963,7 +963,13 @@
     "cutWomen": "Women's",
     "priceUntil": "Price valid until {date}",
     "nextPrice": "from {date}: {price}",
-    "notOnSale": "Not on sale right now"
+    "notOnSale": "Not on sale right now",
+    "startNow": "Activate right after payment",
+    "startOn": "Start date of the pass",
+    "startOnHint": "For example, the day of your next game. You can pick a date within the next 90 days.",
+    "startsOn": "Starts on {date}",
+    "startsNow": "Starts right after payment",
+    "startsOnOrder": "from {date}"
   },
   "adminShop": {
     "title": "Shop",
