@@ -247,7 +247,28 @@
     "photoCropHint": "Drag the photo so your face is inside the circle. Zoom with the slider, the mouse wheel or two fingers.",
     "photoZoom": "Zoom",
     "photoSave": "Save photo",
-    "photoCancel": "Cancel"
+    "photoCancel": "Cancel",
+    "membershipEndsSoon": "Your membership is valid until {date} — {days, plural, one {# day} other {# days}} left. Renew early to avoid a gap.",
+    "membershipEndsTomorrow": "Your membership ends tomorrow, {date}.",
+    "membershipEndsToday": "Today is the last day of your membership.",
+    "membershipRenew": "Renew membership",
+    "feedback": {
+      "title": "Feedback for the club administration",
+      "hint": "What you liked, what to improve, ideas and wishes. Only the club administration will see it.",
+      "placeholder": "Your feedback…",
+      "send": "Send",
+      "sending": "Sending…",
+      "sent": "Thank you! Your feedback has been sent.",
+      "mine": "My feedback ({n})",
+      "read": "read",
+      "unread": "sent",
+      "errors": {
+        "invalid": "Please write at least a few words.",
+        "tooMany": "You can send up to 5 messages a day. Please try again tomorrow.",
+        "save": "Couldn't send. Please try again.",
+        "signIn": "Sign in to leave feedback."
+      }
+    }
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -601,6 +622,15 @@
       "lastChange": "last change: {date}",
       "approve": "Approve",
       "reject": "Reject"
+    },
+    "feedback": {
+      "title": "Player feedback",
+      "hint": "Messages from player accounts. Only the club owner and admins can see them.",
+      "empty": "No feedback yet.",
+      "unread": "{n} new",
+      "markRead": "Mark as read",
+      "markUnread": "Mark as new",
+      "readBy": "read"
     }
   },
   "match": {

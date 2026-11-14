@@ -17,6 +17,8 @@ import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
 import { AccountBlog } from "./AccountBlog";
 import { parseProfileLinks } from "@/lib/profileLinks";
+import { getMembershipEnding } from "@/lib/membershipReminder";
+import { AccountFeedback } from "./AccountFeedback";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError, post }: { locale: Locale; authError: boolean; post?: string }) {
@@ -98,6 +100,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
   if (profile?.verification === "pending") {
     await recordSignupCountry(userId, (await headers()).get("x-vercel-ip-country"));
   }
+  const ending = await getMembershipEnding(userId);
   const { data: ids } = await supabase.auth.getUserIdentities();
   const linked = new Set((ids?.identities ?? []).map((i) => i.provider));
   const methods = [
@@ -139,6 +142,19 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           {t("birthdayGreeting", { name })}
         </p>
       )}
+      {ending && (
+        <div role="status" className={`mt-6 max-w-xl rounded-lg border p-4 ${ending.daysLeft <= 1 ? "border-red-400/60 bg-red-600/15 text-red-100" : "border-amber-400/40 bg-amber-500/10 text-amber-100"}`}>
+          <p>
+            <span aria-hidden="true">⏳ </span>
+            {ending.daysLeft === 0
+              ? t("membershipEndsToday")
+              : ending.daysLeft === 1
+                ? t("membershipEndsTomorrow", { date: fmtDay(ending.until, locale) })
+                : t("membershipEndsSoon", { date: fmtDay(ending.until, locale), days: ending.daysLeft })}
+          </p>
+          <Link href="/shop" className="mt-2 inline-block font-semibold underline">{t("membershipRenew")}</Link>
+        </div>
+      )}
       {!priv?.birthday && (
         <p role="status" className="mt-6 max-w-xl rounded border border-amber-400/40 bg-amber-500/10 p-4 text-sm text-amber-100">
           {t("birthdayMissing")}{" "}
@@ -171,6 +187,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
       />
       <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
       {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
+      <AccountFeedback locale={locale} userId={userId} />
       <section className="mt-10 max-w-md">
         <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>
         <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>
@@ -222,6 +239,10 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
       </form>
     </section>
   );
+}
+
+function fmtDay(d: string, locale: Locale) {
+  return new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
 }
 
 function ProviderButton({

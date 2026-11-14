@@ -309,3 +309,7 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 --   добавлен IX сезон (Харьков, 2019–2021) — финал не проводился.
 -- Через MCP применена миграция shop_membership_start_date: при покупке абонемента можно выбрать дату начала
 --   (shop_order_items.membership_from, завтра … +90 дней), по умолчанию — сразу после оплаты.
+
+-- player_feedback (2026-11-15): отзывы игроков для администрации клуба.
+-- Таблица public.player_feedback (club_id, profile_id, body 3..2000, created_at, read_at, read_by), RLS:
+-- игрок видит свои, owner/admin клуба — все отзывы клуба. Пишет только сервер (service_role), лимит 5 в сутки — в server action.

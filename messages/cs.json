@@ -247,7 +247,28 @@
     "photoCropHint": "Posuňte fotku tak, aby byl obličej v kruhu. Přiblížíte a oddálíte posuvníkem, kolečkem myši nebo dvěma prsty.",
     "photoZoom": "Přiblížení",
     "photoSave": "Uložit fotku",
-    "photoCancel": "Zrušit"
+    "photoCancel": "Zrušit",
+    "membershipEndsSoon": "Vaše permanentka platí do {date} — {days, plural, one {zbývá # den} few {zbývají # dny} other {zbývá # dní}}. Prodlužte ji včas, ať nemáte pauzu.",
+    "membershipEndsTomorrow": "Vaše permanentka končí zítra, {date}.",
+    "membershipEndsToday": "Dnes je poslední den vaší permanentky.",
+    "membershipRenew": "Prodloužit permanentku",
+    "feedback": {
+      "title": "Zpětná vazba pro vedení klubu",
+      "hint": "Co se vám líbilo, co zlepšit, nápady a přání. Zprávu uvidí jen vedení klubu.",
+      "placeholder": "Vaše zpráva…",
+      "send": "Odeslat",
+      "sending": "Odesíláme…",
+      "sent": "Děkujeme! Zpráva byla odeslána.",
+      "mine": "Moje zprávy ({n})",
+      "read": "přečteno",
+      "unread": "odesláno",
+      "errors": {
+        "invalid": "Napište aspoň pár slov.",
+        "tooMany": "Denně můžete poslat nejvýše 5 zpráv. Zkuste to zítra.",
+        "save": "Odeslání se nezdařilo. Zkuste to znovu.",
+        "signIn": "Pro odeslání se přihlaste."
+      }
+    }
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -601,6 +622,15 @@
       "lastChange": "minulá změna: {date}",
       "approve": "Schválit",
       "reject": "Zamítnout"
+    },
+    "feedback": {
+      "title": "Zpětná vazba hráčů",
+      "hint": "Zprávy z osobního účtu. Vidí je jen majitel a admini klubu.",
+      "empty": "Zatím žádné zprávy.",
+      "unread": "{n, plural, one {# nová} few {# nové} other {# nových}}",
+      "markRead": "Přečteno",
+      "markUnread": "Vrátit mezi nové",
+      "readBy": "přečteno"
     }
   },
   "match": {

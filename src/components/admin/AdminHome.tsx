@@ -16,6 +16,7 @@ import { MemberRequests } from "./MemberRequests";
 import { AliasesAdmin } from "./AliasesAdmin";
 import { BirthdayRequests } from "./BirthdayRequests";
 import { NicknameRequests } from "./NicknameRequests";
+import { FeedbackAdmin } from "./FeedbackAdmin";
 import { PostsAdmin } from "./PostsAdmin";
 
 /** Читает сессию — только внутри <Suspense>. */
@@ -59,6 +60,9 @@ export async function AdminHome({
         <MemberRequests locale={locale} notice={member} />
       )}
       {ctx.clubs.some((c) => c.roles.includes("owner")) && <NicknameRequests locale={locale} />}
+      {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
+        <FeedbackAdmin locale={locale} clubIds={ctx.clubs.filter((c) => c.roles.includes("owner") || c.roles.includes("admin")).map((c) => c.id)} />
+      )}
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && <BirthdayRequests locale={locale} />}
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
         <PostsAdmin locale={locale} clubIds={ctx.clubs.filter((c) => c.roles.includes("owner") || c.roles.includes("admin")).map((c) => c.id)} />
