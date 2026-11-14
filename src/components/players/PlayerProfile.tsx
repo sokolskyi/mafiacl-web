@@ -36,9 +36,9 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const seasons = await getSeasons(MAIN_CLUB_SLUG);
   const season = currentSeason(seasons, new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date()));
   const eveningRating = season?.ratings.find((r) => r.prizePerEvening !== null);
-  const eveningWins = eveningRating ? (await getEveningWinners(eveningRating.id)).filter((w) => w.profileId === player.id).length : 0;
+  const eveningWins = eveningRating ? (await getEveningWinners(eveningRating.id)).filter((w) => player.id !== null && w.profileId === player.id).length : 0;
   const potw = await getPlayerOfWeek(MAIN_CLUB_SLUG);
-  const isPotw = !!potw?.winners.some((w) => w.profileId === player.id);
+  const isPotw = !!potw?.winners.some((w) => player.id !== null && w.profileId === player.id);
   const badges = await getBadges(MAIN_CLUB_SLUG);
   const badge = badgeOf(badges, player.id, player.nickname);
   const titles = (await getTitles(MAIN_CLUB_SLUG)).filter((x) => belongsTo(x, player.id, player.nickname));
@@ -49,7 +49,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG, await getAliases()), player.nickname);
   const top10 = player.archive.filter((a) => a.league === "premier" && !a.isCurrent && a.rank <= 10).length;
   const share = (x: number) => `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(x * 100)} %`;
-  const since = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since));
+  const since = player.since ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since)) : null;
 
   return (
     <article>
@@ -71,7 +71,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           <p className="mt-1 text-sm text-neutral-400">
             {player.memberNo && <span>ID {formatMemberNo(player.memberNo)} · </span>}
             {player.city && <span>📍 {cityLabel(player.city, locale)} · </span>}
-            {t("since", { date: since })}
+            {since ? t("since", { date: since }) : t("archiveOnly")}
           </p>
           {titles.length > 0 && (
             <ul className="mt-2 flex flex-wrap gap-2">

@@ -7,6 +7,8 @@ import { getHallOfFame } from "@/lib/badges";
 import { AboutNav } from "@/components/about/AboutNav";
 import { getHallArchive } from "@/lib/hallArchive";
 import { HallArchive } from "@/components/HallArchive";
+import { getKnownPlayers } from "@/lib/playerNames";
+import { playerLinks } from "@/components/players/PlayerNameLink";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = (await params) as { locale: Locale };
@@ -18,6 +20,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   setRequestLocale(locale);
   const tp = await getTranslations({ locale, namespace: "pages" });
   const t = await getTranslations({ locale, namespace: "hall" });
+  const known = await getKnownPlayers();
   const [rows, archive] = await Promise.all([getHallOfFame(MAIN_CLUB_SLUG), getHallArchive(MAIN_CLUB_SLUG)]);
   const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
 
@@ -49,7 +52,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   <td className="font-semibold">
                     {r.linked ? (
                       <Link href={{ pathname: "/players/[nick]", params: { nick: r.nickname } }} className="hover:text-red-400">{r.nickname}</Link>
-                    ) : r.nickname}
+                    ) : (
+                      playerLinks(r.nickname, known, "hover:text-red-400")
+                    )}
                   </td>
                   <td className="text-right">{r.champion || "—"}</td>
                   <td className="text-right">{r.kings || "—"}</td>

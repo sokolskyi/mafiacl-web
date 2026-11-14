@@ -1,12 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { topWinners, type HallEntry } from "@/lib/hallArchive";
+import { getKnownPlayers } from "@/lib/playerNames";
+import { playerLinks } from "@/components/players/PlayerNameLink";
 import { VideoLink } from "./VideoLink";
 
 const MEDAL = ["🥇", "🥈", "🥉"];
 
 /** Архив клуба по годам: финалы сезонов, турниры, мини-турниры, достижения. */
 export async function HallArchive({ entries, locale }: { entries: HallEntry[]; locale: Locale }) {
+  const known = await getKnownPlayers();
   if (entries.length === 0) return null;
   const t = await getTranslations({ locale, namespace: "hall" });
   const years = [...new Set(entries.map((e) => e.year))].sort((a, b) => b - a);
@@ -26,7 +29,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
             <li key={r.name} className="mb-2 flex break-inside-avoid items-baseline gap-3">
               <span className="w-6 text-right font-mono text-neutral-400">{i + 1}</span>
               <span className="font-semibold">
-                {r.name}
+                {playerLinks(r.name, known)}
                 {r.seasons > 0 && (
                   <span className="ml-1" role="img" aria-label={t("seasonStars", { count: r.seasons })} title={t("seasonStars", { count: r.seasons })}>
                     {"⭐".repeat(r.seasons)}
@@ -71,7 +74,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                       <p className="font-display text-2xl font-extrabold uppercase">{t("seasonTitle", { n: e.season ?? "" })}</p>
                       <ol className="mt-2 space-y-1">
                         {e.places.map((p, i) => (
-                          <li key={i} className={i === 0 ? "text-lg font-bold" : "text-neutral-200"}>{MEDAL[i]} {p}</li>
+                          <li key={i} className={i === 0 ? "text-lg font-bold" : "text-neutral-200"}>{MEDAL[i]} {playerLinks(p, known)}</li>
                         ))}
                       </ol>
                       {e.note && <p className="mt-2 text-sm text-neutral-400">{e.note}</p>}
@@ -92,7 +95,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                       <p className="font-semibold">{e.title}</p>
                       <p className="mt-1 text-neutral-200">
                         {e.places.map((p, i) => (
-                          <span key={i} className="mr-4 inline-block">{MEDAL[i]} {p}</span>
+                          <span key={i} className="mr-4 inline-block">{MEDAL[i]} {playerLinks(p, known)}</span>
                         ))}
                       </p>
                       {e.note && <p className="mt-1 text-sm text-neutral-400">{e.note}</p>}
@@ -109,7 +112,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                 <ul className="mt-3 space-y-1">
                   {achievements.map((e) => (
                     <li key={e.id}>
-                      <span className="font-semibold">{e.places[0]}</span> — {e.title}
+                      <span className="font-semibold">{playerLinks(e.places[0] ?? "", known)}</span> — {e.title}
                       {e.note && <span className="text-neutral-400"> ({e.note})</span>}
                     </li>
                   ))}
@@ -125,7 +128,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                     .filter((m) => (m.season ?? "") === s)
                     .map((m) => (
                       <li key={m.id} className="rounded border border-white/15 px-3 py-1 text-sm">
-                        <span className="font-mono text-neutral-400">{m.title}</span> {m.places[0]}
+                        <span className="font-mono text-neutral-400">{m.title}</span> {playerLinks(m.places[0] ?? "", known)}
                       </li>
                     ))}
                 </ul>

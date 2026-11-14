@@ -4,6 +4,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
 import { ALIASES_TAG, getAliases, namesOf } from "@/lib/aliases";
 import { parseProfileLinks, type ProfileLinks } from "@/lib/profileLinks";
+import { getKnownPlayers } from "@/lib/playerNames";
 
 /** Тег кеша сыгранных партий: сбрасывается при сохранении итога партии. */
 export const MATCHES_TAG = "matches";
@@ -50,11 +51,12 @@ export type ArchiveLine = {
 };
 
 export type PlayerPage = {
-  id: string;
+  /** null — игрок есть только в архивах клуба и ещё не зарегистрирован на сайте. */
+  id: string | null;
   nickname: string;
   avatarUrl: string | null;
   city: string | null;
-  since: string;
+  since: string | null;
   /** Номер участника клуба (после верификации). */
   memberNo: number | null;
   /** Профили на сайтах рейтингов (markery, ФИИМ, Mafgame, Emotion Games, iMafia). */
@@ -98,26 +100,36 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   if (!isSupabaseConfigured || !nick || nick.length > 32) return null;
 
   const db = createPublicClient();
-  const pattern = nick.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const esc = (v: string) => v.replace(/[\\%_]/g, (c) => `\\${c}`);
+  // Старый ник ведёт на текущий: архивы и зал славы собраны под ним.
+  const known = await getKnownPlayers();
+  const name = known[nick.toLowerCase()] ?? nick;
   const { data: profiles } = await db
     .from("profiles")
     .select("id, nickname, avatar_url, city, created_at, member_no, links")
-    .ilike("nickname", pattern)
+    .ilike("nickname", esc(name))
     .limit(2);
-  const p = profiles?.length === 1 ? profiles[0] : null;
+  // Нет профиля на сайте — страница по архивам клуба (если такой игрок там есть).
+  const p =
+    profiles?.length === 1 && profiles[0].nickname
+      ? profiles[0]
+      : known[name.toLowerCase()]
+        ? { id: null, nickname: known[name.toLowerCase()], avatar_url: null, city: null, created_at: null, member_no: null, links: null }
+        : null;
   if (!p?.nickname) return null;
+  const pattern = esc(p.nickname);
 
   const aliasNames = namesOf(await getAliases(), p.nickname).slice(1);
   const ARCH_COLS =
     "rank, nickname, points, score, extra, best_player, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places )";
   const [{ data: staff }, { data: rows, error }, { data: archMain, error: archError }, { data: archAlias }] = await Promise.all([
-    db.from("club_staff").select("role, clubs ( name )").eq("profile_id", p.id),
+    p.id ? db.from("club_staff").select("role, clubs ( name )").eq("profile_id", p.id) : Promise.resolve({ data: [] as never[] }),
     db
       .from("match_players")
       .select(
         "seat, role, win, points, fouls, first_killed, best_move_points, votes_black, votes_red, matches!inner ( id, number, table_no, result, rated, finished_at, status, clubs ( name ) )",
       )
-      .eq("profile_id", p.id)
+      .eq("profile_id", p.id ?? "00000000-0000-0000-0000-000000000000")
       .eq("matches.status", "finished")
       .limit(5000),
     db

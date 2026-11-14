@@ -9,6 +9,8 @@ import { getArchiveSeason, type WL } from "@/lib/ratingArchive";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { ScoringRules } from "@/components/rating/ScoringRules";
 import { SeasonStatsBlock } from "@/components/rating/SeasonStatsBlock";
+import { getKnownPlayers } from "@/lib/playerNames";
+import { playerLinks } from "@/components/players/PlayerNameLink";
 
 type Props = PageProps<"/[locale]/ratings/prague/[slug]">;
 
@@ -43,6 +45,7 @@ async function Inner({ params }: Pick<Props, "params">) {
   if (!data) notFound();
   const { season: s, rows } = data;
   const t = await getTranslations({ locale, namespace: "ratingArchive" });
+  const known = await getKnownPlayers();
   const num = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const head = "px-2 py-2 text-right font-normal";
@@ -120,7 +123,7 @@ async function Inner({ params }: Pick<Props, "params">) {
                 <tr key={r.rank} className={r.qualified ? "" : "text-neutral-500"}>
                   <td className="py-2 font-mono">{r.rank}</td>
                   <td className="font-semibold">
-                    {r.nickname}
+                    {playerLinks(r.nickname, known)}
                     {r.stars > 0 && (
                       <span className="ml-1" title={t("starsHint", { count: r.stars })}>
                         <span aria-hidden="true">{"💫".repeat(r.stars)}</span>
@@ -169,7 +172,7 @@ async function Inner({ params }: Pick<Props, "params">) {
                 <tr key={r.rank} className={r.qualified ? "" : "text-neutral-500"}>
                   <td className="py-2 font-mono">{r.rank}</td>
                   <td className="font-semibold">
-                    {r.nickname}
+                    {playerLinks(r.nickname, known)}
                   </td>
                   <td className={`${cell} font-mono text-base font-black ${r.qualified ? "text-white" : ""}`}>{num.format(r.points)}</td>
                   <td className={cell}>{num.format(Math.round(r.extra * 100) / 100)}</td>

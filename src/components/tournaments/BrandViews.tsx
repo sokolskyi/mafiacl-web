@@ -7,6 +7,8 @@ import type { Tournament } from "@/lib/tournaments";
 import type { HallEntry } from "@/lib/hallArchive";
 import { tournamentDates } from "./TournamentCards";
 import { VideoLink } from "@/components/VideoLink";
+import { getKnownPlayers } from "@/lib/playerNames";
+import { playerLinks } from "@/components/players/PlayerNameLink";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
@@ -38,6 +40,7 @@ function RegionBadge({ e, show }: { e: Edition; show: boolean }) {
 
 /** Карточки турниров клуба «без года» для страницы «Турниры». */
 export async function BrandGrid({ tournaments, hall, locale }: { tournaments: Tournament[]; hall: HallEntry[]; locale: Locale }) {
+  const known = await getKnownPlayers();
   const t = await getTranslations({ locale, namespace: "tournaments" });
   const rows = BRANDS.map((b) => ({ b, eds: editionsOf(b, tournaments, hall) })).filter((r) => r.eds.length > 0);
   const active = rows.filter((r) => isActiveBrand(r.eds)).sort((a, z) => z.eds[0].year - a.eds[0].year);
@@ -58,7 +61,7 @@ export async function BrandGrid({ tournaments, hall, locale }: { tournaments: To
           <ul className="mt-2 space-y-0.5 text-sm">
             {winners.map((e) => (
               <li key={e.key}>
-                <span className="text-neutral-400">{e.year}</span> 🥇 <span className="font-semibold">{e.places[0]}</span>
+                <span className="text-neutral-400">{e.year}</span> 🥇 <span className="font-semibold">{playerLinks(e.places[0], known)}</span>
                 <RegionBadge e={e} show={b.key === "mcl"} />
               </li>
             ))}
@@ -94,6 +97,7 @@ export async function BrandGrid({ tournaments, hall, locale }: { tournaments: To
 
 /** Страница турнира «без года»: ближайший розыгрыш сверху, ниже все прошлые годы. */
 export async function BrandPage({ brand, tournaments, hall, locale }: { brand: Brand; tournaments: Tournament[]; hall: HallEntry[]; locale: Locale }) {
+  const known = await getKnownPlayers();
   const t = await getTranslations({ locale, namespace: "tournaments" });
   const eds = editionsOf(brand, tournaments, hall);
   const upcoming = eds.filter(isUpcoming).sort((a, z) => a.tournament!.startsOn.localeCompare(z.tournament!.startsOn));
@@ -172,7 +176,7 @@ export async function BrandPage({ brand, tournaments, hall, locale }: { brand: B
                   {e.places.length > 0 && (
                     <p className="mt-1 text-neutral-200">
                       {e.places.slice(0, 3).map((p, i) => (
-                        <span key={i} className="mr-4 inline-block">{MEDALS[i]} {p}</span>
+                        <span key={i} className="mr-4 inline-block">{MEDALS[i]} {playerLinks(p, known)}</span>
                       ))}
                     </p>
                   )}

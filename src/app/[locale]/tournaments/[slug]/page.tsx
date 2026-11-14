@@ -15,6 +15,8 @@ import { getTournaments } from "@/lib/tournaments";
 import { getHallArchive } from "@/lib/hallArchive";
 import { VideoLink } from "@/components/VideoLink";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
+import { getKnownPlayers } from "@/lib/playerNames";
+import { playerLinks } from "@/components/players/PlayerNameLink";
 
 type Props = PageProps<"/[locale]/tournaments/[slug]">;
 
@@ -45,6 +47,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "tournaments" });
+  const known = await getKnownPlayers();
   const brand = brandBySlug(slug);
   if (brand) {
     const [all, hall] = await Promise.all([getTournaments(MAIN_CLUB_SLUG), getHallArchive(MAIN_CLUB_SLUG)]);
@@ -129,7 +132,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
             {x.winners.slice(0, 3).map((w, i) => (
               <li key={w} className="flex items-center gap-3 rounded-lg border border-white/15 bg-neutral-950/60 p-4">
                 <span aria-hidden="true" className="text-3xl">{["🥇", "🥈", "🥉"][i]}</span>
-                <span className="text-lg font-bold">{w}</span>
+                <span className="text-lg font-bold">{playerLinks(w, known)}</span>
               </li>
             ))}
           </ol>
@@ -174,6 +177,7 @@ function isPast(iso: string | null) {
 
 async function RegistrationBlock({ x, registrations, locale }: { x: Tournament; registrations: Registration[]; locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "tournaments" });
+  const known = await getKnownPlayers();
   const btn = "inline-flex min-h-12 items-center rounded-full bg-red-600 px-7 font-bold text-white hover:bg-red-500";
   if (x.status !== "announced") return <p className="mt-3 text-neutral-300">{t("regClosed")}</p>;
   if (x.registration === "none") return <p className="mt-3 text-neutral-300">{t("regNone")}</p>;
@@ -230,7 +234,7 @@ async function RegistrationBlock({ x, registrations, locale }: { x: Tournament; 
           <ol className="mt-2 flex flex-wrap gap-2">
             {registered.map((r, i) => (
               <li key={r.profileId} className="rounded-full bg-white/10 px-3 py-1 text-sm">
-                {i + 1}. {r.nickname}
+                {i + 1}. {playerLinks(r.nickname, known)}
               </li>
             ))}
           </ol>
@@ -241,7 +245,7 @@ async function RegistrationBlock({ x, registrations, locale }: { x: Tournament; 
           <h3 className="font-bold">{t("waitlist")}</h3>
           <ol className="mt-2 flex flex-wrap gap-2">
             {waitlist.map((r) => (
-              <li key={r.profileId} className="rounded-full border border-white/20 px-3 py-1 text-sm text-neutral-300">{r.nickname}</li>
+              <li key={r.profileId} className="rounded-full border border-white/20 px-3 py-1 text-sm text-neutral-300">{playerLinks(r.nickname, known)}</li>
             ))}
           </ol>
         </div>

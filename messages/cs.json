@@ -832,7 +832,8 @@
     "archiveFKFull": "Zabit jako první, podíl her",
     "archiveExtra": "Bonus/hra",
     "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna",
-    "aliases": "Hrál také jako: {names}"
+    "aliases": "Hrál také jako: {names}",
+    "archiveOnly": "Hráč z archivu klubu, na webu zatím není registrován"
   },
   "rating": {
     "filters": "Filtry žebříčku",

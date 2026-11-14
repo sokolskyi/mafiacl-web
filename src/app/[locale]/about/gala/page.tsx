@@ -3,6 +3,8 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { AboutHeader, AboutNav } from "@/components/about/AboutNav";
 import { GALA_NIGHTS, GALA_NOMINATIONS } from "@/lib/gala";
+import { getKnownPlayers } from "@/lib/playerNames";
+import { playerLinks } from "@/components/players/PlayerNameLink";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about/gala">) {
   const { locale } = (await params) as { locale: Locale };
@@ -13,6 +15,7 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
   const { locale } = (await params) as { locale: Locale };
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "about.gala" });
+  const known = await getKnownPlayers();
   const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const program = t.raw("program") as string[];
 
@@ -44,7 +47,7 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
             {GALA_NOMINATIONS.filter((n) => g.winners[n]).map((n) => (
               <li key={n} className="rounded-lg border border-white/15 bg-neutral-950/60 p-4">
                 <p className="text-sm text-neutral-400">{t(`nominations.${n}`)}</p>
-                <p className="mt-1 text-xl font-bold">🏆 {g.winners[n]}</p>
+                <p className="mt-1 text-xl font-bold">🏆 {playerLinks(g.winners[n] ?? "", known)}</p>
               </li>
             ))}
           </ul>

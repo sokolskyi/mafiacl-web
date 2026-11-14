@@ -101,8 +101,8 @@ export async function getPrizes(clubSlug: string): Promise<Prize[]> {
 }
 
 /** Запись принадлежит игроку: по аккаунту или (если записано на ник) по совпадению ника. */
-export function belongsTo(x: { profileId: string | null; holderName: string | null }, profileId: string, nickname: string) {
-  return x.profileId === profileId || (!x.profileId && x.holderName?.toLowerCase() === nickname.toLowerCase());
+export function belongsTo(x: { profileId: string | null; holderName: string | null }, profileId: string | null, nickname: string) {
+  return (profileId !== null && x.profileId === profileId) || (!x.profileId && x.holderName?.toLowerCase() === nickname.toLowerCase());
 }
 
 export type HallRow = {

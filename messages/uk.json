@@ -832,7 +832,8 @@
     "archiveFKFull": "Першим убитий, частка ігор",
     "archiveExtra": "Доп/гра",
     "miniTitleSeason": "Міні-турнір {n} · {season} сезон",
-    "aliases": "Також грав як: {names}"
+    "aliases": "Також грав як: {names}",
+    "archiveOnly": "Гравець з архіву клубу, на сайті ще не зареєстрований"
   },
   "rating": {
     "filters": "Фільтри рейтингу",
