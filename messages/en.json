@@ -163,6 +163,18 @@
     "players": {
       "title": "Club players",
       "description": "Every MafiaCL player: club games, seasons and tournaments. Find yourself or a rival and open their stats."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "What personal data MafiaCL Prague processes, why, for how long, who receives it and what your rights are. Cookies."
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "description": "Account rules on mafiacl.com: registration from age 15, nickname, game sign-ups, player content, Respect loyalty programme."
+    },
+    "shopTerms": {
+      "title": "Terms of Sale",
+      "description": "Buying MafiaCL Prague goods and memberships: ordering, payment, collection at the club, 14-day withdrawal, complaints."
     }
   },
   "account": {
@@ -268,7 +280,9 @@
         "save": "Couldn't send. Please try again.",
         "signIn": "Sign in to leave feedback."
       }
-    }
+    },
+    "tooYoung": "You must be at least 15 to create an account.",
+    "consent": "By signing in you agree to the <terms>Terms of Use</terms>. How we process your data is described in the <privacy>Privacy Policy</privacy>."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -949,7 +963,7 @@
     "remove": "Remove",
     "clear": "Clear cart",
     "total": "Total",
-    "placeOrder": "Place order",
+    "placeOrder": "Order with obligation to pay",
     "signInToOrder": "Sign in to place an order.",
     "signIn": "Sign in",
     "membershipNote": "A membership is activated automatically once the order is paid.",
@@ -999,7 +1013,8 @@
     "startOnHint": "For example, the day of your next game. You can pick a date within the next 90 days.",
     "startsOn": "Starts on {date}",
     "startsNow": "Starts right after payment",
-    "startsOnOrder": "from {date}"
+    "startsOnOrder": "from {date}",
+    "termsConsent": "By submitting the order you agree to the <shop>Terms of Sale</shop> and acknowledge the <privacy>Privacy Policy</privacy>."
   },
   "adminShop": {
     "title": "Shop",
@@ -2287,7 +2302,10 @@
     "learnTitle": "New players",
     "learnText": "How to play for the first time: roles and how a game goes, in plain words.",
     "source": "Source: {source}",
-    "emotionText": "Official Emotion Games sport mafia rules: game flow, voting, key five, fouls, points and Ci."
+    "emotionText": "Official Emotion Games sport mafia rules: game flow, voting, key five, fouls, points and Ci.",
+    "termsText": "Account rules: registration, nickname, game sign-ups, content and the Respect programme.",
+    "privacyText": "What data we process, why and for how long, your rights and cookies.",
+    "shopText": "Buying goods and memberships: payment, collection, withdrawal and complaints."
   },
   "rulesEmotion": {
     "title": "Emotion Games rules",
@@ -2650,5 +2668,17 @@
     "notRegistered": "not on the site",
     "nothing": "Nobody found.",
     "shown": "Shown: {n}"
+  },
+  "legal": {
+    "effective": "Effective from {date}",
+    "czechPrevails": "If versions differ, the Czech version prevails",
+    "toc": "Contents",
+    "related": "Other documents",
+    "links": {
+      "terms": "Terms of Use",
+      "privacy": "Privacy",
+      "shop": "Terms of Sale"
+    },
+    "operator": "Operator: {name}, IČO {ico}, {address}"
   }
 }

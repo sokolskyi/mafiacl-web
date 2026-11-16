@@ -163,6 +163,18 @@
     "players": {
       "title": "Hráči klubu",
       "description": "Všichni hráči MafiaCL: klubové hry, sezóny a turnaje. Najděte sebe nebo soupeře a otevřete statistiky."
+    },
+    "privacy": {
+      "title": "Zásady ochrany osobních údajů",
+      "description": "Jaké osobní údaje zpracovává klub MafiaCL Prague, proč, jak dlouho, komu je předává a jaká máte práva. Cookies."
+    },
+    "terms": {
+      "title": "Podmínky užívání webu",
+      "description": "Pravidla účtu na mafiacl.com: registrace od 15 let, přezdívka, přihlášky na hry, obsah hráčů, věrnostní program Respect."
+    },
+    "shopTerms": {
+      "title": "Obchodní podmínky",
+      "description": "Nákup zboží a permanentek MafiaCL Prague: objednávka, platba, převzetí v klubu, odstoupení do 14 dnů, reklamace."
     }
   },
   "account": {
@@ -268,7 +280,9 @@
         "save": "Odeslání se nezdařilo. Zkuste to znovu.",
         "signIn": "Pro odeslání se přihlaste."
       }
-    }
+    },
+    "tooYoung": "Účet si může založit osoba starší 15 let.",
+    "consent": "Přihlášením souhlasíte s <terms>podmínkami užívání</terms>. Jak zpracováváme vaše údaje, popisují <privacy>zásady ochrany osobních údajů</privacy>."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -949,7 +963,7 @@
     "remove": "Odebrat",
     "clear": "Vyprázdnit košík",
     "total": "Celkem",
-    "placeOrder": "Objednat",
+    "placeOrder": "Objednávka zavazující k platbě",
     "signInToOrder": "Pro objednávku se přihlaste.",
     "signIn": "Přihlásit se",
     "membershipNote": "Permanentka se aktivuje automaticky po zaplacení objednávky.",
@@ -999,7 +1013,8 @@
     "startOnHint": "Například ode dne nejbližší hry. Datum lze zvolit v příštích 90 dnech.",
     "startsOn": "Začne platit od {date}",
     "startsNow": "Začne platit hned po zaplacení",
-    "startsOnOrder": "od {date}"
+    "startsOnOrder": "od {date}",
+    "termsConsent": "Odesláním objednávky souhlasíte s <shop>obchodními podmínkami</shop> a berete na vědomí <privacy>zásady ochrany osobních údajů</privacy>."
   },
   "adminShop": {
     "title": "Obchod",
@@ -2287,7 +2302,10 @@
     "learnTitle": "Pro nováčky",
     "learnText": "Jak hrát poprvé: role a průběh hry jednoduše.",
     "source": "Zdroj: {source}",
-    "emotionText": "Oficiální pravidla sportovní mafie Emotion Games: průběh hry, hlasování, opěrná pětka, fauly, body a Ci."
+    "emotionText": "Oficiální pravidla sportovní mafie Emotion Games: průběh hry, hlasování, opěrná pětka, fauly, body a Ci.",
+    "termsText": "Pravidla účtu: registrace, přezdívka, přihlášky na hry, obsah a program Respect.",
+    "privacyText": "Jaké údaje zpracováváme, proč a jak dlouho, vaše práva a cookies.",
+    "shopText": "Nákup zboží a permanentek: platba, převzetí, odstoupení a reklamace."
   },
   "rulesEmotion": {
     "title": "Pravidla Emotion Games",
@@ -2650,5 +2668,17 @@
     "notRegistered": "není na webu",
     "nothing": "Nikoho jsme nenašli.",
     "shown": "Zobrazeno: {n}"
+  },
+  "legal": {
+    "effective": "Účinné od {date}",
+    "czechPrevails": "Při rozporu má přednost česká verze",
+    "toc": "Obsah",
+    "related": "Další dokumenty",
+    "links": {
+      "terms": "Podmínky užívání",
+      "privacy": "Ochrana osobních údajů",
+      "shop": "Obchodní podmínky"
+    },
+    "operator": "Provozovatel: {name}, IČO {ico}, {address}"
   }
 }

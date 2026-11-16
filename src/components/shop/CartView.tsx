@@ -88,6 +88,12 @@ export function CartView({ signedIn, error }: { signedIn: boolean; error?: strin
             <button type="submit" className="min-h-12 w-full rounded-full bg-red-600 px-6 font-bold text-white hover:bg-red-500">
               {t("placeOrder")}
             </button>
+            <p className="mt-3 text-xs text-neutral-400">
+              {t.rich("termsConsent", {
+                shop: (ch) => <Link href="/documents/shop-terms" className="underline underline-offset-2 hover:text-white">{ch}</Link>,
+                privacy: (ch) => <Link href="/documents/privacy" className="underline underline-offset-2 hover:text-white">{ch}</Link>,
+              })}
+            </p>
           </form>
         ) : (
           <div className="mt-5 space-y-3">

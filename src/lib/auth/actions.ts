@@ -89,7 +89,7 @@ export async function signOut(formData: FormData) {
   redirect(getPathname({ href: "/account", locale }));
 }
 
-export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidCity" | "invalidLink" | "invalidBirthday" | "birthdayRequired" | "birthdayRequested" | "nicknameRequested" | "taken" | "error" };
+export type ProfileState = { status: "idle" | "saved" | "invalid" | "invalidMarkery" | "invalidCity" | "invalidLink" | "invalidBirthday" | "tooYoung" | "birthdayRequired" | "birthdayRequested" | "nicknameRequested" | "taken" | "error" };
 
 /** Ник игрока: 2–32 символа, без пробелов по краям, уникален без учёта регистра. */
 export async function updateNickname(_prev: ProfileState, formData: FormData): Promise<ProfileState> {
@@ -120,6 +120,7 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   // Дата рождения обязательна; уже заданную меняет только админ (здесь — заявка на смену).
   const birthdayRaw = String(formData.get("birthday") ?? "").trim();
   if (birthdayRaw && !/^\d{4}-\d{2}-\d{2}$/.test(birthdayRaw)) return { status: "invalidBirthday" };
+  if (birthdayRaw && !isAtLeast(birthdayRaw, MIN_AGE)) return { status: "tooYoung" };
   const { data: priv } = await supabase.from("profile_private").select("birthday").eq("profile_id", userId).maybeSingle();
   if (!priv?.birthday && !birthdayRaw) return { status: "birthdayRequired" };
 
@@ -206,4 +207,16 @@ export async function verifyEmailCode(_prev: EmailState, formData: FormData): Pr
   const { data: claims } = await supabase.auth.getClaims();
   await recordSignupCountry(claims?.claims.sub, (await headers()).get("x-vercel-ip-country"));
   redirect(getPathname({ href: "/account", locale }));
+}
+
+/** Минимальный возраст для аккаунта (пользовательское соглашение, п. 2.1). */
+const MIN_AGE = 15;
+
+/** Исполнилось ли на сегодня (UTC) не меньше `years` лет человеку с датой рождения YYYY-MM-DD. */
+function isAtLeast(birthday: string, years: number): boolean {
+  const [y, m, d] = birthday.split("-").map(Number);
+  const now = new Date();
+  const ny = now.getUTCFullYear(), nm = now.getUTCMonth() + 1, nd = now.getUTCDate();
+  const age = ny - y - (nm < m || (nm === m && nd < d) ? 1 : 0);
+  return age >= years;
 }

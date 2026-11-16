@@ -67,6 +67,12 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           <span className="h-px flex-1 bg-white/10" />
         </div>
         <EmailSignIn locale={locale} />
+        <p className="mt-5 text-xs text-neutral-400">
+          {t.rich("consent", {
+            terms: (ch) => <Link href="/documents/terms" className="underline underline-offset-2 hover:text-white">{ch}</Link>,
+            privacy: (ch) => <Link href="/documents/privacy" className="underline underline-offset-2 hover:text-white">{ch}</Link>,
+          })}
+        </p>
         <p className="mt-6 border-t border-white/10 pt-4 text-sm text-neutral-300">
           <span aria-hidden="true">🇺🇦 </span>
           {t("warNotice")}

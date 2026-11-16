@@ -13,6 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { href: "/hall-of-fame", priority: 0.5 },
     { href: "/documents/mafgame-rules", priority: 0.5 },
     { href: "/documents/emotion-games-rules", priority: 0.5 },
+    { href: "/documents/privacy", priority: 0.3 },
+    { href: "/documents/terms", priority: 0.3 },
+    { href: "/documents/shop-terms", priority: 0.3 },
     ...Object.keys(CITIES).map((city) => ({
       href: { pathname: "/clubs/[city]" as const, params: { city } },
       priority: 0.8,

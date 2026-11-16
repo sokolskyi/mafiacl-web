@@ -4,10 +4,13 @@ import type { Locale } from "@/i18n/routing";
 import { FOOTER_NAV, MAIN_NAV, SECTIONS } from "@/lib/site";
 import { CLUB_SOCIAL } from "@/lib/social";
 import { SocialIcon } from "@/components/SocialIcon";
+import { LEGAL_HREF } from "@/content/legal";
+import { OPERATOR } from "@/content/legal/operator";
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "nav" });
   const c = await getTranslations({ locale, namespace: "common" });
+  const lg = await getTranslations({ locale, namespace: "legal" });
 
   return (
     <footer className="mt-24 border-t border-white/10 text-sm text-neutral-400">
@@ -42,9 +45,18 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           ))}
         </ul>
       </div>
-      <p className="mx-auto max-w-6xl px-4 pb-8 text-xs">
-        © 2011–<CurrentYear /> MafiaCL. {c("rights")}
-      </p>
+      <div className="mx-auto max-w-6xl space-y-2 px-4 pb-8 text-xs">
+        <ul className="flex flex-wrap gap-x-4 gap-y-1">
+          {(["terms", "privacy", "shop"] as const).map((d) => (
+            <li key={d}>
+              <Link href={LEGAL_HREF[d]} className="inline-flex min-h-8 items-center hover:text-white">{lg(`links.${d}`)}</Link>
+            </li>
+          ))}
+        </ul>
+        <p>
+          © 2011–<CurrentYear /> MafiaCL. {c("rights")} {lg("operator", { name: OPERATOR.name, ico: OPERATOR.ico, address: OPERATOR.address })}
+        </p>
+      </div>
     </footer>
   );
 }

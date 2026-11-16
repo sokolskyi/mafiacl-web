@@ -18,6 +18,9 @@ export default async function Page({ params }: PageProps<"/[locale]/documents">)
     { href: "/documents/emotion-games-rules" as const, title: p("emotionRules.title"), text: t("emotionText"), source: "emotion.games" },
     { href: "/about/code" as const, title: t("codeTitle"), text: t("codeText") },
     { href: "/learn" as const, title: t("learnTitle"), text: t("learnText") },
+    { href: "/documents/terms" as const, title: p("terms.title"), text: t("termsText") },
+    { href: "/documents/privacy" as const, title: p("privacy.title"), text: t("privacyText") },
+    { href: "/documents/shop-terms" as const, title: p("shopTerms.title"), text: t("shopText") },
   ];
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
