@@ -318,3 +318,5 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 -- league: добавлены 'kharkiv' (рейтинг MafiaCl Kharkiv I–V, 2012–2015) и 'student' (Student League I, II, III, V).
 -- Данные — из таблицы «Рейтинг 5 сезон (1).xlsm» и «Sl V сезон.xlsm» (D:\Mafia\рейтинг): только рейтинг (Коэфф.) и игры;
 -- зачёт — больше 1/5 игр сезона; finalist — есть баллы в финальных играх. У статистических колонок rating_archive_rows — default 0.
+-- player_aliases (2026-11-16, подтверждено владельцем): Sarcasm→Сарказм, Bordo→Бордо, М.Б./М. Б./МБ→Мирон Богданович,
+-- Мвлик→Мылик, DiZzy→D!Zzy, Setti→Сетти, VanCleaf→VanCleef, Eva→Ева (Френк→Frank, Аниморф→Animorf, Балу→Balu уже были).
