@@ -69,9 +69,9 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                 <ul className="mt-3 grid gap-4 sm:grid-cols-2">
                   {seasons.map((e) => (
                     <li key={e.id} className="overflow-hidden rounded-lg border border-amber-400/40 bg-neutral-950/60">
-                      {e.photos.length > 0 && <Photos photos={e.photos} alt={`${t("seasonTitle", { n: e.season ?? "" })} · ${e.places[0] ?? ""}`} />}
+                      {e.photos.length > 0 && <Photos photos={e.photos} alt={`${(e.season ? t("seasonTitle", { n: e.season }) : e.title)} · ${e.places[0] ?? ""}`} />}
                       <div className="p-5">
-                      <p className="font-display text-2xl font-extrabold uppercase">{t("seasonTitle", { n: e.season ?? "" })}</p>
+                      <p className="font-display text-2xl font-extrabold uppercase">{(e.season ? t("seasonTitle", { n: e.season }) : e.title)}</p>
                       {e.places.length > 0 ? (
                         <ol className="mt-2 space-y-1">
                           {e.places.map((p, i) => (
