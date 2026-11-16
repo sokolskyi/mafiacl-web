@@ -9,7 +9,7 @@ export const OPERATOR = {
   address: "Sousedíkova 969/1, 190 00 Praha 9 – Vysočany",
   email: "info@mafiacl.com",
   /** Обязателен для условий продажи потребителям (с 2023). Пока не задан — показывается прочерк. */
-  phone: "",
+  phone: "+420 773 194 945",
   /** Дата вступления текущей редакции в силу (ДД.ММ.ГГГГ). */
   effective: "16.11.2026",
 } as const;
