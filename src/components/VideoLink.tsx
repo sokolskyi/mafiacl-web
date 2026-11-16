@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import type { VideoItem } from "@/lib/videos";
+import { videoHref, type VideoItem } from "@/lib/videos";
 
 const YT = (
   <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z" />
@@ -38,7 +38,7 @@ export async function VideoLink({
           </a>
         )}
         {videos.map((x) => (
-          <a key={x.v} href={`https://www.youtube.com/watch?v=${x.v}`} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 px-5 font-semibold hover:bg-white/10">
+          <a key={x.v} href={videoHref(x)} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 px-5 font-semibold hover:bg-white/10">
             {icon}
             {label(x)}
           </a>
@@ -59,7 +59,7 @@ export async function VideoLink({
         <span className="inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-red-300">{icon}{t("videoShort")}:</span>
       )}
       {videos.map((x) => (
-        <a key={x.v} href={`https://www.youtube.com/watch?v=${x.v}`} target="_blank" rel="noopener" className={link.replace("gap-1.5 ", "")}>
+        <a key={x.v} href={videoHref(x)} target="_blank" rel="noopener" className={link.replace("gap-1.5 ", "")}>
           {label(x)}
         </a>
       ))}
