@@ -4,9 +4,24 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const RATING_ARCHIVE_TAG = "rating-archive";
 
-/** Лиги клуба в Праге: Premier League (the-mafia.net), Liga Mova (на украинском), First League. */
-export const ARCHIVE_LEAGUES = ["premier", "mova", "first"] as const;
+/**
+ * Лиги архива. Прага: Premier League (the-mafia.net), Liga Mova (на украинском), First League.
+ * Харьков: рейтинг MafiaCl Kharkiv (2012–2015) и Student League (2014–2018).
+ */
+export const ARCHIVE_LEAGUES = ["premier", "mova", "first", "kharkiv", "student"] as const;
 export type ArchiveLeague = (typeof ARCHIVE_LEAGUES)[number];
+
+/** Города архива и их лиги — от города зависит адрес страницы сезона. */
+export const ARCHIVE_CITIES = { prague: ["premier", "mova", "first"], kharkiv: ["kharkiv", "student"] } as const satisfies Record<string, readonly ArchiveLeague[]>;
+export type ArchiveCity = keyof typeof ARCHIVE_CITIES;
+export const cityOfLeague = (league: string): ArchiveCity => (league === "kharkiv" || league === "student" ? "kharkiv" : "prague");
+
+/** Адрес страницы сезона архива (Прага или Харьков). */
+export function archiveSeasonHref(league: string, slug: string) {
+  return cityOfLeague(league) === "kharkiv"
+    ? ({ pathname: "/ratings/kharkiv/[slug]", params: { slug } } as const)
+    : ({ pathname: "/ratings/prague/[slug]", params: { slug } } as const);
+}
 
 /** Пара баллов: [команда игрока победила, команда проиграла]. */
 export type Pair = [number, number];

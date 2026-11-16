@@ -2099,6 +2099,14 @@
       "first": {
         "name": "First League",
         "about": "Liga klubu s vlastním žebříčkem a finále sezóny."
+      },
+      "kharkiv": {
+        "name": "MafiaCl Kharkiv",
+        "about": "Klubový žebříček v Charkově: sezóny 2012–2015."
+      },
+      "student": {
+        "name": "Student League",
+        "about": "Studentská liga klubu v Charkově."
       }
     },
     "statsGames": "Her v žebříčku: {games}.",
@@ -2126,7 +2134,15 @@
     "hostsTitle": "Moderátoři sezóny",
     "host": "Moderátor",
     "hostedGames": "Odmoderováno her",
-    "partialGames": "Hry podle protokolů večerů; z večera 5. července 2024 se zachovaly jen výsledky, takže jeho účastníci mohli odehrát více her."
+    "partialGames": "Hry podle protokolů večerů; z večera 5. července 2024 se zachovaly jen výsledky, takže jeho účastníci mohli odehrát více her.",
+    "listTitleKharkiv": "Archiv žebříčků klubu v Charkově",
+    "listLeadKharkiv": "MafiaCl Kharkiv — tak se klub jmenoval před přestěhováním do Prahy. Tabulky klubového žebříčku I.–V. sezóny (2012–2015) a Student League (2014–2018) z klubového archivu.",
+    "pageTitleKharkiv": "{league}, Charkov — {season} ({year})",
+    "pageDescriptionKharkiv": "Archiv klubu MafiaCl Kharkiv, {league}: {season}, rok {year}, {games} her — tabulka žebříčku a medailisté finále.",
+    "kharkiv": "Charkov",
+    "qualifiedNoteKharkiv": "Šedě — hráči, kteří odehráli nejvýše 1/5 her sezóny a do hodnocení se nedostali.",
+    "legendKharkiv": "Žebříček je koeficient sezóny: získané body se vydělí počtem her a vynásobí 100. ✓ ve sloupci „Finále“ — hráč hrál finále sezóny. V archivu se zachoval jen žebříček a počet her, bez rozpisu podle rolí.",
+    "finalistHint": "Hrál finále sezóny"
   },
   "rules": {
     "title": "Pravidla hry Mafgame",

@@ -2,19 +2,26 @@ import { getTranslations } from "next-intl/server";
 import { VideoLink } from "@/components/VideoLink";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { ARCHIVE_LEAGUES, getArchiveSeasons } from "@/lib/ratingArchive";
+import { ARCHIVE_CITIES, archiveSeasonHref, getArchiveSeasons, type ArchiveCity } from "@/lib/ratingArchive";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 
-/** Архив рейтингов клуба в Праге: карточки сезонов по лигам (Premier League, Liga Mova, First League). */
+/** Архив рейтингов клуба: Прага (Premier League, Liga Mova, First League) и Харьков (рейтинг клуба, Student League). */
 export async function ArchiveSeasons({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "ratingArchive" });
   const seasons = await getArchiveSeasons(MAIN_CLUB_SLUG);
   if (seasons.length === 0) return null;
+  const cities: { city: ArchiveCity; title: string; lead: string }[] = [
+    { city: "prague", title: t("listTitle"), lead: t("listLead") },
+    { city: "kharkiv", title: t("listTitleKharkiv"), lead: t("listLeadKharkiv") },
+  ];
   return (
-    <section className="mt-16" aria-labelledby="archive-seasons">
-      <h2 id="archive-seasons" className="font-display text-3xl font-extrabold uppercase sm:text-4xl">{t("listTitle")}</h2>
-      <p className="mt-2 max-w-3xl text-neutral-300">{t("listLead")}</p>
-      {ARCHIVE_LEAGUES.map((league) => {
+    <>
+      {cities.map(({ city, title, lead }) =>
+        seasons.some((s) => (ARCHIVE_CITIES[city] as readonly string[]).includes(s.league)) ? (
+    <section key={city} className="mt-16" aria-labelledby={`archive-${city}`}>
+      <h2 id={`archive-${city}`} className="font-display text-3xl font-extrabold uppercase sm:text-4xl">{title}</h2>
+      <p className="mt-2 max-w-3xl text-neutral-300">{lead}</p>
+      {ARCHIVE_CITIES[city].map((league) => {
         const list = seasons.filter((s) => s.league === league);
         if (list.length === 0) return null;
         return (
@@ -29,7 +36,7 @@ export async function ArchiveSeasons({ locale }: { locale: Locale }) {
                   {s.isCurrent && <span className="rounded bg-red-500/25 px-1.5 text-xs font-semibold uppercase text-red-200">{t("current")}</span>}
                 </p>
                 <h4 className="mt-1 text-2xl font-bold">
-                  <Link href={{ pathname: "/ratings/prague/[slug]", params: { slug: s.slug } }} className="after:absolute after:inset-0 hover:underline">
+                  <Link href={archiveSeasonHref(s.league, s.slug)} className="after:absolute after:inset-0 hover:underline">
                     {s.title}
                   </Link>
                 </h4>
@@ -57,5 +64,8 @@ export async function ArchiveSeasons({ locale }: { locale: Locale }) {
         );
       })}
     </section>
+        ) : null,
+      )}
+    </>
   );
 }

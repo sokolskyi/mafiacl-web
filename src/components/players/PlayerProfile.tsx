@@ -8,7 +8,7 @@ import { badgeOf, belongsTo, getBadges, getPrizes, getTitles } from "@/lib/badge
 import { PlayerShare } from "./PlayerShare";
 import { formatMemberNo } from "@/lib/memberNo";
 import { getHallArchive } from "@/lib/hallArchive";
-import { getPremierTotals } from "@/lib/ratingArchive";
+import { archiveSeasonHref, getPremierTotals, type ArchiveLeague } from "@/lib/ratingArchive";
 import { awardsOf } from "@/lib/awards";
 import { compareWithClub } from "@/lib/clubCompare";
 import { getAliases } from "@/lib/aliases";
@@ -312,8 +312,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                 {player.archive.map((a) => (
                   <tr key={a.slug}>
                     <td className="py-2">
-                      <span className="text-neutral-400">{ta(`leagues.${a.league as "premier" | "mova" | "first"}.name`)} · </span>
-                      <Link href={{ pathname: "/ratings/prague/[slug]", params: { slug: a.slug } }} className="font-semibold hover:underline">{a.title}</Link>
+                      <span className="text-neutral-400">{ta(`leagues.${a.league as ArchiveLeague}.name`)} · </span>
+                      <Link href={archiveSeasonHref(a.league, a.slug)} className="font-semibold hover:underline">{a.title}</Link>
                       <span className="ml-2 text-neutral-500">{a.year}</span>
                       {a.isCurrent && <span className="ml-2 rounded bg-red-500/25 px-1.5 text-xs font-semibold uppercase text-red-200">{t("archiveCurrent")}</span>}
                     </td>

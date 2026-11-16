@@ -313,3 +313,8 @@ revoke all on function private.respect_balance(uuid), private.respect_add(bigint
 -- player_feedback (2026-11-15): отзывы игроков для администрации клуба.
 -- Таблица public.player_feedback (club_id, profile_id, body 3..2000, created_at, read_at, read_by), RLS:
 -- игрок видит свои, owner/admin клуба — все отзывы клуба. Пишет только сервер (service_role), лимит 5 в сутки — в server action.
+
+-- rating_archive_kharkiv_leagues + rating_archive_rows_stat_defaults (2026-11-16): архив Харькова.
+-- league: добавлены 'kharkiv' (рейтинг MafiaCl Kharkiv I–V, 2012–2015) и 'student' (Student League I, II, III, V).
+-- Данные — из таблицы «Рейтинг 5 сезон (1).xlsm» и «Sl V сезон.xlsm» (D:\Mafia\рейтинг): только рейтинг (Коэфф.) и игры;
+-- зачёт — больше 1/5 игр сезона; finalist — есть баллы в финальных играх. У статистических колонок rating_archive_rows — default 0.
