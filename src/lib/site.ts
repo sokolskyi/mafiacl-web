@@ -48,6 +48,39 @@ export const MAIN_NAV: SectionKey[] = [
   "about",
 ];
 
+/** Шапка: 5 групп. Пункт группы — ключ из messages nav.* и путь. Первый пункт — куда ведёт сама группа. */
+export const NAV_GROUPS: { key: "groupPlay" | "groupCompete" | "groupClub" | "groupBusiness" | "shop"; items: { label: string; href: (typeof SECTIONS)[SectionKey] | "/hall-of-fame" }[] }[] = [
+  { key: "groupPlay", items: [
+    { label: "schedule", href: "/play" },
+    { label: "learn", href: "/learn" },
+    { label: "documents", href: "/documents" },
+    { label: "faq", href: "/faq" },
+  ] },
+  { key: "groupCompete", items: [
+    { label: "tournaments", href: "/tournaments" },
+    { label: "kings", href: "/kings" },
+    { label: "ratings", href: "/ratings" },
+    { label: "players", href: "/players" },
+    { label: "hall", href: "/hall-of-fame" },
+  ] },
+  { key: "groupClub", items: [
+    { label: "about", href: "/about" },
+    { label: "hosts", href: "/hosts" },
+    { label: "blog", href: "/blog" },
+    { label: "gallery", href: "/gallery" },
+    { label: "respect", href: "/respect" },
+    { label: "partners", href: "/partners" },
+    { label: "reviews", href: "/reviews" },
+    { label: "contacts", href: "/contacts" },
+  ] },
+  { key: "groupBusiness", items: [
+    { label: "corporate", href: "/corporate" },
+    { label: "kids", href: "/kids" },
+    { label: "franchise", href: "/franchise" },
+  ] },
+  { key: "shop", items: [{ label: "shop", href: "/shop" }] },
+];
+
 /** Подвал: всё остальное. */
 export const FOOTER_NAV: SectionKey[] = [
   "players",

@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { NOINDEX, SITE_NAME, SITE_URL } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { TabBar } from "@/components/TabBar";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -37,6 +38,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <SiteHeader locale={locale} />
           {children}
           <SiteFooter locale={locale} />
+          <TabBar />
         </NextIntlClientProvider>
       </body>
     </html>

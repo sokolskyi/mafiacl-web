@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/manrope/index.css";
+@import "@fontsource-variable/unbounded/index.css";
 @import "@fontsource/sofia-sans-condensed/700.css";
 @import "@fontsource/sofia-sans-condensed/800.css";
 
@@ -15,8 +17,10 @@
 }
 
 @theme {
-  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-sans: "Manrope Variable", "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-display: "Sofia Sans Condensed", "Arial Narrow", sans-serif;
+  /* Крупные заголовки нового дизайна (главная, плитки). */
+  --font-hero: "Unbounded Variable", "Manrope Variable", sans-serif;
 
   --color-white: #fdffc2;
   --color-black: #0b0b0b;
@@ -70,7 +74,8 @@
     opacity: 0.09;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
-  body[data-stream]::after {
+  body[data-stream]::after,
+  body[data-stream] .tabbar {
     display: none;
   }
   h1 {
