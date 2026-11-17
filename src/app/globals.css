@@ -100,3 +100,20 @@
     scroll-behavior: smooth;
   }
 }
+
+/* Подменю шапки: наведение (если после клика не закрыто) или навигация с клавиатуры. */
+.nav-dropdown {
+  visibility: hidden;
+  opacity: 0;
+  translate: 0 4px;
+  transition: opacity 0.15s, translate 0.15s, visibility 0.15s;
+}
+.nav-group:not([data-closed]):hover > .nav-dropdown,
+.nav-group:has(:focus-visible) > .nav-dropdown {
+  visibility: visible;
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown { transition: none; }
+}

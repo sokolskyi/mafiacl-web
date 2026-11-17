@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/routing";
 import { NAV_GROUPS } from "@/lib/site";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
+import { DesktopNav } from "./DesktopNav";
 
 export async function SiteHeader({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "nav" });
@@ -20,9 +21,10 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
 
         {/* Широкий экран: 5 групп, подменю по наведению и с клавиатуры. */}
         <nav aria-label={c("menu")} className="hidden flex-1 justify-center lg:flex">
+          <DesktopNav>
           <ul className="flex items-center gap-1">
             {NAV_GROUPS.map((grp) => (
-              <li key={grp.key} className="group relative">
+              <li key={grp.key} className="nav-group relative">
                 <Link
                   href={grp.items[0].href}
                   className="inline-flex min-h-11 items-center rounded-full px-4 text-[15px] font-semibold text-neutral-200 hover:bg-white/10 hover:text-white"
@@ -30,7 +32,7 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
                   {t(grp.key)}
                 </Link>
                 {grp.items.length > 1 && (
-                  <ul className="invisible absolute left-0 top-full z-50 grid min-w-56 translate-y-1 gap-0.5 rounded-2xl border border-white/10 bg-neutral-900 p-2 opacity-0 shadow-2xl transition group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  <ul className="nav-dropdown absolute left-0 top-full z-50 grid min-w-56 gap-0.5 rounded-2xl border border-white/10 bg-neutral-900 p-2 shadow-2xl">
                     {grp.items.map((it) => (
                       <li key={it.href}>
                         <Link href={it.href} className="flex min-h-11 items-center rounded-xl px-3 font-semibold hover:bg-white/10">
@@ -43,6 +45,7 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ul>
+          </DesktopNav>
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
