@@ -95,7 +95,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       {/* Первый экран: на телефоне видео во весь экран, на компьютере — окно справа. */}
       <section
         aria-labelledby="hero-title"
-        className="relative isolate flex min-h-[calc(100svh-64px)] flex-col justify-end overflow-hidden lg:mx-auto lg:grid lg:min-h-0 lg:max-w-[1360px] lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16 lg:px-6 lg:pb-14 lg:pt-12"
+        className="relative isolate flex min-h-[calc(100svh-150px)] flex-col justify-end overflow-hidden lg:mx-auto lg:grid lg:min-h-0 lg:max-w-[1360px] lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16 lg:px-6 lg:pb-14 lg:pt-12"
       >
         <HeroVideo
           label={t("videoLabel")}
