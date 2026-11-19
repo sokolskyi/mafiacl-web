@@ -14,8 +14,6 @@ export default async function Page({ params }: PageProps<"/[locale]/documents">)
   const t = await getTranslations({ locale, namespace: "documents" });
   const p = await getTranslations({ locale, namespace: "pages" });
   const cards = [
-    { href: "/documents/mafgame-rules" as const, title: p("mafgameRules.title"), text: t("rulesText"), source: "mafgame.org" },
-    { href: "/documents/emotion-games-rules" as const, title: p("emotionRules.title"), text: t("emotionText"), source: "emotion.games" },
     { href: "/about/code" as const, title: t("codeTitle"), text: t("codeText") },
     { href: "/learn" as const, title: t("learnTitle"), text: t("learnText") },
     { href: "/documents/terms" as const, title: p("terms.title"), text: t("termsText") },
@@ -33,7 +31,6 @@ export default async function Page({ params }: PageProps<"/[locale]/documents">)
               <Link href={c.href} className="after:absolute after:inset-0 hover:underline">{c.title}</Link>
             </h2>
             <p className="mt-2 text-neutral-300">{c.text}</p>
-            {c.source && <p className="mt-3 text-sm text-neutral-500">{t("source", { source: c.source })}</p>}
           </li>
         ))}
       </ul>

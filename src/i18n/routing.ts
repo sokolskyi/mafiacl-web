@@ -21,8 +21,6 @@ export const routing = defineRouting({
     "/hall-of-fame": { cs: "/sin-slavy", ru: "/zal-slavy", uk: "/zal-slavy", en: "/hall-of-fame" },
     "/learn": { cs: "/pravidla", ru: "/pravila", uk: "/pravyla", en: "/rules" },
     "/documents": { cs: "/dokumenty", ru: "/dokumenty", uk: "/dokumenty", en: "/documents" },
-    "/documents/mafgame-rules": { cs: "/dokumenty/pravidla-mafgame", ru: "/dokumenty/pravila-mafgame", uk: "/dokumenty/pravyla-mafgame", en: "/documents/mafgame-rules" },
-    "/documents/emotion-games-rules": { cs: "/dokumenty/pravidla-emotion-games", ru: "/dokumenty/pravila-emotion-games", uk: "/dokumenty/pravyla-emotion-games", en: "/documents/emotion-games-rules" },
     "/documents/privacy": { cs: "/dokumenty/ochrana-osobnich-udaju", ru: "/dokumenty/konfidentsialnost", uk: "/dokumenty/konfidentsiinist", en: "/documents/privacy" },
     "/documents/terms": { cs: "/dokumenty/podminky-uzivani", ru: "/dokumenty/polzovatelskoe-soglashenie", uk: "/dokumenty/uhoda-korystuvacha", en: "/documents/terms" },
     "/documents/shop-terms": { cs: "/dokumenty/obchodni-podminky", ru: "/dokumenty/usloviya-prodazhi", uk: "/dokumenty/umovy-prodazhu", en: "/documents/terms-of-sale" },

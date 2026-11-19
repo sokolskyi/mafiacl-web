@@ -11,8 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { href: "/", priority: 1 },
     ...Object.values(SECTIONS).map((href) => ({ href, priority: 0.7 })),
     { href: "/hall-of-fame", priority: 0.5 },
-    { href: "/documents/mafgame-rules", priority: 0.5 },
-    { href: "/documents/emotion-games-rules", priority: 0.5 },
     { href: "/documents/privacy", priority: 0.3 },
     { href: "/documents/terms", priority: 0.3 },
     { href: "/documents/shop-terms", priority: 0.3 },
