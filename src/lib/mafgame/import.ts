@@ -115,6 +115,10 @@ export async function runImport(db: SupabaseClient, opts: { ids?: number[]; scan
     const refresh = (known ?? [])
       .filter((k) => {
         if (!k.starts_on || k.starts_on > today) return false;
+        // Турнир старше месяца так и не закрыли на mafgame — больше не перечитываем.
+        const month = new Date(`${k.starts_on}T00:00:00Z`);
+        month.setUTCDate(month.getUTCDate() + (k.days ?? 1) + 30);
+        if (new Date() > month) return false;
         if (k.status !== "closed") return true;
         // Итоги иногда правят после закрытия — перечитываем неделю после окончания.
         const end = new Date(`${k.starts_on}T00:00:00Z`);
