@@ -895,8 +895,12 @@
     "finalist": "final",
     "stars": "{n} ★ — tournament level",
     "tournamentsTitle": "Club tournaments",
-    "tournamentsLine": "{n} tournaments · {games} games · {wins} won · {finals} finals · {podiums} podiums",
-    "tournamentsSource": "Results from mafgame.org: MafiaCL tournaments and Arenas. Place is by the last stage the player reached."
+    "tournamentsSource": "Results from mafgame.org: MafiaCL tournaments and Arenas. Place is by the last stage the player reached.",
+    "tCount": "{n, plural, one {# tournament} other {# tournaments}}",
+    "tGames": "{n, plural, one {# game} other {# games}}",
+    "tWins": "{pct} won",
+    "tFinals": "{n, plural, one {# final} other {# finals}}",
+    "tPodiums": "podiums: {n}"
   },
   "rating": {
     "filters": "Rating filters",

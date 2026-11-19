@@ -895,8 +895,12 @@
     "finalist": "finále",
     "stars": "{n} ★ — úroveň turnaje",
     "tournamentsTitle": "Turnaje klubu",
-    "tournamentsLine": "Turnajů: {n} · her: {games} · výher {wins} · finále: {finals} · medailová místa: {podiums}",
-    "tournamentsSource": "Výsledky z mafgame.org: turnaje a Areny MafiaCL. Umístění podle poslední fáze, do které hráč postoupil."
+    "tournamentsSource": "Výsledky z mafgame.org: turnaje a Areny MafiaCL. Umístění podle poslední fáze, do které hráč postoupil.",
+    "tCount": "{n, plural, one {# turnaj} few {# turnaje} other {# turnajů}}",
+    "tGames": "{n, plural, one {# hra} few {# hry} other {# her}}",
+    "tWins": "výhry {pct}",
+    "tFinals": "{n, plural, one {# finále} other {# finále}}",
+    "tPodiums": "medailová místa: {n}"
   },
   "rating": {
     "filters": "Filtry žebříčku",

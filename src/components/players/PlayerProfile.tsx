@@ -351,7 +351,13 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         <section aria-labelledby="tournaments" className="mt-10">
           <h2 id="tournaments" className="text-xl font-bold">{t("tournamentsTitle")}</h2>
           <p className="mt-1 text-sm text-neutral-400">
-            {t("tournamentsLine", { n: tournaments.length, games: tGames, wins: pct(tWins, tGames), finals: tFinals, podiums: tPodiums })}
+            {[
+              t("tCount", { n: tournaments.length }),
+              t("tGames", { n: tGames }),
+              t("tWins", { pct: pct(tWins, tGames) }),
+              ...(tFinals ? [t("tFinals", { n: tFinals })] : []),
+              ...(tPodiums ? [t("tPodiums", { n: tPodiums })] : []),
+            ].join(" · ")}
           </p>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[30rem] text-left text-sm">

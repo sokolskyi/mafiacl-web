@@ -895,8 +895,12 @@
     "finalist": "финал",
     "stars": "{n} ★ — уровень турнира",
     "tournamentsTitle": "Турниры клуба",
-    "tournamentsLine": "{n} турниров · {games} игр · побед {wins} · финалов {finals} · призовых мест {podiums}",
-    "tournamentsSource": "Итоги — с mafgame.org: турниры и Арены MafiaCL. Место — по итогам последнего этапа, до которого дошёл игрок."
+    "tournamentsSource": "Итоги — с mafgame.org: турниры и Арены MafiaCL. Место — по итогам последнего этапа, до которого дошёл игрок.",
+    "tCount": "{n, plural, one {# турнир} few {# турнира} other {# турниров}}",
+    "tGames": "{n, plural, one {# игра} few {# игры} other {# игр}}",
+    "tWins": "побед {pct}",
+    "tFinals": "{n, plural, one {# финал} few {# финала} other {# финалов}}",
+    "tPodiums": "призовых мест: {n}"
   },
   "rating": {
     "filters": "Фильтры рейтинга",
