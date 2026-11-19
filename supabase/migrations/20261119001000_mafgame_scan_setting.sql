@@ -4,6 +4,8 @@ insert into private.app_settings (name, value) values ('mafgame_scan', '30') on 
 create or replace function private.kick_mafgame_import()
 returns void language plpgsql security definer set search_path = '' as $$
 begin
+  -- Холостой запрос: pg_net через раз рвёт старое HTTP/2-соединение с Vercel («HTTP2 framing layer»).
+  perform net.http_get(url := (select value from private.app_settings where name = 'mafgame_import_url'), timeout_milliseconds := 10000);
   perform net.http_post(
     url := (select value from private.app_settings where name = 'mafgame_import_url'),
     headers := jsonb_build_object(
