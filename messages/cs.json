@@ -2432,5 +2432,41 @@
       "shop": "Obchodní podmínky"
     },
     "operator": "Provozovatel: {name}, IČO {ico}, {address}"
+  },
+  "blogSocial": {
+    "share": "Sdílet článek",
+    "reactionsLabel": "Reakce na článek",
+    "reactions": {
+      "fire": "Pecka",
+      "target": "Přesně",
+      "wow": "Wow",
+      "doubt": "Sporné",
+      "lol": "Řehtám"
+    },
+    "views": "{n, plural, one {# zobrazení} few {# zobrazení} other {# zobrazení}}",
+    "commentsTitle": "Komentáře · {n}",
+    "placeholder": "Co si myslíte?",
+    "send": "Odeslat",
+    "sending": "Odesíláme…",
+    "signIn": "Pro komentář se",
+    "signInLink": "přihlaste na web",
+    "needNickname": "Pro komentáře si nastavte herní přezdívku —",
+    "needNicknameLink": "v účtu",
+    "youAre": "Píšete jako {nick}",
+    "delete": "Smazat",
+    "deleteConfirm": "Smazat komentář?",
+    "empty": "Zatím žádné komentáře — buďte první.",
+    "errors": {
+      "signIn": "Pro komentáře se přihlaste.",
+      "invalid": "Komentář je prázdný nebo příliš dlouhý.",
+      "nickname": "Nejdřív si v účtu nastavte herní přezdívku.",
+      "tooFast": "Příliš mnoho komentářů za sebou — zkuste to za pár minut.",
+      "save": "Nepovedlo se. Zkuste to znovu."
+    },
+    "moreLabel": "Další články",
+    "popular": "Nejčtenější",
+    "previous": "Předchozí článek",
+    "byAuthor": "Další od {author}",
+    "moreReviews": "Další přehledy sezóny"
   }
 }

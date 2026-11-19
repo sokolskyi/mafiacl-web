@@ -2432,5 +2432,41 @@
       "shop": "Terms of Sale"
     },
     "operator": "Operator: {name}, IČO {ico}, {address}"
+  },
+  "blogSocial": {
+    "share": "Share article",
+    "reactionsLabel": "Reactions to the article",
+    "reactions": {
+      "fire": "Fire",
+      "target": "Spot on",
+      "wow": "Wow",
+      "doubt": "Debatable",
+      "lol": "LOL"
+    },
+    "views": "{n, plural, one {# view} other {# views}}",
+    "commentsTitle": "Comments · {n}",
+    "placeholder": "What do you think?",
+    "send": "Send",
+    "sending": "Sending…",
+    "signIn": "To comment,",
+    "signInLink": "sign in",
+    "needNickname": "To comment, set your game nickname",
+    "needNicknameLink": "in your account",
+    "youAre": "You are writing as {nick}",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this comment?",
+    "empty": "No comments yet — be the first.",
+    "errors": {
+      "signIn": "Sign in to comment.",
+      "invalid": "The comment is empty or too long.",
+      "nickname": "Set your game nickname in your account first.",
+      "tooFast": "Too many comments in a row — try again in a few minutes.",
+      "save": "Something went wrong. Please try again."
+    },
+    "moreLabel": "More articles",
+    "popular": "Most read",
+    "previous": "Previous article",
+    "byAuthor": "More from {author}",
+    "moreReviews": "More season reviews"
   }
 }

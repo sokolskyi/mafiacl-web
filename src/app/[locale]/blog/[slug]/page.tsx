@@ -9,7 +9,9 @@ import { getReview } from "@/lib/reviews/queries";
 import { analyze } from "@/lib/reviews/analyze";
 import { KINGS_ZONE } from "@/lib/reviews/types";
 import { dayMonth, daysBetween, fmtNum, fullDate, monthTitle } from "@/components/reviews/format";
-import { getApprovedPost, paragraphs, postIdOf } from "@/lib/blog-posts";
+import { getApprovedPost, paragraphs, postIdOf, postSlug } from "@/lib/blog-posts";
+import { reviewSlug } from "@/lib/reviews/types";
+import { PostExtras } from "@/components/blog/PostExtras";
 
 const monthOf = (slug: string) => /^season-review-(\d{4}-\d{2})$/.exec(slug)?.[1] ?? null;
 
@@ -186,6 +188,7 @@ async function Review({ params }: Pick<PageProps<"/[locale]/blog/[slug]">, "para
         {t("footer")}{" "}
         <Link href="/kings" className="underline underline-offset-4 hover:text-white">{t("kingsLink")}</Link>
       </p>
+      <PostExtras slug={reviewSlug(month)} title={t("title", { month: monthTitle(month, locale) })} locale={locale} />
     </>
   );
 }
@@ -226,6 +229,7 @@ async function Post({ id, locale }: { id: number; locale: Locale }) {
           ))}
         </ul>
       )}
+      <PostExtras slug={postSlug(post.id)} title={post.title} locale={locale} />
     </article>
   );
 }
