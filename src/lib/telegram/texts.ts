@@ -117,6 +117,13 @@ const T = {
     uk: "✅ Стіл зібрано! Чернетка допису:",
     en: "✅ The table is full! Post draft:",
   },
+  newComment: {
+    cs: "💬 Nový komentář k článku „{title}“ od <b>{nick}</b>:\n\n{text}",
+    ru: "💬 Новый комментарий к статье «{title}» от <b>{nick}</b>:\n\n{text}",
+    uk: "💬 Новий коментар до статті «{title}» від <b>{nick}</b>:\n\n{text}",
+    en: "💬 New comment on “{title}” from <b>{nick}</b>:\n\n{text}",
+  },
+  openComments: { cs: "Otevřít komentáře", ru: "Открыть комментарии", uk: "Відкрити коментарі", en: "Open comments" },
 } as const;
 
 export type TextKey = keyof typeof T;

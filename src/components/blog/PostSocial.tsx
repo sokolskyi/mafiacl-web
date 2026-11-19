@@ -118,7 +118,7 @@ export function PostSocial({ slug, title }: { slug: string; title: string }) {
         {data ? t("views", { n: data.views }) : "…"}
       </p>
 
-      <h2 className="mt-10 text-2xl font-bold">{t("commentsTitle", { n: comments.length })}</h2>
+      <h2 id="comments" className="mt-10 scroll-mt-24 text-2xl font-bold">{t("commentsTitle", { n: comments.length })}</h2>
       {data?.me ? (
         data.me.nickname ? (
           <form

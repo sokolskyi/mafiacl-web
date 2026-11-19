@@ -1,11 +1,12 @@
 import { randomUUID } from "node:crypto";
 import { cookies } from "next/headers";
-import type { NextRequest } from "next/server";
+import { after, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getStaffContext } from "@/lib/admin/queries";
 import { postIdOf } from "@/lib/blog-posts";
 import { COMMENT_MAX, isReaction, SLUG_RE } from "@/lib/blog-social-shared";
+import { notifyNewComment } from "@/lib/blog-notify";
 
 const VISITOR_COOKIE = "mcl_vid";
 
@@ -128,6 +129,8 @@ export async function POST(request: NextRequest, { params }: RouteContext<"/api/
       console.error("blog comment failed", { code: error.code, message: error.message });
       return Response.json({ error: "save" }, { status: 500 });
     }
+    const origin = request.nextUrl.origin;
+    after(() => notifyNewComment({ slug, commenterId: userId, nickname: me.nickname as string, body: text, origin }));
   } else if (body.action === "delete" && Number.isInteger(body.id)) {
     if (!userId) return Response.json({ error: "signIn" }, { status: 401 });
     const staff = await getStaffContext();
