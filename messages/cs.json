@@ -2404,7 +2404,7 @@
     "club": "Hráli v klubu",
     "tournaments": "Hráli na turnajích",
     "both": "Obojí",
-    "note": "Počítáme z archivů sezónních žebříčků, síně slávy, her na webu a výsledků turnajů MafiaCL na mafgame. Turnaje — od 20 účastníků, série — stůl 10 hráčů (s náhradníky až 12) od 8 her v řadě, např. MCL a GMC.",
+    "note": "Počítáme z archivů sezónních žebříčků, síně slávy, her na webu a výsledků turnajů MafiaCL na mafgame. Turnaje — od 20 účastníků a také finále u jednoho stolu na víc než 10 her (Kings); série — stůl 10 hráčů (s náhradníky až 12) na 8–10 her v řadě, např. MCL a GMC.",
     "search": "Hledat podle přezdívky",
     "sort": "Řazení",
     "alpha": "Abecedně",
@@ -2422,9 +2422,9 @@
     "shown": "Zobrazeno: {n}",
     "byTournaments": "Podle turnajů",
     "tournamentsCol": "Turnaje",
-    "tournamentsHint": "Turnaje MafiaCL na mafgame od 20 účastníků",
+    "tournamentsHint": "Turnaje MafiaCL na mafgame: od 20 účastníků a také finále u jednoho stolu na víc než 10 her (např. Kings)",
     "seriesCol": "Série",
-    "seriesHint": "Série MafiaCL na mafgame: stůl 10 hráčů (s náhradníky až 12), od 8 her v řadě — MCL, GMC a další"
+    "seriesHint": "Série MafiaCL na mafgame: stůl 10 hráčů (s náhradníky až 12), 8 až 10 her v řadě — MCL, GMC a další"
   },
   "legal": {
     "effective": "Účinné od {date}",
