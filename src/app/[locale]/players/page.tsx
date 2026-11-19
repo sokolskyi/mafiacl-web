@@ -50,8 +50,9 @@ async function Directory({ locale }: { locale: Locale }) {
         players={d.players}
         locale={locale}
         labels={{
-          search: t("search"), sort: t("sort"), alpha: t("alpha"), games: t("byGames"), medals: t("byMedals"), place: t("byPlace"),
+          search: t("search"), sort: t("sort"), alpha: t("alpha"), games: t("byGames"), medals: t("byMedals"), place: t("byPlace"), tournaments: t("byTournaments"),
           player: t("player"), gamesCol: t("games"), seasons: t("seasons"), bestPlace: t("bestPlace"), medalsCol: t("medals"), minis: t("minis"),
+          tournamentsCol: t("tournamentsCol"), tournamentsHint: t("tournamentsHint"), seriesCol: t("seriesCol"), seriesHint: t("seriesHint"),
           notRegistered: t("notRegistered"), nothing: t("nothing"), shown: t("shown"),
         }}
       />

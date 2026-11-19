@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { DirectoryPlayer } from "@/lib/playersDirectory";
 
-type Sort = "alpha" | "games" | "medals" | "place";
+type Sort = "alpha" | "games" | "medals" | "place" | "tournaments";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
@@ -17,8 +17,9 @@ export function PlayersDirectory({
   players: DirectoryPlayer[];
   locale: string;
   labels: {
-    search: string; sort: string; alpha: string; games: string; medals: string; place: string;
+    search: string; sort: string; alpha: string; games: string; medals: string; place: string; tournaments: string;
     player: string; gamesCol: string; seasons: string; bestPlace: string; medalsCol: string; minis: string;
+    tournamentsCol: string; tournamentsHint: string; seriesCol: string; seriesHint: string;
     notRegistered: string; nothing: string; shown: string;
   };
 }) {
@@ -35,6 +36,8 @@ export function PlayersDirectory({
     if (sort === "alpha") sorted.sort((a, b) => collator.compare(a.nickname, b.nickname));
     if (sort === "games") sorted.sort((a, b) => b.games - a.games || collator.compare(a.nickname, b.nickname));
     if (sort === "medals") sorted.sort((a, b) => medalScore(b) - medalScore(a) || b.minis - a.minis || b.games - a.games);
+    if (sort === "tournaments")
+      sorted.sort((a, b) => b.tournamentCount + b.series - (a.tournamentCount + a.series) || b.tournamentCount - a.tournamentCount || collator.compare(a.nickname, b.nickname));
     if (sort === "place")
       sorted.sort((a, b) => (a.bestPlace ?? 9999) - (b.bestPlace ?? 9999) || b.games - a.games || collator.compare(a.nickname, b.nickname));
     return sorted;
@@ -57,7 +60,7 @@ export function PlayersDirectory({
           />
         </label>
         <div role="group" aria-label={labels.sort} className="flex flex-wrap gap-2 text-sm">
-          {(["alpha", "games", "medals", "place"] as const).map((s) => (
+          {(["alpha", "games", "medals", "place", "tournaments"] as const).map((s) => (
             <button
               key={s}
               type="button"
@@ -76,7 +79,7 @@ export function PlayersDirectory({
         <p className="mt-6 text-neutral-400">{labels.nothing}</p>
       ) : (
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[36rem] text-left text-sm">
+          <table className="w-full min-w-[44rem] text-left text-sm">
             <thead className="text-neutral-400">
               <tr>
                 {sort !== "alpha" && <th className="w-10 py-2 font-normal">#</th>}
@@ -86,6 +89,8 @@ export function PlayersDirectory({
                 <th className="text-right font-normal">{labels.bestPlace}</th>
                 <th className="text-right font-normal">{labels.medalsCol}</th>
                 <th className="text-right font-normal">{labels.minis}</th>
+                <th className="text-right font-normal"><abbr title={labels.tournamentsHint} className="no-underline">{labels.tournamentsCol}</abbr></th>
+                <th className="text-right font-normal"><abbr title={labels.seriesHint} className="no-underline">{labels.seriesCol}</abbr></th>
               </tr>
             </thead>
             <tbody>
@@ -114,6 +119,8 @@ export function PlayersDirectory({
                         : "—"}
                     </td>
                     <td className="text-right font-mono">{p.minis || "—"}</td>
+                    <td className="text-right font-mono">{p.tournamentCount || "—"}</td>
+                    <td className="text-right font-mono">{p.series || "—"}</td>
                   </tr>
                 );
               })}

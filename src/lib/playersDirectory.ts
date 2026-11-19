@@ -5,6 +5,16 @@ import { RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
 import { HALL_ARCHIVE_TAG } from "@/lib/hallArchive";
 import { ALIASES_TAG } from "@/lib/aliases";
 import { getKnownPlayers } from "@/lib/playerNames";
+import { MAFGAME_TAG } from "@/lib/mafgame/queries";
+
+/** Турнир клуба на mafgame: от 20 участников. Серия — стол из 10 (с заменами до 12), от 8 игр подряд (MCL, GMC, CEC…). */
+export function mafgameKind(players: number | null, stages: unknown): "tournament" | "series" | null {
+  const n = players ?? 0;
+  const sessions = Array.isArray(stages) ? stages.reduce((a: number, st) => a + (Number((st as { sessions?: unknown })?.sessions) || 0), 0) : 0;
+  if (n >= 20) return "tournament";
+  if (n >= 10 && n <= 12 && sessions >= 8) return "series";
+  return null;
+}
 
 export type DirectoryPlayer = {
   nickname: string;
@@ -20,6 +30,10 @@ export type DirectoryPlayer = {
   medals: [number, number, number];
   /** Победы в мини-турнирах. */
   minis: number;
+  /** Турниры клуба на mafgame (от 20 участников). */
+  tournamentCount: number;
+  /** Серии клуба на mafgame (стол из 10–12, от 8 игр). */
+  series: number;
   club: boolean;
   tournaments: boolean;
 };
@@ -35,18 +49,19 @@ export type Directory = {
 /** Все игроки клуба: по архивам рейтингов, залу славы, играм и регистрациям на турниры на сайте. */
 export async function getPlayersDirectory(): Promise<Directory> {
   "use cache";
-  cacheTag("matches", RATING_ARCHIVE_TAG, HALL_ARCHIVE_TAG, ALIASES_TAG, "tournaments");
+  cacheTag("matches", RATING_ARCHIVE_TAG, HALL_ARCHIVE_TAG, ALIASES_TAG, "tournaments", MAFGAME_TAG);
   cacheLife("hours");
   const empty: Directory = { players: [], total: 0, club: 0, tournaments: 0, both: 0 };
   if (!isSupabaseConfigured) return empty;
   const db = createPublicClient();
-  const [known, { data: rows }, { data: hall }, { data: profiles }, { data: matches }, { data: regs }] = await Promise.all([
+  const [known, { data: rows }, { data: hall }, { data: profiles }, { data: matches }, { data: regs }, { data: mafgame }] = await Promise.all([
     getKnownPlayers(),
     db.from("rating_archive_rows").select("nickname, rank, games, rating_archive!inner ( is_current, final_places )").limit(20000),
     db.from("hall_of_fame").select("category, places").limit(5000),
     db.from("profiles").select("id, nickname, avatar_url").not("nickname", "is", null).limit(10000),
     db.from("match_players").select("profile_id, matches!inner ( rated, status )").eq("matches.status", "finished").eq("matches.rated", true).not("profile_id", "is", null).limit(50000),
     db.from("tournament_registrations").select("profile_id").limit(20000),
+    db.from("mafgame_results").select("tournament_id, nickname, profile_id, mafgame_tournaments!inner ( players, stages )").limit(20000),
   ]);
 
   const map = new Map<string, DirectoryPlayer>();
@@ -56,7 +71,7 @@ export async function getPlayersDirectory(): Promise<Directory> {
     const key = canon.toLowerCase();
     let p = map.get(key);
     if (!p) {
-      p = { nickname: canon, registered: false, avatarUrl: null, games: 0, seasons: 0, bestPlace: null, medals: [0, 0, 0], minis: 0, club: false, tournaments: false };
+      p = { nickname: canon, registered: false, avatarUrl: null, games: 0, seasons: 0, bestPlace: null, medals: [0, 0, 0], minis: 0, tournamentCount: 0, series: 0, club: false, tournaments: false };
       map.set(key, p);
     }
     return p;
@@ -91,6 +106,21 @@ export async function getPlayersDirectory(): Promise<Directory> {
   for (const r of regs ?? []) {
     const p = r.profile_id ? byId.get(r.profile_id) : undefined;
     if (p) p.tournaments = true;
+  }
+  // Турниры и серии с mafgame: игрок — по привязанному профилю, иначе по нику (с учётом старых ников).
+  const counted = new Set<string>();
+  for (const r of mafgame ?? []) {
+    const t = r.mafgame_tournaments as unknown as { players: number | null; stages: unknown };
+    const kind = mafgameKind(t.players, t.stages);
+    if (!kind) continue;
+    const p = (r.profile_id ? byId.get(r.profile_id) : undefined) ?? get(r.nickname);
+    if (!p) continue;
+    const key = `${p.nickname.toLowerCase()}:${r.tournament_id}`;
+    if (counted.has(key)) continue;
+    counted.add(key);
+    if (kind === "tournament") p.tournamentCount += 1;
+    else p.series += 1;
+    p.tournaments = true;
   }
   for (const h of hall ?? []) {
     const places = (h.places as string[] | null) ?? [];

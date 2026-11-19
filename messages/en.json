@@ -2404,7 +2404,7 @@
     "club": "Played at the club",
     "tournaments": "Played in tournaments",
     "both": "Both",
-    "note": "Counted from season rating archives, the hall of fame and games on the site. Tournaments are counted by podium places in the hall of fame and site registrations, so there are actually more tournament players.",
+    "note": "Based on season rating archives, the hall of fame, games on the site and MafiaCL tournament results on mafgame. Tournaments have 20+ players; series are one table of 10 (up to 12 with substitutes) playing 8+ games in a row, e.g. MCL and GMC.",
     "search": "Search by nickname",
     "sort": "Sort",
     "alpha": "A–Z",
@@ -2419,7 +2419,12 @@
     "minis": "Mini-tournaments",
     "notRegistered": "not on the site",
     "nothing": "Nobody found.",
-    "shown": "Shown: {n}"
+    "shown": "Shown: {n}",
+    "byTournaments": "By tournaments",
+    "tournamentsCol": "Tournaments",
+    "tournamentsHint": "MafiaCL tournaments on mafgame with 20+ players",
+    "seriesCol": "Series",
+    "seriesHint": "MafiaCL series on mafgame: one table of 10 (up to 12 with substitutes), 8+ games in a row — MCL, GMC and others"
   },
   "legal": {
     "effective": "Effective from {date}",

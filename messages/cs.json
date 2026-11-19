@@ -2404,7 +2404,7 @@
     "club": "Hráli v klubu",
     "tournaments": "Hráli na turnajích",
     "both": "Obojí",
-    "note": "Počítáme podle archivů žebříčků sezón, síně slávy a her na webu. Turnaje podle umístění v síni slávy a registrací na webu, turnajových hráčů je tedy ve skutečnosti víc.",
+    "note": "Počítáme z archivů sezónních žebříčků, síně slávy, her na webu a výsledků turnajů MafiaCL na mafgame. Turnaje — od 20 účastníků, série — stůl 10 hráčů (s náhradníky až 12) od 8 her v řadě, např. MCL a GMC.",
     "search": "Hledat podle přezdívky",
     "sort": "Řazení",
     "alpha": "Abecedně",
@@ -2419,7 +2419,12 @@
     "minis": "Mini-turnaje",
     "notRegistered": "není na webu",
     "nothing": "Nikoho jsme nenašli.",
-    "shown": "Zobrazeno: {n}"
+    "shown": "Zobrazeno: {n}",
+    "byTournaments": "Podle turnajů",
+    "tournamentsCol": "Turnaje",
+    "tournamentsHint": "Turnaje MafiaCL na mafgame od 20 účastníků",
+    "seriesCol": "Série",
+    "seriesHint": "Série MafiaCL na mafgame: stůl 10 hráčů (s náhradníky až 12), od 8 her v řadě — MCL, GMC a další"
   },
   "legal": {
     "effective": "Účinné od {date}",
