@@ -890,7 +890,13 @@
     "archiveExtra": "Extra/game",
     "miniTitleSeason": "Mini-tournament {n} · season {season}",
     "aliases": "Also played as: {names}",
-    "archiveOnly": "Player from the club archive, not registered on the site yet"
+    "archiveOnly": "Player from the club archive, not registered on the site yet",
+    "tournament": "Tournament",
+    "finalist": "final",
+    "stars": "{n} ★ — tournament level",
+    "tournamentsTitle": "Club tournaments",
+    "tournamentsLine": "{n} tournaments · {games} games · {wins} won · {finals} finals · {podiums} podiums",
+    "tournamentsSource": "Results from mafgame.org: MafiaCL tournaments and Arenas. Place is by the last stage the player reached."
   },
   "rating": {
     "filters": "Rating filters",
@@ -2545,7 +2551,7 @@
       "membershipQuarter": "Three-month pass",
       "membershipYear": "One-year pass"
     },
-    "earnNote": "Games, best moves, streaks, passes, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. The club adds the bonus for a friend.",
+    "earnNote": "Games, best moves, streaks, passes, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. The club adds the bonus for a friend. Games from club tournaments on mafgame.org are credited once the tournament is closed, matched by nickname or the mafgame profile link in your account (Arenas count via the electronic sheet).",
     "spend": {
       "evening": "Game night",
       "eveningValue": "in full: 300 Kč = 150 Respect",

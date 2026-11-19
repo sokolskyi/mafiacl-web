@@ -890,7 +890,13 @@
     "archiveExtra": "Bonus/hra",
     "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna",
     "aliases": "Hrál také jako: {names}",
-    "archiveOnly": "Hráč z archivu klubu, na webu zatím není registrován"
+    "archiveOnly": "Hráč z archivu klubu, na webu zatím není registrován",
+    "tournament": "Turnaj",
+    "finalist": "finále",
+    "stars": "{n} ★ — úroveň turnaje",
+    "tournamentsTitle": "Turnaje klubu",
+    "tournamentsLine": "Turnajů: {n} · her: {games} · výher {wins} · finále: {finals} · medailová místa: {podiums}",
+    "tournamentsSource": "Výsledky z mafgame.org: turnaje a Areny MafiaCL. Umístění podle poslední fáze, do které hráč postoupil."
   },
   "rating": {
     "filters": "Filtry žebříčku",
@@ -2545,7 +2551,7 @@
       "membershipQuarter": "Permanentka na 3 měsíce",
       "membershipYear": "Permanentka na rok"
     },
-    "earnNote": "Hry, nejlepší tah, série, permanentka, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda připisuje klub.",
+    "earnNote": "Hry, nejlepší tah, série, permanentka, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda připisuje klub. Hry z turnajů klubu na mafgame.org se připíší po uzavření turnaje: podle přezdívky nebo odkazu na profil mafgame v účtu (Areny podle elektronického listu).",
     "spend": {
       "evening": "Herní večer",
       "eveningValue": "celý: 300 Kč = 150 Respect",

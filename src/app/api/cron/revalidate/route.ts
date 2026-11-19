@@ -17,11 +17,12 @@ import { SHOP_TAG } from "@/lib/shop/queries";
 import { TESTIMONIALS_TAG } from "@/lib/testimonials";
 import { TOURNAMENTS_TAG } from "@/lib/tournaments";
 import { VENUES_TAG } from "@/lib/venues";
+import { MAFGAME_TAG } from "@/lib/mafgame/queries";
 
 /** Все теги кеша сайта. Сбросить можно только их. */
 const TAGS = new Set<string>([
   ALIASES_TAG, TITLES_TAG, BANS_TAG, BLOG_POSTS_TAG, GAMES_TAG, HALL_ARCHIVE_TAG, HOSTS_TAG, PARTNERS_TAG,
-  MATCHES_TAG, PROMOTIONS_TAG, RATING_ARCHIVE_TAG, REVIEWS_TAG, SHOP_TAG, TESTIMONIALS_TAG, TOURNAMENTS_TAG, VENUES_TAG,
+  MATCHES_TAG, PROMOTIONS_TAG, RATING_ARCHIVE_TAG, REVIEWS_TAG, SHOP_TAG, TESTIMONIALS_TAG, TOURNAMENTS_TAG, VENUES_TAG, MAFGAME_TAG,
 ]);
 
 /**

@@ -14,6 +14,7 @@ import { compareWithClub } from "@/lib/clubCompare";
 import { getAliases } from "@/lib/aliases";
 import { PROFILE_SERVICES } from "@/lib/profileLinks";
 import { cityLabel } from "@/lib/cities";
+import { getPlayerTournaments } from "@/lib/mafgame/queries";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -49,6 +50,12 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG, await getAliases()), player.nickname);
   const top10 = player.archive.filter((a) => a.league === "premier" && !a.isCurrent && a.rank <= 10).length;
   const share = (x: number) => `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(x * 100)} %`;
+  const tournaments = await getPlayerTournaments(player.id, [player.nickname, ...player.aliases]);
+  const tGames = tournaments.reduce((a, x) => a + x.games, 0);
+  const tWins = tournaments.reduce((a, x) => a + x.wins, 0);
+  const tPodiums = tournaments.filter((x) => x.place !== null && x.place <= 3).length;
+  const tFinals = tournaments.filter((x) => x.finalist).length;
+  const day = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
   const since = player.since ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since)) : null;
 
   return (
@@ -337,6 +344,50 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               </tbody>
             </table>
           </div>
+        </section>
+      )}
+
+      {tournaments.length > 0 && (
+        <section aria-labelledby="tournaments" className="mt-10">
+          <h2 id="tournaments" className="text-xl font-bold">{t("tournamentsTitle")}</h2>
+          <p className="mt-1 text-sm text-neutral-400">
+            {t("tournamentsLine", { n: tournaments.length, games: tGames, wins: pct(tWins, tGames), finals: tFinals, podiums: tPodiums })}
+          </p>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[30rem] text-left text-sm">
+              <thead className="text-neutral-400">
+                <tr>
+                  <th className="py-2 font-normal">{t("tournament")}</th>
+                  <th className="font-normal">{t("date")}</th>
+                  <th className="font-normal">{t("archivePlace")}</th>
+                  <th className="font-normal">{t("games")}</th>
+                  <th className="text-right font-normal">{t("winRate")}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {tournaments.slice(0, 40).map((x) => (
+                  <tr key={x.mafgameId}>
+                    <td className="py-2">
+                      {x.slug ? (
+                        <Link href={{ pathname: "/tournaments/[slug]", params: { slug: x.slug } }} className="font-semibold hover:underline">{x.name}</Link>
+                      ) : (
+                        <a href={`https://mafgame.org/tournaments/${x.mafgameId}/results`} target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline">{x.name}</a>
+                      )}
+                      {x.stars ? <span className="ml-2 text-yellow-300" aria-label={t("stars", { n: x.stars })}>{"★".repeat(Math.min(x.stars, 6))}</span> : null}
+                    </td>
+                    <td className="whitespace-nowrap text-neutral-400">{x.startsOn ? day(x.startsOn) : "—"}</td>
+                    <td className="whitespace-nowrap">
+                      {x.place === null ? "—" : <>{["🥇", "🥈", "🥉"][x.place - 1] ?? ""} {x.place}{x.players ? <span className="text-neutral-500"> / {x.players}</span> : null}</>}
+                      {x.finalist && x.place !== null && x.place > 3 && <span className="ml-2 rounded bg-white/10 px-1.5 text-xs text-neutral-200">{t("finalist")}</span>}
+                    </td>
+                    <td>{x.games}</td>
+                    <td className="text-right">{pct(x.wins, x.games)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs text-neutral-500">{t("tournamentsSource")}</p>
         </section>
       )}
 
