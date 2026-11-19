@@ -1,6 +1,7 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { selectAll } from "@/lib/supabase/selectAll";
 
 export const RATING_ARCHIVE_TAG = "rating-archive";
 
@@ -239,12 +240,15 @@ export async function getPremierTotals(clubSlug: string, aliases: { alias: strin
   cacheLife("days");
   if (!isSupabaseConfigured) return [];
   const db = createPublicClient();
-  const { data, error } = await db
-    .from("rating_archive_rows")
-    .select("nickname, games, wins, first_killed, extra, civ_w, civ_l, sheriff_w, sheriff_l, mafia_w, mafia_l, don_w, don_l, rating_archive!inner ( league, clubs!inner ( slug ) )")
-    .eq("rating_archive.league", "premier")
-    .eq("rating_archive.clubs.slug", clubSlug)
-    .limit(5000);
+  const { data, error } = await selectAll((a, b) =>
+    db
+      .from("rating_archive_rows")
+      .select("nickname, games, wins, first_killed, extra, civ_w, civ_l, sheriff_w, sheriff_l, mafia_w, mafia_l, don_w, don_l, rating_archive!inner ( league, clubs!inner ( slug ) )")
+      .eq("rating_archive.league", "premier")
+      .eq("rating_archive.clubs.slug", clubSlug)
+      .order("id")
+      .range(a, b),
+  );
   if (error) console.error("getPremierTotals failed", { code: error.code, message: error.message });
   const toCanon = new Map(aliases.map((a) => [a.alias.toLowerCase(), a.canonical]));
   const m = new Map<string, PremierTotals>();

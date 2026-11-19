@@ -4,6 +4,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
 import { HALL_ARCHIVE_TAG } from "@/lib/hallArchive";
 import { ALIASES_TAG, getAliases, canonicalizer } from "@/lib/aliases";
+import { selectAll } from "@/lib/supabase/selectAll";
 
 
 /**
@@ -19,8 +20,8 @@ export async function getKnownPlayers(): Promise<Record<string, string>> {
   const [aliases, { data: profiles }, { data: rows }, { data: hall }] = await Promise.all([
     getAliases(),
     db.from("profiles").select("nickname").not("nickname", "is", null).limit(10000),
-    db.from("rating_archive_rows").select("nickname").limit(20000),
-    db.from("hall_of_fame").select("places").limit(5000),
+    selectAll<{ nickname: string }>((a, b) => db.from("rating_archive_rows").select("nickname").order("id").range(a, b)),
+    selectAll<{ places: unknown }>((a, b) => db.from("hall_of_fame").select("places").order("id").range(a, b)),
   ]);
   const canon = canonicalizer(aliases);
   const out: Record<string, string> = {};

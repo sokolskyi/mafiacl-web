@@ -6,6 +6,7 @@ import { HALL_ARCHIVE_TAG } from "@/lib/hallArchive";
 import { ALIASES_TAG } from "@/lib/aliases";
 import { getKnownPlayers } from "@/lib/playerNames";
 import { MAFGAME_TAG } from "@/lib/mafgame/queries";
+import { selectAll } from "@/lib/supabase/selectAll";
 
 /** Турнир клуба на mafgame: от 20 участников. Серия — стол из 10 (с заменами до 12), от 8 игр подряд (MCL, GMC, CEC…). */
 export function mafgameKind(players: number | null, stages: unknown): "tournament" | "series" | null {
@@ -56,12 +57,17 @@ export async function getPlayersDirectory(): Promise<Directory> {
   const db = createPublicClient();
   const [known, { data: rows }, { data: hall }, { data: profiles }, { data: matches }, { data: regs }, { data: mafgame }] = await Promise.all([
     getKnownPlayers(),
-    db.from("rating_archive_rows").select("nickname, rank, games, rating_archive!inner ( is_current, final_places )").limit(20000),
-    db.from("hall_of_fame").select("category, places").limit(5000),
+    selectAll((a, b) => db.from("rating_archive_rows").select("nickname, rank, games, rating_archive!inner ( is_current, final_places )").order("id").range(a, b)),
+    selectAll((a, b) => db.from("hall_of_fame").select("category, places").order("id").range(a, b)),
     db.from("profiles").select("id, nickname, avatar_url").not("nickname", "is", null).limit(10000),
-    db.from("match_players").select("profile_id, matches!inner ( rated, status )").eq("matches.status", "finished").eq("matches.rated", true).not("profile_id", "is", null).limit(50000),
+    selectAll((a, b) =>
+      db.from("match_players").select("profile_id, matches!inner ( rated, status )").eq("matches.status", "finished").eq("matches.rated", true).not("profile_id", "is", null)
+        .order("match_id").order("seat").range(a, b),
+    ),
     db.from("tournament_registrations").select("profile_id").limit(20000),
-    db.from("mafgame_results").select("tournament_id, nickname, profile_id, mafgame_tournaments!inner ( players, stages )").limit(20000),
+    selectAll((a, b) =>
+      db.from("mafgame_results").select("tournament_id, nickname, profile_id, mafgame_tournaments!inner ( players, stages )").order("tournament_id").order("user_id").range(a, b),
+    ),
   ]);
 
   const map = new Map<string, DirectoryPlayer>();
