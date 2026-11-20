@@ -28,7 +28,8 @@
     "schedule": "Schedule",
     "hall": "Hall of fame",
     "tabRating": "Rating",
-    "more": "More"
+    "more": "More",
+    "funGame": "Fun game"
   },
   "common": {
     "comingSoon": "This page is coming soon.",
@@ -795,7 +796,10 @@
     "revote": "Record and revote",
     "nobodyOut": "Record, nobody out",
     "manualOut": "Out without marking votes",
-    "standings": "Evening results"
+    "standings": "Evening results",
+    "funHeader": "Fun game · not rated",
+    "funFinish": "Show result",
+    "funFinished": "Result calculated. It does not count towards any rating."
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",
@@ -2473,5 +2477,12 @@
     "previous": "Previous article",
     "byAuthor": "More from {author}",
     "moreReviews": "More season reviews"
+  },
+  "funGame": {
+    "title": "Fun game",
+    "lead": "An electronic sheet for your own game with friends: roles, votes, night and points at the end. The result does not count towards any rating and is kept only in this browser.",
+    "signIn": "Sign in to open the sheet",
+    "newGame": "New game",
+    "newConfirm": "Start a new game? The current sheet will be cleared."
   }
 }

@@ -28,7 +28,8 @@
     "schedule": "Rozpis",
     "hall": "Síň slávy",
     "tabRating": "Žebříček",
-    "more": "Více"
+    "more": "Více",
+    "funGame": "Fun hra"
   },
   "common": {
     "comingSoon": "Stránka se připravuje.",
@@ -795,7 +796,10 @@
     "revote": "Zapsat a hlasovat znovu",
     "nobodyOut": "Zapsat, nikdo nevypadl",
     "manualOut": "Vyřazení bez označení hlasů",
-    "standings": "Výsledky večera"
+    "standings": "Výsledky večera",
+    "funHeader": "Fun hra · bez žebříčku",
+    "funFinish": "Ukázat výsledek",
+    "funFinished": "Výsledek spočítán. Do žebříčku se nepočítá."
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",
@@ -2473,5 +2477,12 @@
     "previous": "Předchozí článek",
     "byAuthor": "Další od {author}",
     "moreReviews": "Další přehledy sezóny"
+  },
+  "funGame": {
+    "title": "Fun hra",
+    "lead": "Elektronický list pro vlastní hru s přáteli: role, hlasování, noc a výsledek v bodech. Výsledek se nepočítá do žádného žebříčku a zůstává jen v tomto prohlížeči.",
+    "signIn": "Přihlaste se a otevřete list",
+    "newGame": "Nová hra",
+    "newConfirm": "Začít novou hru? Současný list se smaže."
   }
 }

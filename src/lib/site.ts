@@ -49,12 +49,13 @@ export const MAIN_NAV: SectionKey[] = [
 ];
 
 /** Шапка: 5 групп. Пункт группы — ключ из messages nav.* и путь. Первый пункт — куда ведёт сама группа. */
-export const NAV_GROUPS: { key: "groupPlay" | "groupCompete" | "groupClub" | "groupBusiness" | "shop"; items: { label: string; href: (typeof SECTIONS)[SectionKey] | "/hall-of-fame" }[] }[] = [
+export const NAV_GROUPS: { key: "groupPlay" | "groupCompete" | "groupClub" | "groupBusiness" | "shop"; items: { label: string; href: (typeof SECTIONS)[SectionKey] | "/hall-of-fame" | "/fun-game" }[] }[] = [
   { key: "groupPlay", items: [
     { label: "schedule", href: "/play" },
     { label: "learn", href: "/learn" },
     { label: "documents", href: "/documents" },
     { label: "faq", href: "/faq" },
+    { label: "funGame", href: "/fun-game" },
   ] },
   { key: "groupCompete", items: [
     { label: "tournaments", href: "/tournaments" },

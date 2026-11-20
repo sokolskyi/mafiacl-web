@@ -12,6 +12,7 @@ export const routing = defineRouting({
   pathnames: {
     "/": "/",
     "/play": { cs: "/hrat", ru: "/igrat", uk: "/hraty", en: "/play" },
+    "/fun-game": { cs: "/fun-hra", ru: "/fun-igra", uk: "/fun-hra", en: "/fun-game" },
     "/kings": "/kings",
     "/tournaments": { cs: "/turnaje", ru: "/turniry", uk: "/turniry", en: "/tournaments" },
     "/tournaments/[slug]": { cs: "/turnaje/[slug]", ru: "/turniry/[slug]", uk: "/turniry/[slug]", en: "/tournaments/[slug]" },

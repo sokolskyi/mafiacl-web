@@ -51,7 +51,12 @@ export type MatchAppProps = {
   nicknames: { id: string; nickname: string }[];
   overlayUrl: string;
   backHref: string;
+  /** Fun-игра: бланк только в этом браузере — без сохранения в базу, рейтинга и плашки для трансляции. */
+  fun?: boolean;
 };
+
+/** Где fun-бланк хранит игру между перезагрузками страницы. */
+export const FUN_STORAGE_KEY = "mcl-fun-sheet";
 
 export function MatchApp(p: MatchAppProps) {
   const t = useTranslations("match");
@@ -89,6 +94,14 @@ export function MatchApp(p: MatchAppProps) {
 
   // --- сохранение: по очереди, с защитой от записи с двух устройств ---
   function persist(nextLog: Action[], nextSeats?: SeatInfo[]) {
+    if (p.fun) {
+      try {
+        localStorage.setItem(FUN_STORAGE_KEY, JSON.stringify({ log: nextLog, seats: nextSeats ?? seats }));
+      } catch {
+        // Хранилище браузера недоступно — игра просто не переживёт перезагрузку.
+      }
+      return;
+    }
     setSaving((n) => n + 1);
     queue.current = queue.current.then(async () => {
       try {
@@ -273,6 +286,11 @@ export function MatchApp(p: MatchAppProps) {
   const finalScores = state.phase === "finished" ? scores(state, adjNum) : [];
   const [finishing, setFinishing] = useState(false);
   async function saveResult() {
+    if (p.fun) {
+      setStatus("finished");
+      setNotice(t("funFinished"));
+      return;
+    }
     setFinishing(true);
     await queue.current;
     const r = await finishMatch({ id: p.id, version: version.current, rated, adjustments: adjNum });
@@ -284,6 +302,11 @@ export function MatchApp(p: MatchAppProps) {
     } else setNotice(t(`finishErr.${r.code ?? "save"}`));
   }
   async function reopen() {
+    if (p.fun) {
+      setStatus("live");
+      setNotice(null);
+      return;
+    }
     const r = await reopenMatch({ id: p.id });
     if (r.ok) {
       setStatus("live");
@@ -299,10 +322,10 @@ export function MatchApp(p: MatchAppProps) {
         <div className="flex items-center gap-3">
           <a href={p.backHref} className="text-sm text-neutral-400 hover:text-white">←</a>
           <div className="flex-1">
-            <p className="text-xs text-neutral-400">{t("header", { number: p.number, table: p.tableNo })}</p>
+            <p className="text-xs text-neutral-400">{p.fun ? t("funHeader") : t("header", { number: p.number, table: p.tableNo })}</p>
             <p className="text-lg font-black">{phaseLabel}</p>
           </div>
-          <span className="text-xs text-neutral-500" aria-live="polite">{saving > 0 ? t("saving") : t("saved")}</span>
+          {!p.fun && <span className="text-xs text-neutral-500" aria-live="polite">{saving > 0 ? t("saving") : t("saved")}</span>}
           <button onClick={undo} disabled={locked || !log.length} className={btnSoft} aria-label={t("undo")}>↶ {t("undo")}</button>
         </div>
         {state.phase === "day" && (
@@ -576,18 +599,21 @@ export function MatchApp(p: MatchAppProps) {
               ))}
             </tbody>
           </table>
-          <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={rated} disabled={locked} onChange={(e) => setRated(e.target.checked)} /> {t("rated")}
-          </label>
+          {!p.fun && (
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={rated} disabled={locked} onChange={(e) => setRated(e.target.checked)} /> {t("rated")}
+            </label>
+          )}
           {locked ? (
             <button className={btnSoft} onClick={reopen}>{t("reopen")}</button>
           ) : (
-            <button className={`${btnMain} w-full py-3 text-base`} disabled={finishing} onClick={saveResult}>{t("saveResult")}</button>
+            <button className={`${btnMain} w-full py-3 text-base`} disabled={finishing} onClick={saveResult}>{p.fun ? t("funFinish") : t("saveResult")}</button>
           )}
         </section>
       )}
 
       {/* Трансляция */}
+      {!p.fun && (
       <section className="mt-10 space-y-2 border-t border-white/10 pt-4 text-sm">
         <h2 className="font-bold">{t("stream")}</h2>
         <p className="break-all text-neutral-300">{p.overlayUrl}</p>
@@ -606,6 +632,7 @@ export function MatchApp(p: MatchAppProps) {
         </label>
         <p className="text-xs text-neutral-500">{t("streamHint")}</p>
       </section>
+      )}
 
       {/* Протокол */}
       <details className="mt-6 text-sm">
