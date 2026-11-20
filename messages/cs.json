@@ -680,7 +680,7 @@
       "twice": "Tuto noc už zapsáno.",
       "noBestMove": "Nejlepší tah má jen první zabitý v noci."
     },
-    "hintNight0": "Klepnutím na hráče měníte roli: civilista → mafie → don → šerif. Pak „Začít den“.",
+    "hintNight0": "Vepište přezdívky do řádků stolu. Roli změníte klepnutím: civilista → mafie → don → šerif. Pak „Začít den“.",
     "hintDay": "Klepnutím hráče nominujete (nebo zrušíte). „!“ — faul, při čtvrtém vyloučení.",
     "hint": {
       "shot": "Klepněte na hráče, kterého mafie střílí, nebo „Minutí“.",
@@ -799,7 +799,9 @@
     "standings": "Výsledky večera",
     "funHeader": "Fun hra · bez žebříčku",
     "funFinish": "Ukázat výsledek",
-    "funFinished": "Výsledek spočítán. Do žebříčku se nepočítá."
+    "funFinished": "Výsledek spočítán. Do žebříčku se nepočítá.",
+    "roleFor": "Místo {seat}: {role}. Klepnutím změníte roli",
+    "nickPlaceholder": "Přezdívka"
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",

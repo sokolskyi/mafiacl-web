@@ -680,7 +680,7 @@
       "twice": "Already recorded this night.",
       "noBestMove": "Only the first player killed at night has a best move."
     },
-    "hintNight0": "Tap a player to change their role: civilian → mafia → don → sheriff. Then “Start day”.",
+    "hintNight0": "Type nicknames into the table rows. Tap the role to change it: civilian → mafia → don → sheriff. Then “Start day”.",
     "hintDay": "Tap a player to nominate (or un-nominate). “!” is a foul; the fourth one removes the player.",
     "hint": {
       "shot": "Tap the player the mafia shoots, or “Miss”.",
@@ -799,7 +799,9 @@
     "standings": "Evening results",
     "funHeader": "Fun game · not rated",
     "funFinish": "Show result",
-    "funFinished": "Result calculated. It does not count towards any rating."
+    "funFinished": "Result calculated. It does not count towards any rating.",
+    "roleFor": "Seat {seat}: {role}. Tap to change the role",
+    "nickPlaceholder": "Nickname"
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",

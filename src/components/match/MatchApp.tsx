@@ -90,6 +90,8 @@ export function MatchApp(p: MatchAppProps) {
     }
   }, [log]);
   const locked = status !== "live";
+  // До начала дня в строках стола вписываются ники и выбираются роли.
+  const seating = state.phase === "night0" && !locked;
   const nameOf = (seat: number) => seats[seat - 1]?.name || `#${seat}`;
 
   // --- сохранение: по очереди, с защитой от записи с двух устройств ---
@@ -353,6 +355,7 @@ export function MatchApp(p: MatchAppProps) {
       </p>
 
       {/* Стол */}
+      {seating && <datalist id="nicks">{p.nicknames.map((n) => <option key={n.id} value={n.nickname} />)}</datalist>}
       <ol className="mt-3 divide-y divide-white/10 rounded border border-white/10">
         {Array.from({ length: 10 }, (_, i) => i + 1).map((seat) => {
           const role = state.roles[seat] ?? "civilian";
@@ -363,6 +366,32 @@ export function MatchApp(p: MatchAppProps) {
           return (
             <li key={seat} className={`flex items-center gap-2 px-2 py-2 ${out ? "opacity-40" : ""} ${nominated ? "bg-red-600/15" : ""} ${picked ? "bg-sky-500/15" : ""}`}>
               <span className="w-6 text-right font-mono text-sm text-neutral-400">{seat}</span>
+              {seating ? (
+                <>
+                  {/* Нулевая ночь: роль — кнопкой, ник — прямо в строке. */}
+                  <button
+                    onClick={() => seatTap(seat)}
+                    aria-label={t("roleFor", { seat, role: t(`role.${role}`) })}
+                    className="flex h-11 w-24 shrink-0 items-center gap-1.5 rounded bg-white/5 px-2 text-left text-sm hover:bg-white/10"
+                  >
+                    <span className={`w-5 text-center text-lg ${ROLE_CLASS[role]}`}>{ROLE_ICON[role]}</span>
+                    <span className="truncate">{t(`role.${role}`)}</span>
+                  </button>
+                  <input
+                    list="nicks"
+                    value={seats[seat - 1]?.name ?? ""}
+                    onChange={(e) => setSeatName(seat - 1, e.target.value)}
+                    onBlur={saveSeats}
+                    maxLength={80}
+                    placeholder={t("nickPlaceholder")}
+                    aria-label={t("seatName", { seat })}
+                    className="min-h-11 min-w-0 flex-1 rounded border border-white/15 bg-neutral-900 px-3 outline-none placeholder:text-neutral-600 focus:border-red-500"
+                  />
+                  <span className="w-14 shrink-0 text-right text-xs text-neutral-500">
+                    {seats[seat - 1]?.profileId ? t("account") : seats[seat - 1]?.name ? t("guest") : ""}
+                  </span>
+                </>
+              ) : (
               <button
                 onClick={() => seatTap(seat)}
                 aria-label={`${seat}. ${nameOf(seat)}`}
@@ -377,6 +406,7 @@ export function MatchApp(p: MatchAppProps) {
                   <span className="text-xs text-sky-300">{t("bestMoveShort", { picks: state.bestMove.join(", ") })}</span>
                 )}
               </button>
+              )}
               {state.phase !== "night0" && state.phase !== "finished" && (
                 <div className="flex items-center gap-1">
                   <button onClick={() => dispatch({ t: "unfoul", seat })} disabled={locked || fouls === 0} className="h-9 w-8 rounded bg-white/5 text-sm disabled:opacity-30" aria-label={t("unfoul", { seat })}>−</button>
@@ -401,27 +431,6 @@ export function MatchApp(p: MatchAppProps) {
           </div>
           <button className={`${btnMain} w-full py-3 text-base`} onClick={() => dispatch({ t: "start" })}>{t("startDay")}</button>
 
-          <details className="rounded border border-white/10 p-3">
-            <summary className="cursor-pointer font-semibold">{t("seating")}</summary>
-            <datalist id="nicks">{p.nicknames.map((n) => <option key={n.id} value={n.nickname} />)}</datalist>
-            <ol className="mt-3 space-y-2">
-              {seats.map((s, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="w-6 text-right font-mono text-sm text-neutral-400">{i + 1}</span>
-                  <input
-                    list="nicks"
-                    value={s.name}
-                    onChange={(e) => setSeatName(i, e.target.value)}
-                    maxLength={80}
-                    aria-label={t("seatName", { seat: i + 1 })}
-                    className="flex-1 rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500"
-                  />
-                  <span className="w-16 text-xs text-neutral-500">{s.profileId ? t("account") : s.name ? t("guest") : ""}</span>
-                </li>
-              ))}
-            </ol>
-            <button className={`${btnSoft} mt-3`} onClick={saveSeats}>{t("saveSeating")}</button>
-          </details>
         </section>
       )}
 
