@@ -8,12 +8,14 @@ import { getKnownPlayers } from "@/lib/playerNames";
 import { MAFGAME_TAG } from "@/lib/mafgame/queries";
 import { selectAll } from "@/lib/supabase/selectAll";
 
-/** Турнир клуба на mafgame: от 20 участников или финал на 10–12 человек больше чем на 10 игр (Kings). Серия — стол из 10 (с заменами до 12), 8–10 игр подряд (MCL, GMC, CEC…). */
+/**
+ * Турнир клуба на mafgame: от 20 участников или финальный стол, где больше 10 игр (финал Kings).
+ * Серия — стол из 10 (с заменами до 12) и от 8 до 10 игр подряд (MCL, GMC, CEC…).
+ */
 export function mafgameKind(players: number | null, stages: unknown): "tournament" | "series" | null {
   const n = players ?? 0;
   const sessions = Array.isArray(stages) ? stages.reduce((a: number, st) => a + (Number((st as { sessions?: unknown })?.sessions) || 0), 0) : 0;
-  if (n >= 20) return "tournament";
-  if (n >= 10 && n <= 12 && sessions > 10) return "tournament"; // финал, куда проходят (Kings): больше 10 игр
+  if (n >= 20 || (n >= 10 && sessions > 10)) return "tournament";
   if (n >= 10 && n <= 12 && sessions >= 8) return "series";
   return null;
 }

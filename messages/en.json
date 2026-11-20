@@ -2404,7 +2404,7 @@
     "club": "Played at the club",
     "tournaments": "Played in tournaments",
     "both": "Both",
-    "note": "Based on season rating archives, the hall of fame, games on the site and MafiaCL tournament results on mafgame. Tournaments have 20+ players, plus one-table finals of more than 10 games (Kings); series are one table of 10 (up to 12 with substitutes) playing 8–10 games in a row, e.g. MCL and GMC.",
+    "note": "Based on season rating archives, the hall of fame, games on the site and MafiaCL tournament results on mafgame. Tournaments have 20+ players or a final table with more than 10 games (Kings final); series are one table of 10 (up to 12 with substitutes) playing 8 to 10 games in a row, e.g. MCL and GMC.",
     "search": "Search by nickname",
     "sort": "Sort",
     "alpha": "A–Z",
@@ -2422,7 +2422,7 @@
     "shown": "Shown: {n}",
     "byTournaments": "By tournaments",
     "tournamentsCol": "Tournaments",
-    "tournamentsHint": "MafiaCL tournaments on mafgame: 20+ players, plus one-table finals of more than 10 games (e.g. Kings)",
+    "tournamentsHint": "MafiaCL tournaments on mafgame: 20+ players, or a final table with more than 10 games (Kings final)",
     "seriesCol": "Series",
     "seriesHint": "MafiaCL series on mafgame: one table of 10 (up to 12 with substitutes), 8 to 10 games in a row — MCL, GMC and others"
   },
