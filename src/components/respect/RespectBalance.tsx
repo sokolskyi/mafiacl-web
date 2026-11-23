@@ -8,7 +8,7 @@ import { RespectAmount } from "./RespectAmount";
  * Баланс в кабинете. Если есть непросмотренные начисления, сначала показывает прежнюю сумму,
  * а когда монеты «долетели» из праздничного окна — досчитывает до новой.
  */
-export function RespectBalance({ from, to, czk }: { from: number; to: number; czk: number }) {
+export function RespectBalance({ from, to }: { from: number; to: number }) {
   const [n, setN] = useState(from);
   const [pulse, setPulse] = useState(false);
 
@@ -38,7 +38,6 @@ export function RespectBalance({ from, to, czk }: { from: number; to: number; cz
       <span id="respect-balance" className={`inline-block ${pulse ? "rc-pulse" : ""}`}>
         <RespectAmount n={n} className="text-4xl font-black text-yellow-200" />
       </span>
-      <span className="ml-3 text-sm text-neutral-400">≈ {n * czk} Kč</span>
     </p>
   );
 }

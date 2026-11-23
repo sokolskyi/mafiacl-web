@@ -121,7 +121,6 @@ async function Redeem({ locale, searchParams }: { locale: Locale; searchParams: 
       {userId && (
         <p className="text-neutral-300">
           {t("balance")}: <RespectAmount n={balance} className="text-2xl font-black text-yellow-200" />
-          <span className="ml-2 text-sm text-neutral-400">≈ {balance * CZK_PER_RESPECT} Kč</span>
         </p>
       )}
       <h2 id="redeem" className={`text-lg font-bold ${userId ? "mt-5" : ""}`}>{t("redeemTitle")}</h2>

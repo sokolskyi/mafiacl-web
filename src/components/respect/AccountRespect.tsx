@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { CZK_PER_RESPECT } from "@/lib/respect";
 import { getMyRespectHistory, getRespectBalance, getUnseenRespect, type RespectEntry } from "@/lib/respect-queries";
 import { RespectAmount } from "./RespectAmount";
 import { RespectBalance } from "./RespectBalance";
@@ -41,13 +40,12 @@ export async function AccountRespect({ locale, userId }: { locale: Locale; userI
   return (
     <section aria-labelledby="respect-title" className="mt-8 max-w-md rounded-lg border border-yellow-500/30 bg-yellow-500/5 p-5">
       <h2 id="respect-title" className="text-sm font-semibold">Respect</h2>
-      <RespectBalance from={unseen ? balance - unseen.gained : balance} to={balance} czk={CZK_PER_RESPECT} />
+      <RespectBalance from={unseen ? balance - unseen.gained : balance} to={balance} />
       {unseen && (
         <RespectCelebration
           lastId={unseen.lastId}
           gained={unseen.gained}
           balance={balance}
-          czk={CZK_PER_RESPECT}
           items={items}
           more={restN}
           texts={{ title: t("celebrate.title"), collect: t("celebrate.collect"), balanceNow: t("celebrate.balanceNow"), more: t("celebrate.more", { n: restN }) }}

@@ -11,7 +11,6 @@ type Props = {
   lastId: number;
   gained: number;
   balance: number;
-  czk: number;
   items: CelebrationItem[];
   more: number;
   texts: { title: string; collect: string; balanceNow: string; more: string };
@@ -27,7 +26,7 @@ const PARTICLES = Array.from({ length: 14 }, (_, i) => {
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Праздничное окно в кабинете: монета, салют и за что пришёл Respect. Закрытие — монеты летят в баланс. */
-export function RespectCelebration({ lastId, gained, balance, czk, items, more, texts }: Props) {
+export function RespectCelebration({ lastId, gained, balance, items, more, texts }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   const coinRef = useRef<HTMLDivElement>(null);
   const coinRect = useRef<DOMRect | null>(null);
@@ -116,8 +115,7 @@ export function RespectCelebration({ lastId, gained, balance, czk, items, more, 
       </ul>
 
       <p className="mt-4 text-sm text-neutral-400">
-        {texts.balanceNow}: <RespectAmount n={balance} className="font-semibold text-yellow-200" />{" "}
-        <span className="text-neutral-500">≈ {balance * czk} Kč</span>
+        {texts.balanceNow}: <RespectAmount n={balance} className="font-semibold text-yellow-200" />
       </p>
 
       <form method="dialog" className="mt-5">
