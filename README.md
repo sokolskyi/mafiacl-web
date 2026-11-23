@@ -15,7 +15,7 @@
 ```
 src/i18n/routing.ts         языки и переведённые адреса всех разделов
 src/proxy.ts                язык + продление сессии Supabase
-src/app/[locale]/…          страницы (сейчас заглушки с заголовком и описанием)
+src/app/[locale]/…          страницы (подробная карта — в CLAUDE.md)
 src/app/sitemap.ts          sitemap.xml: все страницы × 4 языка + hreflang
 src/app/robots.ts           robots.txt (кабинет закрыт)
 src/lib/seo.ts              canonical, hreflang, Open Graph
