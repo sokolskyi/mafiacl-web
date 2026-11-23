@@ -2324,6 +2324,12 @@
       "month": "на месяц",
       "quarter": "на 3 месяца",
       "year": "на год"
+    },
+    "celebrate": {
+      "title": "Вам пришёл Respect!",
+      "collect": "Забрать",
+      "balanceNow": "Теперь на счету",
+      "more": "и ещё {n}"
     }
   },
   "adminRespect": {

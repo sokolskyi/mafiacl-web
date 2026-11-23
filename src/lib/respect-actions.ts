@@ -133,3 +133,11 @@ export async function createRespectCodes(formData: FormData) {
   }
   redirect(`${back}?batch=${encodeURIComponent(batch)}`);
 }
+
+/** Игрок закрыл праздничное окно: новые начисления до этого id считаются просмотренными. */
+export async function markRespectSeen(lastId: number) {
+  if (!Number.isSafeInteger(lastId) || lastId <= 0) return;
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("respect_mark_seen", { p_id: lastId });
+  if (error) console.error("respect_mark_seen failed", { code: error.code, message: error.message });
+}

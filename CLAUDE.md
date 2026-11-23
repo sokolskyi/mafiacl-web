@@ -50,7 +50,7 @@
 | Турниры | `tournaments/`, `tournaments/[slug]` | `lib/tournaments.ts`, `lib/tournament-actions.ts`, `lib/tournamentBrands.ts` | `components/tournaments/*` |
 | Kings | `kings/` | `lib/kings.ts` (ведёт на старое приложение) | — |
 | Зал славы | `hall-of-fame/` | `lib/hallArchive.ts` | `HallArchive.tsx` |
-| Respect (валюта клуба) | `respect/`, `admin/respect` | `lib/respect*.ts`; начисления в БД (`respect_award_match`, `respect_award_mafgame`, ДР, коды) | `components/respect/*`, `admin/AdminRespect.tsx` |
+| Respect (валюта клуба) | `respect/`, `admin/respect` | `lib/respect*.ts`; начисления в БД (`respect_award_match`, `respect_award_mafgame`, ДР, коды); праздничное окно о новых начислениях — `getUnseenRespect` + `markRespectSeen` (RPC `respect_mark_seen`, поле `profile_private.respect_seen_id`) | `components/respect/*` (`AccountRespect`, `RespectCelebration`, `RespectBalance`; стили `.rc-*` в `globals.css`), `admin/AdminRespect.tsx` |
 | Магазин | `shop/`, `shop/[slug]`, `shop/cart`, `shop/orders/[id]`, `admin/shop` | `lib/shop/{queries,actions,payment}.ts` (`SHOP_PAYMENT_MODE`: gopay/demo/на месте), `lib/admin/shop-*.ts` | `components/shop/*`, `admin/AdminShop.tsx` |
 | Блог | `blog/`, `blog/[slug]` | `lib/blog-posts.ts`, `lib/blog-actions.ts`; соц-часть `lib/blog-social*.ts` + `api/blog/[slug]` (просмотры, реакции, комментарии), уведомление автору `lib/blog-notify.ts` | `components/blog/*`, `account/AccountBlog.tsx`, `admin/PostsAdmin.tsx` |
 | Обзоры сезона | `reviews/` | `lib/reviews/*` (сбор, анализ, сохранение, Telegram), cron `season-review` | — |

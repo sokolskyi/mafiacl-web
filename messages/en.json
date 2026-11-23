@@ -2324,6 +2324,12 @@
       "month": "1 month",
       "quarter": "3 months",
       "year": "1 year"
+    },
+    "celebrate": {
+      "title": "You've got Respect!",
+      "collect": "Collect",
+      "balanceNow": "Your balance now",
+      "more": "and {n} more"
     }
   },
   "adminRespect": {

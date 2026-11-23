@@ -2324,6 +2324,12 @@
       "month": "na měsíc",
       "quarter": "na 3 měsíce",
       "year": "na rok"
+    },
+    "celebrate": {
+      "title": "Přišel vám Respect!",
+      "collect": "Vzít si",
+      "balanceNow": "Na účtu teď máte",
+      "more": "a další {n}"
     }
   },
   "adminRespect": {

@@ -2324,6 +2324,12 @@
       "month": "на місяць",
       "quarter": "на 3 місяці",
       "year": "на рік"
+    },
+    "celebrate": {
+      "title": "Вам надійшов Respect!",
+      "collect": "Забрати",
+      "balanceNow": "Тепер на рахунку",
+      "more": "і ще {n}"
     }
   },
   "adminRespect": {

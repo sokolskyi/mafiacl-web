@@ -25,6 +25,30 @@ export async function getMyRespectHistory(limit = 12): Promise<RespectEntry[]> {
   return (data ?? []).map((r) => ({ id: r.id, amount: r.amount, reason: r.reason as RespectReason, note: r.note, createdAt: r.created_at }));
 }
 
+export type UnseenRespect = { lastId: number; gained: number; entries: RespectEntry[] };
+
+/** Новые начисления, которых игрок ещё не видел (за последние 30 дней), — для праздничного окна в кабинете. */
+export async function getUnseenRespect(profileId: string): Promise<UnseenRespect | null> {
+  if (!isAdminConfigured) return null;
+  const db = createAdminClient();
+  const { data: priv } = await db.from("profile_private").select("respect_seen_id").eq("profile_id", profileId).maybeSingle();
+  const seen = (priv?.respect_seen_id as number | null | undefined) ?? 0;
+  const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const { data, error } = await db
+    .from("respect_ledger")
+    .select("id, amount, reason, note, created_at")
+    .eq("profile_id", profileId)
+    .gt("id", seen)
+    .gt("amount", 0)
+    .gte("created_at", since)
+    .order("id", { ascending: true })
+    .limit(50);
+  if (error) console.error("unseen respect failed", { code: error.code, message: error.message });
+  if (!data?.length) return null;
+  const entries = data.map((r) => ({ id: r.id, amount: r.amount, reason: r.reason as RespectReason, note: r.note, createdAt: r.created_at }));
+  return { lastId: entries[entries.length - 1].id, gained: entries.reduce((s, e) => s + e.amount, 0), entries };
+}
+
 export type CodeBatch = { batch: string; amount: number; total: number; redeemed: number; createdAt: string };
 export type CodeRow = { code: string; amount: number; redeemedAt: string | null; redeemedBy: string | null };
 
