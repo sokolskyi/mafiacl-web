@@ -61,7 +61,7 @@
 | Электронный бланк ведущего | `admin/matches/[id]/` | `lib/match/{engine,actions,queries,types}.ts` (журнал действий → состояние) | `components/match/MatchApp.tsx` |
 | Плашка для трансляции | `app/stream/[club]/[table]/` + `api/stream/...` | `lib/match/queries.ts` | `Overlay.tsx` |
 | Рейтинги сезона | `ratings/` | `lib/rating.ts` (RPC `season_rating*`, `evening_*`) | `components/rating/*` |
-| Архив рейтингов Прага/Харьков | `ratings/prague/[slug]`, `ratings/kharkiv/[slug]` | `lib/ratingArchive.ts`; Харьков VI–VIII и Студлига IV взяты со снимков старого mafiacl.com в веб-архиве (2016–2019, `source_url`) | `ArchiveSeason*.tsx` |
+| Архив рейтингов Прага/Харьков | `ratings/prague/[slug]`, `ratings/kharkiv/[slug]` | `lib/ratingArchive.ts`; Харьков VI–VIII и Студлига IV взяты со снимков старого mafiacl.com в веб-архиве (2016–2019, `source_url`); у VII и VIII роли восстановлены по страницам игр (`stats.rolesFrom/rolesOf`, `stats.noExtra` — допов нет); у Харькова полная таблица показывается, только если есть роли | `ArchiveSeason*.tsx` |
 | Игроки (каталог) | `players/` | `lib/playersDirectory.ts` (колонки «Турниры», «Серии»: `mafgameKind`) | `PlayersDirectory.tsx` |
 | Профиль игрока | `players/[nick]/` | `lib/players.ts`, `lib/awards.ts`, `lib/badges.ts`, `lib/clubCompare.ts`, `lib/mafgame/queries.ts` | `PlayerProfile.tsx`, `PlayerShare.tsx`; картинка — `api/share/player` |
 | Ники/алиасы, «В клубе с» | — | `lib/playerNames.ts`, `lib/aliases*.ts` (`getClubSince` — таблица `player_club_since`, ручной год важнее расчётного) | `admin/AliasesAdmin.tsx` (обе формы) |

@@ -40,6 +40,8 @@ export type ArchiveLine = {
   games: number;
   /** Победы известны только там, где таблица сезона ведёт роли. */
   wins: number | null;
+  /** Игры с известной ролью — знаменатель процента побед. */
+  decided: number | null;
   /** Рейтинг по формуле сезона (у каждой лиги своя шкала). */
   points: number;
   /** Место по итогам финала сезона, если игрок в призёрах. */
@@ -121,7 +123,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
 
   const aliasNames = namesOf(await getAliases(), p.nickname).slice(1);
   const ARCH_COLS =
-    "rank, nickname, points, score, extra, best_player, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places )";
+    "rank, nickname, points, score, extra, best_player, games, wins, first_killed, best_move2, best_move3, civ_w, civ_l, mafia_w, mafia_l, sheriff_w, sheriff_l, don_w, don_l, rating_archive!inner ( slug, title, league, year, is_current, final_places, stats )";
   const [{ data: staff }, { data: rows, error }, { data: archMain, error: archError }, { data: archAlias }] = await Promise.all([
     p.id ? db.from("club_staff").select("role, clubs ( name )").eq("profile_id", p.id) : Promise.resolve({ data: [] as never[] }),
     db
@@ -202,11 +204,14 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   let archBestMove = 0;
   let archBestPlayer = 0;
   let archExtra = 0;
+  let archExtraGames = 0;
   const archive: ArchiveLine[] = [];
   for (const r of arch ?? []) {
     const a = r.rating_archive as unknown as {
       slug: string; title: string; league: string; year: number; is_current: boolean; final_places: string[] | null;
+      stats: { noExtra?: boolean } | null;
     };
+    const noExtra = a.stats?.noExtra === true;
     const roles: [PlayerRole, number, number][] = [
       ["civilian", r.civ_w, r.civ_l],
       ["mafia", r.mafia_w, r.mafia_l],
@@ -220,9 +225,13 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
         byRole[role].games += w + l;
         byRole[role].wins += w;
       }
-      archDecided += r.games;
+      // Знаменатель — игры с известной ролью (в восстановленных сезонах их может быть чуть меньше, чем в таблице).
+      archDecided += roleGames;
       archWins += r.wins;
-      archExtra += Number(r.extra);
+      if (!noExtra) {
+        archExtra += Number(r.extra);
+        archExtraGames += roleGames;
+      }
     }
     archGames += r.games;
     archKilled += r.first_killed;
@@ -238,10 +247,11 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       rank: r.rank,
       games: r.games,
       wins: detailed ? r.wins : null,
+      decided: detailed ? roleGames : null,
       points: Number(r.score ?? r.points),
       finalPlace: fp >= 0 ? fp + 1 : null,
-      firstKilled: detailed && r.games ? r.first_killed / r.games : null,
-      avgExtra: detailed && r.games ? Number(r.extra) / r.games : null,
+      firstKilled: detailed && roleGames ? r.first_killed / roleGames : null,
+      avgExtra: detailed && roleGames && !noExtra ? Number(r.extra) / roleGames : null,
     });
   }
   archive.sort((x, y) => y.year - x.year || x.title.localeCompare(y.title));
@@ -268,7 +278,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       bestMovePoints: round(rated.reduce((a, g) => a + g.bestMovePoints, 0)),
       bestPlayer: archBestPlayer,
       extra: round(archExtra),
-      extraGames: archDecided,
+      extraGames: archExtraGames,
       fouls,
       redVotes,
       blackVotes,

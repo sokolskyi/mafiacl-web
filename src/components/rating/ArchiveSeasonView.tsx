@@ -43,7 +43,11 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
   const head = "px-2 py-2 text-right font-normal";
   const cell = "px-2 py-2 text-right tabular-nums";
   const league = t(`leagues.${s.league}.name`);
-  const compact = city === "kharkiv";
+  const hasRoles = rows.some((r) => r.civ.w + r.civ.l + r.mafia.w + r.mafia.l + r.sheriff.w + r.sheriff.l + r.don.w + r.don.l > 0);
+  // Харьков: полная таблица — только если для сезона восстановлена статистика по ролям.
+  const compact = city === "kharkiv" && !hasRoles;
+  const noExtra = s.stats?.noExtra === true;
+  const decided = s.civWins !== null && s.mafiaWins !== null ? s.civWins + s.mafiaWins : s.games;
   const isLeague = s.league === "mova" || s.league === "first";
   const isSum = s.scoring?.formula === "sum";
   const hasGames = rows.some((r) => r.games > 0);
@@ -60,7 +64,7 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
       </h1>
       <p className="mt-4 text-lg text-neutral-300">
         {s.civWins !== null && s.mafiaWins !== null
-          ? t("stats", { games: s.games, civ: s.civWins, civPct: pct(s.civWins, s.games), mafia: s.mafiaWins, mafiaPct: pct(s.mafiaWins, s.games) })
+          ? t("stats", { games: s.games, civ: s.civWins, civPct: pct(s.civWins, decided), mafia: s.mafiaWins, mafiaPct: pct(s.mafiaWins, decided) })
           : t("statsGames", { games: s.games })}
       </p>
       {s.videoUrl && (
@@ -95,6 +99,9 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
       <section className="mt-6 rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
         {!isSum && <p>{compact ? t("qualifiedNoteKharkiv") : t("qualifiedNote")}</p>}
         <p className={isSum ? "" : "mt-2"}>{compact ? t("legendKharkiv") : isLeague ? t("legendLeague") : t("legend")}</p>
+        {s.stats?.rolesFrom && s.stats.rolesOf && (
+          <p className="mt-2">{t("rolesRebuilt", { from: s.stats.rolesFrom, of: s.stats.rolesOf })}</p>
+        )}
       </section>
 
       {compact ? (
@@ -194,7 +201,7 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
                     {playerLinks(r.nickname, known)}
                   </td>
                   <td className={`${cell} font-mono text-base font-black ${r.qualified ? "text-white" : ""}`}>{num.format(r.points)}</td>
-                  <td className={cell}>{num.format(Math.round(r.extra * 100) / 100)}</td>
+                  <td className={cell}>{noExtra ? "—" : num.format(Math.round(r.extra * 100) / 100)}</td>
                   <td className={cell}>{r.games}</td>
                   <td className={cell}>
                     {r.wins} <span className="text-neutral-500">({pct(r.wins, r.games)})</span>

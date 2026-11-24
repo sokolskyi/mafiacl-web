@@ -357,7 +357,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                       )}
                     </td>
                     <td>{a.games}</td>
-                    <td>{a.wins === null ? "—" : pct(a.wins, a.games)}</td>
+                    <td>{a.wins === null ? "—" : pct(a.wins, a.decided ?? a.games)}</td>
                     <td>{a.firstKilled === null ? "—" : share(a.firstKilled)}</td>
                     <td>{a.avgExtra === null ? "—" : num(Math.round(a.avgExtra * 100) / 100)}</td>
                     <td className="text-right font-mono font-bold">{num(a.points)}</td>

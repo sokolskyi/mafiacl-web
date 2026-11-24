@@ -2236,7 +2236,8 @@
     "kharkiv": "Kharkiv",
     "qualifiedNoteKharkiv": "In grey: players who played no more than 1/5 of the season's games and did not qualify.",
     "legendKharkiv": "The rating is the season coefficient: points scored divided by games played, times 100. ✓ in the Final column means the player played the season final. Only the rating and the number of games survive in the archive, without a breakdown by role.",
-    "finalistHint": "Played the season final"
+    "finalistHint": "Played the season final",
+    "rolesRebuilt": "Role stats were rebuilt from the surviving game pages of the old site: {from} of {of} games. Extra points were not recorded there."
   },
   "documents": {
     "lead": "The game rules our tournaments are played under, and the club's documents.",

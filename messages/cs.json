@@ -2236,7 +2236,8 @@
     "kharkiv": "Charkov",
     "qualifiedNoteKharkiv": "Šedě — hráči, kteří odehráli nejvýše 1/5 her sezóny a do hodnocení se nedostali.",
     "legendKharkiv": "Žebříček je koeficient sezóny: získané body se vydělí počtem her a vynásobí 100. ✓ ve sloupci „Finále“ — hráč hrál finále sezóny. V archivu se zachoval jen žebříček a počet her, bez rozpisu podle rolí.",
-    "finalistHint": "Hrál finále sezóny"
+    "finalistHint": "Hrál finále sezóny",
+    "rolesRebuilt": "Statistika podle rolí je obnovena z dochovaných stránek her starého webu: {from} z {of} her. Bonusové body tam nejsou."
   },
   "documents": {
     "lead": "Pravidla hry, podle kterých se hrají turnaje, a dokumenty klubu.",

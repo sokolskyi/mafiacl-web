@@ -65,6 +65,11 @@ export type SeasonStats = {
   partialGamesRanks?: number[];
   avgExtra?: { n: string; avg: number; median: number }[];
   winrate?: { n: string; black: number; red: number; total: number }[];
+  /** Роли восстановлены по сохранившимся страницам игр: по скольким играм из скольких. */
+  rolesFrom?: number;
+  rolesOf?: number;
+  /** Дополнительных баллов в источнике нет — колонку «Доп» не показываем. */
+  noExtra?: boolean;
 };
 
 export type ArchiveSeason = {
