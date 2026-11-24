@@ -809,7 +809,7 @@
     "metaDescription": "{nick}'s stats at MafiaCL: {games} games, {wins} wins, points and roles.",
     "since": "On the site since {date}",
     "staff": {
-      "owner": "Owner",
+      "owner": "Club management",
       "admin": "Admin",
       "host": "Host"
     },

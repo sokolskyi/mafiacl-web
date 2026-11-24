@@ -809,7 +809,7 @@
     "metaDescription": "Statistiky hráče {nick} v klubu MafiaCL: {games} her, {wins} výher, body a role.",
     "since": "Na webu od {date}",
     "staff": {
-      "owner": "Majitel",
+      "owner": "Vedení klubu",
       "admin": "Admin",
       "host": "Moderátor"
     },

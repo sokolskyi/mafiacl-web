@@ -809,7 +809,7 @@
     "metaDescription": "Статистика игрока {nick} в клубе MafiaCL: {games} игр, {wins} побед, баллы и роли.",
     "since": "На сайте с {date}",
     "staff": {
-      "owner": "Владелец",
+      "owner": "Администрация",
       "admin": "Админ",
       "host": "Ведущий"
     },
