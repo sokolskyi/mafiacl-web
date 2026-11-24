@@ -84,7 +84,7 @@
 
 ## База (Supabase)
 
-- RLS на всех таблицах. Чтение публичного — `lib/supabase/public.ts`; от имени пользователя — `server.ts`/`client.ts`; сервисный ключ — `admin.ts` (только сервер).
+- RLS на всех таблицах. Новой таблице права для `anon`/`authenticated` не выдаются сами — в миграции нужен явный `grant select …`. Чтение публичного — `lib/supabase/public.ts`; от имени пользователя — `server.ts`/`client.ts`; сервисный ключ — `admin.ts` (только сервер).
 - PostgREST отдаёт максимум 1000 строк: для больших выборок — `lib/supabase/selectAll.ts`.
 - Основные таблицы: `profiles`/`profile_private`, `clubs`/`club_staff`/`club_bans`, `cities`/`countries`/`venues`, `games`/`game_schedules`/`game_signups`, `matches`/`match_players`, `seasons`/`season_ratings`/`rating_archive(_rows)`, `tournaments`/`tournament_registrations`, `mafgame_tournaments`/`mafgame_results`, `player_aliases`/`player_club_since`/`player_titles`/`player_prizes`/`hall_of_fame`, `respect_ledger`/`respect_codes`, `shop_products`/`shop_variants`/`shop_orders`/`shop_order_items`/`payments`, `blog_comments`/`blog_reactions`/`blog_views`, `memberships`, `notifications`, `telegram_link_tokens`, `partners`, `hosts`, `promotions`, `testimonials`, `corporate_requests`, `season_reviews`.
 - Настройки: `private.app_settings(name, value)` (например `mafgame_scan`, `mafgame_respect_from`, секрет крона).
