@@ -711,8 +711,7 @@ dialog.hall-lightbox[open]::backdrop {
   grid-row: span 2;
 }
 @media (min-width: 768px) {
-  .mosaic-3,
-  .mosaic-7 {
+  .mosaic-wide {
     grid-column: span 2;
   }
   .mosaic-4 {
