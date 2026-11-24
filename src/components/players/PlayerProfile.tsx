@@ -379,7 +379,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                       ) : (
                         <a href={`https://mafgame.org/tournaments/${x.mafgameId}/results`} target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline">{x.name}</a>
                       )}
-                      {x.stars ? <span className="ml-2 text-yellow-300" aria-label={t("stars", { n: x.stars })}>{"★".repeat(Math.min(x.stars, 6))}</span> : null}
+                      {x.stars ? <span role="img" className="ml-2 text-yellow-300" aria-label={t("stars", { n: x.stars })}>{"★".repeat(Math.min(x.stars, 6))}</span> : null}
                     </td>
                     <td className="whitespace-nowrap text-neutral-400">{x.startsOn ? day(x.startsOn) : "—"}</td>
                     <td className="whitespace-nowrap">

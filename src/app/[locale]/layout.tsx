@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { NOINDEX, SITE_NAME, SITE_URL } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -30,12 +30,17 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const messages = await getMessages({ locale });
+  const t = await getTranslations({ locale, namespace: "nav" });
 
   return (
     <html lang={locale}>
       <body className="min-h-dvh antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <a href="#content" className="skip-link">
+            {t("skipToContent")}
+          </a>
           <SiteHeader locale={locale} />
+          <div id="content" tabIndex={-1} className="outline-none" />
           {children}
           <SiteFooter locale={locale} />
           <TabBar />
