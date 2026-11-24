@@ -79,7 +79,7 @@
 | Партнёры | `partners/` | `lib/partners.ts` (таблица `partners`, логотипы в `public/partners`, не SVG) | — |
 | Документы | `documents/*` | тексты в `src/content/legal/{privacy,terms,shop}/{lang}.ts`, реквизиты `operator.ts` | `documents/LegalDoc.tsx` |
 | FAQ, контакты, клубы по городам, галерея | `faq/`, `contacts/`, `clubs/[city]`, `gallery/` | `lib/cities.ts`, `lib/social.ts` | — |
-| Кабинет | `account/` | `lib/auth/*`, `lib/nickname-actions.ts`, `lib/avatar-actions.ts`, `lib/birthday-actions.ts`, `lib/members*.ts`, `lib/memberships.ts`, `lib/feedback-actions.ts` | `components/account/*` (вход Google/Facebook/почта, Turnstile) |
+| Кабинет | `account/` | `lib/auth/*`, `lib/nickname-actions.ts`, `lib/avatar-actions.ts`, `lib/birthday-actions.ts`, `lib/members*.ts`, `lib/memberships.ts`, `lib/feedback-actions.ts` | `components/account/*` (вход Google/Facebook/почта, Turnstile); группы «Моё / Профиль / Аккаунт» в `AccountPanel.tsx`, `MyGames.tsx` (записи + отмена через `leaveGame` с `from=account`), `MyOrders.tsx` |
 | Админка | `admin/`, `admin/games/[id]` | `lib/admin/{queries,actions,time}.ts`; заявки на ники/членство/ДР — RPC `*_requests`/`*_decide` | `components/admin/*` |
 
 ## База (Supabase)
@@ -93,7 +93,7 @@
 
 | Задача (pg_cron) | Когда | Что делает |
 |---|---|---|
-| `generate-scheduled-games` | 03:15 ежедневно | создаёт игры из `game_schedules` |
+| `generate-scheduled-games` | 03:15 ежедневно | создаёт игры из `game_schedules` (окно предзаписи — полночь за `priority_cutoff_days` дней до игры: вторник → вс 24:00) |
 | `mafgame-import` | :07 и :37 каждый час | POST `api/cron/mafgame` → `lib/mafgame/import.ts` (турниры и результаты mafgame, Respect 2 за игру за турниры MafiaCL с 01.02.2027) |
 | `telegram-dispatch` | каждые 5 мин | `api/telegram/dispatch` → `lib/telegram/dispatch.ts` (очередь `notifications`) |
 | `season-review` | 1-го числа 07:13 | `api/cron/season-review` → `lib/reviews/*` |
