@@ -4,11 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   FOUL_LIMIT,
-  LINEUP,
   MatchError,
   alive,
   bestMoveHits,
   isBlack,
+  isCustomRole,
   replay,
   scores,
   suggestedResult,
@@ -17,15 +17,16 @@ import {
   type MatchState,
   type Result,
   type Role,
+  type Setup,
 } from "@/lib/match/engine";
 import { finishMatch, reopenMatch, saveMatch, setShowRoles } from "@/lib/match/actions";
 import type { SeatInfo } from "@/lib/match/types";
 import { indexNicks } from "@/lib/match/nickSearch";
 import { NickInput } from "./NickInput";
 
-const ROLE_ORDER: Role[] = ["civilian", "mafia", "don", "sheriff"];
-const ROLE_ICON: Record<Role, string> = { civilian: "●", mafia: "▲", don: "♛", sheriff: "★" };
-const ROLE_CLASS: Record<Role, string> = {
+const BASE_ORDER: Role[] = ["civilian", "mafia", "don", "sheriff"];
+const BASE_ICON: Record<string, string> = { civilian: "●", mafia: "▲", don: "♛", sheriff: "★" };
+const BASE_CLASS: Record<string, string> = {
   civilian: "text-red-400",
   sheriff: "text-gold-300",
   mafia: "text-neutral-100",
@@ -57,6 +58,8 @@ export type MatchAppProps = {
   backHref: string;
   /** Fun-игра: бланк только в этом браузере — без сохранения в базу, рейтинга и плашки для трансляции. */
   fun?: boolean;
+  /** Своя игра (только fun): число мест и состав ролей. */
+  setup?: Setup | null;
 };
 
 /** Где fun-бланк хранит игру между перезагрузками страницы. */
@@ -82,7 +85,7 @@ export function MatchApp(p: MatchAppProps) {
   const [rated, setRated] = useState(p.initialRated);
   const [adj, setAdj] = useState<Record<number, { extra: string; penalty: string }>>(() =>
     Object.fromEntries(
-      Array.from({ length: 10 }, (_, i) => [
+      Array.from({ length: p.initialSeats.length }, (_, i) => [
         i + 1,
         { extra: String(p.initialAdjustments[i + 1]?.extra ?? 0), penalty: String(p.initialAdjustments[i + 1]?.penalty ?? 0) },
       ]),
@@ -93,11 +96,16 @@ export function MatchApp(p: MatchAppProps) {
 
   const state: MatchState = useMemo(() => {
     try {
-      return replay(log);
+      return replay(log, p.setup);
     } catch {
-      return replay([]);
+      return replay([], p.setup);
     }
-  }, [log]);
+  }, [log, p.setup]);
+  // Роли этой игры: порядок переключения, значок, цвет и название (у своих ролей — как назвал ведущий).
+  const roleOrder = [...BASE_ORDER, ...(Object.keys(state.custom) as Role[])].filter((r) => state.lineup[r]);
+  const roleIcon = (r: Role) => BASE_ICON[r] ?? (state.custom[r as keyof typeof state.custom] ?? "?").charAt(0).toUpperCase();
+  const roleClass = (r: Role) => BASE_CLASS[r] ?? (isBlack(r) ? "text-neutral-100" : "text-red-400");
+  const roleName = (r: Role) => (isCustomRole(r) ? state.custom[r] ?? r : t(`role.${r}`));
   const locked = status !== "live";
   // До начала дня в строках стола вписываются ники и выбираются роли.
   const seating = state.phase === "night0" && !locked;
@@ -107,7 +115,7 @@ export function MatchApp(p: MatchAppProps) {
   function persist(nextLog: Action[], nextSeats?: SeatInfo[]) {
     if (p.fun) {
       try {
-        localStorage.setItem(FUN_STORAGE_KEY, JSON.stringify({ log: nextLog, seats: nextSeats ?? seats }));
+        localStorage.setItem(FUN_STORAGE_KEY, JSON.stringify({ log: nextLog, seats: nextSeats ?? seats, setup: p.setup ?? null }));
       } catch {
         // Хранилище браузера недоступно — игра просто не переживёт перезагрузку.
       }
@@ -194,8 +202,8 @@ export function MatchApp(p: MatchAppProps) {
   // Ночь: после выстрела — проверки, потом лучший ход; ведущий может переключить вручную.
   const nightDone = (m: NightMode) =>
     m === "shot" ? state.shots.some((x) => x.round === state.round)
-    : m === "don" ? state.donChecks.some((x) => x.round === state.round)
-    : m === "sheriff" ? state.sheriffChecks.some((x) => x.round === state.round)
+    : m === "don" ? !state.lineup.don || state.donChecks.some((x) => x.round === state.round)
+    : m === "sheriff" ? !state.lineup.sheriff || state.sheriffChecks.some((x) => x.round === state.round)
     : state.bestMove !== null || state.firstKilled === null;
   const autoMode = (["shot", "don", "sheriff", "best"] as NightMode[]).find((m) => !nightDone(m)) ?? "shot";
   const nightMode: NightMode = modeChoice && modeChoice.round === state.round && !nightDone(modeChoice.mode) ? modeChoice.mode : autoMode;
@@ -206,7 +214,7 @@ export function MatchApp(p: MatchAppProps) {
   const cur = ballot.key === ballotKey ? ballot : { key: ballotKey, target: null, voters: {} as Record<number, number[]> };
 
   const suggestion = suggestedResult(state);
-  const roleCount = (r: Role) => Array.from({ length: 10 }, (_, i) => state.roles[i + 1] ?? "civilian").filter((x) => x === r).length;
+  const roleCount = (r: Role) => Array.from({ length: state.seats }, (_, i) => state.roles[i + 1] ?? "civilian").filter((x) => x === r).length;
   const phaseLabel =
     state.phase === "night0" ? t("night0")
     : state.phase === "day" ? t("day", { n: state.round })
@@ -217,7 +225,7 @@ export function MatchApp(p: MatchAppProps) {
     if (locked) return;
     if (state.phase === "night0") {
       const cur = state.roles[seat] ?? "civilian";
-      const next = ROLE_ORDER[(ROLE_ORDER.indexOf(cur) + 1) % ROLE_ORDER.length];
+      const next = roleOrder[(roleOrder.indexOf(cur) + 1) % roleOrder.length];
       dispatch({ t: "role", seat, role: next });
     } else if (state.phase === "day") {
       if (state.out[seat]) return;
@@ -333,7 +341,9 @@ export function MatchApp(p: MatchAppProps) {
         <div className="flex items-center gap-3">
           <a href={p.backHref} className="text-sm text-neutral-400 hover:text-white">←</a>
           <div className="flex-1">
-            <p className="text-xs text-neutral-400">{p.fun ? t("funHeader") : t("header", { number: p.number, table: p.tableNo })}</p>
+            <p className="text-xs text-neutral-400">
+              {p.fun ? (state.customGame ? t("funHeaderCustom", { n: state.seats }) : t("funHeader")) : t("header", { number: p.number, table: p.tableNo })}
+            </p>
             <p className="text-lg font-black">{phaseLabel}</p>
           </div>
           {!p.fun && <span className="text-xs text-neutral-500" aria-live="polite">{saving > 0 ? t("saving") : t("saved")}</span>}
@@ -358,14 +368,14 @@ export function MatchApp(p: MatchAppProps) {
 
       {/* Подсказки по фазе */}
       <p className="mt-3 text-sm text-neutral-400">
-        {state.phase === "night0" && t("hintNight0")}
+        {state.phase === "night0" && (state.customGame ? t("hintNight0Custom") : t("hintNight0"))}
         {state.phase === "day" && t("hintDay")}
         {state.phase === "night" && t(`hint.${nightMode}`)}
       </p>
 
       {/* Стол */}
       <ol className="mt-3 divide-y divide-white/10 rounded border border-white/10">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map((seat) => {
+        {Array.from({ length: state.seats }, (_, i) => i + 1).map((seat) => {
           const role = state.roles[seat] ?? "civilian";
           const out = state.out[seat];
           const fouls = state.fouls[seat] ?? 0;
@@ -379,11 +389,11 @@ export function MatchApp(p: MatchAppProps) {
                   {/* Нулевая ночь: роль — кнопкой, ник — прямо в строке. */}
                   <button
                     onClick={() => seatTap(seat)}
-                    aria-label={t("roleFor", { seat, role: t(`role.${role}`) })}
+                    aria-label={t("roleFor", { seat, role: roleName(role) })}
                     className="flex h-11 w-24 shrink-0 items-center gap-1.5 rounded bg-white/5 px-2 text-left text-sm hover:bg-white/10"
                   >
-                    <span className={`w-5 text-center text-lg ${ROLE_CLASS[role]}`}>{ROLE_ICON[role]}</span>
-                    <span className="truncate">{t(`role.${role}`)}</span>
+                    <span className={`w-5 text-center text-lg ${roleClass(role)}`} aria-hidden="true">{roleIcon(role)}</span>
+                    <span className="truncate">{roleName(role)}</span>
                   </button>
                   <NickInput
                     value={seats[seat - 1]?.name ?? ""}
@@ -405,7 +415,7 @@ export function MatchApp(p: MatchAppProps) {
                 disabled={locked || (state.phase !== "night0" && !!out && !(state.phase === "night" && nightMode !== "shot"))}
                 className="flex min-h-11 flex-1 items-center gap-2 text-left"
               >
-                <span className={`w-5 text-center text-lg ${ROLE_CLASS[role]}`} title={t(`role.${role}`)}>{ROLE_ICON[role]}</span>
+                <span className={`w-5 text-center text-lg ${roleClass(role)}`} title={roleName(role)}>{roleIcon(role)}</span>
                 <span className="truncate font-semibold">{nameOf(seat)}</span>
                 {out && <span className="text-xs text-neutral-400">{t(`out.${out.reason}`, { n: out.round })}</span>}
                 {nominated && <span className="rounded bg-red-600 px-1.5 text-xs">{t("nominated")}</span>}
@@ -430,9 +440,9 @@ export function MatchApp(p: MatchAppProps) {
       {state.phase === "night0" && !locked && (
         <section className="mt-6 space-y-4">
           <div className="flex flex-wrap gap-2 text-sm">
-            {(Object.keys(LINEUP) as Role[]).map((r) => (
-              <span key={r} className={`rounded px-2 py-1 ${roleCount(r) === LINEUP[r] ? "bg-green-500/15 text-green-300" : "bg-red-500/15 text-red-300"}`}>
-                <span className={ROLE_CLASS[r]}>{ROLE_ICON[r]}</span> {t(`role.${r}`)} {roleCount(r)}/{LINEUP[r]}
+            {roleOrder.map((r) => (
+              <span key={r} className={`rounded px-2 py-1 ${roleCount(r) === state.lineup[r] ? "bg-green-500/15 text-green-300" : "bg-red-500/15 text-red-300"}`}>
+                <span className={roleClass(r)} aria-hidden="true">{roleIcon(r)}</span> {roleName(r)} {roleCount(r)}/{state.lineup[r]}
               </span>
             ))}
           </div>
@@ -527,7 +537,7 @@ export function MatchApp(p: MatchAppProps) {
       {state.phase === "night" && !locked && (
         <section className="mt-6 space-y-3">
           <div className="flex flex-wrap gap-2">
-            {(["shot", "don", "sheriff", ...(state.firstKilled !== null && state.bestMove === null ? (["best"] as const) : [])] as NightMode[]).map((m) => (
+            {(["shot", ...(state.lineup.don ? (["don"] as const) : []), ...(state.lineup.sheriff ? (["sheriff"] as const) : []), ...(state.firstKilled !== null && state.bestMove === null ? (["best"] as const) : [])] as NightMode[]).map((m) => (
               <button key={m} onClick={() => setNightMode(m)} className={`${btn} ${nightMode === m ? "bg-red-600" : "bg-white/10"}`}>
                 {t(`mode.${m}`)}
               </button>
@@ -535,8 +545,8 @@ export function MatchApp(p: MatchAppProps) {
           </div>
           <ul className="space-y-1 text-sm text-neutral-300">
             <li>{t("mode.shot")}: {lastShot ? (lastShot.seat === null ? t("miss") : `${lastShot.seat}. ${nameOf(lastShot.seat)}`) : "—"}</li>
-            <li>{t("mode.don")}: {lastDon ? `${lastDon.seat} — ${state.roles[lastDon.seat] === "sheriff" ? t("isSheriff") : t("notSheriff")}` : "—"}</li>
-            <li>{t("mode.sheriff")}: {lastSheriff ? `${lastSheriff.seat} — ${isBlack(state.roles[lastSheriff.seat]) ? t("black") : t("red")}` : "—"}</li>
+            {!!state.lineup.don && <li>{t("mode.don")}: {lastDon ? `${lastDon.seat} — ${state.roles[lastDon.seat] === "sheriff" ? t("isSheriff") : t("notSheriff")}` : "—"}</li>}
+            {!!state.lineup.sheriff && <li>{t("mode.sheriff")}: {lastSheriff ? `${lastSheriff.seat} — ${isBlack(state.roles[lastSheriff.seat]) ? t("black") : t("red")}` : "—"}</li>}
           </ul>
           {nightMode === "shot" && !lastShot && (
             <button className={btnSoft} onClick={() => dispatch({ t: "shot", seat: null })}>{t("miss")}</button>
@@ -594,7 +604,7 @@ export function MatchApp(p: MatchAppProps) {
                 <tr key={sc.seat}>
                   <td className="py-1 font-mono text-neutral-400">{sc.seat}</td>
                   <td>
-                    <span className={ROLE_CLASS[state.roles[sc.seat] ?? "civilian"]}>{ROLE_ICON[state.roles[sc.seat] ?? "civilian"]}</span>{" "}
+                    <span className={roleClass(state.roles[sc.seat] ?? "civilian")} title={roleName(state.roles[sc.seat] ?? "civilian")}>{roleIcon(state.roles[sc.seat] ?? "civilian")}</span>{" "}
                     {nameOf(sc.seat)}
                     {sc.win && <span className="ml-1 text-green-400">✓</span>}
                   </td>
@@ -654,7 +664,7 @@ export function MatchApp(p: MatchAppProps) {
       <details className="mt-6 text-sm">
         <summary className="cursor-pointer text-neutral-400">{t("protocol", { n: log.length })}</summary>
         <ol className="mt-2 space-y-1 font-mono text-xs text-neutral-400">
-          {log.map((a, i) => <li key={i}>{i + 1}. {describe(a, t)}</li>)}
+          {log.map((a, i) => <li key={i}>{i + 1}. {describe(a, t, roleName)}</li>)}
         </ol>
       </details>
       <p className="mt-4 text-xs text-neutral-600">{t("aliveCount", { n: alive(state).length })}</p>
@@ -662,9 +672,9 @@ export function MatchApp(p: MatchAppProps) {
   );
 }
 
-function describe(a: Action, t: ReturnType<typeof useTranslations>) {
+function describe(a: Action, t: ReturnType<typeof useTranslations>, roleName: (r: Role) => string) {
   switch (a.t) {
-    case "role": return `${t("log.role")} ${a.seat}: ${t(`role.${a.role}`)}`;
+    case "role": return `${t("log.role")} ${a.seat}: ${roleName(a.role)}`;
     case "start": return t("log.start");
     case "foul": return `${t("log.foul")} ${a.seat}`;
     case "unfoul": return `${t("log.unfoul")} ${a.seat}`;

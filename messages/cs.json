@@ -695,7 +695,8 @@
       "bad": "Neplatný tah.",
       "lineup": "Role nesedí: potřeba 6 civilistů, šerif, 2 mafie a don.",
       "twice": "Tuto noc už zapsáno.",
-      "noBestMove": "Nejlepší tah má jen první zabitý v noci."
+      "noBestMove": "Nejlepší tah má jen první zabitý v noci.",
+      "lineupCustom": "Role nesedí s nastavením hry — porovnejte se štítky dole."
     },
     "hintNight0": "Vepište přezdívky do řádků stolu. Roli změníte klepnutím: civilista → mafie → don → šerif. Pak „Začít den“.",
     "hintDay": "Klepnutím hráče nominujete (nebo zrušíte). „!“ — faul, při čtvrtém vyloučení.",
@@ -818,7 +819,9 @@
     "funFinish": "Ukázat výsledek",
     "funFinished": "Výsledek spočítán. Do žebříčku se nepočítá.",
     "roleFor": "Místo {seat}: {role}. Klepnutím změníte roli",
-    "nickPlaceholder": "Přezdívka"
+    "nickPlaceholder": "Přezdívka",
+    "funHeaderCustom": "Fun-hra · vlastní, hráčů: {n}",
+    "hintNight0Custom": "Vepište přezdívky do řádků stolu. Roli měníte klepnutím dokola. Až budou všechny štítky dole zelené — „Začít den“."
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",
@@ -2521,6 +2524,33 @@
     "lead": "Elektronický list pro vlastní hru s přáteli: role, hlasování, noc a výsledek v bodech. Výsledek se nepočítá do žádného žebříčku a zůstává jen v tomto prohlížeči.",
     "signIn": "Přihlaste se a otevřete list",
     "newGame": "Nová hra",
-    "newConfirm": "Začít novou hru? Současný list se smaže."
+    "newConfirm": "Začít novou hru? Současný list se smaže.",
+    "customGame": "Vlastní hra",
+    "customTitle": "Vlastní hra",
+    "customLead": "Nastavte počet hráčů a role. Civilisté jsou všichni, na koho jiná role nezbyla.",
+    "players": "Hráčů",
+    "roles": "Role",
+    "roleName": "Název role",
+    "roleNamePlaceholder": "Například Doktor",
+    "roleN": "role {n}",
+    "team": "Za koho hraje",
+    "teamRed": "Za civilisty",
+    "teamBlack": "Za mafii",
+    "count": "Kolik",
+    "addRole": "Přidat roli",
+    "remove": "Odebrat: {name}",
+    "less": "Méně: {name}",
+    "more": "Více: {name}",
+    "civilians": "Civilistů: {n}",
+    "start": "Začít hru",
+    "cancel": "Zrušit",
+    "err": {
+      "tooMany": "Rolí je víc než hráčů. Odeberte {n} nebo přidejte hráče.",
+      "noName": "Vyplňte název každé vlastní role.",
+      "sameName": "Název „{name}“ se opakuje — jednu z rolí přejmenujte.",
+      "noBlack": "Je potřeba aspoň jedna černá role: mafie, don nebo vlastní role za mafii.",
+      "tooManyBlack": "Černých není méně než červených — mafie by vyhrála hned. Odeberte černou roli nebo přidejte hráče.",
+      "bad": "Složení nesedí. Zkontrolujte čísla."
+    }
   }
 }

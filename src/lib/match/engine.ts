@@ -4,7 +4,18 @@
  * на телефоне ведущего, на сервере при сохранении и для слоя трансляции.
  */
 
-export type Role = "civilian" | "sheriff" | "mafia" | "don";
+export type BaseRole = "civilian" | "sheriff" | "mafia" | "don";
+/** Своя роль fun-игры: cb1, cb2… играют за мафию, cr1, cr2… — за мирных. */
+export type CustomRoleId = `cb${number}` | `cr${number}`;
+export type Role = BaseRole | CustomRoleId;
+
+/** Своя игра (только fun-бланк): число мест, сколько каких ролей и названия своих ролей. Мирные — все остальные. */
+export type Setup = {
+  seats: number;
+  lineup: Partial<Record<Role, number>>;
+  custom: { id: CustomRoleId; name: string }[];
+};
+export const SETUP_SEATS = { min: 4, max: 20 } as const;
 export type Result = "civilians" | "mafia" | "draw";
 export type OutReason = "killed" | "voted" | "removed";
 
@@ -33,6 +44,12 @@ export type Phase = "night0" | "day" | "night" | "finished";
 
 export type MatchState = {
   seats: number; // обычно 10
+  /** Сколько каких ролей должно быть (мирные включены). */
+  lineup: Partial<Record<Role, number>>;
+  /** Названия своих ролей. */
+  custom: Partial<Record<CustomRoleId, string>>;
+  /** Своя игра (не классика 10 игроков). */
+  customGame: boolean;
   phase: Phase;
   round: number; // 0 — нулевой день/ночь
   roles: Record<number, Role>;
@@ -56,14 +73,45 @@ export class MatchError extends Error {
 }
 
 export const FOUL_LIMIT = 4;
-export const isBlack = (r: Role | undefined) => r === "mafia" || r === "don";
+export const isBlack = (r: Role | undefined) => r === "mafia" || r === "don" || (r?.startsWith("cb") ?? false);
+export const isCustomRole = (r: Role): r is CustomRoleId => r.startsWith("c") && r !== "civilian";
 
 /** Состав для 10 игроков: 6 мирных, шериф, 2 мафии, дон. */
-export const LINEUP: Record<Role, number> = { civilian: 6, sheriff: 1, mafia: 2, don: 1 };
+export const LINEUP: Record<BaseRole, number> = { civilian: 6, sheriff: 1, mafia: 2, don: 1 };
 
-export function initialState(seats = 10): MatchState {
+/** Состав своей игры, проверенный и с мирными «на остаток»; null — состав не годится. */
+export function normalizeSetup(setup: Setup): { seats: number; lineup: Partial<Record<Role, number>>; custom: Partial<Record<CustomRoleId, string>> } | null {
+  const seats = Math.trunc(setup.seats);
+  if (!(seats >= SETUP_SEATS.min && seats <= SETUP_SEATS.max)) return null;
+  const custom: Partial<Record<CustomRoleId, string>> = {};
+  for (const c of setup.custom ?? []) {
+    if (!/^c[br]\d{1,2}$/.test(c.id) || !c.name?.trim()) return null;
+    custom[c.id] = c.name.trim().slice(0, 24);
+  }
+  const lineup: Partial<Record<Role, number>> = {};
+  let taken = 0;
+  for (const [r, v] of Object.entries(setup.lineup ?? {}) as [Role, number][]) {
+    if (r === "civilian") continue;
+    const ok = r === "mafia" || r === "don" || r === "sheriff" || (isCustomRole(r) && custom[r]);
+    const n = Math.trunc(Number(v));
+    if (!ok || !(n >= 0)) return null;
+    if (n > 0) lineup[r] = n;
+    taken += n;
+  }
+  if (taken > seats) return null;
+  const black = (Object.keys(lineup) as Role[]).filter(isBlack).reduce((a, r) => a + (lineup[r] ?? 0), 0);
+  if (black === 0 || black >= seats - black) return null;
+  if (seats > taken) lineup.civilian = seats - taken;
+  return { seats, lineup, custom };
+}
+
+export function initialState(setup?: Setup | null): MatchState {
+  const custom = setup ? normalizeSetup(setup) : null;
   return {
-    seats,
+    seats: custom?.seats ?? 10,
+    lineup: custom?.lineup ?? LINEUP,
+    custom: custom?.custom ?? {},
+    customGame: !!custom,
     phase: "night0",
     round: 0,
     roles: {},
@@ -112,20 +160,21 @@ function apply(s: MatchState, a: Action): MatchState {
   switch (a.t) {
     case "role": {
       if (s.phase !== "night0") throw new MatchError("phase");
-      if (!seatOk(s, a.seat) || !(a.role in LINEUP)) throw new MatchError("bad");
+      if (!seatOk(s, a.seat) || !s.lineup[a.role]) throw new MatchError("bad");
       n.roles[a.seat] = a.role;
       return n;
     }
     case "start": {
       if (s.phase !== "night0") throw new MatchError("phase");
-      const counts: Record<Role, number> = { civilian: 0, sheriff: 0, mafia: 0, don: 0 };
+      const counts: Partial<Record<Role, number>> = {};
       for (let i = 1; i <= s.seats; i++) {
         const r = s.roles[i] ?? "civilian";
         n.roles[i] = r;
-        counts[r]++;
+        counts[r] = (counts[r] ?? 0) + 1;
       }
-      if (s.seats === 10 && (Object.keys(LINEUP) as Role[]).some((r) => counts[r] !== LINEUP[r])) {
-        throw new MatchError("lineup");
+      const roles = new Set([...Object.keys(counts), ...Object.keys(s.lineup)] as Role[]);
+      if ([...roles].some((r) => (counts[r] ?? 0) !== (s.lineup[r] ?? 0))) {
+        throw new MatchError(s.customGame ? "lineupCustom" : "lineup");
       }
       n.phase = "day";
       n.round = 0;
@@ -233,8 +282,8 @@ function apply(s: MatchState, a: Action): MatchState {
   }
 }
 
-export function replay(log: Action[], seats = 10): MatchState {
-  return log.reduce(apply, initialState(seats));
+export function replay(log: Action[], setup?: Setup | null): MatchState {
+  return log.reduce(apply, initialState(setup));
 }
 
 /** Проверить действие до записи в журнал. */

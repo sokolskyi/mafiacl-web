@@ -695,7 +695,8 @@
       "bad": "Invalid move.",
       "lineup": "Roles don't add up: 6 civilians, a sheriff, 2 mafia and a don are needed.",
       "twice": "Already recorded this night.",
-      "noBestMove": "Only the first player killed at night has a best move."
+      "noBestMove": "Only the first player killed at night has a best move.",
+      "lineupCustom": "Roles don't match the game setup — check the labels below."
     },
     "hintNight0": "Type nicknames into the table rows. Tap the role to change it: civilian → mafia → don → sheriff. Then “Start day”.",
     "hintDay": "Tap a player to nominate (or un-nominate). “!” is a foul; the fourth one removes the player.",
@@ -818,7 +819,9 @@
     "funFinish": "Show result",
     "funFinished": "Result calculated. It does not count towards any rating.",
     "roleFor": "Seat {seat}: {role}. Tap to change the role",
-    "nickPlaceholder": "Nickname"
+    "nickPlaceholder": "Nickname",
+    "funHeaderCustom": "Fun game · custom, {n} players",
+    "hintNight0Custom": "Type nicknames into the table rows. Tap the role to cycle through roles. When all the labels below are green — “Start day”."
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",
@@ -2521,6 +2524,33 @@
     "lead": "An electronic sheet for your own game with friends: roles, votes, night and points at the end. The result does not count towards any rating and is kept only in this browser.",
     "signIn": "Sign in to open the sheet",
     "newGame": "New game",
-    "newConfirm": "Start a new game? The current sheet will be cleared."
+    "newConfirm": "Start a new game? The current sheet will be cleared.",
+    "customGame": "Custom game",
+    "customTitle": "Custom game",
+    "customLead": "Set the number of players and roles. Everyone without another role is a civilian.",
+    "players": "Players",
+    "roles": "Roles",
+    "roleName": "Role name",
+    "roleNamePlaceholder": "For example, Doctor",
+    "roleN": "role {n}",
+    "team": "Plays for",
+    "teamRed": "Civilians",
+    "teamBlack": "Mafia",
+    "count": "How many",
+    "addRole": "Add role",
+    "remove": "Remove: {name}",
+    "less": "Fewer: {name}",
+    "more": "More: {name}",
+    "civilians": "Civilians: {n}",
+    "start": "Start game",
+    "cancel": "Cancel",
+    "err": {
+      "tooMany": "More roles than players. Remove {n} or add players.",
+      "noName": "Name each custom role.",
+      "sameName": "The name “{name}” is used twice — rename one of the roles.",
+      "noBlack": "Add at least one black role: mafia, don or a custom mafia role.",
+      "tooManyBlack": "Black roles aren't outnumbered by red ones, so the mafia would win at once. Remove a black role or add players.",
+      "bad": "This lineup doesn't work. Check the numbers."
+    }
   }
 }
