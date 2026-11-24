@@ -41,6 +41,7 @@ export const GALA_NIGHTS: GalaNight[] = [
     },
     albumUrl: "https://www.facebook.com/media/set/?set=a.1260892979466349&type=3",
     postUrl: "https://t.me/mafia_clp/1296",
+    photos: Array.from({ length: 15 }, (_, i) => `/gala/2025-${String(i + 1).padStart(2, "0")}.jpg`),
   },
   {
     year: 2024,
