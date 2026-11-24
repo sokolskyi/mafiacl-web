@@ -11,6 +11,7 @@
 - Vercel: проект `prj_1ZFavpbYytLORhSs3s9pdF85hjC1`, команда `mafiacl`. Пуш в `main` = деплой.
 - Supabase: проект `xdvglckdfbafhvpmrmle`. Миграции — `supabase/migrations/` (применять через MCP `apply_migration`, файл класть в репо с тем же именем).
 - Старый сайт (не трогать без запроса): репо `sokolskyi/mafiacl`, Flask `app.py`, Vercel-проект `mafiacl`, живой mafiacl.com. Там же раздел `/mcl/` (зеркало dovod-mafia.com + страница финала `scripts/build_mcl_final.py`) и старое приложение Kings (`LEGACY_KINGS_ORIGIN`).
+- `/mcl/` на новом сайте: страницы берутся со старого проекта и отдаются через `src/app/mcl/route.ts` и `src/app/mcl/[file]/route.ts` (`lib/mclProxy.ts` вставляет сверху полоску MafiaCL с путём «Турниры › Mafia Champions League › Europe 2026» и растягивает вступительное видео на весь экран); файлы во вложенных папках (`assets/`, `data/`) — rewrite в `next.config.ts`.
 - Стек: Next.js 16 (App Router, `"use cache"` + `cacheTag`/`cacheLife`, `src/proxy.ts` вместо middleware), next-intl 4, Tailwind 4, Supabase (`@supabase/ssr`).
 - Проверка перед коммитом: `npx tsc --noEmit`, `npm run lint`, `npm run build`.
 

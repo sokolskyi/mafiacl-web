@@ -14,8 +14,8 @@ const nextConfig: NextConfig = {
   // /mcl без слэша → /mcl/ делает src/proxy.ts (здесь redirect матчит и /mcl/, получается петля).
   async rewrites() {
     return [
-      { source: "/mcl/", destination: `${LEGACY}/mcl/` },
-      { source: "/mcl/:path+", destination: `${LEGACY}/mcl/:path+` },
+      // Страницы /mcl/ и /mcl/*.html отдаёт src/app/mcl (вставляет полоску сайта), сюда — только файлы в папках.
+      { source: "/mcl/:dir/:path+", destination: `${LEGACY}/mcl/:dir/:path+` },
       { source: "/seasons/:path*", destination: `${LEGACY}/seasons/:path*` },
       { source: "/public/:path*", destination: `${LEGACY}/public/:path*` },
       { source: "/static/:path*", destination: `${LEGACY}/static/:path*` },
