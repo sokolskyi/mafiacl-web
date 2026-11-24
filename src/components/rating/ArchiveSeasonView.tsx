@@ -97,7 +97,7 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
       {s.scoring && <ScoringRules locale={locale} scoring={s.scoring} formula={s.formula} games={s.games} withExtra={!isLeague} />}
 
       <section className="mt-6 rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
-        {!isSum && <p>{compact ? t("qualifiedNoteKharkiv") : t("qualifiedNote")}</p>}
+        {!isSum && <p>{city === "kharkiv" ? t("qualifiedNoteKharkiv") : t("qualifiedNote")}</p>}
         <p className={isSum ? "" : "mt-2"}>{compact ? t("legendKharkiv") : isLeague ? t("legendLeague") : t("legend")}</p>
         {s.stats?.rolesFrom && s.stats.rolesOf && (
           <p className="mt-2">{t("rolesRebuilt", { from: s.stats.rolesFrom, of: s.stats.rolesOf })}</p>
@@ -179,7 +179,7 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
               <tr>
                 <th className="w-10 py-2 font-normal">#</th>
                 <th className="font-normal">{t("player")}</th>
-                <th className={head}>{t("points")}</th>
+                <th className={head}>{city === "kharkiv" ? t("rating") : t("points")}</th>
                 <th className={head}>{t("extra")}</th>
                 <th className={head}>{t("games")}</th>
                 <th className={head}>{t("wins")}</th>
