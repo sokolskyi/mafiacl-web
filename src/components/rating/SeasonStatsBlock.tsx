@@ -12,7 +12,7 @@ export async function SeasonStatsBlock({ locale, stats }: { locale: Locale; stat
   if (!stats.hosts?.length && !stats.avgExtra?.length && !stats.winrate?.length) return null;
   return (
     <section className="mt-10" aria-labelledby="season-stats">
-      <h2 id="season-stats" className="text-2xl font-bold">{t("statsTitle")}</h2>
+      <h2 id="season-stats" className="text-xl font-bold">{t("statsTitle")}</h2>
       <div className="mt-4 grid gap-8 lg:grid-cols-2">
         {stats.hosts && stats.hosts.length > 0 && (
           <div className="overflow-x-auto">

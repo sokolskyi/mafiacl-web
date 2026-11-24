@@ -118,7 +118,7 @@ export function PostSocial({ slug, title }: { slug: string; title: string }) {
         {data ? t("views", { n: data.views }) : "…"}
       </p>
 
-      <h2 id="comments" className="mt-10 scroll-mt-24 text-2xl font-bold">{t("commentsTitle", { n: comments.length })}</h2>
+      <h2 id="comments" className="mt-10 scroll-mt-24 text-xl font-bold">{t("commentsTitle", { n: comments.length })}</h2>
       {data?.me ? (
         data.me.nickname ? (
           <form
@@ -140,7 +140,7 @@ export function PostSocial({ slug, title }: { slug: string; title: string }) {
               className="mt-2 w-full rounded-lg border border-white/20 bg-neutral-900 px-4 py-3 text-neutral-100 placeholder:text-neutral-500 focus:border-white focus:outline-none"
             />
             <div className="mt-2 flex items-center gap-4">
-              <button type="submit" disabled={pending || !text.trim()} className="rounded-full bg-red-600 px-6 py-2.5 font-bold text-white hover:bg-red-500 disabled:opacity-50">
+              <button type="submit" disabled={pending || !text.trim()} className="min-h-11 rounded bg-red-600 px-6 font-bold text-white hover:bg-red-500 disabled:opacity-50">
                 {pending ? t("sending") : t("send")}
               </button>
               <span className="text-xs text-neutral-500 tabular-nums">{text.length}/{COMMENT_MAX}</span>

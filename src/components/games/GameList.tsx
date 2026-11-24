@@ -65,7 +65,7 @@ export async function GameList({
             <h2 className="mt-1 font-display text-4xl font-extrabold uppercase leading-none">
               {time} · {title}
             </h2>
-            {late && <p className="mt-1 text-sm text-amber-400">{t("lateFrom", { time: late })}</p>}
+            {late && <p className="mt-1 text-sm text-gold-400">{t("lateFrom", { time: late })}</p>}
             {g.venue && (
               <p className="mt-3 text-sm text-neutral-300">
                 {g.venue.mapsUrl ? (
@@ -84,7 +84,7 @@ export async function GameList({
               ) : free > 0 ? (
                 <span className="text-green-400">{t("seats", { free, capacity: g.capacity })}</span>
               ) : (
-                <span className="text-amber-400">{t("full", { waitlist: g.waitlist })}</span>
+                <span className="text-gold-400">{t("full", { waitlist: g.waitlist })}</span>
               )}
             </p>
             {queueOpen && <p className="mt-1 text-xs text-neutral-500">{t("queueHint")}</p>}
@@ -117,7 +117,7 @@ export async function GameList({
                     className={
                       mine === "confirmed" ? "font-semibold text-green-400"
                       : mine === "queued" ? "font-semibold text-sky-400"
-                      : "font-semibold text-amber-400"
+                      : "font-semibold text-gold-400"
                     }
                   >
                     {mine === "confirmed" ? t("youAreIn") : mine === "queued" ? t("youAreQueued") : t("youAreWaitlisted")}

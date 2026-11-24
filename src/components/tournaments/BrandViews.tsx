@@ -32,7 +32,7 @@ function RegionBadge({ e, show }: { e: Edition; show: boolean }) {
   const r = show ? regionOf(e) : null;
   if (!r) return null;
   return (
-    <span className={`ml-1.5 inline-block rounded px-1.5 py-px align-middle text-[10px] font-bold leading-4 ${r === "EU" ? "bg-blue-500/25 text-blue-200" : "bg-yellow-400/20 text-yellow-200"}`}>
+    <span className={`ml-1.5 inline-block rounded px-1.5 py-px align-middle text-[10px] font-bold leading-4 ${r === "EU" ? "bg-blue-500/25 text-blue-200" : "bg-gold-400/20 text-gold-200"}`}>
       {r}
     </span>
   );

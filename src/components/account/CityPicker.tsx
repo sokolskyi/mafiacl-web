@@ -155,7 +155,7 @@ export function CityPicker({
           ))}
         </ul>
       )}
-      {open && text && matches.length === 0 && <p className="mt-1 text-sm text-amber-300">{noMatch}</p>}
+      {open && text && matches.length === 0 && <p className="mt-1 text-sm text-gold-300">{noMatch}</p>}
       <p id={`${listId}-hint`} className="mt-2 text-sm text-neutral-400">{hint}</p>
     </div>
   );

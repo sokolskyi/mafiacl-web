@@ -68,10 +68,10 @@ export async function ArchiveSeasonView({ locale, city, slug }: { locale: Locale
           <VideoLink url={s.videoUrl} locale={locale} big />
         </p>
       )}
-      {s.isCurrent && s.asOf && <p className="mt-1 text-sm text-yellow-300">{t("asOf", { date: date.format(new Date(`${s.asOf}T12:00:00Z`)) })}</p>}
+      {s.isCurrent && s.asOf && <p className="mt-1 text-sm text-gold-300">{t("asOf", { date: date.format(new Date(`${s.asOf}T12:00:00Z`)) })}</p>}
 
-      <section className="mt-6 rounded-lg border border-yellow-400/30 bg-yellow-400/5 p-4" aria-labelledby="final-title">
-        <h2 id="final-title" className="text-lg font-bold">{t("finalTitle")}</h2>
+      <section className="mt-6 rounded-lg border border-gold-400/30 bg-gold-400/5 p-4" aria-labelledby="final-title">
+        <h2 id="final-title" className="text-xl font-bold">{t("finalTitle")}</h2>
         {s.final.length > 0 ? (
           <ol className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-base">
             {s.final.slice(0, 3).map((n, i) => (

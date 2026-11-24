@@ -34,7 +34,7 @@ export default async function Page({ params }: PageProps<"/[locale]/partners">) 
                 )}
               </div>
               <div className="flex flex-1 flex-col p-5">
-                <h2 className="text-lg font-bold">
+                <h2 className="font-display text-3xl font-extrabold uppercase">
                   {p.url ? (
                     <a href={p.url} target="_blank" rel="noopener" className="after:absolute after:inset-0 hover:underline">
                       {p.name}

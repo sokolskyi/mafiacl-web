@@ -96,7 +96,7 @@ export function RespectCelebration({ lastId, gained, balance, items, more, texts
       </div>
 
       <h1 id="rc-title" className="rc-title mt-2 text-xl font-black">{texts.title}</h1>
-      <p className="rc-gain mt-1 text-5xl font-black text-yellow-200" aria-hidden="true">
+      <p className="rc-gain mt-1 text-5xl font-black text-gold-200" aria-hidden="true">
         +{shown}
       </p>
       <p className="sr-only">+{gained} Respect</p>
@@ -115,11 +115,11 @@ export function RespectCelebration({ lastId, gained, balance, items, more, texts
       </ul>
 
       <p className="mt-4 text-sm text-neutral-400">
-        {texts.balanceNow}: <RespectAmount n={balance} className="font-semibold text-yellow-200" />
+        {texts.balanceNow}: <RespectAmount n={balance} className="font-semibold text-gold-200" />
       </p>
 
       <form method="dialog" className="mt-5">
-        <button autoFocus className="rc-collect w-full rounded-lg bg-yellow-400 px-5 py-3 font-black text-neutral-950 hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-200">
+        <button autoFocus className="rc-collect w-full rounded-full bg-gold-400 px-5 py-3 font-black text-neutral-950 hover:bg-gold-300">
           {texts.collect}
         </button>
       </form>

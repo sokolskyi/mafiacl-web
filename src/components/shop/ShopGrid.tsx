@@ -30,7 +30,7 @@ export async function ShopGrid({ products, locale }: { products: Product[]; loca
           <li key={p.id} className="relative flex flex-col overflow-hidden rounded-lg border border-white/15 bg-neutral-950/60 focus-within:outline focus-within:outline-2 focus-within:outline-white">
             <ProductImage product={p} locale={locale} className="aspect-[4/5] w-full object-top" />
             <div className="flex flex-1 flex-col p-5">
-              <h2 className="text-lg font-bold">
+              <h2 className="text-xl font-bold">
                 <Link href={{ pathname: "/shop/[slug]", params: { slug: p.slug } }} className="after:absolute after:inset-0 hover:underline">
                   {loc(p.name, locale)}
                 </Link>
@@ -40,9 +40,9 @@ export async function ShopGrid({ products, locale }: { products: Product[]; loca
                 {p.onSale ? (
                   <span className="font-display text-3xl font-extrabold">{money(locale, p.priceCzk)}</span>
                 ) : (
-                  <span className="font-semibold text-amber-300">{t("notOnSale")}</span>
+                  <span className="font-semibold text-gold-300">{t("notOnSale")}</span>
                 )}
-                {soldOut && <span className="text-sm font-semibold text-amber-400">{t("soldOut")}</span>}
+                {soldOut && <span className="text-sm font-semibold text-gold-400">{t("soldOut")}</span>}
               </p>
               <PriceSchedule product={p} locale={locale} compact />
             </div>

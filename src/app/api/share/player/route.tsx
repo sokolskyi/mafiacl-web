@@ -16,10 +16,16 @@ const SIZE = { story: { width: 1080, height: 1920 }, post: { width: 1200, height
 type Format = keyof typeof SIZE;
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
-const ROLE_COLOR: Record<PlayerRole, string> = { civilian: "#f87171", sheriff: "#fde047", mafia: "#e5e5e5", don: "#e5e5e5" };
-const RED = "#dc2626";
+// Цвета совпадают с токенами globals.css (в картинке CSS-переменные не работают).
+const RED = "#e60000";
+const CREAM = "#fdffc2"; // --color-white
+const MUTED = "#cabfa6"; // --color-neutral-500
+const SOFT = "#efedc0"; // --color-neutral-200
+const GOLD_200 = "#fde68a";
+const GOLD_400 = "#fbbf24";
+const ROLE_COLOR: Record<PlayerRole, string> = { civilian: "#ff8274", sheriff: "#fcd34d", mafia: SOFT, don: SOFT };
 const FONT = "SSC-latin, SSC-latin-ext, SSC-cyrillic";
-const BG = "linear-gradient(160deg, #2a050b 0%, #0a0a0a 55%, #000 100%)";
+const BG = "linear-gradient(160deg, #4a1220 0%, #2a050b 55%, #1c0308 100%)";
 
 let fontsPromise: Promise<{ name: string; data: Buffer; weight: 400 | 800; style: "normal" }[]> | null = null;
 function fonts() {
@@ -91,15 +97,15 @@ export async function GET(request: NextRequest) {
       // eslint-disable-next-line @next/next/no-img-element
       <img src={avatarSrc} width={size} height={size} alt="" style={{ width: size, height: size, borderRadius: size, objectFit: "cover", border: `${Math.round(size / 40)}px solid ${RED}` }} />
     ) : (
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: size, height: size, borderRadius: size, background: "#262626", border: `${Math.round(size / 40)}px solid ${RED}`, color: "#a3a3a3", fontSize: size * 0.45, fontWeight: 800 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: size, height: size, borderRadius: size, background: "#2e0710", border: `${Math.round(size / 40)}px solid ${RED}`, color: MUTED, fontSize: size * 0.45, fontWeight: 800 }}>
         {player.nickname.slice(0, 1).toUpperCase()}
       </div>
     );
 
   const StatBox = ([label, value]: [string, string]) => (
     <div key={label} style={{ display: "flex", flexDirection: "column", flex: 1, padding: `${28 * k}px ${32 * k}px`, borderRadius: 24 * k, background: "rgba(255,255,255,0.06)", border: "2px solid rgba(255,255,255,0.12)" }}>
-      <div style={{ fontSize: 34 * k, color: "#a3a3a3" }}>{label}</div>
-      <div style={{ fontSize: 96 * k, fontWeight: 800, color: "#fff", lineHeight: 1.05 }}>{value}</div>
+      <div style={{ fontSize: 34 * k, color: MUTED }}>{label}</div>
+      <div style={{ fontSize: 96 * k, fontWeight: 800, color: CREAM, lineHeight: 1.05 }}>{value}</div>
     </div>
   );
 
@@ -114,7 +120,7 @@ export async function GET(request: NextRequest) {
             <div style={{ display: "flex", flex: 1, height: 22 * k, borderRadius: 22 * k, background: "rgba(255,255,255,0.1)" }}>
               <div style={{ display: "flex", width: `${Math.round(share * 100)}%`, height: "100%", borderRadius: 22 * k, background: RED }} />
             </div>
-            <div style={{ display: "flex", width: 210 * k, justifyContent: "flex-end", color: "#e5e5e5" }}>
+            <div style={{ display: "flex", width: 210 * k, justifyContent: "flex-end", color: SOFT }}>
               {x.games ? `${pct(x.wins, x.games)} · ${x.games}` : "—"}
             </div>
           </div>
@@ -126,10 +132,10 @@ export async function GET(request: NextRequest) {
   const Titles = titles.length > 0 && (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 14 * k, justifyContent: story ? "center" : "flex-start" }}>
       {titles.map((x) => (
-        <div key={x.id} style={{ display: "flex", padding: `${8 * k}px ${22 * k}px`, borderRadius: 14 * k, background: "rgba(234,179,8,0.18)", color: "#fef08a", fontSize: 34 * k }}>
+        <div key={x.id} style={{ display: "flex", padding: `${8 * k}px ${22 * k}px`, borderRadius: 14 * k, background: "rgba(251,191,36,0.18)", color: GOLD_200, fontSize: 34 * k }}>
           <svg width={30 * k} height={30 * k} viewBox="0 0 24 24" style={{ marginRight: 10 * k, marginTop: 4 * k }}>
             <path
-              fill="#facc15"
+              fill={GOLD_400}
               d={x.kind === "season_champion" ? "M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z" : "M3 18h18l-1.5-10-4.5 4-3-7-3 7-4.5-4z"}
             />
           </svg>
@@ -141,16 +147,16 @@ export async function GET(request: NextRequest) {
 
   // eslint-disable-next-line @next/next/no-img-element
   const Logo = <img src={logoSrc} alt="" width={story ? 340 : 230} height={story ? 121 : 82} />;
-  const Footer = <div style={{ display: "flex", fontSize: 34 * k, color: "#a3a3a3" }}>mafiacl.com · {t("shareCta")}</div>;
+  const Footer = <div style={{ display: "flex", fontSize: 34 * k, color: MUTED }}>mafiacl.com · {t("shareCta")}</div>;
 
   const body = story ? (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", height: "100%", padding: "80px 80px 70px", background: BG, color: "#fff", fontFamily: FONT }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", height: "100%", padding: "80px 80px 70px", background: BG, color: CREAM, fontFamily: FONT }}>
       {Logo}
       <div style={{ display: "flex", marginTop: 70 }}>
         <Avatar size={320} />
       </div>
       <div style={{ display: "flex", marginTop: 40, fontSize: 130, fontWeight: 800, lineHeight: 1, textAlign: "center" }}>{player.nickname}</div>
-      <div style={{ display: "flex", marginTop: 20, fontSize: 40, color: "#a3a3a3" }}>
+      <div style={{ display: "flex", marginTop: 20, fontSize: 40, color: MUTED }}>
         {[player.memberNo ? `ID ${formatMemberNo(player.memberNo)}` : null, cityLabel(player.city, locale), t("shareClub")].filter(Boolean).join(" · ")}
       </div>
       <div style={{ display: "flex", marginTop: 28 }}>{Titles}</div>
@@ -168,16 +174,16 @@ export async function GET(request: NextRequest) {
       {Footer}
     </div>
   ) : (
-    <div style={{ display: "flex", width: "100%", height: "100%", padding: "48px 56px", gap: 48, background: BG, color: "#fff", fontFamily: FONT }}>
+    <div style={{ display: "flex", width: "100%", height: "100%", padding: "48px 56px", gap: 48, background: BG, color: CREAM, fontFamily: FONT }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", width: 300 }}>
         {Logo}
         <Avatar size={250} />
-        <div style={{ display: "flex", fontSize: 26, color: "#a3a3a3" }}>mafiacl.com</div>
+        <div style={{ display: "flex", fontSize: 26, color: MUTED }}>mafiacl.com</div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", flex: 1, gap: 22 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 20 }}>
           <div style={{ display: "flex", fontSize: 88, fontWeight: 800, lineHeight: 1 }}>{player.nickname}</div>
-          <div style={{ display: "flex", fontSize: 28, color: "#a3a3a3" }}>{[player.memberNo ? `ID ${formatMemberNo(player.memberNo)}` : null, cityLabel(player.city, locale), t("shareClub")].filter(Boolean).join(" · ")}</div>
+          <div style={{ display: "flex", fontSize: 28, color: MUTED }}>{[player.memberNo ? `ID ${formatMemberNo(player.memberNo)}` : null, cityLabel(player.city, locale), t("shareClub")].filter(Boolean).join(" · ")}</div>
         </div>
         {Titles}
         <div style={{ display: "flex", gap: 16 }}>{stats.map(StatBox)}</div>

@@ -184,7 +184,7 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
         </fieldset>
       )}
       {current && current.stock !== null && current.stock > 0 && current.stock <= 5 && (
-        <p className="text-sm text-amber-400">{t("fewLeft", { count: current.stock })}</p>
+        <p className="text-sm text-gold-400">{t("fewLeft", { count: current.stock })}</p>
       )}
       <div className="flex flex-wrap items-center gap-3">
         <button

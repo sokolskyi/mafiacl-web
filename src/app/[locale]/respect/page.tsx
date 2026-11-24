@@ -45,7 +45,7 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <SectionPage locale={locale} pageKey="respect">
-      <p className="mt-6 inline-flex items-center gap-3 rounded-full border border-yellow-500/50 bg-yellow-500/10 px-5 py-2 text-lg font-bold text-yellow-200">
+      <p className="mt-6 inline-flex items-center gap-3 rounded-full border border-gold-500/50 bg-gold-500/10 px-5 py-2 text-lg font-bold text-gold-200">
         <RespectCoin className="h-6 w-6" /> {t("rate", { czk: CZK_PER_RESPECT })}
       </p>
 
@@ -60,7 +60,7 @@ export default async function Page({ params, searchParams }: Props) {
             {earn.map(([label, n]) => (
               <li key={label} className={row}>
                 <span>{label}</span>
-                <RespectAmount n={n} sign className="font-bold text-yellow-200" />
+                <RespectAmount n={n} sign className="font-bold text-gold-200" />
               </li>
             ))}
             <li className={row}>
@@ -120,7 +120,7 @@ async function Redeem({ locale, searchParams }: { locale: Locale; searchParams: 
     <section aria-labelledby="redeem" className="mt-8 max-w-xl rounded-lg border border-white/15 bg-neutral-950/60 p-6">
       {userId && (
         <p className="text-neutral-300">
-          {t("balance")}: <RespectAmount n={balance} className="text-2xl font-black text-yellow-200" />
+          {t("balance")}: <RespectAmount n={balance} className="text-2xl font-black text-gold-200" />
         </p>
       )}
       <h2 id="redeem" className={`text-lg font-bold ${userId ? "mt-5" : ""}`}>{t("redeemTitle")}</h2>

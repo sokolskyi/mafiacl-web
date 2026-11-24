@@ -25,12 +25,12 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
       <AboutNav locale={locale} current="gala" />
       <AboutHeader title={t("title")} lead={t("lead")} />
 
-      <section className="mt-10 rounded-2xl border border-amber-400/40 bg-neutral-950/60 p-6 sm:p-8" aria-labelledby="gala-program">
+      <section className="mt-10 rounded-2xl border border-gold-400/40 bg-neutral-950/60 p-6 sm:p-8" aria-labelledby="gala-program">
         <h2 id="gala-program" className="font-display text-3xl font-extrabold uppercase">{t("programTitle")}</h2>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
           {program.map((p) => (
             <li key={p} className="flex gap-3 text-lg">
-              <span aria-hidden="true" className="text-amber-300">✦</span>
+              <span aria-hidden="true" className="text-gold-300">✦</span>
               <span>{p}</span>
             </li>
           ))}
@@ -40,7 +40,7 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
       {GALA_NIGHTS.map((g) => (
         <section key={g.year} className="mt-14 border-t border-white/10 pt-10" aria-labelledby={`gala-${g.year}`}>
           <h2 id={`gala-${g.year}`} className="font-display text-4xl font-extrabold uppercase sm:text-5xl">
-            Gala Night <span className="text-amber-300">{g.year}</span>
+            Gala Night <span className="text-gold-300">{g.year}</span>
           </h2>
           <p className="mt-3 text-neutral-300">{date.format(new Date(`${g.date}T12:00:00Z`))}</p>
           {g.photos && g.photos.length > 0 && (
@@ -52,7 +52,7 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
           <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {GALA_NOMINATIONS.filter((n) => g.winners[n]).map((n) => (
               <li key={n} className="gala-nom">
-                <p className="text-xs font-semibold uppercase tracking-widest text-amber-200/70">{t(`nominations.${n}`)}</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-gold-200/70">{t(`nominations.${n}`)}</p>
                 <p className="gala-winner">{playerLinks(g.winners[n] ?? "", known)}</p>
                 <span className="gala-trophy" aria-hidden="true">🏆</span>
               </li>

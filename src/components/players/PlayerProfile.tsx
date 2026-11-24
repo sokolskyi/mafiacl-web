@@ -20,7 +20,7 @@ const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
 const ROLE_CLASS: Record<PlayerRole, string> = {
   civilian: "text-red-400",
-  sheriff: "text-yellow-300",
+  sheriff: "text-gold-300",
   mafia: "text-neutral-100",
   don: "text-neutral-100",
 };
@@ -83,7 +83,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           {titles.length > 0 && (
             <ul className="mt-2 flex flex-wrap gap-2">
               {titles.map((x) => (
-                <li key={x.id} className="rounded bg-yellow-500/15 px-2 py-0.5 text-xs text-yellow-200">
+                <li key={x.id} className="rounded bg-gold-500/15 px-2 py-0.5 text-xs text-gold-200">
                   {x.kind === "season_champion" ? "⭐" : "👑"} {t(`title.${x.kind}`)} · {x.label}
                 </li>
               ))}
@@ -103,7 +103,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           )}
           {(isPotw || eveningWins > 0) && (
             <p className="mt-2 flex flex-wrap gap-2">
-              {isPotw && <span className="rounded bg-yellow-500/20 px-2 py-0.5 text-xs font-bold text-yellow-300">⚜️ {t("playerOfWeek")}</span>}
+              {isPotw && <span className="rounded bg-gold-500/20 px-2 py-0.5 text-xs font-bold text-gold-300">⚜️ {t("playerOfWeek")}</span>}
               {eveningWins > 0 && eveningRating && season && (
                 <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-200">
                   {t("eveningWins", { n: eveningWins, rating: eveningRating.name, season: season.name })}
@@ -242,7 +242,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                         {c.top === null ? (
                           <span className="text-neutral-500">—</span>
                         ) : c.top <= 50 ? (
-                          <span className={c.top <= 10 ? "font-bold text-yellow-300" : "text-green-400"}>{t("topPct", { n: c.top })}</span>
+                          <span className={c.top <= 10 ? "font-bold text-gold-300" : "text-green-400"}>{t("topPct", { n: c.top })}</span>
                         ) : (
                           <span className="text-neutral-400">{t("belowMedian")}</span>
                         )}
@@ -277,7 +277,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           {awards.list.some((a) => a.category === "achievement") && (
             <ul className="mt-4 flex flex-wrap gap-2">
               {awards.list.filter((a) => a.category === "achievement").map((a) => (
-                <li key={a.id} className="rounded bg-yellow-500/15 px-2 py-0.5 text-sm text-yellow-200">🏅 {a.title} · {a.year}</li>
+                <li key={a.id} className="rounded bg-gold-500/15 px-2 py-0.5 text-sm text-gold-200">🏅 {a.title} · {a.year}</li>
               ))}
             </ul>
           )}
@@ -379,7 +379,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                       ) : (
                         <a href={`https://mafgame.org/tournaments/${x.mafgameId}/results`} target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline">{x.name}</a>
                       )}
-                      {x.stars ? <span role="img" className="ml-2 text-yellow-300" aria-label={t("stars", { n: x.stars })}>{"★".repeat(Math.min(x.stars, 6))}</span> : null}
+                      {x.stars ? <span role="img" className="ml-2 text-gold-300" aria-label={t("stars", { n: x.stars })}>{"★".repeat(Math.min(x.stars, 6))}</span> : null}
                     </td>
                     <td className="whitespace-nowrap text-neutral-400">{x.startsOn ? day(x.startsOn) : "—"}</td>
                     <td className="whitespace-nowrap">

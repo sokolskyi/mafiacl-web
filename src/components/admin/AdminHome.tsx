@@ -72,11 +72,11 @@ export async function AdminHome({
       )}
 
       <p>
-        <Link href="/admin/shop" className="inline-flex min-h-11 items-center rounded-full border border-white/55 px-5 font-semibold hover:bg-white/10">
+        <Link href="/admin/shop" className="inline-flex min-h-11 items-center rounded border border-white/55 px-5 font-semibold hover:bg-white/10">
           {t("shopLink")}
         </Link>
         {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
-          <Link href="/admin/respect" className="ml-3 inline-flex min-h-11 items-center rounded-full border border-yellow-500/60 px-5 font-semibold text-yellow-200 hover:bg-yellow-500/10">
+          <Link href="/admin/respect" className="ml-3 inline-flex min-h-11 items-center rounded border border-gold-500/60 px-5 font-semibold text-gold-200 hover:bg-gold-500/10">
             {t("respectLink")}
           </Link>
         )}
@@ -103,7 +103,7 @@ export async function AdminHome({
                   <span className="text-sm text-neutral-400">{g.venueName}</span>
                   <span className="text-sm">
                     {g.confirmed}/{g.capacity}
-                    {g.waitlist > 0 && <span className="text-amber-400"> +{g.waitlist}</span>}
+                    {g.waitlist > 0 && <span className="text-gold-400"> +{g.waitlist}</span>}
                     {g.queued > 0 && <span className="text-sky-400"> · {t("queuedShort", { count: g.queued })}</span>}
                   </span>
                   <span className="rounded bg-white/10 px-2 py-0.5 text-xs">{t(`status.${g.status}`)}</span>
@@ -165,12 +165,12 @@ export async function AdminHome({
                     <li key={m.id} className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2">
                       <span className="flex-1 font-semibold">
                         {m.name}
-                        {!m.linked && <span className="ml-2 rounded bg-amber-500/20 px-1.5 text-xs font-normal text-amber-300">{t("notLinked")}</span>}
+                        {!m.linked && <span className="ml-2 rounded bg-gold-500/20 px-1.5 text-xs font-normal text-gold-300">{t("notLinked")}</span>}
                       </span>
                       <span className="text-sm text-neutral-400">{t(`plans.${m.plan}`)}</span>
                       <span className="text-sm">{date(m.validFrom)} – {date(m.validUntil)}</span>
                       <span className="text-sm">
-                        {m.paid ? <span className="text-green-400">✓ {m.paid.amount} Kč{m.paid.method !== "other" && ` · ${t(`pay.${m.paid.method}`)}`}</span> : <span className="text-amber-400">{t("pay.unpaid")}</span>}
+                        {m.paid ? <span className="text-green-400">✓ {m.paid.amount} Kč{m.paid.method !== "other" && ` · ${t(`pay.${m.paid.method}`)}`}</span> : <span className="text-gold-400">{t("pay.unpaid")}</span>}
                       </span>
                       {!m.linked && (
                         <form action={linkMembership} className="flex gap-1">
@@ -611,7 +611,7 @@ export async function AdminHome({
                     {requests.map((r) => (
                       <li key={r.id} className="space-y-1 px-4 py-3">
                         <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                          <span className={`rounded px-2 py-0.5 text-xs font-semibold ${r.kind === "franchise" ? "bg-amber-500/20 text-amber-200" : "bg-white/10"}`}>{t(`requestKinds.${r.kind}`)}</span>
+                          <span className={`rounded px-2 py-0.5 text-xs font-semibold ${r.kind === "franchise" ? "bg-gold-500/20 text-gold-200" : "bg-white/10"}`}>{t(`requestKinds.${r.kind}`)}</span>
                           <span className="font-bold">{r.name}</span>
                           {r.city && <span className="text-neutral-300">{r.city}</span>}
                           {r.company && <span className="text-neutral-300">{r.company}</span>}
@@ -777,7 +777,7 @@ export async function AdminHome({
                     {reviews.map((r) => (
                       <li key={r.id} className="flex flex-wrap items-center gap-3 px-4 py-2">
                         <Link href={{ pathname: "/blog/[slug]", params: { slug: reviewSlug(r.month) } }} className="font-semibold hover:underline">{r.month}</Link>
-                        {r.partial && <span className="rounded bg-amber-500/20 px-2 py-0.5 text-xs text-amber-200">{t("reviewPartial")}</span>}
+                        {r.partial && <span className="rounded bg-gold-500/20 px-2 py-0.5 text-xs text-gold-200">{t("reviewPartial")}</span>}
                         {!r.published && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
                         {r.postedAt && <span className="text-xs text-green-400">{t("reviewPosted")}</span>}
                         {r.published && (

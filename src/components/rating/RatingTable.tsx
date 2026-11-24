@@ -59,7 +59,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
       </nav>
 
       <section className="rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
-        <h2 className="text-lg font-bold text-white">{s.name} · {r.name}</h2>
+        <h2 className="text-xl font-bold text-white">{s.name} · {r.name}</h2>
         <p className="mt-1">{t("period", { from: date(s.startsOn), to: date(s.endsOn) })} · {t("played", { matches, evenings })}</p>
         <p className="mt-1">{r.formula === "winrate" ? t("formulaWinrate") : t("formulaSum")}</p>
         {r.minShare > 0 && <p className="mt-1">{t("threshold", { pct: Math.round(r.minShare * 100), n: minGames })}</p>}
@@ -109,10 +109,10 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
                         )}
                         {x.nickname}
                         {badgeOf(badges, x.profileId, x.nickname) && <span aria-hidden="true">{badgeOf(badges, x.profileId, x.nickname)}</span>}
-                        {finalist && <span className="rounded bg-yellow-500/20 px-1.5 text-xs font-normal text-yellow-300">{t("finalist")}</span>}
+                        {finalist && <span className="rounded bg-gold-500/20 px-1.5 text-xs font-normal text-gold-300">{t("finalist")}</span>}
                       </Link>
                     </td>
-                    <td className="text-right">{x.games}{x.finals ? <span className="text-yellow-300"> +{x.finals}</span> : null}</td>
+                    <td className="text-right">{x.games}{x.finals ? <span className="text-gold-300"> +{x.finals}</span> : null}</td>
                     <td className="text-right">{x.wins}</td>
                     <td className="text-right">{pct(x.wins, x.games + x.finals)}</td>
                     <td className="text-right">{x.sheriffGames ? `${x.sheriffWins}/${x.sheriffGames}` : "—"}</td>
@@ -130,7 +130,7 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
       )}
       <p className="text-xs text-neutral-500">{t("note")}</p>
       <p>
-        <Link href="/hall-of-fame" className="font-semibold text-yellow-300 hover:text-yellow-200">⭐ {t("hallOfFame")} →</Link>
+        <Link href="/hall-of-fame" className="font-semibold text-gold-300 hover:text-gold-200">⭐ {t("hallOfFame")} →</Link>
       </p>
     </div>
   );

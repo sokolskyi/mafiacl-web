@@ -137,19 +137,19 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
         </div>
       </div>
       {profile && profile.verification !== "approved" && (
-        <p role="status" className={`mt-6 max-w-xl rounded border p-4 text-sm ${profile.verification === "rejected" ? "border-red-400/50 bg-red-600/15 text-red-200" : "border-amber-400/40 bg-amber-500/10 text-amber-100"}`}>
+        <p role="status" className={`mt-6 max-w-xl rounded border p-4 text-sm ${profile.verification === "rejected" ? "border-red-400/50 bg-red-600/15 text-red-200" : "border-gold-400/40 bg-gold-500/10 text-gold-100"}`}>
           {t(profile.verification === "rejected" ? "verificationRejected" : "verificationPending")}
           {profile.verification === "pending" && !telegramOn && <> {t("verificationBotHint")}</>}
         </p>
       )}
       {birthdayGreeting && (
-        <p role="status" className="mt-6 max-w-xl rounded-lg border border-yellow-500/50 bg-yellow-500/10 p-4 text-yellow-100">
+        <p role="status" className="mt-6 max-w-xl rounded-lg border border-gold-500/50 bg-gold-500/10 p-4 text-gold-100">
           <span aria-hidden="true">🎉 </span>
           {t("birthdayGreeting", { name })}
         </p>
       )}
       {ending && (
-        <div role="status" className={`mt-6 max-w-xl rounded-lg border p-4 ${ending.daysLeft <= 1 ? "border-red-400/60 bg-red-600/15 text-red-100" : "border-amber-400/40 bg-amber-500/10 text-amber-100"}`}>
+        <div role="status" className={`mt-6 max-w-xl rounded-lg border p-4 ${ending.daysLeft <= 1 ? "border-red-400/60 bg-red-600/15 text-red-100" : "border-gold-400/40 bg-gold-500/10 text-gold-100"}`}>
           <p>
             <span aria-hidden="true">⏳ </span>
             {ending.daysLeft === 0
@@ -162,7 +162,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
         </div>
       )}
       {!priv?.birthday && (
-        <p role="status" className="mt-6 max-w-xl rounded border border-amber-400/40 bg-amber-500/10 p-4 text-sm text-amber-100">
+        <p role="status" className="mt-6 max-w-xl rounded border border-gold-400/40 bg-gold-500/10 p-4 text-sm text-gold-100">
           {t("birthdayMissing")}{" "}
           <a href="#birthday" className="font-semibold underline">{t("birthdayMissingLink")}</a>
         </p>

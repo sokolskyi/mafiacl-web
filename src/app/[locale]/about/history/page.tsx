@@ -25,7 +25,7 @@ export default async function Page({ params }: PageProps<"/[locale]/about/histor
             <span aria-hidden="true" className="absolute -left-[31px] top-2 h-3 w-3 rounded-full bg-red-500 ring-4 ring-red-500/20 sm:-left-[47px]" />
             <p className="font-display text-4xl font-extrabold leading-none text-red-400">{s.year}</p>
             <p className="mt-1 text-sm uppercase tracking-widest text-neutral-400">{s.place}</p>
-            <h2 className="mt-3 text-2xl font-bold">{s.title}</h2>
+            <h2 className="mt-3 font-display text-3xl font-extrabold uppercase">{s.title}</h2>
             <p className="mt-2 text-lg text-neutral-300">{s.text}</p>
           </li>
         ))}

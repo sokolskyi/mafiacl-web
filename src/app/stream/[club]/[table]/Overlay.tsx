@@ -17,7 +17,7 @@ const T = {
 };
 const ROLE: Record<string, { icon: string; cls: string }> = {
   civilian: { icon: "●", cls: "bg-red-700" },
-  sheriff: { icon: "★", cls: "bg-yellow-500 text-black" },
+  sheriff: { icon: "★", cls: "bg-gold-500 text-black" },
   mafia: { icon: "▲", cls: "bg-neutral-900" },
   don: { icon: "♛", cls: "bg-neutral-900" },
 };

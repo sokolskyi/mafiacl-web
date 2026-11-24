@@ -44,7 +44,7 @@ export async function AdminRespect({ locale, flags }: { locale: Locale; flags: F
       {errorKey && <p role="alert" className="text-red-400 print:hidden">{t(`errors.${errorKey as "invalid" | "noPlayer" | "insufficient" | "blogYear" | "save"}`)}</p>}
 
       <p className="text-neutral-300 print:hidden">
-        {t("outstanding")}: <RespectAmount n={outstanding} className="text-2xl font-black text-yellow-200" />
+        {t("outstanding")}: <RespectAmount n={outstanding} className="text-2xl font-black text-gold-200" />
         <span className="ml-2 text-sm text-neutral-400">≈ {outstanding * CZK_PER_RESPECT} Kč</span>
       </p>
 

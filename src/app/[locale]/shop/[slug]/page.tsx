@@ -78,7 +78,7 @@ async function Inner({ params }: Pick<Props, "params">) {
         askNickname={product.askNickname}
         askColor={product.askColor}
         defaultNickname={defaultNickname}
-        notOnSale={product.onSale ? undefined : <p className="text-lg font-semibold text-amber-300">{t("notOnSale")}</p>}
+        notOnSale={product.onSale ? undefined : <p className="text-lg font-semibold text-gold-300">{t("notOnSale")}</p>}
       />
     </>
   );

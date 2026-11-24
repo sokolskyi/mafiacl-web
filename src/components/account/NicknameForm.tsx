@@ -54,7 +54,7 @@ export function NicknameForm({
       </div>
       <p id="nickname-hint" className="mt-2 text-sm text-neutral-400">
         {t("nicknameHint")} {t("nicknameRule")}
-        {nicknameRequest && <span className="mt-1 block text-amber-300">{t("nicknamePending", { nick: nicknameRequest })}</span>}
+        {nicknameRequest && <span className="mt-1 block text-gold-300">{t("nicknamePending", { nick: nicknameRequest })}</span>}
       </p>
       <CityPicker
         name="city"

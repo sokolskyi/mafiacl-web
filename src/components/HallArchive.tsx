@@ -88,7 +88,7 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
                               {e.season}
                             </span>
                           )}
-                          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-300/80">
+                          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-300/80">
                             {e.city} · {e.year}
                             {league ? ` · ${league}` : ""}
                           </p>

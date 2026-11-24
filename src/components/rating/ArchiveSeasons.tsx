@@ -19,7 +19,7 @@ export async function ArchiveSeasons({ locale }: { locale: Locale }) {
       {cities.map(({ city, title, lead }) =>
         seasons.some((s) => (ARCHIVE_CITIES[city] as readonly string[]).includes(s.league)) ? (
     <section key={city} className="mt-16" aria-labelledby={`archive-${city}`}>
-      <h2 id={`archive-${city}`} className="font-display text-3xl font-extrabold uppercase sm:text-4xl">{title}</h2>
+      <h2 id={`archive-${city}`} className="text-xl font-bold">{title}</h2>
       <p className="mt-2 max-w-3xl text-neutral-300">{lead}</p>
       {ARCHIVE_CITIES[city].map((league) => {
         const list = seasons.filter((s) => s.league === league);

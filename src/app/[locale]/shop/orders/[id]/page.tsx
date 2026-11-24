@@ -99,7 +99,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
         ))}
       </ul>
       {order.respect_points > 0 && (
-        <p className="mt-4 flex items-baseline justify-between text-yellow-200">
+        <p className="mt-4 flex items-baseline justify-between text-gold-200">
           <span>{tr("orderPaidWith")} <RespectAmount n={order.respect_points} /></span>
           <span className="font-bold">−{money(locale, Number(order.respect_czk))}</span>
         </p>
@@ -110,7 +110,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
       </p>
 
       {respectMax > 0 && (
-        <section className="mt-10 rounded-lg border border-yellow-500/30 bg-yellow-500/5 p-6">
+        <section className="mt-10 rounded-lg border border-gold-500/30 bg-gold-500/5 p-6">
           <h2 className="text-xl font-bold">{tr("orderTitle")}</h2>
           <p className="mt-1 text-sm text-neutral-300">{tr("orderHint", { max: respectMax, czk: respectMax * CZK_PER_RESPECT })}</p>
           <form action={applyRespectToOrder} className="mt-4 flex flex-wrap items-end gap-3">
@@ -120,7 +120,7 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
               {tr("orderAmount")}
               <input name="points" type="number" required min={1} max={respectMax} step={1} defaultValue={respectMax} className="w-32 rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500" />
             </label>
-            <button type="submit" className="min-h-11 rounded bg-yellow-500 px-5 font-bold text-black hover:bg-yellow-400">{tr("orderApply")}</button>
+            <button type="submit" className="min-h-11 rounded bg-gold-500 px-5 font-bold text-black hover:bg-gold-400">{tr("orderApply")}</button>
           </form>
         </section>
       )}

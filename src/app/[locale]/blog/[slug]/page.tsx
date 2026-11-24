@@ -138,7 +138,7 @@ async function Review({ params }: Pick<PageProps<"/[locale]/blog/[slug]">, "para
                     {previous && (
                       <td className="px-3 py-2 text-right tabular-nums">
                         {r.isNew ? (
-                          <span className="text-amber-300">{t("moveNew")}</span>
+                          <span className="text-gold-300">{t("moveNew")}</span>
                         ) : r.delta && r.delta > 0 ? (
                           <span className="text-green-400">▲ {r.delta}</span>
                         ) : r.delta && r.delta < 0 ? (

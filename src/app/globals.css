@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "../../.design-steward";
 @import "@fontsource-variable/inter/wght.css";
 @import "@fontsource-variable/manrope/index.css";
 @import "@fontsource-variable/unbounded/index.css";
@@ -6,9 +7,17 @@
 @import "@fontsource/sofia-sans-condensed/800.css";
 
 /*
-  Фирменные цвета MafiaCL: красный #E60000, чёрный #0B0B0B, кремовый #FDFFC2.
+  Фирменные цвета MafiaCL: красный #E60000, чёрный #0B0B0B, кремовый #FDFFC2,
+  плюс золото (--color-gold-*) для наград и Respect.
   Фон сайта — «бордовый бархат». Серую и красную шкалы Tailwind переопределяем,
   чтобы все существующие страницы сразу получили новую палитру.
+
+  Правила (решения 2026-11-24, .design-steward/2026-11-24-align/decisions.json):
+  - Тёмные поверхности (карточки, окна) — бордовые neutral-950/900. Почти чёрный
+    только у просмотра фото (.hall-lightbox), где фото — главное.
+  - Белый текст — кремовый var(--color-white), не #fff.
+  - Золото — только --color-gold-*.
+  - Обводка фокуса — кремовая (глобальный :focus-visible), без своих цветов.
 */
 :root {
   --background: #2a050b;
@@ -37,6 +46,16 @@
   --color-neutral-300: #e4e2b4;
   --color-neutral-200: #efedc0;
   --color-neutral-100: #f7f6c4;
+
+  /*
+    Золото — награды, Respect, чемпионы. Одно семейство (янтарное) вместо
+    yellow/amber/ручных hex. В классах: text-gold-300, bg-gold-400 и т.д.
+  */
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
 
   /* Красный: плашки и кнопки — фирменный, мелкий текст на тёмном — светлее. */
   --color-red-300: #ffa699;
@@ -87,7 +106,7 @@
   }
   ::selection {
     background: #e60000;
-    color: #ffffff;
+    color: var(--color-white);
   }
   :focus-visible {
     outline: 2px solid #fdffc2;
@@ -141,12 +160,12 @@ dialog.rc-dialog {
   width: min(92vw, 420px);
   max-height: 92dvh;
   padding: 1.25rem 1.5rem 1.5rem;
-  border: 1px solid rgb(234 179 8 / 0.45);
+  border: 1px solid color-mix(in srgb, var(--color-gold-400) 45%, transparent);
   border-radius: 1.25rem;
   background:
-    radial-gradient(120% 70% at 50% 0%, rgb(234 179 8 / 0.18), transparent 60%),
-    #0b0b0c;
-  color: #f5f5f5;
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--color-gold-400) 18%, transparent), transparent 60%),
+    var(--color-neutral-950);
+  color: var(--color-white);
   text-align: center;
   overflow-x: hidden;
   opacity: 0;
@@ -187,7 +206,7 @@ dialog.rc-dialog::backdrop {
   transition-behavior: allow-discrete;
 }
 dialog.rc-dialog[open]::backdrop {
-  background-color: rgb(0 0 0 / 0.7);
+  background-color: color-mix(in srgb, var(--color-neutral-950) 75%, transparent);
   @starting-style {
     background-color: rgb(0 0 0 / 0);
   }
@@ -213,7 +232,7 @@ dialog.rc-dialog[open]::backdrop {
   width: 190px;
   height: 190px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(250 204 21 / 0.35), transparent 65%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-gold-300) 35%, transparent), transparent 65%);
   @media (prefers-reduced-motion: no-preference) {
     animation: rc-glow 2.4s ease-in-out 0.6s infinite alternate both;
   }
@@ -223,7 +242,7 @@ dialog.rc-dialog[open]::backdrop {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  border: 2px solid rgb(250 204 21 / 0.7);
+  border: 2px solid color-mix(in srgb, var(--color-gold-300) 70%, transparent);
   opacity: 0;
   @media (prefers-reduced-motion: no-preference) {
     animation: rc-ring 1s ease-out 0.45s both;
@@ -250,8 +269,8 @@ dialog.rc-dialog[open]::backdrop {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fde68a;
-  box-shadow: 0 0 10px 2px rgb(253 230 138 / 0.8);
+  background: var(--color-gold-200);
+  box-shadow: 0 0 10px 2px color-mix(in srgb, var(--color-gold-200) 80%, transparent);
 }
 .rc-title,
 .rc-gain {
@@ -261,7 +280,7 @@ dialog.rc-dialog[open]::backdrop {
 }
 .rc-gain {
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 24px rgb(250 204 21 / 0.45);
+  text-shadow: 0 0 24px color-mix(in srgb, var(--color-gold-300) 45%, transparent);
 }
 .rc-item {
   @media (prefers-reduced-motion: no-preference) {
@@ -318,9 +337,9 @@ dialog.rc-dialog[open]::backdrop {
   to { translate: 0 0; opacity: 1; }
 }
 @keyframes rc-pulse {
-  0% { scale: 1; filter: drop-shadow(0 0 0 rgb(250 204 21 / 0)); }
-  40% { scale: 1.12; filter: drop-shadow(0 0 14px rgb(250 204 21 / 0.8)); }
-  100% { scale: 1; filter: drop-shadow(0 0 0 rgb(250 204 21 / 0)); }
+  0% { scale: 1; filter: drop-shadow(0 0 0 transparent); }
+  40% { scale: 1.12; filter: drop-shadow(0 0 14px color-mix(in srgb, var(--color-gold-300) 80%, transparent)); }
+  100% { scale: 1; filter: drop-shadow(0 0 0 transparent); }
 }
 
 /* ── Зал славы: карточки сезонов и просмотр фото ──────────────────────── */
@@ -328,11 +347,11 @@ dialog.rc-dialog[open]::backdrop {
   position: relative;
   display: grid;
   overflow: hidden;
-  border: 1px solid rgb(251 191 36 / 0.28);
+  border: 1px solid color-mix(in srgb, var(--color-gold-400) 28%, transparent);
   border-radius: 1.25rem;
   background:
-    radial-gradient(90% 120% at 100% 0%, rgb(251 191 36 / 0.1), transparent 55%),
-    linear-gradient(180deg, rgb(10 10 10 / 0.75), rgb(10 10 10 / 0.9));
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--color-gold-400) 10%, transparent), transparent 55%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-neutral-950) 75%, transparent), color-mix(in srgb, var(--color-neutral-950) 90%, transparent));
   isolation: isolate;
 }
 @media (min-width: 1024px) {
@@ -385,11 +404,11 @@ dialog.rc-dialog[open]::backdrop {
     inset: 0 0 0 auto;
     width: 30%;
     pointer-events: none;
-    background: linear-gradient(90deg, transparent, rgb(10 10 10 / 0.92));
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-neutral-950) 92%, transparent));
   }
   .hall-season.is-flipped .hall-photos::after {
     inset: 0 auto 0 0;
-    background: linear-gradient(270deg, transparent, rgb(10 10 10 / 0.92));
+    background: linear-gradient(270deg, transparent, color-mix(in srgb, var(--color-neutral-950) 92%, transparent));
   }
 }
 @media (max-width: 1023px) {
@@ -399,11 +418,11 @@ dialog.rc-dialog[open]::backdrop {
     inset: auto 0 0 0;
     height: 35%;
     pointer-events: none;
-    background: linear-gradient(180deg, transparent, rgb(10 10 10 / 0.95));
+    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-neutral-950) 95%, transparent));
   }
 }
 .hall-main:focus-visible {
-  outline: 3px solid #fcd34d;
+  outline: 3px solid var(--color-white);
   outline-offset: -3px;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -447,7 +466,7 @@ dialog.rc-dialog[open]::backdrop {
   object-position: 50% 30%;
 }
 .hall-polaroid:focus-visible {
-  outline: 3px solid #fcd34d;
+  outline: 3px solid var(--color-white);
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -466,9 +485,9 @@ dialog.rc-dialog[open]::backdrop {
   left: 0.75rem;
   padding: 0.15rem 0.6rem;
   border-radius: 999px;
-  background: rgb(0 0 0 / 0.6);
+  background: color-mix(in srgb, var(--color-neutral-950) 70%, transparent);
   font-size: 0.75rem;
-  color: #e5e5e5;
+  color: var(--color-neutral-200);
   pointer-events: none;
 }
 
@@ -497,7 +516,7 @@ dialog.rc-dialog[open]::backdrop {
   font-size: clamp(7rem, 16vw, 12rem);
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 2px rgb(251 191 36 / 0.16);
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--color-gold-400) 16%, transparent);
   user-select: none;
   pointer-events: none;
 }
@@ -508,11 +527,11 @@ dialog.rc-dialog[open]::backdrop {
   font-weight: 900;
   line-height: 0.95;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #fde68a 10%, #f59e0b 95%);
+  background: linear-gradient(180deg, var(--color-gold-200) 10%, var(--color-gold-500) 95%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 30px rgb(245 158 11 / 0.15);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--color-gold-500) 15%, transparent);
 }
 .hall-champion a {
   color: inherit;
@@ -530,9 +549,9 @@ dialog.rc-dialog[open]::backdrop {
 .hall-chip {
   padding: 0.2rem 0.65rem;
   border-radius: 0.4rem;
-  background: rgb(251 191 36 / 0.08);
+  background: color-mix(in srgb, var(--color-gold-400) 8%, transparent);
   font-size: 0.8rem;
-  color: #d4d4d4;
+  color: var(--color-neutral-300);
 }
 
 /* Просмотр фото на странице. */
@@ -545,7 +564,7 @@ dialog.hall-lightbox {
   border: 1px solid rgb(255 255 255 / 0.12);
   border-radius: 1rem;
   background: #0a0a0a;
-  color: #f5f5f5;
+  color: var(--color-white);
   overflow: hidden;
   overscroll-behavior: contain;
   opacity: 0;
@@ -593,7 +612,7 @@ dialog.hall-lightbox[open]::backdrop {
   display: none;
 }
 .hall-track:focus-visible {
-  outline: 2px solid #fcd34d;
+  outline: 2px solid var(--color-white);
   outline-offset: -2px;
 }
 .hall-slide {
@@ -619,7 +638,7 @@ dialog.hall-lightbox[open]::backdrop {
   background: rgb(255 255 255 / 0.08);
   font-size: 1.25rem;
   line-height: 1;
-  color: #fff;
+  color: var(--color-white);
 }
 .hall-lb-btn:hover:not(:disabled) {
   background: rgb(255 255 255 / 0.18);
@@ -629,7 +648,7 @@ dialog.hall-lightbox[open]::backdrop {
 }
 .hall-lb-btn:focus-visible,
 .hall-thumb:focus-visible {
-  outline: 2px solid #fcd34d;
+  outline: 2px solid var(--color-white);
   outline-offset: 2px;
 }
 .hall-lb-prev,
@@ -661,7 +680,7 @@ dialog.hall-lightbox[open]::backdrop {
 }
 .hall-thumb[aria-current="true"] {
   opacity: 1;
-  outline-color: #fbbf24;
+  outline-color: var(--color-gold-400);
 }
 
 /* Миниатюры в просмотре фото: прокручиваются, если не влезают. */
@@ -695,7 +714,7 @@ dialog.hall-lightbox[open]::backdrop {
   position: relative;
   overflow: hidden;
   border-radius: 0.75rem;
-  background: #111;
+  background: var(--color-neutral-950);
 }
 .mosaic-tile button {
   position: relative;
@@ -713,7 +732,7 @@ dialog.hall-lightbox[open]::backdrop {
   filter: saturate(0.92) brightness(0.95);
 }
 .mosaic-tile button:focus-visible {
-  outline: 3px solid #fcd34d;
+  outline: 3px solid var(--color-white);
   outline-offset: -3px;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -747,11 +766,11 @@ dialog.hall-lightbox[open]::backdrop {
   inset: 0;
   display: grid;
   place-items: center;
-  background: rgb(0 0 0 / 0.6);
+  background: color-mix(in srgb, var(--color-neutral-950) 65%, transparent);
   font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 900;
-  color: #fff;
+  color: var(--color-white);
 }
 
 /* Номинации Gala Night. */
@@ -759,15 +778,15 @@ dialog.hall-lightbox[open]::backdrop {
   position: relative;
   overflow: hidden;
   padding: 1.1rem 1.25rem 1.2rem;
-  border: 1px solid rgb(251 191 36 / 0.25);
+  border: 1px solid color-mix(in srgb, var(--color-gold-400) 25%, transparent);
   border-radius: 0.9rem;
   background:
-    radial-gradient(120% 90% at 100% 0%, rgb(251 191 36 / 0.1), transparent 60%),
-    rgb(10 10 10 / 0.7);
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--color-gold-400) 10%, transparent), transparent 60%),
+    color-mix(in srgb, var(--color-neutral-950) 70%, transparent);
   transition: border-color 0.3s, translate 0.3s;
 }
 .gala-nom:hover {
-  border-color: rgb(251 191 36 / 0.55);
+  border-color: color-mix(in srgb, var(--color-gold-400) 55%, transparent);
 }
 @media (prefers-reduced-motion: no-preference) {
   .gala-nom:hover {
@@ -781,7 +800,7 @@ dialog.hall-lightbox[open]::backdrop {
   font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #fde68a 10%, #f59e0b 95%);
+  background: linear-gradient(180deg, var(--color-gold-200) 10%, var(--color-gold-500) 95%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

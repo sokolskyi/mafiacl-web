@@ -49,7 +49,7 @@ export default async function Page({ params }: PageProps<"/[locale]/blog">) {
                   >
                     <p className="text-sm uppercase tracking-widest text-neutral-400">{t("kicker")}</p>
                     <p className="mt-1 font-display text-3xl font-extrabold uppercase">{monthTitle(r.month, locale)}</p>
-                    {r.partial && <p className="mt-1 text-sm text-amber-300">{t("partialShort")}</p>}
+                    {r.partial && <p className="mt-1 text-sm text-gold-300">{t("partialShort")}</p>}
                     <p className="mt-3 text-neutral-300">{leaders.join(" · ")}</p>
                   </Link>
                 </li>

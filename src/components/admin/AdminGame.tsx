@@ -75,7 +75,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
             <button name="method" value="cash" className="rounded bg-white/10 px-2 py-0.5 hover:bg-white/20">{t("pay.cash")}</button>
             <button name="method" value="card" className="rounded bg-white/10 px-2 py-0.5 hover:bg-white/20">{t("pay.card")}</button>
             {s.profileId && Number(game.price_czk ?? 0) > 0 && (
-              <button formAction={payGameWithRespect} title={t("pay.respectHint")} className="rounded bg-yellow-500/20 px-2 py-0.5 text-yellow-200 hover:bg-yellow-500/30">
+              <button formAction={payGameWithRespect} title={t("pay.respectHint")} className="rounded bg-gold-500/20 px-2 py-0.5 text-gold-200 hover:bg-gold-500/30">
                 <RespectAmount n={respectForCzk(Number(game.price_czk))} />
               </button>
             )}
@@ -156,7 +156,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
             <h4 className="font-bold">{tm("standings")}</h4>
             <ol className="mt-2 max-w-md divide-y divide-white/10 rounded border border-white/10 text-sm">
               {standings.map((r) => (
-                <li key={`${r.profileId ?? r.name}`} className={`flex items-center gap-3 px-3 py-1.5 ${r.place === 1 ? "bg-yellow-500/10 font-bold" : ""}`}>
+                <li key={`${r.profileId ?? r.name}`} className={`flex items-center gap-3 px-3 py-1.5 ${r.place === 1 ? "bg-gold-500/10 font-bold" : ""}`}>
                   <span className="w-6 font-mono text-neutral-400">{r.place}</span>
                   <span className="flex-1">{r.place === 1 && "⚜️ "}{withBadge(badges, r.profileId, r.nickname ?? r.name)}</span>
                   <span className="text-neutral-400">{r.wins}/{r.games}</span>
@@ -198,7 +198,7 @@ export async function AdminGame({ locale, id, flags }: { locale: Locale; id: num
         </ol>
         {waitlist.length > 0 && (
           <>
-            <h3 className="mt-6 text-lg font-bold text-amber-400">{t("waitlist", { count: waitlist.length })}</h3>
+            <h3 className="mt-6 text-lg font-bold text-gold-400">{t("waitlist", { count: waitlist.length })}</h3>
             <ol className="mt-3 divide-y divide-white/10 rounded border border-white/10">
               {waitlist.map((s, i) => <Row key={s.id} s={s} n={i + 1} />)}
             </ol>

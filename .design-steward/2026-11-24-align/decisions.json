@@ -1,0 +1,57 @@
+{
+  "run": "2026-11-24-align",
+  "sourceReport": ".design-steward/2026-11-24-audit/canon-report.md",
+  "authority": "Ievgen Sokolskyi (администрация клуба), ответ «da» в чате 2026-11-24 на 5 предложений; разрешено записать решения и привести сайт к единому виду",
+  "decisions": [
+    {
+      "findingId": "color-surface",
+      "decision": "Тёмные поверхности (карточки, окна, подложки на фото) — бордовые neutral-950/900. Почти чёрный только у просмотра фото (.hall-lightbox).",
+      "scope": "app/all",
+      "decisionStatus": "approved",
+      "exceptions": [{"scope": "dialog.hall-lightbox и его слайды", "value": "#0a0a0a / #050505 / rgb(0 0 0 / 0.85) фон"}]
+    },
+    {
+      "findingId": "color-gold",
+      "decision": "Одно золото — токены --color-gold-100..500 (значения янтарной шкалы). Классы yellow-*/amber-* и ручные hex заменены на gold-*.",
+      "scope": "app/награды, Respect, чемпионы, финалисты",
+      "decisionStatus": "approved",
+      "exceptions": []
+    },
+    {
+      "findingId": "color-text-white",
+      "decision": "Белый текст — кремовый var(--color-white) #fdffc2; #fff/#f5f5f5/#e5e5e5/#d4d4d4 убраны. Обводка фокуса тоже кремовая (жёлтые обводки сняты).",
+      "scope": "app/all, включая картинку для соцсетей api/share/player",
+      "decisionStatus": "approved",
+      "exceptions": [],
+      "open": ["Бумага «полароидов» в Зале славы #f5f1e8 — это цвет материала, а не белый текст; оставлена без изменений до отдельного решения"]
+    },
+    {
+      "findingId": "radius-button",
+      "decision": "rounded-full («таблетка») — главное действие страницы на публичных экранах (Записаться, Купить, Оформить, Оплатить, Отправить заявку, Забрать Respect) и парная к нему контурная кнопка-призыв. rounded — кнопки форм, кабинета, админки и служебные. Чипы-фильтры и навигация остаются rounded-full: это не кнопки действия.",
+      "scope": "app/кнопки",
+      "decisionStatus": "approved",
+      "exceptions": []
+    },
+    {
+      "findingId": "type-h2",
+      "decision": "Витрина (главная, О клубе, Зал славы, Gala, турниры, блог-лента, FAQ, корпоративы, партнёры): h2 = font-display text-3xl font-extrabold uppercase. Рабочие экраны (рейтинги, профиль, кабинет, админка, магазин, заказ, комментарии): h2 = text-xl font-bold.",
+      "scope": "app/заголовки разделов",
+      "decisionStatus": "approved",
+      "exceptions": [{"scope": "мелкие подписи карточек в кабинете (text-sm font-semibold)", "value": "не заголовок раздела"}]
+    },
+    {
+      "findingId": "cta-primary",
+      "decision": "Красная кнопка — главное действие; золотая — только действие с Respect (следует из color-gold).",
+      "scope": "app/кнопки",
+      "decisionStatus": "approved",
+      "exceptions": []
+    },
+    {
+      "findingId": "focus-ring",
+      "decision": "Только глобальный кремовый :focus-visible; собственные жёлтые обводки удалены.",
+      "scope": "app/all",
+      "decisionStatus": "approved",
+      "exceptions": []
+    }
+  ]
+}

@@ -36,7 +36,7 @@ export function RespectBalance({ from, to }: { from: number; to: number }) {
   return (
     <p className="mt-1">
       <span id="respect-balance" className={`inline-block ${pulse ? "rc-pulse" : ""}`}>
-        <RespectAmount n={n} className="text-4xl font-black text-yellow-200" />
+        <RespectAmount n={n} className="text-4xl font-black text-gold-200" />
       </span>
     </p>
   );

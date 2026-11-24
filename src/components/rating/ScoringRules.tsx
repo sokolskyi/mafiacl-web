@@ -25,7 +25,7 @@ export async function ScoringRules({ locale, scoring: sc, formula, games, withEx
 
   return (
     <section className="mt-6 rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300" aria-labelledby="scoring-title">
-      <h2 id="scoring-title" className="text-lg font-bold text-white">{t("scoringTitle")}</h2>
+      <h2 id="scoring-title" className="text-xl font-bold text-white">{t("scoringTitle")}</h2>
       <p className="mt-2">
         {kind === "sum"
           ? t("scoringFormulaSum")
@@ -69,7 +69,7 @@ export async function ScoringRules({ locale, scoring: sc, formula, games, withEx
       {formula && (
         <details className="mt-3">
           <summary className="cursor-pointer text-neutral-400 hover:text-white">{t("formulaRaw")}</summary>
-          <code className="mt-2 block overflow-x-auto rounded bg-black/60 p-2 font-mono text-xs text-neutral-200">{formula}</code>
+          <code className="mt-2 block overflow-x-auto rounded bg-neutral-950 p-2 font-mono text-xs text-neutral-200">{formula}</code>
         </details>
       )}
     </section>

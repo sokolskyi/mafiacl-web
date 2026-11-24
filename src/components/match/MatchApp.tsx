@@ -25,7 +25,7 @@ const ROLE_ORDER: Role[] = ["civilian", "mafia", "don", "sheriff"];
 const ROLE_ICON: Record<Role, string> = { civilian: "●", mafia: "▲", don: "♛", sheriff: "★" };
 const ROLE_CLASS: Record<Role, string> = {
   civilian: "text-red-400",
-  sheriff: "text-yellow-300",
+  sheriff: "text-gold-300",
   mafia: "text-neutral-100",
   don: "text-neutral-100",
 };
@@ -345,7 +345,7 @@ export function MatchApp(p: MatchAppProps) {
         )}
       </div>
 
-      {notice && <p role="status" className="mt-3 rounded bg-amber-500/10 px-3 py-2 text-sm text-amber-300">{notice}</p>}
+      {notice && <p role="status" className="mt-3 rounded bg-gold-500/10 px-3 py-2 text-sm text-gold-300">{notice}</p>}
 
       {/* Подсказки по фазе */}
       <p className="mt-3 text-sm text-neutral-400">
@@ -491,7 +491,7 @@ export function MatchApp(p: MatchAppProps) {
                 )}
                 {leaders.length > 1 && (
                   <>
-                    <p className="w-full text-sm text-amber-300">{t("tie", { seats: leaders.join(", ") })}</p>
+                    <p className="w-full text-sm text-gold-300">{t("tie", { seats: leaders.join(", ") })}</p>
                     <button className={btnSoft} onClick={() => commitVote([], leaders)}>{t("revote")}</button>
                     <button className={btnMain} onClick={() => commitVote(leaders)}>{t("outAll", { seats: leaders.join(", ") })}</button>
                   </>

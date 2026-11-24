@@ -38,7 +38,7 @@ export async function AccountBlog({ locale, notice }: { locale: Locale; notice?:
                 )}
                 {p.review_note && <span className="block text-neutral-400">{p.review_note}</span>}
               </span>
-              <span className={p.status === "approved" ? "text-green-400" : p.status === "rejected" ? "text-red-300" : "text-amber-300"}>
+              <span className={p.status === "approved" ? "text-green-400" : p.status === "rejected" ? "text-red-300" : "text-gold-300"}>
                 {t(`status.${p.status as "pending" | "approved" | "rejected"}`)}
               </span>
             </li>
