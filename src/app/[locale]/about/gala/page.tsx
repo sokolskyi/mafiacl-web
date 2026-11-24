@@ -5,6 +5,7 @@ import { AboutHeader, AboutNav } from "@/components/about/AboutNav";
 import { GALA_NIGHTS, GALA_NOMINATIONS } from "@/lib/gala";
 import { getKnownPlayers } from "@/lib/playerNames";
 import { playerLinks } from "@/components/players/PlayerNameLink";
+import { PhotoMosaic } from "@/components/hall/PhotoMosaic";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about/gala">) {
   const { locale } = (await params) as { locale: Locale };
@@ -42,12 +43,18 @@ export default async function Page({ params }: PageProps<"/[locale]/about/gala">
             Gala Night <span className="text-amber-300">{g.year}</span>
           </h2>
           <p className="mt-3 text-neutral-300">{date.format(new Date(`${g.date}T12:00:00Z`))}</p>
-          <h3 className="mt-6 text-sm font-semibold uppercase tracking-widest text-neutral-400">{t("nominationsTitle")}</h3>
+          {g.photos && g.photos.length > 0 && (
+            <div className="mt-6">
+              <PhotoMosaic photos={g.photos} alt={`Gala Night ${g.year}`} caption={`Gala Night ${g.year} · ${date.format(new Date(`${g.date}T12:00:00Z`))}`} />
+            </div>
+          )}
+          <h3 className="mt-8 text-sm font-semibold uppercase tracking-widest text-neutral-400">{t("nominationsTitle")}</h3>
           <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {GALA_NOMINATIONS.filter((n) => g.winners[n]).map((n) => (
-              <li key={n} className="rounded-lg border border-white/15 bg-neutral-950/60 p-4">
-                <p className="text-sm text-neutral-400">{t(`nominations.${n}`)}</p>
-                <p className="mt-1 text-xl font-bold">🏆 {playerLinks(g.winners[n] ?? "", known)}</p>
+              <li key={n} className="gala-nom">
+                <p className="text-xs font-semibold uppercase tracking-widest text-amber-200/70">{t(`nominations.${n}`)}</p>
+                <p className="gala-winner">{playerLinks(g.winners[n] ?? "", known)}</p>
+                <span className="gala-trophy" aria-hidden="true">🏆</span>
               </li>
             ))}
           </ul>

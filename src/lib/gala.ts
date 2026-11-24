@@ -19,6 +19,8 @@ export type GalaNight = {
   winners: Partial<Record<GalaNomination, string>>;
   albumUrl?: string;
   postUrl?: string;
+  /** Фото вечера в public/gala/ — первое идёт обложкой мозаики. */
+  photos?: string[];
 };
 
 export const GALA_NIGHTS: GalaNight[] = [
@@ -56,5 +58,6 @@ export const GALA_NIGHTS: GalaNight[] = [
     },
     albumUrl: "https://www.facebook.com/media/set/?set=a.946292330926417&type=3",
     postUrl: "https://t.me/mafia_clp/784",
+    photos: Array.from({ length: 10 }, (_, i) => `/gala/2024-${String(i + 1).padStart(2, "0")}.jpg`),
   },
 ];
