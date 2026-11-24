@@ -45,7 +45,9 @@ export async function joinGame(formData: FormData) {
 export async function leaveGame(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
   const gameId = gameIdFrom(formData);
-  const back = getPathname({ href: "/play", locale });
+  // Отмена из кабинета возвращает в кабинет, из расписания — к карточке игры.
+  const fromAccount = formData.get("from") === "account";
+  const back = getPathname({ href: fromAccount ? "/account" : "/play", locale });
   if (!gameId) redirect(back);
 
   const supabase = await createClient();
@@ -64,5 +66,5 @@ export async function leaveGame(formData: FormData) {
     redirect(`${back}?signup=error`);
   }
   updateTag(GAMES_TAG);
-  redirect(`${back}#game-${gameId}`);
+  redirect(fromAccount ? `${back}#my-games-title` : `${back}#game-${gameId}`);
 }

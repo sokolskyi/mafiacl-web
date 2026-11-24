@@ -284,7 +284,18 @@
       }
     },
     "tooYoung": "Účet si může založit osoba starší 15 let.",
-    "consent": "Přihlášením souhlasíte s <terms>podmínkami užívání</terms>. Jak zpracováváme vaše údaje, popisují <privacy>zásady ochrany osobních údajů</privacy>."
+    "consent": "Přihlášením souhlasíte s <terms>podmínkami užívání</terms>. Jak zpracováváme vaše údaje, popisují <privacy>zásady ochrany osobních údajů</privacy>.",
+    "groupsNav": "Části účtu",
+    "group": {
+      "mine": "Moje",
+      "profile": "Profil",
+      "settings": "Účet"
+    },
+    "myGames": "Moje hry",
+    "myGamesEmpty": "Zatím nejste přihlášeni na žádnou hru.",
+    "myGamesSchedule": "Rozpis her",
+    "myGamesCancel": "Zrušit přihlášku",
+    "myOrders": "Moje objednávky"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -807,7 +818,6 @@
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",
     "metaDescription": "Statistiky hráče {nick} v klubu MafiaCL: {games} her, {wins} výher, body a role.",
-    "since": "Na webu od {date}",
     "staff": {
       "owner": "Vedení klubu",
       "admin": "Admin",
@@ -885,11 +895,11 @@
     "awardsAll": "Všechna umístění na stupních vítězů ({n})",
     "miniTitle": "Mini-turnaj {n}",
     "archiveFK": "PZ",
-    "archiveFKFull": "Zabit jako první, podíl her",
+    "archiveFKFull": "První zabitý: podíl her, kdy byl hráč zabit jako první",
     "archiveExtra": "Bonus/hra",
     "miniTitleSeason": "Mini-turnaj {n} · {season}. sezóna",
     "aliases": "Hrál také jako: {names}",
-    "archiveOnly": "Hráč z archivu klubu, na webu zatím není registrován",
+    "archiveOnly": "na webu zatím není registrován",
     "tournament": "Turnaj",
     "finalist": "finále",
     "stars": "{n} ★ — úroveň turnaje",
@@ -899,7 +909,13 @@
     "tGames": "{n, plural, one {# hra} few {# hry} other {# her}}",
     "tWins": "výhry {pct}",
     "tFinals": "{n, plural, one {# finále} other {# finále}}",
-    "tPodiums": "medailová místa: {n}"
+    "tPodiums": "medailová místa: {n}",
+    "inClubSince": "V klubu od {year}",
+    "archiveExtraFull": "Průměrný bonusový bod za hru",
+    "archiveLegend": "PZ — první zabitý: podíl her, kdy byl hráč zabit jako první. Bonus/hra — průměrné bonusové body za hru.",
+    "medalsLabel": "Umístění na stupních:",
+    "medalsHint": "Sezóny, turnaje a miniturnaje klubu",
+    "ratingProfiles": "Profily v žebříčcích:"
   },
   "rating": {
     "filters": "Filtry žebříčku",

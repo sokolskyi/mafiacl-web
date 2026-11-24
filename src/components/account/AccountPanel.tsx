@@ -19,6 +19,8 @@ import { AccountBlog } from "./AccountBlog";
 import { parseProfileLinks } from "@/lib/profileLinks";
 import { getMembershipEnding } from "@/lib/membershipReminder";
 import { AccountFeedback } from "./AccountFeedback";
+import { MyGames } from "./MyGames";
+import { MyOrders } from "./MyOrders";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError, post }: { locale: Locale; authError: boolean; post?: string }) {
@@ -167,82 +169,102 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           <a href="#birthday" className="font-semibold underline">{t("birthdayMissingLink")}</a>
         </p>
       )}
-      {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} />}
-      {(staffRoles ?? 0) > 0 && (
-        <p className="mt-6">
-          <Link href="/admin" className="font-semibold text-red-400 hover:text-red-300">
-            {t("admin")}
-          </Link>
-        </p>
-      )}
-      {profile?.nickname && (
-        <p className="mt-4">
-          <Link href={{ pathname: "/players/[nick]", params: { nick: profile.nickname } }} className="font-semibold text-red-400 hover:text-red-300">
-            {t("myPage")}
-          </Link>
-        </p>
-      )}
-      {profile?.nickname && (
-        <div className="mt-3">
-          <PlayerShare locale={locale} nickname={profile.nickname} />
-        </div>
-      )}
-      <AvatarField
-        initial={profile?.avatar_url ?? null}
-        labels={{ title: t("photo"), hint: t("photoHint"), upload: t("photoUpload"), change: t("photoChange"), remove: t("photoRemove"), uploading: t("photoUploading"), failed: t("photoFailed"), saved: t("photoSaved"), cropHint: t("photoCropHint"), zoom: t("photoZoom"), save: t("photoSave"), cancel: t("photoCancel") }}
-      />
-      <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
-      {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
-      <AccountFeedback locale={locale} userId={userId} />
-      <section className="mt-10 max-w-md">
-        <h2 className="text-sm font-semibold">{t("loginMethods")}</h2>
-        <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>
-        {authError && (
-          <p role="alert" className="mt-2 text-sm text-red-400">
-            {t("linkError")}
+      <nav aria-label={t("groupsNav")} className="mt-8 flex flex-wrap gap-2">
+        {(["mine", "profile", "settings"] as const).map((id) => (
+          <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-sm font-semibold hover:border-white/50">
+            {t(`group.${id}`)}
+          </a>
+        ))}
+      </nav>
+
+      <section id="mine" aria-labelledby="mine-title" className="mt-10 scroll-mt-24 border-t border-white/10 pt-8">
+        <h2 id="mine-title" className="text-xl font-bold">{t("group.mine")}</h2>
+        <MyGames locale={locale} userId={userId} />
+        {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} />}
+        <MyOrders locale={locale} userId={userId} />
+        {profile?.nickname && (
+          <p className="mt-4">
+            <Link href={{ pathname: "/players/[nick]", params: { nick: profile.nickname } }} className="font-semibold text-red-400 hover:text-red-300">
+              {t("myPage")}
+            </Link>
           </p>
         )}
-        <ul className="mt-3 divide-y divide-white/10 rounded border border-white/10">
-          {methods.map((m) => (
-            <li key={m.provider} className="flex items-center gap-3 px-4 py-3">
-              {m.icon}
-              <span className="flex-1">{m.label}</span>
-              {linked.has(m.provider) ? (
-                <span className="text-sm text-green-400">✓ {t("linked")}</span>
-              ) : (
-                <form action={linkProvider}>
-                  <input type="hidden" name="locale" value={locale} />
-                  <input type="hidden" name="provider" value={m.provider} />
-                  <button type="submit" className="text-sm font-semibold text-red-400 hover:text-red-300">
-                    {t("link")}
-                  </button>
-                </form>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="mt-10 max-w-md">
-        <h2 className="text-sm font-semibold">{t("botTitle")}</h2>
-        <p className="mt-1 text-sm text-neutral-400">{t("botHint")}</p>
-        {telegramOn ? (
-          <p className="mt-3 text-sm text-green-400">✓ {t("botOn")}</p>
-        ) : (
-          <form action={connectTelegram} className="mt-3">
-            <input type="hidden" name="locale" value={locale} />
-            <button type="submit" className="flex items-center gap-2 rounded bg-[#229ED9] px-4 py-2 font-semibold hover:bg-[#1f91c7]">
-              <TelegramIcon />
-              {t("botConnect")}
-            </button>
-          </form>
+        {profile?.nickname && (
+          <div className="mt-3">
+            <PlayerShare locale={locale} nickname={profile.nickname} />
+          </div>
         )}
+        {(staffRoles ?? 0) > 0 && (
+          <p className="mt-6">
+            <Link href="/admin" className="font-semibold text-red-400 hover:text-red-300">
+              {t("admin")}
+            </Link>
+          </p>
+        )}
+        {profile?.verification === "approved" && <AccountBlog locale={locale} notice={post} />}
+        <AccountFeedback locale={locale} userId={userId} />
       </section>
-      <form action={signOut} className="mt-10">
-        <input type="hidden" name="locale" value={locale} />
-        <button type="submit" className="text-sm text-neutral-400 underline hover:text-white">
-          {t("signOut")}
-        </button>
-      </form>
+
+      <section id="profile" aria-labelledby="profile-title" className="mt-12 scroll-mt-24 border-t border-white/10 pt-8">
+        <h2 id="profile-title" className="text-xl font-bold">{t("group.profile")}</h2>
+        <AvatarField
+          initial={profile?.avatar_url ?? null}
+          labels={{ title: t("photo"), hint: t("photoHint"), upload: t("photoUpload"), change: t("photoChange"), remove: t("photoRemove"), uploading: t("photoUploading"), failed: t("photoFailed"), saved: t("photoSaved"), cropHint: t("photoCropHint"), zoom: t("photoZoom"), save: t("photoSave"), cancel: t("photoCancel") }}
+        />
+        <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
+      </section>
+      <section id="settings" aria-labelledby="settings-title" className="mt-12 scroll-mt-24 border-t border-white/10 pt-8">
+        <h2 id="settings-title" className="text-xl font-bold">{t("group.settings")}</h2>
+        <section className="mt-6 max-w-md">
+          <h3 className="text-lg font-bold">{t("loginMethods")}</h3>
+          <p className="mt-1 text-sm text-neutral-400">{t("loginMethodsHint")}</p>
+          {authError && (
+            <p role="alert" className="mt-2 text-sm text-red-400">
+              {t("linkError")}
+            </p>
+          )}
+          <ul className="mt-3 divide-y divide-white/10 rounded border border-white/10">
+            {methods.map((m) => (
+              <li key={m.provider} className="flex items-center gap-3 px-4 py-3">
+                {m.icon}
+                <span className="flex-1">{m.label}</span>
+                {linked.has(m.provider) ? (
+                  <span className="text-sm text-green-400">✓ {t("linked")}</span>
+                ) : (
+                  <form action={linkProvider}>
+                    <input type="hidden" name="locale" value={locale} />
+                    <input type="hidden" name="provider" value={m.provider} />
+                    <button type="submit" className="text-sm font-semibold text-red-400 hover:text-red-300">
+                      {t("link")}
+                    </button>
+                  </form>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className="mt-10 max-w-md">
+          <h3 className="text-lg font-bold">{t("botTitle")}</h3>
+          <p className="mt-1 text-sm text-neutral-400">{t("botHint")}</p>
+          {telegramOn ? (
+            <p className="mt-3 text-sm text-green-400">✓ {t("botOn")}</p>
+          ) : (
+            <form action={connectTelegram} className="mt-3">
+              <input type="hidden" name="locale" value={locale} />
+              <button type="submit" className="flex items-center gap-2 rounded bg-[#229ED9] px-4 py-2 font-semibold hover:bg-[#1f91c7]">
+                <TelegramIcon />
+                {t("botConnect")}
+              </button>
+            </form>
+          )}
+        </section>
+        <form action={signOut} className="mt-10">
+          <input type="hidden" name="locale" value={locale} />
+          <button type="submit" className="text-sm text-neutral-400 underline hover:text-white">
+            {t("signOut")}
+          </button>
+        </form>
+      </section>
     </section>
   );
 }

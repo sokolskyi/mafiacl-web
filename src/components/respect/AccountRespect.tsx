@@ -39,7 +39,7 @@ export async function AccountRespect({ locale, userId }: { locale: Locale; userI
   const restN = grouped.length - items.length;
   return (
     <section aria-labelledby="respect-title" className="mt-8 max-w-md rounded-lg border border-gold-500/30 bg-gold-500/5 p-5">
-      <h2 id="respect-title" className="text-sm font-semibold">Respect</h2>
+      <h3 id="respect-title" className="text-sm font-semibold">Respect</h3>
       <RespectBalance from={unseen ? balance - unseen.gained : balance} to={balance} />
       {unseen && (
         <RespectCelebration

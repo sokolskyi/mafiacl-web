@@ -56,7 +56,7 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
           </div>
           <Link
             href="/account"
-            className="inline-flex min-h-11 items-center rounded-full bg-white px-5 text-sm font-bold text-black hover:bg-neutral-200"
+            className="hidden min-h-11 items-center rounded-full bg-white px-5 text-sm font-bold text-black hover:bg-neutral-200 lg:inline-flex"
           >
             {t("account")}
           </Link>

@@ -16,7 +16,7 @@ export async function AccountFeedback({ locale, userId }: { locale: Locale; user
   const fmt = (d: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(d));
   return (
     <section id="feedback" className="mt-10 max-w-xl" aria-labelledby="feedback-title">
-      <h2 id="feedback-title" className="text-sm font-semibold">{t("title")}</h2>
+      <h3 id="feedback-title" className="text-lg font-bold">{t("title")}</h3>
       <p className="mt-1 text-sm text-neutral-400">{t("hint")}</p>
       <FeedbackForm
         labels={{

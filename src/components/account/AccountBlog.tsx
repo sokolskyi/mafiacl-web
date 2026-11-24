@@ -22,7 +22,7 @@ export async function AccountBlog({ locale, notice }: { locale: Locale; notice?:
   const errNotice = notice && !okNotice && ["invalid", "unverified", "tooMany", "error"].includes(notice) ? notice : null;
   return (
     <section id="blog" aria-labelledby="blog-title" className="mt-10 max-w-2xl">
-      <h2 id="blog-title" className="text-sm font-semibold">{t("title")}</h2>
+      <h3 id="blog-title" className="text-lg font-bold">{t("title")}</h3>
       <p className="mt-1 text-sm text-neutral-400">{t("hint")}</p>
       {okNotice && <p role="status" className="mt-3 text-sm text-green-400">{t("sent")}</p>}
       {errNotice && <p role="alert" className="mt-3 text-sm text-red-400">{t(`errors.${errNotice as "invalid" | "unverified" | "tooMany" | "error"}`)}</p>}

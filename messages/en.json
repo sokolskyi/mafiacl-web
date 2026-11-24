@@ -284,7 +284,18 @@
       }
     },
     "tooYoung": "You must be at least 15 to create an account.",
-    "consent": "By signing in you agree to the <terms>Terms of Use</terms>. How we process your data is described in the <privacy>Privacy Policy</privacy>."
+    "consent": "By signing in you agree to the <terms>Terms of Use</terms>. How we process your data is described in the <privacy>Privacy Policy</privacy>.",
+    "groupsNav": "Account sections",
+    "group": {
+      "mine": "Mine",
+      "profile": "Profile",
+      "settings": "Account"
+    },
+    "myGames": "My games",
+    "myGamesEmpty": "You haven't signed up for any games yet.",
+    "myGamesSchedule": "Game schedule",
+    "myGamesCancel": "Cancel sign-up",
+    "myOrders": "My orders"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -807,7 +818,6 @@
   "player": {
     "metaTitle": "{nick} — mafia club player",
     "metaDescription": "{nick}'s stats at MafiaCL: {games} games, {wins} wins, points and roles.",
-    "since": "On the site since {date}",
     "staff": {
       "owner": "Club management",
       "admin": "Admin",
@@ -885,11 +895,11 @@
     "awardsAll": "All podium places ({n})",
     "miniTitle": "Mini-tournament {n}",
     "archiveFK": "KF",
-    "archiveFKFull": "Killed first, share of games",
+    "archiveFKFull": "Killed first: share of games where the player was killed first",
     "archiveExtra": "Extra/game",
     "miniTitleSeason": "Mini-tournament {n} · season {season}",
     "aliases": "Also played as: {names}",
-    "archiveOnly": "Player from the club archive, not registered on the site yet",
+    "archiveOnly": "not registered on the site yet",
     "tournament": "Tournament",
     "finalist": "final",
     "stars": "{n} ★ — tournament level",
@@ -899,7 +909,13 @@
     "tGames": "{n, plural, one {# game} other {# games}}",
     "tWins": "{pct} won",
     "tFinals": "{n, plural, one {# final} other {# finals}}",
-    "tPodiums": "podiums: {n}"
+    "tPodiums": "podiums: {n}",
+    "inClubSince": "In the club since {year}",
+    "archiveExtraFull": "Average extra points per game",
+    "archiveLegend": "KF — killed first: share of games where the player was killed first. Extra/game — average extra points per game.",
+    "medalsLabel": "Podium finishes:",
+    "medalsHint": "Club seasons, tournaments and mini-tournaments",
+    "ratingProfiles": "Rating profiles:"
   },
   "rating": {
     "filters": "Rating filters",

@@ -47,6 +47,14 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const prizeTotal = prizes.reduce((a, x) => a + x.amount, 0);
   const czk = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "CZK", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n);
   const awards = awardsOf(await getHallArchive(MAIN_CLUB_SLUG), [player.nickname, ...player.aliases]);
+  // «В клубе с» — самый ранний год, когда игрок появляется в данных клуба:
+  // сезоны рейтинга, призовые места зала славы, игры на сайте. Внешние достижения не считаем.
+  const years = [
+    ...player.archive.map((a) => a.year),
+    ...awards.list.filter((a) => a.category !== "achievement").map((a) => a.year),
+    ...(player.since ? [Number(player.since.slice(0, 4))] : []),
+  ].filter((y) => Number.isFinite(y) && y > 2000);
+  const firstYear = years.length > 0 ? Math.min(...years) : null;
   const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG, await getAliases()), player.nickname);
   const top10 = player.archive.filter((a) => a.league === "premier" && !a.isCurrent && a.rank <= 10).length;
   const share = (x: number) => `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(x * 100)} %`;
@@ -56,7 +64,6 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const tPodiums = tournaments.filter((x) => x.place !== null && x.place <= 3).length;
   const tFinals = tournaments.filter((x) => x.finalist).length;
   const day = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
-  const since = player.since ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(player.since)) : null;
 
   return (
     <article>
@@ -70,7 +77,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           </div>
         )}
         <div>
-          <h1 className="text-4xl font-black tracking-tight">
+          <h1 className="text-4xl font-black tracking-tight normal-case">
             {player.nickname}
             {badge && <span className="ml-2 text-3xl" aria-label={t("badges")}>{badge}</span>}
           </h1>
@@ -78,7 +85,9 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           <p className="mt-1 text-sm text-neutral-400">
             {player.memberNo && <span>ID {formatMemberNo(player.memberNo)} · </span>}
             {player.city && <span>📍 {cityLabel(player.city, locale)} · </span>}
-            {since ? t("since", { date: since }) : t("archiveOnly")}
+            {firstYear && t("inClubSince", { year: firstYear })}
+            {firstYear && !player.since && " · "}
+            {!player.since && t("archiveOnly")}
           </p>
           {titles.length > 0 && (
             <ul className="mt-2 flex flex-wrap gap-2">
@@ -91,6 +100,11 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
           )}
           {(awards.medals.some((n) => n > 0) || top10 > 0) && (
             <p className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+              {awards.medals.some((n) => n > 0) && (
+                <a href="#awards" title={t("medalsHint")} className="text-neutral-400 underline decoration-white/30 underline-offset-2 hover:text-white">
+                  {t("medalsLabel")}
+                </a>
+              )}
               {awards.medals.map((n, i) =>
                 n > 0 ? (
                   <span key={i} className="rounded bg-white/10 px-2 py-0.5 font-semibold" title={t("medalTitle", { place: i + 1 })}>
@@ -123,6 +137,9 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         </div>
         <div className="flex flex-wrap gap-2 sm:ml-auto sm:self-start">
           <PlayerShare locale={locale} nickname={player.nickname} games={s.games} />
+          {PROFILE_SERVICES.some((svc) => player.links[svc.key]) && (
+            <span className="inline-flex min-h-11 items-center text-sm text-neutral-400">{t("ratingProfiles")}</span>
+          )}
           {PROFILE_SERVICES.filter((svc) => player.links[svc.key]).map((svc) => (
             <a
               key={svc.key}
@@ -311,7 +328,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
                   <th className="font-normal">{t("games")}</th>
                   <th className="font-normal">{t("winRate")}</th>
                   <th className="font-normal"><abbr title={t("archiveFKFull")} className="no-underline">{t("archiveFK")}</abbr></th>
-                  <th className="font-normal">{t("archiveExtra")}</th>
+                  <th className="font-normal"><abbr title={t("archiveExtraFull")} className="no-underline">{t("archiveExtra")}</abbr></th>
                   <th className="text-right font-normal">{t("archiveRating")}</th>
                 </tr>
               </thead>
@@ -344,6 +361,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
               </tbody>
             </table>
           </div>
+          <p className="mt-2 text-xs text-neutral-400">{t("archiveLegend")}</p>
         </section>
       )}
 
