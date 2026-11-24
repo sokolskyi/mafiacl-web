@@ -430,7 +430,8 @@
       "promoTitle": "Название",
       "promoBody": "Условия",
       "promoUntil": "Действует до (необязательно)",
-      "promoActive": "Показывать на сайте"
+      "promoActive": "Показывать на сайте",
+      "partnerInstagram": "Instagram"
     },
     "status": {
       "draft": "Черновик",

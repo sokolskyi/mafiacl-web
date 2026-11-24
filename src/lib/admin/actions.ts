@@ -534,6 +534,10 @@ export async function savePartner(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim().slice(0, 80);
   const urlRaw = String(formData.get("url") ?? "").trim();
   const url = urlRaw ? safeHttps(urlRaw.startsWith("http") ? urlRaw : `https://${urlRaw}`) : null;
+  const igRaw = String(formData.get("instagram") ?? "").trim();
+  const igUrl = igRaw ? safeHttps(igRaw.startsWith("http") ? igRaw : `https://${igRaw}`) : null;
+  // Ссылку на Instagram храним без меток отслеживания (?igsh=…, ?lqvp=…).
+  const instagram = igUrl && /^https:\/\/(www\.)?instagram\.com\//.test(igUrl) ? igUrl.split(/[?#]/)[0] : null;
   const logoRaw = String(formData.get("images") ?? "").split("\n").map((s) => s.trim()).filter(Boolean)[0] ?? "";
   const logo = logoRaw ? (LOCAL_IMG.test(logoRaw) ? logoRaw : safeHttps(logoRaw)) : null;
   const description: Record<string, string> = {};
@@ -541,10 +545,10 @@ export async function savePartner(formData: FormData) {
     const v = String(formData.get(`description_${l}`) ?? "").trim().slice(0, 400);
     if (v) description[l] = v;
   }
-  if (!clubId || !name || (urlRaw && !url) || (logoRaw && !logo)) redirect(`${back}?error=invalid#partners`);
+  if (!clubId || !name || (urlRaw && !url) || (igRaw && !instagram) || (logoRaw && !logo)) redirect(`${back}?error=invalid#partners`);
 
   const supabase = await createClient();
-  const row = { name, url, logo_url: logo, description: Object.keys(description).length ? description : null };
+  const row = { name, url, instagram_url: instagram, logo_url: logo, description: Object.keys(description).length ? description : null };
   const { error } = partnerId
     ? await supabase.from("partners").update(row).eq("id", partnerId)
     : await supabase.from("partners").insert({ ...row, club_id: clubId });

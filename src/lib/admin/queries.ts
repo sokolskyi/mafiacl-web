@@ -235,7 +235,7 @@ export async function getClubPartners(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("partners")
-    .select("id, name, url, logo_url, description, active, sort")
+    .select("id, name, url, instagram_url, logo_url, description, active, sort")
     .eq("club_id", clubId)
     .order("sort")
     .order("id");
@@ -243,6 +243,7 @@ export async function getClubPartners(clubId: number) {
     id: p.id,
     name: p.name,
     url: p.url,
+    instagramUrl: p.instagram_url,
     logoUrl: p.logo_url,
     description: (p.description ?? {}) as Record<string, string>,
   }));

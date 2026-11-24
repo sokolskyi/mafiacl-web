@@ -77,7 +77,7 @@
 | О клубе | `about/*` (history, code, team, promotions, bans, gala) | `lib/promotions.ts`, `lib/bans.ts`, `lib/gala.ts` (номинации и фото Gala Night, фото в `public/gala/`) | `about/AboutNav.tsx`; фотомозаика `hall/PhotoMosaic.tsx` |
 | Ведущие | `hosts/` | `lib/hosts.ts` | `HostCards.tsx` |
 | Корпоративы / детская / франшиза | `corporate/`, `kids/`, `franchise/` | `lib/corporate-actions.ts`, `lib/corporatePhotos.ts`, `lib/testimonials.ts` | `components/corporate/*`, `franchise/FranchiseForm.tsx` |
-| Партнёры | `partners/` | `lib/partners.ts` (таблица `partners`, логотипы в `public/partners`, не SVG) | — |
+| Партнёры | `partners/` | `lib/partners.ts` (таблица `partners`: сайт `url` + `instagram_url`; логотипы в `public/partners`, не SVG — SVG переводить в WebP через sharp) | — |
 | Документы | `documents/*` | тексты в `src/content/legal/{privacy,terms,shop}/{lang}.ts`, реквизиты `operator.ts` | `documents/LegalDoc.tsx` |
 | FAQ, контакты, клубы по городам, галерея | `faq/`, `contacts/`, `clubs/[city]`, `gallery/` | `lib/cities.ts`, `lib/social.ts` | — |
 | Кабинет | `account/` | `lib/auth/*`, `lib/nickname-actions.ts`, `lib/avatar-actions.ts`, `lib/birthday-actions.ts`, `lib/members*.ts`, `lib/memberships.ts`, `lib/feedback-actions.ts` | `components/account/*` (вход Google/Facebook/почта, Turnstile); группы «Моё / Профиль / Аккаунт» в `AccountPanel.tsx`, `MyGames.tsx` (записи + отмена через `leaveGame` с `from=account`), `MyOrders.tsx` |

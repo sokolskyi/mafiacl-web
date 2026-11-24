@@ -430,7 +430,8 @@
       "promoTitle": "Назва",
       "promoBody": "Умови",
       "promoUntil": "Діє до (необов’язково)",
-      "promoActive": "Показувати на сайті"
+      "promoActive": "Показувати на сайті",
+      "partnerInstagram": "Instagram"
     },
     "status": {
       "draft": "Чернетка",

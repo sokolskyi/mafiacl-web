@@ -755,6 +755,9 @@ export async function AdminHome({
                 <label className="text-sm">{t("fields.partnerUrl")}
                   <input name="url" placeholder="https://…" defaultValue={p?.url ?? ""} className={`mt-1 w-full ${input}`} />
                 </label>
+                <label className="text-sm">{t("fields.partnerInstagram")}
+                  <input name="instagram" placeholder="https://www.instagram.com/…" defaultValue={p?.instagramUrl ?? ""} className={`mt-1 w-full ${input}`} />
+                </label>
                 <PhotoField clubId={club.id} initial={p?.logoUrl ? [p.logoUrl] : []} labels={photoLabels} />
                 {(["cs", "ru", "uk", "en"] as const).map((l) => (
                   <label key={l} className="text-sm">{t("fields.partnerDescription")} · {l.toUpperCase()}

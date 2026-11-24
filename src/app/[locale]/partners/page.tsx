@@ -44,7 +44,17 @@ export default async function Page({ params }: PageProps<"/[locale]/partners">) 
                   )}
                 </h2>
                 {p.description && <p className="mt-2 text-sm text-neutral-300">{loc(p.description, locale)}</p>}
-                {p.url && <p className="mt-auto pt-4 text-sm font-semibold text-red-300">{new URL(p.url).hostname.replace(/^www\./, "")} ↗</p>}
+                {(p.url || p.instagramUrl) && (
+                  <p className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-4 text-sm font-semibold text-red-300">
+                    {p.url && <span>{new URL(p.url).hostname.replace(/^www\./, "")} ↗</span>}
+                    {p.instagramUrl && (
+                      // Вторая ссылка поверх ссылки-карточки.
+                      <a href={p.instagramUrl} target="_blank" rel="noopener" aria-label={`${p.name} — Instagram`} className="relative z-10 inline-flex min-h-6 items-center hover:underline">
+                        Instagram ↗
+                      </a>
+                    )}
+                  </p>
+                )}
               </div>
             </li>
           ))}
