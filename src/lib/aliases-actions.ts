@@ -53,3 +53,24 @@ export async function removeAlias(formData: FormData) {
   if (error) console.error("removeAlias failed", { code: error.code, message: error.message });
   done(back, "removed");
 }
+
+/** «В клубе с (год)» для любого игрока. Пустой год — убрать ручное значение. Только owner/admin клуба. */
+export async function saveClubSince(formData: FormData) {
+  const back = await guard(formData);
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const raw = String(formData.get("year") ?? "").trim();
+  const year = Number(raw);
+  if (!nickname || nickname.length > 64 || (raw && (!Number.isInteger(year) || year < 2000 || year > 2100))) {
+    redirect(`${back}?alias=invalid#club-since`);
+  }
+  const db = createAdminClient();
+  // Ник без учёта регистра: сначала убираем прежнее значение, потом записываем новое.
+  const del = await db.from("player_club_since").delete().ilike("nickname", nickname.replace(/[\\%_]/g, (c) => `\\${c}`));
+  const error = del.error ?? (raw ? (await db.from("player_club_since").insert({ nickname, year })).error : null);
+  if (error) {
+    console.error("saveClubSince failed", { code: error.code, message: error.message });
+    redirect(`${back}?alias=invalid#club-since`);
+  }
+  updateTag(ALIASES_TAG);
+  redirect(`${back}?alias=${raw ? "saved" : "removed"}#club-since`);
+}

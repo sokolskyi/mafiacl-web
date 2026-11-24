@@ -634,7 +634,12 @@
       "saved": "Propojeno.",
       "removed": "Propojení zrušeno.",
       "invalid": "Zkontrolujte přezdívky: obě jsou povinné a nesmí být stejné.",
-      "remove": "Zrušit {alias} → {canonical}"
+      "remove": "Zrušit {alias} → {canonical}",
+      "sinceTitle": "V klubu od (rok)",
+      "sinceHint": "Rok, od kterého je hráč v klubu, — zobrazuje se v profilu. Bez záznamu se rok počítá z žebříčků a síně slávy. Pro odstranění ruční hodnoty nechte rok prázdný.",
+      "sinceNickname": "Přezdívka",
+      "sinceYear": "Rok",
+      "sinceSave": "Uložit"
     },
     "respectLink": "Respect: připsání a mince",
     "birthdays": {

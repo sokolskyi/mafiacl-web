@@ -27,3 +27,14 @@ export function namesOf(aliases: { alias: string; canonical: string }[], nicknam
   const n = nickname.toLowerCase();
   return [nickname, ...aliases.filter((a) => a.canonical.toLowerCase() === n).map((a) => a.alias)];
 }
+
+/** «В клубе с (год)», заданный администрацией вручную: ник (в нижнем регистре) → год. */
+export async function getClubSince(): Promise<Record<string, number>> {
+  "use cache";
+  cacheTag(ALIASES_TAG);
+  cacheLife("days");
+  if (!isSupabaseConfigured) return {};
+  const { data, error } = await createPublicClient().from("player_club_since").select("nickname, year").limit(5000);
+  if (error) console.error("getClubSince failed", { code: error.code, message: error.message });
+  return Object.fromEntries((data ?? []).map((r) => [r.nickname.toLowerCase(), r.year]));
+}

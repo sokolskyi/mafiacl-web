@@ -634,7 +634,12 @@
       "saved": "Linked.",
       "removed": "Link removed.",
       "invalid": "Check the nicknames: both are required and must differ.",
-      "remove": "Remove {alias} → {canonical}"
+      "remove": "Remove {alias} → {canonical}",
+      "sinceTitle": "In the club since (year)",
+      "sinceHint": "The year the player joined the club, shown on the profile. Without an entry the year is worked out from ratings and the hall of fame. Leave the year empty to remove a manual value.",
+      "sinceNickname": "Nickname",
+      "sinceYear": "Year",
+      "sinceSave": "Save"
     },
     "respectLink": "Respect: adjustments and coins",
     "birthdays": {

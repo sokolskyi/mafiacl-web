@@ -61,10 +61,10 @@
 | Электронный бланк ведущего | `admin/matches/[id]/` | `lib/match/{engine,actions,queries,types}.ts` (журнал действий → состояние) | `components/match/MatchApp.tsx` |
 | Плашка для трансляции | `app/stream/[club]/[table]/` + `api/stream/...` | `lib/match/queries.ts` | `Overlay.tsx` |
 | Рейтинги сезона | `ratings/` | `lib/rating.ts` (RPC `season_rating*`, `evening_*`) | `components/rating/*` |
-| Архив рейтингов Прага/Харьков | `ratings/prague/[slug]`, `ratings/kharkiv/[slug]` | `lib/ratingArchive.ts` | `ArchiveSeason*.tsx` |
+| Архив рейтингов Прага/Харьков | `ratings/prague/[slug]`, `ratings/kharkiv/[slug]` | `lib/ratingArchive.ts`; Харьков VI–VIII и Студлига IV взяты со снимков старого mafiacl.com в веб-архиве (2016–2019, `source_url`) | `ArchiveSeason*.tsx` |
 | Игроки (каталог) | `players/` | `lib/playersDirectory.ts` (колонки «Турниры», «Серии»: `mafgameKind`) | `PlayersDirectory.tsx` |
 | Профиль игрока | `players/[nick]/` | `lib/players.ts`, `lib/awards.ts`, `lib/badges.ts`, `lib/clubCompare.ts`, `lib/mafgame/queries.ts` | `PlayerProfile.tsx`, `PlayerShare.tsx`; картинка — `api/share/player` |
-| Ники/алиасы | — | `lib/playerNames.ts`, `lib/aliases*.ts` | `admin/AliasesAdmin.tsx` |
+| Ники/алиасы, «В клубе с» | — | `lib/playerNames.ts`, `lib/aliases*.ts` (`getClubSince` — таблица `player_club_since`, ручной год важнее расчётного) | `admin/AliasesAdmin.tsx` (обе формы) |
 | Турниры | `tournaments/`, `tournaments/[slug]` | `lib/tournaments.ts`, `lib/tournament-actions.ts`, `lib/tournamentBrands.ts` | `components/tournaments/*` |
 | Kings | `kings/` | `lib/kings.ts` (ведёт на старое приложение) | — |
 | Зал славы | `hall-of-fame/` | `lib/hallArchive.ts` (таблица `hall_of_fame`, фото в `public/hall/`, после правки — `select private.site_revalidate(array['hall-archive'])`) | `HallArchive.tsx` (карточки сезонов), `hall/HallPhotos.tsx` (фото-«полароиды»), общий просмотр фото `hall/usePhotoLightbox.tsx`; стили `.hall-*` в `globals.css` |
@@ -86,7 +86,7 @@
 
 - RLS на всех таблицах. Чтение публичного — `lib/supabase/public.ts`; от имени пользователя — `server.ts`/`client.ts`; сервисный ключ — `admin.ts` (только сервер).
 - PostgREST отдаёт максимум 1000 строк: для больших выборок — `lib/supabase/selectAll.ts`.
-- Основные таблицы: `profiles`/`profile_private`, `clubs`/`club_staff`/`club_bans`, `cities`/`countries`/`venues`, `games`/`game_schedules`/`game_signups`, `matches`/`match_players`, `seasons`/`season_ratings`/`rating_archive(_rows)`, `tournaments`/`tournament_registrations`, `mafgame_tournaments`/`mafgame_results`, `player_aliases`/`player_titles`/`player_prizes`/`hall_of_fame`, `respect_ledger`/`respect_codes`, `shop_products`/`shop_variants`/`shop_orders`/`shop_order_items`/`payments`, `blog_comments`/`blog_reactions`/`blog_views`, `memberships`, `notifications`, `telegram_link_tokens`, `partners`, `hosts`, `promotions`, `testimonials`, `corporate_requests`, `season_reviews`.
+- Основные таблицы: `profiles`/`profile_private`, `clubs`/`club_staff`/`club_bans`, `cities`/`countries`/`venues`, `games`/`game_schedules`/`game_signups`, `matches`/`match_players`, `seasons`/`season_ratings`/`rating_archive(_rows)`, `tournaments`/`tournament_registrations`, `mafgame_tournaments`/`mafgame_results`, `player_aliases`/`player_club_since`/`player_titles`/`player_prizes`/`hall_of_fame`, `respect_ledger`/`respect_codes`, `shop_products`/`shop_variants`/`shop_orders`/`shop_order_items`/`payments`, `blog_comments`/`blog_reactions`/`blog_views`, `memberships`, `notifications`, `telegram_link_tokens`, `partners`, `hosts`, `promotions`, `testimonials`, `corporate_requests`, `season_reviews`.
 - Настройки: `private.app_settings(name, value)` (например `mafgame_scan`, `mafgame_respect_from`, секрет крона).
 
 ## Автоматика

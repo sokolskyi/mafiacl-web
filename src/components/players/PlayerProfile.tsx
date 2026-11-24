@@ -11,7 +11,7 @@ import { getHallArchive } from "@/lib/hallArchive";
 import { archiveSeasonHref, getPremierTotals, type ArchiveLeague } from "@/lib/ratingArchive";
 import { awardsOf } from "@/lib/awards";
 import { compareWithClub } from "@/lib/clubCompare";
-import { getAliases } from "@/lib/aliases";
+import { getAliases, getClubSince } from "@/lib/aliases";
 import { PROFILE_SERVICES } from "@/lib/profileLinks";
 import { cityLabel } from "@/lib/cities";
 import { getPlayerTournaments } from "@/lib/mafgame/queries";
@@ -54,7 +54,10 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
     ...awards.list.filter((a) => a.category !== "achievement").map((a) => a.year),
     ...(player.since ? [Number(player.since.slice(0, 4))] : []),
   ].filter((y) => Number.isFinite(y) && y > 2000);
-  const firstYear = years.length > 0 ? Math.min(...years) : null;
+  // Год, заданный администрацией вручную (по текущему или старому нику), важнее расчётного.
+  const manualSince = await getClubSince();
+  const manualYear = [player.nickname, ...player.aliases].map((n) => manualSince[n.toLowerCase()]).find(Boolean);
+  const firstYear = manualYear ?? (years.length > 0 ? Math.min(...years) : null);
   const compare = compareWithClub(await getPremierTotals(MAIN_CLUB_SLUG, await getAliases()), player.nickname);
   const top10 = player.archive.filter((a) => a.league === "premier" && !a.isCurrent && a.rank <= 10).length;
   const share = (x: number) => `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(x * 100)} %`;

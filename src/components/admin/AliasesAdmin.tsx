@@ -1,12 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { removeAlias, saveAlias } from "@/lib/aliases-actions";
+import { removeAlias, saveAlias, saveClubSince } from "@/lib/aliases-actions";
 
 /** Старые и другие написания ников: архивы и зал славы засчитываются игроку под текущим ником. */
 export async function AliasesAdmin({ locale, notice }: { locale: Locale; notice?: string }) {
   const t = await getTranslations({ locale, namespace: "admin.aliases" });
   const { data } = await createAdminClient().from("player_aliases").select("alias, canonical").order("canonical").limit(5000);
+  const { data: since } = await createAdminClient().from("player_club_since").select("nickname, year").order("nickname").limit(5000);
   const groups = new Map<string, string[]>();
   for (const r of data ?? []) groups.set(r.canonical, [...(groups.get(r.canonical) ?? []), r.alias]);
   const input = "rounded border border-white/20 bg-neutral-900 px-3 py-2 outline-none focus:border-red-500";
@@ -51,6 +52,32 @@ export async function AliasesAdmin({ locale, notice }: { locale: Locale; notice?
           ))}
         </ul>
       </details>
+
+      <div id="club-since" className="mt-10 scroll-mt-24">
+        <h3 className="text-lg font-bold">{t("sinceTitle")}</h3>
+        <p className="mt-1 max-w-3xl text-sm text-neutral-400">{t("sinceHint")}</p>
+        <form action={saveClubSince} className="mt-4 flex flex-wrap items-end gap-3">
+          <input type="hidden" name="locale" value={locale} />
+          <label className="grid gap-1 text-sm">
+            {t("sinceNickname")}
+            <input name="nickname" required maxLength={64} className={input} />
+          </label>
+          <label className="grid gap-1 text-sm">
+            {t("sinceYear")}
+            <input name="year" type="number" inputMode="numeric" min={2000} max={2100} className={`${input} w-28`} />
+          </label>
+          <button type="submit" className="min-h-11 rounded bg-red-600 px-4 font-semibold hover:bg-red-500">{t("sinceSave")}</button>
+        </form>
+        {since && since.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-2 text-sm">
+            {since.map((r) => (
+              <li key={r.nickname} className="rounded bg-white/10 px-2 py-1">
+                {r.nickname} — {r.year}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </section>
   );
 }
