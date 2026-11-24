@@ -1,3 +1,4 @@
+import { getKnownPlayers } from "@/lib/playerNames";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
@@ -33,7 +34,8 @@ async function Inner({ params }: Pick<Props, "params">) {
   if (!ctx) return <p className="mt-10"><Link href="/account" className="text-red-400 underline">→</Link></p>;
   const match = await getMatch(n);
   if (!match || !ctx.clubs.some((c) => c.id === match.clubId)) notFound();
-  const nicknames = await getNicknames();
+  const [nicknames, known] = await Promise.all([getNicknames(), getKnownPlayers()]);
+  const knownNames = [...new Set(Object.values(known))];
 
   const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host") ?? "";
@@ -57,6 +59,7 @@ async function Inner({ params }: Pick<Props, "params">) {
       initialRated={match.rated}
       initialAdjustments={match.adjustments}
       nicknames={nicknames}
+      knownNames={knownNames}
       overlayUrl={overlayUrl}
       backHref={backHref}
     />

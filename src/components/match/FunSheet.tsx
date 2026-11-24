@@ -21,7 +21,7 @@ function load(): Saved {
 }
 
 /** Fun-игра: электронный бланк, который живёт только в этом браузере. Ничего не уходит на сервер. */
-export function FunSheet({ nicknames, backHref }: { nicknames: { id: string; nickname: string }[]; backHref: string }) {
+export function FunSheet({ nicknames, knownNames, backHref }: { nicknames: { id: string; nickname: string }[]; knownNames: string[]; backHref: string }) {
   const t = useTranslations("funGame");
   const [game, setGame] = useState<{ n: number; data: Saved } | null>(null);
 
@@ -62,6 +62,7 @@ export function FunSheet({ nicknames, backHref }: { nicknames: { id: string; nic
         initialRated={false}
         initialAdjustments={{}}
         nicknames={nicknames}
+        knownNames={knownNames}
         overlayUrl=""
         backHref={backHref}
       />

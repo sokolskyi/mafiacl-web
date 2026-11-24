@@ -1,3 +1,4 @@
+import { getKnownPlayers } from "@/lib/playerNames";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -49,11 +50,12 @@ async function Inner({ params }: Props) {
       </>
     );
   }
-  const nicknames = await getNicknames();
+  const [nicknames, known] = await Promise.all([getNicknames(), getKnownPlayers()]);
+  const knownNames = [...new Set(Object.values(known))];
   return (
     <>
       {intro}
-      <FunSheet nicknames={nicknames} backHref={getPathname({ href: "/play", locale })} />
+      <FunSheet nicknames={nicknames} knownNames={knownNames} backHref={getPathname({ href: "/play", locale })} />
     </>
   );
 }

@@ -20,6 +20,8 @@ import {
 } from "@/lib/match/engine";
 import { finishMatch, reopenMatch, saveMatch, setShowRoles } from "@/lib/match/actions";
 import type { SeatInfo } from "@/lib/match/types";
+import { indexNicks } from "@/lib/match/nickSearch";
+import { NickInput } from "./NickInput";
 
 const ROLE_ORDER: Role[] = ["civilian", "mafia", "don", "sheriff"];
 const ROLE_ICON: Record<Role, string> = { civilian: "●", mafia: "▲", don: "♛", sheriff: "★" };
@@ -49,6 +51,8 @@ export type MatchAppProps = {
   initialRated: boolean;
   initialAdjustments: Record<number, { extra: number; penalty: number }>;
   nicknames: { id: string; nickname: string }[];
+  /** Ники из архивов клуба (без аккаунта) — тоже в подсказках, игрок станет «гостем». */
+  knownNames?: string[];
   overlayUrl: string;
   backHref: string;
   /** Fun-игра: бланк только в этом браузере — без сохранения в базу, рейтинга и плашки для трансляции. */
@@ -60,6 +64,11 @@ export const FUN_STORAGE_KEY = "mcl-fun-sheet";
 
 export function MatchApp(p: MatchAppProps) {
   const t = useTranslations("match");
+  const nickIndex = useMemo(() => {
+    const taken = new Set(p.nicknames.map((n) => n.nickname.toLowerCase()));
+    const guests = (p.knownNames ?? []).filter((n) => !taken.has(n.toLowerCase())).map((nickname) => ({ nickname, id: null }));
+    return indexNicks([...p.nicknames, ...guests]);
+  }, [p.nicknames, p.knownNames]);
   const [log, setLog] = useState<Action[]>(p.initialLog);
   const [seats, setSeats] = useState<SeatInfo[]>(p.initialSeats);
   const [status, setStatus] = useState(p.status);
@@ -355,7 +364,6 @@ export function MatchApp(p: MatchAppProps) {
       </p>
 
       {/* Стол */}
-      {seating && <datalist id="nicks">{p.nicknames.map((n) => <option key={n.id} value={n.nickname} />)}</datalist>}
       <ol className="mt-3 divide-y divide-white/10 rounded border border-white/10">
         {Array.from({ length: 10 }, (_, i) => i + 1).map((seat) => {
           const role = state.roles[seat] ?? "civilian";
@@ -377,15 +385,14 @@ export function MatchApp(p: MatchAppProps) {
                     <span className={`w-5 text-center text-lg ${ROLE_CLASS[role]}`}>{ROLE_ICON[role]}</span>
                     <span className="truncate">{t(`role.${role}`)}</span>
                   </button>
-                  <input
-                    list="nicks"
+                  <NickInput
                     value={seats[seat - 1]?.name ?? ""}
-                    onChange={(e) => setSeatName(seat - 1, e.target.value)}
+                    onChange={(v) => setSeatName(seat - 1, v)}
                     onBlur={saveSeats}
-                    maxLength={80}
+                    index={nickIndex}
+                    label={t("seatName", { seat })}
                     placeholder={t("nickPlaceholder")}
-                    aria-label={t("seatName", { seat })}
-                    className="min-h-11 min-w-0 flex-1 rounded border border-white/15 bg-neutral-900 px-3 outline-none placeholder:text-neutral-600 focus:border-red-500"
+                    accountLabel={t("account")}
                   />
                   <span className="w-14 shrink-0 text-right text-xs text-neutral-500">
                     {seats[seat - 1]?.profileId ? t("account") : seats[seat - 1]?.name ? t("guest") : ""}
