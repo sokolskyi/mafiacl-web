@@ -138,19 +138,21 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         <div className="flex flex-wrap gap-2 sm:ml-auto sm:self-start">
           <PlayerShare locale={locale} nickname={player.nickname} games={s.games} />
           {PROFILE_SERVICES.some((svc) => player.links[svc.key]) && (
-            <span className="inline-flex min-h-11 items-center text-sm text-neutral-400">{t("ratingProfiles")}</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm text-neutral-400">{t("ratingProfiles")}</span>
+              {PROFILE_SERVICES.filter((svc) => player.links[svc.key]).map((svc) => (
+                <a
+                  key={svc.key}
+                  href={player.links[svc.key]}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  className="inline-flex min-h-11 items-center rounded-full border border-white/40 px-4 text-sm font-semibold hover:bg-white/10"
+                >
+                  {svc.label} ↗
+                </a>
+              ))}
+            </div>
           )}
-          {PROFILE_SERVICES.filter((svc) => player.links[svc.key]).map((svc) => (
-            <a
-              key={svc.key}
-              href={player.links[svc.key]}
-              target="_blank"
-              rel="noopener nofollow"
-              className="inline-flex min-h-11 items-center rounded-full border border-white/40 px-4 text-sm font-semibold hover:bg-white/10"
-            >
-              {svc.label} ↗
-            </a>
-          ))}
         </div>
       </header>
 
