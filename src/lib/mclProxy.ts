@@ -22,6 +22,8 @@ const SITE_BAR = `
 .mcl-sitebar .acc:hover{background:#fff5a8}
 .mcl-sitebar a:focus-visible{outline:2px solid #fdffc2;outline-offset:2px;border-radius:4px}
 @media (max-width:560px){.mcl-sitebar .home-crumb{display:none}.mcl-sitebar .in{gap:10px}}
+/* Старая строка «MafiaCL / MCL Europe 2026» со старого сайта — её заменяет полоска выше. */
+.dv-crumb{display:none!important}
 /* Вступительное видео — на весь экран, а не маленьким окошком посередине. */
 #intro video{width:100vw!important;height:100vh!important;height:100dvh!important;object-fit:contain}
 </style>
