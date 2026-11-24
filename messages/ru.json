@@ -994,7 +994,14 @@
     "seasonTitle": "{n} сезон",
     "archiveSource": "Архив собран по публикациям клуба ВКонтакте (vk.com/mafiacl и группы турниров клуба), в Telegram (t.me/mafia_cl, t.me/mafia_clp) и по таблицам ФИИМ (fiim.world) и Mafgame (mafgame.org). Нашли ошибку или пропуск — напишите нам.",
     "seasonStars": "{count, plural, one {# раз чемпион сезона} few {# раза чемпион сезона} many {# раз чемпион сезона} other {# раза чемпион сезона}}",
-    "noFinal": "Финал не проводился"
+    "noFinal": "Финал не проводился",
+    "championShort": "Чемпион",
+    "photoOpen": "Открыть фото",
+    "photoClose": "Закрыть",
+    "photoPrev": "Предыдущее фото",
+    "photoNext": "Следующее фото",
+    "photoCounter": "{n} / {total}",
+    "photosShort": "фото"
   },
   "shop": {
     "soldOut": "Нет в наличии",

@@ -994,7 +994,14 @@
     "seasonTitle": "Season {n}",
     "archiveSource": "The archive is compiled from the club's posts on VKontakte (vk.com/mafiacl and the club tournament groups), Telegram (t.me/mafia_cl, t.me/mafia_clp) and FIIM (fiim.world) and Mafgame (mafgame.org) tables. Spotted a mistake or a gap? Let us know.",
     "seasonStars": "{count, plural, one {# season title} other {# season titles}}",
-    "noFinal": "No final was played"
+    "noFinal": "No final was played",
+    "championShort": "Champion",
+    "photoOpen": "Open photo",
+    "photoClose": "Close",
+    "photoPrev": "Previous photo",
+    "photoNext": "Next photo",
+    "photoCounter": "{n} / {total}",
+    "photosShort": "photos"
   },
   "shop": {
     "soldOut": "Sold out",

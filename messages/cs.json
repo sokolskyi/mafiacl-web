@@ -994,7 +994,14 @@
     "seasonTitle": "{n}. sezóna",
     "archiveSource": "Archiv je sestaven z příspěvků klubu na VKontakte (vk.com/mafiacl a skupiny klubových turnajů), v Telegramu (t.me/mafia_cl, t.me/mafia_clp) a v tabulkách FIIM (fiim.world) a Mafgame (mafgame.org). Našli jste chybu nebo mezeru? Napište nám.",
     "seasonStars": "{count, plural, one {# titul mistra sezóny} few {# tituly mistra sezóny} other {# titulů mistra sezóny}}",
-    "noFinal": "Finále se nekonalo"
+    "noFinal": "Finále se nekonalo",
+    "championShort": "Šampion",
+    "photoOpen": "Otevřít fotku",
+    "photoClose": "Zavřít",
+    "photoPrev": "Předchozí fotka",
+    "photoNext": "Další fotka",
+    "photoCounter": "{n} / {total}",
+    "photosShort": "foto"
   },
   "shop": {
     "soldOut": "Vyprodáno",

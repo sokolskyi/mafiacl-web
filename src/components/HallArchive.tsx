@@ -4,6 +4,7 @@ import { topWinners, type HallEntry } from "@/lib/hallArchive";
 import { getKnownPlayers } from "@/lib/playerNames";
 import { playerLinks } from "@/components/players/PlayerNameLink";
 import { VideoLink } from "./VideoLink";
+import { HallPhotos } from "./hall/HallPhotos";
 
 const MEDAL = ["🥇", "🥈", "🥉"];
 
@@ -14,6 +15,8 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
   const t = await getTranslations({ locale, namespace: "hall" });
   const years = [...new Set(entries.map((e) => e.year))].sort((a, b) => b - a);
   const top = topWinners(entries);
+  // Карточки сезонов чередуют сторону фото по всему архиву, а не внутри года.
+  const flip = new Map(years.flatMap((y) => entries.filter((e) => e.year === y && e.category === "season")).map((e, i) => [e.id, i % 2 === 1]));
   const h3 = "mt-6 text-sm font-semibold uppercase tracking-widest text-neutral-400";
 
   return (
@@ -66,27 +69,61 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
             {seasons.length > 0 && (
               <>
                 <p className={h3}>{t("catSeason")}</p>
-                <ul className="mt-3 grid gap-4 sm:grid-cols-2">
-                  {seasons.map((e) => (
-                    <li key={e.id} className="overflow-hidden rounded-lg border border-amber-400/40 bg-neutral-950/60">
-                      {e.photos.length > 0 && <Photos photos={e.photos} alt={`${(e.season ? t("seasonTitle", { n: e.season }) : e.title)} · ${e.places[0] ?? ""}`} />}
-                      <div className="p-5">
-                      <p className="font-display text-2xl font-extrabold uppercase">{(e.season ? t("seasonTitle", { n: e.season }) : e.title)}</p>
-                      {e.places.length > 0 ? (
-                        <ol className="mt-2 space-y-1">
-                          {e.places.map((p, i) => (
-                            <li key={i} className={i === 0 ? "text-lg font-bold" : "text-neutral-200"}>{MEDAL[i]} {playerLinks(p, known)}</li>
-                          ))}
-                        </ol>
-                      ) : (
-                        <p className="mt-2 text-lg text-neutral-300">{t("noFinal")}</p>
-                      )}
-                      {e.note && <p className="mt-2 text-sm text-neutral-400">{e.note}</p>}
-                      <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} className="mt-2" />
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-4 space-y-8">
+                  {seasons.map((e) => {
+                    const name = e.season ? t("seasonTitle", { n: e.season }) : e.title;
+                    const league = e.title.includes("·") ? e.title.split("·").slice(1).join("·").trim() : null;
+                    return (
+                      <article
+                        key={e.id}
+                        className={`hall-season ${e.photos.length ? "has-photos" : ""} ${flip.get(e.id) ? "is-flipped" : ""}`}
+                        aria-labelledby={`hs${e.id}`}
+                      >
+                        {e.photos.length > 0 && (
+                          <HallPhotos photos={e.photos} alt={`${name} · ${e.places[0] ?? ""}`} caption={`${name} · ${e.city} ${e.year}`} />
+                        )}
+                        <div className="hall-text">
+                          {e.season && (
+                            <span className="hall-numeral" aria-hidden="true">
+                              {e.season}
+                            </span>
+                          )}
+                          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-300/80">
+                            {e.city} · {e.year}
+                            {league ? ` · ${league}` : ""}
+                          </p>
+                          <h4 id={`hs${e.id}`} className="mt-1 font-display text-3xl font-extrabold uppercase">{name}</h4>
+                          {e.places.length > 0 ? (
+                            <>
+                              <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-neutral-400">👑 {t("championShort")}</p>
+                              <p className="hall-champion">{playerLinks(e.places[0], known)}</p>
+                              {e.places.length > 1 && (
+                                <ol className="mt-4 flex flex-wrap gap-2">
+                                  {e.places.slice(1).map((p, i) => (
+                                    <li key={i} className="hall-place">
+                                      <span aria-hidden="true">{MEDAL[i + 1]}</span>
+                                      <span className="sr-only">{i + 2}.</span> {playerLinks(p, known)}
+                                    </li>
+                                  ))}
+                                </ol>
+                              )}
+                            </>
+                          ) : (
+                            <p className="mt-4 text-lg text-neutral-300">{t("noFinal")}</p>
+                          )}
+                          {e.note && (
+                            <ul className="mt-5 flex flex-wrap gap-1.5">
+                              {noteChips(e.note).map((c, i) => (
+                                <li key={i} className="hall-chip">{c}</li>
+                              ))}
+                            </ul>
+                          )}
+                          <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} className="mt-4" />
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
               </>
             )}
 
@@ -146,25 +183,8 @@ export async function HallArchive({ entries, locale }: { entries: HallEntry[]; l
   );
 }
 
-/** Фото к записи архива: первое крупно, остальные — миниатюры; клик открывает оригинал. */
-function Photos({ photos, alt }: { photos: string[]; alt: string }) {
-  const [first, ...rest] = photos;
-  return (
-    <div>
-      <a href={first} target="_blank" rel="noopener" className="block">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={first} alt={alt} loading="lazy" className="aspect-[3/2] w-full object-cover object-[50%_25%]" />
-      </a>
-      {rest.length > 0 && (
-        <div className="flex gap-1 bg-black/40 p-1">
-          {rest.map((src, i) => (
-            <a key={src} href={src} target="_blank" rel="noopener" className="block flex-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={`${alt} · ${i + 2}`} loading="lazy" className="aspect-[3/2] w-full object-cover object-[50%_25%]" />
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+/** Пояснение к сезону «финал 16.12.2025, 303 рейтинговые игры; MVP — Рауль» → отдельные плашки. */
+function noteChips(note: string): string[] {
+  const [head, ...tail] = note.split(/;\s*/);
+  return [...head.split(/,\s*/), ...tail].map((x) => x.trim()).filter(Boolean);
 }

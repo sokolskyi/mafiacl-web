@@ -304,3 +304,344 @@ dialog.rc-dialog[open]::backdrop {
   40% { scale: 1.12; filter: drop-shadow(0 0 14px rgb(250 204 21 / 0.8)); }
   100% { scale: 1; filter: drop-shadow(0 0 0 rgb(250 204 21 / 0)); }
 }
+
+/* ── Зал славы: карточки сезонов и просмотр фото ──────────────────────── */
+.hall-season {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgb(251 191 36 / 0.28);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(90% 120% at 100% 0%, rgb(251 191 36 / 0.1), transparent 55%),
+    linear-gradient(180deg, rgb(10 10 10 / 0.75), rgb(10 10 10 / 0.9));
+  isolation: isolate;
+}
+@media (min-width: 1024px) {
+  .hall-season.has-photos {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    min-height: 26rem;
+  }
+  .hall-season.has-photos.is-flipped {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+  .hall-season.is-flipped .hall-photos {
+    order: 2;
+  }
+}
+.hall-photos {
+  position: relative;
+  min-height: 16rem;
+}
+.hall-main {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.hall-main img {
+  width: 100%;
+  height: 100%;
+  min-height: 16rem;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: 50% 25%;
+  transition: scale 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s;
+  filter: saturate(0.95);
+}
+@media (min-width: 1024px) {
+  /* Фото занимает всю высоту карточки, какой бы формы оно ни было. */
+  .hall-season.has-photos .hall-main {
+    position: absolute;
+    inset: 0;
+  }
+  .hall-main img {
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  /* Фото плавно уходит в текстовую часть, а не обрывается краем. */
+  .hall-season .hall-photos::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 30%;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgb(10 10 10 / 0.92));
+  }
+  .hall-season.is-flipped .hall-photos::after {
+    inset: 0 auto 0 0;
+    background: linear-gradient(270deg, transparent, rgb(10 10 10 / 0.92));
+  }
+}
+@media (max-width: 1023px) {
+  .hall-season .hall-photos::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 35%;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgb(10 10 10 / 0.95));
+  }
+}
+.hall-main:focus-visible {
+  outline: 3px solid #fcd34d;
+  outline-offset: -3px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hall-season:hover .hall-main img {
+    scale: 1.04;
+    filter: saturate(1.1);
+  }
+}
+
+/* Остальные фото — «полароиды», лежащие поверх угла главного. */
+.hall-polaroids {
+  position: absolute;
+  z-index: 2;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+}
+.hall-season.is-flipped .hall-polaroids {
+  left: auto;
+  right: 1rem;
+}
+.hall-polaroid {
+  width: clamp(5.5rem, 14vw, 8.5rem);
+  margin-left: calc(var(--i) * -1.25rem);
+  padding: 0.3rem 0.3rem 1rem;
+  background: #f5f1e8;
+  border-radius: 0.2rem;
+  box-shadow: 0 10px 25px rgb(0 0 0 / 0.55);
+  rotate: calc(-6deg + var(--i) * 7deg);
+  cursor: zoom-in;
+  transition: rotate 0.35s ease, translate 0.35s ease, scale 0.35s ease;
+}
+.hall-polaroid:first-child {
+  margin-left: 0;
+}
+.hall-polaroid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.hall-polaroid:focus-visible {
+  outline: 3px solid #fcd34d;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hall-polaroid:hover,
+  .hall-polaroid:focus-visible {
+    rotate: 0deg;
+    translate: 0 -0.5rem;
+    scale: 1.08;
+    z-index: 3;
+  }
+}
+.hall-count {
+  position: absolute;
+  z-index: 2;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.6);
+  font-size: 0.75rem;
+  color: #e5e5e5;
+  pointer-events: none;
+}
+
+.hall-text {
+  position: relative;
+  z-index: 1;
+  padding: 1.75rem 1.75rem 2rem;
+  align-self: center;
+}
+@media (min-width: 1024px) {
+  .hall-season.has-photos .hall-text {
+    padding: 2.5rem 2.5rem 2.5rem 1.5rem;
+  }
+  .hall-season.has-photos.is-flipped .hall-text {
+    padding: 2.5rem 1.5rem 2.5rem 2.5rem;
+  }
+}
+/* Огромная римская цифра сезона — контуром на фоне текста. */
+.hall-numeral {
+  position: absolute;
+  z-index: -1;
+  top: -0.5rem;
+  right: 1rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(7rem, 16vw, 12rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(251 191 36 / 0.16);
+  user-select: none;
+  pointer-events: none;
+}
+.hall-champion {
+  margin-top: 0.15rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fde68a 10%, #f59e0b 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgb(245 158 11 / 0.15);
+}
+.hall-champion a {
+  color: inherit;
+}
+.hall-place {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.04);
+  font-weight: 600;
+}
+.hall-chip {
+  padding: 0.2rem 0.65rem;
+  border-radius: 0.4rem;
+  background: rgb(251 191 36 / 0.08);
+  font-size: 0.8rem;
+  color: #d4d4d4;
+}
+
+/* Просмотр фото на странице. */
+dialog.hall-lightbox {
+  width: min(96vw, 1200px);
+  max-width: none;
+  max-height: 94dvh;
+  margin: auto;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1rem;
+  background: #0a0a0a;
+  color: #f5f5f5;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  opacity: 0;
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: 0.25s;
+  transition-behavior: allow-discrete;
+  @media (prefers-reduced-motion: no-preference) {
+    transform: scale(0.96);
+  }
+}
+dialog.hall-lightbox[open] {
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    transform: scale(1);
+    @starting-style {
+      transform: scale(0.96);
+    }
+  }
+}
+dialog.hall-lightbox::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgb(0 0 0 / 0);
+  transition-property: background-color, display, overlay;
+  transition-duration: 0.25s;
+  transition-behavior: allow-discrete;
+}
+dialog.hall-lightbox[open]::backdrop {
+  background: rgb(0 0 0 / 0.85);
+  @starting-style {
+    background: rgb(0 0 0 / 0);
+  }
+}
+.hall-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.hall-track::-webkit-scrollbar {
+  display: none;
+}
+.hall-track:focus-visible {
+  outline: 2px solid #fcd34d;
+  outline-offset: -2px;
+}
+.hall-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: grid;
+  place-items: center;
+  height: min(78dvh, 800px);
+  background: #050505;
+}
+.hall-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.hall-lb-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #fff;
+}
+.hall-lb-btn:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.18);
+}
+.hall-lb-btn:disabled {
+  opacity: 0.3;
+}
+.hall-lb-btn:focus-visible,
+.hall-thumb:focus-visible {
+  outline: 2px solid #fcd34d;
+  outline-offset: 2px;
+}
+.hall-lb-prev,
+.hall-lb-next {
+  position: absolute;
+  top: calc(50% - 1rem);
+  font-size: 2rem;
+  background: rgb(0 0 0 / 0.55);
+}
+.hall-lb-prev {
+  left: 0.75rem;
+}
+.hall-lb-next {
+  right: 0.75rem;
+}
+.hall-thumb {
+  width: 4.5rem;
+  height: 3rem;
+  overflow: hidden;
+  border-radius: 0.35rem;
+  opacity: 0.5;
+  outline: 2px solid transparent;
+  transition: opacity 0.2s;
+}
+.hall-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hall-thumb[aria-current="true"] {
+  opacity: 1;
+  outline-color: #fbbf24;
+}
