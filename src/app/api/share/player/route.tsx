@@ -60,6 +60,12 @@ async function avatar(url: string | null): Promise<string | null> {
     if (!res.ok || !type.startsWith("image/")) return null;
     const buf = Buffer.from(await res.arrayBuffer());
     if (buf.length > 2_000_000) return null;
+    // Картинку рисует Satori: он не понимает WebP (аватары хранятся в WebP) — переводим в PNG.
+    if (type !== "image/png" && type !== "image/jpeg") {
+      const { default: sharp } = await import("sharp");
+      const png = await sharp(buf).resize(512, 512, { fit: "cover" }).png().toBuffer();
+      return `data:image/png;base64,${png.toString("base64")}`;
+    }
     return `data:${type};base64,${buf.toString("base64")}`;
   } catch {
     return null;
