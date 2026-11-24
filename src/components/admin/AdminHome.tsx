@@ -685,6 +685,7 @@ export async function AdminHome({
                         <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
                           <span className="font-semibold">{r.author}</span>
                           <span className="flex-1 truncate text-sm text-neutral-400">{r.company ?? (r.event_type ? t(`formats.${r.event_type}`) : "")}</span>
+                          {r.source === "site" && <span className="rounded bg-red-600/20 px-2 py-0.5 text-xs text-red-200">{t("fromSite")}</span>}
                           {!r.active && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
                         </summary>
                         <div className="border-t border-white/10 p-4">

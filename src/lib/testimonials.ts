@@ -16,21 +16,20 @@ export type Testimonial = {
   body: string;
 };
 
-/** Отзывы о корпоративах (кеш; сбрасывается при правках в админке). */
-export async function getTestimonials(clubSlug: string): Promise<Testimonial[]> {
+/** Показанные отзывы клуба (кеш; сбрасывается при правках в админке). kind — только о корпоративах или все. */
+export async function getTestimonials(clubSlug: string, kind: "corporate" | "all" = "corporate"): Promise<Testimonial[]> {
   "use cache";
   cacheTag(TESTIMONIALS_TAG);
   cacheLife("hours");
   if (!isSupabaseConfigured) return [];
   const db = createPublicClient();
-  const { data, error } = await db
+  let q = db
     .from("testimonials")
     .select("id, author, photo_url, company, event_type, event_date, body, sort, clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
-    .eq("kind", "corporate")
-    .eq("active", true)
-    .order("sort")
-    .order("id", { ascending: false });
+    .eq("active", true);
+  if (kind === "corporate") q = q.eq("kind", "corporate");
+  const { data, error } = await q.order("sort").order("id", { ascending: false });
   if (error) console.error("getTestimonials failed", { code: error.code, message: error.message });
   return (data ?? []).map((r) => ({
     id: r.id,

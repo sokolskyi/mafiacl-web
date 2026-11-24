@@ -558,7 +558,7 @@
       "new": "No experience yet"
     },
     "testimonials": "Company event reviews — {club}",
-    "testimonialsHint": "Shown on the company mafia page. Company is optional: for a birthday, a name and the occasion are enough.",
+    "testimonialsHint": "Shown on the Reviews page; corporate ones also on the corporate mafia page. Reviews from the website arrive hidden: check them and tick “Show on the website”.",
     "addTestimonial": "Add review",
     "hiddenItem": "hidden",
     "tournamentsAdmin": "Tournaments — {club}",
@@ -664,7 +664,8 @@
       "markRead": "Mark as read",
       "markUnread": "Mark as new",
       "readBy": "read"
-    }
+    },
+    "fromSite": "from website"
   },
   "match": {
     "matches": "Games tonight",
@@ -1346,7 +1347,8 @@
         "text": "Several rounds of questions on different topics — light, competitive and good for any group."
       }
     },
-    "otherHow": "Want one of these? Send a request with the “Other” format and say so in the comment — we'll pass it to our partners and come back with options."
+    "otherHow": "Want one of these? Send a request with the “Other” format and say so in the comment — we'll pass it to our partners and come back with options.",
+    "leaveReview": "Leave your own review"
   },
   "hosts": {
     "empty": "Our hosts will appear here soon.",
@@ -2552,6 +2554,36 @@
       "noBlack": "Add at least one black role: mafia, don or a custom mafia role.",
       "tooManyBlack": "Black roles aren't outnumbered by red ones, so the mafia would win at once. Remove a black role or add players.",
       "bad": "This lineup doesn't work. Check the numbers."
+    }
+  },
+  "testimonials": {
+    "leaveLink": "Leave a review",
+    "empty": "No reviews yet — yours could be the first.",
+    "formTitle": "Leave a review",
+    "formLead": "Played with us at an evening, a tournament or a corporate event? Tell us how it went.",
+    "form": {
+      "author": "Your name",
+      "company": "Company or organisation",
+      "body": "Review",
+      "bodyHint": "10 to 1,500 characters.",
+      "photo": "Your photo",
+      "photoChoose": "Choose photo",
+      "photoChange": "Change photo",
+      "photoRemove": "Remove",
+      "photoPreview": "Your photo for the review",
+      "photoHint": "Optional. Shown in a circle next to your review.",
+      "consent": "I agree to my review being published on the club website with my name, company and photo.",
+      "send": "Send review",
+      "sending": "Sending…",
+      "sent": "Thank you for your review! It will appear on the site once the club management has checked it.",
+      "moderation": "Reviews are published after the club management checks them.",
+      "errors": {
+        "invalid": "Check your name and review — it needs at least 10 characters.",
+        "consent": "Tick the consent box — without it we can't publish your review.",
+        "photo": "Couldn't upload the photo. Choose another one — JPG or PNG.",
+        "tooMany": "Too many reviews in a row. Try again tomorrow.",
+        "save": "Couldn't send your review. Try again in a minute."
+      }
     }
   }
 }

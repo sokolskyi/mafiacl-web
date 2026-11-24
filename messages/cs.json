@@ -558,7 +558,7 @@
       "new": "Zatím bez zkušeností"
     },
     "testimonials": "Recenze firemních akcí — {club}",
-    "testimonialsHint": "Zobrazují se na stránce firemní mafie. Firma je nepovinná: u narozenin stačí jméno a příležitost.",
+    "testimonialsHint": "Zobrazují se na stránce Recenze, ty o firemních akcích i na stránce firemní mafie. Recenze z webu přicházejí skryté: zkontrolujte je a zaškrtněte „Zobrazit na webu“.",
     "addTestimonial": "Přidat recenzi",
     "hiddenItem": "skrytá",
     "tournamentsAdmin": "Turnaje — {club}",
@@ -664,7 +664,8 @@
       "markRead": "Přečteno",
       "markUnread": "Vrátit mezi nové",
       "readBy": "přečteno"
-    }
+    },
+    "fromSite": "z webu"
   },
   "match": {
     "matches": "Hry večera",
@@ -1346,7 +1347,8 @@
         "text": "Několik kol otázek z různých oblastí — lehké, soutěživé a vhodné pro každou partu."
       }
     },
-    "otherHow": "Chcete takovou hru? Pošlete poptávku s formátem „Jiné“ a napište to do komentáře — předáme to partnerům a ozveme se s možnostmi."
+    "otherHow": "Chcete takovou hru? Pošlete poptávku s formátem „Jiné“ a napište to do komentáře — předáme to partnerům a ozveme se s možnostmi.",
+    "leaveReview": "Napsat vlastní recenzi"
   },
   "hosts": {
     "empty": "Brzy tu budou moderátoři.",
@@ -2552,6 +2554,36 @@
       "noBlack": "Je potřeba aspoň jedna černá role: mafie, don nebo vlastní role za mafii.",
       "tooManyBlack": "Černých není méně než červených — mafie by vyhrála hned. Odeberte černou roli nebo přidejte hráče.",
       "bad": "Složení nesedí. Zkontrolujte čísla."
+    }
+  },
+  "testimonials": {
+    "leaveLink": "Napsat recenzi",
+    "empty": "Zatím tu nejsou žádné recenze — ta vaše může být první.",
+    "formTitle": "Napsat recenzi",
+    "formLead": "Hráli jste u nás na večeru, turnaji nebo firemní akci? Napište, jak se vám líbilo.",
+    "form": {
+      "author": "Vaše jméno",
+      "company": "Firma nebo organizace",
+      "body": "Recenze",
+      "bodyHint": "10 až 1500 znaků.",
+      "photo": "Vaše fotka",
+      "photoChoose": "Vybrat fotku",
+      "photoChange": "Změnit fotku",
+      "photoRemove": "Odebrat",
+      "photoPreview": "Vaše fotka k recenzi",
+      "photoHint": "Nepovinné. Zobrazíme ji v kroužku vedle recenze.",
+      "consent": "Souhlasím se zveřejněním recenze se jménem, firmou a fotkou na webu klubu.",
+      "send": "Odeslat recenzi",
+      "sending": "Odesíláme…",
+      "sent": "Děkujeme za recenzi! Na webu se objeví po kontrole vedením klubu.",
+      "moderation": "Recenze zveřejňujeme po kontrole vedením klubu.",
+      "errors": {
+        "invalid": "Zkontrolujte jméno a text recenze — musí mít aspoň 10 znaků.",
+        "consent": "Zaškrtněte souhlas se zveřejněním — bez něj se recenze na webu neobjeví.",
+        "photo": "Fotku se nepodařilo nahrát. Vyberte jinou — JPG nebo PNG.",
+        "tooMany": "Příliš mnoho recenzí za sebou. Zkuste to zítra.",
+        "save": "Recenzi se nepodařilo odeslat. Zkuste to znovu za minutu."
+      }
     }
   }
 }

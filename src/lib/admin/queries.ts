@@ -286,11 +286,13 @@ export async function getClubTestimonials(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("testimonials")
-    .select("id, author, photo_url, company, event_type, event_date, body, active, sort")
+    .select("id, author, photo_url, company, event_type, event_date, body, active, sort, source, created_at")
     .eq("club_id", clubId)
     .order("sort")
     .order("id", { ascending: false });
-  return data ?? [];
+  // Новые отзывы с сайта, ждущие проверки, — наверх.
+  const rows = data ?? [];
+  return [...rows.filter((r) => r.source === "site" && !r.active), ...rows.filter((r) => !(r.source === "site" && !r.active))];
 }
 
 export async function getClubTournaments(clubId: number) {

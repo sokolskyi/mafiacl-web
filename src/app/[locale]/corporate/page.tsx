@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
+import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getHosts } from "@/lib/hosts";
@@ -127,6 +128,9 @@ export default async function Page({ params }: PageProps<"/[locale]/corporate">)
         <section id="reviews" className="mt-20 scroll-mt-24" aria-labelledby="reviews-title">
           <h2 id="reviews-title" className={h2}>{t("reviewsTitle")}</h2>
           <Testimonials items={reviews} locale={locale} />
+          <p className="mt-6">
+            <Link href={{ pathname: "/reviews", hash: "leave-review" }} className="font-semibold text-red-300 hover:underline">{t("leaveReview")} →</Link>
+          </p>
         </section>
       )}
 
