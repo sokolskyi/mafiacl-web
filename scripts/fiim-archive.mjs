@@ -5,7 +5,7 @@
  *
  * Список турниров — data/fiim/tournaments.json (ours = турнир клуба, project = серия лиги клуба).
  * Для каждого турнира с fiim_id сохраняет в data/fiim/raw/:
- *   <id>.html        — основная часть страницы турнира (описание, итоги, лучшие игроки), без скриптов;
+ *   <id>.html        — основная часть страницы турнира (описание, итоги, лучшие игроки), без скриптов и встроенных картинок;
  *   <id>-games.html  — протоколы игр по турам (/tournaments/<id>/old_games_table).
  * Уже скачанные файлы не перекачивает (для повторной загрузки удалите файл).
  *
@@ -29,8 +29,9 @@ function mainPart(html) {
     .replace(/<script[\s\S]*?<\/script>/gi, "")
     .replace(/<style[\s\S]*?<\/style>/gi, "")
     .replace(/<form[\s\S]*?<\/form>/gi, "")
-    .replace(/[ \t]+\n/g, "\n")
-    .replace(/\n{3,}/g, "\n\n");
+    .replace(/(["'(])data:[^"')]+/g, "$1") // встроенные картинки (афиши в base64) — мегабайты без пользы
+    .replace(/>\s+</g, ">\n<")
+    .replace(/[ \t]{2,}/g, " ");
 }
 
 async function get(url) {
