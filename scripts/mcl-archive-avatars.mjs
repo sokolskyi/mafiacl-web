@@ -33,6 +33,7 @@ console.log(`Аватарок на серверах mafgame: ${urls.size}`);
 
 mkdirSync(AVATARS, { recursive: true });
 const local = new Map();
+const dead = new Set(); // уже удалены на mafgame (404/403) — вместо них пустой кружок, как у игрока без фото
 let failed = 0;
 for (const url of urls) {
   const ext = (extname(new URL(url).pathname) || ".jpg").toLowerCase();
@@ -41,6 +42,7 @@ for (const url of urls) {
   if (!existsSync(path)) {
     try {
       const res = await fetch(url, { headers: { "user-agent": UA } });
+      if (res.status === 403 || res.status === 404) dead.add(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       writeFileSync(path, Buffer.from(await res.arrayBuffer()));
     } catch (e) {
@@ -53,10 +55,12 @@ for (const url of urls) {
 }
 for (const p of files) {
   const text = readFileSync(p, "utf8");
-  const next = text.replace(REMOTE, (u) => local.get(u) ?? u);
+  const next = text
+    .replace(/"p":"(https:[^"]+)"/g, (m, u) => (dead.has(u) ? '"p":""' : m))
+    .replace(REMOTE, (u) => local.get(u) ?? u);
   if (next !== text) writeFileSync(p, next);
 }
-console.log(`Перенесено: ${local.size}, не скачалось: ${failed}`);
+console.log(`Перенесено: ${local.size}, не скачалось: ${failed} (из них уже удалены на mafgame: ${dead.size})`);
 
 // Исходные данные турнира 757 с mafgame: JSON из data-page (Inertia) страниц игр и итогов.
 mkdirSync(RAW, { recursive: true });
