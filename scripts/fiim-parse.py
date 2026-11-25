@@ -189,6 +189,8 @@ def legacy_stage(page_id, title):
         rows.append({"place": number(place), "nick": nick, "club": club, "penalty": penalty, "seat": None,
                      "total": number(values["Б"]), "values": {k: number(x) for k, x in values.items()}})
     note = label.get_text(" ", strip=True) if label and label.find_previous(["h3", "h4"]) is h else None
+    if note and not re.search(r"\d", note):  # «отсутствует» — коэффициента сложности не было
+        note = None
     return {"title": title, "note": note, "columns": cols, "rows": rows}, legend
 
 
