@@ -42,6 +42,32 @@ const SITE_BAR = `
 try{if(/[?&]intro=1/.test(location.search))localStorage.removeItem("mclIntro")}catch(e){}</script>
 `;
 
+const photo = (name: string, w: number, h: number, alt: string, cls = "") =>
+  `<a class="fp${cls}" href="/mcl-final/${name}-1800.webp" target="_blank" rel="noopener">` +
+  `<img src="/mcl-final/${name}-900.webp" srcset="/mcl-final/${name}-900.webp 900w, /mcl-final/${name}-1800.webp 1800w" ` +
+  `sizes="(max-width:760px) 100vw, ${cls ? "1100px" : "550px"}" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"></a>`;
+
+/** Фото финала MCL Europe 2026 (файлы в public/mcl-final) — блок сразу после итогов, перед составом. */
+const FINAL_PHOTOS = `
+<style>
+#photos .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+#photos .fp{display:block;overflow:hidden;border-radius:4px;border:1px solid var(--line,rgba(255,255,255,.12));background:#000}
+#photos .fp.wide{grid-column:1/-1}
+#photos .fp img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+#photos .fp:hover img{transform:scale(1.02)}
+@media (max-width:760px){#photos .fgrid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){#photos .fp img{transition:none}#photos .fp:hover img{transform:none}}
+</style>
+<section id="photos"><div class="wrap">
+  <div class="sechead"><div class="no">★</div><h2 class="h">Фото финала</h2><div class="line"></div></div>
+  <div class="fgrid">
+    ${photo("group", 1800, 915, "Финалисты MCL Europe 2026 с медалями и дипломами за финальным столом", " wide")}
+    ${photo("podium", 1800, 1268, "Призёры финала: 1 место — KEX, 2 место — TOPS, 3 место — DOVOD")}
+    ${photo("champion", 1800, 1200, "Победитель MCL Europe 2026 KEX с кубком, медалью и наградой MVP")}
+  </div>
+</div></section>
+`;
+
 /** Отдать файл MCL со старого сайта; в HTML-страницы вставить полоску сайта сразу после <body>. */
 export async function proxyMcl(file: string): Promise<Response> {
   if (!/^[\w.-]+$/.test(file)) return new Response("Not found", { status: 404 });
@@ -55,6 +81,7 @@ export async function proxyMcl(file: string): Promise<Response> {
     return new Response(upstream.body, { status: upstream.status, headers });
   }
   const html = await upstream.text();
-  const withBar = /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (m) => m + SITE_BAR) : SITE_BAR + html;
+  let withBar = /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (m) => m + SITE_BAR) : SITE_BAR + html;
+  if (file === "final.html") withBar = withBar.replace('<section id="squad">', FINAL_PHOTOS + '<section id="squad">');
   return new Response(withBar, { status: 200, headers });
 }
