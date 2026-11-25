@@ -22,7 +22,9 @@ export async function getKingsPage(path: string): Promise<KingsPage> {
 
 /** Полоска MafiaCL над страницами Kings — чтобы было видно, что это раздел того же сайта. */
 export function kingsSiteBar(path: string): string {
+  // На главной странице сезона «MafiaCL Kings» — текущее место; на вложенных (рейтинг, игрок, турнир) — ссылка на сезон.
   const season = path.match(/^\/seasons\/(\d+)/)?.[1];
+  const home = !season || /^\/seasons\/\d+\/?(\?.*)?$/.test(path);
   return `
 <style id="mafiacl-sitebar-css">
 .mcl-sitebar{position:relative;z-index:31;background:#1c0308;border-bottom:1px solid rgba(253,255,194,.12);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1}
@@ -44,7 +46,7 @@ export function kingsSiteBar(path: string): string {
   <a class="logo" href="/ru" aria-label="MafiaCL — главная"><img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width="67" height="24"></a>
   <nav aria-label="Где вы на сайте"><ol>
     <li class="home-crumb"><a href="/ru/turniry">Турниры</a></li>
-    ${season ? `<li><a href="/seasons/${season}">MafiaCL Kings</a></li><li aria-current="page">Сезон ${season}</li>` : `<li aria-current="page">MafiaCL Kings</li>`}
+    <li${home ? ' aria-current="page"' : ""}>${home ? "MafiaCL Kings" : `<a href="/seasons/${season}">MafiaCL Kings</a>`}</li>
   </ol></nav>
   <a class="acc" href="/ru/kabinet">Кабинет</a>
 </div></div>
