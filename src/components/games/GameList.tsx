@@ -172,11 +172,11 @@ export async function GameList({
                 {rows.map((r, i) => (
                   <div key={i} className={`flex flex-col gap-1 ${r.pending ? "opacity-55" : ""}`}>
                     {r.label && <span className="text-[11px] text-neutral-400">{r.label}</span>}
-                    <span className="flex flex-wrap items-center gap-[5px]">
+                    <span className="flex flex-wrap items-center gap-[5px] md:gap-1">
                       {r.seats.map((s, j) => (
                         <span
                           key={j}
-                          className={`size-5 rounded-t-md rounded-b-sm ${j === TABLE && !g.tableSize ? "ml-2.5" : ""} ${
+                          className={`size-5 rounded-t-md rounded-b-sm md:size-[18px] ${j === TABLE && !g.tableSize ? "ml-2.5 md:ml-2" : ""} ${
                             s.on ? `${red ? "bg-red-600" : "bg-white"} ${s.pending ? "opacity-50" : ""}` : `border-2 border-neutral-500 ${s.dashed ? "border-dashed" : ""}`
                           }`}
                         />
