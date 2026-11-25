@@ -324,7 +324,18 @@
     "youAreQueued": "You're in the queue",
     "signupBanned": "You can't sign up for this club's games. Please contact the organiser.",
     "signupError": "Sign-up failed. Please try again.",
-    "signupUnverified": "You'll be able to sign up for games once the club approves your account. It's usually quick — check the status in your account."
+    "signupUnverified": "You'll be able to sign up for games once the club approves your account. It's usually quick — check the status in your account.",
+    "track": "Upcoming games",
+    "filterLabel": "Which games to show",
+    "filterAll": "All",
+    "days": "Days with games",
+    "prev": "Previous games",
+    "next": "Next games",
+    "table": "Table {n}",
+    "tablePending": "Table {n} — opens once {need} sign up ({left} to go)",
+    "rotation": "{players} players take turns: {games} games, each plays {plays}",
+    "rotationShort": "{players} players take turns",
+    "seatsAria": "{taken} of {total} signed up"
   },
   "admin": {
     "title": "Club admin",

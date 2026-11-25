@@ -57,7 +57,7 @@
 | Раздел | Страница | Данные / логика | Компоненты |
 |---|---|---|---|
 | Главная | `page.tsx` | `lib/home.ts`, `lib/videos.ts` | `components/home/*` (HeroVideo, PlayerOfWeek, Tile) |
-| Играть (расписание, запись) | `play/` | `lib/games.ts`, `lib/games-actions.ts`, `lib/venues.ts` | `components/games/GameList*.tsx` |
+| Играть (расписание, запись) | `play/` | `lib/games.ts` (у игры `scheduleId`, `tableSize`/`maxCapacity` — столы), `lib/games-actions.ts`, `lib/venues.ts` | `components/games/GameList*.tsx` — лента билетов (макет «B» на холсте «MafiaCL — расписание игр»): корешок с датой, места «стульями» (вторник — ряд на стол, следующий стол бледный до набора; воскресенье — 10 + места по очереди пунктиром); `TicketStrip.tsx` — фильтр по серии, полоска дней, на компьютере лента вбок со snap |
 | Fun-игра (бланк без рейтинга) | `fun-game/` | хранится в localStorage `mcl-fun-sheet` (журнал, места, `setup`); «Своя игра» — `Setup` в `lib/match/engine.ts` (4–20 мест, число ролей, свои роли `cb*` за мафию / `cr*` за мирных, мирные — остаток), последний состав — `mcl-fun-setup-draft` | `components/match/FunSheet.tsx` → `MatchApp` с `fun` и `setup`; форма `CustomSetup.tsx` |
 | Подсказки ников в бланке | — | `lib/match/nickSearch.ts` (не та раскладка RU/UK↔EN, кириллица вместо латиницы: «Екумукн», «Тревори» → Trevery); ники: профили + архивы (`getKnownPlayers`) | `components/match/NickInput.tsx` (combobox) |
 | Электронный бланк ведущего | `admin/matches/[id]/` | `lib/match/{engine,actions,queries,types}.ts` (журнал действий → состояние) | `components/match/MatchApp.tsx` |

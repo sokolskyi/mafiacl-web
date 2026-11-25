@@ -23,6 +23,11 @@ export type UpcomingGame = {
   priceCzk: number | null;
   venue: { name: string; address: string | null; mapsUrl: string | null } | null;
   timezone: string;
+  /** Серия (расписание), из которой игра; null — разовая игра. */
+  scheduleId: number | null;
+  /** Шаг столов и предел мест: вторник — 10 и 20 (второй стол собирается от 20 записавшихся). */
+  tableSize: number | null;
+  maxCapacity: number | null;
 };
 
 export const GAMES_TAG = "games";
@@ -40,7 +45,7 @@ export async function getUpcomingGames(clubSlug: string, limit = 12): Promise<Up
     .from("games")
     .select(
       `id, starts_at, late_after, title, kind, capacity, stream_url, info_url, number, price_czk,
-       priority_until, allocated_at,
+       priority_until, allocated_at, schedule_id, table_size, max_capacity,
        game_schedules ( number_style ),
        venues ( name, address, maps_url ),
        clubs!inner ( slug, cities ( timezone ) ),
@@ -81,6 +86,9 @@ export async function getUpcomingGames(clubSlug: string, limit = 12): Promise<Up
       priceCzk: g.price_czk === null ? null : Number(g.price_czk),
       venue: venue ? { name: venue.name, address: venue.address, mapsUrl: venue.maps_url } : null,
       timezone: club?.cities?.timezone ?? "Europe/Prague",
+      scheduleId: g.schedule_id,
+      tableSize: g.table_size,
+      maxCapacity: g.max_capacity,
     };
   });
 }

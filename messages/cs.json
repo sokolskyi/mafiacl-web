@@ -324,7 +324,18 @@
     "youAreQueued": "Jste v pořadí",
     "signupBanned": "Na hry klubu se zapsat nemůžete. Obraťte se na pořadatele.",
     "signupError": "Zápis se nezdařil. Zkuste to znovu.",
-    "signupUnverified": "Na hry se budete moci zapsat, jakmile klub schválí váš účet. Obvykle to je rychlé — stav uvidíte v profilu."
+    "signupUnverified": "Na hry se budete moci zapsat, jakmile klub schválí váš účet. Obvykle to je rychlé — stav uvidíte v profilu.",
+    "track": "Nejbližší hry",
+    "filterLabel": "Které hry zobrazit",
+    "filterAll": "Vše",
+    "days": "Dny s hrami",
+    "prev": "Předchozí hry",
+    "next": "Další hry",
+    "table": "Stůl {n}",
+    "tablePending": "Stůl {n} — otevře se, až se přihlásí {need} (zbývá {left})",
+    "rotation": "{players} hráčů se střídá: {games, plural, one {# hra} few {# hry} other {# her}}, každý hraje {plays}",
+    "rotationShort": "{players} hráčů se střídá",
+    "seatsAria": "Přihlášeno {taken} z {total}"
   },
   "admin": {
     "title": "Správa klubu",
