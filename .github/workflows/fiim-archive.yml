@@ -1,0 +1,44 @@
+# Архив турниров клуба с ФИИМ: сохранить страницы итогов и протоколы игр в data/fiim/raw/
+# (scripts/fiim-archive.mjs). Запускается сам, когда меняются скрипт, список турниров или этот файл,
+# и вручную: Actions → «FIIM archive» → Run workflow. Изменения коммитит в main.
+name: FIIM archive
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/fiim-archive.mjs
+      - data/fiim/tournaments.json
+      - .github/workflows/fiim-archive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fiim-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Скачать страницы турниров с ФИИМ
+        run: node scripts/fiim-archive.mjs
+      - name: Сохранить в репозиторий
+        run: |
+          git add data/fiim/raw
+          if git diff --cached --quiet; then
+            echo "Нечего сохранять"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git commit -m "ФИИМ: архив страниц турниров клуба"
+          git pull --rebase
+          git push
