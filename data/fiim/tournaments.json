@@ -1,8 +1,21 @@
 {
  "source": "fiim.world: Харьков за все годы + серии Mafia Champions League и Mafia Stars в других городах + Прага",
  "fetched": "2026-11-25",
- "rule": "ours=true — турнир клуба, идёт в статистику клуба (по словам администрации клуба 25.11.2026; с 2018 сверено с «Организатор» = YeS). project=true, ours=false — отборочные серии лиг клуба (Mafia Champions League, Mafia Stars), отданные другим клубам: показывать как часть лиги, в статистику клуба не включать. MafiaCL Championship 2013 на ФИИМ нет (проводился в клубе до федерации).",
+ "rule": "ours=true — турнир клуба, идёт в статистику клуба (по словам администрации клуба 25.11.2026; с 2018 сверено с «Организатор» = YeS). project=true, ours=false — отборочные серии лиг клуба (Mafia Champions League, Mafia Stars), отданные другим клубам: показывать как часть лиги, в статистику клуба не включать. MafiaCL Championship 2013 на ФИИМ нет — итоги перенесены вручную со скриншотов ВКонтакте.",
  "tournaments": [
+  {
+   "fiim_id": null,
+   "url": null,
+   "date": "2013-04-20",
+   "name": "MafiaCl Championship 2013",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": true,
+   "city": "Харьков",
+   "project": true,
+   "results": "data/fiim/mafiacl-championship-2013.json"
+  },
   {
    "fiim_id": 26,
    "url": "https://fiim.world/tournaments/26",
