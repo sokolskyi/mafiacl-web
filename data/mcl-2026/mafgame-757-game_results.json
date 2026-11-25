@@ -1,0 +1,8228 @@
+{
+ "component": "Tournaments/TournamentGameResults",
+ "props": {
+  "errors": {},
+  "auth": {
+   "user": null,
+   "notifications": 0,
+   "unread_notifications": 0
+  },
+  "club_membership_restriction": null,
+  "tournament_fee_unpaid": false,
+  "env": "prod",
+  "ziggy": {
+   "url": "https://mafgame.org",
+   "port": null,
+   "defaults": [],
+   "routes": {
+    "passport.token": {
+     "uri": "oauth/token",
+     "methods": [
+      "POST"
+     ]
+    },
+    "passport.authorizations.authorize": {
+     "uri": "oauth/authorize",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "passport.token.refresh": {
+     "uri": "oauth/token/refresh",
+     "methods": [
+      "POST"
+     ]
+    },
+    "passport.authorizations.approve": {
+     "uri": "oauth/authorize",
+     "methods": [
+      "POST"
+     ]
+    },
+    "passport.authorizations.deny": {
+     "uri": "oauth/authorize",
+     "methods": [
+      "DELETE"
+     ]
+    },
+    "passport.tokens.index": {
+     "uri": "oauth/tokens",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "passport.tokens.destroy": {
+     "uri": "oauth/tokens/{token_id}",
+     "methods": [
+      "DELETE"
+     ],
+     "parameters": [
+      "token_id"
+     ]
+    },
+    "passport.clients.index": {
+     "uri": "oauth/clients",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "passport.clients.store": {
+     "uri": "oauth/clients",
+     "methods": [
+      "POST"
+     ]
+    },
+    "passport.clients.update": {
+     "uri": "oauth/clients/{client_id}",
+     "methods": [
+      "PUT"
+     ],
+     "parameters": [
+      "client_id"
+     ]
+    },
+    "passport.clients.destroy": {
+     "uri": "oauth/clients/{client_id}",
+     "methods": [
+      "DELETE"
+     ],
+     "parameters": [
+      "client_id"
+     ]
+    },
+    "passport.scopes.index": {
+     "uri": "oauth/scopes",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "passport.personal.tokens.index": {
+     "uri": "oauth/personal-access-tokens",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "passport.personal.tokens.store": {
+     "uri": "oauth/personal-access-tokens",
+     "methods": [
+      "POST"
+     ]
+    },
+    "passport.personal.tokens.destroy": {
+     "uri": "oauth/personal-access-tokens/{token_id}",
+     "methods": [
+      "DELETE"
+     ],
+     "parameters": [
+      "token_id"
+     ]
+    },
+    "sanctum.csrf-cookie": {
+     "uri": "sanctum/csrf-cookie",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "club.payment.success": {
+     "uri": "api/stripe/club/{payment}/success",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "payment"
+     ],
+     "bindings": {
+      "payment": "id"
+     }
+    },
+    "club.payment.cancelled": {
+     "uri": "api/stripe/club/{payment}/cancel",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "payment"
+     ],
+     "bindings": {
+      "payment": "id"
+     }
+    },
+    "tournament.payment.success": {
+     "uri": "api/stripe/tournament/{payment}/success",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "payment"
+     ],
+     "bindings": {
+      "payment": "id"
+     }
+    },
+    "tournament.payment.cancelled": {
+     "uri": "api/stripe/tournament/{payment}/cancel",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "payment"
+     ],
+     "bindings": {
+      "payment": "id"
+     }
+    },
+    "stripe.webhook": {
+     "uri": "api/stripe-wh",
+     "methods": [
+      "POST"
+     ]
+    },
+    "oauth.avatar": {
+     "uri": "api/oauth/avatar/{user}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "user"
+     ],
+     "bindings": {
+      "user": "id"
+     }
+    },
+    "oauth.user": {
+     "uri": "api/oauth/user",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "home": {
+     "uri": "/",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "language.select": {
+     "uri": "lang/{locale}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "locale"
+     ]
+    },
+    "tournaments": {
+     "uri": "tournaments",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "clubs": {
+     "uri": "clubs",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "club.rating": {
+     "uri": "clubs/{club}/rating",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.stats": {
+     "uri": "clubs/{club}/stats",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.referees": {
+     "uri": "clubs/{club}/referees",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.view": {
+     "uri": "clubs/{club}/view",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.trophies": {
+     "uri": "clubs/{club}/trophies",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.tournament_points": {
+     "uri": "clubs/{club}/points",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.quick_search": {
+     "uri": "club/quick_search",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "club.games": {
+     "uri": "clubs/{club}/games",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.members": {
+     "uri": "clubs/{club}/members",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.game_app_online": {
+     "uri": "club/{club}/game_app_online/{table}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club",
+      "table"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.no_roles_twitch_extension": {
+     "uri": "club/{club}/no_roles_twitch_extension/{table}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club",
+      "table"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "no_roles_twitch_extension": {
+     "uri": "no_roles_twitch_extension",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "no_roles_twitch_extension_json": {
+     "uri": "no_roles_twitch_extension_json",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "twitch_extension.live_config": {
+     "uri": "twitch_extension/live_config",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "tournament.view": {
+     "uri": "tournaments/{tournament}/view",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.terms": {
+     "uri": "tournaments/{tournament}/terms",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.participants": {
+     "uri": "tournaments/{tournament}/participants",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.results": {
+     "uri": "tournaments/{tournament}/results",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.game_results": {
+     "uri": "tournaments/{tournament}/game_results",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.points": {
+     "uri": "tournaments/{tournament}/points",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "bans": {
+     "uri": "bans",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "city.quick_search": {
+     "uri": "city/quick_search",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "city.preselect": {
+     "uri": "city/preselect",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "locale.serve": {
+     "uri": "locales/{locale}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "locale"
+     ]
+    },
+    "page.offline_hall_of_fame": {
+     "uri": "hall_of_fame/offline",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "page.online_hall_of_fame": {
+     "uri": "hall_of_fame/online",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "page.english_hall_of_fame": {
+     "uri": "hall_of_fame/english",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "user.show": {
+     "uri": "user/{user}/view",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "user"
+     ],
+     "bindings": {
+      "user": "id"
+     }
+    },
+    "user.stats": {
+     "uri": "user/{user}/stats",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "user"
+     ],
+     "bindings": {
+      "user": "id"
+     }
+    },
+    "tournament.game_app_online": {
+     "uri": "tournament/{tournament}/game_app_online/{table}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament",
+      "table"
+     ]
+    },
+    "global_rating": {
+     "uri": "rating",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "country_rating": {
+     "uri": "country_rating",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "public_referees": {
+     "uri": "referee_list",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.drop_caches": {
+     "uri": "admin/drop_caches",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.regenerate_country_rating_cache": {
+     "uri": "admin/regenerate_country_rating_cache",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.select_user": {
+     "uri": "admin/select_user",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.login_as": {
+     "uri": "admin/login_as",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.audit_log": {
+     "uri": "admin/audit_log",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.roles": {
+     "uri": "admin/roles",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.roles.store": {
+     "uri": "admin/roles",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.roles.update": {
+     "uri": "admin/roles/{role}/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "role"
+     ],
+     "bindings": {
+      "role": "id"
+     }
+    },
+    "admin.roles.assign": {
+     "uri": "admin/roles/assign",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.twitch_extension_config": {
+     "uri": "admin/twitch_extension_config",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.twitch_extension_config.save": {
+     "uri": "admin/twitch_extension_config",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.badge_manager": {
+     "uri": "admin/badge_manager",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.badge_manager.toggle": {
+     "uri": "admin/badge_manager/toggle",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.badge_manager.switch_source": {
+     "uri": "admin/badge_manager/switch_source",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.clubs.index": {
+     "uri": "admin/clubs",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.clubs.subscriptions": {
+     "uri": "admin/clubs/subscriptions",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "admin.clubs.bulk-update": {
+     "uri": "admin/clubs/bulk",
+     "methods": [
+      "POST"
+     ]
+    },
+    "admin.clubs.show": {
+     "uri": "admin/clubs/{club}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "admin.clubs.update": {
+     "uri": "admin/clubs/{club}",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "admin.clubs.payments": {
+     "uri": "admin/clubs/{club}/payments",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "admin.clubs.reminder.preview": {
+     "uri": "admin/clubs/{club}/payment-reminder",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "admin.clubs.reminder.send": {
+     "uri": "admin/clubs/{club}/payment-reminder",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "admin.clubs.subscription.restart": {
+     "uri": "admin/clubs/{club}/subscription/restart",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "user.quick_search": {
+     "uri": "user/quick_search",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "user.preselect": {
+     "uri": "user/preselect",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "club.add": {
+     "uri": "clubs/add",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "club.save": {
+     "uri": "clubs/add",
+     "methods": [
+      "POST"
+     ]
+    },
+    "club.edit": {
+     "uri": "clubs/{club}/edit",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.update": {
+     "uri": "clubs/{club}/edit",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.delete": {
+     "uri": "clubs/{club}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.manage_ratings": {
+     "uri": "clubs/{club}/ratings",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.store_rating_type": {
+     "uri": "clubs/{club}/store_rating",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.update_rating_type": {
+     "uri": "clubs/{rating}/update_rating",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "rating"
+     ],
+     "bindings": {
+      "rating": "id"
+     }
+    },
+    "club.payments": {
+     "uri": "clubs/{club}/payments",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.payment.init": {
+     "uri": "clubs/{club}/payment",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.preselect": {
+     "uri": "clubs/preselect",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "club.membership": {
+     "uri": "clubs/{club}/membership",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.join": {
+     "uri": "clubs/{club}/apply",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.revoke_application": {
+     "uri": "club_application/{application}/revoke",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "application"
+     ],
+     "bindings": {
+      "application": "id"
+     }
+    },
+    "club.accept_application": {
+     "uri": "club_application/{application}/accept",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "application"
+     ],
+     "bindings": {
+      "application": "id"
+     }
+    },
+    "club.reject_application": {
+     "uri": "club_application/{application}/reject",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "application"
+     ],
+     "bindings": {
+      "application": "id"
+     }
+    },
+    "club.leave": {
+     "uri": "clubs/{club}/leave",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.delete_member": {
+     "uri": "clubs/{member}/delete_member",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "member"
+     ],
+     "bindings": {
+      "member": "id"
+     }
+    },
+    "club.admins": {
+     "uri": "clubs/{club}/admins",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.grant": {
+     "uri": "clubs/{club}/grant",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.revoke": {
+     "uri": "clubs/{club}/revoke",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.upload_logo": {
+     "uri": "clubs/{club}/logo",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.new_game": {
+     "uri": "clubs/{club}/new_game",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.game_players": {
+     "uri": "clubs/{club}/game_players",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.save_game": {
+     "uri": "clubs/{club}/save_game",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "club.edit_game": {
+     "uri": "clubs/{game}/edit_game",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "game"
+     ],
+     "bindings": {
+      "game": "id"
+     }
+    },
+    "club.delete_game": {
+     "uri": "clubs/{game}/delete_game",
+     "methods": [
+      "DELETE"
+     ],
+     "parameters": [
+      "game"
+     ],
+     "bindings": {
+      "game": "id"
+     }
+    },
+    "club.update_game": {
+     "uri": "clubs/{game}/update_game",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "game"
+     ],
+     "bindings": {
+      "game": "id"
+     }
+    },
+    "club.start_stream": {
+     "uri": "clubs/{club}/start_stream/{table}",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "club",
+      "table"
+     ],
+     "bindings": {
+      "club": "id"
+     }
+    },
+    "profile.view": {
+     "uri": "profile/view",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "profile.edit": {
+     "uri": "profile/edit",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "profile.update": {
+     "uri": "profile",
+     "methods": [
+      "PATCH"
+     ]
+    },
+    "profile.upload_avatar": {
+     "uri": "profile/avatar",
+     "methods": [
+      "POST"
+     ]
+    },
+    "profile.upload_photo": {
+     "uri": "profile/photo",
+     "methods": [
+      "POST"
+     ]
+    },
+    "profile.destroy": {
+     "uri": "profile",
+     "methods": [
+      "DELETE"
+     ]
+    },
+    "profile.my_clubs": {
+     "uri": "profile/my_clubs",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "profile.my_tournaments": {
+     "uri": "profile/my_tournaments",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "profile.my_tournament_applications": {
+     "uri": "profile/my_tournament_applications",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "profile.referee_info": {
+     "uri": "referee/{user}/view",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "user"
+     ],
+     "bindings": {
+      "user": "id"
+     }
+    },
+    "tournament.add": {
+     "uri": "tournaments/add",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "tournament.save": {
+     "uri": "tournaments/add",
+     "methods": [
+      "POST"
+     ]
+    },
+    "tournament.edit": {
+     "uri": "tournaments/{tournament}/edit",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.update": {
+     "uri": "tournaments/{tournament}/edit",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.edit_terms": {
+     "uri": "tournaments/{tournament}/edit_regulations",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.update_terms": {
+     "uri": "tournaments/{tournament}/edit_regulations",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.dashboard": {
+     "uri": "tournaments/{tournament}/dashboard",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.document": {
+     "uri": "tournaments/{tournament}/document",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.scheme": {
+     "uri": "tournaments/{tournament}/scheme",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.save_scheme_preset": {
+     "uri": "scheme/{scheme}/save_preset",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.update_scheme_part": {
+     "uri": "scheme/{scheme}/update_part",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.store_scheme_part": {
+     "uri": "scheme/{scheme}/store_part",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.delete_scheme_part": {
+     "uri": "scheme/{scheme}/delete_part",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.reorder_scheme_parts": {
+     "uri": "scheme/{scheme}/reorder_parts",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.store_serie": {
+     "uri": "scheme/{scheme}/store_serie",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.update_serie": {
+     "uri": "scheme/{scheme}/update_serie",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "scheme"
+     ],
+     "bindings": {
+      "scheme": "id"
+     }
+    },
+    "tournament.participant_payments": {
+     "uri": "tournaments/{tournament}/player_payments",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.save_participant_payment": {
+     "uri": "tournaments/player_payment/{player}",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "player"
+     ],
+     "bindings": {
+      "player": "id"
+     }
+    },
+    "tournament.delete_participant_payment": {
+     "uri": "tournaments/player_payment/{paymentInfo}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "paymentInfo"
+     ],
+     "bindings": {
+      "paymentInfo": "id"
+     }
+    },
+    "tournament.payments": {
+     "uri": "tournaments/{tournament}/payments",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.payment.init": {
+     "uri": "tournaments/{tournament}/payment",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.fee_correction": {
+     "uri": "tournament/{tournament}/correction",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.admins": {
+     "uri": "tournaments/{tournament}/admins",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.grant": {
+     "uri": "tournaments/{tournament}/grant",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.revoke": {
+     "uri": "tournaments/{tournament}/revoke",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.organizers": {
+     "uri": "tournaments/{tournament}/organizers",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.organizers.add": {
+     "uri": "tournaments/{tournament}/organizers/add",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.organizers.remove": {
+     "uri": "tournaments/{tournament}/organizers/remove",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.hide": {
+     "uri": "tournaments/{tournament}/hide",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.make_visible": {
+     "uri": "tournaments/{tournament}/make_visible",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.open_registration": {
+     "uri": "tournaments/{tournament}/open_registration",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.close_registration": {
+     "uri": "tournaments/{tournament}/close_registration",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.open_players": {
+     "uri": "tournaments/{tournament}/open_players",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.close_players": {
+     "uri": "tournaments/{tournament}/close_players",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.hide_results": {
+     "uri": "tournaments/{tournament}/hide_results",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.show_results": {
+     "uri": "tournaments/{tournament}/show_results",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.calculate": {
+     "uri": "tournaments/{tournament}/calculate",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.cancel": {
+     "uri": "tournaments/{tournament}/cancel",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.close": {
+     "uri": "tournaments/{tournament}/close",
+     "methods": [
+      "GET",
+      "POST",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.reopen": {
+     "uri": "tournaments/{tournament}/reopen",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.apply": {
+     "uri": "tournaments/{tournament}/apply",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament_application.revoke": {
+     "uri": "tournament_application/{application}/revoke",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "application"
+     ],
+     "bindings": {
+      "application": "id"
+     }
+    },
+    "tournament_application.accept": {
+     "uri": "tournament_application/{application}/accept",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "application"
+     ],
+     "bindings": {
+      "application": "id"
+     }
+    },
+    "tournament_application.reject": {
+     "uri": "tournament_application/{application}/reject",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "application"
+     ],
+     "bindings": {
+      "application": "id"
+     }
+    },
+    "tournament.add_player": {
+     "uri": "tournament_player/{tournament}/add",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "player.replace": {
+     "uri": "tournament_player/{player}/replace",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "player"
+     ],
+     "bindings": {
+      "player": "id"
+     }
+    },
+    "player.mark_as_replacement": {
+     "uri": "tournament_player/{player}/mark",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "player"
+     ],
+     "bindings": {
+      "player": "id"
+     }
+    },
+    "player.mark_as_not_replacement": {
+     "uri": "tournament_player/{player}/unmark",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "player"
+     ],
+     "bindings": {
+      "player": "id"
+     }
+    },
+    "tournament_team.accept": {
+     "uri": "tournament_team/{team}/accept",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "team"
+     ],
+     "bindings": {
+      "team": "id"
+     }
+    },
+    "tournament_team.reject": {
+     "uri": "tournament_team/{team}/reject",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "team"
+     ],
+     "bindings": {
+      "team": "id"
+     }
+    },
+    "tournament_team.add": {
+     "uri": "tournament_team/{tournament}/add",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament_team.member.accept": {
+     "uri": "tournament_team/{team}/member/{member}/accept",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "team",
+      "member"
+     ],
+     "bindings": {
+      "team": "id",
+      "member": "id"
+     }
+    },
+    "tournament_team.member.reject": {
+     "uri": "tournament_team/{team}/member/{member}/reject",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "team",
+      "member"
+     ],
+     "bindings": {
+      "team": "id",
+      "member": "id"
+     }
+    },
+    "tournament_team.member.promote": {
+     "uri": "tournament_team/{team}/member/{member}/promote",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "team",
+      "member"
+     ],
+     "bindings": {
+      "team": "id",
+      "member": "id"
+     }
+    },
+    "tournament.referees": {
+     "uri": "tournament/{tournament}/referees",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.add_referee": {
+     "uri": "tournament/{tournament}/referees",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.delete_referee": {
+     "uri": "tournament/{tournament}/delete_referee",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.assign_referees": {
+     "uri": "tournament/{tournament}/assign_referees",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.prizes": {
+     "uri": "tournament/{tournament}/prizes",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.save_prizes": {
+     "uri": "tournament/{tournament}/prizes",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.preview_prizes": {
+     "uri": "tournament/{tournament}/prizes/preview",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.papers": {
+     "uri": "tournament/{tournament}/papers/{what}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament",
+      "what"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.seats": {
+     "uri": "tournament/{tournament}/seats",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.seats_auto": {
+     "uri": "tournament/{tournament}/seats/auto_allocate",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.seats_manual": {
+     "uri": "tournament/{tournament}/seats/allocate",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.seats_save": {
+     "uri": "tournament/{tournament}/seats/save",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.seats_review": {
+     "uri": "tournament/{tournament}/seats/review_auto_allocation",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.seats_confirm": {
+     "uri": "tournament/{tournament}/seats/confirm_allocation",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.games": {
+     "uri": "tournament/{tournament}/games",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.edit_game": {
+     "uri": "tournament/{tournament}/edit_game",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.save_game": {
+     "uri": "tournament/{tournament}/save_game",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.game_app": {
+     "uri": "tournament_game/{tournament}/game_app",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.game_app_update": {
+     "uri": "tournament_game/{tournament}/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.player_labels.create": {
+     "uri": "tournament_game/{tournament}/player_labels",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.player_labels.update": {
+     "uri": "tournament_game/{tournament}/player_labels/{playerLabel}",
+     "methods": [
+      "PUT"
+     ],
+     "parameters": [
+      "tournament",
+      "playerLabel"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.player_labels.delete": {
+     "uri": "tournament_game/{tournament}/player_labels/{playerLabel}",
+     "methods": [
+      "DELETE"
+     ],
+     "parameters": [
+      "tournament",
+      "playerLabel"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "club.game_app": {
+     "uri": "club_game/{game}/game_app/{table}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "game",
+      "table"
+     ],
+     "bindings": {
+      "game": "id"
+     }
+    },
+    "club.game_app_update": {
+     "uri": "club_game/{game}/game_app/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "game"
+     ],
+     "bindings": {
+      "game": "id"
+     }
+    },
+    "approvals": {
+     "uri": "approvals",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "approval.confirm": {
+     "uri": "approval/{approval}/confirm",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "approval"
+     ],
+     "bindings": {
+      "approval": "id"
+     }
+    },
+    "approval.reject": {
+     "uri": "approval/{approval}/reject",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "approval"
+     ],
+     "bindings": {
+      "approval": "id"
+     }
+    },
+    "notification.tournament": {
+     "uri": "notification/{notification}/tournament",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "notification"
+     ]
+    },
+    "notifications": {
+     "uri": "notifications",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "notifications.clear_all": {
+     "uri": "notifications/clear",
+     "methods": [
+      "POST"
+     ]
+    },
+    "notifications.mark_all_read": {
+     "uri": "notifications/mark_read",
+     "methods": [
+      "POST"
+     ]
+    },
+    "notification.delete": {
+     "uri": "notification/{notification}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "notification"
+     ]
+    },
+    "notification.mark_read": {
+     "uri": "notification/{notification}/mark_read",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "notification"
+     ]
+    },
+    "referees": {
+     "uri": "referees",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "referee.store": {
+     "uri": "referee/add",
+     "methods": [
+      "POST"
+     ]
+    },
+    "referee.update": {
+     "uri": "referee/{referee}/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "referee"
+     ],
+     "bindings": {
+      "referee": "id"
+     }
+    },
+    "referee.quick_search": {
+     "uri": "referee/quick_search",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "pages": {
+     "uri": "pages",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "page.add": {
+     "uri": "page/add",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "page.edit": {
+     "uri": "page/{page}/edit",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "page"
+     ],
+     "bindings": {
+      "page": "id"
+     }
+    },
+    "page.preview": {
+     "uri": "page/{page}/preview",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "page"
+     ],
+     "bindings": {
+      "page": "id"
+     }
+    },
+    "page.save": {
+     "uri": "pages",
+     "methods": [
+      "POST"
+     ]
+    },
+    "page.update": {
+     "uri": "page/{page}/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "page"
+     ],
+     "bindings": {
+      "page": "id"
+     }
+    },
+    "translations": {
+     "uri": "translations",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "translation.save": {
+     "uri": "translations",
+     "methods": [
+      "POST"
+     ]
+    },
+    "settings.index": {
+     "uri": "settings",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "settings.save": {
+     "uri": "settings",
+     "methods": [
+      "POST"
+     ]
+    },
+    "page.revision": {
+     "uri": "revision/{revision}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "revision"
+     ],
+     "bindings": {
+      "revision": "id"
+     }
+    },
+    "page.revision_restore": {
+     "uri": "revision/{revision}/restore",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "revision"
+     ],
+     "bindings": {
+      "revision": "id"
+     }
+    },
+    "page.delete": {
+     "uri": "page/{page}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "page"
+     ],
+     "bindings": {
+      "page": "id"
+     }
+    },
+    "tournament.incompatibilities": {
+     "uri": "incompatible/{tournament}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "tournament"
+     ],
+     "bindings": {
+      "tournament": "id"
+     }
+    },
+    "tournament.add_incompatibility": {
+     "uri": "incompatible/{tournament}",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "tournament"
+     ]
+    },
+    "disciplinary": {
+     "uri": "dict/disciplinary",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "disciplinary.add": {
+     "uri": "dict/disciplinary/add",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "disciplinary.store": {
+     "uri": "dict/disciplinary/add",
+     "methods": [
+      "POST"
+     ]
+    },
+    "disciplinary.edit": {
+     "uri": "dict/disciplinary/{record}/update",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "record"
+     ],
+     "bindings": {
+      "record": "id"
+     }
+    },
+    "disciplinary.update": {
+     "uri": "dict/disciplinary/{record}/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "record"
+     ],
+     "bindings": {
+      "record": "id"
+     }
+    },
+    "disciplinary.delete": {
+     "uri": "dict/disciplinary/{record}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "record"
+     ],
+     "bindings": {
+      "record": "id"
+     }
+    },
+    "incompatible": {
+     "uri": "admin/incompatible",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "incompatible.delete": {
+     "uri": "admin/incompatible/{inc}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "inc"
+     ],
+     "bindings": {
+      "inc": "id"
+     }
+    },
+    "incompatible.admin_add": {
+     "uri": "admin/incompatible",
+     "methods": [
+      "POST"
+     ]
+    },
+    "shadow.index": {
+     "uri": "shadows",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "shadow.delete": {
+     "uri": "shadows/{shadow}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "shadow"
+     ],
+     "bindings": {
+      "shadow": "id"
+     }
+    },
+    "shadow.add": {
+     "uri": "shadows",
+     "methods": [
+      "POST"
+     ]
+    },
+    "payment_form": {
+     "uri": "payment_test",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "payment_form_confirm": {
+     "uri": "payment_test_confirm",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "regions": {
+     "uri": "dict/regions",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "region.add": {
+     "uri": "dict/region/add",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "region.store": {
+     "uri": "dict/region/add",
+     "methods": [
+      "POST"
+     ]
+    },
+    "region.edit": {
+     "uri": "dict/region/{record}/edit",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "record"
+     ],
+     "bindings": {
+      "record": "id"
+     }
+    },
+    "region.update": {
+     "uri": "dict/region/{record}/update",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "record"
+     ],
+     "bindings": {
+      "record": "id"
+     }
+    },
+    "region.delete": {
+     "uri": "dict/region/{record}/delete",
+     "methods": [
+      "POST"
+     ],
+     "parameters": [
+      "record"
+     ],
+     "bindings": {
+      "record": "id"
+     }
+    },
+    "banners": {
+     "uri": "banners",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "banners.save": {
+     "uri": "banners",
+     "methods": [
+      "POST"
+     ]
+    },
+    "page.view": {
+     "uri": "pages/{route_key}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "route_key"
+     ]
+    },
+    "register": {
+     "uri": "register",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "login": {
+     "uri": "login",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "password.request": {
+     "uri": "forgot-password",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "password.email": {
+     "uri": "forgot-password",
+     "methods": [
+      "POST"
+     ]
+    },
+    "password.reset": {
+     "uri": "reset-password/{token}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "token"
+     ]
+    },
+    "password.store": {
+     "uri": "reset-password",
+     "methods": [
+      "POST"
+     ]
+    },
+    "verification.notice": {
+     "uri": "verify-email",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "verification.verify": {
+     "uri": "verify-email/{id}/{hash}",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "parameters": [
+      "id",
+      "hash"
+     ]
+    },
+    "verification.send": {
+     "uri": "email/verification-notification",
+     "methods": [
+      "POST"
+     ]
+    },
+    "password.confirm": {
+     "uri": "confirm-password",
+     "methods": [
+      "GET",
+      "HEAD"
+     ]
+    },
+    "password.update": {
+     "uri": "password",
+     "methods": [
+      "PUT"
+     ]
+    },
+    "logout": {
+     "uri": "logout",
+     "methods": [
+      "POST"
+     ]
+    }
+   },
+   "location": "https://mafgame.org/tournaments/757/game_results"
+  },
+  "flash": {
+   "message": null
+  },
+  "menu": [
+   {
+    "id": 4,
+    "label": "menu.home",
+    "link": "home",
+    "enabled": 1,
+    "raw_prefix": "﻿<i class=\"bi bi-house-heart\"></i>",
+    "raw_suffix": null,
+    "parent_id": null
+   },
+   {
+    "id": 5,
+    "label": "menu.tournaments",
+    "link": "tournaments",
+    "enabled": 1,
+    "raw_prefix": "﻿<i class=\"bi bi-trophy\"></i>",
+    "raw_suffix": null,
+    "parent_id": null
+   },
+   {
+    "id": 10,
+    "label": "menu.participants",
+    "link": "#",
+    "enabled": 1,
+    "raw_prefix": "﻿<i class=\"bi bi-person\"></i>",
+    "raw_suffix": null,
+    "subItems": [
+     {
+      "id": 20,
+      "label": "menu.global_rating",
+      "link": "global_rating",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 10
+     },
+     {
+      "id": 21,
+      "label": "menu.referee_list",
+      "link": "public_referees",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 10
+     },
+     {
+      "id": 22,
+      "label": "menu.country_rating",
+      "link": "country_rating",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 10
+     },
+     {
+      "id": 9,
+      "label": "menu.bans",
+      "link": "bans",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 10
+     },
+     {
+      "id": 11,
+      "label": "menu.hall_of_fame",
+      "link": "page.offline_hall_of_fame",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 10
+     }
+    ],
+    "parent_id": null
+   },
+   {
+    "id": 6,
+    "label": "menu.clubs",
+    "link": "clubs",
+    "enabled": 1,
+    "raw_prefix": "﻿<i class=\"bi bi-people\"></i>",
+    "raw_suffix": null,
+    "parent_id": null
+   },
+   {
+    "id": 7,
+    "label": "menu.rules",
+    "link": "#",
+    "enabled": 1,
+    "raw_prefix": "﻿<i class=\"bi bi-journal-medical\"></i>",
+    "raw_suffix": null,
+    "subItems": [
+     {
+      "id": 8,
+      "label": "menu.mafgame_rules",
+      "link": "/pages/rules",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 7
+     },
+     {
+      "id": 12,
+      "label": "menu.mafgame_points",
+      "link": "/pages/mafgame_points",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 7
+     },
+     {
+      "id": 13,
+      "label": "menu.tournament_rules",
+      "link": "/pages/tournaments_rules",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 7
+     },
+     {
+      "id": 19,
+      "label": "menu.code_of_conduct",
+      "link": "/pages/code_of_conduct",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 7
+     }
+    ],
+    "parent_id": null
+   },
+   {
+    "id": 14,
+    "label": "menu.mafgame",
+    "link": "#",
+    "enabled": 1,
+    "raw_prefix": "<image src=\"/logo-without-text.png\" class=\"menu-icon\">",
+    "raw_suffix": null,
+    "subItems": [
+     {
+      "id": 16,
+      "label": "menu.management",
+      "link": "/pages/management",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 14
+     },
+     {
+      "id": 17,
+      "label": "menu.judges",
+      "link": "/pages/judges",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 14
+     },
+     {
+      "id": 18,
+      "label": "menu.discipline",
+      "link": "/pages/discipline",
+      "enabled": 1,
+      "raw_prefix": null,
+      "raw_suffix": null,
+      "parent_id": 14
+     }
+    ],
+    "parent_id": null
+   }
+  ],
+  "tournament": {
+   "id": 757,
+   "parent_tournament_id": null,
+   "club_id": 4,
+   "region_id": 3,
+   "name": "\"Mafia Champions league\" Europe 2026",
+   "start_date": "2026-11-21",
+   "days": 2,
+   "global": 1,
+   "online": 0,
+   "english": 0,
+   "teams": 0,
+   "serial": 1,
+   "team_size": 0,
+   "scheme_id": 677,
+   "rating_type": 0,
+   "expected_participants": 10,
+   "no_of_stars": 4,
+   "city_id": 3067696,
+   "participation_fee": "120.00",
+   "participation_currency_id": 49,
+   "service_fee_amount_paid": "50.00",
+   "service_fee_per_player": "5.00",
+   "service_fee_correction": "0.00",
+   "registration_open": 0,
+   "players_confirmed": 1,
+   "social_link": null,
+   "commenter_room_url": null,
+   "embedded_doc": null,
+   "visible": 1,
+   "show_participants": 1,
+   "description": "",
+   "regulations": null,
+   "status": "closed",
+   "final_closed": 0,
+   "organised_by": 101,
+   "main_referee_id": 101,
+   "report_provided": 0,
+   "reported_too_late": 0,
+   "approved_by_vp": 0,
+   "closed_at": "2026-11-22",
+   "created_at": "2026-02-14T17:04:51.000000Z",
+   "updated_at": "2026-11-24T17:46:57.000000Z",
+   "mvp_prize": "0.00",
+   "mvp_prize_local": "0.00",
+   "prize_currency_id": null,
+   "mvp_prize_eur": null,
+   "prize_conversion_status": null,
+   "prize_history_currency": null,
+   "prize_history_currency_id": null
+  },
+  "user_props": {
+   "show_judging_tab": false,
+   "subscribed": false,
+   "can_edit": false,
+   "can_manage_organizers": false,
+   "banned": false,
+   "player_id": null,
+   "has_hidden_results": false,
+   "hide_tournament_results": 0
+  },
+  "games": {
+   "results": {
+    "1-1-1": "black",
+    "1-2-1": "black",
+    "1-3-1": "black",
+    "1-4-1": "black",
+    "1-5-1": "red",
+    "1-6-1": "black",
+    "1-7-1": "black",
+    "1-8-1": "red",
+    "1-9-1": "black",
+    "1-10-1": "red",
+    "1-11-1": "red",
+    "1-12-1": "red",
+    "1-13-1": "red",
+    "1-14-1": "black",
+    "1-15-1": "red",
+    "1-16-1": "black"
+   },
+   "seats": {
+    "1-1-1-1": {
+     "place": 1,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-2": {
+     "place": 2,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-3": {
+     "place": 3,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-4": {
+     "place": 4,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-5": {
+     "place": 5,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-1-1-6": {
+     "place": 6,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-7": {
+     "place": 7,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-8": {
+     "place": 8,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-9": {
+     "place": 9,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-1-1-10": {
+     "place": 10,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0.13
+    },
+    "1-2-1-1": {
+     "place": 1,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-2": {
+     "place": 2,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-3": {
+     "place": 3,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-4": {
+     "place": 4,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-5": {
+     "place": 5,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-6": {
+     "place": 6,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-7": {
+     "place": 7,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0.2
+    },
+    "1-2-1-8": {
+     "place": 8,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-9": {
+     "place": 9,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-2-1-10": {
+     "place": 10,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-1": {
+     "place": 1,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-2": {
+     "place": 2,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-3": {
+     "place": 3,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-4": {
+     "place": 4,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-5": {
+     "place": 5,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-6": {
+     "place": 6,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-7": {
+     "place": 7,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-8": {
+     "place": 8,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0.13
+    },
+    "1-3-1-9": {
+     "place": 9,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-3-1-10": {
+     "place": 10,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-1": {
+     "place": 1,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-2": {
+     "place": 2,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-3": {
+     "place": 3,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-4": {
+     "place": 4,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-4-1-5": {
+     "place": 5,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-6": {
+     "place": 6,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-7": {
+     "place": 7,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-8": {
+     "place": 8,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-4-1-9": {
+     "place": 9,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 2,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0.25,
+     "penalty": 0,
+     "Ci": 0.07
+    },
+    "1-4-1-10": {
+     "place": 10,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-1": {
+     "place": 1,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-2": {
+     "place": 2,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 2,
+     "game_points": 0.75,
+     "game_bonus": 0.05,
+     "best_move_bonus": 0.25,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-3": {
+     "place": 3,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-4": {
+     "place": 4,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-5": {
+     "place": 5,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-6": {
+     "place": 6,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-5-1-7": {
+     "place": 7,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-8": {
+     "place": 8,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-9": {
+     "place": 9,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-5-1-10": {
+     "place": 10,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-1": {
+     "place": 1,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-2": {
+     "place": 2,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-6-1-3": {
+     "place": 3,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-4": {
+     "place": 4,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-5": {
+     "place": 5,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-6": {
+     "place": 6,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-7": {
+     "place": 7,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-8": {
+     "place": 8,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-9": {
+     "place": 9,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-6-1-10": {
+     "place": 10,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-1": {
+     "place": 1,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-2": {
+     "place": 2,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-3": {
+     "place": 3,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-4": {
+     "place": 4,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-5": {
+     "place": 5,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-6": {
+     "place": 6,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-7": {
+     "place": 7,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-8": {
+     "place": 8,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-7-1-9": {
+     "place": 9,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-7-1-10": {
+     "place": 10,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-8-1-1": {
+     "place": 1,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-2": {
+     "place": 2,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-3": {
+     "place": 3,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-4": {
+     "place": 4,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "sheriff",
+     "killed_first": 1,
+     "best_move": 2,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0.25,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-5": {
+     "place": 5,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-6": {
+     "place": 6,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-7": {
+     "place": 7,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-8": {
+     "place": 8,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-9": {
+     "place": 9,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-8-1-10": {
+     "place": 10,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-1": {
+     "place": 1,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-2": {
+     "place": 2,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-3": {
+     "place": 3,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-4": {
+     "place": 4,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-5": {
+     "place": 5,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-6": {
+     "place": 6,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-7": {
+     "place": 7,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0.13
+    },
+    "1-9-1-8": {
+     "place": 8,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-9-1-9": {
+     "place": 9,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-9-1-10": {
+     "place": 10,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-1": {
+     "place": 1,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-2": {
+     "place": 2,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-3": {
+     "place": 3,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-4": {
+     "place": 4,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-5": {
+     "place": 5,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-6": {
+     "place": 6,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-7": {
+     "place": 7,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-8": {
+     "place": 8,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-10-1-9": {
+     "place": 9,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0.2,
+     "Ci": 0
+    },
+    "1-10-1-10": {
+     "place": 10,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-1": {
+     "place": 1,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "sheriff",
+     "killed_first": 1,
+     "best_move": 2,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0.25,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-2": {
+     "place": 2,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-3": {
+     "place": 3,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-4": {
+     "place": 4,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-5": {
+     "place": 5,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-6": {
+     "place": 6,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-7": {
+     "place": 7,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-8": {
+     "place": 8,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-9": {
+     "place": 9,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-11-1-10": {
+     "place": 10,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-1": {
+     "place": 1,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "sheriff",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-2": {
+     "place": 2,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-3": {
+     "place": 3,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-4": {
+     "place": 4,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-5": {
+     "place": 5,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-6": {
+     "place": 6,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-7": {
+     "place": 7,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-8": {
+     "place": 8,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-9": {
+     "place": 9,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-12-1-10": {
+     "place": 10,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-1": {
+     "place": 1,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-2": {
+     "place": 2,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-3": {
+     "place": 3,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-4": {
+     "place": 4,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-5": {
+     "place": 5,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-6": {
+     "place": 6,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-7": {
+     "place": 7,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-8": {
+     "place": 8,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-9": {
+     "place": 9,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-13-1-10": {
+     "place": 10,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-1": {
+     "place": 1,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-2": {
+     "place": 2,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-3": {
+     "place": 3,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-4": {
+     "place": 4,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0.07
+    },
+    "1-14-1-5": {
+     "place": 5,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0.4,
+     "Ci": 0
+    },
+    "1-14-1-6": {
+     "place": 6,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-7": {
+     "place": 7,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-8": {
+     "place": 8,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-9": {
+     "place": 9,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-14-1-10": {
+     "place": 10,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-1": {
+     "place": 1,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-2": {
+     "place": 2,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-3": {
+     "place": 3,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 1,
+     "game_points": 0.75,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-4": {
+     "place": 4,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-5": {
+     "place": 5,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0.4,
+     "Ci": 0
+    },
+    "1-15-1-6": {
+     "place": 6,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.3,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-7": {
+     "place": 7,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-8": {
+     "place": 8,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-9": {
+     "place": 9,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.4,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-15-1-10": {
+     "place": 10,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.1,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-1": {
+     "place": 1,
+     "player_id": 15402,
+     "original_nickname": "KEX",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-2": {
+     "place": 2,
+     "player_id": 15406,
+     "original_nickname": "Грешник",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-3": {
+     "place": 3,
+     "player_id": 15397,
+     "original_nickname": "TOPS",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-4": {
+     "place": 4,
+     "player_id": 15403,
+     "original_nickname": "qUAest0r",
+     "role": "don",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-5": {
+     "place": 5,
+     "player_id": 15598,
+     "original_nickname": "Айвенго",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-6": {
+     "place": 6,
+     "player_id": 15401,
+     "original_nickname": "Kiwi",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-7": {
+     "place": 7,
+     "player_id": 15399,
+     "original_nickname": "Монтгомери",
+     "role": "black",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0.75,
+     "game_bonus": 0.2,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-8": {
+     "place": 8,
+     "player_id": 15404,
+     "original_nickname": "DOVOD",
+     "role": "red",
+     "killed_first": 1,
+     "best_move": 2,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0.25,
+     "penalty": 0,
+     "Ci": 0.13
+    },
+    "1-16-1-9": {
+     "place": 9,
+     "player_id": 15400,
+     "original_nickname": "***Алиса***",
+     "role": "red",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "1-16-1-10": {
+     "place": 10,
+     "player_id": 15398,
+     "original_nickname": "LogisticPro",
+     "role": "sheriff",
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0,
+     "Ci": 0
+    },
+    "2-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "2-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "3-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "4-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "5-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "6-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "7-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "8-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "9-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "10-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "11-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "12-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "13-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "14-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "15-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "16-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "17-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "18-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "19-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "20-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-1": {
+     "place": 1,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-2": {
+     "place": 2,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-3": {
+     "place": 3,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-4": {
+     "place": 4,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-5": {
+     "place": 5,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-6": {
+     "place": 6,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-7": {
+     "place": 7,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-8": {
+     "place": 8,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-9": {
+     "place": 9,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    },
+    "21-1-1-10": {
+     "place": 10,
+     "player_id": null,
+     "original_nickname": null,
+     "role": null,
+     "killed_first": 0,
+     "best_move": 0,
+     "game_points": 0,
+     "game_bonus": 0,
+     "best_move_bonus": 0,
+     "penalty": 0
+    }
+   },
+   "missing": {
+    "1-1": [],
+    "1-2": [],
+    "1-3": [],
+    "1-4": [],
+    "1-5": [],
+    "1-6": [],
+    "1-7": [],
+    "1-8": [],
+    "1-9": [],
+    "1-10": [],
+    "1-11": [],
+    "1-12": [],
+    "1-13": [],
+    "1-14": [],
+    "1-15": [],
+    "1-16": [],
+    "2-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "3-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "4-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "5-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "6-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "7-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "8-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "9-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "10-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "11-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "12-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "13-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "14-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "15-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "16-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "17-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "18-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "19-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "20-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ],
+    "21-1": [
+     "***Алиса***",
+     "DOVOD",
+     "KEX",
+     "Kiwi",
+     "LogisticPro",
+     "TOPS",
+     "qUAest0r",
+     "Айвенго",
+     "Грешник",
+     "Монтгомери"
+    ]
+   },
+   "part_data": {
+    "1": {
+     "id": 1168,
+     "number": 1,
+     "name": "Final",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 16,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 0,
+     "sum_score_with": 0,
+     "has_score_table": true,
+     "rating_type": 1,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "2": {
+     "id": 1170,
+     "number": 2,
+     "name": "Mafia Champions League Europe 2024. Prague/01",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 768,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "3": {
+     "id": 1285,
+     "number": 3,
+     "name": "Mafia Champions League Europe 2026. Prague/02",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 823,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "4": {
+     "id": 1363,
+     "number": 4,
+     "name": "\"Mafia Champions league\" Europe 2026. Israel/Ramat Gan/01",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 853,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "5": {
+     "id": 1380,
+     "number": 5,
+     "name": "Mafia Champions League Europe 2026. Cologne/03",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 861,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "6": {
+     "id": 1397,
+     "number": 6,
+     "name": "Mafia Champions League Europe 2026. Brussel/04",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 871,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "7": {
+     "id": 1402,
+     "number": 7,
+     "name": "Mafia Champions League Europe 2026. Chemnitz/05",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 874,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "8": {
+     "id": 1423,
+     "number": 8,
+     "name": "\"Mafia Champions league\" Europe 2026. Cyprus/Limassol/01",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 884,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "9": {
+     "id": 1431,
+     "number": 9,
+     "name": "\"Mafia Champions league\" Europe 2026. Israel/Haifa/02",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 889,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "10": {
+     "id": 1471,
+     "number": 10,
+     "name": "\"Mafia Champions league\" Europe 2026. Israel/Ramat Gan/03",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 910,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "11": {
+     "id": 1475,
+     "number": 11,
+     "name": "\"Mafia Champions league\" Europe 2026. Cyprus/Limassol/02",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 912,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "12": {
+     "id": 1477,
+     "number": 12,
+     "name": "\"Mafia Champions league\" Europe 2026. Cyprus/Limassol/03",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 913,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "13": {
+     "id": 1525,
+     "number": 13,
+     "name": "Mafia Champions League Europe 2026. Nürnberg/06",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 940,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "14": {
+     "id": 1529,
+     "number": 14,
+     "name": "\"Mafia Champions league\" Europe 2026. Israel/Haifa/04",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 942,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "15": {
+     "id": 1536,
+     "number": 15,
+     "name": "Mafia Champions League Europe 2026. Nürnberg/07",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 947,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "16": {
+     "id": 1547,
+     "number": 16,
+     "name": "Mafia Champions League Europe 2026. Prague/07",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 951,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "17": {
+     "id": 1577,
+     "number": 17,
+     "name": "\"Mafia Champions league\" Europe 2026. Israel/Ramat Gan/05",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 965,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "18": {
+     "id": 1633,
+     "number": 18,
+     "name": "Mafia Champions League Europe 2026. Israel/Semifinal",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 994,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "19": {
+     "id": 1659,
+     "number": 19,
+     "name": "Mafia Champions League Europe 2026. Cyprus/Semifinal",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 1006,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "20": {
+     "id": 1673,
+     "number": 20,
+     "name": "Mafia Champions League Europe 2026. Torrevieja/09",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 1012,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    },
+    "21": {
+     "id": 1687,
+     "number": 21,
+     "name": "Mafia Champions League Europe 2026. Wroclaw/10",
+     "player_count": 10,
+     "tables": 1,
+     "sessions": 1,
+     "tour_koef": 1,
+     "ci_distance_number": 1,
+     "hide_results": 0,
+     "serial_child_tournament": 1019,
+     "sum_score_with": 0,
+     "has_score_table": false,
+     "rating_type": 0,
+     "is_final": 0,
+     "tour_win_points": 0.75
+    }
+   },
+   "tournament": {
+    "id": 757,
+    "parent_tournament_id": null,
+    "club_id": 4,
+    "region_id": 3,
+    "name": "\"Mafia Champions league\" Europe 2026",
+    "start_date": "2026-11-21",
+    "days": 2,
+    "global": 1,
+    "online": 0,
+    "english": 0,
+    "teams": 0,
+    "serial": 1,
+    "team_size": 0,
+    "scheme_id": 677,
+    "rating_type": 0,
+    "expected_participants": 10,
+    "no_of_stars": 4,
+    "city_id": 3067696,
+    "participation_fee": "120.00",
+    "participation_currency_id": 49,
+    "service_fee_amount_paid": "50.00",
+    "service_fee_per_player": "5.00",
+    "service_fee_correction": "0.00",
+    "registration_open": 0,
+    "players_confirmed": 1,
+    "social_link": null,
+    "commenter_room_url": null,
+    "embedded_doc": null,
+    "visible": 1,
+    "show_participants": 1,
+    "description": "",
+    "regulations": null,
+    "status": "closed",
+    "final_closed": 0,
+    "organised_by": 101,
+    "main_referee_id": 101,
+    "report_provided": 0,
+    "reported_too_late": 0,
+    "approved_by_vp": 0,
+    "closed_at": "2026-11-22",
+    "created_at": "2026-02-14T17:04:51.000000Z",
+    "updated_at": "2026-11-24T17:46:57.000000Z",
+    "mvp_prize": "0.00",
+    "mvp_prize_local": "0.00",
+    "prize_currency_id": null,
+    "mvp_prize_eur": null,
+    "prize_conversion_status": null,
+    "prize_history_currency": null,
+    "prize_history_currency_id": null,
+    "prize_places": [
+     {
+      "id": 576,
+      "tournament_id": 757,
+      "position": 1,
+      "teams": 0,
+      "prize": "785.00",
+      "prize_local": "700.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     },
+     {
+      "id": 577,
+      "tournament_id": 757,
+      "position": 2,
+      "teams": 0,
+      "prize": "560.00",
+      "prize_local": "500.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     },
+     {
+      "id": 578,
+      "tournament_id": 757,
+      "position": 3,
+      "teams": 0,
+      "prize": "450.00",
+      "prize_local": "400.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     },
+     {
+      "id": 579,
+      "tournament_id": 757,
+      "position": 4,
+      "teams": 0,
+      "prize": "225.00",
+      "prize_local": "200.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     },
+     {
+      "id": 580,
+      "tournament_id": 757,
+      "position": 5,
+      "teams": 0,
+      "prize": "225.00",
+      "prize_local": "200.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     },
+     {
+      "id": 581,
+      "tournament_id": 757,
+      "position": 6,
+      "teams": 0,
+      "prize": "0.00",
+      "prize_local": "0.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     },
+     {
+      "id": 582,
+      "tournament_id": 757,
+      "position": 7,
+      "teams": 0,
+      "prize": "0.00",
+      "prize_local": "0.00",
+      "created_at": "2026-07-01T20:54:13.000000Z",
+      "updated_at": "2026-10-24T11:49:10.000000Z",
+      "prize_eur": null
+     }
+    ]
+   },
+   "hide_tournament_results": 0,
+   "results_calculated": true,
+   "show_game_comments": true,
+   "game_comments": {
+    "1-1-1": "3 игра в 4-5\n5 промах, связал себя с 2\n7 игра в 4, 6 считала красным \n8 переиграл 9, вышел с попила \n9 вскрылся не откатил до голосования",
+    "1-2-1": "2 единственный 2 раза голосовал в черного в этой игре \n4 нашел шерифа\n8 развил атаку в 2-6 которых до этого никто не подозревал \n10 переиграла 9 , купила голосов всех мирных и шерифа",
+    "1-3-1": "1 собирала в 6, хоть и завещание неправильное \n2 набрал красноты , собрал на 3в3\n4 оставил правильно шерифа, объявлял голосование с черным \n6 замался и говорил плохие речи топя контркоманду\n9 выиграла версию",
+    "1-4-1": "2 сломал в шерифа \n3 вскрылся красному в ноль. Хорошее завещание \n4 играл против 5-7. Штраф дисциплинарный за крики \n6 оставил 8-10 красными",
+    "1-5-1": "1 - игра в 3-6, правильное аргументированное завещание \n2 - завещание 1-8-9 мирные в которое играли \n4 - игра в 3 поверх всех кто играл с 3\n5 - проверка в 6, голосование в 7. Доп снижен за излишний эмоционал \n6 - промах \n8 - игра в 6\n9 - поверка в 7, собирал в 7\n10 - проверка черного ( первый раз за финал проверил шериф черного в первую ночь), проверка 6",
+    "1-6-1": "1. Выбрал шерифа с аргументами , забрал 3 , оставил 4 красным \n2. Правильно сыграл под 1, купил 5\n3. Взял удар на себя \n4. Нашел 7 красным который в него играл, выбрал шерифа, нашел 3 и почти дошел до 2.\n6 аргументировано выбрало правильно шерифа \n7 оставил правильно шерифа, и 6 красной \n8 оставил 4 красных цвета",
+    "1-7-1": "2 дал динамику на шерифа в ноль .\nУбил во вторую без проверки , купил 1-8\n7 проверил 5-9 черные вскрылся красному в ноль \n8 прикрыл шерифа\n9 промах\n10 штраф 7.4.2.2",
+    "1-8-1": "1 игра в 2\n3 поставил в 1\n5 красные 1-6-8 завещание\n7 переиграла 10\n8 ставил в 7 в пятерке, оставил правильное завещание перед угадайкой\n9 дал динамику в шерифа",
+    "1-9-1": "2. Dovod - игра в 5-10\n5. Выиграл версию будучи не доном \n8. Играл в 1-2-3 красные \n9. Купила много красных. Промах\n10. Впитал в себя проверку",
+    "1-10-1": "1 противовес с 7\n3 собирал в 7, оставил 10 шерифом \n4 игра в 7, голосование на критике \n5 первым определился с шерифом , голосовал против 9\n6 собирал в 7, правильное завещание \n9 промах \n10 игра в 8",
+    "1-11-1": "2 выиграла версию у пу на круг\n3 собирал в 2 \n4 игра в 1, игра в 2\n6 динамика в шерифа\n7 игра в 6, завещание правильное \n10 голосование только в черных в игре",
+    "1-12-1": "2 игра в 9\n3 оставил 6 красной, не разыгрывать противовес \n6 игра в 9-10\n7 нашел 5 красным \n8 нашел 9-10",
+    "1-13-1": "1. Игра в 10\n2. Проверка 5\n4. Нашел 8 красным, вписался в версию\n7. Вскрылся 2 в ноль, проверил черных. \n8. Сыграл без баланса в правильную версию \n9. Оставил точно шерифом 7",
+    "1-14-1": "5. 7.4.3.6 без баланса на 3в3\n6 купил 1\n7 купил шерифа, не снял 9 при этом в него проголоосовал \n8 нашла 5 красным, голосовала в черного 9 всегда \n9 развил атаку в 2-3, 8-10",
+    "1-15-1": "1 доп уменьшен за эмоционал \n7.4.3.16. недоставил на 3в3\n3 оставил 5 не шерифом \n6 правильное завещание с аргументами \n7 спрятался в девятке \n8 купила 4\n9 спрятал шерифа, собирал в 5, правильно играл против 8-10\n10 собрал в 1",
+    "1-16-1": "1. На критике с горе пополам оставил правильное завещание . Объявлял голосование 4-6\n7. Рисковал просил на себя проверку, правильно построил игру против 2-5"
+   }
+  }
+ },
+ "url": "/tournaments/757/game_results",
+ "version": "b106c955e4e1e4d79a80a736f55b7a89",
+ "clearHistory": false,
+ "encryptHistory": false
+}
