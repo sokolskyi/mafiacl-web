@@ -101,7 +101,7 @@
 | `telegram-dispatch` | каждые 5 мин | `api/telegram/dispatch` → `lib/telegram/dispatch.ts` (очередь `notifications`) |
 | `season-review` | 1-го числа 07:13 | `api/cron/season-review` → `lib/reviews/*` |
 | `shop-expire-orders` | :17 каждый час | снимает неоплаченные заказы |
-| `kings-warm` | каждые 5 мин | `api/cron/kings-warm` — держит в кеше свежую страницу текущего сезона Kings |
+| `kings-warm` | каждые 5 мин | `api/cron/kings-warm` — держит в кеше свежие страницы Kings: текущий сезон, его 4 рейтинга, прошлые сезоны |
 
 - Вызовы из БД идут через pg_net; бывают ошибки «HTTP2 framing» — перед POST делается прогревочный GET (сейчас только в mafgame-kick).
 - Сброс кэша: POST `api/cron/revalidate` с заголовком `x-cron-secret` → `revalidateTag(tag, {expire: 0})`. Теги: `games`, `matches`, `tournaments`, `mafgame`, `blog-posts`, `blog-stats`, `player-aliases`, `rating-archive`, `hall-archive`, `season-reviews`, `shop`, `partners`, `hosts`, `promotions`, `testimonials`, `titles`, `bans`, `venues`, `kings`.
