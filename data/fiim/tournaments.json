@@ -1,7 +1,7 @@
 {
- "source": "fiim.world, город Харьков, все годы",
+ "source": "fiim.world: Харьков за все годы + серии Mafia Champions League и Mafia Stars в других городах + Прага",
  "fetched": "2026-11-25",
- "rule": "наши — по словам администрации клуба 25.11.2026; с 2018 сверено с полем «Организатор» на ФИИМ (YeS = наш)",
+ "rule": "ours=true — турнир клуба, идёт в статистику клуба (по словам администрации клуба 25.11.2026; с 2018 сверено с «Организатор» = YeS). project=true, ours=false — отборочные серии лиг клуба (Mafia Champions League, Mafia Stars), отданные другим клубам: показывать как часть лиги, в статистику клуба не включать. MafiaCL Championship 2013 на ФИИМ нет (проводился в клубе до федерации).",
  "tournaments": [
   {
    "fiim_id": 26,
@@ -11,7 +11,9 @@
    "kind": "personal",
    "stars_or_level": 20,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 34,
@@ -21,7 +23,9 @@
    "kind": "personal",
    "stars_or_level": 40,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 51,
@@ -31,7 +35,9 @@
    "kind": "personal",
    "stars_or_level": 20,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 41,
@@ -41,7 +47,9 @@
    "kind": "personal",
    "stars_or_level": 50,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 78,
@@ -51,7 +59,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 82,
@@ -61,7 +71,9 @@
    "kind": "personal",
    "stars_or_level": 60,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 93,
@@ -71,7 +83,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 118,
@@ -81,7 +95,9 @@
    "kind": "team",
    "stars_or_level": 40,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 146,
@@ -91,7 +107,9 @@
    "kind": "personal",
    "stars_or_level": 70,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 147,
@@ -101,7 +119,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 179,
@@ -111,7 +131,9 @@
    "kind": "team",
    "stars_or_level": 40,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 151,
@@ -121,7 +143,9 @@
    "kind": "personal",
    "stars_or_level": 60,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 181,
@@ -131,7 +155,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 228,
@@ -141,7 +167,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 231,
@@ -151,7 +179,9 @@
    "kind": "personal",
    "stars_or_level": 25,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 233,
@@ -161,7 +191,9 @@
    "kind": "personal",
    "stars_or_level": 70,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 232,
@@ -171,7 +203,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 234,
@@ -181,7 +215,9 @@
    "kind": "team",
    "stars_or_level": 50,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 229,
@@ -191,7 +227,9 @@
    "kind": "personal",
    "stars_or_level": 80,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 230,
@@ -201,7 +239,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 381,
@@ -211,7 +251,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 384,
@@ -221,7 +263,9 @@
    "kind": "personal",
    "stars_or_level": 60,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 313,
@@ -231,7 +275,21 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 383,
+   "url": "https://fiim.world/tournaments/383",
+   "date": "2018-06-23",
+   "name": "MAFIA STARS Ukraine 2018",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": null,
+   "ours": false,
+   "city": "Днепр",
+   "project": true
   },
   {
    "fiim_id": 386,
@@ -241,7 +299,9 @@
    "kind": "team",
    "stars_or_level": 50,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 388,
@@ -251,7 +311,9 @@
    "kind": "personal",
    "stars_or_level": 80,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 389,
@@ -261,7 +323,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 446,
@@ -271,7 +335,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 595,
@@ -281,7 +347,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 458,
@@ -291,7 +359,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 601,
@@ -301,7 +371,9 @@
    "kind": "series",
    "stars_or_level": 80,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 603,
@@ -311,7 +383,9 @@
    "kind": "team",
    "stars_or_level": 60,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 610,
@@ -321,7 +395,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 956,
@@ -331,7 +407,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 957,
@@ -341,7 +419,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 958,
@@ -351,7 +431,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 959,
@@ -361,7 +443,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 961,
@@ -371,7 +455,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 962,
@@ -381,7 +467,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 964,
@@ -391,7 +479,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 971,
@@ -401,7 +491,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 839,
@@ -411,7 +503,21 @@
    "kind": "team",
    "stars_or_level": 50,
    "organizer": "Бородач",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 860,
+   "url": "https://fiim.world/tournaments/860",
+   "date": "2020-07-17",
+   "name": "Mafia Stars Ukraine 2020",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": null,
+   "ours": false,
+   "city": "Днепр",
+   "project": true
   },
   {
    "fiim_id": 996,
@@ -421,7 +527,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 688,
@@ -431,7 +539,9 @@
    "kind": "series",
    "stars_or_level": 50,
    "organizer": null,
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 994,
@@ -441,7 +551,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 842,
@@ -451,7 +563,9 @@
    "kind": "personal",
    "stars_or_level": 40,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1000,
@@ -461,7 +575,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1052,
@@ -471,7 +587,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1066,
@@ -481,7 +599,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1090,
@@ -491,7 +611,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 995,
@@ -501,7 +623,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1014,
@@ -511,7 +635,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1131,
@@ -521,7 +647,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1145,
@@ -531,7 +659,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1161,
@@ -541,7 +671,21 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1146,
+   "url": "https://fiim.world/tournaments/1146",
+   "date": "2020-11-29",
+   "name": "Mafia Champions League 2020/2021. Серия 4. Днепр",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
   },
   {
    "fiim_id": 1244,
@@ -551,7 +695,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 858,
@@ -561,7 +707,9 @@
    "kind": "series",
    "stars_or_level": 50,
    "organizer": "SuperAdmin",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1246,
@@ -571,7 +719,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1303,
@@ -581,7 +731,45 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 1429,
+   "url": "https://fiim.world/tournaments/1429",
+   "date": "2021-01-30",
+   "name": "MAFIA STARS 2021 Zaporozhye",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Big Fish mafia club , Экстрасенс",
+   "ours": false,
+   "city": "Запорожье",
+   "project": true
+  },
+  {
+   "fiim_id": 1319,
+   "url": "https://fiim.world/tournaments/1319",
+   "date": "2021-01-30",
+   "name": "MAFIA STARS 2021 Kryvyi Rih",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Palad1N",
+   "ours": false,
+   "city": "Кривой Рог",
+   "project": true
+  },
+  {
+   "fiim_id": 1445,
+   "url": "https://fiim.world/tournaments/1445",
+   "date": "2021-02-06",
+   "name": "Mafia Champions League 2020/2021. Серия 6. Киев",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Сталкер",
+   "ours": false,
+   "city": "Киев",
+   "project": true
   },
   {
    "fiim_id": 1403,
@@ -591,7 +779,33 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1500,
+   "url": "https://fiim.world/tournaments/1500",
+   "date": "2021-02-20",
+   "name": "MAFIA STARS 2021 Kherson",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Континент",
+   "ours": false,
+   "city": "Херсон",
+   "project": true
+  },
+  {
+   "fiim_id": 1505,
+   "url": "https://fiim.world/tournaments/1505",
+   "date": "2021-02-20",
+   "name": "MAFIA STARS 2021 Lviv",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Ямаха",
+   "ours": false,
+   "city": "Львов",
+   "project": true
   },
   {
    "fiim_id": 1426,
@@ -601,7 +815,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1501,
@@ -611,7 +827,33 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1485,
+   "url": "https://fiim.world/tournaments/1485",
+   "date": "2021-03-06",
+   "name": "Mafia Champions League 2020/2021. Серия 7. Запорожье",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Big Fish mafia club , Экстрасенс",
+   "ours": false,
+   "city": "Запорожье",
+   "project": true
+  },
+  {
+   "fiim_id": 1518,
+   "url": "https://fiim.world/tournaments/1518",
+   "date": "2021-03-06",
+   "name": "MAFIA STARS 2021 Kyiv",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Сталкер",
+   "ours": false,
+   "city": "Киев",
+   "project": true
   },
   {
    "fiim_id": 1522,
@@ -621,7 +863,69 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Кифлык",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1507,
+   "url": "https://fiim.world/tournaments/1507",
+   "date": "2021-03-07",
+   "name": "MAFIA STARS 2021 Odessa",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Rock",
+   "ours": false,
+   "city": "Одесса",
+   "project": true
+  },
+  {
+   "fiim_id": 1508,
+   "url": "https://fiim.world/tournaments/1508",
+   "date": "2021-03-13",
+   "name": "MAFIA STARS 2021 Kremenchug",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Домино",
+   "ours": false,
+   "city": "Кременчуг",
+   "project": true
+  },
+  {
+   "fiim_id": 1509,
+   "url": "https://fiim.world/tournaments/1509",
+   "date": "2021-03-14",
+   "name": "MAFIA STARS 2021 Poltava",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Lucky",
+   "ours": false,
+   "city": "Полтава",
+   "project": true
+  },
+  {
+   "fiim_id": 1486,
+   "url": "https://fiim.world/tournaments/1486",
+   "date": "2021-03-20",
+   "name": "Mafia Champions League 2020/2021. Серия 8. Кривой Рог",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Palad1N",
+   "ours": false,
+   "city": "Кривой Рог",
+   "project": true
+  },
+  {
+   "fiim_id": 1524,
+   "url": "https://fiim.world/tournaments/1524",
+   "date": "2021-03-20",
+   "name": "MAFIA STARS 2021 Cherkasy",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Рауль",
+   "ours": false,
+   "city": "Черкассы",
+   "project": true
   },
   {
    "fiim_id": 1533,
@@ -631,7 +935,57 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Кифлык",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1523,
+   "url": "https://fiim.world/tournaments/1523",
+   "date": "2021-03-27",
+   "name": "Mafia Champions League 2020/2021. Серия 9. Киев",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Сталкер",
+   "ours": false,
+   "city": "Киев",
+   "project": true
+  },
+  {
+   "fiim_id": 1535,
+   "url": "https://fiim.world/tournaments/1535",
+   "date": "2021-03-28",
+   "name": "MAFIA STARS 2021 Mykolaiv",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Баобаб1",
+   "ours": false,
+   "city": "Николаев",
+   "project": true
+  },
+  {
+   "fiim_id": 1529,
+   "url": "https://fiim.world/tournaments/1529",
+   "date": "2021-04-11",
+   "name": "Mafia Champions League 2020/2021. Серия 10. Днепр",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Большая Игра , Суфриер",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
+  },
+  {
+   "fiim_id": 1532,
+   "url": "https://fiim.world/tournaments/1532",
+   "date": "2021-04-11",
+   "name": "MAFIA STARS 2021 Minsk",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Самаритянка",
+   "ours": false,
+   "city": "Минск",
+   "project": true
   },
   {
    "fiim_id": 1530,
@@ -641,7 +995,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1567,
@@ -651,7 +1007,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1568,
@@ -661,7 +1019,21 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 1609,
+   "url": "https://fiim.world/tournaments/1609",
+   "date": "2021-05-16",
+   "name": "MAFIA STARS 2021 Kraków",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Красный",
+   "ours": false,
+   "city": "Краков",
+   "project": true
   },
   {
    "fiim_id": 1628,
@@ -671,7 +1043,21 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1605,
+   "url": "https://fiim.world/tournaments/1605",
+   "date": "2021-05-22",
+   "name": "MAFIA STARS 2021 Полуфинал Odessa",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Rock",
+   "ours": false,
+   "city": "Одесса",
+   "project": true
   },
   {
    "fiim_id": 1623,
@@ -681,7 +1067,33 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 1607,
+   "url": "https://fiim.world/tournaments/1607",
+   "date": "2021-05-30",
+   "name": "MAFIA STARS 2021 Brest",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "Эльф_",
+   "ours": false,
+   "city": "Брест",
+   "project": true
+  },
+  {
+   "fiim_id": 1570,
+   "url": "https://fiim.world/tournaments/1570",
+   "date": "2021-06-05",
+   "name": "MAFIA STARS 2021 Warsaw",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Варшава",
+   "project": true
   },
   {
    "fiim_id": 1642,
@@ -691,7 +1103,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 859,
@@ -701,7 +1115,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 1308,
@@ -711,7 +1127,9 @@
    "kind": "personal",
    "stars_or_level": 60,
    "organizer": "Big Fish mafia club , B@LU",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1309,
@@ -721,7 +1139,33 @@
    "kind": "team",
    "stars_or_level": 75,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1697,
+   "url": "https://fiim.world/tournaments/1697",
+   "date": "2021-07-17",
+   "name": "MAFIA STARS 2021 Полуфинал Kyiv",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Киев",
+   "project": true
+  },
+  {
+   "fiim_id": 1726,
+   "url": "https://fiim.world/tournaments/1726",
+   "date": "2021-07-31",
+   "name": "MAFIA STARS 2021 Wien",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Вена",
+   "project": true
   },
   {
    "fiim_id": 1730,
@@ -731,7 +1175,57 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 1727,
+   "url": "https://fiim.world/tournaments/1727",
+   "date": "2021-08-01",
+   "name": "MAFIA STARS 2021 Dnepr",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
+  },
+  {
+   "fiim_id": 1746,
+   "url": "https://fiim.world/tournaments/1746",
+   "date": "2021-08-14",
+   "name": "MAFIA STARS 2021 Полуфинал Dnepr",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
+  },
+  {
+   "fiim_id": 1736,
+   "url": "https://fiim.world/tournaments/1736",
+   "date": "2021-08-21",
+   "name": "MAFIA STARS 2021 Mariupol",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Мариуполь",
+   "project": true
+  },
+  {
+   "fiim_id": 1778,
+   "url": "https://fiim.world/tournaments/1778",
+   "date": "2021-08-27",
+   "name": "MAFIA STARS 2021 Dnepr 2",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
   },
   {
    "fiim_id": 1311,
@@ -741,7 +1235,33 @@
    "kind": "personal",
    "stars_or_level": 40,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 1814,
+   "url": "https://fiim.world/tournaments/1814",
+   "date": "2021-09-12",
+   "name": "MAFIA STARS 2021 Полуфинал Krakow",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Краков",
+   "project": true
+  },
+  {
+   "fiim_id": 1867,
+   "url": "https://fiim.world/tournaments/1867",
+   "date": "2021-09-25",
+   "name": "MAFIA STARS 2021 Полуфинал Dnepr 2",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
   },
   {
    "fiim_id": 1870,
@@ -751,7 +1271,33 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 1862,
+   "url": "https://fiim.world/tournaments/1862",
+   "date": "2021-10-03",
+   "name": "MAFIA STARS 2021 Last chance",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Полтава",
+   "project": true
+  },
+  {
+   "fiim_id": 1310,
+   "url": "https://fiim.world/tournaments/1310",
+   "date": "2021-10-09",
+   "name": "MAFIA STARS 2021",
+   "kind": "series",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": false,
+   "city": "Днепр",
+   "project": true
   },
   {
    "fiim_id": 1955,
@@ -761,7 +1307,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1981,
@@ -771,7 +1319,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Flash",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 1316,
@@ -781,7 +1331,9 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 2345,
@@ -791,7 +1343,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": "Big Ben Mafia Club , Марі",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2359,
@@ -801,7 +1355,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": "Big Ben Mafia Club , Марі",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2395,
@@ -811,7 +1367,9 @@
    "kind": "personal",
    "stars_or_level": null,
    "organizer": "Big Ben Mafia Club , Марі",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2128,
@@ -821,7 +1379,9 @@
    "kind": "personal",
    "stars_or_level": 50,
    "organizer": "Big Fish mafia club , B@LU",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2129,
@@ -831,7 +1391,9 @@
    "kind": "team",
    "stars_or_level": 60,
    "organizer": "Абрам",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2130,
@@ -841,7 +1403,9 @@
    "kind": "personal",
    "stars_or_level": 50,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
   },
   {
    "fiim_id": 2134,
@@ -851,7 +1415,21 @@
    "kind": "personal",
    "stars_or_level": 30,
    "organizer": "YeS",
-   "ours": true
+   "ours": true,
+   "city": "Харьков",
+   "project": true
+  },
+  {
+   "fiim_id": 2527,
+   "url": "https://fiim.world/tournaments/2527",
+   "date": "2023-04-15",
+   "name": "MafiaCl Championship 2023",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": true,
+   "city": "Прага",
+   "project": true
   },
   {
    "fiim_id": 2603,
@@ -861,7 +1439,9 @@
    "kind": "team",
    "stars_or_level": 80,
    "organizer": null,
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2790,
@@ -871,7 +1451,9 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Клуб \"Мафия Харьков\" , Дин",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
   },
   {
    "fiim_id": 2829,
@@ -881,7 +1463,21 @@
    "kind": "series",
    "stars_or_level": 10,
    "organizer": "Клуб \"Мафия Харьков\" , Дин",
-   "ours": false
+   "ours": false,
+   "city": "Харьков",
+   "project": false
+  },
+  {
+   "fiim_id": 2853,
+   "url": "https://fiim.world/tournaments/2853",
+   "date": "2024-02-03",
+   "name": "Турнир Победителей MafiaCl 2024",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": true,
+   "city": "Прага",
+   "project": true
   }
  ]
 }
