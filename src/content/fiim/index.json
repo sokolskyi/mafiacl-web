@@ -6,6 +6,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -22,6 +23,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -38,6 +40,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -54,6 +57,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -70,6 +74,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -86,6 +91,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -102,14 +108,15 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
 "Борщ",
-"Kika",
+"Кика",
 "Гармония"
 ],
-"players": 10
+"players": 32
 },
 {
 "key": "151",
@@ -118,6 +125,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -134,6 +142,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -144,12 +153,30 @@
 "players": 30
 },
 {
+"key": "maf-marathon-2016",
+"name": "Маф-марафон 2016",
+"date": "2016-12-01",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": true,
+"parent": null,
+"stage": false,
+"top": [
+"Кучерявая",
+"Хохольчик",
+"Марта"
+],
+"players": 20
+},
+{
 "key": "228",
 "name": "Ukrainian Students Tournament 2017",
 "date": "2017-02-11",
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -166,6 +193,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -173,7 +201,7 @@
 "Snow",
 "Борщ"
 ],
-"players": 10
+"players": 26
 },
 {
 "key": "232",
@@ -182,10 +210,32 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
-"top": [],
-"players": 0
+"top": [
+"Дин",
+"Franklin",
+"Ятна"
+],
+"players": 34
+},
+{
+"key": "mafiacl-kharkiv-cup-2017",
+"name": "MafiaCl Kharkiv Cup 2017",
+"date": "2017-06-01",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": true,
+"parent": null,
+"stage": false,
+"top": [
+"Борщ",
+"Гармония",
+"Blink"
+],
+"players": 40
 },
 {
 "key": "229",
@@ -194,6 +244,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -210,6 +261,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -220,12 +272,30 @@
 "players": 30
 },
 {
+"key": "maf-marathon-2017",
+"name": "Маф-марафон 2017",
+"date": "2017-12-01",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": true,
+"parent": null,
+"stage": false,
+"top": [
+"YeS",
+"Бенджамин",
+"Кельтас"
+],
+"players": 20
+},
+{
 "key": "381",
 "name": "Ukrainian Students Tournament 2018",
 "date": "2018-02-10",
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -242,6 +312,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -258,6 +329,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -274,6 +346,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -290,6 +363,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -306,6 +380,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -322,6 +397,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -338,6 +414,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -354,6 +431,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [],
@@ -366,12 +444,13 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
+"Кира",
 "Экстрасенс",
-"Шершень",
-"Benjamin"
+"Шершень"
 ],
 "players": 58
 },
@@ -382,6 +461,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": true,
 "top": [
@@ -398,6 +478,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -414,6 +495,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -430,6 +512,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": true,
 "top": [
@@ -446,6 +529,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -462,6 +546,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -478,6 +563,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -494,6 +580,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -510,6 +597,7 @@
 "city": "Запорожье",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -526,6 +614,7 @@
 "city": "Кривой Рог",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -542,6 +631,7 @@
 "city": "Киев",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -558,6 +648,7 @@
 "city": "Херсон",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -574,6 +665,7 @@
 "city": "Львов",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -590,6 +682,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -606,6 +699,7 @@
 "city": "Запорожье",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -622,6 +716,7 @@
 "city": "Киев",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -638,6 +733,7 @@
 "city": "Одесса",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -654,6 +750,7 @@
 "city": "Кременчуг",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -670,6 +767,7 @@
 "city": "Полтава",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -686,6 +784,7 @@
 "city": "Кривой Рог",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -702,6 +801,7 @@
 "city": "Черкассы",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -718,6 +818,7 @@
 "city": "Киев",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -734,6 +835,7 @@
 "city": "Николаев",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -750,6 +852,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -766,6 +869,7 @@
 "city": "Минск",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -782,6 +886,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -798,6 +903,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -814,6 +920,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": "859",
 "stage": true,
 "top": [
@@ -830,6 +937,7 @@
 "city": "Краков",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -846,6 +954,7 @@
 "city": "Одесса",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -862,6 +971,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": true,
 "top": [
@@ -878,6 +988,7 @@
 "city": "Брест",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [],
@@ -890,6 +1001,7 @@
 "city": "Варшава",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -906,6 +1018,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -922,6 +1035,7 @@
 "city": "Киев",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -938,6 +1052,7 @@
 "city": "Вена",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -954,6 +1069,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -970,6 +1086,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -986,6 +1103,7 @@
 "city": "Мариуполь",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1002,6 +1120,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1018,6 +1137,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -1034,6 +1154,7 @@
 "city": "Краков",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1050,6 +1171,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1066,6 +1188,7 @@
 "city": "Харьков",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": true,
 "top": [
@@ -1082,6 +1205,7 @@
 "city": "Полтава",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1098,6 +1222,7 @@
 "city": "Днепр",
 "ours": false,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -1114,6 +1239,7 @@
 "city": "Прага",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [
@@ -1130,6 +1256,7 @@
 "city": "Прага",
 "ours": true,
 "project": true,
+"approx_date": false,
 "parent": null,
 "stage": false,
 "top": [

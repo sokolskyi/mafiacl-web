@@ -9,7 +9,8 @@ import { playerLinks } from "@/components/players/PlayerNameLink";
 const MEDALS = ["🥇", "🥈", "🥉"];
 const TOTAL = new Set(["Итоговый Кф", "Б", "Σ"]);
 
-function dateOf(date: string, locale: Locale) {
+function dateOf(date: string, locale: Locale, approx = false) {
+  if (approx) return date.slice(0, 4);
   return new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
 }
 
@@ -47,7 +48,7 @@ export async function ArchiveIndex({ locale }: { locale: Locale }) {
                   <li key={x.key} className="px-4 py-4">
                     <p className="text-lg font-bold">
                       <ArchiveLink item={x} />
-                      <span className="ml-2 text-sm font-normal text-neutral-400">· {x.city} · {dateOf(x.date, locale)}</span>
+                      <span className="ml-2 text-sm font-normal text-neutral-400">· {x.city} · {dateOf(x.date, locale, x.approx_date)}</span>
                     </p>
                     {x.top.length > 0 ? (
                       <p className="mt-1 text-neutral-200">
@@ -127,7 +128,7 @@ export async function ArchiveTournamentView({ data, locale }: { data: ArchiveTou
       </p>
       <h1 className="mt-2 text-4xl sm:text-5xl">{data.name}</h1>
       <p className="mt-3 text-lg text-neutral-200">
-        {data.city} · {dateOf(data.date, locale)}
+        {data.city} · {dateOf(data.date, locale, data.approx_date)}
       </p>
       {parent && (
         <p className="mt-2 text-neutral-300">
@@ -157,7 +158,7 @@ export async function ArchiveTournamentView({ data, locale }: { data: ArchiveTou
             {stages.map((x) => (
               <li key={x.key} className="px-4 py-3">
                 <ArchiveLink item={x} />
-                <span className="ml-2 text-sm text-neutral-400">· {dateOf(x.date, locale)}</span>
+                <span className="ml-2 text-sm text-neutral-400">· {dateOf(x.date, locale, x.approx_date)}</span>
                 {x.top[0] && <span className="ml-2 text-sm">🥇 {playerLinks(x.top[0], known)}</span>}
                 {!x.ours && <span className="ml-2 text-xs text-neutral-400">({t("archive.otherClub")})</span>}
               </li>
@@ -183,7 +184,9 @@ export async function ArchiveTournamentView({ data, locale }: { data: ArchiveTou
       <p className="mt-10 text-sm text-neutral-400">
         {t("archive.source")}:{" "}
         {data.url ? (
-          <a href={data.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">fiim.world</a>
+          <a href={data.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
+            {data.source === "fiim.world" ? "fiim.world" : t("archive.sourceOldSite")}
+          </a>
         ) : (
           t("archive.sourceVk")
         )}

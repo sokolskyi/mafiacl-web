@@ -15,6 +15,8 @@ export type ArchiveItem = {
   city: string;
   ours: boolean;
   project: boolean;
+  /** Точной даты нет (старый сайт клуба) — показываем только год. */
+  approx_date: boolean;
   /** Ключ финала, к которому относится этот этап (серия, полуфинал). */
   parent: string | null;
   /** Этап серии (в том числе без финала в архиве) — не отдельный розыгрыш турнира. */
@@ -46,6 +48,7 @@ export type ArchiveTournament = {
   ours: boolean;
   project: boolean;
   source: string;
+  approx_date?: boolean;
   legend: Record<string, string>;
   notes?: string[];
   stages: ArchiveStage[];

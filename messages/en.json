@@ -1658,7 +1658,8 @@
       "source": "Source",
       "sourceVk": "club post on VKontakte",
       "copy": "A copy of the page is kept in the club archive.",
-      "open": "All tables since 2013"
+      "open": "All tables since 2013",
+      "sourceOldSite": "the club's old website (web archive)"
     }
   },
   "about": {

@@ -1658,7 +1658,8 @@
       "source": "Zdroj",
       "sourceVk": "příspěvek klubu na VKontakte",
       "copy": "Kopie stránky je uložena v archivu klubu.",
-      "open": "Všechny tabulky od roku 2013"
+      "open": "Všechny tabulky od roku 2013",
+      "sourceOldSite": "starý web klubu (webový archiv)"
     }
   },
   "about": {

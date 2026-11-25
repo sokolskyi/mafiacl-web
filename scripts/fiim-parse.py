@@ -161,6 +161,88 @@ if __name__ == "__main__":
     main()
 
 
+LEGACY = "data/legacy-mafiacl/mafia_stars_results"
+
+
+def legacy_stage(page_id, title):
+    """Таблица со старого mafiacl.com (веб-архив): /mafia_stars_results/<id>."""
+    soup = BeautifulSoup(open(f"{LEGACY}/{page_id}.html", encoding="utf8").read(), "lxml")
+    h = next(x for x in soup.find_all(["h3", "h4"]) if "Рейтинг" in x.get_text())
+    label = h.find_next("label")
+    table = h.find_next("table")
+    head = table.find("thead").find_all("th")
+    # Ш/Д/М на старом сайте — число игр в роли, а не побед, как на ФИИМ: даём свои названия колонок.
+    rename = {"Ш": "Шер", "Д": "Дон", "М": "Маф"}
+    cols = [rename.get(c.get_text(strip=True), c.get_text(strip=True)) for c in head]
+    legend = {rename.get(c.get_text(strip=True), c.get_text(strip=True)): c.get("title") for c in head if c.get("title")}
+    rows = []
+    for tr in [tr for tr in table.find_all("tr") if not tr.find_parent("thead")]:
+        v = [c.get_text(" ", strip=True) for c in tr.find_all(["td", "th"])]
+        if len(v) != len(cols):
+            continue
+        values = dict(zip(cols, v))
+        nick, club, penalty, seat = player(values.pop("Ник"))
+        m = re.match(r"^(.*\S)\s+\((Полтава|Киев|Одесса|Днепр|Винница|Запорожье|Краматорск)\)$", nick)
+        if m:
+            nick, club = m.group(1), m.group(2)
+        place = values.pop("№")
+        rows.append({"place": number(place), "nick": nick, "club": club, "penalty": penalty, "seat": None,
+                     "total": number(values["Б"]), "values": {k: number(x) for k, x in values.items()}})
+    note = label.get_text(" ", strip=True) if label and label.find_previous(["h3", "h4"]) is h else None
+    return {"title": title, "note": note, "columns": cols, "rows": rows}, legend
+
+
+def legacy_url(page_id):
+    first = open(f"{LEGACY}/{page_id}.html", encoding="utf8").readline()
+    m = re.search(r"<!-- (\S+) -->", first)
+    return m.group(1) if m else None
+
+
+def mcl_2016_2017():
+    """Mafia Champions League 2016/2017: серии и финал — со старого mafiacl.com, рейтинг отбора и места — из постов группы MCL во ВКонтакте."""
+    series = [10, 11, 13, 15, 17, 19, 25, 26, 29]
+    final, legend = legacy_stage(31, "Финальная серия")
+    # Коэффициенты отбора перед финалом (пост группы MCL 26.05.2017), ИК = 0,6 × отбор + 0,4 × финал.
+    qual = {"Franklin": (15.00, 30), "Дин": (14.12, 30), "Lucky": (13.31, 40), "Гармония": (12.68, 30), "Малыш": (13.00, 30),
+            "Анархия": (12.67, 30), "Ятна": (12.35, 30), "13": (12.05, 30), "Лача": (11.17, 30), "YeS": (10.53, 40)}
+    fin = {r["nick"]: r for r in final["rows"]}
+    total = []
+    for nick, (q, games) in qual.items():
+        f = fin[nick]["total"] * 10 / fin[nick]["values"]["И"]
+        total.append({"nick": nick, "club": fin[nick]["club"], "q": q, "games": games, "f": round(f, 2), "ik": round(q * 0.6 + f * 0.4, 3)})
+    total.sort(key=lambda r: -r["ik"])
+    assert [r["nick"] for r in total[:3]] == ["Дин", "Franklin", "Ятна"], total[:3]
+    cols = ["№", "Игрок", "ИК", "Отбор", "Игр в отборе", "Финал"]
+    summary = {
+        "title": "Итоговая таблица",
+        "note": "ИК = 0,6 × коэффициент отбора + 0,4 × коэффициент финала (баллы финала на 10 игр). Пересчитано по данным клуба; места совпадают с объявленными: 1. Дин, 2. Франклин, 3. Ятна.",
+        "columns": cols,
+        "rows": [{"place": i + 1, "nick": r["nick"], "club": r["club"], "penalty": None, "seat": None, "total": r["ik"],
+                  "values": {"ИК": r["ik"], "Отбор": r["q"], "Игр в отборе": r["games"], "Финал": r["f"]}} for i, r in enumerate(total)],
+    }
+    stages = [summary, final] + [legacy_stage(pid, f"{i + 1} серия")[0] for i, pid in enumerate(series)]
+    return {
+        "key": "232", "fiim_id": 232, "url": legacy_url(31), "date": "2017-05-27", "name": "Mafia Champions League 2016/2017",
+        "city": "Харьков", "kind": "personal", "ours": True, "project": True,
+        "source": "старый mafiacl.com (веб-архив) и посты группы Mafia Champions League во ВКонтакте",
+        "legend": {**legend, "ИК": "итоговый коэффициент", "Отбор": "средний коэффициент за серии отбора (баллы за 10 игр)", "Финал": "баллы финальной серии в пересчёте на 10 игр"},
+        "notes": ["Первый сезон лиги: 9 отборочных серий по 10 игр и финальная серия из 15 игр, всего 105 игр.",
+                  "На сайте ФИИМ у этого турнира по ошибке стоит таблица MafiaCl Championship 2017, поэтому данные взяты со старого сайта клуба."],
+        "stages": stages,
+    }
+
+
+def legacy_extra(key, name, date, city, pages, ours=True, notes=None):
+    stages, legend = [], {}
+    for pid, title in pages:
+        st, lg = legacy_stage(pid, title)
+        stages.append(st)
+        legend.update(lg)
+    return {"key": key, "fiim_id": None, "url": legacy_url(pages[0][0]), "date": date, "name": name, "city": city, "kind": "personal",
+            "ours": ours, "project": True, "source": "старый mafiacl.com (веб-архив)", "legend": legend, "stages": stages,
+            "approx_date": True, "notes": notes or []}
+
+
 def manual_2013():
     """MafiaCl Championship 2013 — не на ФИИМ, итоги со скриншотов ВКонтакте (data/fiim/mafiacl-championship-2013.json)."""
     m = json.load(open("data/fiim/mafiacl-championship-2013.json", encoding="utf8"))
@@ -205,7 +287,15 @@ def manual_2013():
 
 def bundle():
     """Всё для сайта одним файлом: src/content/fiim/archive.json (только турниры клуба и серии его лиг)."""
-    items = [manual_2013()]
+    items = [
+        manual_2013(),
+        legacy_extra("maf-marathon-2016", "Маф-марафон 2016", "2016-12-01", "Харьков", [(9, "Личный зачёт")],
+                     notes=["Парный турнир на 24 часа, 27 игр. Победители в парном зачёте — Хохольчик и Марта."]),
+        legacy_extra("maf-marathon-2017", "Маф-марафон 2017", "2017-12-01", "Харьков", [(35, "Личный зачёт")],
+                     notes=["Парный турнир: 27 игр за 25 часов. Парный зачёт: 1. Анархия и Lynch, 2. Бенджамин и Ginger, 3. YeS и Морф."]),
+        legacy_extra("mafiacl-kharkiv-cup-2017", "MafiaCl Kharkiv Cup 2017", "2017-06-01", "Харьков", [(34, "Итоги")],
+                     notes=["Турнир к 5-летию клуба. Парный зачёт — Борщ и Snow."]),
+    ]
     for t in json.load(open("data/fiim/tournaments.json", encoding="utf8"))["tournaments"]:
         if not t.get("fiim_id") or not (t["ours"] or t["project"]):
             continue
@@ -216,6 +306,22 @@ def bundle():
             continue
         d = json.load(open(p, encoding="utf8"))
         d["key"] = str(t["fiim_id"])
+        if t["fiim_id"] == 688:  # на ФИИМ главная таблица — только финальные игры; места сезона — по ИК (данные клуба)
+            d["podium"] = ["Кира", "Экстрасенс", "Шершень"]
+            d["notes"] = ["Итоговые места сезона (по итоговому коэффициенту с учётом отбора): 1. Кира, 2. Экстрасенс, 3. Шершень. Призовой фонд 10 000 грн, 116 игр за сезон. Ниже — таблицы ФИИМ отдельно по финальным и квалификационным играм."]
+        if t["fiim_id"] == 232:
+            items.append(mcl_2016_2017())
+            continue
+        if t["fiim_id"] == 147:  # Mafia Stars 2016: туры и полуфинал со старого сайта
+            for pid, title in [(5, "Финал (старый сайт клуба)"), (4, "Полуфинал"), (3, "Тур 3"), (2, "Тур 2"), (1, "Тур 1")]:
+                st, lg = legacy_stage(pid, title)
+                d["stages"].append(st)
+                d["legend"] = {**lg, **d["legend"]}
+        if t["fiim_id"] == 231:  # Mafia Stars 2017: отбор и полуфиналы со старого сайта (финала там нет)
+            for pid, title in [(24, "Полуфинал 2"), (22, "Полуфинал 1"), (21, "Отборочный тур")]:
+                st, lg = legacy_stage(pid, title)
+                d["stages"].append(st)
+                d["legend"] = {**lg, **d["legend"]}
         if t.get("results_wrong"):
             d["stages"] = []
             d["notes"] = [t["note"]]
@@ -225,7 +331,7 @@ def bundle():
         # Сверху главное: итоговая таблица, финал, полуфинал, дальше отбор и серии в порядке страницы ФИИМ.
         def rank(st):
             t = st["title"].lower()
-            if "итогов" in t:
+            if "итогов" in t or t.startswith("рейтинг") or "текущий рейтинг" in t:
                 return 0
             if re.search(r"финал|final", t) and "полуфинал" not in t:
                 return 1
@@ -253,8 +359,8 @@ def bundle():
         main = next((st for st in x["stages"] if re.search(r"итогов", st["title"], re.I)), None) or next(
             (st for st in x["stages"] if re.search(r"финал|final", st["title"], re.I) and not re.search(r"полуфинал", st["title"], re.I)), None
         ) or (x["stages"][0] if x["stages"] else None)
-        top = [r["nick"] for r in sorted(main["rows"], key=lambda r: (r["place"] if isinstance(r["place"], int) else 999))[:3]] if main else []
-        index.append({k: x[k] for k in ("key", "name", "date", "city", "ours", "project")} | {"parent": parent, "stage": stage, "top": top, "players": len({r["nick"] for st in x["stages"] for r in st["rows"]})})
+        top = x.get("podium") or [r["nick"] for r in sorted(main["rows"], key=lambda r: (r["place"] if isinstance(r["place"], int) else 999))[:3]] if main else []
+        index.append({k: x[k] for k in ("key", "name", "date", "city", "ours", "project")} | {"approx_date": bool(x.get("approx_date")), "parent": parent, "stage": stage, "top": top, "players": len({r["nick"] for st in x["stages"] for r in st["rows"]})})
     json.dump(index, open("src/content/fiim/index.json", "w", encoding="utf8"), ensure_ascii=False, indent=0)
     print(f"src/content/fiim/archive.json: {len(items)} турниров")
     for i in index:
