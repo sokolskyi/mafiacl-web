@@ -209,11 +209,16 @@ def bundle():
     for t in json.load(open("data/fiim/tournaments.json", encoding="utf8"))["tournaments"]:
         if not t.get("fiim_id") or not (t["ours"] or t["project"]):
             continue
+        if t.get("held") is False:
+            continue
         p = f"{OUT}/{t['fiim_id']}.json"
         if not os.path.exists(p):
             continue
         d = json.load(open(p, encoding="utf8"))
         d["key"] = str(t["fiim_id"])
+        if t.get("results_wrong"):
+            d["stages"] = []
+            d["notes"] = [t["note"]]
         d["source"] = "fiim.world"
         for s in d["stages"]:
             s["title"] = re.sub(r"\s+", " ", s["title"]).strip()

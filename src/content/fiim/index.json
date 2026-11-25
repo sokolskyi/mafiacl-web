@@ -184,12 +184,8 @@
 "project": true,
 "parent": null,
 "stage": false,
-"top": [
-"Анархия",
-"Полицейский",
-"Чикаго"
-],
-"players": 30
+"top": [],
+"players": 0
 },
 {
 "key": "229",
@@ -1110,42 +1106,6 @@
 "Valar Dohaeris"
 ],
 "players": 20
-},
-{
-"key": "1316",
-"name": "MafiaCl Championship 2021",
-"date": "2021-11-20",
-"city": "Харьков",
-"ours": true,
-"project": true,
-"parent": null,
-"stage": false,
-"top": [],
-"players": 0
-},
-{
-"key": "2130",
-"name": "Кубок Слобожанщины 2022",
-"date": "2022-08-20",
-"city": "Харьков",
-"ours": true,
-"project": true,
-"parent": null,
-"stage": false,
-"top": [],
-"players": 0
-},
-{
-"key": "2134",
-"name": "MafiaCl Championship 2022",
-"date": "2022-11-19",
-"city": "Харьков",
-"ours": true,
-"project": true,
-"parent": null,
-"stage": false,
-"top": [],
-"players": 0
 },
 {
 "key": "2527",
