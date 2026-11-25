@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 /**
- * Старый mafiacl.com (2016–2019) из веб-архива: страницы итогов турниров клуба
- * /mafia_stars_results/<id> (серии Mafia Champions League 2016/2017, Mafia Stars и др.).
- * Сохраняет исходный HTML ближайшего снимка в data/legacy-mafiacl/mafia_stars_results/<id>.html.
+ * Старый mafiacl.com (2016–2019) из веб-архива.
+ *  - /mafia_stars_results/<id> — итоги турниров клуба (серии Mafia Champions League 2016/2017, Mafia Stars,
+ *    Маф-марафоны, «Зачётные дни» и др.) → data/legacy-mafiacl/mafia_stars_results/<id>.html;
+ *  - /show_game/<id> — протоколы игр, на которые ссылаются сохранённые страницы итогов
+ *    → data/legacy-mafiacl/show_game/<id>.html.
+ * Список снимков берётся из CDX веб-архива. Уже скачанные страницы не перекачивает.
  * Нужен интернет — запускается в GitHub Actions (.github/workflows/legacy-mafiacl-archive.yml).
- * Уже скачанные страницы не перекачивает.
  */
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 
-const DIR = "data/legacy-mafiacl/mafia_stars_results";
-const FROM = 1;
-const TO = 60;
+const ROOT = "data/legacy-mafiacl";
 const UA = "Mozilla/5.0 (compatible; MafiaCL archive; +https://mafiacl.com)";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function get(url) {
-  for (let i = 1; i <= 4; i++) {
+async function get(url, tries = 4) {
+  for (let i = 1; i <= tries; i++) {
     try {
       const res = await fetch(url, { headers: { "user-agent": UA } });
       if (res.ok) return res;
@@ -29,25 +29,49 @@ async function get(url) {
   return null;
 }
 
-mkdirSync(DIR, { recursive: true });
+/** Последний удачный снимок каждой страницы раздела: id → timestamp. */
+async function snapshots(path) {
+  const res = await get(`https://web.archive.org/cdx/search/cdx?url=mafiacl.com/${path}/*&output=json&filter=statuscode:200&fl=original,timestamp`);
+  const rows = res ? await res.json() : [];
+  const out = new Map();
+  for (const [original, timestamp] of rows.slice(1)) {
+    const m = original.match(new RegExp(`/${path}/(\\d+)`));
+    if (m && (!out.has(m[1]) || out.get(m[1]).timestamp < timestamp)) out.set(m[1], { original, timestamp });
+  }
+  return out;
+}
+
+async function save(dir, id, snap) {
+  const file = `${dir}/${id}.html`;
+  if (existsSync(file)) return false;
+  const page = await get(`https://web.archive.org/web/${snap.timestamp}id_/${snap.original}`);
+  if (!page) return false;
+  writeFileSync(file, `<!-- http://web.archive.org/web/${snap.timestamp}/${snap.original} -->\n${await page.text()}`);
+  return true;
+}
+
 let saved = 0;
-for (let id = FROM; id <= TO; id++) {
-  const file = `${DIR}/${id}.html`;
-  if (existsSync(file)) continue;
-  const avail = await get(`https://archive.org/wayback/available?url=mafiacl.com/mafia_stars_results/${id}`);
-  const snap = avail ? (await avail.json())?.archived_snapshots?.closest : null;
-  if (!snap?.available) {
-    console.log(`${id}: снимка нет`);
-    await sleep(1000);
-    continue;
-  }
-  const raw = snap.url.replace(/\/web\/(\d+)\//, "/web/$1id_/").replace(/^http:/, "https:");
-  const page = await get(raw);
-  if (page) {
-    writeFileSync(file, `<!-- ${snap.url} -->\n${await page.text()}`);
-    saved++;
-    console.log(`${id}: ${snap.timestamp}`);
-  }
-  await sleep(1500);
+const results = `${ROOT}/mafia_stars_results`;
+mkdirSync(results, { recursive: true });
+const rs = await snapshots("mafia_stars_results");
+console.log(`Страниц итогов в веб-архиве: ${rs.size}`);
+for (const [id, snap] of rs) {
+  if (await save(results, id, snap)) saved++, await sleep(700);
+}
+
+// Протоколы игр — только те, на которые ссылаются сохранённые итоги.
+const games = `${ROOT}/show_game`;
+mkdirSync(games, { recursive: true });
+const wanted = new Set();
+for (const f of readdirSync(results)) {
+  for (const m of readFileSync(`${results}/${f}`, "utf8").matchAll(/show_game\/(\d+)/g)) wanted.add(m[1]);
+}
+const gs = await snapshots("show_game");
+const missing = [...wanted].filter((id) => !gs.has(id));
+console.log(`Игр в итогах: ${wanted.size}, в веб-архиве: ${[...wanted].filter((id) => gs.has(id)).length}`);
+if (missing.length) console.log(`Нет в веб-архиве: ${missing.length}`);
+for (const id of wanted) {
+  const snap = gs.get(id);
+  if (snap && (await save(games, id, snap))) saved++, await sleep(700);
 }
 console.log(`Сохранено: ${saved}`);

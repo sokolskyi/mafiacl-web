@@ -20,7 +20,7 @@ concurrency:
 jobs:
   archive:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,6 +37,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Старый mafiacl.com: страницы итогов турниров из веб-архива"
+          git commit -m "Старый mafiacl.com: итоги турниров и протоколы игр из веб-архива"
           git pull --rebase
           git push
