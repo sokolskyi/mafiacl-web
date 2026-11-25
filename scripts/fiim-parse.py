@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 RAW = "data/fiim/raw"
 OUT = "data/fiim/results"
 TOTAL_COLS = ("Итоговый Кф", "Б", "Σ")
+CITIES = "Харьков|Киев|Днепр|Полтава|Одесса|Запорожье|Винница|Львов|Донецк|Тель-Авив|Краматорск|Кривой Рог|Херсон|Николаев|Черкассы|Кременчуг|Мариуполь|Прага|Минск"
 
 
 def cells(tr):
@@ -52,6 +53,10 @@ def player(raw):
     m = re.search(r"\s*\((?:штраф\s*)?(-?\d+(?:\.\d+)?)\)\s*$", raw)
     if m:
         penalty, raw = number(m.group(1)), raw[: m.start()]
+    # «Анархия (Харьков)», «Совесть (Тель-Авив)» — город в скобках, а не часть ника.
+    m = re.search(r"\s*\((" + CITIES + r")\)\s*$", raw)
+    if m:
+        club, raw = club or m.group(1), raw[: m.start()]
     seat = None
     m = re.match(r"^\[(\d+)\]\s+(.+)$", raw)
     if m:
@@ -182,9 +187,6 @@ def legacy_stage(page_id, title):
             continue
         values = dict(zip(cols, v))
         nick, club, penalty, seat = player(values.pop("Ник"))
-        m = re.match(r"^(.*\S)\s+\((Полтава|Киев|Одесса|Днепр|Винница|Запорожье|Краматорск)\)$", nick)
-        if m:
-            nick, club = m.group(1), m.group(2)
         place = values.pop("№")
         rows.append({"place": number(place), "nick": nick, "club": club, "penalty": penalty, "seat": None,
                      "total": number(values["Б"]), "values": {k: number(x) for k, x in values.items()}})
