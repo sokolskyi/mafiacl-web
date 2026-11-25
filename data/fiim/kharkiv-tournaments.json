@@ -1,0 +1,887 @@
+{
+ "source": "fiim.world, город Харьков, все годы",
+ "fetched": "2026-11-25",
+ "rule": "наши — по словам администрации клуба 25.11.2026; с 2018 сверено с полем «Организатор» на ФИИМ (YeS = наш)",
+ "tournaments": [
+  {
+   "fiim_id": 26,
+   "url": "https://fiim.world/tournaments/26",
+   "date": "2014-05-03",
+   "name": "Kharkiv Mafia Open 2014",
+   "kind": "personal",
+   "stars_or_level": 20,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 34,
+   "url": "https://fiim.world/tournaments/34",
+   "date": "2014-08-23",
+   "name": "Кубок Слобожанщины 2014",
+   "kind": "personal",
+   "stars_or_level": 40,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 51,
+   "url": "https://fiim.world/tournaments/51",
+   "date": "2014-11-08",
+   "name": "MafiaCl Championship 2014",
+   "kind": "personal",
+   "stars_or_level": 20,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 41,
+   "url": "https://fiim.world/tournaments/41",
+   "date": "2014-12-06",
+   "name": "Mafia World Championship 2014",
+   "kind": "personal",
+   "stars_or_level": 50,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 78,
+   "url": "https://fiim.world/tournaments/78",
+   "date": "2015-04-11",
+   "name": "Kharkiv Mafia Open 2015",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 82,
+   "url": "https://fiim.world/tournaments/82",
+   "date": "2015-08-22",
+   "name": "Кубок Слобожанщины 2015",
+   "kind": "personal",
+   "stars_or_level": 60,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 93,
+   "url": "https://fiim.world/tournaments/93",
+   "date": "2015-11-07",
+   "name": "MafiaCl Championship 2015",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 118,
+   "url": "https://fiim.world/tournaments/118",
+   "date": "2016-01-03",
+   "name": "Благотворительный турнир pro100.Sherlock CUP",
+   "kind": "team",
+   "stars_or_level": 40,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 146,
+   "url": "https://fiim.world/tournaments/146",
+   "date": "2016-04-16",
+   "name": "Kharkiv Mafia Open 2016",
+   "kind": "personal",
+   "stars_or_level": 70,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 147,
+   "url": "https://fiim.world/tournaments/147",
+   "date": "2016-05-28",
+   "name": "Kharkiv Mafia Stars 2016",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 179,
+   "url": "https://fiim.world/tournaments/179",
+   "date": "2016-06-11",
+   "name": "Pro100.SherlockCup 2016",
+   "kind": "team",
+   "stars_or_level": 40,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 151,
+   "url": "https://fiim.world/tournaments/151",
+   "date": "2016-08-20",
+   "name": "Кубок Слобожанщины 2016",
+   "kind": "personal",
+   "stars_or_level": 60,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 181,
+   "url": "https://fiim.world/tournaments/181",
+   "date": "2016-11-26",
+   "name": "MafiaCl Championship 2016",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 228,
+   "url": "https://fiim.world/tournaments/228",
+   "date": "2017-02-11",
+   "name": "Ukrainian Students Tournament 2017",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 231,
+   "url": "https://fiim.world/tournaments/231",
+   "date": "2017-04-08",
+   "name": "Mafia Stars Kharkiv 2017",
+   "kind": "personal",
+   "stars_or_level": 25,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 233,
+   "url": "https://fiim.world/tournaments/233",
+   "date": "2017-04-15",
+   "name": "Kharkov Mafia Open 2017",
+   "kind": "personal",
+   "stars_or_level": 70,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 232,
+   "url": "https://fiim.world/tournaments/232",
+   "date": "2017-05-27",
+   "name": "Mafia Champions League 2016/2017",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 234,
+   "url": "https://fiim.world/tournaments/234",
+   "date": "2017-07-08",
+   "name": "Pro100.Sherlock Cup 2017",
+   "kind": "team",
+   "stars_or_level": 50,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 229,
+   "url": "https://fiim.world/tournaments/229",
+   "date": "2017-08-26",
+   "name": "Кубок Слобожанщины 2017",
+   "kind": "personal",
+   "stars_or_level": 80,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 230,
+   "url": "https://fiim.world/tournaments/230",
+   "date": "2017-11-04",
+   "name": "MafiaCl Championship 2017",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 381,
+   "url": "https://fiim.world/tournaments/381",
+   "date": "2018-02-10",
+   "name": "Ukrainian Students Tournament 2018",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 384,
+   "url": "https://fiim.world/tournaments/384",
+   "date": "2018-03-24",
+   "name": "Kharkov Mafia Open 2018",
+   "kind": "personal",
+   "stars_or_level": 60,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 313,
+   "url": "https://fiim.world/tournaments/313",
+   "date": "2018-05-26",
+   "name": "Mafia Champions League 2017/2018 (Финал)",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 386,
+   "url": "https://fiim.world/tournaments/386",
+   "date": "2018-07-07",
+   "name": "Pro100.Sherlock Cup 2018",
+   "kind": "team",
+   "stars_or_level": 50,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 388,
+   "url": "https://fiim.world/tournaments/388",
+   "date": "2018-08-25",
+   "name": "Кубок Слобожанщины 2018",
+   "kind": "personal",
+   "stars_or_level": 80,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 389,
+   "url": "https://fiim.world/tournaments/389",
+   "date": "2018-11-17",
+   "name": "MafiaCl Championship 2018",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 446,
+   "url": "https://fiim.world/tournaments/446",
+   "date": "2019-01-06",
+   "name": "Шерлок Холмс 2018",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 595,
+   "url": "https://fiim.world/tournaments/595",
+   "date": "2019-02-09",
+   "name": "Ukrainian Students Tournament 2019",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 458,
+   "url": "https://fiim.world/tournaments/458",
+   "date": "2019-05-25",
+   "name": "Mafia Champions League 2018/2019",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 601,
+   "url": "https://fiim.world/tournaments/601",
+   "date": "2019-06-22",
+   "name": "MAFIA STARS Ukraine 2019",
+   "kind": "series",
+   "stars_or_level": 80,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 603,
+   "url": "https://fiim.world/tournaments/603",
+   "date": "2019-07-06",
+   "name": "pro100.sherlock cup 2019",
+   "kind": "team",
+   "stars_or_level": 60,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 610,
+   "url": "https://fiim.world/tournaments/610",
+   "date": "2019-12-22",
+   "name": "Кубок Харькова 2019",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 956,
+   "url": "https://fiim.world/tournaments/956",
+   "date": "2020-01-26",
+   "name": "Кубок Харькова 2020 1/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 957,
+   "url": "https://fiim.world/tournaments/957",
+   "date": "2020-02-02",
+   "name": "Кубок Харькова 2020 2/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 958,
+   "url": "https://fiim.world/tournaments/958",
+   "date": "2020-02-25",
+   "name": "Кубок Харькова 2020 3/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 959,
+   "url": "https://fiim.world/tournaments/959",
+   "date": "2020-03-15",
+   "name": "Кубок Харькова 2020 4/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 961,
+   "url": "https://fiim.world/tournaments/961",
+   "date": "2020-04-12",
+   "name": "Кубок Харькова 2020 5/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 962,
+   "url": "https://fiim.world/tournaments/962",
+   "date": "2020-04-19",
+   "name": "Кубок Харькова 2020 6/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 964,
+   "url": "https://fiim.world/tournaments/964",
+   "date": "2020-06-06",
+   "name": "ПЛМ ПФ Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 971,
+   "url": "https://fiim.world/tournaments/971",
+   "date": "2020-06-14",
+   "name": "Кубок Харькова 2020 7/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 839,
+   "url": "https://fiim.world/tournaments/839",
+   "date": "2020-07-04",
+   "name": "Pro100.Sherlock Cup 2020",
+   "kind": "team",
+   "stars_or_level": 50,
+   "organizer": "Бородач",
+   "ours": false
+  },
+  {
+   "fiim_id": 996,
+   "url": "https://fiim.world/tournaments/996",
+   "date": "2020-07-26",
+   "name": "Кубок Харькова 2020 8/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 688,
+   "url": "https://fiim.world/tournaments/688",
+   "date": "2020-08-08",
+   "name": "Mafia Champions League 2019/2020",
+   "kind": "series",
+   "stars_or_level": 50,
+   "organizer": null,
+   "ours": true
+  },
+  {
+   "fiim_id": 994,
+   "url": "https://fiim.world/tournaments/994",
+   "date": "2020-08-15",
+   "name": "Ukrainian Mafia Cup 2020. Серия 1. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 842,
+   "url": "https://fiim.world/tournaments/842",
+   "date": "2020-08-22",
+   "name": "Кубок Слобожанщины 2020",
+   "kind": "personal",
+   "stars_or_level": 40,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1000,
+   "url": "https://fiim.world/tournaments/1000",
+   "date": "2020-08-24",
+   "name": "Mafia Champions League 2020/2021. Серия 1. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1052,
+   "url": "https://fiim.world/tournaments/1052",
+   "date": "2020-09-13",
+   "name": "Кубок Харькова 2020 9/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 1066,
+   "url": "https://fiim.world/tournaments/1066",
+   "date": "2020-09-26",
+   "name": "Big Ben High Level 2020 Харьков 1",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 1090,
+   "url": "https://fiim.world/tournaments/1090",
+   "date": "2020-10-04",
+   "name": "Кубок Харькова 2020 10/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 995,
+   "url": "https://fiim.world/tournaments/995",
+   "date": "2020-10-10",
+   "name": "Ukrainian Mafia Cup 2020. Серия 2. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1014,
+   "url": "https://fiim.world/tournaments/1014",
+   "date": "2020-10-11",
+   "name": "Mafia Champions League 2020/2021. Серия 2. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1131,
+   "url": "https://fiim.world/tournaments/1131",
+   "date": "2020-10-25",
+   "name": "Кубок Харькова 2020 11/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 1145,
+   "url": "https://fiim.world/tournaments/1145",
+   "date": "2020-11-14",
+   "name": "Mafia Champions League 2020/2021. Серия 3. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1161,
+   "url": "https://fiim.world/tournaments/1161",
+   "date": "2020-11-15",
+   "name": "Кубок Харькова 2020 12/12",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 1244,
+   "url": "https://fiim.world/tournaments/1244",
+   "date": "2020-12-25",
+   "name": "Кубок Харькова 2020 Финал",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 858,
+   "url": "https://fiim.world/tournaments/858",
+   "date": "2020-12-27",
+   "name": "Кубок Харькова 2020",
+   "kind": "series",
+   "stars_or_level": 50,
+   "organizer": "SuperAdmin",
+   "ours": false
+  },
+  {
+   "fiim_id": 1246,
+   "url": "https://fiim.world/tournaments/1246",
+   "date": "2021-01-17",
+   "name": "ПЛМ 2021 Харьков Серия 1",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1303,
+   "url": "https://fiim.world/tournaments/1303",
+   "date": "2021-01-23",
+   "name": "Mafia Champions League 2020/2021. Серия 5. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1403,
+   "url": "https://fiim.world/tournaments/1403",
+   "date": "2021-02-07",
+   "name": "ПЛМ 2021 Харьков Серия 2",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1426,
+   "url": "https://fiim.world/tournaments/1426",
+   "date": "2021-02-27",
+   "name": "MAFIA STARS 2021 Kharkiv",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1501,
+   "url": "https://fiim.world/tournaments/1501",
+   "date": "2021-02-28",
+   "name": "ПЛМ 2021 Харьков Серия 3",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1522,
+   "url": "https://fiim.world/tournaments/1522",
+   "date": "2021-03-07",
+   "name": "ПЛМ 2021 Харьков Серия 4",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Кифлык",
+   "ours": false
+  },
+  {
+   "fiim_id": 1533,
+   "url": "https://fiim.world/tournaments/1533",
+   "date": "2021-03-21",
+   "name": "ПЛМ 2021 Харьков серия 5",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Кифлык",
+   "ours": false
+  },
+  {
+   "fiim_id": 1530,
+   "url": "https://fiim.world/tournaments/1530",
+   "date": "2021-04-17",
+   "name": "MAFIA STARS 2021 Полуфинал Kharkiv",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1567,
+   "url": "https://fiim.world/tournaments/1567",
+   "date": "2021-05-08",
+   "name": "Mafia Champions League 2020/2021. Серия 11. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1568,
+   "url": "https://fiim.world/tournaments/1568",
+   "date": "2021-05-16",
+   "name": "Mafia Champions League 2020/2021. Серия 12. Харьков",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1628,
+   "url": "https://fiim.world/tournaments/1628",
+   "date": "2021-05-22",
+   "name": "ПЛМ 2021 Харьков Полуфинал",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1623,
+   "url": "https://fiim.world/tournaments/1623",
+   "date": "2021-05-30",
+   "name": "МЛМ 2021, Украина, Восточная Конференция, Харьков - серия 1",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1642,
+   "url": "https://fiim.world/tournaments/1642",
+   "date": "2021-06-06",
+   "name": "МЛМ 2021, Украина, Восточная Конференция, Харьков- серия 2",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 859,
+   "url": "https://fiim.world/tournaments/859",
+   "date": "2021-06-19",
+   "name": "Mafia Champions League 2020/2021",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1308,
+   "url": "https://fiim.world/tournaments/1308",
+   "date": "2021-06-26",
+   "name": "MAFIA HELP OPEN 2021",
+   "kind": "personal",
+   "stars_or_level": 60,
+   "organizer": "Big Fish mafia club , B@LU",
+   "ours": false
+  },
+  {
+   "fiim_id": 1309,
+   "url": "https://fiim.world/tournaments/1309",
+   "date": "2021-07-10",
+   "name": "Pro100.Sherlock Cup 2021",
+   "kind": "team",
+   "stars_or_level": 75,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 1730,
+   "url": "https://fiim.world/tournaments/1730",
+   "date": "2021-08-01",
+   "name": "МЛМ 2021, Украина,  Харьков - 3 серия",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1311,
+   "url": "https://fiim.world/tournaments/1311",
+   "date": "2021-08-28",
+   "name": "Кубок Слобожанщины 2021",
+   "kind": "personal",
+   "stars_or_level": 40,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1870,
+   "url": "https://fiim.world/tournaments/1870",
+   "date": "2021-10-02",
+   "name": "UMC 2021, ВК - Харьков 1",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 1955,
+   "url": "https://fiim.world/tournaments/1955",
+   "date": "2021-10-16",
+   "name": "UMC 2021, Харьков 2",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1981,
+   "url": "https://fiim.world/tournaments/1981",
+   "date": "2021-11-06",
+   "name": "МЛМ 2021, Украина Полуфинал ВК",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Flash",
+   "ours": false
+  },
+  {
+   "fiim_id": 1316,
+   "url": "https://fiim.world/tournaments/1316",
+   "date": "2021-11-20",
+   "name": "MafiaCl Championship 2021",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 2345,
+   "url": "https://fiim.world/tournaments/2345",
+   "date": "2022-01-22",
+   "name": "High Level Games 2022 - Серия 1, Харьков",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "Big Ben Mafia Club , Марі",
+   "ours": false
+  },
+  {
+   "fiim_id": 2359,
+   "url": "https://fiim.world/tournaments/2359",
+   "date": "2022-01-30",
+   "name": "High Level Games 2022 Харьков Серия 2",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "Big Ben Mafia Club , Марі",
+   "ours": false
+  },
+  {
+   "fiim_id": 2395,
+   "url": "https://fiim.world/tournaments/2395",
+   "date": "2022-02-05",
+   "name": "High Level Games 2022 Серия 3, Харьков",
+   "kind": "personal",
+   "stars_or_level": null,
+   "organizer": "Big Ben Mafia Club , Марі",
+   "ours": false
+  },
+  {
+   "fiim_id": 2128,
+   "url": "https://fiim.world/tournaments/2128",
+   "date": "2022-06-25",
+   "name": "MAFIA HELP OPEN 2022",
+   "kind": "personal",
+   "stars_or_level": 50,
+   "organizer": "Big Fish mafia club , B@LU",
+   "ours": false
+  },
+  {
+   "fiim_id": 2129,
+   "url": "https://fiim.world/tournaments/2129",
+   "date": "2022-07-09",
+   "name": "Pro100.Sherlock Cup 2022",
+   "kind": "team",
+   "stars_or_level": 60,
+   "organizer": "Абрам",
+   "ours": false
+  },
+  {
+   "fiim_id": 2130,
+   "url": "https://fiim.world/tournaments/2130",
+   "date": "2022-08-20",
+   "name": "Кубок Слобожанщины 2022",
+   "kind": "personal",
+   "stars_or_level": 50,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 2134,
+   "url": "https://fiim.world/tournaments/2134",
+   "date": "2022-11-19",
+   "name": "MafiaCl Championship 2022",
+   "kind": "personal",
+   "stars_or_level": 30,
+   "organizer": "YeS",
+   "ours": true
+  },
+  {
+   "fiim_id": 2603,
+   "url": "https://fiim.world/tournaments/2603",
+   "date": "2023-07-08",
+   "name": "Pro100.Sherlock Cup 2023",
+   "kind": "team",
+   "stars_or_level": 80,
+   "organizer": null,
+   "ours": false
+  },
+  {
+   "fiim_id": 2790,
+   "url": "https://fiim.world/tournaments/2790",
+   "date": "2023-10-22",
+   "name": "UMC 2023, Східна Конференція - Харків, серія 1",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Клуб \"Мафия Харьков\" , Дин",
+   "ours": false
+  },
+  {
+   "fiim_id": 2829,
+   "url": "https://fiim.world/tournaments/2829",
+   "date": "2023-11-12",
+   "name": "Мировая Лига Мафии 2023, Харьков-серия 1",
+   "kind": "series",
+   "stars_or_level": 10,
+   "organizer": "Клуб \"Мафия Харьков\" , Дин",
+   "ours": false
+  }
+ ]
+}
