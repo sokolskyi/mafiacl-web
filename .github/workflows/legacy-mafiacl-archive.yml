@@ -1,0 +1,42 @@
+# Старый mafiacl.com из веб-архива: страницы итогов турниров (scripts/legacy-mafiacl-archive.mjs)
+# в data/legacy-mafiacl/. Запускается сам при изменении скрипта или этого файла и вручную.
+name: Legacy mafiacl.com archive
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/legacy-mafiacl-archive.mjs
+      - .github/workflows/legacy-mafiacl-archive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legacy-mafiacl-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Скачать страницы из веб-архива
+        run: node scripts/legacy-mafiacl-archive.mjs
+      - name: Сохранить в репозиторий
+        run: |
+          git add data/legacy-mafiacl
+          if git diff --cached --quiet; then
+            echo "Нечего сохранять"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Старый mafiacl.com: страницы итогов турниров из веб-архива"
+          git pull --rebase
+          git push
