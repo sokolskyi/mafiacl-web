@@ -45,13 +45,26 @@ const COLS =
   "id, slug, name, series, status, starts_on, ends_on, starts_at, city, venue_name, venue_address, organizer, description, cover_url, registration, registration_url, registration_closes_at, capacity, price_czk, currency, prize_fund, winners, info_url, video_url, videos";
 
 type Row = Record<string, unknown>;
+
+/**
+ * * Статус турнира: со следующего дня после последнего дня турнира (по Праге), если в базе остался «анонс»
+ * или «идёт» — показываем как завершённый, чтобы прошедший турнир не висел в анонсах, пока статус не поменяют руками.
+ */
+function statusOf(t: Row): Tournament["status"] {
+  const status = t.status as Tournament["status"];
+  if (status !== "announced" && status !== "running") return status;
+  const last = (t.ends_on as string | null) ?? (t.starts_on as string);
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date());
+  return last < today ? "finished" : status;
+}
+
 function map(t: Row): Tournament {
   return {
     id: t.id as number,
     slug: t.slug as string,
     name: t.name as string,
     series: t.series as Series,
-    status: t.status as Tournament["status"],
+    status: statusOf(t),
     startsOn: t.starts_on as string,
     endsOn: (t.ends_on as string) ?? null,
     startsAt: (t.starts_at as string) ?? null,
