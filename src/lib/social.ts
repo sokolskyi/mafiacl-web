@@ -20,7 +20,10 @@ export const CLUB_SOCIAL: SocialLink[] = [
 ];
 
 /** Страницы клуба на сайтах федераций и рейтинговых платформ. */
-export const CLUB_FEDERATIONS: SocialLink[] = [{ kind: "web", label: "IMAFIA — Mafia CL Prague", href: "https://imafia.org/club/50" }];
+export const CLUB_FEDERATIONS: SocialLink[] = [
+  { kind: "web", label: "Mafgame — Mafia club \"Champions League\" Prague", href: "https://mafgame.org/clubs/4/view" },
+  { kind: "web", label: "IMAFIA — Mafia CL Prague", href: "https://imafia.org/club/50" },
+];
 
 /** Проекты клуба. */
 export const PROJECTS: { key: "kings" | "mcl" | "stars"; name: string; href?: string; links: SocialLink[] }[] = [
