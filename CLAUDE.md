@@ -68,7 +68,7 @@
 | Профиль игрока | `players/[nick]/` | `lib/players.ts`, `lib/awards.ts`, `lib/badges.ts`, `lib/clubCompare.ts`, `lib/mafgame/queries.ts` | `PlayerProfile.tsx`, `PlayerShare.tsx`; картинка — `api/share/player` |
 | Ники/алиасы, «В клубе с» | — | `lib/playerNames.ts`, `lib/aliases*.ts` (`getClubSince` — таблица `player_club_since`, ручной год важнее расчётного) | `admin/AliasesAdmin.tsx` (обе формы) |
 | Турниры | `tournaments/`, `tournaments/[slug]` | `lib/tournaments.ts`, `lib/tournament-actions.ts`, `lib/tournamentBrands.ts` | `components/tournaments/*` |
-| Kings | `kings/` | `lib/kings.ts` (ведёт на старое приложение) | — |
+| Kings | `kings/` → `/seasons/<id>` | `lib/kings.ts` (текущий сезон), `lib/kingsPage.ts` (страницы старого приложения в общем кеше `"use cache: remote"`, обновление в фоне раз в 5 мин, тег `kings`; полоска MafiaCL сверху); `app/seasons/[...path]/route.ts` (посетителям — из кеша, администратору Kings с cookie `session` и POST-формам — напрямую); прогрев `api/cron/kings-warm` | — |
 | Зал славы | `hall-of-fame/` | `lib/hallArchive.ts` (таблица `hall_of_fame`, фото в `public/hall/`, после правки — `select private.site_revalidate(array['hall-archive'])`) | `HallArchive.tsx` (карточки сезонов), `hall/HallPhotos.tsx` (фото-«полароиды»), общий просмотр фото `hall/usePhotoLightbox.tsx`; стили `.hall-*` в `globals.css` |
 | Respect (валюта клуба) | `respect/`, `admin/respect` | `lib/respect*.ts`; начисления в БД (`respect_award_match`, `respect_award_mafgame`, ДР, коды); праздничное окно о новых начислениях — `getUnseenRespect` + `markRespectSeen` (RPC `respect_mark_seen`, поле `profile_private.respect_seen_id`) | `components/respect/*` (`AccountRespect`, `RespectCelebration`, `RespectBalance`; стили `.rc-*` в `globals.css`), `admin/AdminRespect.tsx` |
 | Магазин | `shop/`, `shop/[slug]`, `shop/cart`, `shop/orders/[id]`, `admin/shop` | `lib/shop/{queries,actions,payment}.ts` (`SHOP_PAYMENT_MODE`: gopay/demo/на месте), `lib/admin/shop-*.ts` | `components/shop/*`, `admin/AdminShop.tsx` |
@@ -101,9 +101,10 @@
 | `telegram-dispatch` | каждые 5 мин | `api/telegram/dispatch` → `lib/telegram/dispatch.ts` (очередь `notifications`) |
 | `season-review` | 1-го числа 07:13 | `api/cron/season-review` → `lib/reviews/*` |
 | `shop-expire-orders` | :17 каждый час | снимает неоплаченные заказы |
+| `kings-warm` | каждые 5 мин | `api/cron/kings-warm` — держит в кеше свежую страницу текущего сезона Kings |
 
 - Вызовы из БД идут через pg_net; бывают ошибки «HTTP2 framing» — перед POST делается прогревочный GET (сейчас только в mafgame-kick).
-- Сброс кэша: POST `api/cron/revalidate` с заголовком `x-cron-secret` → `revalidateTag(tag, {expire: 0})`. Теги: `games`, `matches`, `tournaments`, `mafgame`, `blog-posts`, `blog-stats`, `player-aliases`, `rating-archive`, `hall-archive`, `season-reviews`, `shop`, `partners`, `hosts`, `promotions`, `testimonials`, `titles`, `bans`, `venues`.
+- Сброс кэша: POST `api/cron/revalidate` с заголовком `x-cron-secret` → `revalidateTag(tag, {expire: 0})`. Теги: `games`, `matches`, `tournaments`, `mafgame`, `blog-posts`, `blog-stats`, `player-aliases`, `rating-archive`, `hall-archive`, `season-reviews`, `shop`, `partners`, `hosts`, `promotions`, `testimonials`, `titles`, `bans`, `venues`, `kings`.
 - Telegram: бот `lib/telegram/{bot,api,texts,games,actions}.ts`, вебхук `api/telegram/webhook`; уведомления персоналу `lib/staffNotify.ts`.
 
 ## Переменные окружения

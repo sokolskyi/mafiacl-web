@@ -23,6 +23,6 @@ export default async function proxy(request: NextRequest) {
 
 export const config = {
   // Всё, кроме API, служебных файлов Next.js и файлов с расширением (картинки, sitemap.xml, robots.txt).
-  // Плюс архив MCL (public/mcl) и разделы старого сайта, которые проксируются как есть (next.config.ts): seasons и их файлы.
+  // Плюс архив MCL (public/mcl), раздел Kings (src/app/seasons) и файлы старого сайта (next.config.ts).
   matcher: ["/mcl", "/((?!api|auth|stream|_next|_vercel|mcl|seasons|public|static|club|assets|.*\\..*).*)"],
 };

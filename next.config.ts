@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
     return [
       // Архив MCL Europe 2026 лежит в public/mcl (scripts/mcl-freeze.mjs); /mcl/ — его главная страница.
       { source: "/mcl/", destination: "/mcl/index.html" },
-      { source: "/seasons/:path*", destination: `${LEGACY}/seasons/:path*` },
+      // /seasons/... (MafiaCL Kings) отдаёт src/app/seasons/[...path] — с кешем и полоской сайта.
       { source: "/public/:path*", destination: `${LEGACY}/public/:path*` },
       { source: "/static/:path*", destination: `${LEGACY}/static/:path*` },
       { source: "/club/:path*", destination: `${LEGACY}/club/:path*` },
