@@ -1890,7 +1890,8 @@
         "facebook": "Facebook",
         "youtube": "YouTube",
         "twitch": "Twitch",
-        "phone": "Phone"
+        "phone": "Phone",
+        "web": "Website"
       },
       "venuesTitle": "Where we play",
       "map": "Open in maps",
@@ -1912,7 +1913,8 @@
         "kings": "The club's main end-of-season tournament. The channel posts monthly rating summaries and the qualifying zone."
       },
       "kharkivTitle": "MafiaCL Kharkiv",
-      "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history."
+      "kharkivText": "Archive from the club's Kharkiv years: photos, games and season history.",
+      "federationsText": "The club on federation websites:"
     },
     "gala": {
       "title": "MafiaCL Gala Night",

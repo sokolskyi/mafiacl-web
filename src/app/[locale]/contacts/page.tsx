@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { getVenues } from "@/lib/venues";
 import { loc } from "@/lib/shop/queries";
-import { CLUB_SOCIAL, KHARKIV_SOCIAL, SIGNUP_CONTACTS, type SocialLink } from "@/lib/social";
+import { CLUB_FEDERATIONS, CLUB_SOCIAL, KHARKIV_SOCIAL, SIGNUP_CONTACTS, type SocialLink } from "@/lib/social";
 import { AboutHeader, AboutNav } from "@/components/about/AboutNav";
 import { SocialIcon } from "@/components/SocialIcon";
 
@@ -53,6 +53,8 @@ export default async function Page({ params }: PageProps<"/[locale]/contacts">) 
           <h2 id="social" className={h2}>{t("socialTitle")}</h2>
           <p className="mt-2 text-neutral-300">{t("socialText")}</p>
           {links(CLUB_SOCIAL)}
+          <p className="mt-5 text-sm text-neutral-300">{t("federationsText")}</p>
+          {links(CLUB_FEDERATIONS)}
         </section>
       </div>
 

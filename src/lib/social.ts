@@ -1,6 +1,6 @@
 /** Публичные контакты и соцсети клуба и его проектов. */
 
-export type SocialKind = "telegram" | "instagram" | "facebook" | "youtube" | "twitch" | "phone";
+export type SocialKind = "telegram" | "instagram" | "facebook" | "youtube" | "twitch" | "phone" | "web";
 export type SocialLink = { kind: SocialKind; label: string; href: string; note?: "en" | "channel" | "dm" };
 
 /** Запись на игры и вопросы — напрямую основателю. */
@@ -18,6 +18,9 @@ export const CLUB_SOCIAL: SocialLink[] = [
   { kind: "youtube", label: "mafiaclK", href: "https://www.youtube.com/user/mafiaclK" },
   { kind: "twitch", label: "Mafiacl", href: "https://www.twitch.tv/Mafiacl" },
 ];
+
+/** Страницы клуба на сайтах федераций и рейтинговых платформ. */
+export const CLUB_FEDERATIONS: SocialLink[] = [{ kind: "web", label: "IMAFIA — Mafia CL Prague", href: "https://imafia.org/club/50" }];
 
 /** Проекты клуба. */
 export const PROJECTS: { key: "kings" | "mcl" | "stars"; name: string; href?: string; links: SocialLink[] }[] = [

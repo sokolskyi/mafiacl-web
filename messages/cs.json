@@ -1890,7 +1890,8 @@
         "facebook": "Facebook",
         "youtube": "YouTube",
         "twitch": "Twitch",
-        "phone": "Telefon"
+        "phone": "Telefon",
+        "web": "Web"
       },
       "venuesTitle": "Kde hrajeme",
       "map": "Otevřít na mapě",
@@ -1912,7 +1913,8 @@
         "kings": "Hlavní turnaj klubu na konci sezóny. Na kanálu měsíční přehledy žebříčků a postupové zóny."
       },
       "kharkivTitle": "MafiaCL Kharkiv",
-      "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón."
+      "kharkivText": "Archiv klubu z charkovského období: fotky, hry a historie sezón.",
+      "federationsText": "Klub na webech federací:"
     },
     "gala": {
       "title": "MafiaCL Gala Night",
