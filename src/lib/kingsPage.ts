@@ -1,7 +1,10 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
+import { getKingsSeasonPath } from "@/lib/kings";
 
-// Раздел MafiaCL Kings (/seasons/...) живёт в старом приложении (Flask + Neon): страница сезона
+// Раздел MafiaCL Kings живёт в старом приложении (Flask + Neon) по адресам /seasons/<id>/...;
+// у нас он открывается по понятным адресам /<язык>/kings/<год>/... (app/[locale]/kings/[year]/[[...rest]]).
+// Страница сезона
 // собирается там 5–8 секунд. Новый сайт хранит готовую страницу в общем кеше и отдаёт её сразу,
 // а обновляет в фоне не чаще раза в 5 минут (плюс прогрев по расписанию — api/cron/kings-warm).
 export const KINGS_ORIGIN = process.env.LEGACY_KINGS_ORIGIN ?? "https://mafiacl.vercel.app";
@@ -21,10 +24,8 @@ export async function getKingsPage(path: string): Promise<KingsPage> {
 }
 
 /** Полоска MafiaCL над страницами Kings — чтобы было видно, что это раздел того же сайта. */
-export function kingsSiteBar(path: string): string {
+function kingsSiteBar(seasonHref: string, isHome: boolean): string {
   // На главной странице сезона «MafiaCL Kings» — текущее место; на вложенных (рейтинг, игрок, турнир) — ссылка на сезон.
-  const season = path.match(/^\/seasons\/(\d+)/)?.[1];
-  const home = !season || /^\/seasons\/\d+\/?(\?.*)?$/.test(path);
   return `
 <style id="mafiacl-sitebar-css">
 .mcl-sitebar{position:relative;z-index:31;background:#1c0308;border-bottom:1px solid rgba(253,255,194,.12);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1}
@@ -46,26 +47,119 @@ export function kingsSiteBar(path: string): string {
   <a class="logo" href="/ru" aria-label="MafiaCL — главная"><img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width="67" height="24"></a>
   <nav aria-label="Где вы на сайте"><ol>
     <li class="home-crumb"><a href="/ru/turniry">Турниры</a></li>
-    <li${home ? ' aria-current="page"' : ""}>${home ? "MafiaCL Kings" : `<a href="/seasons/${season}">MafiaCL Kings</a>`}</li>
+    <li${isHome ? ' aria-current="page"' : ""}>${isHome ? "MafiaCL Kings" : `<a href="${seasonHref}">MafiaCL Kings</a>`}</li>
   </ol></nav>
   <a class="acc" href="/ru/kabinet">Кабинет</a>
 </div></div>
 `;
 }
 
-/** Вставить полоску сайта сразу после <body>. */
-export function withSiteBar(html: string, path: string): string {
-  const bar = kingsSiteBar(path);
-  return /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (m) => m + bar) : bar + html;
+export type KingsSeason = { id: number; slug: string };
+
+/** Сезоны Kings: внутренний номер старого приложения ↔ год в адресе (берём с вкладок сезонов на странице). */
+export async function getKingsSeasons(): Promise<KingsSeason[]> {
+  "use cache: remote";
+  cacheTag(KINGS_TAG);
+  cacheLife("hours");
+  const current = await getKingsSeasonPath();
+  const currentId = Number(current.match(/\d+/)?.[0]);
+  const seasons: KingsSeason[] = [];
+  try {
+    const page = await getKingsPage(current);
+    for (const m of page.body.matchAll(/<a href="\/seasons\/(\d+)" class="season-chip[^"]*">\s*([^<]+?)\s*<\/a>/g)) {
+      const label = m[2].trim();
+      let slug = /^\d{4}$/.test(label) ? label : m[1];
+      if (seasons.some((x) => x.slug === slug)) slug = `${slug}-${m[1]}`;
+      seasons.push({ id: Number(m[1]), slug });
+    }
+  } catch (e) {
+    console.error("getKingsSeasons failed", e instanceof Error ? e.message : e);
+  }
+  if (currentId && !seasons.some((x) => x.id === currentId)) seasons.push({ id: currentId, slug: String(currentId) });
+  return seasons;
 }
 
-/** Адрес перенаправления старого приложения → адрес на нашем домене. */
-export function localLocation(location: string | null): string | null {
+/** /seasons/12/ranking/premier → /ru/kings/2026/ranking/premier (адреса старого приложения → наши). */
+export function toSiteUrl(legacy: string, seasons: KingsSeason[], locale: string): string {
+  return legacy
+    .replace(/^\/seasons\/(\d+)/, (m, id) => `/${locale}/kings/${seasons.find((x) => x.id === Number(id))?.slug ?? id}`)
+    .replace(/^\/kings(?=$|[?#/])/, `/${locale}/kings`);
+}
+
+/** Ссылки и формы на странице старого приложения → наши адреса; плюс полоска сайта после <body>. */
+export function prepareHtml(html: string, opts: { seasons: KingsSeason[]; locale: string; slug: string; isHome: boolean }): string {
+  const { seasons, locale } = opts;
+  const out = html.replace(/(href|action)="(\/seasons\/\d+[^"]*|\/kings)"/g, (_m, attr, url) => `${attr}="${toSiteUrl(url, seasons, locale)}"`);
+  const bar = kingsSiteBar(`/${locale}/kings/${opts.slug}`, opts.isHome);
+  return /<body[^>]*>/i.test(out) ? out.replace(/<body[^>]*>/i, (m) => m + bar) : bar + out;
+}
+
+/** Перенаправление старого приложения → адрес на нашем домене. */
+export function localLocation(location: string | null, seasons: KingsSeason[], locale: string): string | null {
   if (!location) return null;
   try {
     const u = new URL(location, KINGS_ORIGIN);
-    return u.origin === new URL(KINGS_ORIGIN).origin ? u.pathname + u.search + u.hash : location;
+    if (u.origin !== new URL(KINGS_ORIGIN).origin) return location;
+    return toSiteUrl(u.pathname, seasons, locale) + u.search + u.hash;
   } catch {
     return location;
   }
+}
+
+const isAdmin = (req: Request) => /(?:^|;\s*)session=/.test(req.headers.get("cookie") ?? "");
+
+/**
+ * Ответ для страницы Kings: посетителям — из кеша, администратору Kings (cookie старого приложения)
+ * и формам (POST) — напрямую, без кеша.
+ */
+export async function kingsResponse(req: Request, opts: { legacyPath: string; locale: string; slug: string; isHome: boolean; seasons: KingsSeason[] }) {
+  const { legacyPath, seasons, locale } = opts;
+  if (req.method === "POST" || isAdmin(req)) return forward(req, opts);
+  let page: KingsPage;
+  try {
+    page = await getKingsPage(legacyPath);
+  } catch (e) {
+    console.error("kings page failed", legacyPath, e instanceof Error ? e.message : e);
+    return new Response("Раздел MafiaCL Kings временно недоступен. Обновите страницу через минуту.", {
+      status: 502,
+      headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
+  if (page.status >= 300 && page.status < 400) {
+    return new Response(null, { status: page.status, headers: { location: localLocation(page.location, seasons, locale) ?? `/${locale}` } });
+  }
+  const html = page.type.includes("text/html");
+  return new Response(html ? prepareHtml(page.body, opts) : page.body, {
+    status: page.status,
+    headers: {
+      "content-type": page.type,
+      // На краю Vercel: минуту свежая, дальше отдаётся прежняя копия, пока в фоне готовится новая.
+      "cache-control": page.status === 200 ? "public, s-maxage=60, stale-while-revalidate=604800" : "no-store",
+    },
+  });
+}
+
+async function forward(req: Request, opts: { legacyPath: string; locale: string; slug: string; isHome: boolean; seasons: KingsSeason[] }) {
+  const headers = new Headers();
+  for (const h of ["cookie", "content-type", "accept", "accept-language", "user-agent"]) {
+    const v = req.headers.get(h);
+    if (v) headers.set(h, v);
+  }
+  const res = await fetch(`${KINGS_ORIGIN}${opts.legacyPath}`, {
+    method: req.method,
+    headers,
+    body: req.method === "POST" ? await req.arrayBuffer() : undefined,
+    redirect: "manual",
+    cache: "no-store",
+  });
+  const out = new Headers({ "cache-control": "private, no-store" });
+  const type = res.headers.get("content-type");
+  if (type) out.set("content-type", type);
+  const loc = localLocation(res.headers.get("location"), opts.seasons, opts.locale);
+  if (loc) out.set("location", loc);
+  for (const c of res.headers.getSetCookie()) out.append("set-cookie", c);
+  if (type?.includes("text/html") && res.status === 200) {
+    return new Response(prepareHtml(await res.text(), opts), { status: res.status, headers: out });
+  }
+  return new Response(res.body, { status: res.status, headers: out });
 }
