@@ -1,0 +1,42 @@
+# Турниры клуба на the-mafia.net (2022–2024): страницы и таблицы итогов (scripts/themafia-archive.mjs)
+# в data/themafia/. Запускается сам при изменении скрипта или этого файла и вручную.
+name: the-mafia.net archive
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/themafia-archive.mjs
+      - .github/workflows/themafia-archive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: themafia-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Скачать турниры клуба с the-mafia.net
+        run: node scripts/themafia-archive.mjs
+      - name: Сохранить в репозиторий
+        run: |
+          git add data/themafia
+          if git diff --cached --quiet; then
+            echo "Нечего сохранять"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git commit -m "the-mafia.net: архив турниров клуба"
+          git pull --rebase
+          git push
