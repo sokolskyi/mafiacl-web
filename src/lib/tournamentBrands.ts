@@ -1,6 +1,7 @@
 import type { HallEntry } from "@/lib/hallArchive";
 import type { Tournament } from "@/lib/tournaments";
 import type { VideoItem } from "@/lib/videos";
+import { ARCHIVE, archiveYear, type ArchiveItem } from "@/lib/fiimArchive";
 
 /**
  * Турниры клуба «без года»: Central Cup, Championship, Kings… Каждый турнир (из базы турниров или из
@@ -49,6 +50,8 @@ export type Edition = {
   videoUrl: string | null;
   videos: VideoItem[];
   tournament: Tournament | null;
+  /** Таблицы итогов из архива ФИИМ (обычно одна; у старых лиг — финал отдельно от сезона). */
+  archive: ArchiveItem[];
 };
 
 const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
@@ -57,7 +60,9 @@ const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
 export function editionsOf(brand: Brand, tournaments: Tournament[], hall: HallEntry[]): Edition[] {
   const ts = tournaments.filter((t) => t.status !== "cancelled" && brandOf(t.name)?.key === brand.key);
   const hs = hall.filter((h) => h.category === "tournament" && brandOf(h.title)?.key === brand.key);
-  const years = [...new Set([...ts.map((t) => Number(t.startsOn.slice(0, 4))), ...hs.map((h) => h.year)])].sort((a, b) => b - a);
+  // Архив ФИИМ: только сами розыгрыши (финалы), этапы серий видны на странице финала.
+  const as = ARCHIVE.filter((a) => !a.stage && brandOf(a.name)?.key === brand.key);
+  const years = [...new Set([...ts.map((t) => Number(t.startsOn.slice(0, 4))), ...hs.map((h) => h.year), ...as.map(archiveYear)])].sort((a, b) => b - a);
   const out: Edition[] = [];
   for (const year of years) {
     const yt = ts.filter((t) => Number(t.startsOn.slice(0, 4)) === year);
@@ -77,12 +82,22 @@ export function editionsOf(brand: Brand, tournaments: Tournament[], hall: HallEn
         videoUrl: t.videoUrl ?? h?.videoUrl ?? null,
         videos: t.videos.length ? t.videos : (h?.videos ?? []),
         tournament: t,
+        archive: [],
       });
     }
     for (const h of yh) {
       if (used.has(h.id)) continue;
-      out.push({ key: `h${h.id}`, year, title: h.title, city: h.city, places: h.places, note: h.note, videoUrl: h.videoUrl, videos: h.videos, tournament: null });
+      out.push({ key: `h${h.id}`, year, title: h.title, city: h.city, places: h.places, note: h.note, videoUrl: h.videoUrl, videos: h.videos, tournament: null, archive: [] });
     }
+    const ya = out.filter((e) => e.year === year);
+    for (const a of as.filter((x) => archiveYear(x) === year)) {
+      const e =
+        ya.find((x) => norm(x.title) === norm(a.name)) ??
+        (ya.length === 1 ? ya[0] : ya.find((x) => regionOf(x) === "UA" || /харьк|харків|kharkiv/i.test(x.city ?? "")));
+      if (e) e.archive.push(a);
+      else out.push({ key: `a${a.key}`, year, title: a.name, city: a.city, places: a.top, note: null, videoUrl: null, videos: [], tournament: null, archive: [a] });
+    }
+    for (const e of ya) if (!e.places.length && e.archive[0]) e.places = e.archive[0].top;
   }
   return out;
 }

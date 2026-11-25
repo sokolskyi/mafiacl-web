@@ -1640,6 +1640,25 @@
         "name": "Mafia Stars",
         "about": "Turnaj projektu Mafia Stars: Charkov, poté Mafia Stars Ukraine a Europe."
       }
+    },
+    "archive": {
+      "title": "Archiv turnajů",
+      "lead": "Výsledkové tabulky turnajů klubu od roku 2013: Charkov a Praha. Data z webu federace FIIM, kopii uchováváme u nás.",
+      "results": "Výsledková tabulka",
+      "player": "Hráč",
+      "penalty": "trest",
+      "partOf": "Část turnaje",
+      "stages": "Etapy a série",
+      "stagesCount": "{count, plural, one {# etapa} few {# etapy} other {# etap}}",
+      "otherClub": "pořádal jiný klub",
+      "league": "Kvalifikační série ligy klubu. Pořádal ji jiný klub, proto se nezapočítává do statistik klubu.",
+      "leagueFinal": "Finále ligy klubu v jiném městě",
+      "noResults": "Na webu FIIM výsledky tohoto turnaje nejsou.",
+      "legend": "Vysvětlivky",
+      "source": "Zdroj",
+      "sourceVk": "příspěvek klubu na VKontakte",
+      "copy": "Kopie stránky je uložena v archivu klubu.",
+      "open": "Všechny tabulky od roku 2013"
     }
   },
   "about": {

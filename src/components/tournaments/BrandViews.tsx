@@ -14,6 +14,13 @@ const MEDALS = ["🥇", "🥈", "🥉"];
 
 function EditionLink({ e, children, className }: { e: Edition; children: React.ReactNode; className?: string }) {
   const t = e.tournament;
+  if (!t && e.archive[0]) {
+    return (
+      <Link href={{ pathname: "/tournaments/archive/[key]", params: { key: e.archive[0].key } }} className={`${className ?? ""} hover:underline`}>
+        {children}
+      </Link>
+    );
+  }
   if (!t) return <span className={className}>{children}</span>;
   if (t.infoUrl?.startsWith("/")) {
     return (
@@ -169,7 +176,7 @@ export async function BrandPage({ brand, tournaments, hall, locale }: { brand: B
                 <span className="font-display text-3xl font-extrabold text-red-400">{e.year}</span>
                 <div>
                   <p className="text-lg font-bold">
-                    <EditionLink e={e} className={e.tournament ? "underline decoration-white/30 underline-offset-4" : undefined}>{e.title}</EditionLink>
+                    <EditionLink e={e} className={e.tournament || e.archive.length ? "underline decoration-white/30 underline-offset-4" : undefined}>{e.title}</EditionLink>
                     <RegionBadge e={e} show={brand.key === "mcl"} />
                     {e.city && <span className="ml-2 text-sm font-normal text-neutral-400">· {e.city}</span>}
                   </p>
@@ -181,6 +188,13 @@ export async function BrandPage({ brand, tournaments, hall, locale }: { brand: B
                     </p>
                   )}
                   {e.note && <p className="mt-1 text-sm text-neutral-400">{e.note}</p>}
+                  {(e.tournament ? e.archive : e.archive.slice(1)).map((a) => (
+                    <p key={a.key} className="mt-1 text-sm">
+                      <Link href={{ pathname: "/tournaments/archive/[key]", params: { key: a.key } }} className="inline-flex min-h-6 items-center text-neutral-300 underline decoration-white/30 underline-offset-4 hover:text-white">
+                        {t("archive.results")}: {a.name}
+                      </Link>
+                    </p>
+                  ))}
                   <VideoLink url={e.videoUrl} videos={e.videos} locale={locale} />
                 </div>
               </li>

@@ -1640,6 +1640,25 @@
         "name": "Mafia Stars",
         "about": "The Mafia Stars project tournament: Kharkiv, then Mafia Stars Ukraine and Europe."
       }
+    },
+    "archive": {
+      "title": "Tournament archive",
+      "lead": "Results tables of the club's tournaments since 2013: Kharkiv and Prague. Data from the FIIM federation website, with a copy kept by the club.",
+      "results": "Results table",
+      "player": "Player",
+      "penalty": "penalty",
+      "partOf": "Part of",
+      "stages": "Stages and series",
+      "stagesCount": "{count, plural, one {# stage} other {# stages}}",
+      "otherClub": "hosted by another club",
+      "league": "Qualifying series of the club's league, hosted by another club, so it doesn't count towards club statistics.",
+      "leagueFinal": "Final of the club's league in another city",
+      "noResults": "FIIM has no results for this tournament.",
+      "legend": "Legend",
+      "source": "Source",
+      "sourceVk": "club post on VKontakte",
+      "copy": "A copy of the page is kept in the club archive.",
+      "open": "All tables since 2013"
     }
   },
   "about": {

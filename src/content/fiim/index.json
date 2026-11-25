@@ -1,0 +1,1182 @@
+[
+{
+"key": "mafiacl-championship-2013",
+"name": "MafiaCl Championship 2013",
+"date": "2013-04-20",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"RiT",
+"Вольфрам",
+"Бордо"
+],
+"players": 20
+},
+{
+"key": "34",
+"name": "Кубок Слобожанщины 2014",
+"date": "2014-08-23",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Аниморф",
+"Доктор Шелдон",
+"Holder"
+],
+"players": 40
+},
+{
+"key": "51",
+"name": "MafiaCl Championship 2014",
+"date": "2014-11-08",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Кертис",
+"Дин",
+"Персик"
+],
+"players": 20
+},
+{
+"key": "41",
+"name": "Mafia World Championship 2014",
+"date": "2014-12-06",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Тихий Закат",
+"Сарказм",
+"Бенджамин"
+],
+"players": 50
+},
+{
+"key": "82",
+"name": "Кубок Слобожанщины 2015",
+"date": "2015-08-22",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Артист",
+"Сарказм",
+"Амахонда"
+],
+"players": 60
+},
+{
+"key": "93",
+"name": "MafiaCl Championship 2015",
+"date": "2015-11-07",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Артист",
+"Ятна",
+"Flash"
+],
+"players": 30
+},
+{
+"key": "147",
+"name": "Kharkiv Mafia Stars 2016",
+"date": "2016-05-28",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Борщ",
+"Kika",
+"Гармония"
+],
+"players": 10
+},
+{
+"key": "151",
+"name": "Кубок Слобожанщины 2016",
+"date": "2016-08-20",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Кай",
+"Сарказм",
+"Анархия"
+],
+"players": 60
+},
+{
+"key": "181",
+"name": "MafiaCl Championship 2016",
+"date": "2016-11-26",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Lucky",
+"Бенджамин",
+"Artykartoshechka"
+],
+"players": 30
+},
+{
+"key": "228",
+"name": "Ukrainian Students Tournament 2017",
+"date": "2017-02-11",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Анархия",
+"Леди Бу",
+"Superman"
+],
+"players": 30
+},
+{
+"key": "231",
+"name": "Mafia Stars Kharkiv 2017",
+"date": "2017-04-08",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"RiT",
+"Snow",
+"Борщ"
+],
+"players": 10
+},
+{
+"key": "232",
+"name": "Mafia Champions League 2016/2017",
+"date": "2017-05-27",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Анархия",
+"Полицейский",
+"Чикаго"
+],
+"players": 30
+},
+{
+"key": "229",
+"name": "Кубок Слобожанщины 2017",
+"date": "2017-08-26",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Сарказм",
+"Полицейский",
+"Вольфрам"
+],
+"players": 80
+},
+{
+"key": "230",
+"name": "MafiaCl Championship 2017",
+"date": "2017-11-04",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Анархия",
+"Полицейский",
+"Чикаго"
+],
+"players": 30
+},
+{
+"key": "381",
+"name": "Ukrainian Students Tournament 2018",
+"date": "2018-02-10",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Полицейский",
+"Констанция",
+"Вольфрам"
+],
+"players": 30
+},
+{
+"key": "313",
+"name": "Mafia Champions League 2017/2018 (Финал)",
+"date": "2018-05-26",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Бенджамин",
+"Персик",
+"Гармония"
+],
+"players": 41
+},
+{
+"key": "383",
+"name": "MAFIA STARS Ukraine 2018",
+"date": "2018-06-23",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Flash",
+"Valar Dohaeris",
+"Дин"
+],
+"players": 83
+},
+{
+"key": "388",
+"name": "Кубок Слобожанщины 2018",
+"date": "2018-08-25",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"22",
+"Шершень",
+"Марта"
+],
+"players": 80
+},
+{
+"key": "389",
+"name": "MafiaCl Championship 2018",
+"date": "2018-11-17",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Вольфрам",
+"Flash",
+"Ятна"
+],
+"players": 30
+},
+{
+"key": "595",
+"name": "Ukrainian Students Tournament 2019",
+"date": "2019-02-09",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Абрам",
+"Амбал",
+"Амахонда"
+],
+"players": 30
+},
+{
+"key": "458",
+"name": "Mafia Champions League 2018/2019",
+"date": "2019-05-25",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Шершень",
+"Бенджамин",
+"Добряк"
+],
+"players": 40
+},
+{
+"key": "601",
+"name": "MAFIA STARS Ukraine 2019",
+"date": "2019-06-22",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Flash",
+"Лев",
+"Шершень"
+],
+"players": 84
+},
+{
+"key": "860",
+"name": "Mafia Stars Ukraine 2020",
+"date": "2020-07-17",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [],
+"players": 0
+},
+{
+"key": "688",
+"name": "Mafia Champions League 2019/2020",
+"date": "2020-08-08",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Экстрасенс",
+"Шершень",
+"Benjamin"
+],
+"players": 58
+},
+{
+"key": "994",
+"name": "Ukrainian Mafia Cup 2020. Серия 1. Харьков",
+"date": "2020-08-15",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": true,
+"top": [
+"Октава",
+"Rize",
+"Одиннадцатый"
+],
+"players": 10
+},
+{
+"key": "842",
+"name": "Кубок Слобожанщины 2020",
+"date": "2020-08-22",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Марта",
+"Snow",
+"Клото"
+],
+"players": 40
+},
+{
+"key": "1000",
+"name": "Mafia Champions League 2020/2021. Серия 1. Харьков",
+"date": "2020-08-24",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Мельник",
+"Вряд ли",
+"Экстрасенс"
+],
+"players": 10
+},
+{
+"key": "995",
+"name": "Ukrainian Mafia Cup 2020. Серия 2. Харьков",
+"date": "2020-10-10",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": true,
+"top": [
+"дор",
+"Марта",
+"Ксюша"
+],
+"players": 10
+},
+{
+"key": "1014",
+"name": "Mafia Champions League 2020/2021. Серия 2. Харьков",
+"date": "2020-10-11",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"B@LU",
+"Балу",
+"Экстрасенс"
+],
+"players": 10
+},
+{
+"key": "1145",
+"name": "Mafia Champions League 2020/2021. Серия 3. Харьков",
+"date": "2020-11-14",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Lucky",
+"Борщ",
+"YeS"
+],
+"players": 10
+},
+{
+"key": "1146",
+"name": "Mafia Champions League 2020/2021. Серия 4. Днепр",
+"date": "2020-11-29",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Мельник",
+"Анхель",
+"Экстрасенс"
+],
+"players": 10
+},
+{
+"key": "1303",
+"name": "Mafia Champions League 2020/2021. Серия 5. Харьков",
+"date": "2021-01-23",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Шершень",
+"FD",
+"Лжец"
+],
+"players": 10
+},
+{
+"key": "1429",
+"name": "MAFIA STARS 2021 Zaporozhye",
+"date": "2021-01-30",
+"city": "Запорожье",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Экстрасенс",
+"Nancy",
+"Space Cadet"
+],
+"players": 10
+},
+{
+"key": "1319",
+"name": "MAFIA STARS 2021 Kryvyi Rih",
+"date": "2021-01-30",
+"city": "Кривой Рог",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Фаренгейт",
+"Грешила",
+"Памела"
+],
+"players": 10
+},
+{
+"key": "1445",
+"name": "Mafia Champions League 2020/2021. Серия 6. Киев",
+"date": "2021-02-06",
+"city": "Киев",
+"ours": false,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Belial",
+"Амахонда",
+"Валькирия"
+],
+"players": 10
+},
+{
+"key": "1500",
+"name": "MAFIA STARS 2021 Kherson",
+"date": "2021-02-20",
+"city": "Херсон",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Katе",
+"Младший Брат",
+"Баобаб"
+],
+"players": 10
+},
+{
+"key": "1505",
+"name": "MAFIA STARS 2021 Lviv",
+"date": "2021-02-20",
+"city": "Львов",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"MANA",
+"Інкогніто",
+"Син Леоніда"
+],
+"players": 10
+},
+{
+"key": "1426",
+"name": "MAFIA STARS 2021 Kharkiv",
+"date": "2021-02-27",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"YeS",
+"Вряд ли",
+"above"
+],
+"players": 10
+},
+{
+"key": "1485",
+"name": "Mafia Champions League 2020/2021. Серия 7. Запорожье",
+"date": "2021-03-06",
+"city": "Запорожье",
+"ours": false,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Nancy",
+"Шалфей",
+"Экстрасенс"
+],
+"players": 10
+},
+{
+"key": "1518",
+"name": "MAFIA STARS 2021 Kyiv",
+"date": "2021-03-06",
+"city": "Киев",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Шокси",
+"Хорс",
+"Ингуш"
+],
+"players": 10
+},
+{
+"key": "1507",
+"name": "MAFIA STARS 2021 Odessa",
+"date": "2021-03-07",
+"city": "Одесса",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Сова",
+"Kelly",
+"Упс"
+],
+"players": 10
+},
+{
+"key": "1508",
+"name": "MAFIA STARS 2021 Kremenchug",
+"date": "2021-03-13",
+"city": "Кременчуг",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Palad1N",
+"Zippo",
+"Святоша"
+],
+"players": 10
+},
+{
+"key": "1509",
+"name": "MAFIA STARS 2021 Poltava",
+"date": "2021-03-14",
+"city": "Полтава",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"FD",
+"Пряник",
+"Grace"
+],
+"players": 10
+},
+{
+"key": "1486",
+"name": "Mafia Champions League 2020/2021. Серия 8. Кривой Рог",
+"date": "2021-03-20",
+"city": "Кривой Рог",
+"ours": false,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Pадагаст",
+"Грешила",
+"Шалфей"
+],
+"players": 10
+},
+{
+"key": "1524",
+"name": "MAFIA STARS 2021 Cherkasy",
+"date": "2021-03-20",
+"city": "Черкассы",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Железный",
+"Braun (Браун)",
+"Joi"
+],
+"players": 10
+},
+{
+"key": "1523",
+"name": "Mafia Champions League 2020/2021. Серия 9. Киев",
+"date": "2021-03-27",
+"city": "Киев",
+"ours": false,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Диментий",
+"Сварог",
+"Тритон"
+],
+"players": 10
+},
+{
+"key": "1535",
+"name": "MAFIA STARS 2021 Mykolaiv",
+"date": "2021-03-28",
+"city": "Николаев",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Tigarbo",
+"Лемур",
+"Trulvov"
+],
+"players": 10
+},
+{
+"key": "1529",
+"name": "Mafia Champions League 2020/2021. Серия 10. Днепр",
+"date": "2021-04-11",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Старик",
+"Pадагаст",
+"Шалфей"
+],
+"players": 10
+},
+{
+"key": "1532",
+"name": "MAFIA STARS 2021 Minsk",
+"date": "2021-04-11",
+"city": "Минск",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Крис",
+"Самаритянка",
+"Гермес"
+],
+"players": 10
+},
+{
+"key": "1530",
+"name": "MAFIA STARS 2021 Полуфинал Kharkiv",
+"date": "2021-04-17",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"YeS",
+"Пряник",
+"above"
+],
+"players": 10
+},
+{
+"key": "1567",
+"name": "Mafia Champions League 2020/2021. Серия 11. Харьков",
+"date": "2021-05-08",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Диментий",
+"Benjamin",
+"Полицейский"
+],
+"players": 10
+},
+{
+"key": "1568",
+"name": "Mafia Champions League 2020/2021. Серия 12. Харьков",
+"date": "2021-05-16",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": "859",
+"stage": true,
+"top": [
+"Лжец",
+"Benjamin",
+"Диментий"
+],
+"players": 10
+},
+{
+"key": "1609",
+"name": "MAFIA STARS 2021 Kraków",
+"date": "2021-05-16",
+"city": "Краков",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Филч",
+"Grizzly",
+"Фанат Логики"
+],
+"players": 10
+},
+{
+"key": "1605",
+"name": "MAFIA STARS 2021 Полуфинал Odessa",
+"date": "2021-05-22",
+"city": "Одесса",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Сова",
+"Континент",
+"Trulvov"
+],
+"players": 10
+},
+{
+"key": "1623",
+"name": "МЛМ 2021, Украина, Восточная Конференция, Харьков - серия 1",
+"date": "2021-05-30",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": true,
+"top": [
+"Asya",
+"Вряд ли",
+"Мельник"
+],
+"players": 10
+},
+{
+"key": "1607",
+"name": "MAFIA STARS 2021 Brest",
+"date": "2021-05-30",
+"city": "Брест",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [],
+"players": 0
+},
+{
+"key": "1570",
+"name": "MAFIA STARS 2021 Warsaw",
+"date": "2021-06-05",
+"city": "Варшава",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"mr_seven",
+"Жил был пес",
+"BAKS__"
+],
+"players": 10
+},
+{
+"key": "859",
+"name": "Mafia Champions League 2020/2021",
+"date": "2021-06-19",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Шершень",
+"Экстрасенс",
+"YeS"
+],
+"players": 10
+},
+{
+"key": "1697",
+"name": "MAFIA STARS 2021 Полуфинал Kyiv",
+"date": "2021-07-17",
+"city": "Киев",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Айстра Вітер",
+"Шокси",
+"Хорс"
+],
+"players": 10
+},
+{
+"key": "1726",
+"name": "MAFIA STARS 2021 Wien",
+"date": "2021-07-31",
+"city": "Вена",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Aqai",
+"Aleksandr",
+"Фантастик"
+],
+"players": 10
+},
+{
+"key": "1727",
+"name": "MAFIA STARS 2021 Dnepr",
+"date": "2021-08-01",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Тюля",
+"Valar Dohaeris",
+"Охана"
+],
+"players": 10
+},
+{
+"key": "1746",
+"name": "MAFIA STARS 2021 Полуфинал Dnepr",
+"date": "2021-08-14",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Valar Dohaeris",
+"Тюля",
+"Охана"
+],
+"players": 10
+},
+{
+"key": "1736",
+"name": "MAFIA STARS 2021 Mariupol",
+"date": "2021-08-21",
+"city": "Мариуполь",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Archi MRPL",
+"Балу8",
+"DM_Corax"
+],
+"players": 10
+},
+{
+"key": "1778",
+"name": "MAFIA STARS 2021 Dnepr 2",
+"date": "2021-08-27",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Экстрасенс",
+"Странник (Днепр)",
+"Старик"
+],
+"players": 10
+},
+{
+"key": "1311",
+"name": "Кубок Слобожанщины 2021",
+"date": "2021-08-28",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Sailos",
+"Хохольчик",
+"Cardinal"
+],
+"players": 40
+},
+{
+"key": "1814",
+"name": "MAFIA STARS 2021 Полуфинал Krakow",
+"date": "2021-09-12",
+"city": "Краков",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Prometej",
+"BAKS__",
+"Лиса"
+],
+"players": 10
+},
+{
+"key": "1867",
+"name": "MAFIA STARS 2021 Полуфинал Dnepr 2",
+"date": "2021-09-25",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Ксюша",
+"Гонч",
+"Темный"
+],
+"players": 10
+},
+{
+"key": "1870",
+"name": "UMC 2021, ВК - Харьков 1",
+"date": "2021-10-02",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": true,
+"top": [
+"_Prince_",
+"FloW",
+"Шершень"
+],
+"players": 10
+},
+{
+"key": "1862",
+"name": "MAFIA STARS 2021 Last chance",
+"date": "2021-10-03",
+"city": "Полтава",
+"ours": false,
+"project": true,
+"parent": "1310",
+"stage": true,
+"top": [
+"Диментий",
+"Ланселот",
+"Seezov"
+],
+"players": 10
+},
+{
+"key": "1310",
+"name": "MAFIA STARS 2021",
+"date": "2021-10-09",
+"city": "Днепр",
+"ours": false,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Сова",
+"Nancy",
+"Valar Dohaeris"
+],
+"players": 20
+},
+{
+"key": "1316",
+"name": "MafiaCl Championship 2021",
+"date": "2021-11-20",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [],
+"players": 0
+},
+{
+"key": "2130",
+"name": "Кубок Слобожанщины 2022",
+"date": "2022-08-20",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [],
+"players": 0
+},
+{
+"key": "2134",
+"name": "MafiaCl Championship 2022",
+"date": "2022-11-19",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [],
+"players": 0
+},
+{
+"key": "2527",
+"name": "MafiaCl Championship 2023",
+"date": "2023-04-15",
+"city": "Прага",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Адлер",
+"Рауль",
+"Упс"
+],
+"players": 50
+},
+{
+"key": "2853",
+"name": "Турнир Победителей MafiaCl 2024",
+"date": "2024-02-03",
+"city": "Прага",
+"ours": true,
+"project": true,
+"parent": null,
+"stage": false,
+"top": [
+"Рауль",
+"Отец",
+"Apachе"
+],
+"players": 20
+}
+]

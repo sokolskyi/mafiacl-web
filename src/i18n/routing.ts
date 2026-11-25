@@ -15,6 +15,8 @@ export const routing = defineRouting({
     "/fun-game": { cs: "/fun-hra", ru: "/fun-igra", uk: "/fun-hra", en: "/fun-game" },
     "/kings": "/kings",
     "/tournaments": { cs: "/turnaje", ru: "/turniry", uk: "/turniry", en: "/tournaments" },
+    "/tournaments/archive": { cs: "/turnaje/archiv", ru: "/turniry/arhiv", uk: "/turniry/arkhiv", en: "/tournaments/archive" },
+    "/tournaments/archive/[key]": { cs: "/turnaje/archiv/[key]", ru: "/turniry/arhiv/[key]", uk: "/turniry/arkhiv/[key]", en: "/tournaments/archive/[key]" },
     "/tournaments/[slug]": { cs: "/turnaje/[slug]", ru: "/turniry/[slug]", uk: "/turniry/[slug]", en: "/tournaments/[slug]" },
     "/ratings": { cs: "/zebricky", ru: "/reytingi", uk: "/reitynhy", en: "/ratings" },
     "/ratings/prague/[slug]": { cs: "/zebricky/praha/[slug]", ru: "/reytingi/praga/[slug]", uk: "/reitynhy/praha/[slug]", en: "/ratings/prague/[slug]" },

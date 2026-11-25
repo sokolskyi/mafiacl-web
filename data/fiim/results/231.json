@@ -1,0 +1,208 @@
+{
+ "fiim_id": 231,
+ "url": "https://fiim.world/tournaments/231",
+ "date": "2017-04-08",
+ "name": "Mafia Stars Kharkiv 2017",
+ "city": "Харьков",
+ "kind": "personal",
+ "ours": true,
+ "project": true,
+ "legend": {
+  "Б": "Общее количество баллов",
+  "П": "количество побед",
+  "Д": "количество побед в роли Дона",
+  "Ш": "количество побед в роли Шерифа",
+  "М": "количество побед в роли Мафии",
+  "У": "количество игр, в которых игрок убит в первую ночь",
+  "Ci": "компенсационные баллы за отстрелы (см. п.8.6 Турнирных правил ФИИМ)"
+ },
+ "stages": [
+  {
+   "title": "Текущий рейтинг",
+   "note": "1.1000 за красные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Л",
+    "П",
+    "Д",
+    "Ш",
+    "М",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "RiT",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 33.3,
+     "values": {
+      "Б": 33.3,
+      "Л": 5,
+      "П": 14,
+      "Д": 2,
+      "Ш": 1,
+      "М": 3,
+      "У": 2
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Snow",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 29.05,
+     "values": {
+      "Б": 29.05,
+      "Л": 3,
+      "П": 12,
+      "Д": 1,
+      "Ш": 1,
+      "М": 2,
+      "У": 4
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Борщ",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 28.9,
+     "values": {
+      "Б": 28.9,
+      "Л": 3,
+      "П": 13,
+      "Д": 3,
+      "Ш": 2,
+      "М": 3,
+      "У": 1
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Шкода",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 20.1,
+     "values": {
+      "Б": 20.1,
+      "Л": 2,
+      "П": 9,
+      "Д": 3,
+      "Ш": 2,
+      "М": 3,
+      "У": 1
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Леди Бу",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 19.9,
+     "values": {
+      "Б": 19.9,
+      "Л": 1,
+      "П": 9,
+      "Д": 1,
+      "Ш": 2,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Lina",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 19.9,
+     "values": {
+      "Б": 19.9,
+      "Л": 0,
+      "П": 9,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 3
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Шершень",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 19.2,
+     "values": {
+      "Б": 19.2,
+      "Л": 0,
+      "П": 9,
+      "Д": 1,
+      "Ш": 1,
+      "М": 2,
+      "У": 3
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Малыш",
+     "club": "pro100.Mafia, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 17.2,
+     "values": {
+      "Б": 17.2,
+      "Л": 0,
+      "П": 8,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 1
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Аниморф",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 15,
+     "values": {
+      "Б": 15,
+      "Л": 0,
+      "П": 7,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "YeS",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.8,
+     "values": {
+      "Б": 13.8,
+      "Л": 1,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 3
+     }
+    }
+   ]
+  }
+ ]
+}

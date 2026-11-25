@@ -1,0 +1,1092 @@
+{
+ "fiim_id": 228,
+ "url": "https://fiim.world/tournaments/228",
+ "date": "2017-02-11",
+ "name": "Ukrainian Students Tournament 2017",
+ "city": "Харьков",
+ "kind": "personal",
+ "ours": true,
+ "project": true,
+ "legend": {
+  "Б": "Общее количество баллов",
+  "П": "количество побед",
+  "Д": "количество побед в роли Дона",
+  "Ш": "количество побед в роли Шерифа",
+  "М": "количество побед в роли Мафии",
+  "У": "количество игр, в которых игрок убит в первую ночь",
+  "Ci": "компенсационные баллы за отстрелы (см. п.8.6 Турнирных правил ФИИМ)"
+ },
+ "stages": [
+  {
+   "title": "Отборочные игры",
+   "note": "1.0833 за черные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Л",
+    "П",
+    "Д",
+    "Ш",
+    "М",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "legacy",
+     "club": null,
+     "penalty": null,
+     "seat": 4,
+     "total": 15.67,
+     "values": {
+      "Б": 15.67,
+      "Л": 2,
+      "П": 7,
+      "Д": 1,
+      "Ш": 1,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Борщ",
+     "club": null,
+     "penalty": null,
+     "seat": 17,
+     "total": 15.08,
+     "values": {
+      "Б": 15.08,
+      "Л": 3,
+      "П": 6,
+      "Д": 1,
+      "Ш": 0,
+      "М": 1,
+      "У": 4
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Sunny",
+     "club": null,
+     "penalty": null,
+     "seat": 21,
+     "total": 14.83,
+     "values": {
+      "Б": 14.83,
+      "Л": 1,
+      "П": 7,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Анархия",
+     "club": null,
+     "penalty": null,
+     "seat": 10,
+     "total": 13.33,
+     "values": {
+      "Б": 13.33,
+      "Л": 2,
+      "П": 6,
+      "Д": 1,
+      "Ш": 0,
+      "М": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Полумуж",
+     "club": null,
+     "penalty": null,
+     "seat": 5,
+     "total": 12.33,
+     "values": {
+      "Б": 12.33,
+      "Л": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Shelby",
+     "club": null,
+     "penalty": null,
+     "seat": 1,
+     "total": 11.33,
+     "values": {
+      "Б": 11.33,
+      "Л": 1,
+      "П": 5,
+      "Д": 2,
+      "Ш": 1,
+      "М": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Кель",
+     "club": null,
+     "penalty": null,
+     "seat": 22,
+     "total": 11,
+     "values": {
+      "Б": 11,
+      "Л": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Coil",
+     "club": null,
+     "penalty": null,
+     "seat": 25,
+     "total": 10.83,
+     "values": {
+      "Б": 10.83,
+      "Л": 1,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Леди Бу",
+     "club": null,
+     "penalty": null,
+     "seat": 24,
+     "total": 10.83,
+     "values": {
+      "Б": 10.83,
+      "Л": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Superman",
+     "club": null,
+     "penalty": null,
+     "seat": 23,
+     "total": 10.83,
+     "values": {
+      "Б": 10.83,
+      "Л": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 11,
+     "nick": "Lina",
+     "club": null,
+     "penalty": null,
+     "seat": 13,
+     "total": 10.67,
+     "values": {
+      "Б": 10.67,
+      "Л": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 12,
+     "nick": "Диментий",
+     "club": null,
+     "penalty": null,
+     "seat": 11,
+     "total": 10.17,
+     "values": {
+      "Б": 10.17,
+      "Л": 0,
+      "П": 5,
+      "Д": 1,
+      "Ш": 1,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 13,
+     "nick": "Snow",
+     "club": null,
+     "penalty": null,
+     "seat": 28,
+     "total": 9.83,
+     "values": {
+      "Б": 9.83,
+      "Л": 1,
+      "П": 4,
+      "Д": 2,
+      "Ш": 0,
+      "М": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 14,
+     "nick": "Амахонда",
+     "club": null,
+     "penalty": null,
+     "seat": 18,
+     "total": 9.58,
+     "values": {
+      "Б": 9.58,
+      "Л": 1,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 3
+     }
+    },
+    {
+     "place": 15,
+     "nick": "Шершень",
+     "club": null,
+     "penalty": null,
+     "seat": 2,
+     "total": 9.5,
+     "values": {
+      "Б": 9.5,
+      "Л": 1,
+      "П": 4,
+      "Д": 0,
+      "Ш": 1,
+      "М": 0,
+      "У": 3
+     }
+    },
+    {
+     "place": 16,
+     "nick": "Artykartoshechka",
+     "club": null,
+     "penalty": null,
+     "seat": 9,
+     "total": 9.33,
+     "values": {
+      "Б": 9.33,
+      "Л": 1,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 17,
+     "nick": "Mr.Fox",
+     "club": null,
+     "penalty": null,
+     "seat": 8,
+     "total": 9.17,
+     "values": {
+      "Б": 9.17,
+      "Л": 1,
+      "П": 4,
+      "Д": 0,
+      "Ш": 1,
+      "М": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 18,
+     "nick": "Slamet",
+     "club": null,
+     "penalty": null,
+     "seat": 16,
+     "total": 8.5,
+     "values": {
+      "Б": 8.5,
+      "Л": 1,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "М": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 19,
+     "nick": "Sailos",
+     "club": null,
+     "penalty": null,
+     "seat": 6,
+     "total": 8.17,
+     "values": {
+      "Б": 8.17,
+      "Л": 0,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 20,
+     "nick": "Шпрот",
+     "club": null,
+     "penalty": null,
+     "seat": 15,
+     "total": 8,
+     "values": {
+      "Б": 8,
+      "Л": 0,
+      "П": 4,
+      "Д": 0,
+      "Ш": 2,
+      "М": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 21,
+     "nick": "Одиннадцатый",
+     "club": null,
+     "penalty": null,
+     "seat": 7,
+     "total": 6.75,
+     "values": {
+      "Б": 6.75,
+      "Л": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 1,
+      "М": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 22,
+     "nick": "Добрая",
+     "club": null,
+     "penalty": null,
+     "seat": 12,
+     "total": 6.67,
+     "values": {
+      "Б": 6.67,
+      "Л": 1,
+      "П": 3,
+      "Д": 0,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 23,
+     "nick": "Морф",
+     "club": null,
+     "penalty": null,
+     "seat": 20,
+     "total": 6,
+     "values": {
+      "Б": 6,
+      "Л": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 1,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 24,
+     "nick": "Paradox",
+     "club": null,
+     "penalty": null,
+     "seat": 27,
+     "total": 6,
+     "values": {
+      "Б": 6,
+      "Л": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 0,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 25,
+     "nick": "Бегедил",
+     "club": null,
+     "penalty": null,
+     "seat": 29,
+     "total": 5,
+     "values": {
+      "Б": 5,
+      "Л": 1,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "М": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 26,
+     "nick": "Fake",
+     "club": null,
+     "penalty": null,
+     "seat": 14,
+     "total": 5,
+     "values": {
+      "Б": 5,
+      "Л": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 2,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 27,
+     "nick": "Чикаго",
+     "club": null,
+     "penalty": null,
+     "seat": 3,
+     "total": 4.67,
+     "values": {
+      "Б": 4.67,
+      "Л": 1,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "М": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 28,
+     "nick": "SkiF",
+     "club": null,
+     "penalty": null,
+     "seat": 19,
+     "total": 4.17,
+     "values": {
+      "Б": 4.17,
+      "Л": 0,
+      "П": 2,
+      "Д": 1,
+      "Ш": 0,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 29,
+     "nick": "Серый Лис",
+     "club": null,
+     "penalty": null,
+     "seat": 30,
+     "total": 4,
+     "values": {
+      "Б": 4,
+      "Л": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 1,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 30,
+     "nick": "Иволга",
+     "club": null,
+     "penalty": null,
+     "seat": 26,
+     "total": 4,
+     "values": {
+      "Б": 4,
+      "Л": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "М": 0,
+      "У": 0
+     }
+    }
+   ]
+  },
+  {
+   "title": "Финал",
+   "note": "1.0556 за черные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Л",
+    "П",
+    "Д",
+    "Ш",
+    "М",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Анархия",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 23.83,
+     "values": {
+      "Б": 23.83,
+      "Л": 5,
+      "П": 10,
+      "Д": 1,
+      "Ш": 1,
+      "М": 2,
+      "У": 2
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Леди Бу",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 22.94,
+     "values": {
+      "Б": 22.94,
+      "Л": 4,
+      "П": 10,
+      "Д": 1,
+      "Ш": 1,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Superman",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 21.94,
+     "values": {
+      "Б": 21.94,
+      "Л": 2,
+      "П": 10,
+      "Д": 1,
+      "Ш": 0,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Snow",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 21.69,
+     "values": {
+      "Б": 21.69,
+      "Л": 4,
+      "П": 9,
+      "Д": 2,
+      "Ш": 1,
+      "М": 2,
+      "У": 4
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Lina",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 21.33,
+     "values": {
+      "Б": 21.33,
+      "Л": 2,
+      "П": 10,
+      "Д": 1,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Sunny",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 20.83,
+     "values": {
+      "Б": 20.83,
+      "Л": 1,
+      "П": 10,
+      "Д": 0,
+      "Ш": 0,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Shelby",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 19.83,
+     "values": {
+      "Б": 19.83,
+      "Л": 2,
+      "П": 9,
+      "Д": 2,
+      "Ш": 1,
+      "М": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Борщ",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 19.33,
+     "values": {
+      "Б": 19.33,
+      "Л": 3,
+      "П": 8,
+      "Д": 1,
+      "Ш": 0,
+      "М": 2,
+      "У": 8
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Кель",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 19,
+     "values": {
+      "Б": 19,
+      "Л": 1,
+      "П": 9,
+      "Д": 0,
+      "Ш": 2,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Полумуж",
+     "club": "Royal House, Краматорск",
+     "penalty": null,
+     "seat": null,
+     "total": 18.33,
+     "values": {
+      "Б": 18.33,
+      "Л": 0,
+      "П": 9,
+      "Д": 1,
+      "Ш": 0,
+      "М": 2,
+      "У": 1
+     }
+    }
+   ]
+  },
+  {
+   "title": "Полуфинал",
+   "note": "1.1250 за черные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Л",
+    "П",
+    "Д",
+    "Ш",
+    "М",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Леди Бу",
+     "club": null,
+     "penalty": null,
+     "seat": 24,
+     "total": 18.75,
+     "values": {
+      "Б": 18.75,
+      "Л": 3,
+      "П": 8,
+      "Д": 0,
+      "Ш": 1,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Полумуж",
+     "club": null,
+     "penalty": null,
+     "seat": 5,
+     "total": 18.75,
+     "values": {
+      "Б": 18.75,
+      "Л": 0,
+      "П": 9,
+      "Д": 1,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Анархия",
+     "club": null,
+     "penalty": null,
+     "seat": 10,
+     "total": 18.5,
+     "values": {
+      "Б": 18.5,
+      "Л": 3,
+      "П": 8,
+      "Д": 1,
+      "Ш": 1,
+      "М": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Superman",
+     "club": null,
+     "penalty": null,
+     "seat": 23,
+     "total": 18.25,
+     "values": {
+      "Б": 18.25,
+      "Л": 2,
+      "П": 8,
+      "Д": 0,
+      "Ш": 0,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Борщ",
+     "club": null,
+     "penalty": null,
+     "seat": 17,
+     "total": 17.5,
+     "values": {
+      "Б": 17.5,
+      "Л": 3,
+      "П": 7,
+      "Д": 1,
+      "Ш": 0,
+      "М": 1,
+      "У": 7
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Snow",
+     "club": null,
+     "penalty": null,
+     "seat": 28,
+     "total": 17.25,
+     "values": {
+      "Б": 17.25,
+      "Л": 3,
+      "П": 7,
+      "Д": 2,
+      "Ш": 1,
+      "М": 1,
+      "У": 3
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Кель",
+     "club": null,
+     "penalty": null,
+     "seat": 22,
+     "total": 17,
+     "values": {
+      "Б": 17,
+      "Л": 1,
+      "П": 8,
+      "Д": 0,
+      "Ш": 1,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Sunny",
+     "club": null,
+     "penalty": null,
+     "seat": 21,
+     "total": 17,
+     "values": {
+      "Б": 17,
+      "Л": 1,
+      "П": 8,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Lina",
+     "club": null,
+     "penalty": null,
+     "seat": 13,
+     "total": 16.75,
+     "values": {
+      "Б": 16.75,
+      "Л": 1,
+      "П": 8,
+      "Д": 0,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Shelby",
+     "club": null,
+     "penalty": null,
+     "seat": 1,
+     "total": 16,
+     "values": {
+      "Б": 16,
+      "Л": 2,
+      "П": 7,
+      "Д": 2,
+      "Ш": 1,
+      "М": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 11,
+     "nick": "legacy",
+     "club": null,
+     "penalty": null,
+     "seat": 4,
+     "total": 16,
+     "values": {
+      "Б": 16,
+      "Л": 2,
+      "П": 7,
+      "Д": 1,
+      "Ш": 1,
+      "М": 3,
+      "У": 0
+     }
+    },
+    {
+     "place": 12,
+     "nick": "Artykartoshechka",
+     "club": null,
+     "penalty": null,
+     "seat": 9,
+     "total": 16,
+     "values": {
+      "Б": 16,
+      "Л": 1,
+      "П": 7,
+      "Д": 3,
+      "Ш": 0,
+      "М": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 13,
+     "nick": "Шершень",
+     "club": null,
+     "penalty": null,
+     "seat": 2,
+     "total": 15.5,
+     "values": {
+      "Б": 15.5,
+      "Л": 1,
+      "П": 7,
+      "Д": 0,
+      "Ш": 1,
+      "М": 0,
+      "У": 4
+     }
+    },
+    {
+     "place": 14,
+     "nick": "Coil",
+     "club": null,
+     "penalty": null,
+     "seat": 25,
+     "total": 15.25,
+     "values": {
+      "Б": 15.25,
+      "Л": 1,
+      "П": 7,
+      "Д": 1,
+      "Ш": 0,
+      "М": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 15,
+     "nick": "Амахонда",
+     "club": null,
+     "penalty": null,
+     "seat": 18,
+     "total": 14.75,
+     "values": {
+      "Б": 14.75,
+      "Л": 2,
+      "П": 6,
+      "Д": 0,
+      "Ш": 1,
+      "М": 2,
+      "У": 5
+     }
+    },
+    {
+     "place": 16,
+     "nick": "Sailos",
+     "club": null,
+     "penalty": null,
+     "seat": 6,
+     "total": 14.5,
+     "values": {
+      "Б": 14.5,
+      "Л": 0,
+      "П": 7,
+      "Д": 0,
+      "Ш": 0,
+      "М": 2,
+      "У": 1
+     }
+    },
+    {
+     "place": 17,
+     "nick": "Диментий",
+     "club": null,
+     "penalty": null,
+     "seat": 11,
+     "total": 14.25,
+     "values": {
+      "Б": 14.25,
+      "Л": 0,
+      "П": 7,
+      "Д": 1,
+      "Ш": 1,
+      "М": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 18,
+     "nick": "Шпрот",
+     "club": null,
+     "penalty": null,
+     "seat": 15,
+     "total": 12,
+     "values": {
+      "Б": 12,
+      "Л": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 3,
+      "М": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 19,
+     "nick": "Mr.Fox",
+     "club": null,
+     "penalty": null,
+     "seat": 8,
+     "total": 11.25,
+     "values": {
+      "Б": 11.25,
+      "Л": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "М": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 20,
+     "nick": "Slamet",
+     "club": null,
+     "penalty": null,
+     "seat": 16,
+     "total": 10.5,
+     "values": {
+      "Б": 10.5,
+      "Л": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "М": 0,
+      "У": 1
+     }
+    }
+   ]
+  }
+ ]
+}

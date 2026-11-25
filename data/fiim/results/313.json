@@ -1,0 +1,2969 @@
+{
+ "fiim_id": 313,
+ "url": "https://fiim.world/tournaments/313",
+ "date": "2018-05-26",
+ "name": "Mafia Champions League 2017/2018 (Финал)",
+ "city": "Харьков",
+ "kind": "personal",
+ "ours": true,
+ "project": true,
+ "legend": {
+  "Б": "общее количество баллов",
+  "Дб": "дополнительные баллы",
+  "Л1": "количество званий \"Лучший игрок 1\"",
+  "Л2": "количество званий \"Лучший игрок 2\"",
+  "П": "количество побед",
+  "Д": "количество побед в роли Дона",
+  "Ш": "количество побед в роли Шерифа",
+  "У": "количество игр, в которых игрок убит в первую ночь",
+  "Ci": "компенсационные баллы за отстрелы (см. п.8.6 Турнирных правил ФИИМ)"
+ },
+ "stages": [
+  {
+   "title": "Итоговая таблица",
+   "note": null,
+   "columns": [
+    "№",
+    "Ник",
+    "Итоговый Кф",
+    "Финал",
+    "Отбор",
+    "К-во",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Бенджамин",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 18.374,
+     "values": {
+      "Итоговый Кф": 18.374,
+      "Финал": 21.77,
+      "Отбор": 13.28,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": 12.5,
+      "4": null,
+      "5": 10.5,
+      "6": 16.85,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Персик",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 16.65,
+     "values": {
+      "Итоговый Кф": 16.65,
+      "Финал": 20.15,
+      "Отбор": 11.4,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": 12.5,
+      "4": null,
+      "5": null,
+      "6": 13.7,
+      "7": null,
+      "8": null,
+      "9": 8.0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Гармония",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 16.532,
+     "values": {
+      "Итоговый Кф": 16.532,
+      "Финал": 19.4,
+      "Отбор": 12.23,
+      "К-во": 3,
+      "1": 11.55,
+      "2": null,
+      "3": null,
+      "4": 18.65,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 6.5,
+      "9": null
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Анархия",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 15.754,
+     "values": {
+      "Итоговый Кф": 15.754,
+      "Финал": 17.27,
+      "Отбор": 13.48,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": 16.5,
+      "4": null,
+      "5": null,
+      "6": 12.35,
+      "7": 11.6,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Snow",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 15.354,
+     "values": {
+      "Итоговый Кф": 15.354,
+      "Финал": 17.77,
+      "Отбор": 11.73,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": 9.45,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 12.5,
+      "9": 13.25
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Шершень",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 15.208,
+     "values": {
+      "Итоговый Кф": 15.208,
+      "Финал": 17.9,
+      "Отбор": 11.17,
+      "К-во": 3,
+      "1": null,
+      "2": 13.15,
+      "3": 4.25,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": 16.1,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Ginger",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 14.602,
+     "values": {
+      "Итоговый Кф": 14.602,
+      "Финал": 16.65,
+      "Отбор": 11.53,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": 12.5,
+      "4": null,
+      "5": null,
+      "6": 11.6,
+      "7": null,
+      "8": null,
+      "9": 10.5
+     }
+    },
+    {
+     "place": 8,
+     "nick": "YeS",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 14.138,
+     "values": {
+      "Итоговый Кф": 14.138,
+      "Финал": 14.63,
+      "Отбор": 13.4,
+      "К-во": 3,
+      "1": 9.8,
+      "2": 17.8,
+      "3": null,
+      "4": null,
+      "5": 12.6,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Странник",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 14.07,
+     "values": {
+      "Итоговый Кф": 14.07,
+      "Финал": 14.27,
+      "Отбор": 13.77,
+      "К-во": 3,
+      "1": 18.4,
+      "2": 10.65,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 12.25,
+      "9": null
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Лев",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 10.652,
+     "values": {
+      "Итоговый Кф": 10.652,
+      "Финал": 10.0,
+      "Отбор": 11.63,
+      "К-во": 3,
+      "1": 14.25,
+      "2": 10.65,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 10.0,
+      "9": null
+     }
+    },
+    {
+     "place": 11,
+     "nick": "Полицейский",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 11.76,
+      "К-во": 4,
+      "1": null,
+      "2": 14.65,
+      "3": 12.0,
+      "4": 9.7,
+      "5": null,
+      "6": 10.7,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 12,
+     "nick": "Lucky",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 11.38,
+      "К-во": 3,
+      "1": 12.3,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": 4.35,
+      "6": null,
+      "7": null,
+      "8": 17.5,
+      "9": null
+     }
+    },
+    {
+     "place": 13,
+     "nick": "Хохольчик",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 10.97,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": 8.1,
+      "6": 11.8,
+      "7": null,
+      "8": null,
+      "9": 13.0
+     }
+    },
+    {
+     "place": 14,
+     "nick": "13",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 10.98,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": 9.4,
+      "5": null,
+      "6": null,
+      "7": 13.3,
+      "8": null,
+      "9": 10.25
+     }
+    },
+    {
+     "place": 15,
+     "nick": "Антонио",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 10.62,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": 12.9,
+      "5": null,
+      "6": null,
+      "7": 11.95,
+      "8": 7.0,
+      "9": null
+     }
+    },
+    {
+     "place": 16,
+     "nick": "Борщ",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 10.47,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": 9.45,
+      "7": 8.2,
+      "8": null,
+      "9": 13.75
+     }
+    },
+    {
+     "place": 17,
+     "nick": "Katana",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 10.33,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": 10.0,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 13.0,
+      "9": 8.0
+     }
+    },
+    {
+     "place": 18,
+     "nick": "Эммануэль",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 8.55,
+      "К-во": 4,
+      "1": 13.3,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": 9.6,
+      "6": null,
+      "7": 4.8,
+      "8": null,
+      "9": 6.5
+     }
+    },
+    {
+     "place": 19,
+     "nick": "Кучерявая",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 8.43,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": 10.9,
+      "5": null,
+      "6": 3.4,
+      "7": null,
+      "8": null,
+      "9": 11.0
+     }
+    },
+    {
+     "place": 20,
+     "nick": "Nancy",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 7.93,
+      "К-во": 3,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": 4.0,
+      "6": 4.8,
+      "7": null,
+      "8": null,
+      "9": 15.0
+     }
+    },
+    {
+     "place": 21,
+     "nick": "Абрам",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 7.5,
+      "К-во": 3,
+      "1": 11.8,
+      "2": null,
+      "3": null,
+      "4": 5.2,
+      "5": 5.5,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 22,
+     "nick": "Леди Бу",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 9.63,
+      "К-во": 2,
+      "1": 13.25,
+      "2": null,
+      "3": 6.0,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 23,
+     "nick": "RiT",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 9.08,
+      "К-во": 2,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": 9.4,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 8.75,
+      "9": null
+     }
+    },
+    {
+     "place": 24,
+     "nick": "Franklin",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 8.98,
+      "К-во": 2,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": 9.7,
+      "8": 8.25,
+      "9": null
+     }
+    },
+    {
+     "place": 25,
+     "nick": "B@LU",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 7.8,
+      "К-во": 2,
+      "1": null,
+      "2": 8.9,
+      "3": null,
+      "4": 6.7,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 26,
+     "nick": "Дин",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 7.55,
+      "К-во": 2,
+      "1": null,
+      "2": null,
+      "3": 9.0,
+      "4": null,
+      "5": 6.1,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 27,
+     "nick": "Slamet",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 16.8,
+      "К-во": 1,
+      "1": null,
+      "2": 16.8,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 28,
+     "nick": "legacy",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 15.3,
+      "К-во": 1,
+      "1": null,
+      "2": 15.3,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 29,
+     "nick": "Frank",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 13.3,
+      "К-во": 1,
+      "1": 13.3,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 30,
+     "nick": "Fox",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 12.25,
+      "К-во": 1,
+      "1": 12.25,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 31,
+     "nick": "Mexx",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 12.0,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": 12.0,
+      "9": null
+     }
+    },
+    {
+     "place": 32,
+     "nick": "Бутч",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 12.0,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": 12.0,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 33,
+     "nick": "Ятна",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 11.8,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": 11.8,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 34,
+     "nick": "blink",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 11.05,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": 11.05,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 35,
+     "nick": "Амбал",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 9.9,
+      "К-во": 1,
+      "1": null,
+      "2": 9.9,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 36,
+     "nick": "Белочка",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 9.85,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": 9.85,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 37,
+     "nick": "Цымба",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 9.85,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": 9.85,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 38,
+     "nick": "Жирафа",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 9.7,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": 9.7,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 39,
+     "nick": "Констанция",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 8.55,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": 8.55,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 40,
+     "nick": "Бордо",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 8.5,
+      "К-во": 1,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": 8.5,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    },
+    {
+     "place": 41,
+     "nick": "Малыш",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": null,
+     "values": {
+      "Итоговый Кф": null,
+      "Финал": null,
+      "Отбор": 4.0,
+      "К-во": 1,
+      "1": null,
+      "2": 4.0,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null,
+      "9": null
+     }
+    }
+   ]
+  },
+  {
+   "title": "1 Серия",
+   "note": "1.4000 за черные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Странник",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 18.4,
+     "values": {
+      "Б": 18.4,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 8,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Лев",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 14.25,
+     "values": {
+      "Б": 14.25,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 7,
+      "Д": 0,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Эммануэль",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.3,
+     "values": {
+      "Б": 13.3,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Frank",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.3,
+     "values": {
+      "Б": 13.3,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Леди Бу",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.25,
+     "values": {
+      "Б": 13.25,
+      "Дб": 1.25,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 2,
+      "У": 1
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Lucky",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 12.3,
+     "values": {
+      "Б": 12.3,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Fox",
+     "club": "Big Ben Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 12.25,
+     "values": {
+      "Б": 12.25,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Абрам",
+     "club": "Шерлок Холмс, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 11.8,
+     "values": {
+      "Б": 11.8,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Гармония",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 11.55,
+     "values": {
+      "Б": 11.55,
+      "Дб": 0.75,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "У": 3
+     }
+    },
+    {
+     "place": 10,
+     "nick": "YeS",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9.8,
+     "values": {
+      "Б": 9.8,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 4,
+      "Д": 1,
+      "Ш": 2,
+      "У": 1
+     }
+    }
+   ]
+  },
+  {
+   "title": "2 Серия",
+   "note": "1.2000 за черные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "YeS",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 17.8,
+     "values": {
+      "Б": 17.8,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 8,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Slamet",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 16.8,
+     "values": {
+      "Б": 16.8,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 8,
+      "Д": 0,
+      "Ш": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "legacy",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 15.3,
+     "values": {
+      "Б": 15.3,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 7,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Полицейский",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 14.65,
+     "values": {
+      "Б": 14.65,
+      "Дб": 2.25,
+      "Л1": 2,
+      "Л2": 0,
+      "П": 6,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Шершень",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.15,
+     "values": {
+      "Б": 13.15,
+      "Дб": 0.75,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 1,
+      "Ш": 1,
+      "У": 3
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Лев",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 10.65,
+     "values": {
+      "Б": 10.65,
+      "Дб": 2.25,
+      "Л1": 1,
+      "Л2": 2,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Странник",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 10.65,
+     "values": {
+      "Б": 10.65,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Амбал",
+     "club": "221b BakerStreet Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 9.9,
+     "values": {
+      "Б": 9.9,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 9,
+     "nick": "B@LU",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 8.9,
+     "values": {
+      "Б": 8.9,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Малыш",
+     "club": "pro100.Mafia, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 4,
+     "values": {
+      "Б": 4,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 1,
+      "У": 2
+     }
+    }
+   ]
+  },
+  {
+   "title": "3 Серия",
+   "note": null,
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Анархия",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 16.5,
+     "values": {
+      "Б": 16.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 8,
+      "Д": 1,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Бенджамин",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12.5,
+     "values": {
+      "Б": 12.5,
+      "Дб": 2.5,
+      "Л1": 2,
+      "Л2": 1,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Персик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12.5,
+     "values": {
+      "Б": 12.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 1,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Ginger",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12.5,
+     "values": {
+      "Б": 12.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Полицейский",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12,
+     "values": {
+      "Б": 12,
+      "Дб": 2,
+      "Л1": 1,
+      "Л2": 2,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "У": 3
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Бутч",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 12,
+     "values": {
+      "Б": 12,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Katana",
+     "club": "Black Chicago, Винница",
+     "penalty": null,
+     "seat": null,
+     "total": 10,
+     "values": {
+      "Б": 10,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Дин",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9,
+     "values": {
+      "Б": 9,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 4,
+      "Д": 2,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Леди Бу",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 6,
+     "values": {
+      "Б": 6,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Шершень",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 4.25,
+     "values": {
+      "Б": 4.25,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "У": 3
+     }
+    }
+   ]
+  },
+  {
+   "title": "4 Серия",
+   "note": "1.6000 за красные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Гармония",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 18.65,
+     "values": {
+      "Б": 18.65,
+      "Дб": 2.25,
+      "Л1": 2,
+      "Л2": 0,
+      "П": 7,
+      "Д": 2,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Антонио",
+     "club": "221b BakerStreet Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 12.9,
+     "values": {
+      "Б": 12.9,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Кучерявая",
+     "club": "Mafia ZP Style, Запорожье",
+     "penalty": null,
+     "seat": null,
+     "total": 10.9,
+     "values": {
+      "Б": 10.9,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 2,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Полицейский",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9.7,
+     "values": {
+      "Б": 9.7,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Snow",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9.45,
+     "values": {
+      "Б": 9.45,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 6,
+     "nick": "13",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 9.4,
+     "values": {
+      "Б": 9.4,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 7,
+     "nick": "RiT",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9.4,
+     "values": {
+      "Б": 9.4,
+      "Дб": 1,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 3,
+      "Д": 1,
+      "Ш": 0,
+      "У": 4
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Бордо",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 8.5,
+     "values": {
+      "Б": 8.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 2,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 9,
+     "nick": "B@LU",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 6.7,
+     "values": {
+      "Б": 6.7,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Абрам",
+     "club": "Шерлок Холмс, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 5.2,
+     "values": {
+      "Б": 5.2,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 2,
+      "П": 2,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    }
+   ]
+  },
+  {
+   "title": "5 Серия",
+   "note": "1.8000 за красные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "YeS",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12.6,
+     "values": {
+      "Б": 12.6,
+      "Дб": 1,
+      "Л1": 2,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Бенджамин",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 10.5,
+     "values": {
+      "Б": 10.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Цымба",
+     "club": "Иград, Белгород",
+     "penalty": null,
+     "seat": null,
+     "total": 9.85,
+     "values": {
+      "Б": 9.85,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 3,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Белочка",
+     "club": null,
+     "penalty": null,
+     "seat": null,
+     "total": 9.85,
+     "values": {
+      "Б": 9.85,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Эммануэль",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9.6,
+     "values": {
+      "Б": 9.6,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Хохольчик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 8.1,
+     "values": {
+      "Б": 8.1,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 3,
+      "Д": 1,
+      "Ш": 0,
+      "У": 3
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Дин",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 6.1,
+     "values": {
+      "Б": 6.1,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 2,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Абрам",
+     "club": "Шерлок Холмс, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 5.5,
+     "values": {
+      "Б": 5.5,
+      "Дб": -0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 3,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Lucky",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 4.35,
+     "values": {
+      "Б": 4.35,
+      "Дб": -1.25,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 2,
+      "Д": 0,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Nancy",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 4,
+     "values": {
+      "Б": 4,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    }
+   ]
+  },
+  {
+   "title": "6 Серия",
+   "note": "1.2000 за красные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Бенджамин",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 16.85,
+     "values": {
+      "Б": 16.85,
+      "Дб": 1.25,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 7,
+      "Д": 1,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Персик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.7,
+     "values": {
+      "Б": 13.7,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Анархия",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12.35,
+     "values": {
+      "Б": 12.35,
+      "Дб": 0.75,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Ятна",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 11.8,
+     "values": {
+      "Б": 11.8,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Хохольчик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 11.8,
+     "values": {
+      "Б": 11.8,
+      "Дб": -1,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Ginger",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 11.6,
+     "values": {
+      "Б": 11.6,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Полицейский",
+     "club": "Клуб \"Мафия Харьков\", Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 10.7,
+     "values": {
+      "Б": 10.7,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 4
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Борщ",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 9.45,
+     "values": {
+      "Б": 9.45,
+      "Дб": 0.25,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 4,
+      "Д": 1,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Nancy",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 4.8,
+     "values": {
+      "Б": 4.8,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Кучерявая",
+     "club": "Mafia ZP Style, Запорожье",
+     "penalty": null,
+     "seat": null,
+     "total": 3.4,
+     "values": {
+      "Б": 3.4,
+      "Дб": -1,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 2,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    }
+   ]
+  },
+  {
+   "title": "7 Серия",
+   "note": "1.2000 за красные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Шершень",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 16.1,
+     "values": {
+      "Б": 16.1,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 7,
+      "Д": 0,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 2,
+     "nick": "13",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 13.3,
+     "values": {
+      "Б": 13.3,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 2,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Антонио",
+     "club": "221b BakerStreet Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 11.95,
+     "values": {
+      "Б": 11.95,
+      "Дб": 0.75,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Анархия",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 11.6,
+     "values": {
+      "Б": 11.6,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 2,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "blink",
+     "club": "221b BakerStreet Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 11.05,
+     "values": {
+      "Б": 11.05,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Жирафа",
+     "club": "Mafia Club Odessa, Одесса",
+     "penalty": null,
+     "seat": null,
+     "total": 9.7,
+     "values": {
+      "Б": 9.7,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Franklin",
+     "club": "Big Ben Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 9.7,
+     "values": {
+      "Б": 9.7,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Констанция",
+     "club": "MAFIA MANIA, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 8.55,
+     "values": {
+      "Б": 8.55,
+      "Дб": -0.25,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Борщ",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 8.2,
+     "values": {
+      "Б": 8.2,
+      "Дб": -1,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Эммануэль",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 4.8,
+     "values": {
+      "Б": 4.8,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 2,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    }
+   ]
+  },
+  {
+   "title": "8 Серия",
+   "note": null,
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Lucky",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 17.5,
+     "values": {
+      "Б": 17.5,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 2,
+      "П": 8,
+      "Д": 1,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Katana",
+     "club": "Black Chicago, Винница",
+     "penalty": null,
+     "seat": null,
+     "total": 13,
+     "values": {
+      "Б": 13,
+      "Дб": 1,
+      "Л1": 0,
+      "Л2": 2,
+      "П": 6,
+      "Д": 2,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Snow",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 12.5,
+     "values": {
+      "Б": 12.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Странник",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 12.25,
+     "values": {
+      "Б": 12.25,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 6,
+      "Д": 0,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Mexx",
+     "club": "True Story, Гамбург",
+     "penalty": null,
+     "seat": null,
+     "total": 12,
+     "values": {
+      "Б": 12,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 6,
+      "Д": 1,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Лев",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 10,
+     "values": {
+      "Б": 10,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 7,
+     "nick": "RiT",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 8.75,
+     "values": {
+      "Б": 8.75,
+      "Дб": 2.75,
+      "Л1": 2,
+      "Л2": 1,
+      "П": 3,
+      "Д": 1,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Franklin",
+     "club": "Big Ben Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 8.25,
+     "values": {
+      "Б": 8.25,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Антонио",
+     "club": "221b BakerStreet Mafia Club, Киев",
+     "penalty": null,
+     "seat": null,
+     "total": 7,
+     "values": {
+      "Б": 7,
+      "Дб": 1,
+      "Л1": 1,
+      "Л2": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Гармония",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 6.5,
+     "values": {
+      "Б": 6.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 3,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    }
+   ]
+  },
+  {
+   "title": "9 серия",
+   "note": null,
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Nancy",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 15,
+     "values": {
+      "Б": 15,
+      "Дб": 1,
+      "Л1": 0,
+      "Л2": 2,
+      "П": 7,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Борщ",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.75,
+     "values": {
+      "Б": 13.75,
+      "Дб": 1.75,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 6,
+      "Д": 1,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Snow",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13.25,
+     "values": {
+      "Б": 13.25,
+      "Дб": 1.25,
+      "Л1": 0,
+      "Л2": 2,
+      "П": 6,
+      "Д": 0,
+      "Ш": 2,
+      "У": 2
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Хохольчик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 13,
+     "values": {
+      "Б": 13,
+      "Дб": 3,
+      "Л1": 3,
+      "Л2": 0,
+      "П": 5,
+      "Д": 2,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Кучерявая",
+     "club": "Mafia ZP Style, Запорожье",
+     "penalty": null,
+     "seat": null,
+     "total": 11,
+     "values": {
+      "Б": 11,
+      "Дб": 1,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 1,
+      "Ш": 1,
+      "У": 2
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Ginger",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 10.5,
+     "values": {
+      "Б": 10.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 7,
+     "nick": "13",
+     "club": "Maf League Poltava Club, Полтава",
+     "penalty": null,
+     "seat": null,
+     "total": 10.25,
+     "values": {
+      "Б": 10.25,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 1,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 8,
+     "nick": "Katana",
+     "club": "Black Chicago, Винница",
+     "penalty": null,
+     "seat": null,
+     "total": 8,
+     "values": {
+      "Б": 8,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 0,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Персик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 8,
+     "values": {
+      "Б": 8,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 4,
+      "Д": 0,
+      "Ш": 0,
+      "У": 0
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Эммануэль",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 6.5,
+     "values": {
+      "Б": 6.5,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 3,
+      "Д": 0,
+      "Ш": 1,
+      "У": 2
+     }
+    }
+   ]
+  },
+  {
+   "title": "Финал",
+   "note": "1.0667 за черные победы",
+   "columns": [
+    "№",
+    "Игрок / Код",
+    "Б",
+    "Дб",
+    "Л1",
+    "Л2",
+    "П",
+    "Д",
+    "Ш",
+    "У"
+   ],
+   "rows": [
+    {
+     "place": 1,
+     "nick": "Бенджамин",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 21.77,
+     "values": {
+      "Б": 21.77,
+      "Дб": 3.5,
+      "Л1": 1,
+      "Л2": 4,
+      "П": 9,
+      "Д": 2,
+      "Ш": 2,
+      "У": 1
+     }
+    },
+    {
+     "place": 2,
+     "nick": "Персик",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 20.15,
+     "values": {
+      "Б": 20.15,
+      "Дб": 1.75,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 9,
+      "Д": 0,
+      "Ш": 2,
+      "У": 1
+     }
+    },
+    {
+     "place": 3,
+     "nick": "Гармония",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 19.4,
+     "values": {
+      "Б": 19.4,
+      "Дб": 1,
+      "Л1": 0,
+      "Л2": 2,
+      "П": 9,
+      "Д": 1,
+      "Ш": 1,
+      "У": 1
+     }
+    },
+    {
+     "place": 4,
+     "nick": "Шершень",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 17.9,
+     "values": {
+      "Б": 17.9,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 8,
+      "Д": 1,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 5,
+     "nick": "Snow",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 17.77,
+     "values": {
+      "Б": 17.77,
+      "Дб": 1.5,
+      "Л1": 1,
+      "Л2": 1,
+      "П": 8,
+      "Д": 1,
+      "Ш": 1,
+      "У": 0
+     }
+    },
+    {
+     "place": 6,
+     "nick": "Анархия",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 17.27,
+     "values": {
+      "Б": 17.27,
+      "Дб": 3,
+      "Л1": 0,
+      "Л2": 5,
+      "П": 7,
+      "Д": 2,
+      "Ш": 0,
+      "У": 3
+     }
+    },
+    {
+     "place": 7,
+     "nick": "Ginger",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 16.65,
+     "values": {
+      "Б": 16.65,
+      "Дб": 0.25,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 8,
+      "Д": 0,
+      "Ш": 2,
+      "У": 2
+     }
+    },
+    {
+     "place": 8,
+     "nick": "YeS",
+     "club": "Mafia сlub \"Champions league\" Kharkiv, Харьков",
+     "penalty": null,
+     "seat": null,
+     "total": 14.63,
+     "values": {
+      "Б": 14.63,
+      "Дб": 0.5,
+      "Л1": 0,
+      "Л2": 1,
+      "П": 7,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    },
+    {
+     "place": 9,
+     "nick": "Странник",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 14.27,
+     "values": {
+      "Б": 14.27,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 7,
+      "Д": 0,
+      "Ш": 0,
+      "У": 1
+     }
+    },
+    {
+     "place": 10,
+     "nick": "Лев",
+     "club": "Большая Игра, Днепр",
+     "penalty": null,
+     "seat": null,
+     "total": 10,
+     "values": {
+      "Б": 10,
+      "Дб": 0,
+      "Л1": 0,
+      "Л2": 0,
+      "П": 5,
+      "Д": 0,
+      "Ш": 0,
+      "У": 2
+     }
+    }
+   ]
+  }
+ ]
+}
