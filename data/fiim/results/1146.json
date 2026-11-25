@@ -195,8 +195,8 @@
     },
     {
      "place": 9,
-     "nick": "Странник (Днепр)",
-     "club": null,
+     "nick": "Странник",
+     "club": "Днепр",
      "penalty": null,
      "seat": 2,
      "total": 3.5,
