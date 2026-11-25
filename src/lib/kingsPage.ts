@@ -66,7 +66,7 @@ export async function getKingsSeasons(): Promise<KingsSeason[]> {
   const seasons: KingsSeason[] = [];
   try {
     const page = await getKingsPage(current);
-    for (const m of page.body.matchAll(/<a href="\/seasons\/(\d+)" class="season-chip[^"]*">\s*([^<]+?)\s*<\/a>/g)) {
+    for (const m of page.body.matchAll(/<a\s+href="\/seasons\/(\d+)"\s+class="season-chip[^"]*"\s*>\s*([^<]+?)\s*<\/a>/g)) {
       const label = m[2].trim();
       let slug = /^\d{4}$/.test(label) ? label : m[1];
       if (seasons.some((x) => x.slug === slug)) slug = `${slug}-${m[1]}`;
