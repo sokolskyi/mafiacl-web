@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · standings.html (копия для mafiacl.com, собрана зеркалом mirror_mcl.py) · источник mcl-standings.html · v1.8 · 2026-10-13 · блок «Сверка для организатора»: серии (контрольные суммы), зачёт и итог полуфинала по шагам с пересчётом из протоколов и CSV; шапка маршрута с формулой по региону · v1.7 · 2026-10-13 · ×1.5 к отбору только на Кипре, Израиль 50/50 · v1.6 · итог полуфинала: отбор ×1.5 при 2+ сериях, колонка «Итог», пометка ×1.5 · v1.5 · 2026-10-05 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. v1.5: блок «Итог полуфинала» (50% балла отборов + 50% балла полуфинала, conf[c].semiResult из data/mcl2026.js). Генератор: build_site.py -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08070b">
+<title>Зачёт · MCL Europe 2026</title>
+<link rel="icon" href="assets/icons/icon-32.png?v=2" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png?v=2" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png?v=2">
+
+<meta name="description" content="Зачёт MCL Europe 2026 по трём регионам: средний балл за серию, норма двух серий, полуфиналы Израиля и Кипра, калькулятор прохода в финал.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,400;0,600;0,700;1,700;1,800&family=Fira+Sans+Extra+Condensed:ital,wght@0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08070b; --bg2:#0d0b11; --panel:#131018; --panel2:#191320; --line:rgba(198,90,180,.20);
+  --pur:#812276; --pur-hi:#c65ab4; --pur-dp:#4a1243; --red:#db514e; --gold:#c9a14d; --gold-hi:#f0d488;
+  --ink:#ffffff; --mut:#9c93a6; --dim:#615a6c;
+  --ff-h:'Fira Sans Extra Condensed','Fira Sans Condensed','PT Sans Narrow','Arial Narrow',sans-serif;
+  --ff-n:'Fira Sans Condensed','Arial Narrow',sans-serif;
+  --ff-b:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-b);font-size:15px;line-height:1.55}
+a{color:var(--pur-hi);text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit}
+.wrap{width:min(1180px,100%);margin:0 auto;padding:0 16px}
+.h{font-family:var(--ff-h);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:.92}
+.num{font-family:var(--ff-n);font-variant-numeric:tabular-nums;font-weight:700}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.22;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.35;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px)}
+
+/* интро */
+#intro{position:fixed;inset:0;z-index:60;background:#000;display:grid;place-items:center;transition:opacity .5s ease,visibility .5s}
+#intro[hidden]{display:none}
+#intro.off{opacity:0;visibility:hidden}
+#intro video{width:min(78vw,560px);mix-blend-mode:screen}
+#intro .cap{position:absolute;bottom:16%;left:0;right:0;text-align:center;font-family:var(--ff-h);font-style:italic;font-weight:800;
+  font-size:clamp(15px,3.4vw,24px);letter-spacing:.22em;color:#fff;opacity:0;animation:capin .9s ease 2.1s forwards;text-transform:uppercase}
+#intro .cap b{color:var(--pur-hi);font-weight:800}
+@keyframes capin{to{opacity:1}}
+#intro .skip{position:absolute;bottom:26px;right:22px;font-size:11px;letter-spacing:.18em;color:var(--dim);
+  border:1px solid rgba(255,255,255,.14);border-radius:2px;padding:8px 14px;background:transparent;cursor:pointer;text-transform:uppercase}
+#intro .skip:hover{color:#fff;border-color:var(--pur-hi)}
+
+/* шапка */
+.top{position:sticky;top:0;z-index:30;background:rgba(8,7,11,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .in{display:flex;align-items:center;gap:14px;height:58px}
+.top .mark{display:flex;align-items:center;gap:10px;flex:none}
+.top .mark img{width:34px;height:34px;object-fit:contain}
+.top .mark span{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:19px;letter-spacing:.06em;color:#fff}
+.top .mark i{color:var(--pur-hi);font-style:italic}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-family:var(--ff-n);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+  padding:9px 13px;white-space:nowrap;transform:skewX(-11deg);transition:.15s}
+.nav a span{display:inline-block;transform:skewX(11deg)}
+.nav a:hover{color:#fff}
+.nav a.on{background:var(--pur);color:#fff}
+.tobtn{flex:none;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--red);color:#fff;border:0;padding:9px 15px;cursor:pointer;transform:skewX(-11deg)}
+.tobtn span{display:inline-block;transform:skewX(11deg)}
+.tobtn:hover{background:#e8615e}
+
+/* герой большой */
+.hero{position:relative;min-height:clamp(500px,84svh,740px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-2;background:#000 center/cover no-repeat;transform:scale(1.06);animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.14) translate3d(-1.6%,-1.2%,0)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(8,7,11,.72) 0%,rgba(8,7,11,.30) 34%,rgba(8,7,11,.86) 74%,var(--bg) 100%),
+             radial-gradient(90% 60% at 50% 8%,rgba(129,34,118,.42),transparent 66%)}
+.hero .spot{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background:radial-gradient(320px 320px at var(--mx,50%) var(--my,30%),rgba(198,90,180,.30),transparent 70%)}
+.hero .in{padding:0 16px 34px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-n);font-weight:700;font-size:12px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--pur-hi)}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--red)}
+.hero h1{margin:12px 0 0;font-size:clamp(54px,13.5vw,168px);letter-spacing:-.012em}
+.hero h1 .o{-webkit-text-stroke:2px rgba(255,255,255,.72);color:transparent;paint-order:stroke fill}
+.hero .sub{margin-top:10px;font-family:var(--ff-h);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:clamp(17px,4.2vw,30px);color:#fff;letter-spacing:.03em}
+.hero .sub b{color:var(--pur-hi)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.fact{background:rgba(19,16,24,.72);border:1px solid var(--line);padding:9px 14px;backdrop-filter:blur(6px)}
+.fact .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.fact .v{font-family:var(--ff-n);font-weight:700;font-size:19px;color:#fff;margin-top:1px}
+.fact .v i{color:var(--red);font-style:normal}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-n);font-weight:700;font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;padding:13px 22px;border:0;cursor:pointer;transform:skewX(-11deg);background:var(--pur);color:#fff;transition:.15s}
+.btn>*{transform:skewX(11deg)}
+.btn:hover{background:var(--pur-hi)}
+.btn.gh{background:transparent;border:1px solid rgba(255,255,255,.28);color:#fff}
+.btn.gh:hover{border-color:var(--pur-hi);background:rgba(129,34,118,.22)}
+.play{width:9px;height:11px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%)}
+
+/* герой компактный (внутренние страницы) */
+.phead{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+  background:linear-gradient(120deg,var(--pur-dp) 0%,#0c0910 55%,#0c0910 100%)}
+.phead .bg{position:absolute;inset:0;background:center/cover no-repeat;opacity:.24;filter:grayscale(.3)}
+.phead .in{position:relative;padding:34px 16px 26px}
+.phead h1{margin:8px 0 0;font-size:clamp(34px,8.5vw,72px)}
+.phead .sub{color:var(--mut);font-size:13.5px;margin-top:8px;max-width:64ch}
+.phead .sub b{color:#fff}
+
+/* тикер */
+.tick{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,var(--pur-dp),#120b12 55%,var(--pur-dp));overflow:hidden}
+.tick .row{display:flex;width:max-content;animation:run 46s linear infinite}
+.tick:hover .row{animation-play-state:paused}
+@keyframes run{to{transform:translateX(-50%)}}
+.tick span{font-family:var(--ff-n);font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.86);padding:11px 0;white-space:nowrap}
+.tick span::after{content:"\25C6";color:var(--red);margin:0 20px;font-size:9px;vertical-align:middle}
+
+/* секции */
+section{padding:56px 0 8px;position:relative}
+.sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.sechead .no{font-family:var(--ff-n);font-weight:700;font-size:13px;color:var(--red);letter-spacing:.2em}
+.sechead h2{margin:0;font-size:clamp(28px,6.5vw,54px)}
+.sechead .line{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);align-self:center}
+.lead{color:var(--mut);font-size:14px;max-width:64ch;margin:10px 0 24px}
+.lead b{color:#fff;font-weight:600}
+.more{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--ff-n);font-weight:700;font-size:12.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi);border-bottom:1px solid rgba(198,90,180,.4);padding-bottom:3px}
+.more:hover{color:#fff;border-color:#fff}
+
+/* KPI и регионы */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
+.kpi{background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur)}
+.kpi .v{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:34px;line-height:1;color:#fff}
+.kpi .l{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:7px}
+.confs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.cbox{background:var(--panel);border:1px solid var(--line);padding:16px;display:block;transition:.15s}
+a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
+.cbox .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff}
+.cbox .q{font-size:12px;color:var(--mut);margin-top:2px}
+.cbox .bar{height:6px;background:#241c2b;margin-top:12px;position:relative;overflow:hidden}
+.cbox .bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--pur),var(--pur-hi))}
+.cbox .n{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--ff-n);font-size:12.5px;color:var(--mut)}
+.cbox .n b{color:#fff}
+
+/* табы и тумблер */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 14px}
+.tab{font-family:var(--ff-n);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+  background:var(--panel);border:1px solid var(--line);padding:11px 18px;cursor:pointer;transform:skewX(-11deg);transition:.15s}
+.tab span{display:inline-block;transform:skewX(11deg)}
+.tab:hover{color:#fff}
+.tab.on{background:var(--pur);border-color:var(--pur);color:#fff}
+.switch{display:inline-flex;border:1px solid var(--line);background:var(--panel);margin:0 0 14px}
+.switch button{background:transparent;border:0;color:var(--mut);font-family:var(--ff-n);font-weight:700;font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 14px;cursor:pointer}
+.switch button.on{background:rgba(129,34,118,.35);color:#fff}
+.switch button:not(.on):hover{color:#fff}
+
+/* зачёт */
+.stbl{border:1px solid var(--line);background:var(--panel)}
+.sth,.srow{display:grid;grid-template-columns:40px 42px minmax(0,1fr) 82px 88px 96px;gap:10px;align-items:center;padding:9px 14px}
+.sth{background:var(--panel2);border-bottom:1px solid var(--line);position:sticky;top:58px;z-index:6}
+.sth div{font-family:var(--ff-n);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi)}
+.sth .r,.srow .r{text-align:right}
+.srow{border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.srow:last-child{border-bottom:0}
+.srow:hover{background:rgba(129,34,118,.10)}
+.srow .rk{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:21px;color:var(--dim);text-align:center}
+.srow.zone .rk{color:var(--pur-hi)}
+.srow.zone::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur-hi)}
+.srow.zone{background:linear-gradient(90deg,rgba(129,34,118,.18),transparent 62%)}
+.av{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#241c2b;border:1px solid rgba(255,255,255,.12)}
+.srow.zone .av{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.25)}
+.nick{font-family:var(--ff-n);font-weight:700;font-size:16px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.det{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.needm{display:none}
+.donebar{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:10px;padding:11px 14px;
+  border:1px solid rgba(198,90,180,.45);background:linear-gradient(120deg,rgba(74,18,67,.55),var(--panel) 65%);
+  font-size:13px;color:var(--mut)}
+.donebar b{font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pur-hi)}
+.donebar i{font-style:normal;color:#fff;font-weight:600}
+.donebar.semi{border-color:rgba(201,161,77,.5);background:linear-gradient(120deg,rgba(96,72,20,.4),var(--panel) 65%)}
+.donebar.semi b{color:#f0d488}
+.donebar.semi::before{content:'полуфинал';font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#1a1206;background:#c9a14d;padding:2px 7px;border-radius:2px;align-self:center}
+.donebar:not(.semi)::before{content:'напрямую';font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#fff;background:var(--pur);padding:2px 7px;border-radius:2px;align-self:center}
+.nomore{color:var(--dim);font-weight:400}
+.avg{font-family:var(--ff-n);font-weight:700;font-size:19px;text-align:right;color:#fff}
+.srow.zone .avg{color:var(--pur-hi)}
+.pill{display:inline-block;min-width:76px;white-space:nowrap;text-align:center;font-family:var(--ff-n);font-weight:700;font-size:12px;
+  letter-spacing:.06em;padding:4px 8px;border:1px solid var(--line);color:var(--pur-hi);background:rgba(129,34,118,.16)}
+.pill em{font-style:normal}
+.need{font-family:var(--ff-n);font-weight:700;font-size:13px;text-align:right;color:var(--red);white-space:nowrap}
+.need s{text-decoration:none;color:var(--dim);font-weight:400;font-size:10.5px;display:block;letter-spacing:.06em}
+.srow.one{opacity:.74}
+.srow.wd .nick{text-decoration:line-through}.srow.wd{opacity:.55}
+.wdtag{display:inline-block;margin-left:6px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.3);text-decoration:none;vertical-align:middle}
+.srow.one .nick,.srow.one .avg{color:var(--mut)}
+.srow.one .pill{color:var(--red);border-color:rgba(219,81,78,.4);background:rgba(219,81,78,.10)}
+.cutline{display:flex;align-items:center;gap:12px;padding:7px 14px;background:rgba(198,90,180,.10);border-top:1px dashed rgba(198,90,180,.5);border-bottom:1px dashed rgba(198,90,180,.5)}
+.cutline b{font-family:var(--ff-n);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pur-hi)}
+.cutline i{flex:1;height:1px;background:rgba(198,90,180,.32)}
+.legend{font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.6}
+.legend em{color:var(--red);font-style:normal}
+
+/* итог полуфинала: 50% балла отборов + 50% балла полуфинала */
+.sf{border:1px solid rgba(201,161,77,.55);background:linear-gradient(135deg,rgba(96,72,20,.30),var(--panel) 58%);margin:0 0 24px}
+.sf .sfh{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;padding:13px 16px;border-bottom:1px solid rgba(201,161,77,.35)}
+.sf .sfh b{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:23px;text-transform:uppercase;color:var(--gold-hi)}
+.sf .sfh s{text-decoration:none;font-family:var(--ff-n);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.sf .sfh a{color:var(--gold);font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.sf .sfh a:hover{color:var(--gold-hi)}
+.sfth,.sfr{display:grid;grid-template-columns:40px 42px minmax(0,1fr) 88px 96px 96px;gap:10px;align-items:center;padding:9px 16px}
+.sfth{border-bottom:1px solid rgba(201,161,77,.3);background:rgba(20,15,8,.45)}
+.sfth div{font-family:var(--ff-n);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.sfth .r,.sfr .r{text-align:right}
+.sfr{border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.sfr:last-child{border-bottom:0}
+.sfr:hover{background:rgba(201,161,77,.08)}
+.sfr .rk{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:21px;color:var(--dim);text-align:center}
+.sfr .q50,.sfr .sp50{font-family:var(--ff-n);font-weight:700;font-size:15px;text-align:right;color:var(--mut)}
+.sfr .fin50{font-family:var(--ff-n);font-weight:700;font-size:19px;text-align:right;color:#fff}
+.sfr.fin{background:linear-gradient(90deg,rgba(201,161,77,.20),transparent 62%)}
+.sfr.fin::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-hi)}
+.sfr.fin .rk,.sfr.fin .fin50{color:var(--gold-hi)}
+.sfr.fin .av{border-color:var(--gold-hi);box-shadow:0 0 0 2px rgba(201,161,77,.3)}
+.sftag{display:inline-block;margin-left:9px;vertical-align:2px;font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#1a1206;background:var(--gold-hi);padding:3px 7px}
+.sfcut{display:flex;align-items:center;gap:12px;padding:7px 16px;background:rgba(201,161,77,.10);border-top:1px dashed rgba(201,161,77,.55);border-bottom:1px dashed rgba(201,161,77,.55)}
+.sfcut b{font-family:var(--ff-n);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-hi)}
+.sfcut i{flex:1;height:1px;background:rgba(201,161,77,.35)}
+.sfnote{padding:11px 16px;font-size:12px;color:var(--mut);line-height:1.6;border-top:1px solid rgba(255,255,255,.05)}
+.sfnote b{color:var(--gold-hi)}
+@media (max-width:720px){
+  .sfth,.sfr{grid-template-columns:26px 32px minmax(0,1fr) 54px 58px 64px;gap:7px;padding:9px 10px}
+  .sf .sfh b{font-size:19px}
+  .sfr .rk{font-size:17px}.sfr .fin50{font-size:16px}.sfr .q50,.sfr .sp50{font-size:12.5px}
+  .sftag{display:block;margin:3px 0 0;width:max-content}
+}
+
+/* калькулятор */
+.rc{margin:30px 0 8px;border:1px solid rgba(201,161,77,.45);background:linear-gradient(135deg,rgba(96,72,20,.18),var(--panel) 55%)}
+.rc>summary{cursor:pointer;list-style:none;padding:15px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rc>summary::-webkit-details-marker{display:none}
+.rc>summary b{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:21px;text-transform:uppercase;color:var(--gold-hi)}
+.rc>summary s{text-decoration:none;color:var(--mut);font-size:13px}
+.rc>summary:after{content:'▾';margin-left:auto;color:var(--gold-hi)}
+.rc[open]>summary:after{content:'▴'}
+.rc .rcb{padding:0 18px 18px}
+.rc h4{margin:20px 0 6px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.rc .rcn{font-size:12.5px;color:var(--mut);margin:0 0 8px;line-height:1.55}
+.rc .rcw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line)}
+.rc table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:640px}
+.rc th,.rc td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.rc th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:rgba(0,0,0,.25);position:sticky;top:0}
+.rc td.l,.rc th.l{text-align:left}
+.rc td.w{white-space:normal;min-width:170px;color:var(--mut)}
+.rc tr.fin td{background:rgba(201,161,77,.10)}
+.rc tr.tot td{font-weight:700;color:#fff;background:rgba(0,0,0,.25)}
+.rc .ok{color:#67e08f;font-weight:700}.rc .bad{color:var(--red);font-weight:800}
+.rc .rcbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 2px}
+.rc .rcbar button{background:transparent;border:1px solid rgba(201,161,77,.55);color:var(--gold-hi);padding:7px 12px;font-size:12px;cursor:pointer}
+.rc .rcsum{margin-top:14px;padding:10px 12px;border:1px dashed rgba(201,161,77,.45);font-size:13px;line-height:1.6}
+.calc{background:linear-gradient(120deg,rgba(74,18,67,.55),var(--panel) 60%);border:1px solid rgba(198,90,180,.4);padding:18px;margin:18px 0 6px}
+.calc .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase}
+.calc .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.calc select,.calc input{background:#0e0b12;border:1px solid var(--line);color:#fff;font-family:var(--ff-n);font-weight:700;
+  font-size:15px;padding:10px 12px;min-width:150px}
+.calc input{width:110px}
+.calc .out{margin-top:14px;font-size:14px;color:var(--mut);line-height:1.6}
+.calc .out b{color:#fff}
+.calc .out .big{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:32px;color:var(--pur-hi);line-height:1}
+.calc .hint{font-size:11.5px;color:var(--dim);margin-top:10px}
+
+/* мини-таблица топа */
+.mini{border:1px solid var(--line);background:var(--panel)}
+.mini .mh{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.mini .mh b{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:19px;text-transform:uppercase;color:#fff}
+.mini .mh s{text-decoration:none;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pur-hi)}
+.mrow{display:grid;grid-template-columns:26px 32px minmax(0,1fr) auto;gap:9px;align-items:center;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
+.mrow:last-child{border-bottom:0}
+.mrow .rk{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:17px;color:var(--pur-hi);text-align:center}
+.mrow .av{width:30px;height:30px}
+.mrow .nick{font-size:15px}
+.mrow .avg{font-size:17px;color:var(--pur-hi)}
+
+/* состав */
+.squad{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
+.sq{position:relative;aspect-ratio:3/4;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.sq .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12) brightness(.86);transition:.35s}
+.sq .duo{position:absolute;inset:0;background:linear-gradient(165deg,rgba(198,90,180,.65),rgba(74,18,67,.9));mix-blend-mode:color;transition:.35s}
+.sq .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,11,.15) 30%,rgba(8,7,11,.86) 72%,rgba(8,7,11,.97))}
+.sq .ghost{position:absolute;right:-8px;top:-14px;font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:96px;
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.16);line-height:1}
+.sq .slot{position:absolute;top:9px;left:10px;font-family:var(--ff-n);font-weight:700;font-size:10.5px;letter-spacing:.14em;
+  color:#fff;background:var(--red);padding:3px 7px}
+.sq .body{position:absolute;left:11px;right:11px;bottom:10px}
+.sq .nm{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:26px;text-transform:uppercase;line-height:.95;
+  color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sq .st{display:flex;gap:10px;margin-top:6px;align-items:baseline}
+.sq .st b{font-family:var(--ff-n);font-weight:700;font-size:20px;color:var(--pur-hi)}
+.sq .st s{text-decoration:none;font-size:11px;color:var(--mut);letter-spacing:.04em}
+.sq.empty{display:grid;place-items:center}
+.sq.empty .q{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:64px;color:rgba(255,255,255,.14)}
+.sq:hover .ph{filter:grayscale(.15) contrast(1.06) brightness(1)}
+.sq:hover .duo{opacity:.45}
+
+/* карусель победителей */
+.car{position:relative;border:1px solid var(--line);background:#000;overflow:hidden}
+.cartrack{display:flex;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.carslide{flex:0 0 100%;position:relative;aspect-ratio:16/9;background:#07060a}
+.carslide img{width:100%;height:100%;object-fit:cover;opacity:.95}
+.carslide .cap{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 14px;
+  background:linear-gradient(180deg,transparent,rgba(8,7,11,.94))}
+.carslide .cap .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:clamp(20px,4.4vw,32px);text-transform:uppercase;color:#fff}
+.carslide .cap .t b{color:var(--pur-hi)}
+.carslide .cap .s{font-family:var(--ff-n);font-size:12px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.carbtn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.25);
+  background:rgba(8,7,11,.6);color:#fff;cursor:pointer;font-size:18px;line-height:1;display:grid;place-items:center;backdrop-filter:blur(4px)}
+.carbtn:hover{background:var(--pur);border-color:var(--pur)}
+.carbtn.p{left:10px}.carbtn.n{right:10px}
+.cardots{display:flex;gap:6px;justify-content:center;padding:12px 0 2px;flex-wrap:wrap}
+.cardot{width:26px;height:3px;background:rgba(255,255,255,.18);border:0;cursor:pointer;padding:0}
+.cardot.on{background:var(--pur-hi)}
+
+/* серии */
+.slist{display:grid;gap:10px}
+.sitem{background:var(--panel);border:1px solid var(--line);transition:.15s;overflow:hidden}
+.sitem:hover{border-color:rgba(198,90,180,.45)}
+.sihead{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px}
+.sithumb{width:96px;height:60px;object-fit:cover;border:1px solid var(--line);background:#0c0a10}
+.simeta{font-size:12.5px;color:var(--mut);letter-spacing:.03em}
+.simeta b{color:#fff;font-family:var(--ff-n);font-size:16px;font-weight:700;letter-spacing:0}
+.pod{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.pod span{font-size:12px;color:var(--mut);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:3px 8px}
+.pod span b{color:#fff;font-family:var(--ff-n);font-weight:700}
+.pod span:first-child{border-color:rgba(198,90,180,.45);background:rgba(129,34,118,.18)}
+.pod span:first-child b{color:var(--pur-hi)}
+.siact{display:flex;flex-direction:column;gap:7px;align-items:stretch}
+.tblink{display:inline-flex;align-items:center;gap:7px;font-family:var(--ff-n);font-weight:700;font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:#fff;background:var(--pur);padding:9px 13px;white-space:nowrap;border-bottom:2px solid var(--pur-hi)}
+.tblink:hover{background:var(--pur-hi);color:#0b0810}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:var(--ff-n);font-weight:700;font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--pur-hi);background:transparent;border:1px solid rgba(198,90,180,.45);
+  padding:8px 13px;cursor:pointer;white-space:nowrap}
+.ibtn:hover{background:rgba(129,34,118,.25);color:#fff}
+.ibtn i{font-style:normal;display:inline-grid;place-items:center;width:16px;height:16px;border:1px solid currentColor;border-radius:50%;font-size:10px}
+.sidet{display:none;border-top:1px solid var(--line);background:#0e0b13;padding:14px}
+.sitem.open .sidet{display:block}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.dg{background:var(--panel);border:1px solid rgba(255,255,255,.06);padding:12px}
+.dg .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.dg .v{font-family:var(--ff-n);font-weight:700;font-size:19px;color:#fff;margin-top:3px}
+.dg .h2n{font-size:11.5px;color:var(--dim);margin-top:4px;line-height:1.5}
+
+/* календарь */
+.cal{display:grid;gap:14px}
+.month{border:1px solid var(--line);background:var(--panel);padding:14px}
+.month .mt{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;margin-bottom:10px}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+.day{padding:9px 6px 8px;text-align:center;border:1px solid rgba(255,255,255,.07);background:#0e0b13;color:var(--dim);cursor:default;min-height:66px}
+.day .dn{font-family:var(--ff-n);font-weight:700;font-size:19px;line-height:1;color:var(--mut)}
+.day .dw{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.day .dc{font-family:var(--ff-n);font-weight:700;font-size:11px;line-height:1.15;margin-top:5px;color:var(--pur-hi);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.02em}
+.day.done .dc{color:var(--dim)}
+.day.fin .dc{color:var(--gold-hi)}
+.day.has{border-color:var(--pur-hi);background:linear-gradient(180deg,rgba(129,34,118,.5),rgba(129,34,118,.16));cursor:pointer;color:#fff}
+.day.has .dn{color:#fff}
+.day.has .dw{color:var(--pur-hi)}
+.day.has:hover{background:var(--pur)}
+.day.fin{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,161,77,.55),rgba(201,161,77,.14));color:#fff;cursor:pointer}
+.day.fin .dn{color:var(--gold-hi)}
+.day.fin .dw{color:var(--gold)}
+.day.fin:hover{background:linear-gradient(180deg,rgba(201,161,77,.75),rgba(201,161,77,.3))}
+.day.fin.on{outline-color:var(--gold-hi)}
+.dayinfo.gold{border-color:rgba(201,161,77,.55);background:linear-gradient(120deg,rgba(96,72,20,.55),var(--panel) 60%)}
+.dayinfo.gold .t{color:var(--gold-hi)}
+.dayinfo .fintag{display:inline-block;font-family:var(--ff-n);font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:#1a1206;background:var(--gold);padding:3px 8px;margin-bottom:8px}
+.final{border-color:rgba(201,161,77,.45)}
+.final .lbl{color:var(--gold-hi)}
+.day.done{border-color:rgba(255,255,255,.12);background:#100d15}
+.day.done .dn{color:var(--dim)}
+.day.on{outline:2px solid var(--pur-hi);outline-offset:1px}
+.evlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:14px}
+.evcard{background:var(--panel);border:1px solid var(--line);padding:14px;position:relative;transition:box-shadow .3s,border-color .3s}
+.evcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur-hi)}
+.evcard.gold::before{background:var(--gold)}
+.evcard.hi{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.45),0 10px 30px rgba(0,0,0,.5)}
+.evcard.gold.hi{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,161,77,.5),0 10px 30px rgba(0,0,0,.5)}
+.evcard .ed{font-family:var(--ff-n);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.evcard.gold .ed{color:var(--gold-hi)}
+.evcard .et{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;color:#fff;line-height:1;margin-top:5px}
+.evcard .em{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:10px}
+.evcard .em div .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.evcard .em div .v{font-family:var(--ff-n);font-weight:700;font-size:15px;color:#fff}
+.evcard .ea{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.sitem.hi{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.45)}
+.dayinfo{margin-top:12px;border:1px solid rgba(198,90,180,.4);background:linear-gradient(120deg,rgba(74,18,67,.5),var(--panel) 60%);padding:14px;display:none}
+.dayinfo.on{display:block}
+.dayinfo .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;color:#fff}
+.dayinfo .r{display:flex;flex-wrap:wrap;gap:18px;margin-top:10px}
+.dayinfo .r div .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.dayinfo .r div .v{font-family:var(--ff-n);font-weight:700;font-size:17px;color:#fff}
+.dayinfo .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* финал */
+.final{margin-top:14px;background:linear-gradient(120deg,var(--pur-dp),#140d16 60%);border:1px solid rgba(198,90,180,.4);padding:22px 18px;position:relative;overflow:hidden}
+.final .lbl{font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--red)}
+.final .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:clamp(28px,6vw,46px);text-transform:uppercase;margin-top:4px}
+.final .row{display:flex;flex-wrap:wrap;gap:20px;margin-top:14px}
+.final .row div .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.final .row div .v{font-family:var(--ff-n);font-weight:700;font-size:20px;color:#fff}
+.final img{position:absolute;right:-30px;top:-30px;width:220px;opacity:.10;pointer-events:none}
+
+/* разбор */
+.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.blk{background:var(--panel);border:1px solid var(--line);padding:18px}
+.blk .bt{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;line-height:1.05}
+.blk .bb{font-size:13.5px;color:var(--mut);margin-top:9px;line-height:1.62}
+.blk .bb b{color:#fff}
+.blk .big{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:44px;color:var(--pur-hi);line-height:1;margin-bottom:2px}
+.tw{overflow-x:auto;border:1px solid var(--line);background:var(--panel);margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:560px}
+th{font-family:var(--ff-n);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--pur-hi);
+  background:var(--panel2);text-align:right;padding:10px;white-space:nowrap;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);text-align:right;white-space:nowrap;color:#e9e5ee}
+tr:last-child td{border-bottom:0}
+td.nm{font-family:var(--ff-n);font-weight:700;color:#fff}
+.zero{color:var(--red);font-weight:700}
+
+/* модалка */
+#modal{position:fixed;inset:0;z-index:50;background:rgba(4,3,6,.94);display:none;place-items:center;padding:16px}
+#modal.on{display:grid}
+#modal .box{width:min(1000px,100%)}
+#modal video{width:100%;border:1px solid var(--line);background:#000}
+#modal .x{margin:10px 0 0;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;
+  font-family:var(--ff-n);font-weight:700;letter-spacing:.14em;font-size:12px;text-transform:uppercase;cursor:pointer}
+
+.upfab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:41;width:44px;height:44px;
+  display:grid;place-items:center;border-radius:50%;border:1px solid rgba(198,90,180,.5);background:rgba(19,16,24,.86);
+  backdrop-filter:blur(8px);color:var(--pur-hi);font-size:19px;line-height:1;cursor:pointer;opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .25s,visibility .25s,transform .25s,background .15s}
+.upfab.on{opacity:1;visibility:visible;transform:none}
+.upfab:hover{background:var(--pur);color:#fff;border-color:var(--pur)}
+footer{margin-top:56px;border-top:1px solid var(--line);background:#050409;padding:30px 0 44px}
+footer .fin{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start}
+footer img.flogo{width:64px;opacity:.85}
+footer .txt{font-size:12.5px;color:var(--dim);line-height:1.75}
+footer .txt b{color:var(--mut)}
+footer .ct{font-size:13px;line-height:1.9}
+footer .ct .ck{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pur-hi);display:block;margin-bottom:4px}
+footer .ct a{color:#fff}
+footer .ct a:hover{color:var(--pur-hi)}
+.up{font-family:var(--ff-n);font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pur-hi)}
+
+@media (max-width:860px){
+  footer .fin{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:720px){
+  html{scroll-padding-top:112px}
+  .top .in{height:auto;flex-wrap:wrap;padding-top:9px;row-gap:0}
+  .top .mark img{width:30px;height:30px}.top .mark span{font-size:17px}
+  .nav{order:3;width:100%;margin:7px -16px 0;padding:0 16px;border-top:1px solid rgba(255,255,255,.06)}
+  .nav a{padding:10px 10px;font-size:11.5px;letter-spacing:.1em}
+  .tobtn{margin-left:auto;padding:8px 12px;font-size:11px}
+  .sth{top:104px}
+  .hero::after{background:linear-gradient(180deg,rgba(8,7,11,.82) 0%,rgba(8,7,11,.46) 30%,rgba(8,7,11,.9) 72%,var(--bg) 100%),radial-gradient(90% 60% at 50% 8%,rgba(129,34,118,.42),transparent 66%)}
+  .sth,.srow{grid-template-columns:26px 32px minmax(0,1fr) 62px 44px;gap:7px;padding:9px 10px}
+  .sth .cneed,.srow .cneed{display:none}
+  .srow .rk{font-size:17px}.avg{font-size:16px}.nick{font-size:14.5px}.av{width:32px;height:32px}
+  .pill{min-width:38px;font-size:11.5px;padding:3px 4px}
+  .pill em{display:none}
+  .det{display:none}
+  .needm{display:block;font-size:11px;font-weight:600;color:var(--red);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sihead{grid-template-columns:72px minmax(0,1fr);row-gap:10px}
+  .sithumb{width:72px;height:46px}
+  .siact{grid-column:1/-1;flex-direction:row}
+  .siact>*{flex:1;justify-content:center}
+  .days{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+  .day{min-height:62px;padding:8px 4px 7px}
+  .day .dn{font-size:17px}
+  .day .dc{font-size:10.5px}
+  .upfab{width:40px;height:40px;font-size:17px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  section{padding:40px 0 6px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero .bg{animation:none}.tick .row{animation:none}.cartrack{transition:none}
+}
+
+/* ссылка на пост в канале */
+.carlink{display:block;position:relative}
+.carlink .tgb{position:absolute;right:14px;bottom:14px;font:700 11px/1 var(--fc,inherit);letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(8,7,11,.72);border:1px solid rgba(255,255,255,.22);color:#fff;padding:7px 10px;border-radius:999px;backdrop-filter:blur(4px);opacity:.85;transition:opacity .2s,background .2s}
+.carlink:hover .tgb{opacity:1;background:var(--p,#812276)}
+a .sithumb{cursor:pointer;transition:filter .2s}
+a:hover .sithumb{filter:brightness(1.12)}
+.tblink.tgl{border-color:rgba(255,255,255,.28)}
+@media (max-width:640px){.carlink .tgb{right:10px;bottom:10px;font-size:10px;padding:6px 8px}}
+</style>
+<style id="dvcrumbcss">
+.dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
+ font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+ background:#05060a;border-bottom:1px solid rgba(255,255,255,.10);position:relative;z-index:60}
+.dv-crumb a{color:#8a91a0;text-decoration:none;border:0;transition:color .15s}
+.dv-crumb a.dv-home{color:#f5ff35;font-weight:800}
+.dv-crumb a:hover{color:#eef3fb}
+.dv-crumb i{color:#39404c;font-style:normal}
+.dv-crumb span{color:#5f6675}
+</style>
+</head>
+<body>
+<style id="mafiacl-sitebar-css">
+.mcl-sitebar{position:relative;z-index:31;background:#1c0308;border-bottom:1px solid rgba(253,255,194,.12);font-family:var(--ff-b,Inter,system-ui,sans-serif);font-size:14px;line-height:1}
+.mcl-sitebar .in{max-width:1360px;margin:0 auto;padding:0 16px;height:44px;display:flex;align-items:center;gap:14px}
+.mcl-sitebar a{color:#fdffc2;text-decoration:none}
+.mcl-sitebar .logo{display:flex;align-items:center;flex:none;min-height:36px}
+.mcl-sitebar .logo img{height:24px;width:auto;display:block}
+.mcl-sitebar ol{display:flex;align-items:center;gap:8px;margin:0;padding:0;list-style:none;color:rgba(253,255,194,.6);min-width:0;white-space:nowrap;overflow:hidden}
+.mcl-sitebar ol li+li::before{content:"›";margin-right:8px;color:rgba(253,255,194,.4)}
+.mcl-sitebar ol a{color:rgba(253,255,194,.78);display:inline-flex;align-items:center;min-height:32px}
+.mcl-sitebar ol a:hover{color:#fdffc2;text-decoration:underline}
+.mcl-sitebar ol [aria-current]{color:#fdffc2;font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.mcl-sitebar .acc{margin-left:auto;flex:none;display:inline-flex;align-items:center;min-height:32px;padding:0 16px;border-radius:999px;background:#fdffc2;color:#1c0308;font-weight:700;font-size:13px}
+.mcl-sitebar .acc:hover{background:#fff5a8}
+.mcl-sitebar a:focus-visible{outline:2px solid #fdffc2;outline-offset:2px;border-radius:4px}
+@media (max-width:560px){.mcl-sitebar .home-crumb{display:none}.mcl-sitebar .in{gap:10px}}
+/* Старая строка «MafiaCL / MCL Europe 2026» со старого сайта — её заменяет полоска выше. */
+.dv-crumb{display:none!important}
+/* Кнопки эфира и таблицы финала в первом экране — то же есть в разделе Final, а таблица t757 уже не открывается. */
+.hero .cta a.ytl,.hero .cta a[href="t757.html"]{display:none!important}
+/* Вступительное видео — на весь экран, а не маленьким окошком посередине. */
+#intro video{width:100vw!important;height:100vh!important;height:100dvh!important;object-fit:contain}
+</style>
+<div class="mcl-sitebar"><div class="in">
+  <a class="logo" href="/ru" aria-label="MafiaCL — главная"><img src="/brand/mafiacl-wordmark-dark.svg" alt="MafiaCL" width="67" height="24"></a>
+  <nav aria-label="Где вы на сайте"><ol>
+    <li class="home-crumb"><a href="/ru/turniry">Турниры</a></li>
+    <li><a href="/ru/turniry/mafia-champions-league">Mafia Champions League</a></li>
+    <li aria-current="page">Europe 2026</li>
+  </ol></nav>
+  <a class="acc" href="/ru/kabinet">Кабинет</a>
+</div></div>
+<script>/* ?intro=1 — показать вступительное видео ещё раз (обычно оно показывается раз в сутки). */
+try{if(/[?&]intro=1/.test(location.search))localStorage.removeItem("mclIntro")}catch(e){}</script>
+
+<nav class="dv-crumb"><a class="dv-home" href="/">MafiaCL</a><i>/</i><a href="index.html">MCL Europe 2026</a><i>/</i><span>Зачёт</span></nav>
+<div class="grain"></div><div class="scan"></div>
+<header class="top">
+  <div class="wrap in">
+    <a class="mark" href="index.html" title="MCL Europe 2026">
+      <img src="assets/mcl/logo-white.png" alt="MCL"><span>MCL <i>2026</i></span>
+    </a>
+    <nav class="nav"><a href="index.html"><span>Обзор</span></a><a href="standings.html" class="on"><span>Зачёт</span></a><a href="series.html"><span>Серии</span></a><a href="lab.html"><span>Разбор</span></a><a href="final.html"><span>Final</span></a></nav>
+    <button class="tobtn" id="teaser1"><span>&#9654; Анонс</span></button>
+  </div>
+</header>
+
+<div class="phead"><div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
+  <div class="wrap in">
+    <div class="eyebrow">IX season · зачёт регионов</div>
+    <h1 class="h">Зачёт</h1>
+    <div class="sub">Средний балл за серию, норма — <b>минимум две сыгранные</b>. Дальше маршруты расходятся: Central Europe отдаёт <b>шесть путёвок в финал напрямую</b>, Israel и Cyprus играют <b>полуфинал</b>, куда выходят по десять человек.</div>
+  </div></div>
+<main><div class="wrap">
+  <section style="padding-top:34px">
+    <div class="tabs" id="tabs"></div>
+    <div class="switch" id="filt">
+      <button data-f="all" class="on">Все игроки</button>
+      <button data-f="q">Только с нормой 2+</button>
+    </div>
+    <div id="stbl"></div>
+    <div class="legend" id="stleg"></div>
+
+    <div class="calc" id="calc">
+      <div class="t">Калькулятор прохода</div>
+      <div class="row">
+        <select id="cpl"></select>
+        <input id="csc" type="number" step="0.05" min="0" max="12" placeholder="балл">
+        <button class="btn" id="cgo"><span>Посчитать</span></button>
+      </div>
+      <div class="out" id="cout"></div>
+      <div class="hint">Порог — балл игрока, который сейчас занимает последнее место в квоте. По ходу сезона он растёт: чем больше людей выполнит норму, тем выше планка. Медиана результата серии в этом сезоне — 4.43.</div>
+    </div>
+    <details class="rc" id="recon"></details>
+    <a class="more" href="series.html">Серии и календарь &rarr;</a>
+  </section>
+</div></main>
+<button class="upfab" id="upfab" aria-label="Наверх" title="Наверх">&#8593;</button>
+<footer><div class="wrap fin">
+  <img class="flogo" src="assets/mcl/logo-white.png" alt="MCL">
+  <div class="txt"><b>Mafia Champions League Europe 2026</b> · IX season · финал 21–22.11, Прага<br>
+    Организатор — <b>Mafia Club «Champions league» Prague</b>. Канал лиги: <a href="https://t.me/mafiamcl" target="_blank" rel="noopener">@mafiamcl</a><br>
+    Статистика собрана <b>DOVOD</b> по протоколам <a href="https://mafgame.org/tournaments/757/view" target="_blank" rel="noopener">mafgame.org</a> · снимок <span id="snap"></span> ·
+    <a href="https://dovod-mafia.com/series.html" target="_blank" rel="noopener">серийники DOVOD</a></div>
+  <div class="ct"><span class="ck">Контакты организатора</span>
+    <a href="https://t.me/Yes1911" target="_blank" rel="noopener">@Yes1911</a><br>
+    <a href="tel:+420773194945">+420 773 194 945</a><br>
+    <a class="up" href="#">&#8593; наверх</a></div>
+</div></footer>
+
+<div id="modal"><div class="box">
+  <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
+  <button class="x" id="close">закрыть</button>
+</div></div>
+<script src="data/mcl2026.js?v=20261124"></script>
+<script>
+'use strict';
+var D=window.MCL;
+var $=function(s){return document.querySelector(s);}, $$=function(s){return [].slice.call(document.querySelectorAll(s));};
+var MM=function(q){try{return !!(window.matchMedia&&window.matchMedia(q).matches);}catch(e){return false;}};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+var f2=function(v){return v==null?'—':v.toFixed(2);}, f3=function(v){return v==null?'—':v.toFixed(3);};
+var SER=function(n){return n===1?'серия':(n<5?'серии':'серий');};
+/* флаги строим из кода страны, а не списком: иначе новая страна в календаре
+   (так в октябре приехала Испания) остаётся без флага до правки руками */
+var FL=(function(){var m={};
+  var add=function(cc){ if(cc&&/^[A-Z]{2}$/.test(cc)&&!m[cc])
+    m[cc]=String.fromCodePoint(127397+cc.charCodeAt(0),127397+cc.charCodeAt(1)); };
+  (D.series||[]).forEach(function(s){add(s.fl);});
+  (D.upcoming||[]).forEach(function(s){add(s.fl);});
+  return m;})();
+var MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+var MONN=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};
+var scode=function(s){return s.c+'/'+String(s.num<10?'0'+s.num:s.num);};
+if($('#snap')) $('#snap').textContent=D.snap;
+/* плавающая кнопка «наверх» */
+(function(){var f=$('#upfab'); if(!f) return;
+ var on=false, tick=false;
+ var upd=function(){ var y=window.pageYOffset||document.documentElement.scrollTop;
+   var need=y>500; if(need!==on){ on=need; f.classList.toggle('on',on);} tick=false; };
+ addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd);} },{passive:true});
+ f.addEventListener('click',function(){ window.scrollTo({top:0,behavior:MM('(prefers-reduced-motion: reduce)')?'auto':'smooth'}); });
+ upd();})();
+/* модалка с анонсом */
+(function(){var m=$('#modal'), tv=$('#tv'), b=$('#teaser1');
+ if(!m||!b) return;
+ var open=function(){m.classList.add('on'); tv.play().catch(function(){});};
+ var close=function(){m.classList.remove('on'); tv.pause();};
+ b.addEventListener('click',open);
+ var t2=$('#teaser2'); if(t2) t2.addEventListener('click',open);
+ $('#close').addEventListener('click',close);
+ m.addEventListener('click',function(e){if(e.target===m)close();});
+ addEventListener('keydown',function(e){if(e.key==='Escape')close();});})();
+</script>
+<script>
+
+var CONF=(location.search.match(/[?&]c=(CE|IL|CY)/)||[])[1]||'CE';
+var FILT='all';
+try{ var f=localStorage.getItem('mclFilt'); if(f) FILT=f; }catch(e){}
+$('#tabs').innerHTML=['CE','IL','CY'].map(function(c){
+  return '<div class="tab'+(c===CONF?' on':'')+'" data-c="'+c+'"><span>'+esc(D.conf[c].name)+'</span></div>';}).join('');
+$('#tabs').addEventListener('click',function(e){var t=e.target.closest('.tab'); if(!t)return;
+  CONF=t.dataset.c; $$('#tabs .tab').forEach(function(x){x.classList.toggle('on',x.dataset.c===CONF);});
+  stand(); fillCalc(); recon();});
+$$('#filt button').forEach(function(b){ b.classList.toggle('on', b.dataset.f===FILT);
+  b.addEventListener('click',function(){ FILT=b.dataset.f;
+    try{localStorage.setItem('mclFilt',FILT);}catch(e){}
+    $$('#filt button').forEach(function(x){x.classList.toggle('on',x.dataset.f===FILT);}); stand();});});
+
+function needFor(k,r){ /* сколько нужно в следующей серии, чтобы достать порог */
+  var need=k.cut*(r.s+1)-r.t; return need;
+}
+function stand(){
+  var k=D.conf[CONF], q=k.quota, placed=0, out=[];
+  var done=k.played>=k.total;                    /* все серии региона сыграны */
+  var semi=k.route==='semi', slots=semi?(k.semiSlots||10):q;
+  /* маршрут региона: он у всех трёх разный, поэтому пишем его прямо над таблицей */
+  var head1, head2, sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
+  if(sr){
+    head1='Полуфинал сыгран';
+    head2='итог — <i>'+(sr.some(function(r){return r.qk>1;})?'(балл отборов × 1.5 + балл полуфинала) / 2':'50% балла отборов + 50% балла полуфинала')+'</i> · в финале: <i>'+
+      sr.slice(0,q).map(function(r){return esc(r.n);}).join('</i> · <i>')+'</i>';
+  } else if(semi){
+    head1=(done?'Серии сыграны':'Идёт отбор в полуфинал');
+    head2='в полуфинал выходят <i>'+slots+'</i> · '+
+      (k.semiDate?'полуфинал '+dm(k.semiDate)+' · ':'') +
+      'в финал '+(q===1?'едет <i>победитель</i> полуфинала':'едут <i>трое</i>')+
+      (k.semiPrize?' · призовые полуфинала <i>'+esc(k.semiPrize)+'</i>':'')+
+      (k.semiNote?' · '+esc(k.semiNote):'');
+  } else {
+    head1=(done?'Отбор завершён':'Прямой отбор');
+    head2='<i>'+q+'</i> лучших с нормой «две серии» едут в финал напрямую, без полуфинала';
+  }
+  /* сыгранный полуфинал: итоговая таблица (отбор ×1.5 при 2+ сериях) — над зачётом отбора */
+  if(sr){
+    out.push('<div class="sf"><div class="sfh"><b>Итог полуфинала'+
+      (k.semiCity?' · '+esc(k.semiCity):'')+(k.semiDate?' '+dm(k.semiDate):'')+'</b>'+
+      '<s>'+q+' '+(q===1?'место':'места')+' в финале</s>'+
+      (k.semiId?'<a href="https://mafgame.org/tournaments/'+k.semiId+'/view" target="_blank" rel="noopener">протокол &#8599;</a>':'')+'</div>');
+    out.push('<div class="sfth"><div>#</div><div></div><div>Игрок</div><div class="r">Отбор</div><div class="r">Полуфинал</div><div class="r">Итог</div></div>');
+    sr.forEach(function(r,i){
+      var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
+      var into=i<q;
+      out.push('<div class="sfr'+(into?' fin':'')+'">'+
+        '<div class="rk">'+(i+1)+'</div>'+ph+
+        '<div><span class="nick">'+esc(r.n)+'</span>'+(into?'<span class="sftag">в финал</span>':'')+'</div>'+
+        '<div class="q50 r">'+(r.qa==null?'—':r.qa.toFixed(2)+(r.qk>1?'<small style="display:block;opacity:.7;font-size:.78em">×1.5</small>':''))+'</div>'+
+        '<div class="sp50 r">'+r.sp.toFixed(2)+'</div>'+
+        '<div class="fin50">'+r.fin.toFixed(3)+'</div></div>');
+      if(into&&i===q-1&&sr.length>q) out.push('<div class="sfcut"><b>линия финала · '+q+' '+(q===1?'место':'места')+'</b><i></i></div>');
+    });
+    out.push('<div class="sfnote">'+(sr.some(function(r){return r.qk>1;})?'Формула регламента: итог = (<b>балл отборов × 1.5</b> + <b>балл полуфинала</b>) / 2. Балл отборов — средний по отборочным сериям; коэффициент 1.5 — у выполнивших норму «две серии и больше», у добора с одной серией — 1.':'Формула регламента: итог = (<b>балл отборов</b> + <b>балл полуфинала</b>) / 2, балл отборов — средний по отборочным сериям.')+
+      (k.semiNote?' '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1))+'.':'')+'</div></div>');
+  }
+  out.push('<div class="donebar'+(semi?' semi':'')+(done?' done':'')+'"><b>'+head1+'</b> · '+head2+'</div>');
+  out.push('<div class="stbl"><div class="sth"><div>#</div><div></div><div>Игрок</div><div class="r">Средний</div><div class="r">Серий</div><div class="r cneed">Нужно</div></div>');
+  k.rows.forEach(function(r){
+    var ok=r.s>=2&&!r.wd;   /* снявшийся (D.withdrawn) места не занимает */
+    if(semi){ placed++; } else if(ok){ placed++; }
+    var zone=semi ? placed<=slots : (ok&&placed<=q);
+    if(FILT==='q'&&!ok) return;
+    var det=r.d.map(function(d){return esc(d[0])+' — '+f2(d[1]);}).join('   ·   ');
+    var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
+    var need=needFor(k,r), nd='', ndm='';
+    if(semi&&!ok&&!done){ /* добор идёт после всех, кто выполнил норму */
+      nd='<span class="nomore">добор</span><s>после игроков с двумя сериями</s>';
+      ndm='<div class="needm nomore">добор — после тех, у кого две серии</div>';
+    } else if(done){
+      if(!zone){ nd='<span class="nomore">—</span><s>серий больше нет</s>';
+                 ndm='<div class="needm nomore">серий больше нет</div>'; }
+    } else if(!zone){
+      nd = need<=0 ? '<span style="color:var(--pur-hi)">любой</span><s>результат</s>'
+                   : need.toFixed(2)+'<s>в '+(r.s+1)+'-й серии</s>';
+      ndm = '<div class="needm">нужно '+(need<=0?'любой результат':need.toFixed(2))+' в '+(r.s+1)+'-й</div>';
+    }
+    out.push('<div class="srow'+(zone?' zone':'')+((ok||zone)?'':' one')+(r.wd?' wd':'')+'">'+
+      '<div class="rk">'+((ok||semi)?placed:'·')+'</div>'+ph+
+      '<div><div class="nick">'+esc(r.n)+(r.wd?' <span class="wdtag">снялся с финала</span>':'')+'</div><div class="det">'+det+'</div>'+ndm+'</div>'+
+      '<div class="avg">'+r.a.toFixed(3)+'</div>'+
+      '<div class="r"><span class="pill">'+r.s+'<em>&nbsp;'+SER(r.s)+'</em></span></div>'+
+      '<div class="need cneed">'+nd+'</div></div>');
+    if(zone&&placed===slots) out.push('<div class="cutline"><b>'+
+      (semi ? 'линия полуфинала · '+slots+' мест'
+            : 'линия прохода · '+q+' '+(q===6?'мест':'места')+' · порог '+(k.cut!=null?k.cut.toFixed(3):'—'))+
+      '</b><i></i></div>');
+  });
+  out.push('</div>');
+  $('#stbl').innerHTML=out.join('');
+  if(semi){
+    $('#stleg').innerHTML = sr
+      ? 'Выше — итог полуфинала по формуле регламента, ниже — <b style="color:#fff">зачёт отбора</b>, по которому в полуфинал выходили первые '+slots+'. '+
+        'Балл отборов в итоге — средний по отборочным сериям игрока; сам полуфинал в зачёт отбора не входит.'
+      : 'Порядок такой: сначала все, кто сыграл <b style="color:#fff">две серии и больше</b> — по среднему баллу, '+
+        'затем добором те, у кого одна серия. Первые <b style="color:#fff">'+slots+'</b> играют полуфинал'+
+        (k.semiDate?' '+dm(k.semiDate):'')+'. '+
+        (q===1 ? 'Единственную путёвку в финал даёт победа в полуфинале'+(k.semiPrize?', призовые получают первые трое: '+esc(k.semiPrize):'')+'.'
+               : 'Путёвки в финал получают трое лучших'+(k.semiNote?'; '+esc(k.semiNote):'')+'.');
+    return;
+  }
+  $('#stleg').innerHTML = done
+    ? ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков региона · все '+k.total+' '+SER(k.total)+
+       ' сыграны, догнать зону уже нельзя. <em>Приглушённые строки</em> — сыграна одна серия: норма «минимум две» не выполнена, поэтому в зачёт такие результаты не идут, каким бы высоким ни был балл.')
+    : ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков региона · осталось <b style="color:#fff">'+
+       (k.total-k.played)+'</b> '+((k.total-k.played)===1?'серия':'серий')+' · <em>приглушённые строки</em> — одна серия, норма не выполнена. Колонка «нужно» считается от текущего порога зоны.');
+}
+function fillCalc(){
+  var k=D.conf[CONF];
+  $('#cpl').innerHTML=k.rows.map(function(r){return '<option value="'+r.u+'">'+esc(r.n)+' · '+r.a.toFixed(2)+' ('+r.s+')</option>';}).join('');
+  $('#cout').innerHTML='';
+  $('#csc').value='';
+}
+function simulate(){
+  var k=D.conf[CONF], uid=+$('#cpl').value, sc=parseFloat(($('#csc').value||'').replace(',','.'));
+  var me=k.rows.filter(function(r){return r.u===uid;})[0]; if(!me) return;
+  if(k.played>=k.total){
+    $('#cout').innerHTML='<div class="big">—</div>Отбор в этом регионе завершён: все '+k.total+' '+SER(k.total)+
+      ' сыграны, считать нечего. Итог — в таблице выше.';
+    return;
+  }
+  var need=needFor(k,me);
+  if(isNaN(sc)){
+    $('#cout').innerHTML='<div class="big">'+(need<=0?'любой результат':need.toFixed(2))+'</div>'+
+      '<b>'+esc(me.n)+'</b> сейчас '+me.a.toFixed(3)+' по '+me.s+' '+SER(me.s)+'. Чтобы достать текущий порог зоны ('+k.cut.toFixed(3)+'), в '+(me.s+1)+'-й серии нужно '+
+      (need<=0?'просто сыграть — норма уже выше порога.':'набрать <b>'+need.toFixed(2)+'</b>.')+' Введи балл, чтобы увидеть место.';
+    return;
+  }
+  var newAvg=(me.t+sc)/(me.s+1);
+  var others=k.rows.filter(function(r){return r.u!==uid && r.s>=2;}).map(function(r){return {n:r.n,a:r.a};});
+  others.push({n:me.n,a:newAvg});
+  others.sort(function(a,b){return b.a-a.a;});
+  var pos=others.map(function(r){return r.n;}).indexOf(me.n)+1;
+  var into=pos<=k.quota;
+  $('#cout').innerHTML='<div class="big">'+pos+' место</div>'+
+    '<b>'+esc(me.n)+'</b> с результатом '+sc.toFixed(2)+' в '+(me.s+1)+'-й серии получит средний <b>'+newAvg.toFixed(3)+'</b> — это '+pos+
+    '-е место среди выполнивших норму'+(into?' и <b style="color:var(--pur-hi)">попадание в квоту</b> ('+k.quota+' мест).':' — квота '+k.quota+', пока мимо. Нужно <b>'+needFor(k,me).toFixed(2)+'</b> и выше.');
+}
+
+/* ── Сверка для организатора (v1.8, 13.10.2026) ─────────────────────────────
+   Каждая цифра зачёта раскладывается на шаги, которые организатор может пересчитать
+   руками или в Excel (кнопка CSV): баллы по сериям → Σ → средний → (×k) → + полуфинал → /2.
+   Пересчёт делается здесь же, в браузере, из сырых протоколов серий (D.series[].r),
+   и сравнивается с тем, что показывает таблица (D.conf[c].rows / semiResult): ✓ — совпало. */
+var RC_CSV={};
+function rcDl(key){var t=RC_CSV[key];if(!t)return;
+  var b=new Blob(['﻿'+t.rows.map(function(r){return r.map(function(v){v=v==null?'':String(v);return /[;"\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}).join(';');}).join('\r\n')],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=t.name;document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+function rcNum(v,d){return v==null||isNaN(v)?'—':(+v).toFixed(d==null?3:d).replace('.',',');}
+function recon(){
+  var el=$('#recon'); if(!el) return;
+  var c=CONF, k=D.conf[c], q=k.quota, semi=k.route==='semi';
+  var sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
+  var ser=(D.series||[]).filter(function(s){return s.c===c&&s.r&&s.r.length;});
+  var qs=ser.filter(function(s){return !s.semi;}), ss=ser.filter(function(s){return s.semi;});
+  var lab=function(s){return s.city+' '+dm(s.date);};
+  /* пересчёт из протоколов: uid → [[серия, балл]] */
+  var by={}; qs.forEach(function(s){s.r.forEach(function(x){(by[x[0]]=by[x[0]]||{n:x[1],d:[]}).d.push([lab(s),x[2]]);});});
+  var html=[], bad=0, chk=0, mark=function(ok){chk++;if(!ok)bad++;return ok?'<span class="ok">✓</span>':'<span class="bad">✗</span>';};
+  var e3=function(a,b){return a!=null&&b!=null&&Math.abs(a-b)<0.0015;};
+  /* 1 · серии региона: контрольные суммы протоколов */
+  var t1=[['Серия','Дата','Город','Судья','Игроков','Игр','Σ баллов всех игроков','1-е место','Балл 1-го','mafgame id']];
+  var h1=ser.map(function(s){var sum=s.r.reduce(function(a,x){return a+x[2];},0);
+    t1.push([s.semi?'полуфинал':scode(s),s.date,s.city,s.j||'',s.players||s.r.length,s.games||'',sum.toFixed(2),s.r[0][1],s.r[0][2],s.id]);
+    return '<tr'+(s.semi?' class="fin"':'')+'><td class="l">'+(s.semi?'<b>полуфинал</b>':esc(scode(s)))+'</td><td>'+dm(s.date)+'</td><td class="l">'+esc(s.city)+'</td><td class="l">'+esc(s.j||'—')+'</td><td>'+(s.players||s.r.length)+'</td><td>'+(s.games||'—')+'</td><td>'+rcNum(sum,2)+'</td><td class="l">'+esc(s.r[0][1])+' · '+rcNum(s.r[0][2],2)+'</td><td><a href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">'+s.id+' ↗</a></td></tr>';}).join('');
+  RC_CSV[c+'1']={name:'MCL-'+c+'-1-serii.csv',rows:t1};
+  html.push('<h4>1 · Серии региона — контрольные суммы</h4><p class="rcn">Сверка с протоколами mafgame: число игроков и игр, сумма баллов всех игроков серии и победитель. Если сумма совпала с таблицей серии на mafgame — протокол перенесён без потерь.</p>'+
+    '<div class="rcw"><table><tr><th class="l">Серия</th><th>Дата</th><th class="l">Город</th><th class="l">Судья</th><th>Игроков</th><th>Игр</th><th>Σ баллов</th><th class="l">1-е место</th><th>Протокол</th></tr>'+h1+'</table></div>'+
+    '<div class="rcbar"><button onclick="rcDl(\''+c+'1\')">⬇ CSV · серии</button></div>');
+  /* 2 · зачёт отбора: средний = Σ / серий */
+  var t2=[['Место','Игрок','Баллы по сериям','Σ','Серий','Средний = Σ / серий','Норма 2+','На сайте','Совпало']];
+  var pl=0;
+  var h2=k.rows.map(function(r){var o=by[r.u]||{d:[]};var sum=o.d.reduce(function(a,x){return a+x[1];},0),n=o.d.length,avg=n?sum/n:null;
+    var ok2=r.s>=2; if(semi||ok2) pl++; var ok=e3(avg,r.a)&&n===r.s; var m=mark(ok);
+    var zone=semi?pl<=(k.semiSlots||10):(ok2&&pl<=q);
+    t2.push([(semi||ok2)?pl:'',r.n,o.d.map(function(x){return x[0]+' '+x[1];}).join(' | '),sum.toFixed(3),n,avg==null?'':avg.toFixed(3),ok2?'да':'нет',r.a.toFixed(3),ok?'да':'НЕТ']);
+    return '<tr'+(zone?' class="fin"':'')+'><td>'+((semi||ok2)?pl:'·')+'</td><td class="l">'+esc(r.n)+'</td><td class="l w">'+o.d.map(function(x){return esc(x[0])+' — <b style="color:#fff">'+rcNum(x[1],2)+'</b>';}).join('<br>')+'</td><td>'+rcNum(sum)+'</td><td>'+n+'</td><td><b>'+rcNum(avg)+'</b></td><td>'+(ok2?'да':'<span style="color:var(--dim)">нет</span>')+'</td><td>'+m+'</td></tr>';}).join('');
+  RC_CSV[c+'2']={name:'MCL-'+c+'-2-zachet.csv',rows:t2};
+  html.push('<h4>2 · Зачёт отбора — пошагово</h4><p class="rcn">Средний = сумма баллов за отборочные серии / число серий. '+(semi?'Порядок: сначала все с нормой «две серии и больше» по среднему, затем добором — с одной серией. Подсвечены '+(k.semiSlots||10)+' мест полуфинала.':'В зачёт идут только выполнившие норму «две серии и больше». Подсвечены '+q+' мест прямого прохода в финал.')+' Последняя колонка: ✓ — пересчёт из протоколов совпал с таблицей на сайте.</p>'+
+    '<div class="rcw"><table><tr><th>#</th><th class="l">Игрок</th><th class="l">Баллы по сериям</th><th>Σ</th><th>Серий</th><th>Средний</th><th>Норма 2+</th><th>✓</th></tr>'+h2+'</table></div>'+
+    '<div class="rcbar"><button onclick="rcDl(\''+c+'2\')">⬇ CSV · зачёт отбора</button></div>');
+  /* 3 · итог полуфинала */
+  if(sr){
+    var bon=sr.some(function(r){return r.qk>1;});
+    var semiS=ss[ss.length-1], sp={}; if(semiS) semiS.r.forEach(function(x){sp[x[0]]=x[2];});
+    var t3=[['Место','Игрок','Серий отбора','Средний отбора','Коэф.','Средний × коэф.','Балл полуфинала','Сумма','Итог = сумма / 2','На сайте','Совпало','Финал']];
+    var h3=sr.map(function(r,i){var o=by[r.u]||{d:[]};var n=o.d.length,avg=n?o.d.reduce(function(a,x){return a+x[1];},0)/n:0;
+      var kk=(bon&&n>=2)?1.5:1, adj=avg*kk, p=sp[r.u], sum=adj+(p||0), fin=sum/2;
+      var ok=e3(fin,r.fin)&&e3(p,r.sp); var m=mark(ok); var into=i<q;
+      t3.push([i+1,r.n,n,avg.toFixed(3),kk,adj.toFixed(4),p,sum.toFixed(4),fin.toFixed(4),r.fin.toFixed(3),ok?'да':'НЕТ',into?'да':'']);
+      return '<tr'+(into?' class="fin"':'')+'><td>'+(i+1)+'</td><td class="l">'+esc(r.n)+(into?' <b style="color:var(--gold-hi)">→ финал</b>':'')+'</td><td>'+n+'</td><td>'+rcNum(avg)+'</td><td>×'+String(kk).replace('.',',')+'</td><td>'+rcNum(adj,4)+'</td><td>'+rcNum(p,2)+'</td><td>'+rcNum(sum,4)+'</td><td><b>'+rcNum(fin,4)+'</b></td><td>'+m+'</td></tr>';}).join('');
+    RC_CSV[c+'3']={name:'MCL-'+c+'-3-polufinal.csv',rows:t3};
+    html.push('<h4>3 · Итог полуфинала — пошагово</h4><p class="rcn">'+(bon
+        ?'Регламент Кипра: итог = (средний отборов × коэффициент + балл полуфинала) / 2. Коэффициент <b style="color:#fff">1,5</b> — у сыгравших в отборе две серии и больше, <b style="color:#fff">1</b> — у добора с одной серией.'
+        :'Итог = (средний отборов + балл полуфинала) / 2 — половина на половину, без коэффициентов.')+
+      ' Балл полуфинала — из протокола полуфинала'+(semiS?' ('+esc(lab(semiS))+', mafgame '+semiS.id+')':'')+'. В финал: '+(q===1?'первое место':'первые '+q+' места')+'.</p>'+
+      '<div class="rcw"><table><tr><th>#</th><th class="l">Игрок</th><th>Серий</th><th>Средний отборов</th><th>Коэф.</th><th>× коэф.</th><th>Полуфинал</th><th>Сумма</th><th>Итог</th><th>✓</th></tr>'+h3+'</table></div>'+
+      '<div class="rcbar"><button onclick="rcDl(\''+c+'3\')">⬇ CSV · полуфинал</button></div>');
+  }
+  /* 4 · сводка проверок */
+  var sq=(D.squad||[]).filter(function(x){return x.c===c&&x.n;});
+  var players=Object.keys(by).length;
+  html.push('<div class="rcsum">'+(bad?'<span class="bad">✗ Расхождений: '+bad+' из '+chk+'</span> — строки с ✗ надо сверить с протоколом.':'<span class="ok">✓ Все '+chk+' проверок сошлись</span>: пересчёт из протоколов совпал с таблицами на сайте.')+
+    '<br>Сыграно серий отбора: <b>'+qs.length+'</b> из '+k.total+(ss.length?' · полуфинал сыгран':'')+' · игроков в протоколах региона: <b>'+players+'</b> (в таблице зачёта — '+k.rows.length+')'+
+    (sq.length?'<br>Путёвки в финал сейчас: <b>'+sq.map(function(x){return esc(x.slot)+' — '+esc(x.n);}).join(' · ')+'</b>':'')+
+    '<br><span style="color:var(--mut)">Данные — снимок '+esc(D.snap)+', протоколы mafgame. Если в протоколе на mafgame правили баллы после снимка, цифры обновятся при следующем прогоне робота.</span></div>');
+  var open=el.open;
+  el.innerHTML='<summary><b>Сверка для организатора</b><s>'+esc(k.name)+' · каждая цифра по шагам · CSV для Excel</s></summary><div class="rcb">'+html.join('')+'</div>';
+  el.open=open;
+}
+$('#cgo').addEventListener('click',simulate);
+$('#cpl').addEventListener('change',simulate);
+$('#csc').addEventListener('keydown',function(e){if(e.key==='Enter')simulate();});
+stand(); fillCalc(); simulate(); recon();
+
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+</body>
+</html>

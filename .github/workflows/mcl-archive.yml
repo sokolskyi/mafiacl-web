@@ -1,0 +1,42 @@
+# Архив MCL Europe 2026: перенести аватарки игроков и исходные данные финала с серверов mafgame
+# к себе в репозиторий (scripts/mcl-archive-avatars.mjs). Запускается сам, когда меняется скрипт
+# или этот файл, и вручную: Actions → «MCL archive» → Run workflow. Изменения коммитит в main.
+name: MCL archive
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/mcl-archive-avatars.mjs
+      - .github/workflows/mcl-archive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mcl-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Скачать аватарки и данные финала
+        run: node scripts/mcl-archive-avatars.mjs
+      - name: Сохранить в репозиторий
+        run: |
+          git add public/mcl data/mcl-2026
+          if git diff --cached --quiet; then
+            echo "Нечего сохранять"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git commit -m "MCL: архив аватарок игроков и исходных данных финала с mafgame"
+          git push

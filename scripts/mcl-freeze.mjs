@@ -1,9 +1,29 @@
-import "server-only";
+#!/usr/bin/env node
+/**
+ * Архив раздела MCL Europe 2026 на новом сайте.
+ *
+ * Сезон и финал закончились, поэтому страницы MCL больше не берутся со старого проекта и с mafgame:
+ * их копия лежит в public/mcl/ (статические файлы). Скрипт переносит страницы из старого репозитория
+ * (sokolskyi/mafiacl, папка public/mcl) и вставляет в них то, что нужно новому сайту:
+ *   — полоску MafiaCL над шапкой турнира, вступительное видео на весь экран;
+ *   — на final.html блок «Фото финала» (public/mcl-final/) и таблицу финала из снимка data/final.json
+ *     вместо живого запроса к /api/mcl/final.json (снимок 25.11.2026 — итог всех 16 игр финала);
+ *   — убирает ссылки на файлы, которых нет (share.js, аналитика старого проекта).
+ * Запуск: node scripts/mcl-freeze.mjs ../mafiacl/public/mcl
+ * Аватарки игроков с серверов mafgame переносит scripts/mcl-archive-avatars.mjs (нужен интернет).
+ */
+import { cpSync, readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { join } from "node:path";
 
-// Страницы MCL Europe живут в старом проекте Vercel «mafiacl» (их обновляет робот).
-// Новый сайт отдаёт их на своём домене и добавляет сверху полоску MafiaCL —
-// чтобы было видно, что это раздел того же сайта, и был путь обратно.
-const LEGACY = process.env.LEGACY_KINGS_ORIGIN ?? "https://mafiacl.vercel.app";
+const from = process.argv[2];
+if (!from || !existsSync(join(from, "index.html"))) {
+  console.error("Укажите папку public/mcl старого сайта: node scripts/mcl-freeze.mjs ../mafiacl/public/mcl");
+  process.exit(1);
+}
+const to = "public/mcl";
+const snapshot = existsSync(join(to, "data/final.json")) ? readFileSync(join(to, "data/final.json")) : null;
+cpSync(from, to, { recursive: true });
+if (snapshot) writeFileSync(join(to, "data/final.json"), snapshot);
 
 /** Полоска сайта над шапкой MCL. Страницы MCL на русском — ссылки ведут на русскую версию. */
 const SITE_BAR = `
@@ -42,7 +62,7 @@ const SITE_BAR = `
 try{if(/[?&]intro=1/.test(location.search))localStorage.removeItem("mclIntro")}catch(e){}</script>
 `;
 
-const photo = (name: string, w: number, h: number, alt: string, cls = "") =>
+const photo = (name, w, h, alt, cls = "") =>
   `<a class="fp${cls}" href="/mcl-final/${name}-1800.webp" target="_blank" rel="noopener">` +
   `<img src="/mcl-final/${name}-900.webp" srcset="/mcl-final/${name}-900.webp 900w, /mcl-final/${name}-1800.webp 1800w" ` +
   `sizes="(max-width:760px) 100vw, ${cls ? "1100px" : "550px"}" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"></a>`;
@@ -68,20 +88,17 @@ const FINAL_PHOTOS = `
 </div></section>
 `;
 
-/** Отдать файл MCL со старого сайта; в HTML-страницы вставить полоску сайта сразу после <body>. */
-export async function proxyMcl(file: string): Promise<Response> {
-  if (!/^[\w.-]+$/.test(file)) return new Response("Not found", { status: 404 });
-  const upstream = await fetch(`${LEGACY}/mcl/${file === "index.html" ? "" : file}`, { cache: "no-store" });
-  const type = upstream.headers.get("content-type") ?? "";
-  const headers = new Headers();
-  if (type) headers.set("content-type", type);
-  // Данные MCL обновляются роботом раз в несколько минут — короткий кэш на CDN.
-  headers.set("cache-control", "public, s-maxage=60, stale-while-revalidate=300");
-  if (!upstream.ok || !type.includes("text/html")) {
-    return new Response(upstream.body, { status: upstream.status, headers });
+
+for (const file of readdirSync(to).filter((f) => f.endsWith(".html"))) {
+  let html = readFileSync(join(to, file), "utf8");
+  if (html.includes("mcl-sitebar")) continue;
+  html = html.replace(/<body[^>]*>/i, (m) => m + SITE_BAR);
+  html = html.replace(/<script[^>]*src="\/assets\/share\.js[^"]*"[^>]*><\/script>\s*/g, "");
+  html = html.replace(/<script[^>]*src="\/_vercel\/insights\/script\.js"[^>]*><\/script>\s*/g, "");
+  if (file === "final.html") {
+    html = html.replace('<section id="squad">', FINAL_PHOTOS + '<section id="squad">');
+    html = html.replace("fetch('/api/mcl/final.json',{cache:'no-store'})", "fetch('data/final.json',{cache:'no-cache'})");
   }
-  const html = await upstream.text();
-  let withBar = /<body[^>]*>/i.test(html) ? html.replace(/<body[^>]*>/i, (m) => m + SITE_BAR) : SITE_BAR + html;
-  if (file === "final.html") withBar = withBar.replace('<section id="squad">', FINAL_PHOTOS + '<section id="squad">');
-  return new Response(withBar, { status: 200, headers });
+  writeFileSync(join(to, file), html);
+  console.log("ok", file);
 }
