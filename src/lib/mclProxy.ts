@@ -24,6 +24,8 @@ const SITE_BAR = `
 @media (max-width:560px){.mcl-sitebar .home-crumb{display:none}.mcl-sitebar .in{gap:10px}}
 /* Старая строка «MafiaCL / MCL Europe 2026» со старого сайта — её заменяет полоска выше. */
 .dv-crumb{display:none!important}
+/* Кнопки эфира и таблицы финала в первом экране — то же есть в разделе Final, а таблица t757 уже не открывается. */
+.hero .cta a.ytl,.hero .cta a[href="t757.html"]{display:none!important}
 /* Вступительное видео — на весь экран, а не маленьким окошком посередине. */
 #intro video{width:100vw!important;height:100vh!important;height:100dvh!important;object-fit:contain}
 </style>
@@ -36,6 +38,8 @@ const SITE_BAR = `
   </ol></nav>
   <a class="acc" href="/ru/kabinet">Кабинет</a>
 </div></div>
+<script>/* ?intro=1 — показать вступительное видео ещё раз (обычно оно показывается раз в сутки). */
+try{if(/[?&]intro=1/.test(location.search))localStorage.removeItem("mclIntro")}catch(e){}</script>
 `;
 
 /** Отдать файл MCL со старого сайта; в HTML-страницы вставить полоску сайта сразу после <body>. */
