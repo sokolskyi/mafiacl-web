@@ -217,6 +217,17 @@ def bundle():
         d["source"] = "fiim.world"
         for s in d["stages"]:
             s["title"] = re.sub(r"\s+", " ", s["title"]).strip()
+        # Сверху главное: итоговая таблица, финал, полуфинал, дальше отбор и серии в порядке страницы ФИИМ.
+        def rank(st):
+            t = st["title"].lower()
+            if "итогов" in t:
+                return 0
+            if re.search(r"финал|final", t) and "полуфинал" not in t:
+                return 1
+            if "полуфинал" in t:
+                return 2
+            return 3
+        d["stages"].sort(key=rank)
         items.append(d)
     items.sort(key=lambda x: x["date"])
     os.makedirs("src/content/fiim", exist_ok=True)
