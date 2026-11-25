@@ -229,6 +229,7 @@ def legacy_game(game_id):
         best_move = re.findall(r"\d+", killed.get_text()) if killed else []
         best = next((n for n, cid in ((1, f"bestPlayerLeading{seat}"), (2, f"bestPlayerLeading1{seat}"), (3, f"bestPlayerLeading2{seat}"))
                      if soup.find(id=cid) and soup.find(id=cid).find("span")), None)
+        nick = player(nick)[0]
         players.append({
             "seat": seat,
             "nick": nick,
