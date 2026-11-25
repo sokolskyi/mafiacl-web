@@ -17,6 +17,8 @@ export type ArchiveItem = {
   project: boolean;
   /** Точной даты нет (старый сайт клуба) — показываем только год. */
   approx_date: boolean;
+  /** Год розыгрыша, если он не совпадает с датой (финал сезона 2022/2023 Europe прошёл в январе 2024). */
+  season_year: number | null;
   /** Ключ финала, к которому относится этот этап (серия, полуфинал). */
   parent: string | null;
   /** Этап серии (в том числе без финала в архиве) — не отдельный розыгрыш турнира. */
@@ -36,7 +38,31 @@ export type ArchiveRow = {
   values: Record<string, number | string | null>;
 };
 
-export type ArchiveStage = { title: string; note: string | null; columns: string[]; rows: ArchiveRow[] };
+export type ArchiveGamePlayer = {
+  seat: number;
+  nick: string;
+  role: "citizen" | "mafia" | "don" | "sheriff" | null;
+  fouls: number | null;
+  /** Лучший игрок по версии ведущего: 1, 2 или 3. */
+  best: number | null;
+  killed_first: boolean;
+  /** Лучший ход убитого первым (номера мест). */
+  best_move: number[] | null;
+  penalty: number | null;
+};
+
+/** Протокол игры со старого сайта клуба. */
+export type ArchiveGame = { id: number; number: number; date: string | null; host: string | null; winner: "town" | "mafia" | null; players: ArchiveGamePlayer[] };
+
+export type ArchiveStage = {
+  title: string;
+  note: string | null;
+  columns: string[];
+  rows: ArchiveRow[];
+  /** Протоколы игр этапа (только то, что сохранилось в веб-архиве). */
+  games?: ArchiveGame[];
+  games_total?: number;
+};
 
 export type ArchiveTournament = {
   key: string;
@@ -56,7 +82,16 @@ export type ArchiveTournament = {
 
 export const ARCHIVE = index as ArchiveItem[];
 
-export const archiveYear = (x: { date: string }) => Number(x.date.slice(0, 4));
+export const archiveYear = (x: { date: string; season_year?: number | null }) => x.season_year ?? Number(x.date.slice(0, 4));
+
+/** Европа или Украина — для лиг с двумя конференциями (MCL 2022/2023). */
+export function archiveRegion(x: { name: string; city: string }): "EU" | "UA" | null {
+  if (/europe/i.test(x.name)) return "EU";
+  if (/ukrain|україн|украин/i.test(x.name)) return "UA";
+  if (/праг|praha|prague/i.test(x.city)) return "EU";
+  if (/харьк|харків|kharkiv/i.test(x.city)) return "UA";
+  return null;
+}
 
 export const archiveItem = (key: string) => ARCHIVE.find((x) => x.key === key);
 

@@ -7,6 +7,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -24,6 +25,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -41,6 +43,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -58,6 +61,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -75,6 +79,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -92,6 +97,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -109,6 +115,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -119,6 +126,24 @@
 "players": 32
 },
 {
+"key": "mafia-school-2016",
+"name": "Mafia School 2016",
+"date": "2016-06-01",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": true,
+"season_year": null,
+"parent": null,
+"stage": false,
+"top": [
+"Rize",
+"Snow",
+"Prince"
+],
+"players": 10
+},
+{
 "key": "151",
 "name": "Кубок Слобожанщины 2016",
 "date": "2016-08-20",
@@ -126,6 +151,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -143,6 +169,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -160,6 +187,7 @@
 "ours": true,
 "project": true,
 "approx_date": true,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -177,6 +205,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -194,6 +223,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -211,6 +241,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -221,13 +252,32 @@
 "players": 34
 },
 {
-"key": "mafiacl-kharkiv-cup-2017",
-"name": "MafiaCl Kharkiv Cup 2017",
-"date": "2017-06-01",
+"key": "zachetnye-dni-2016-2017",
+"name": "Зачётные дни 2016/2017",
+"date": "2017-06-24",
 "city": "Харьков",
 "ours": true,
 "project": true,
-"approx_date": true,
+"approx_date": false,
+"season_year": null,
+"parent": null,
+"stage": false,
+"top": [
+"Бегедил",
+"Шершень",
+"Джина"
+],
+"players": 43
+},
+{
+"key": "mafiacl-kharkiv-cup-2017",
+"name": "MafiaCl Kharkiv Cup 2017",
+"date": "2017-07-16",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -238,6 +288,24 @@
 "players": 40
 },
 {
+"key": "maf-marathon-2017",
+"name": "Маф-марафон 2017",
+"date": "2017-08-05",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": null,
+"parent": null,
+"stage": false,
+"top": [
+"YeS",
+"Бенджамин",
+"Кельтас"
+],
+"players": 20
+},
+{
 "key": "229",
 "name": "Кубок Слобожанщины 2017",
 "date": "2017-08-26",
@@ -245,6 +313,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -262,6 +331,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -272,23 +342,6 @@
 "players": 30
 },
 {
-"key": "maf-marathon-2017",
-"name": "Маф-марафон 2017",
-"date": "2017-12-01",
-"city": "Харьков",
-"ours": true,
-"project": true,
-"approx_date": true,
-"parent": null,
-"stage": false,
-"top": [
-"YeS",
-"Бенджамин",
-"Кельтас"
-],
-"players": 20
-},
-{
 "key": "381",
 "name": "Ukrainian Students Tournament 2018",
 "date": "2018-02-10",
@@ -296,6 +349,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -313,6 +367,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -330,6 +385,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -347,6 +403,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -364,6 +421,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -381,6 +439,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -398,6 +457,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -415,6 +475,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -432,6 +493,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [],
@@ -445,6 +507,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -462,6 +525,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": true,
 "top": [
@@ -479,6 +543,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -496,6 +561,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -513,6 +579,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": true,
 "top": [
@@ -530,6 +597,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -547,6 +615,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -564,6 +633,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -581,6 +651,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -598,6 +669,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -615,6 +687,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -632,6 +705,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -649,6 +723,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -666,6 +741,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -683,6 +759,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -700,6 +777,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -717,6 +795,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -734,6 +813,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -751,6 +831,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -768,6 +849,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -785,6 +867,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -802,6 +885,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -819,6 +903,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -836,6 +921,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -853,6 +939,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -870,6 +957,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -887,6 +975,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -904,6 +993,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -921,6 +1011,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "859",
 "stage": true,
 "top": [
@@ -938,6 +1029,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -955,6 +1047,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -972,6 +1065,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": true,
 "top": [
@@ -989,6 +1083,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [],
@@ -1002,6 +1097,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1019,6 +1115,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -1036,6 +1133,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1053,6 +1151,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1070,6 +1169,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1087,6 +1187,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1104,6 +1205,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1121,6 +1223,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1138,6 +1241,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -1155,6 +1259,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1172,6 +1277,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1189,6 +1295,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": true,
 "top": [
@@ -1206,6 +1313,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": "1310",
 "stage": true,
 "top": [
@@ -1223,6 +1331,7 @@
 "ours": false,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -1233,6 +1342,312 @@
 "players": 20
 },
 {
+"key": "tm-mcl-20222023-krakov-1-seriya",
+"name": "Mafia Champions league 2022/2023 Краков. 1 серия",
+"date": "2022-07-24",
+"city": "Краков",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Walle",
+"Хрещена",
+"Mako"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-myunhen-2-seriya",
+"name": "Mafia Champions league 2022/2023 Мюнхен. 2 серия",
+"date": "2022-08-13",
+"city": "Мюнхен",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"YeS",
+"Алик",
+"Сисечкин"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-lviv-1-seriya",
+"name": "Mafia Champions league 2022/2023 Львiв. 1 серiя",
+"date": "2022-09-10",
+"city": "Львiв",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Олд",
+"Джентльмен",
+"Atos"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-kriviy-rig-2-seriya",
+"name": "Mafia Champions league 2022/2023 Кривий Рiг. 2 серiя",
+"date": "2022-09-24",
+"city": "Кривий Рiг",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"nasa",
+"Midnight",
+"Нет Проблем"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-poltava-3-seriya",
+"name": "Mafia Champions league 2022/2023 Полтава. 3 серiя",
+"date": "2022-10-09",
+"city": "Полтава",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Wanted!",
+"FD",
+"Frost"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-dnipro-4-seriya",
+"name": "Mafia Champions league 2022/2023 Днiпро. 4 серiя",
+"date": "2022-10-16",
+"city": "Днiпро",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Анна Франк",
+"Экстрасенс",
+"Мандарин"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-harkiv-5-seriya",
+"name": "Mafia Champions league 2022/2023 Харкiв. 5 серiя",
+"date": "2022-10-22",
+"city": "Харкiв",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Дин",
+"Fake",
+"SDK"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-kremenchuk-6-seriya",
+"name": "Mafia Champions league 2022/2023 Кременчук. 6 серiя",
+"date": "2022-11-06",
+"city": "Кременчук",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Osborn",
+"Анна Франк",
+"Lucky"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-praga-3-seriya",
+"name": "Mafia Champions league 2022/2023 Прага. 3 серия",
+"date": "2022-11-19",
+"city": "Прага",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Лето",
+"Рауль",
+"Остин"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-poltava-8-seriya",
+"name": "Mafia Champions league 2022/2023 Полтава. 8 серiя",
+"date": "2022-12-11",
+"city": "Полтава",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Lucky",
+"Osborn",
+"Шпрот"
+],
+"players": 11
+},
+{
+"key": "tm-mcl-20222023-lviv-7-seriya",
+"name": "Mafia Champions league 2022/2023 Львiв. 7 серiя",
+"date": "2023-01-22",
+"city": "Львiв",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Чорничка",
+"Aloha",
+"B@LU"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-krakov-4-seriya",
+"name": "Mafia Champions league 2022/2023 Краков. 4 серия",
+"date": "2023-02-11",
+"city": "Краков",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Лёва",
+"Миф",
+"Шляпник"
+],
+"players": 11
+},
+{
+"key": "tm-mcl-20222023-praga-5-seriya",
+"name": "Mafia Champions league 2022/2023 Прага. 5 серия",
+"date": "2023-02-12",
+"city": "Прага",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Гармония",
+"Остин",
+"Рауль"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-praga-6-seriya",
+"name": "Mafia Champions league 2022/2023 Прага. 6 серия",
+"date": "2023-03-25",
+"city": "Прага",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Чикаго",
+"Лето",
+"Гармония"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-dnipro-11-seriya",
+"name": "Mafia Champions league 2022/2023 Днiпро. 11 серiя",
+"date": "2023-03-26",
+"city": "Днiпро",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Кира",
+"Анхель",
+"Экстрасенс"
+],
+"players": 12
+},
+{
+"key": "tm-mcl-20222023-harkiv-10-seriya",
+"name": "Mafia Champions league 2022/2023 Харкiв. 10 серiя",
+"date": "2023-04-08",
+"city": "Харкiв",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Дин",
+"Fake",
+"Wanted!"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-krakov-7-seriya",
+"name": "Mafia Champions league 2022/2023 Краков. 7 серия",
+"date": "2023-04-09",
+"city": "Краков",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Сын",
+"Zakkerman",
+"Хрещена"
+],
+"players": 10
+},
+{
 "key": "2527",
 "name": "MafiaCl Championship 2023",
 "date": "2023-04-15",
@@ -1240,6 +1655,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [
@@ -1250,6 +1666,204 @@
 "players": 50
 },
 {
+"key": "tm-mcl-20222023-poznan-9-seriya",
+"name": "Mafia Champions league 2022/2023 Познань. 9 серия",
+"date": "2023-05-20",
+"city": "Познань",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Хрещена",
+"Zakkerman",
+"Xena"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-poltava-12-seriya",
+"name": "Mafia Champions league 2022/2023 Полтава. 12 серiя",
+"date": "2023-05-21",
+"city": "Полтава",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Индиго",
+"Benjamin",
+"Osborn"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-harkiv-13-seriya",
+"name": "Mafia Champions league 2022/2023 Харкiв. 13 серiя",
+"date": "2023-06-04",
+"city": "Харкiв",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"FD",
+"Nongrata",
+"Диментий"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-kremenchuk-9-seriya",
+"name": "Mafia Champions league 2022/2023 Кременчук. 9 серiя",
+"date": "2023-06-18",
+"city": "Кременчук",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Noobik",
+"Кубик",
+"Lucky"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-dnipro-14-seriya",
+"name": "Mafia Champions league 2022/2023 Днiпро. 14 серiя",
+"date": "2023-06-25",
+"city": "Днiпро",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Кратос",
+"Людовик",
+"Сильвер"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-poltava-15-seriya",
+"name": "Mafia Champions league 2022/2023 Полтава. 15 серiя",
+"date": "2023-07-02",
+"city": "Полтава",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Benjamin",
+"FD",
+"Шпрот"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-katovice-10-seriya",
+"name": "Mafia Champions league 2022/2023 Катовице. 10 серия",
+"date": "2023-07-09",
+"city": "Катовице",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"Frodo",
+"Sun",
+"Чуть позже"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-lviv-16-seriya",
+"name": "Mafia Champions league 2022/2023 Львiв. 16 серiя",
+"date": "2023-07-23",
+"city": "Львiв",
+"ours": false,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-ukraine",
+"stage": true,
+"top": [
+"Аль Капоне",
+"Nightingale",
+"Олд"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-praga-8-seriya",
+"name": "Mafia Champions league 2022/2023 Прага. 8 серия",
+"date": "2023-08-19",
+"city": "Прага",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": "tm-mcl-20222023-final-europe",
+"stage": true,
+"top": [
+"YeS",
+"Fox",
+"Apache"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-final-ukraine",
+"name": "Mafia Champions league 2022/2023 Final Ukraine",
+"date": "2023-09-30",
+"city": "Харьков",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": null,
+"stage": false,
+"top": [
+"Benjamin",
+"Osborn",
+"FD"
+],
+"players": 10
+},
+{
+"key": "tm-mcl-20222023-final-europe",
+"name": "Mafia Champions league 2022/2023 Final Europe",
+"date": "2024-01-13",
+"city": "Прага",
+"ours": true,
+"project": true,
+"approx_date": false,
+"season_year": 2023,
+"parent": null,
+"stage": false,
+"top": [
+"Рауль",
+"Гармония",
+"Сын"
+],
+"players": 10
+},
+{
 "key": "2853",
 "name": "Турнир Победителей MafiaCl 2024",
 "date": "2024-02-03",
@@ -1257,6 +1871,7 @@
 "ours": true,
 "project": true,
 "approx_date": false,
+"season_year": null,
 "parent": null,
 "stage": false,
 "top": [

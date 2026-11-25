@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { ARCHIVE, archiveItem, archiveStagesOf, archiveYear, type ArchiveItem, type ArchiveStage, type ArchiveTournament } from "@/lib/fiimArchive";
+import { ARCHIVE, archiveItem, archiveStagesOf, archiveYear, type ArchiveGame, type ArchiveItem, type ArchiveStage, type ArchiveTournament } from "@/lib/fiimArchive";
 import { brandOf } from "@/lib/tournamentBrands";
 import { getKnownPlayers } from "@/lib/playerNames";
 import { playerLinks } from "@/components/players/PlayerNameLink";
@@ -106,6 +106,63 @@ function StageTable({ stage, known, label, t }: { stage: ArchiveStage; known: Re
   );
 }
 
+const ROLE_CLASS: Record<string, string> = { mafia: "text-red-300", don: "text-red-300 font-semibold", sheriff: "font-semibold text-sky-300", citizen: "text-neutral-300" };
+
+function StageGames({ games, total, known, locale, t }: { games: ArchiveGame[]; total: number; known: Record<string, string>; locale: Locale; t: (k: string, v?: Record<string, string | number>) => string }) {
+  return (
+    <details className="mt-3 rounded-lg border border-white/15 bg-neutral-950/40">
+      <summary className="flex min-h-11 cursor-pointer items-center px-4 text-sm font-semibold">
+        {t("archive.games")} · {games.length === total ? games.length : t("archive.gamesSaved", { saved: games.length, total })}
+      </summary>
+      <div className="grid gap-4 p-4 pt-1 lg:grid-cols-2">
+        {games.map((g) => (
+          <section key={g.id} className="rounded border border-white/10" aria-label={t("archive.game", { n: g.number })}>
+            <h3 className="flex flex-wrap gap-x-3 border-b border-white/10 px-3 py-2 text-sm">
+              <span className="font-bold">{t("archive.game", { n: g.number })}</span>
+              {g.date && <span className="text-neutral-400">{dateOf(g.date, locale)}</span>}
+              {g.winner && (
+                <span className={g.winner === "mafia" ? "text-red-300" : "text-sky-300"}>{t(g.winner === "mafia" ? "archive.winMafia" : "archive.winTown")}</span>
+              )}
+              {g.host && <span className="text-neutral-400">{t("archive.host")}: {g.host}</span>}
+            </h3>
+            <div className="overflow-x-auto" role="region" aria-label={t("archive.game", { n: g.number })} tabIndex={0}>
+              <table className="w-full min-w-max text-sm tabular-nums">
+                <thead className="text-left text-xs text-neutral-400">
+                  <tr>
+                    <th scope="col" className="px-3 py-1 text-right">№</th>
+                    <th scope="col" className="px-3 py-1">{t("archive.player")}</th>
+                    <th scope="col" className="px-3 py-1">{t("archive.role")}</th>
+                    <th scope="col" className="px-3 py-1">{t("archive.notesCol")}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {g.players.map((p) => (
+                    <tr key={p.seat}>
+                      <td className="px-3 py-1 text-right text-neutral-400">{p.seat}</td>
+                      <th scope="row" className="px-3 py-1 text-left font-semibold">{playerLinks(p.nick, known)}</th>
+                      <td className={`px-3 py-1 ${ROLE_CLASS[p.role ?? "citizen"]}`}>{p.role ? t(`archive.roles.${p.role}`) : ""}</td>
+                      <td className="px-3 py-1 text-xs text-neutral-300">
+                        {[
+                          p.best ? t("archive.best", { n: p.best }) : null,
+                          p.killed_first ? (p.best_move ? t("archive.killedMove", { move: p.best_move.join(", ") }) : t("archive.killed")) : null,
+                          p.fouls ? t("archive.fouls", { n: p.fouls }) : null,
+                          p.penalty ? t("archive.penalties", { n: p.penalty }) : null,
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 /** Страница одного турнира из архива: таблицы этапов, этапы серии, расшифровка колонок. */
 export async function ArchiveTournamentView({ data, locale }: { data: ArchiveTournament; locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "tournaments" });
@@ -148,6 +205,7 @@ export async function ArchiveTournamentView({ data, locale }: { data: ArchiveTou
           <h2 id={`s${i}`} className="font-display text-3xl font-extrabold uppercase">{s.title}</h2>
           {s.note && <p className="mt-1 text-sm text-neutral-400">{s.note}</p>}
           <StageTable stage={s} known={known} label={s.title} t={tr} />
+          {s.games?.length ? <StageGames games={s.games} total={s.games_total ?? s.games.length} known={known} locale={locale} t={t} /> : null}
         </section>
       ))}
 

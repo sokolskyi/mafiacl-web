@@ -7,6 +7,7 @@ data/fiim/results/<id>.json — этапы турнира (отбор, полу�
 хранятся как есть по названиям колонок, а расшифровка — в legend (с той же страницы ФИИМ).
 Запуск: python3 scripts/fiim-parse.py (нужны beautifulsoup4 и lxml).
 """
+import glob
 import json
 import os
 import re
@@ -193,7 +194,67 @@ def legacy_stage(page_id, title):
     note = label.get_text(" ", strip=True) if label and label.find_previous(["h3", "h4"]) is h else None
     if note and not re.search(r"\d", note):  # «отсутствует» — коэффициента сложности не было
         note = None
-    return {"title": title, "note": note, "columns": cols, "rows": rows}, legend
+    games, total_games = legacy_games(page_id)
+    stage = {"title": title, "note": note, "columns": cols, "rows": rows}
+    if games:
+        stage["games"] = games
+        stage["games_total"] = total_games
+    return stage, legend
+
+
+GAMES = "data/legacy-mafiacl/show_game"
+ROLES = {"citizen": "мирный", "mafia": "мафия", "don": "дон", "sheriff": "шериф"}
+
+
+def legacy_game(game_id):
+    """Протокол игры со старого mafiacl.com: ведущий, победа, дата, рассадка с ролями, фолами, лучшими и первым убитым."""
+    path = f"{GAMES}/{game_id}.html"
+    if not os.path.exists(path):
+        return None
+    soup = BeautifulSoup(open(path, encoding="utf8").read(), "lxml")
+
+    def selected(sel_id):
+        sel = soup.find("select", id=sel_id)
+        opt = sel.find("option", selected=True) if sel else None
+        return opt.get("value") if opt and sel_id.startswith("role") else (opt.get_text(strip=True) if opt else None)
+
+    date = soup.find("input", id="date")
+    d = date.get("value") if date else None
+    players = []
+    for seat in range(1, 11):
+        nick = selected(f"playerNickName{seat}")
+        if not nick:
+            continue
+        killed = soup.find(id=f"killedFirst{seat}")
+        best_move = re.findall(r"\d+", killed.get_text()) if killed else []
+        best = next((n for n, cid in ((1, f"bestPlayerLeading{seat}"), (2, f"bestPlayerLeading1{seat}"), (3, f"bestPlayerLeading2{seat}"))
+                     if soup.find(id=cid) and soup.find(id=cid).find("span")), None)
+        players.append({
+            "seat": seat,
+            "nick": nick,
+            "role": selected(f"role{seat}"),
+            "fouls": number(selected(f"remark{seat}") or "0"),
+            "best": best,
+            "killed_first": bool(killed and killed.find("span")),
+            "best_move": [int(x) for x in best_move] or None,
+            "penalty": number(selected(f"penaltyAmount{seat}") or "0"),
+        })
+    return {
+        "id": int(game_id),
+        "date": "-".join(reversed(d.split("."))) if d and re.match(r"\d{2}\.\d{2}\.\d{4}$", d) else None,
+        "host": selected("leading_id"),
+        "winner": {"Мирные": "town", "Мафия": "mafia"}.get(selected("victory") or ""),
+        "players": players,
+    }
+
+
+def legacy_games(page_id):
+    html = open(f"{LEGACY}/{page_id}.html", encoding="utf8").read()
+    ids = list(dict.fromkeys(re.findall(r"show_game/(\d+)", html)))
+    games = [g for g in (legacy_game(i) for i in ids) if g]
+    for n, g in enumerate(games):
+        g["number"] = ids.index(str(g["id"])) + 1
+    return games, len(ids)
 
 
 def legacy_url(page_id):
@@ -242,9 +303,87 @@ def legacy_extra(key, name, date, city, pages, ours=True, notes=None):
         st, lg = legacy_stage(pid, title)
         stages.append(st)
         legend.update(lg)
+    dates = sorted(g["date"] for g in stages[0].get("games", []) if g["date"])  # дата первой страницы (у «Зачётных дней» — финал)
+    approx = not dates
+    if dates:
+        date = dates[0]
     return {"key": key, "fiim_id": None, "url": legacy_url(pages[0][0]), "date": date, "name": name, "city": city, "kind": "personal",
             "ours": ours, "project": True, "source": "старый mafiacl.com (веб-архив)", "legend": legend, "stages": stages,
-            "approx_date": True, "notes": notes or []}
+            "approx_date": approx, "notes": notes or []}
+
+
+THEMAFIA = "data/themafia"
+THEMAFIA_LEGEND = {
+    "Баллы": "сумма баллов", "Доп": "дополнительные баллы", "Игр": "сыграно игр", "Побед": "побед",
+    "ЛИ": "лучший игрок", "ПУ": "убит первым", "ЛХ3": "лучший ход: 3 чёрных", "ЛХ2": "лучший ход: 2 чёрных",
+    "Житель": "побед мирным", "Мафия": "побед мафией", "Шериф": "побед шерифом", "Дон": "побед доном",
+}
+# Сезон MCL 2022/2023 на the-mafia.net: финалы и серии (серии в городах клуба — турниры клуба, остальные — серии лиги у других клубов).
+MCL_2223 = {
+    "europe": {"final": "mafia-champions-league-20222023-final-europe", "own": ("praga",), "podium": ["Рауль", "Гармония", "Сын"],
+               "note": "Итоговые места сезона (с учётом отбора): 1. Рауль, 2. Гармония, 3. Сын. Призовой фонд 500 €, 116 игр за сезон. Таблица ниже — только финальная серия."},
+    "ukraine": {"final": "mafia-champions-league-20222023-final-ukraine", "own": ("harkiv",), "podium": ["Benjamin", "Osborn", "FD"],
+                "note": "Итоговые места сезона (с учётом отбора): 1. Benjamin, 2. Osborn, 3. FD. Призовой фонд 20 000 грн, 176 игр за сезон. Таблица ниже — только финальная серия."},
+}
+
+
+def themafia_tournament(slug):
+    soup = BeautifulSoup(open(f"{THEMAFIA}/tournament/{slug}.html", encoding="utf8").read(), "lxml")
+    text = soup.get_text(" | ", strip=True)
+    m = re.search(r"(Mafia Champions league[^|]+?) \| Клуб:", text)
+    name = m.group(1).strip() if m else slug
+    city = re.search(r"Город: \| ([^|]+) \|", text)
+    m = re.search(r"2022/2023 ([^.]+)\. \d+ сер", name)  # город серии — в названии («… Краков. 1 серия»)
+    series_city = m.group(1).strip() if m else None
+    date = re.search(r"Дата: \| (\d{4}-\d{2}-\d{2})", text)
+    rate_ids = list(dict.fromkeys(re.findall(r"/tournament/rate/(\d+)", str(soup))))
+    stages = []
+    for rid in rate_ids:
+        path = f"{THEMAFIA}/rate/{rid}.html"
+        if not os.path.exists(path):
+            continue
+        rs = BeautifulSoup(open(path, encoding="utf8").read(), "lxml")
+        table = rs.find("table")
+        cols = [th.get_text(strip=True) for th in table.find_all("th")]
+        rows = []
+        for tr in table.find_all("tr"):
+            v = [td.get_text(" ", strip=True) for td in tr.find_all("td")]
+            if len(v) != len(cols):
+                continue
+            values = dict(zip(cols, v))
+            nick, club, penalty, seat = player(values.pop("Ник"))
+            place = values.pop("№")
+            rows.append({"place": number(place), "nick": nick, "club": club, "penalty": penalty, "seat": None,
+                         "total": number(values["Баллы"]), "values": {k: number(x) for k, x in values.items()}})
+        rows.sort(key=lambda r: r["place"] if isinstance(r["place"], int) else 999)
+        stages.append({"title": "Итоги", "note": None, "columns": cols, "rows": rows})
+    return {"key": f"tm-{slug.replace('mafia-champions-league-', 'mcl-')}", "fiim_id": None, "url": f"https://the-mafia.net/tournament/{slug}",
+            "date": date.group(1) if date else None, "name": name, "city": series_city or (city.group(1).strip() if city else ""), "kind": "personal",
+            "source": "the-mafia.net", "legend": THEMAFIA_LEGEND, "stages": stages}
+
+
+def themafia_items():
+    out = []
+    slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(f"{THEMAFIA}/tournament/*.html"))
+    for conf, c in MCL_2223.items():
+        final_key = f"tm-{c['final'].replace('mafia-champions-league-', 'mcl-')}"
+        for slug in slugs:
+            if "20222023" not in slug:
+                continue
+            is_final = slug == c["final"]
+            t = themafia_tournament(slug)
+            club_page = open(f"{THEMAFIA}/tournament/{slug}.html", encoding="utf8").read()
+            if not is_final and (("Prague" in club_page) != (conf == "europe")):
+                continue
+            own = is_final or any(x in slug for x in c["own"])
+            t.update({"ours": own, "project": True, "season_year": 2023})
+            if is_final:
+                t["podium"] = c["podium"]
+                t["notes"] = [c["note"]]
+            else:
+                t["parent"] = final_key
+            out.append(t)
+    return out
 
 
 def manual_2013():
@@ -299,6 +438,12 @@ def bundle():
                      notes=["Парный турнир: 27 игр за 25 часов. Парный зачёт: 1. Анархия и Lynch, 2. Бенджамин и Ginger, 3. YeS и Морф."]),
         legacy_extra("mafiacl-kharkiv-cup-2017", "MafiaCl Kharkiv Cup 2017", "2017-06-01", "Харьков", [(34, "Итоги")],
                      notes=["Турнир к 5-летию клуба. Парный зачёт — Борщ и Snow."]),
+        legacy_extra("zachetnye-dni-2016-2017", "Зачётные дни 2016/2017", "2017-06-01", "Харьков",
+                     [(33, "Финал"), (32, "Май 2017"), (30, "Апрель 2017"), (27, "Март 2017"), (23, "Февраль 2017"), (20, "Январь 2017"),
+                      (18, "Декабрь 2016"), (16, "Ноябрь 2016"), (14, "Октябрь 2016"), (12, "Сентябрь 2016")],
+                     notes=["Ежемесячные зачётные дни клуба сезона 2016/2017 (по 7 игр) и финал сезона."]),
+        legacy_extra("mafia-school-2016", "Mafia School 2016", "2016-06-01", "Харьков", [(6, "Итоги")],
+                     notes=["Турнир для учеников школы мафии клуба."]),
     ]
     for t in json.load(open("data/fiim/tournaments.json", encoding="utf8"))["tournaments"]:
         if not t.get("fiim_id") or not (t["ours"] or t["project"]):
@@ -344,6 +489,7 @@ def bundle():
             return 3
         d["stages"].sort(key=rank)
         items.append(d)
+    items += themafia_items()
     items.sort(key=lambda x: x["date"])
     os.makedirs("src/content/fiim", exist_ok=True)
     json.dump(items, open("src/content/fiim/archive.json", "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
@@ -354,7 +500,7 @@ def bundle():
 
     index = []
     for x in items:
-        parent = next(
+        parent = x.get("parent") or next(
             (p["key"] for p in items if p is not x and base(x["name"]).startswith(base(p["name"]) + " ".strip()) and len(p["name"]) < len(x["name"])
              and base(x["name"])[len(base(p["name"]))] in " .,(-" and p["date"] >= x["date"]),
             None,
@@ -364,7 +510,7 @@ def bundle():
             (st for st in x["stages"] if re.search(r"финал|final", st["title"], re.I) and not re.search(r"полуфинал", st["title"], re.I)), None
         ) or (x["stages"][0] if x["stages"] else None)
         top = x.get("podium") or [r["nick"] for r in sorted(main["rows"], key=lambda r: (r["place"] if isinstance(r["place"], int) else 999))[:3]] if main else []
-        index.append({k: x[k] for k in ("key", "name", "date", "city", "ours", "project")} | {"approx_date": bool(x.get("approx_date")), "parent": parent, "stage": stage, "top": top, "players": len({r["nick"] for st in x["stages"] for r in st["rows"]})})
+        index.append({k: x[k] for k in ("key", "name", "date", "city", "ours", "project")} | {"approx_date": bool(x.get("approx_date")), "season_year": x.get("season_year"), "parent": parent, "stage": stage, "top": top, "players": len({r["nick"] for st in x["stages"] for r in st["rows"]})})
     json.dump(index, open("src/content/fiim/index.json", "w", encoding="utf8"), ensure_ascii=False, indent=0)
     print(f"src/content/fiim/archive.json: {len(items)} турниров")
     for i in index:

@@ -1659,7 +1659,26 @@
       "sourceVk": "club post on VKontakte",
       "copy": "A copy of the page is kept in the club archive.",
       "open": "All tables since 2013",
-      "sourceOldSite": "the club's old website (web archive)"
+      "sourceOldSite": "the club's old website (web archive)",
+      "games": "Game sheets",
+      "gamesSaved": "{saved} of {total} preserved",
+      "game": "Game {n}",
+      "host": "host",
+      "winTown": "Town wins",
+      "winMafia": "Mafia wins",
+      "role": "Role",
+      "notesCol": "Notes",
+      "roles": {
+        "citizen": "civilian",
+        "mafia": "mafia",
+        "don": "don",
+        "sheriff": "sheriff"
+      },
+      "best": "best {n}",
+      "killed": "killed first",
+      "killedMove": "killed first, best move {move}",
+      "fouls": "fouls: {n}",
+      "penalties": "penalties: {n}"
     }
   },
   "about": {

@@ -1659,7 +1659,26 @@
       "sourceVk": "příspěvek klubu na VKontakte",
       "copy": "Kopie stránky je uložena v archivu klubu.",
       "open": "Všechny tabulky od roku 2013",
-      "sourceOldSite": "starý web klubu (webový archiv)"
+      "sourceOldSite": "starý web klubu (webový archiv)",
+      "games": "Protokoly her",
+      "gamesSaved": "dochováno {saved} z {total}",
+      "game": "Hra {n}",
+      "host": "moderátor",
+      "winTown": "Výhra města",
+      "winMafia": "Výhra mafie",
+      "role": "Role",
+      "notesCol": "Poznámky",
+      "roles": {
+        "citizen": "občan",
+        "mafia": "mafie",
+        "don": "don",
+        "sheriff": "šerif"
+      },
+      "best": "nejlepší {n}",
+      "killed": "zabit první",
+      "killedMove": "zabit první, nejlepší tah {move}",
+      "fouls": "faulů: {n}",
+      "penalties": "trestů: {n}"
     }
   },
   "about": {

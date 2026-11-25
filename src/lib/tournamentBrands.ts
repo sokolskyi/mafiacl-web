@@ -1,7 +1,7 @@
 import type { HallEntry } from "@/lib/hallArchive";
 import type { Tournament } from "@/lib/tournaments";
 import type { VideoItem } from "@/lib/videos";
-import { ARCHIVE, archiveYear, type ArchiveItem } from "@/lib/fiimArchive";
+import { ARCHIVE, archiveRegion, archiveYear, type ArchiveItem } from "@/lib/fiimArchive";
 
 /**
  * Турниры клуба «без года»: Central Cup, Championship, Kings… Каждый турнир (из базы турниров или из
@@ -91,9 +91,11 @@ export function editionsOf(brand: Brand, tournaments: Tournament[], hall: HallEn
     }
     const ya = out.filter((e) => e.year === year);
     for (const a of as.filter((x) => archiveYear(x) === year)) {
+      const ar = archiveRegion(a);
+      const fits = (x: Edition) => !ar || !regionOf(x) || regionOf(x) === ar;
       const e =
         ya.find((x) => norm(x.title) === norm(a.name)) ??
-        (ya.length === 1 ? ya[0] : ya.find((x) => regionOf(x) === "UA" || /харьк|харків|kharkiv/i.test(x.city ?? "")));
+        (ya.length === 1 && fits(ya[0]) ? ya[0] : ya.find((x) => ar !== null && regionOf(x) === ar));
       if (e) e.archive.push(a);
       else out.push({ key: `a${a.key}`, year, title: a.name, city: a.city, places: a.top, note: null, videoUrl: null, videos: [], tournament: null, archive: [a] });
     }
