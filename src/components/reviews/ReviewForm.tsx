@@ -101,7 +101,7 @@ export function ReviewForm({ locale, hosts }: { locale: string; hosts: { id: num
       {hosts.length > 0 && (
         <label className="text-sm font-semibold sm:col-span-2">
           {t("host")}
-          <select name="host" defaultValue="" className={`${field} sm:max-w-sm`}>
+          <select name="host" defaultValue="" className={`${field} block sm:max-w-sm`}>
             <option value="">{t("hostNone")}</option>
             {hosts.map((h) => (
               <option key={h.id} value={h.id}>{h.nickname}</option>
