@@ -448,7 +448,8 @@
       "promoUntil": "Valid until (optional)",
       "promoActive": "Show on the site",
       "partnerInstagram": "Instagram",
-      "reviewHost": "Host"
+      "reviewHost": "Host",
+      "reviewLogo": "Company logo"
     },
     "status": {
       "draft": "Draft",
@@ -2663,10 +2664,15 @@
         "consent": "Tick the consent box — without it we can't publish your review.",
         "photo": "Couldn't upload the photo. Choose another one — JPG or PNG.",
         "tooMany": "Too many reviews in a row. Try again tomorrow.",
-        "save": "Couldn't send your review. Try again in a minute."
+        "save": "Couldn't send your review. Try again in a minute.",
+        "logo": "The logo didn't work. Choose a smaller JPG, PNG or WebP image."
       },
       "host": "Who hosted your game",
-      "hostNone": "Don't remember / doesn't matter"
+      "hostNone": "Don't remember / doesn't matter",
+      "logo": "Company logo",
+      "logoPreview": "Company logo",
+      "logoHint": "Optional. A PNG with a transparent background looks best.",
+      "logoNeedsCompany": "Enter the company or organization first."
     },
     "hostWas": "host — {host}"
   }

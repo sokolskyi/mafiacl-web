@@ -552,6 +552,7 @@ export async function AdminHome({
                   <textarea name="body" required rows={4} maxLength={1500} defaultValue={r?.body ?? ""} className={`mt-1 w-full ${input}`} />
                 </label>
                 <PhotoField clubId={club.id} initial={r?.photo_url ? [r.photo_url] : []} labels={{ label: t("fields.reviewPhoto"), hint: t("fields.logoHint"), upload: t("fields.uploadPhoto"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }} />
+                <PhotoField name="logo" clubId={club.id} initial={r?.company_logo_url ? [r.company_logo_url] : []} labels={{ label: t("fields.reviewLogo"), hint: t("fields.logoHint"), upload: t("fields.uploadPhoto"), uploading: t("fields.uploading"), failed: t("fields.uploadFailed") }} />
                 <label className="text-sm">{t("fields.sort")}
                   <input name="sort" type="number" min={0} defaultValue={r?.sort ?? 100} className={`mt-1 w-full ${input}`} />
                 </label>

@@ -32,10 +32,14 @@ export async function Testimonials({ items, locale }: { items: Testimonial[]; lo
                     {r.author.slice(0, 1)}
                   </span>
                 )}
-                <span>
+                <span className="min-w-0 flex-1">
                   <span className="block font-bold">{r.author}</span>
                   {meta.length > 0 && <span className="block text-sm text-neutral-400">{meta.join(" · ")}</span>}
                 </span>
+                {r.companyLogoUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={r.companyLogoUrl} alt={r.company ?? ""} className="h-12 max-w-28 shrink-0 rounded bg-white/5 object-contain p-1" loading="lazy" />
+                )}
               </figcaption>
             </figure>
           </li>

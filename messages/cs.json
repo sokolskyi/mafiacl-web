@@ -448,7 +448,8 @@
       "promoUntil": "Platí do (nepovinné)",
       "promoActive": "Zobrazit na webu",
       "partnerInstagram": "Instagram",
-      "reviewHost": "Moderátor"
+      "reviewHost": "Moderátor",
+      "reviewLogo": "Logo firmy"
     },
     "status": {
       "draft": "Koncept",
@@ -2663,10 +2664,15 @@
         "consent": "Zaškrtněte souhlas se zveřejněním — bez něj se recenze na webu neobjeví.",
         "photo": "Fotku se nepodařilo nahrát. Vyberte jinou — JPG nebo PNG.",
         "tooMany": "Příliš mnoho recenzí za sebou. Zkuste to zítra.",
-        "save": "Recenzi se nepodařilo odeslat. Zkuste to znovu za minutu."
+        "save": "Recenzi se nepodařilo odeslat. Zkuste to znovu za minutu.",
+        "logo": "Logo se nepodařilo nahrát. Vyberte menší obrázek JPG, PNG nebo WebP."
       },
       "host": "Kdo hru moderoval",
-      "hostNone": "Nevzpomínám si / nezáleží"
+      "hostNone": "Nevzpomínám si / nezáleží",
+      "logo": "Logo firmy",
+      "logoPreview": "Logo firmy",
+      "logoHint": "Nepovinné. Nejlépe vypadá PNG s průhledným pozadím.",
+      "logoNeedsCompany": "Nejdřív vyplňte firmu nebo organizaci."
     },
     "hostWas": "moderátor — {host}"
   }

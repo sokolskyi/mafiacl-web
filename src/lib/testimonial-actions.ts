@@ -9,11 +9,38 @@ import { notifyStaff } from "@/lib/staffNotify";
 import { createClient } from "@/lib/supabase/server";
 import { markHostReviewsSeen } from "@/lib/hostReviews";
 
-export type TestimonialState = { ok?: boolean; error?: "invalid" | "consent" | "photo" | "tooMany" | "save" };
+export type TestimonialState = { ok?: boolean; error?: "invalid" | "consent" | "photo" | "logo" | "tooMany" | "save" };
 
 const BUCKET = "testimonials";
-// Браузер заранее уменьшает фото (см. ReviewForm), а у Server Actions предел тела запроса — 1 МБ.
-const MAX_PHOTO_BYTES = 1024 * 1024;
+// Браузер заранее уменьшает фото и логотип (см. ReviewForm), а у Server Actions предел тела запроса — 1 МБ на всё.
+const MAX_IMAGE_BYTES = 512 * 1024;
+
+type Db = ReturnType<typeof createAdminClient>;
+
+/**
+ * Картинка из формы → WebP в хранилище, без EXIF (геометки, модель телефона).
+ * Фото автора — квадрат 400×400; логотип — целиком в рамке 400×200, прозрачный фон сохраняется.
+ * null — картинки нет; "bad" — не картинка, слишком большая или не прочиталась.
+ */
+async function storeImage(db: Db, file: FormDataEntryValue | null, kind: "photo" | "logo"): Promise<string | null | "bad"> {
+  if (!(file instanceof File) || file.size === 0) return null;
+  if (file.size > MAX_IMAGE_BYTES || !file.type.startsWith("image/")) return "bad";
+  try {
+    const { default: sharp } = await import("sharp");
+    const img = sharp(Buffer.from(await file.arrayBuffer()), { limitInputPixels: 40_000_000 }).rotate();
+    const webp = await (kind === "photo"
+      ? img.resize(400, 400, { fit: "cover", position: "attention" }).webp({ quality: 82 })
+      : img.resize(400, 200, { fit: "inside", withoutEnlargement: true }).webp({ quality: 90, alphaQuality: 100 })
+    ).toBuffer();
+    const path = `${new Date().toISOString().slice(0, 7)}/${kind === "logo" ? "logo-" : ""}${randomUUID()}.webp`;
+    const { error } = await db.storage.from(BUCKET).upload(path, webp, { contentType: "image/webp" });
+    if (error) throw error;
+    return db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+  } catch (e) {
+    console.error(`testimonial ${kind} failed`, e instanceof Error ? e.message : e);
+    return "bad";
+  }
+}
 
 /**
  * Отзыв с открытой страницы «Отзывы». Приходит скрытым — показывает администрация клуба из админки.
@@ -46,27 +73,11 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
   ]);
   if ((fromIp ?? 0) >= 3 || (total ?? 0) >= 20) return { error: "tooMany" };
 
-  // Фото: перекодируем на сервере в квадрат 400×400 WebP — без EXIF (геометки, модель телефона).
-  let photoUrl: string | null = null;
-  const file = formData.get("photo");
-  if (file instanceof File && file.size > 0) {
-    if (file.size > MAX_PHOTO_BYTES || !file.type.startsWith("image/")) return { error: "photo" };
-    try {
-      const { default: sharp } = await import("sharp");
-      const webp = await sharp(Buffer.from(await file.arrayBuffer()), { limitInputPixels: 40_000_000 })
-        .rotate()
-        .resize(400, 400, { fit: "cover", position: "attention" })
-        .webp({ quality: 82 })
-        .toBuffer();
-      const path = `${new Date().toISOString().slice(0, 7)}/${randomUUID()}.webp`;
-      const { error } = await db.storage.from(BUCKET).upload(path, webp, { contentType: "image/webp" });
-      if (error) throw error;
-      photoUrl = db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-    } catch (e) {
-      console.error("testimonial photo failed", e instanceof Error ? e.message : e);
-      return { error: "photo" };
-    }
-  }
+  const photoUrl = await storeImage(db, formData.get("photo"), "photo");
+  if (photoUrl === "bad") return { error: "photo" };
+  // Логотип — только вместе с названием компании/организации.
+  const logoUrl = company ? await storeImage(db, formData.get("logo"), "logo") : null;
+  if (logoUrl === "bad") return { error: "logo" };
 
   const { data: club } = await db.from("clubs").select("id").eq("slug", MAIN_CLUB_SLUG).maybeSingle();
   if (!club) return { error: "save" };
@@ -85,6 +96,7 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
       company,
       body,
       photo_url: photoUrl,
+      company_logo_url: logoUrl,
       active: false,
       source: "site",
       site_locale: siteLocale,
@@ -100,7 +112,7 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
 
   await notifyStaff(club.id, [
     `💬 <b>Новый отзыв №${row.id}</b> — ждёт проверки в админке`,
-    `${escapeHtml(author)}${company ? ` · ${escapeHtml(company)}` : ""}${host ? ` · ведущий ${escapeHtml(host.nickname)}` : ""}${photoUrl ? " · 📷" : ""}`,
+    `${escapeHtml(author)}${company ? ` · ${escapeHtml(company)}` : ""}${host ? ` · ведущий ${escapeHtml(host.nickname)}` : ""}${photoUrl ? " · 📷" : ""}${logoUrl ? " · 🏷 лого" : ""}`,
     escapeHtml(body.slice(0, 600)),
   ]);
   return { ok: true };

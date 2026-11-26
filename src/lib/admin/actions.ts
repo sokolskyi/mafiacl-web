@@ -677,10 +677,12 @@ export async function saveTestimonial(formData: FormData) {
   const sort = int(formData.get("sort"), 0, 100000) ?? 100;
   const active = formData.get("active") === "on";
   const host_id = int(formData.get("hostId"), 1, Number.MAX_SAFE_INTEGER) ?? null;
+  const logoRaw = String(formData.get("logo") ?? "").split("\n").map((x) => x.trim()).filter(Boolean)[0] ?? "";
+  const company_logo_url = logoRaw ? (LOCAL_IMG.test(logoRaw) ? logoRaw : safeHttps(logoRaw)) : null;
   if (!clubId || !author || !body || (photoRaw && !photo)) redirect(`${back}?error=invalid#testimonials`);
 
   const supabase = await createClient();
-  const row = { author, body, company, event_type, event_date, photo_url: photo, sort, active, host_id };
+  const row = { author, body, company, event_type, event_date, photo_url: photo, sort, active, host_id, company_logo_url };
   const { data: saved, error } = id
     ? await supabase.from("testimonials").update(row).eq("id", id).select("id").maybeSingle()
     : await supabase.from("testimonials").insert({ ...row, club_id: clubId }).select("id").maybeSingle();
