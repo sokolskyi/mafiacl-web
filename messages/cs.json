@@ -295,7 +295,12 @@
     "myGamesEmpty": "Zatím nejste přihlášeni na žádnou hru.",
     "myGamesSchedule": "Rozpis her",
     "myGamesCancel": "Zrušit přihlášku",
-    "myOrders": "Moje objednávky"
+    "myOrders": "Moje objednávky",
+    "hostReviews": "Recenze na vás jako moderátora ({host})",
+    "hostReviewNew": "nová",
+    "hostReviewsAll": "Všechny recenze klubu",
+    "hostReviewsBanner": "{count, plural, one {Vyšla o vás nová recenze} few {Vyšly o vás # nové recenze} other {Vyšlo o vás # nových recenzí}}.",
+    "hostReviewsBannerLink": "Přečíst"
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",

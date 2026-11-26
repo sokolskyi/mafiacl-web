@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { updateTag } from "next/cache";
 import { getPathname } from "@/i18n/navigation";
+import { notifyHostAboutReview } from "@/lib/hostReviews";
 import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import { PARTNERS_TAG } from "@/lib/partners";
@@ -680,13 +681,15 @@ export async function saveTestimonial(formData: FormData) {
 
   const supabase = await createClient();
   const row = { author, body, company, event_type, event_date, photo_url: photo, sort, active, host_id };
-  const { error } = id
-    ? await supabase.from("testimonials").update(row).eq("id", id)
-    : await supabase.from("testimonials").insert({ ...row, club_id: clubId });
+  const { data: saved, error } = id
+    ? await supabase.from("testimonials").update(row).eq("id", id).select("id").maybeSingle()
+    : await supabase.from("testimonials").insert({ ...row, club_id: clubId }).select("id").maybeSingle();
   if (error) {
     console.error("saveTestimonial failed", { clubId, code: error.code, message: error.message });
     redirect(`${back}?error=save#testimonials`);
   }
+  // Опубликованный отзыв с ведущим — сообщение ведущему (один раз; сама функция проверяет, что пора).
+  if (saved?.id && active && host_id) await notifyHostAboutReview(saved.id);
   updateTag(TESTIMONIALS_TAG);
   redirect(`${back}#testimonials`);
 }

@@ -21,6 +21,8 @@ import { getMembershipEnding } from "@/lib/membershipReminder";
 import { AccountFeedback } from "./AccountFeedback";
 import { MyGames } from "./MyGames";
 import { MyOrders } from "./MyOrders";
+import { MyHostReviews } from "./MyHostReviews";
+import { getMyHostReviews } from "@/lib/hostReviews";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
 export async function AccountPanel({ locale, authError, post }: { locale: Locale; authError: boolean; post?: string }) {
@@ -108,7 +110,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
   if (profile?.verification === "pending") {
     await recordSignupCountry(userId, (await headers()).get("x-vercel-ip-country"));
   }
-  const ending = await getMembershipEnding(userId);
+  const [ending, hostReviews] = await Promise.all([getMembershipEnding(userId), getMyHostReviews(userId)]);
   const { data: ids } = await supabase.auth.getUserIdentities();
   const linked = new Set((ids?.identities ?? []).map((i) => i.provider));
   const methods = [
@@ -163,6 +165,13 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           <Link href="/shop" className="mt-2 inline-block font-semibold underline">{t("membershipRenew")}</Link>
         </div>
       )}
+      {hostReviews && hostReviews.unseen > 0 && (
+        <p role="status" className="mt-6 max-w-xl rounded-lg border border-gold-400/50 bg-gold-500/10 p-4 text-gold-100">
+          <span aria-hidden="true">⭐ </span>
+          {t("hostReviewsBanner", { count: hostReviews.unseen })}{" "}
+          <a href="#my-reviews" className="font-semibold underline">{t("hostReviewsBannerLink")}</a>
+        </p>
+      )}
       {!priv?.birthday && (
         <p role="status" className="mt-6 max-w-xl rounded border border-gold-400/40 bg-gold-500/10 p-4 text-sm text-gold-100">
           {t("birthdayMissing")}{" "}
@@ -181,6 +190,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
         <h2 id="mine-title" className="text-xl font-bold">{t("group.mine")}</h2>
         <MyGames locale={locale} userId={userId} />
         {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} />}
+        {hostReviews && <MyHostReviews locale={locale} data={hostReviews} />}
         <MyOrders locale={locale} userId={userId} />
         {profile?.nickname && (
           <p className="mt-4">

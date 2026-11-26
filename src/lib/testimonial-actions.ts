@@ -6,6 +6,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { escapeHtml } from "@/lib/telegram/api";
 import { notifyStaff } from "@/lib/staffNotify";
+import { createClient } from "@/lib/supabase/server";
+import { markHostReviewsSeen } from "@/lib/hostReviews";
 
 export type TestimonialState = { ok?: boolean; error?: "invalid" | "consent" | "photo" | "tooMany" | "save" };
 
@@ -102,4 +104,12 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
     escapeHtml(body.slice(0, 600)),
   ]);
   return { ok: true };
+}
+
+/** Ведущий открыл кабинет с «Отзывами о вас» — отметки «новый» больше не показываем. */
+export async function markMyReviewsSeen() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getClaims();
+  const userId = data?.claims.sub;
+  if (userId) await markHostReviewsSeen(userId);
 }

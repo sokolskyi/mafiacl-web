@@ -295,7 +295,12 @@
     "myGamesEmpty": "You haven't signed up for any games yet.",
     "myGamesSchedule": "Game schedule",
     "myGamesCancel": "Cancel sign-up",
-    "myOrders": "My orders"
+    "myOrders": "My orders",
+    "hostReviews": "Reviews of you as a host ({host})",
+    "hostReviewNew": "new",
+    "hostReviewsAll": "All club reviews",
+    "hostReviewsBanner": "{count, plural, one {A new review about you is published} other {# new reviews about you are published}}.",
+    "hostReviewsBannerLink": "Read"
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",

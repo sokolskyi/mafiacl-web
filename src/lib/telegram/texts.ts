@@ -124,6 +124,13 @@ const T = {
     en: "💬 New comment on “{title}” from <b>{nick}</b>:\n\n{text}",
   },
   openComments: { cs: "Otevřít komentáře", ru: "Открыть комментарии", uk: "Відкрити коментарі", en: "Open comments" },
+  reviewAboutYou: {
+    cs: "⭐ Na webu klubu vyšla recenze, ve které vás hráč uvedl jako moderátora — <b>{author}</b>:\n\n{text}",
+    ru: "⭐ На сайте клуба опубликован отзыв, где вас отметили ведущим, — <b>{author}</b>:\n\n{text}",
+    uk: "⭐ На сайті клубу опубліковано відгук, де вас відзначили ведучим, — <b>{author}</b>:\n\n{text}",
+    en: "⭐ A review naming you as the host is now on the club website — <b>{author}</b>:\n\n{text}",
+  },
+  openMyReviews: { cs: "Otevřít v profilu", ru: "Открыть в кабинете", uk: "Відкрити в кабінеті", en: "Open in your account" },
 } as const;
 
 export type TextKey = keyof typeof T;

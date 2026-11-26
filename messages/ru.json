@@ -295,7 +295,12 @@
     "myGamesEmpty": "Вы пока никуда не записаны.",
     "myGamesSchedule": "Расписание игр",
     "myGamesCancel": "Отменить запись",
-    "myOrders": "Мои заказы"
+    "myOrders": "Мои заказы",
+    "hostReviews": "Отзывы о вас как о ведущем ({host})",
+    "hostReviewNew": "новый",
+    "hostReviewsAll": "Все отзывы клуба",
+    "hostReviewsBanner": "{count, plural, one {О вас опубликован новый отзыв} few {О вас опубликовано # новых отзыва} other {О вас опубликовано # новых отзывов}}.",
+    "hostReviewsBannerLink": "Прочитать"
   },
   "games": {
     "empty": "Ближайших игр пока нет. Следите за нашим Telegram.",
