@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
   );
 
   const Corner = ({ flip }: { flip?: boolean }) => (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: px(4), transform: flip ? "rotate(180deg)" : undefined }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: px(4), ...(flip ? { transform: "rotate(180deg)" } : {}) }}>
       <div style={{ display: "flex", fontSize: px(44), fontWeight: 800, color: GOLD_400, lineHeight: 1 }}>MCL</div>
       <Pip size={px(34)} />
     </div>
