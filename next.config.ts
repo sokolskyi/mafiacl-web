@@ -12,6 +12,18 @@ const nextConfig: NextConfig = {
   // /mcl/ должен остаться со слешем: страница грузит файлы относительными путями.
   skipTrailingSlashRedirect: true,
   // /mcl без слэша → /mcl/ делает src/proxy.ts (здесь redirect матчит и /mcl/, получается петля).
+  // Адреса старого mafiacl.com (2016–2017), которые ещё помнит Google: постоянная переадресация.
+  async redirects() {
+    const archive = "/ru/turniry/arhiv";
+    return [
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/home/", destination: "/", permanent: true },
+      { source: "/mafia_stars", destination: archive, permanent: true },
+      { source: "/mafia_stars/", destination: archive, permanent: true },
+      { source: "/mafia_stars_results/:id", destination: archive, permanent: true },
+      { source: "/show_game/:id", destination: archive, permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       // Архив MCL Europe 2026 лежит в public/mcl (scripts/mcl-freeze.mjs); /mcl/ — его главная страница.
