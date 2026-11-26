@@ -1,5 +1,6 @@
 "use server";
 
+import { BIRTHDAYS_TAG } from "@/lib/badges";
 import { recordSignupCountry } from "@/lib/members";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -121,7 +122,8 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
   const birthdayRaw = String(formData.get("birthday") ?? "").trim();
   if (birthdayRaw && !/^\d{4}-\d{2}-\d{2}$/.test(birthdayRaw)) return { status: "invalidBirthday" };
   if (birthdayRaw && !isAtLeast(birthdayRaw, MIN_AGE)) return { status: "tooYoung" };
-  const { data: priv } = await supabase.from("profile_private").select("birthday").eq("profile_id", userId).maybeSingle();
+  const { data: priv } = await supabase.from("profile_private").select("birthday, birthday_public").eq("profile_id", userId).maybeSingle();
+  const birthdayPublic = formData.get("birthdayPublic") === "on";
   if (!priv?.birthday && !birthdayRaw) return { status: "birthdayRequired" };
 
   // Ник: раз в год — сразу, чаще — заявкой владельцу клуба (в базе: nickname_change).
@@ -144,6 +146,12 @@ export async function updateNickname(_prev: ProfileState, formData: FormData): P
     const { data: res, error: bErr } = await admin.rpc("birthday_set", { p_profile: userId, p_date: birthdayRaw });
     if (bErr) return { status: bErr.message.includes("invalid") ? "invalidBirthday" : "error" };
     requested = res === "requested";
+  }
+  // Согласие на публичное поздравление (пост в канале, значок 🎂 на неделю).
+  if (birthdayPublic !== Boolean(priv?.birthday_public)) {
+    const { error: pErr } = await admin.from("profile_private").update({ birthday_public: birthdayPublic }).eq("profile_id", userId);
+    if (pErr) console.error("birthday_public update failed", { code: pErr.code, message: pErr.message });
+    else updateTag(BIRTHDAYS_TAG);
   }
   revalidatePath("/", "layout");
   if (nickRes === "set") {

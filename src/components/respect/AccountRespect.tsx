@@ -7,8 +7,9 @@ import { RespectBalance } from "./RespectBalance";
 import { RespectCelebration, type CelebrationItem } from "./RespectCelebration";
 
 /** Блок Respect в кабинете: баланс и последние движения. */
-export async function AccountRespect({ locale, userId }: { locale: Locale; userId: string }) {
+export async function AccountRespect({ locale, userId, nick }: { locale: Locale; userId: string; nick: string | null }) {
   const t = await getTranslations({ locale, namespace: "respect" });
+  const tb = await getTranslations({ locale, namespace: "birthdayCard" });
   const [balance, history, unseen] = await Promise.all([getRespectBalance(userId), getMyRespectHistory(10), getUnseenRespect(userId)]);
   const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", timeZone: "Europe/Prague" });
   const note = (h: Pick<RespectEntry, "reason" | "note">) =>
@@ -48,6 +49,7 @@ export async function AccountRespect({ locale, userId }: { locale: Locale; userI
           balance={balance}
           items={items}
           more={restN}
+          birthday={nick && unseen.entries.some((e) => e.reason === "birthday") ? { nick, title: tb("title", { name: nick }) } : undefined}
           texts={{ title: t("celebrate.title"), collect: t("celebrate.collect"), balanceNow: t("celebrate.balanceNow"), more: t("celebrate.more", { n: restN }) }}
         />
       )}

@@ -1,5 +1,3 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { getTranslations } from "next-intl/server";
@@ -9,6 +7,7 @@ import { getPlayer, headlineStats, type PlayerRole } from "@/lib/players";
 import { getTitles, belongsTo } from "@/lib/badges";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { formatMemberNo } from "@/lib/memberNo";
+import { avatar, BG, CREAM, fonts, FONT, GOLD_200, GOLD_400, logo, MUTED, RED, SOFT } from "@/lib/shareImage";
 
 /** Картинка для соцсетей с личной статистикой игрока: f=story (1080×1920) или f=post (1200×630). */
 
@@ -16,61 +15,7 @@ const SIZE = { story: { width: 1080, height: 1920 }, post: { width: 1200, height
 type Format = keyof typeof SIZE;
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
-// Цвета совпадают с токенами globals.css (в картинке CSS-переменные не работают).
-const RED = "#e60000";
-const CREAM = "#fdffc2"; // --color-white
-const MUTED = "#cabfa6"; // --color-neutral-500
-const SOFT = "#efedc0"; // --color-neutral-200
-const GOLD_200 = "#fde68a";
-const GOLD_400 = "#fbbf24";
 const ROLE_COLOR: Record<PlayerRole, string> = { civilian: "#ff8274", sheriff: "#fcd34d", mafia: SOFT, don: SOFT };
-const FONT = "SSC-latin, SSC-latin-ext, SSC-cyrillic";
-const BG = "linear-gradient(160deg, #4a1220 0%, #2a050b 55%, #1c0308 100%)";
-
-let fontsPromise: Promise<{ name: string; data: Buffer; weight: 400 | 800; style: "normal" }[]> | null = null;
-function fonts() {
-  fontsPromise ??= Promise.all(
-    (["latin", "latin-ext", "cyrillic"] as const).flatMap((subset) =>
-      ([400, 800] as const).map(async (weight) => ({
-        // Своё имя на каждый набор символов: шрифты с одинаковым именем Satori не сочетает.
-        name: `SSC-${subset}`,
-        data: await readFile(join(process.cwd(), "assets/fonts", `sofia-sans-condensed-${subset}-${weight}-normal.woff`)),
-        weight,
-        style: "normal" as const,
-      })),
-    ),
-  );
-  return fontsPromise;
-}
-
-let logoPromise: Promise<string> | null = null;
-function logo() {
-  logoPromise ??= readFile(join(process.cwd(), "public/brand/mafiacl-wordmark-dark.svg")).then(
-    (b) => `data:image/svg+xml;base64,${b.toString("base64")}`,
-  );
-  return logoPromise;
-}
-
-/** Аватар заранее, как data URL: если внешний сервер не ответил, рисуем первую букву ника. */
-async function avatar(url: string | null): Promise<string | null> {
-  if (!url || !/^https:\/\//.test(url)) return null;
-  try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(3000) });
-    const type = res.headers.get("content-type") ?? "";
-    if (!res.ok || !type.startsWith("image/")) return null;
-    const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.length > 2_000_000) return null;
-    // Картинку рисует Satori: он не понимает WebP (аватары хранятся в WebP) — переводим в PNG.
-    if (type !== "image/png" && type !== "image/jpeg") {
-      const { default: sharp } = await import("sharp");
-      const png = await sharp(buf).resize(512, 512, { fit: "cover" }).png().toBuffer();
-      return `data:image/png;base64,${png.toString("base64")}`;
-    }
-    return `data:${type};base64,${buf.toString("base64")}`;
-  } catch {
-    return null;
-  }
-}
 
 export async function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams;

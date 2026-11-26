@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { markRespectSeen } from "@/lib/respect-actions";
 import { RespectAmount, RespectCoin } from "./RespectAmount";
 import { RESPECT_COLLECTED } from "./events";
+import { BirthdayShare } from "@/components/account/BirthdayShare";
 
 export type CelebrationItem = { label: string; amount: number; count: number };
 
@@ -13,6 +14,8 @@ type Props = {
   balance: number;
   items: CelebrationItem[];
   more: number;
+  /** День рождения: свой заголовок и открытка с кнопками «Поделиться / Скачать». */
+  birthday?: { nick: string; title: string };
   texts: { title: string; collect: string; balanceNow: string; more: string };
 };
 
@@ -26,7 +29,7 @@ const PARTICLES = Array.from({ length: 14 }, (_, i) => {
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Праздничное окно в кабинете: монета, салют и за что пришёл Respect. Закрытие — монеты летят в баланс. */
-export function RespectCelebration({ lastId, gained, balance, items, more, texts }: Props) {
+export function RespectCelebration({ lastId, gained, balance, items, more, birthday, texts }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   const coinRef = useRef<HTMLDivElement>(null);
   const coinRect = useRef<DOMRect | null>(null);
@@ -95,7 +98,7 @@ export function RespectCelebration({ lastId, gained, balance, items, more, texts
         </div>
       </div>
 
-      <h1 id="rc-title" className="rc-title mt-2 text-xl font-black">{texts.title}</h1>
+      <h1 id="rc-title" className="rc-title mt-2 text-xl font-black">{birthday?.title ?? texts.title}</h1>
       <p className="rc-gain mt-1 text-5xl font-black text-gold-200" aria-hidden="true">
         +{shown}
       </p>
@@ -113,6 +116,8 @@ export function RespectCelebration({ lastId, gained, balance, items, more, texts
         ))}
         {more > 0 && <li className="rc-item text-neutral-500" style={{ "--i": items.length } as React.CSSProperties}>{texts.more}</li>}
       </ul>
+
+      {birthday && <BirthdayShare nick={birthday.nick} compact />}
 
       <p className="mt-4 text-sm text-neutral-400">
         {texts.balanceNow}: <RespectAmount n={balance} className="font-semibold text-gold-200" />

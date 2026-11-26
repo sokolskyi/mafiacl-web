@@ -5,8 +5,23 @@ import { MATCHES_TAG } from "@/lib/players";
 import { getPlayerOfWeek } from "@/lib/rating";
 
 /** Значки у ника, как в клубе: ⭐ чемпион сезона Premier League, 👑 MafiaCL Kings, ⚜️ победитель последнего мини-турнира. */
-export const BADGE = { season_champion: "⭐", kings_winner: "👑", evening: "⚜️" } as const;
+export const BADGE = { season_champion: "⭐", kings_winner: "👑", evening: "⚜️", birthday: "🎂" } as const;
 export const TITLES_TAG = "titles";
+/** Значок 🎂: неделя после дня рождения у тех, кто разрешил поздравлять публично. */
+export const BIRTHDAYS_TAG = "birthdays";
+
+async function getBirthdayBadges(): Promise<string[]> {
+  "use cache";
+  cacheTag(BIRTHDAYS_TAG);
+  cacheLife("hours");
+  if (!isSupabaseConfigured) return [];
+  const { data, error } = await createPublicClient().rpc("birthday_badges");
+  if (error) console.error("birthday_badges failed", { code: error.code, message: error.message });
+  // setof uuid PostgREST отдаёт списком строк (на всякий случай понимаем и {birthday_badges: …}).
+  return ((data ?? []) as unknown[])
+    .map((x) => (typeof x === "string" ? x : (x as { birthday_badges?: unknown } | null)?.birthday_badges))
+    .filter((x): x is string => typeof x === "string");
+}
 
 export type Title = { id: number; kind: "season_champion" | "kings_winner"; label: string; wonOn: string | null; profileId: string | null; holderName: string | null; nickname: string | null };
 export type Badges = { byProfile: Record<string, string>; byName: Record<string, string> };
@@ -37,9 +52,9 @@ export async function getTitles(clubSlug: string): Promise<Title[]> {
 /** Значки всех игроков: по аккаунту и по нику (для гостей и титулов, записанных на ник). */
 export async function getBadges(clubSlug: string): Promise<Badges> {
   "use cache";
-  cacheTag(TITLES_TAG, MATCHES_TAG);
+  cacheTag(TITLES_TAG, MATCHES_TAG, BIRTHDAYS_TAG);
   cacheLife("minutes");
-  const [titles, potw] = await Promise.all([getTitles(clubSlug), getPlayerOfWeek(clubSlug)]);
+  const [titles, potw, birthdays] = await Promise.all([getTitles(clubSlug), getPlayerOfWeek(clubSlug), getBirthdayBadges()]);
   const count: Record<string, { s: number; k: number; e: boolean }> = {};
   const keyOf = (profileId: string | null, name: string | null) => (profileId ? `p:${profileId}` : `n:${(name ?? "").toLowerCase()}`);
   for (const t of titles) {
@@ -59,6 +74,7 @@ export async function getBadges(clubSlug: string): Promise<Badges> {
     if (k.startsWith("p:")) out.byProfile[k.slice(2)] = b;
     else out.byName[k.slice(2)] = b;
   }
+  for (const id of birthdays) out.byProfile[id] = (out.byProfile[id] ?? "") + BADGE.birthday;
   return out;
 }
 

@@ -49,6 +49,17 @@ export function sendMessage(chatId: number | string, text: string, buttons?: Inl
   });
 }
 
+/** Фото по ссылке (Telegram сам скачивает картинку) с подписью и кнопками. */
+export function sendPhoto(chatId: number | string, photoUrl: string, caption: string, buttons?: InlineButton[][]) {
+  return tg("sendPhoto", {
+    chat_id: chatId,
+    photo: photoUrl,
+    caption,
+    parse_mode: "HTML",
+    ...(buttons ? { reply_markup: { inline_keyboard: buttons } } : {}),
+  });
+}
+
 export function escapeHtml(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }

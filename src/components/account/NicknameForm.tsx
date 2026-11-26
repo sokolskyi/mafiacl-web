@@ -12,6 +12,7 @@ export function NicknameForm({
   links,
   birthday,
   birthdayRequest,
+  birthdayPublic,
   nicknameRequest,
 }: {
   current: string | null;
@@ -19,6 +20,7 @@ export function NicknameForm({
   links: ProfileLinks;
   birthday: string | null;
   birthdayRequest: string | null;
+  birthdayPublic: boolean;
   nicknameRequest: string | null;
 }) {
   const t = useTranslations("account");
@@ -84,6 +86,13 @@ export function NicknameForm({
       <p id="birthday-hint" className="mt-2 text-sm text-neutral-400">
         {birthdayRequest ? t("birthdayPending") : birthday ? t("birthdayChangeHint") : t("birthdayHint")}
       </p>
+      <label className="mt-3 flex items-start gap-3 text-sm">
+        <input type="checkbox" name="birthdayPublic" defaultChecked={birthdayPublic} aria-describedby="birthday-public-hint" className="mt-0.5 h-5 w-5 shrink-0 accent-red-600" />
+        <span>
+          <span className="font-semibold">{t("birthdayPublic")}</span>
+          <span id="birthday-public-hint" className="mt-0.5 block text-neutral-400">{t("birthdayPublicHint")}</span>
+        </span>
+      </label>
       <fieldset className="mt-6">
         <legend className="text-sm font-semibold">{t("profilesTitle")}</legend>
         <p className="mt-1 text-sm text-neutral-400">{t("profilesHint")}</p>

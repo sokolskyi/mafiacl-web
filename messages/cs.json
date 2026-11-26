@@ -300,7 +300,9 @@
     "hostReviewNew": "nová",
     "hostReviewsAll": "Všechny recenze klubu",
     "hostReviewsBanner": "{count, plural, one {Vyšla o vás nová recenze} few {Vyšly o vás # nové recenze} other {Vyšlo o vás # nových recenzí}}.",
-    "hostReviewsBannerLink": "Přečíst"
+    "hostReviewsBannerLink": "Přečíst",
+    "birthdayPublic": "Klub mi může blahopřát veřejně",
+    "birthdayPublicHint": "Příspěvek v Telegram kanálu klubu a ikona 🎂 u přezdívky týden po narozeninách. Datum ani věk nezveřejňujeme."
   },
   "games": {
     "empty": "Žádné naplánované hry. Sledujte náš Telegram.",
@@ -2675,5 +2677,22 @@
       "logoNeedsCompany": "Nejdřív vyplňte firmu nebo organizaci."
     },
     "hostWas": "moderátor — {host}"
+  },
+  "birthdayCard": {
+    "happy": "Vše nejlepší k narozeninám!",
+    "cardLabel": "Karta role",
+    "role": "Oslavenec",
+    "since": "V klubu od {year}",
+    "games": "{n, plural, one {# hra} few {# hry} other {# her}} v klubu",
+    "favRole": "Oblíbená role: {role}",
+    "gift": "+10 Respect — dárek od klubu",
+    "footer": "mafiacl.com · klub mafie MafiaCL",
+    "title": "Vše nejlepší, {name}!",
+    "preview": "Vaše narozeninové přání",
+    "share": "Sdílet",
+    "download": "Stáhnout",
+    "story": "Do příběhu",
+    "post": "Do příspěvku",
+    "shareHint": "Přání můžete dát do příběhu, do příspěvku nebo poslat přátelům."
   }
 }

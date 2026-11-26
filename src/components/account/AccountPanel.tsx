@@ -15,6 +15,7 @@ import { connectTelegram } from "@/lib/telegram/actions";
 import { getOptionalProviders } from "@/lib/auth/providers";
 import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
+import { BirthdayShare } from "./BirthdayShare";
 import { AccountBlog } from "./AccountBlog";
 import { parseProfileLinks } from "@/lib/profileLinks";
 import { getMembershipEnding } from "@/lib/membershipReminder";
@@ -97,7 +98,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
     .eq("profile_id", userId);
   const { data: priv } = await supabase
     .from("profile_private")
-    .select("telegram_chat_id, birthday, birthday_request, nickname_request")
+    .select("telegram_chat_id, birthday, birthday_request, nickname_request, birthday_public")
     .eq("profile_id", userId)
     .maybeSingle();
   const telegramOn = Boolean(priv?.telegram_chat_id);
@@ -147,10 +148,13 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
         </p>
       )}
       {birthdayGreeting && (
-        <p role="status" className="mt-6 max-w-xl rounded-lg border border-gold-500/50 bg-gold-500/10 p-4 text-gold-100">
-          <span aria-hidden="true">🎉 </span>
-          {t("birthdayGreeting", { name })}
-        </p>
+        <div role="status" className="mt-6 max-w-xl rounded-lg border border-gold-500/50 bg-gold-500/10 p-4 text-gold-100">
+          <p>
+            <span aria-hidden="true">🎉 </span>
+            {t("birthdayGreeting", { name })}
+          </p>
+          {profile?.nickname && <BirthdayShare nick={profile.nickname} />}
+        </div>
       )}
       {ending && (
         <div role="status" className={`mt-6 max-w-xl rounded-lg border p-4 ${ending.daysLeft <= 1 ? "border-red-400/60 bg-red-600/15 text-red-100" : "border-gold-400/40 bg-gold-500/10 text-gold-100"}`}>
@@ -189,7 +193,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
       <section id="mine" aria-labelledby="mine-title" className="mt-10 scroll-mt-24 border-t border-white/10 pt-8">
         <h2 id="mine-title" className="text-xl font-bold">{t("group.mine")}</h2>
         <MyGames locale={locale} userId={userId} />
-        {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} />}
+        {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} nick={profile?.nickname ?? null} />}
         {hostReviews && <MyHostReviews locale={locale} data={hostReviews} />}
         <MyOrders locale={locale} userId={userId} />
         {profile?.nickname && (
@@ -221,7 +225,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           initial={profile?.avatar_url ?? null}
           labels={{ title: t("photo"), hint: t("photoHint"), upload: t("photoUpload"), change: t("photoChange"), remove: t("photoRemove"), uploading: t("photoUploading"), failed: t("photoFailed"), saved: t("photoSaved"), cropHint: t("photoCropHint"), zoom: t("photoZoom"), save: t("photoSave"), cancel: t("photoCancel") }}
         />
-        <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} nicknameRequest={priv?.nickname_request ?? null} />
+        <NicknameForm current={profile?.nickname ?? null} city={profile?.city ?? null} links={parseProfileLinks(profile?.links)} birthday={priv?.birthday ?? null} birthdayRequest={priv?.birthday_request ?? null} birthdayPublic={priv?.birthday_public ?? false} nicknameRequest={priv?.nickname_request ?? null} />
       </section>
       <section id="settings" aria-labelledby="settings-title" className="mt-12 scroll-mt-24 border-t border-white/10 pt-8">
         <h2 id="settings-title" className="text-xl font-bold">{t("group.settings")}</h2>

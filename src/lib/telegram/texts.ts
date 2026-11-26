@@ -130,6 +130,26 @@ const T = {
     uk: "⭐ На сайті клубу опубліковано відгук, де вас відзначили ведучим, — <b>{author}</b>:\n\n{text}",
     en: "⭐ A review naming you as the host is now on the club website — <b>{author}</b>:\n\n{text}",
   },
+  birthdayDm: {
+    cs: "🎂 <b>{name}</b>, vše nejlepší k narozeninám! Klub MafiaCL vám přeje hodně šťastných her a dává vám <b>10 Respect</b> — už jsou na účtu.\n\nTady je vaše přání — můžete ho rovnou dát do příběhu nebo do příspěvku.",
+    ru: "🎂 <b>{name}</b>, с днём рождения! Клуб MafiaCL поздравляет вас, желает удачных игр и дарит <b>10 Respect</b> — они уже на счету.\n\nВот ваша открытка — можно сразу выложить в сторис или в ленту.",
+    uk: "🎂 <b>{name}</b>, з днем народження! Клуб MafiaCL вітає вас, бажає вдалих ігор і дарує <b>10 Respect</b> — вони вже на рахунку.\n\nОсь ваша листівка — можна одразу викласти в сторіс або в стрічку.",
+    en: "🎂 Happy birthday, <b>{name}</b>! MafiaCL wishes you many great games and gives you <b>10 Respect</b> — it's already in your account.\n\nHere's your card — post it to your stories or feed.",
+  },
+  birthdayDmNoGift: {
+    cs: "🎂 <b>{name}</b>, vše nejlepší k narozeninám! Klub MafiaCL vám přeje hodně šťastných her.\n\nTady je vaše přání — můžete ho rovnou dát do příběhu nebo do příspěvku.",
+    ru: "🎂 <b>{name}</b>, с днём рождения! Клуб MafiaCL поздравляет вас и желает удачных игр.\n\nВот ваша открытка — можно сразу выложить в сторис или в ленту.",
+    uk: "🎂 <b>{name}</b>, з днем народження! Клуб MafiaCL вітає вас і бажає вдалих ігор.\n\nОсь ваша листівка — можна одразу викласти в сторіс або в стрічку.",
+    en: "🎂 Happy birthday, <b>{name}</b>! MafiaCL wishes you many great games.\n\nHere's your card — post it to your stories or feed.",
+  },
+  birthdayChannel: {
+    cs: "🎂 Dnes slaví narozeniny <b>{name}</b>! Klub MafiaCL přeje vše nejlepší a hodně vítězství za jakoukoli barvu. Přidejte se s gratulací v komentářích 🎉",
+    ru: "🎂 Сегодня день рождения у <b>{name}</b>! Клуб MafiaCL поздравляет и желает побольше побед за любой цвет. Поздравляйте в комментариях 🎉",
+    uk: "🎂 Сьогодні день народження у <b>{name}</b>! Клуб MafiaCL вітає та бажає більше перемог за будь-який колір. Вітайте в коментарях 🎉",
+    en: "🎂 It's <b>{name}</b>'s birthday today! MafiaCL wishes them plenty of wins on either side. Send your wishes in the comments 🎉",
+  },
+  birthdayStory: { cs: "Přání do příběhu", ru: "Открытка для сторис", uk: "Листівка для сторіс", en: "Card for stories" },
+  openAccount: { cs: "Otevřít účet", ru: "Открыть кабинет", uk: "Відкрити кабінет", en: "Open your account" },
   openMyReviews: { cs: "Otevřít v profilu", ru: "Открыть в кабинете", uk: "Відкрити в кабінеті", en: "Open in your account" },
 } as const;
 

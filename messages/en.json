@@ -300,7 +300,9 @@
     "hostReviewNew": "new",
     "hostReviewsAll": "All club reviews",
     "hostReviewsBanner": "{count, plural, one {A new review about you is published} other {# new reviews about you are published}}.",
-    "hostReviewsBannerLink": "Read"
+    "hostReviewsBannerLink": "Read",
+    "birthdayPublic": "The club may congratulate me publicly",
+    "birthdayPublicHint": "A post in the club's Telegram channel and a 🎂 next to your nickname for a week after your birthday. We never show the date or your age."
   },
   "games": {
     "empty": "No upcoming games yet. Follow our Telegram.",
@@ -2675,5 +2677,22 @@
       "logoNeedsCompany": "Enter the company or organization first."
     },
     "hostWas": "host — {host}"
+  },
+  "birthdayCard": {
+    "happy": "Happy birthday!",
+    "cardLabel": "Role card",
+    "role": "Birthday star",
+    "since": "In the club since {year}",
+    "games": "{n, plural, one {# game} other {# games}} with the club",
+    "favRole": "Favourite role: {role}",
+    "gift": "+10 Respect — a gift from the club",
+    "footer": "mafiacl.com · MafiaCL mafia club",
+    "title": "Happy birthday, {name}!",
+    "preview": "Your birthday card",
+    "share": "Share",
+    "download": "Download",
+    "story": "For stories",
+    "post": "For the feed",
+    "shareHint": "Post the card to your stories or feed, or send it to friends."
   }
 }
