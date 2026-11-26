@@ -834,7 +834,30 @@
     "roleFor": "Místo {seat}: {role}. Klepnutím změníte roli",
     "nickPlaceholder": "Přezdívka",
     "funHeaderCustom": "Fun-hra · vlastní, hráčů: {n}",
-    "hintNight0Custom": "Vepište přezdívky do řádků stolu. Roli měníte klepnutím dokola. Až budou všechny štítky dole zelené — „Začít den“."
+    "hintNight0Custom": "Vepište přezdívky do řádků stolu. Roli měníte klepnutím dokola. Až budou všechny štítky dole zelené — „Začít den“.",
+    "voice": {
+      "start": "Hlasem",
+      "stop": "Zastavit",
+      "lang": "Jazyk rozpoznávání",
+      "listening": "Poslouchám…",
+      "unsupported": "Hlasové zadávání funguje v Chrome, Edge a Safari.",
+      "denied": "Chybí přístup k mikrofonu — povolte ho v nastavení prohlížeče.",
+      "failed": "Mikrofon se nepodařilo zapnout. Zkuste to znovu.",
+      "unknown": "Nerozumím: „{text}“. Řekněte číslo místa a příkaz.",
+      "cannot": "„{text}“ — teď to nejde.",
+      "seated": "Hlas: {list}",
+      "done": "Hlas: {list}",
+      "partly": "Část příkazu nesedí — zkontrolujte stůl.",
+      "did": {
+        "foul": "faul č. {seat}",
+        "unfoul": "mínus faul č. {seat}",
+        "nominate": "nominován č. {seat}",
+        "unnominate": "zrušena nominace č. {seat}",
+        "seat": "místo {seat}"
+      },
+      "hintSeating": "Řekněte sestavu: „první Trevery, druhá Harmonie…“. Přezdívka bez čísla půjde na první volné místo.",
+      "hintDay": "Řekněte: „faul pět“, „zrušit faul pět“, „nominuji tři“, „tři nominuje sedm“."
+    }
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",

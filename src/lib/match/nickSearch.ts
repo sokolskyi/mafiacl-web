@@ -112,3 +112,27 @@ export function searchNicks(index: Indexed[], query: string, limit = 6): NickOpt
   scored.sort((a, b) => b.score - a.score || a.o.nickname.length - b.o.nickname.length || a.o.nickname.localeCompare(b.o.nickname));
   return scored.slice(0, limit).map(({ o }) => ({ nickname: o.nickname, id: o.id }));
 }
+
+/**
+ * Ник из распознанной речи: браузер пишет его «как слышно» («ес» вместо YeS, «тревори» вместо Trevery).
+ * Сначала обычный поиск, потом — самое близкое звучание целиком (расстояние по скелету).
+ * null — уверенного совпадения нет.
+ */
+export function matchSpokenNick(index: Indexed[], spoken: string): NickOption | null {
+  const q = spoken.trim().toLowerCase().replace(/ё/g, "е").replace(/^(мистер|містер)\s+/, "mr ").replace(/^(миссис|місіс)\s+/, "mrs ");
+  if (!q) return null;
+  const exact = index.find((o) => o.lower === q);
+  if (exact) return { nickname: exact.nickname, id: exact.id };
+  const s = skeleton(q);
+  if (!s) return null;
+  const max = s.length <= 3 ? 1 : s.length <= 6 ? 2 : 3;
+  let best: { o: Indexed; d: number } | null = null;
+  for (const o of index) {
+    // «ес» ~ «ies» (YeS): в начале скелета у латинских ников часто лишняя «i».
+    const d = Math.min(distance(s, o.skel, max), distance(s, o.skel.replace(/^i/, ""), max));
+    if (d <= max && (!best || d < best.d || (d === best.d && !!o.id && !best.o.id))) best = { o, d };
+  }
+  if (best) return { nickname: best.o.nickname, id: best.o.id };
+  const [top] = searchNicks(index, q, 1);
+  return top ?? null;
+}

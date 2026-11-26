@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   FOUL_LIMIT,
   MatchError,
@@ -21,7 +21,9 @@ import {
 } from "@/lib/match/engine";
 import { finishMatch, reopenMatch, saveMatch, setShowRoles } from "@/lib/match/actions";
 import type { SeatInfo } from "@/lib/match/types";
-import { indexNicks } from "@/lib/match/nickSearch";
+import { indexNicks, matchSpokenNick } from "@/lib/match/nickSearch";
+import { parseVoice } from "@/lib/match/voiceCommands";
+import { VoiceInput } from "./VoiceInput";
 import { NickInput } from "./NickInput";
 
 const BASE_ORDER: Role[] = ["civilian", "mafia", "don", "sheriff"];
@@ -67,6 +69,7 @@ export const FUN_STORAGE_KEY = "mcl-fun-sheet";
 
 export function MatchApp(p: MatchAppProps) {
   const t = useTranslations("match");
+  const locale = useLocale();
   const nickIndex = useMemo(() => {
     const taken = new Set(p.nicknames.map((n) => n.nickname.toLowerCase()));
     const guests = (p.knownNames ?? []).filter((n) => !taken.has(n.toLowerCase())).map((nickname) => ({ nickname, id: null }));
@@ -179,6 +182,69 @@ export function MatchApp(p: MatchAppProps) {
   }
   function saveSeats() {
     persist(log, seats);
+  }
+
+  // --- голосовой ввод: состав в нулевую ночь, фолы и выставления днём ---
+  function onVoice(text: string) {
+    if (locked) return;
+    const cmds = parseVoice(text, state.phase === "night0", state.seats);
+    if (!cmds.length) {
+      setNotice(t("voice.unknown", { text }));
+      return;
+    }
+    if (state.phase === "night0") {
+      const next = [...seats];
+      while (next.length < state.seats) next.push({ name: "", profileId: null });
+      const done: string[] = [];
+      for (const c of cmds) {
+        if (c.kind !== "seat") continue;
+        const idx = c.seat !== null ? c.seat - 1 : next.findIndex((x, i) => i < state.seats && !x.name.trim());
+        if (idx < 0 || idx >= state.seats) continue;
+        const hit = matchSpokenNick(nickIndex, c.text);
+        const name = hit?.nickname ?? c.text.replace(/(^|\s)\p{L}/gu, (m) => m.toUpperCase());
+        const profile = p.nicknames.find((n) => n.nickname.toLowerCase() === name.toLowerCase());
+        next[idx] = { name, profileId: profile?.id ?? hit?.id ?? null };
+        done.push(`${idx + 1} — ${name}`);
+      }
+      if (!done.length) {
+        setNotice(t("voice.unknown", { text }));
+        return;
+      }
+      setSeats(next);
+      persist(log, next);
+      setNotice(t("voice.seated", { list: done.join(", ") }));
+      return;
+    }
+    // Все команды одной фразы — одним шагом журнала (одна отмена), каждая проверяется по очереди.
+    const at = stamp();
+    let s = state;
+    const acts: Action[] = [];
+    const done: string[] = [];
+    let failed = 0;
+    for (const c of cmds) {
+      const a: Action | null =
+        c.kind === "foul" ? { t: "foul", seat: c.seat }
+        : c.kind === "unfoul" ? { t: "unfoul", seat: c.seat }
+        : c.kind === "nominate" ? (c.by ? { t: "nominate", seat: c.seat, by: c.by } : { t: "nominate", seat: c.seat })
+        : c.kind === "unnominate" ? { t: "unnominate", seat: c.seat }
+        : null;
+      if (!a) continue;
+      try {
+        s = tryApply(s, a);
+        acts.push({ ...a, at });
+        done.push(t(`voice.did.${c.kind}`, { seat: (a as { seat: number }).seat }));
+      } catch {
+        failed++;
+      }
+    }
+    if (!acts.length) {
+      setNotice(t("voice.cannot", { text }));
+      return;
+    }
+    const next = [...log, ...acts];
+    setLog(next);
+    persist(next);
+    setNotice(t("voice.done", { list: done.join(", ") }) + (failed ? ` ${t("voice.partly")}` : ""));
   }
 
   // --- таймер речи (только на устройстве ведущего) ---
@@ -363,6 +429,13 @@ export function MatchApp(p: MatchAppProps) {
           </div>
         )}
       </div>
+
+      {!locked && state.phase !== "finished" && (
+        <div className="mt-3 rounded border border-white/10 bg-white/[0.03] p-2">
+          <VoiceInput locale={locale} onPhrase={onVoice} />
+          <p className="mt-1 text-xs text-neutral-500">{state.phase === "night0" ? t("voice.hintSeating") : t("voice.hintDay")}</p>
+        </div>
+      )}
 
       {notice && <p role="status" className="mt-3 rounded bg-gold-500/10 px-3 py-2 text-sm text-gold-300">{notice}</p>}
 

@@ -834,7 +834,30 @@
     "roleFor": "Seat {seat}: {role}. Tap to change the role",
     "nickPlaceholder": "Nickname",
     "funHeaderCustom": "Fun game · custom, {n} players",
-    "hintNight0Custom": "Type nicknames into the table rows. Tap the role to cycle through roles. When all the labels below are green — “Start day”."
+    "hintNight0Custom": "Type nicknames into the table rows. Tap the role to cycle through roles. When all the labels below are green — “Start day”.",
+    "voice": {
+      "start": "Voice",
+      "stop": "Stop",
+      "lang": "Recognition language",
+      "listening": "Listening…",
+      "unsupported": "Voice input works in Chrome, Edge and Safari.",
+      "denied": "No microphone access — allow it in your browser settings.",
+      "failed": "Couldn't start the microphone. Try again.",
+      "unknown": "Didn't get “{text}”. Say a seat number and a command.",
+      "cannot": "“{text}” — not possible right now.",
+      "seated": "Voice: {list}",
+      "done": "Voice: {list}",
+      "partly": "Part of the command didn't fit — check the table.",
+      "did": {
+        "foul": "foul #{seat}",
+        "unfoul": "foul removed #{seat}",
+        "nominate": "nominated #{seat}",
+        "unnominate": "nomination removed #{seat}",
+        "seat": "seat {seat}"
+      },
+      "hintSeating": "Say the lineup: “first Trevery, second Harmony…”. A nick without a number goes to the first free seat.",
+      "hintDay": "Say: “foul five”, “remove foul five”, “nominate three”, “three nominates seven”."
+    }
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",
