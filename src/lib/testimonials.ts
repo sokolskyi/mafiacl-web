@@ -14,6 +14,8 @@ export type Testimonial = {
   eventType: EventType | null;
   eventDate: string | null;
   body: string;
+  /** Ведущий, который вёл игру (если автор выбрал). */
+  hostNick: string | null;
 };
 
 /** Показанные отзывы клуба (кеш; сбрасывается при правках в админке). kind — только о корпоративах или все. */
@@ -25,7 +27,7 @@ export async function getTestimonials(clubSlug: string, kind: "corporate" | "all
   const db = createPublicClient();
   let q = db
     .from("testimonials")
-    .select("id, author, photo_url, company, event_type, event_date, body, sort, clubs!inner ( slug )")
+    .select("id, author, photo_url, company, event_type, event_date, body, sort, hosts ( nickname ), clubs!inner ( slug )")
     .eq("clubs.slug", clubSlug)
     .eq("active", true);
   if (kind === "corporate") q = q.eq("kind", "corporate");
@@ -39,5 +41,6 @@ export async function getTestimonials(clubSlug: string, kind: "corporate" | "all
     eventType: (r.event_type ?? null) as EventType | null,
     eventDate: r.event_date,
     body: r.body,
+    hostNick: (r.hosts as unknown as { nickname: string } | null)?.nickname ?? null,
   }));
 }

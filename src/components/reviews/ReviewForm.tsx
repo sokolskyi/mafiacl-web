@@ -27,7 +27,7 @@ async function shrink(file: File): Promise<Blob | null> {
   }
 }
 
-export function ReviewForm({ locale }: { locale: string }) {
+export function ReviewForm({ locale, hosts }: { locale: string; hosts: { id: number; nickname: string }[] }) {
   const t = useTranslations("testimonials.form");
   const [state, action, pending] = useActionState<TestimonialState, FormData>(submitTestimonial, {});
   const [photo, setPhoto] = useState<{ blob: Blob; url: string } | null>(null);
@@ -97,6 +97,18 @@ export function ReviewForm({ locale }: { locale: string }) {
         {t("company")}
         <input name="company" maxLength={120} autoComplete="organization" className={field} />
       </label>
+
+      {hosts.length > 0 && (
+        <label className="text-sm font-semibold sm:col-span-2">
+          {t("host")}
+          <select name="host" defaultValue="" className={`${field} sm:max-w-sm`}>
+            <option value="">{t("hostNone")}</option>
+            {hosts.map((h) => (
+              <option key={h.id} value={h.id}>{h.nickname}</option>
+            ))}
+          </select>
+        </label>
+      )}
 
       <label className="text-sm font-semibold sm:col-span-2">
         {t("body")} *

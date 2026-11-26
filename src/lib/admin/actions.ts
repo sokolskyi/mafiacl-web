@@ -675,10 +675,11 @@ export async function saveTestimonial(formData: FormData) {
   const photo = photoRaw ? (LOCAL_IMG.test(photoRaw) ? photoRaw : safeHttps(photoRaw)) : null;
   const sort = int(formData.get("sort"), 0, 100000) ?? 100;
   const active = formData.get("active") === "on";
+  const host_id = int(formData.get("hostId"), 1, Number.MAX_SAFE_INTEGER) ?? null;
   if (!clubId || !author || !body || (photoRaw && !photo)) redirect(`${back}?error=invalid#testimonials`);
 
   const supabase = await createClient();
-  const row = { author, body, company, event_type, event_date, photo_url: photo, sort, active };
+  const row = { author, body, company, event_type, event_date, photo_url: photo, sort, active, host_id };
   const { error } = id
     ? await supabase.from("testimonials").update(row).eq("id", id)
     : await supabase.from("testimonials").insert({ ...row, club_id: clubId });

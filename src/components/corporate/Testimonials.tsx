@@ -5,11 +5,17 @@ import type { Testimonial } from "@/lib/testimonials";
 /** Отзывы: фото и имя, повод и компания (если есть), сам отзыв. */
 export async function Testimonials({ items, locale }: { items: Testimonial[]; locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "corporate" });
+  const tt = await getTranslations({ locale, namespace: "testimonials" });
   const month = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric", timeZone: "UTC" });
   return (
     <ul className="mt-8 grid gap-5 md:grid-cols-2">
       {items.map((r) => {
-        const meta = [r.eventType ? t(`formats.${r.eventType}.title`) : null, r.company, r.eventDate ? month.format(new Date(r.eventDate)) : null].filter(Boolean);
+        const meta = [
+          r.eventType ? t(`formats.${r.eventType}.title`) : null,
+          r.company,
+          r.eventDate ? month.format(new Date(r.eventDate)) : null,
+          r.hostNick ? tt("hostWas", { host: r.hostNick }) : null,
+        ].filter(Boolean);
         return (
           <li key={r.id}>
             <figure className="flex h-full flex-col rounded-lg border border-white/15 bg-neutral-950/60 p-6">

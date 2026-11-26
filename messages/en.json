@@ -442,7 +442,8 @@
       "promoBody": "Terms",
       "promoUntil": "Valid until (optional)",
       "promoActive": "Show on the site",
-      "partnerInstagram": "Instagram"
+      "partnerInstagram": "Instagram",
+      "reviewHost": "Host"
     },
     "status": {
       "draft": "Draft",
@@ -2658,7 +2659,10 @@
         "photo": "Couldn't upload the photo. Choose another one — JPG or PNG.",
         "tooMany": "Too many reviews in a row. Try again tomorrow.",
         "save": "Couldn't send your review. Try again in a minute."
-      }
-    }
+      },
+      "host": "Who hosted your game",
+      "hostNone": "Don't remember / doesn't matter"
+    },
+    "hostWas": "host — {host}"
   }
 }

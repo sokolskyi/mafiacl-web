@@ -539,6 +539,12 @@ export async function AdminHome({
                     {(["teambuilding", "party", "birthday", "friends", "hens", "turnkey", "office", "club", "other"] as const).map((f) => <option key={f} value={f}>{t(`formats.${f}`)}</option>)}
                   </select>
                 </label>
+                <label className="text-sm">{t("fields.reviewHost")}
+                  <select name="hostId" defaultValue={r?.host_id ?? ""} className={`mt-1 w-full ${input}`}>
+                    <option value="">—</option>
+                    {hosts.map((h) => <option key={h.id} value={h.id}>{h.nickname}</option>)}
+                  </select>
+                </label>
                 <label className="text-sm">{t("fields.reviewDate")}
                   <input name="eventDate" type="month" defaultValue={r?.event_date?.slice(0, 7) ?? ""} className={`mt-1 w-full ${input}`} />
                 </label>
@@ -684,7 +690,9 @@ export async function AdminHome({
                       <details key={r.id} className="rounded border border-white/10">
                         <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3">
                           <span className="font-semibold">{r.author}</span>
-                          <span className="flex-1 truncate text-sm text-neutral-400">{r.company ?? (r.event_type ? t(`formats.${r.event_type}`) : "")}</span>
+                          <span className="flex-1 truncate text-sm text-neutral-400">
+                            {[r.company ?? (r.event_type ? t(`formats.${r.event_type}`) : ""), hosts.find((h) => h.id === r.host_id)?.nickname].filter(Boolean).join(" · ")}
+                          </span>
                           {r.source === "site" && <span className="rounded bg-red-600/20 px-2 py-0.5 text-xs text-red-200">{t("fromSite")}</span>}
                           {!r.active && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-neutral-400">{t("hiddenItem")}</span>}
                         </summary>

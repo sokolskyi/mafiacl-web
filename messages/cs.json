@@ -442,7 +442,8 @@
       "promoBody": "Podmínky",
       "promoUntil": "Platí do (nepovinné)",
       "promoActive": "Zobrazit na webu",
-      "partnerInstagram": "Instagram"
+      "partnerInstagram": "Instagram",
+      "reviewHost": "Moderátor"
     },
     "status": {
       "draft": "Koncept",
@@ -2658,7 +2659,10 @@
         "photo": "Fotku se nepodařilo nahrát. Vyberte jinou — JPG nebo PNG.",
         "tooMany": "Příliš mnoho recenzí za sebou. Zkuste to zítra.",
         "save": "Recenzi se nepodařilo odeslat. Zkuste to znovu za minutu."
-      }
-    }
+      },
+      "host": "Kdo hru moderoval",
+      "hostNone": "Nevzpomínám si / nezáleží"
+    },
+    "hostWas": "moderátor — {host}"
   }
 }

@@ -286,7 +286,7 @@ export async function getClubTestimonials(clubId: number) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("testimonials")
-    .select("id, author, photo_url, company, event_type, event_date, body, active, sort, source, created_at")
+    .select("id, author, photo_url, company, event_type, event_date, body, active, sort, source, created_at, host_id")
     .eq("club_id", clubId)
     .order("sort")
     .order("id", { ascending: false });

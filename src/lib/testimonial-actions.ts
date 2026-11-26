@@ -28,6 +28,8 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
   if (!author || body.length < 10) return { error: "invalid" };
   if (formData.get("consent") !== "on") return { error: "consent" };
   const siteLocale = String(formData.get("locale") ?? "").slice(0, 5) || null;
+  const hostRaw = Number(formData.get("host"));
+  const hostId = Number.isInteger(hostRaw) && hostRaw > 0 ? hostRaw : null;
 
   const h = await headers();
   const ip = (h.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
@@ -66,6 +68,12 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
 
   const { data: club } = await db.from("clubs").select("id").eq("slug", MAIN_CLUB_SLUG).maybeSingle();
   if (!club) return { error: "save" };
+  // Ведущий — только действующий ведущий этого клуба, иначе не сохраняем выбор.
+  let host: { id: number; nickname: string } | null = null;
+  if (hostId) {
+    const { data } = await db.from("hosts").select("id, nickname").eq("id", hostId).eq("club_id", club.id).eq("active", true).maybeSingle();
+    host = data ?? null;
+  }
   const { data: row, error } = await db
     .from("testimonials")
     .insert({
@@ -79,6 +87,7 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
       source: "site",
       site_locale: siteLocale,
       ip_hash: ipHash,
+      host_id: host?.id ?? null,
     })
     .select("id")
     .single();
@@ -89,7 +98,7 @@ export async function submitTestimonial(_prev: TestimonialState, formData: FormD
 
   await notifyStaff(club.id, [
     `💬 <b>Новый отзыв №${row.id}</b> — ждёт проверки в админке`,
-    `${escapeHtml(author)}${company ? ` · ${escapeHtml(company)}` : ""}${photoUrl ? " · 📷" : ""}`,
+    `${escapeHtml(author)}${company ? ` · ${escapeHtml(company)}` : ""}${host ? ` · ведущий ${escapeHtml(host.nickname)}` : ""}${photoUrl ? " · 📷" : ""}`,
     escapeHtml(body.slice(0, 600)),
   ]);
   return { ok: true };
