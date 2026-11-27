@@ -718,7 +718,8 @@
       "lineup": "Roles don't add up: 6 civilians, a sheriff, 2 mafia and a don are needed.",
       "twice": "Already recorded this night.",
       "noBestMove": "Only the first player killed at night has a best move.",
-      "lineupCustom": "Roles don't match the game setup — check the labels below."
+      "lineupCustom": "Roles don't match the game setup — check the labels below.",
+      "casper": "Casper can't be nominated, voted out or given a foul — and his role is always civilian."
     },
     "hintNight0": "Type nicknames into the table rows. Tap the role to change it: civilian → mafia → don → sheriff. Then “Start day”.",
     "hintDay": "Tap a player to nominate (or un-nominate). “!” is a foul; the fourth one removes the player.",
@@ -866,7 +867,13 @@
       },
       "hintSeating": "Say the lineup: “first Trevery, second Harmony…”. A nick without a number goes to the first free seat.",
       "hintDay": "Say: “foul five”, “remove foul five”, “nominate three”, “three nominates seven”."
-    }
+    },
+    "casperName": "Casper",
+    "casperRole": "civilian, silent",
+    "funHeaderCasper": "Fun game · 9 players and Casper",
+    "hintNight0Casper": "Enter 9 players' nicknames and assign roles by tapping. Seat {seat} is Casper: a civilian who doesn't speak, votes for the last nominee and dies on the first night. Then “Start day”.",
+    "hintCasperDay": "Casper (seat {seat}) is silent; he can't be nominated or voted out.",
+    "casperVotes": "Casper (seat {seat}) votes for the last nominee — {target}."
   },
   "player": {
     "metaTitle": "{nick} — mafia club player",
@@ -2681,7 +2688,8 @@
       "noBlack": "Add at least one black role: mafia, don or a custom mafia role.",
       "tooManyBlack": "Black roles aren't outnumbered by red ones, so the mafia would win at once. Remove a black role or add players.",
       "bad": "This lineup doesn't work. Check the numbers."
-    }
+    },
+    "casperGame": "9 players with Casper"
   },
   "testimonials": {
     "leaveLink": "Leave a review",

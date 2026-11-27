@@ -112,7 +112,7 @@ export function MatchApp(p: MatchAppProps) {
   const locked = status !== "live";
   // До начала дня в строках стола вписываются ники и выбираются роли.
   const seating = state.phase === "night0" && !locked;
-  const nameOf = (seat: number) => seats[seat - 1]?.name || `#${seat}`;
+  const nameOf = (seat: number) => (seat === state.casper ? t("casperName") : seats[seat - 1]?.name || `#${seat}`);
 
   // --- сохранение: по очереди, с защитой от записи с двух устройств ---
   function persist(nextLog: Action[], nextSeats?: SeatInfo[]) {
@@ -309,14 +309,24 @@ export function MatchApp(p: MatchAppProps) {
   // --- голосование ---
   const nominees = state.nominations;
   const activeTarget = cur.target !== null && nominees.includes(cur.target) ? cur.target : nominees[0] ?? null;
-  const votedFor = (voter: number) => Number(Object.entries(cur.voters).find(([, l]) => l.includes(voter))?.[0] ?? 0);
-  const tally = nominees.map((s) => ({ seat: s, votes: cur.voters[s]?.length ?? 0 }));
+  // Каспер (пока жив) голосует за последнего выставленного — его голос уже стоит в бюллетене.
+  const casperVoting = state.casper !== null && !state.out[state.casper] && nominees.length > 0 ? state.casper : null;
+  const ballotVoters: Record<number, number[]> = casperVoting
+    ? (() => {
+        const last = nominees[nominees.length - 1];
+        const v = Object.fromEntries(Object.entries(cur.voters).map(([k, l]) => [k, l.filter((x) => x !== casperVoting)]));
+        v[last] = [...(v[last] ?? []), casperVoting].sort((a, b) => a - b);
+        return v;
+      })()
+    : cur.voters;
+  const votedFor = (voter: number) => Number(Object.entries(ballotVoters).find(([, l]) => l.includes(voter))?.[0] ?? 0);
+  const tally = nominees.map((s) => ({ seat: s, votes: ballotVoters[s]?.length ?? 0 }));
   const maxVotes = Math.max(0, ...tally.map((x) => x.votes));
   const leaders = tally.filter((x) => x.votes === maxVotes && maxVotes > 0).map((x) => x.seat);
   const unassigned = alive(state).filter((v) => !votedFor(v));
 
   function toggleVoter(voter: number) {
-    if (activeTarget === null) return;
+    if (activeTarget === null || voter === state.casper) return;
     const owner = votedFor(voter);
     if (owner && owner !== activeTarget) return; // уже проголосовал за другого
     const list = cur.voters[activeTarget] ?? [];
@@ -332,11 +342,11 @@ export function MatchApp(p: MatchAppProps) {
 
   /** Записать голосование (если отмечали руки) и, если нужно, выбывших. */
   function commitVote(seatsOut: number[], keepOnly?: number[]) {
-    const hasVotes = Object.values(cur.voters).some((l) => l.length);
+    const hasVotes = Object.values(cur.voters).some((l) => l.length) || casperVoting !== null;
     const steps: Action[] = [];
     const at = stamp();
     if (hasVotes) {
-      const voters = Object.fromEntries(nominees.map((s) => [String(s), cur.voters[s] ?? []]));
+      const voters = Object.fromEntries(nominees.map((s) => [String(s), ballotVoters[s] ?? []]));
       const counts = Object.fromEntries(nominees.map((s) => [String(s), voters[String(s)].length]));
       steps.push({ t: "vote", counts, voters, at });
     }
@@ -408,7 +418,7 @@ export function MatchApp(p: MatchAppProps) {
           <a href={p.backHref} className="text-sm text-neutral-400 hover:text-white">←</a>
           <div className="flex-1">
             <p className="text-xs text-neutral-400">
-              {p.fun ? (state.customGame ? t("funHeaderCustom", { n: state.seats }) : t("funHeader")) : t("header", { number: p.number, table: p.tableNo })}
+              {p.fun ? (state.casper ? t("funHeaderCasper") : state.customGame ? t("funHeaderCustom", { n: state.seats }) : t("funHeader")) : t("header", { number: p.number, table: p.tableNo })}
             </p>
             <p className="text-lg font-black">{phaseLabel}</p>
           </div>
@@ -441,7 +451,8 @@ export function MatchApp(p: MatchAppProps) {
 
       {/* Подсказки по фазе */}
       <p className="mt-3 text-sm text-neutral-400">
-        {state.phase === "night0" && (state.customGame ? t("hintNight0Custom") : t("hintNight0"))}
+        {state.phase === "night0" && (state.casper ? t("hintNight0Casper", { seat: state.casper }) : state.customGame ? t("hintNight0Custom") : t("hintNight0"))}
+        {state.phase === "day" && state.casper && !state.out[state.casper] && <>{t("hintCasperDay", { seat: state.casper })} </>}
         {state.phase === "day" && t("hintDay")}
         {state.phase === "night" && t(`hint.${nightMode}`)}
       </p>
@@ -457,7 +468,13 @@ export function MatchApp(p: MatchAppProps) {
           return (
             <li key={seat} className={`flex items-center gap-2 px-2 py-2 ${out ? "opacity-40" : ""} ${nominated ? "bg-red-600/15" : ""} ${picked ? "bg-sky-500/15" : ""}`}>
               <span className="w-6 text-right font-mono text-sm text-neutral-400">{seat}</span>
-              {seating ? (
+              {seating && seat === state.casper ? (
+                <span className="flex min-h-11 flex-1 items-center gap-2 text-sm">
+                  <span className="w-5 text-center text-lg" aria-hidden="true">👻</span>
+                  <span className="font-semibold">{t("casperName")}</span>
+                  <span className="text-xs text-neutral-400">{t("casperRole")}</span>
+                </span>
+              ) : seating ? (
                 <>
                   {/* Нулевая ночь: роль — кнопкой, ник — прямо в строке. */}
                   <button
@@ -485,7 +502,7 @@ export function MatchApp(p: MatchAppProps) {
               <button
                 onClick={() => seatTap(seat)}
                 aria-label={`${seat}. ${nameOf(seat)}`}
-                disabled={locked || (state.phase !== "night0" && !!out && !(state.phase === "night" && nightMode !== "shot"))}
+                disabled={locked || (state.phase === "day" && seat === state.casper) || (state.phase !== "night0" && !!out && !(state.phase === "night" && nightMode !== "shot"))}
                 className="flex min-h-11 flex-1 items-center gap-2 text-left"
               >
                 <span className={`w-5 text-center text-lg ${roleClass(role)}`} title={roleName(role)}>{roleIcon(role)}</span>
@@ -497,7 +514,7 @@ export function MatchApp(p: MatchAppProps) {
                 )}
               </button>
               )}
-              {state.phase !== "night0" && state.phase !== "finished" && (
+              {state.phase !== "night0" && state.phase !== "finished" && seat !== state.casper && (
                 <div className="flex items-center gap-1">
                   <button onClick={() => dispatch({ t: "unfoul", seat })} disabled={locked || fouls === 0} className="h-9 w-8 rounded bg-white/5 text-sm disabled:opacity-30" aria-label={t("unfoul", { seat })}>−</button>
                   <span className={`w-6 text-center font-mono text-sm ${fouls >= FOUL_LIMIT - 1 ? "text-red-400" : ""}`} aria-label={t("fouls", { n: fouls })}>{fouls}</span>
@@ -556,7 +573,7 @@ export function MatchApp(p: MatchAppProps) {
                         <button
                           key={v}
                           onClick={() => toggleVoter(v)}
-                          disabled={!!owner && !mine}
+                          disabled={(!!owner && !mine) || v === state.casper}
                           aria-pressed={mine}
                           aria-label={owner && !mine ? t("votedForOther", { voter: v, seat: owner }) : t("voterSeat", { voter: v })}
                           className={`h-11 rounded font-mono text-lg font-bold ${mine ? "bg-red-600" : owner ? "bg-white/5 text-neutral-600" : "bg-white/10 hover:bg-white/20"}`}
@@ -568,6 +585,9 @@ export function MatchApp(p: MatchAppProps) {
                     })}
                   </div>
                   <p className="mt-2 text-xs text-neutral-500">{t("notVoted", { n: unassigned.length })}</p>
+                  {casperVoting !== null && (
+                    <p className="mt-1 text-xs text-neutral-400">👻 {t("casperVotes", { seat: casperVoting, target: nominees[nominees.length - 1] })}</p>
+                  )}
                   {unassigned.length > 0 && nominees.length > 1 && (
                     <button className={`${btnSoft} mt-2`} onClick={restToLast}>
                       {t("restToLast", { seat: nominees[nominees.length - 1] })}
@@ -586,7 +606,7 @@ export function MatchApp(p: MatchAppProps) {
                     <button className={btnMain} onClick={() => commitVote(leaders)}>{t("outAll", { seats: leaders.join(", ") })}</button>
                   </>
                 )}
-                <button className={btnSoft} onClick={() => commitVote([])} disabled={!Object.values(cur.voters).some((l) => l.length)}>
+                <button className={btnSoft} onClick={() => commitVote([])} disabled={!Object.values(ballotVoters).some((l) => l.length)}>
                   {t("nobodyOut")}
                 </button>
               </div>

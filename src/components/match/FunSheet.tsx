@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { FUN_STORAGE_KEY, MatchApp } from "./MatchApp";
 import { CustomSetup, DEFAULT_DRAFT, type SetupDraft } from "./CustomSetup";
-import { normalizeSetup, type Action, type Setup } from "@/lib/match/engine";
+import { CASPER_SETUP, normalizeSetup, type Action, type Setup } from "@/lib/match/engine";
 import type { SeatInfo } from "@/lib/match/types";
 
 type Saved = { log: Action[]; seats: SeatInfo[]; setup: Setup | null };
@@ -61,6 +61,15 @@ export function FunSheet({ nicknames, knownNames, backHref }: { nicknames: { id:
   return (
     <>
       <div className="mx-auto mb-4 flex max-w-xl flex-wrap justify-end gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            if (startNew(CASPER_SETUP)) setDraft(null);
+          }}
+          className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold hover:bg-white/10"
+        >
+          {t("casperGame")}
+        </button>
         <button
           type="button"
           onClick={() => setDraft(loadDraft())}

@@ -14,7 +14,15 @@ export type Setup = {
   seats: number;
   lineup: Partial<Record<Role, number>>;
   custom: { id: CustomRoleId; name: string }[];
+  /**
+   * «На 9 игроков с Каспером»: последнее место — Каспер (мирный). Он не говорит, голосует за последнего
+   * выставленного и умирает в первую ночь; выставить, заголосовать или дать ему фол нельзя.
+   */
+  casper?: boolean;
 };
+
+/** Режим «На 9 игроков с Каспером»: 10 мест, классический состав, Каспер — 10-й, мирный. */
+export const CASPER_SETUP: Setup = { seats: 10, lineup: { mafia: 2, don: 1, sheriff: 1 }, custom: [], casper: true };
 export const SETUP_SEATS = { min: 4, max: 20 } as const;
 export type Result = "civilians" | "mafia" | "draw";
 export type OutReason = "killed" | "voted" | "removed";
@@ -50,6 +58,8 @@ export type MatchState = {
   custom: Partial<Record<CustomRoleId, string>>;
   /** Своя игра (не классика 10 игроков). */
   customGame: boolean;
+  /** Место Каспера (режим «9 игроков с Каспером»), иначе null. */
+  casper: number | null;
   phase: Phase;
   round: number; // 0 — нулевой день/ночь
   roles: Record<number, Role>;
@@ -80,7 +90,7 @@ export const isCustomRole = (r: Role): r is CustomRoleId => r.startsWith("c") &&
 export const LINEUP: Record<BaseRole, number> = { civilian: 6, sheriff: 1, mafia: 2, don: 1 };
 
 /** Состав своей игры, проверенный и с мирными «на остаток»; null — состав не годится. */
-export function normalizeSetup(setup: Setup): { seats: number; lineup: Partial<Record<Role, number>>; custom: Partial<Record<CustomRoleId, string>> } | null {
+export function normalizeSetup(setup: Setup): { seats: number; lineup: Partial<Record<Role, number>>; custom: Partial<Record<CustomRoleId, string>>; casper: number | null } | null {
   const seats = Math.trunc(setup.seats);
   if (!(seats >= SETUP_SEATS.min && seats <= SETUP_SEATS.max)) return null;
   const custom: Partial<Record<CustomRoleId, string>> = {};
@@ -102,19 +112,23 @@ export function normalizeSetup(setup: Setup): { seats: number; lineup: Partial<R
   const black = (Object.keys(lineup) as Role[]).filter(isBlack).reduce((a, r) => a + (lineup[r] ?? 0), 0);
   if (black === 0 || black >= seats - black) return null;
   if (seats > taken) lineup.civilian = seats - taken;
-  return { seats, lineup, custom };
+  // Каспер — один из мирных, на последнем месте.
+  if (setup.casper && !(lineup.civilian && lineup.civilian >= 1)) return null;
+  return { seats, lineup, custom, casper: setup.casper ? seats : null };
 }
 
 export function initialState(setup?: Setup | null): MatchState {
   const custom = setup ? normalizeSetup(setup) : null;
+  const casper = custom?.casper ?? null;
   return {
     seats: custom?.seats ?? 10,
     lineup: custom?.lineup ?? LINEUP,
     custom: custom?.custom ?? {},
-    customGame: !!custom,
+    customGame: !!custom && !casper,
+    casper,
     phase: "night0",
     round: 0,
-    roles: {},
+    roles: casper ? { [casper]: "civilian" } : {},
     fouls: {},
     out: {},
     nominations: [],
@@ -160,6 +174,7 @@ function apply(s: MatchState, a: Action): MatchState {
   switch (a.t) {
     case "role": {
       if (s.phase !== "night0") throw new MatchError("phase");
+      if (a.seat === s.casper) throw new MatchError("casper");
       if (!seatOk(s, a.seat) || !s.lineup[a.role]) throw new MatchError("bad");
       n.roles[a.seat] = a.role;
       return n;
@@ -182,6 +197,7 @@ function apply(s: MatchState, a: Action): MatchState {
       return n;
     }
     case "foul": {
+      if (a.seat === s.casper) throw new MatchError("casper");
       if (!seatOk(s, a.seat) || s.out[a.seat]) throw new MatchError("bad");
       n.fouls[a.seat] = (s.fouls[a.seat] ?? 0) + 1;
       if (n.fouls[a.seat] >= FOUL_LIMIT) {
@@ -198,6 +214,7 @@ function apply(s: MatchState, a: Action): MatchState {
     }
     case "nominate": {
       if (s.phase !== "day") throw new MatchError("phase");
+      if (a.seat === s.casper || (a.by !== undefined && a.by === s.casper)) throw new MatchError("casper");
       if (!seatOk(s, a.seat) || s.out[a.seat] || s.nominations.includes(a.seat)) throw new MatchError("bad");
       n.nominations.push(a.seat);
       return n;
@@ -218,8 +235,14 @@ function apply(s: MatchState, a: Action): MatchState {
             seen.add(v);
           }
         }
-        const counts = Object.fromEntries(Object.entries(a.voters).map(([k, v]) => [k, v.length]));
-        n.votes.push({ round: s.round, counts, voters: a.voters });
+        // Каспер всегда голосует за последнего выставленного — его голос ставит сам бланк.
+        const voters = Object.fromEntries(Object.entries(a.voters).map(([k, v]) => [k, v.filter((x) => x !== s.casper)]));
+        const last = s.nominations[s.nominations.length - 1];
+        if (s.casper && !s.out[s.casper] && last !== undefined) {
+          voters[String(last)] = [...(voters[String(last)] ?? []), s.casper].sort((x, y) => x - y);
+        }
+        const counts = Object.fromEntries(Object.entries(voters).map(([k, v]) => [k, v.length]));
+        n.votes.push({ round: s.round, counts, voters });
       } else {
         n.votes.push({ round: s.round, counts: a.counts });
       }
@@ -228,6 +251,7 @@ function apply(s: MatchState, a: Action): MatchState {
     case "eliminate": {
       if (!a.seats.length || a.seats.some((x) => !seatOk(s, x) || s.out[x])) throw new MatchError("bad");
       if (a.reason === "voted" && s.phase !== "day") throw new MatchError("phase");
+      if (s.casper !== null && a.seats.includes(s.casper)) throw new MatchError("casper");
       for (const x of a.seats) n.out[x] = { reason: a.reason, round: s.round };
       n.nominations = n.nominations.filter((x) => !a.seats.includes(x));
       return n;
@@ -237,6 +261,11 @@ function apply(s: MatchState, a: Action): MatchState {
       n.phase = "night";
       n.round = s.round + 1;
       n.nominations = [];
+      // Каспер умирает в первую ночь: это и есть выстрел мафии. Лучшего хода у него нет — он не говорит.
+      if (n.round === 1 && s.casper !== null && !s.out[s.casper]) {
+        n.shots.push({ round: 1, seat: s.casper });
+        n.out[s.casper] = { reason: "killed", round: 1 };
+      }
       return n;
     }
     case "shot": {

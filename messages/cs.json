@@ -718,7 +718,8 @@
       "lineup": "Role nesedí: potřeba 6 civilistů, šerif, 2 mafie a don.",
       "twice": "Tuto noc už zapsáno.",
       "noBestMove": "Nejlepší tah má jen první zabitý v noci.",
-      "lineupCustom": "Role nesedí s nastavením hry — porovnejte se štítky dole."
+      "lineupCustom": "Role nesedí s nastavením hry — porovnejte se štítky dole.",
+      "casper": "Kaspera nelze nominovat, vyhlasovat ani mu dát faul — a jeho role je vždy civilista."
     },
     "hintNight0": "Vepište přezdívky do řádků stolu. Roli změníte klepnutím: civilista → mafie → don → šerif. Pak „Začít den“.",
     "hintDay": "Klepnutím hráče nominujete (nebo zrušíte). „!“ — faul, při čtvrtém vyloučení.",
@@ -866,7 +867,13 @@
       },
       "hintSeating": "Řekněte sestavu: „první Trevery, druhá Harmonie…“. Přezdívka bez čísla půjde na první volné místo.",
       "hintDay": "Řekněte: „faul pět“, „zrušit faul pět“, „nominuji tři“, „tři nominuje sedm“."
-    }
+    },
+    "casperName": "Kasper",
+    "casperRole": "civilista, mlčí",
+    "funHeaderCasper": "Fun hra · 9 hráčů a Kasper",
+    "hintNight0Casper": "Zapište přezdívky 9 hráčů a rozdejte role klepnutím. Místo {seat} je Kasper: civilista, nemluví, hlasuje pro posledního nominovaného a zemře první noc. Pak „Začít den“.",
+    "hintCasperDay": "Kasper (místo {seat}) mlčí; nominovat ho ani vyhlasovat nelze.",
+    "casperVotes": "Kasper (místo {seat}) hlasuje pro posledního nominovaného — {target}."
   },
   "player": {
     "metaTitle": "{nick} — hráč mafiánského klubu",
@@ -2681,7 +2688,8 @@
       "noBlack": "Je potřeba aspoň jedna černá role: mafie, don nebo vlastní role za mafii.",
       "tooManyBlack": "Černých není méně než červených — mafie by vyhrála hned. Odeberte černou roli nebo přidejte hráče.",
       "bad": "Složení nesedí. Zkontrolujte čísla."
-    }
+    },
+    "casperGame": "Na 9 hráčů s Kasperem"
   },
   "testimonials": {
     "leaveLink": "Napsat recenzi",
