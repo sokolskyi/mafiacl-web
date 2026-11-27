@@ -7,8 +7,8 @@ import { ALIASES_TAG, getAliases, canonicalizer } from "@/lib/aliases";
 import { selectAll } from "@/lib/supabase/selectAll";
 import { MAFGAME_TAG } from "@/lib/mafgame/queries";
 
-/** Так клуб MafiaCL называется на mafgame (у игроков в итогах турниров). */
-const MAFGAME_CLUB_NAME = 'Mafia club "Champions League" Prague';
+/** Так клуб MafiaCL называется на mafgame (у игроков в итогах турниров): сейчас и до переименования в ноябре 2026. */
+const MAFGAME_CLUB_NAMES = ["MafiaCL Prague", 'Mafia club "Champions League" Prague'];
 
 
 /**
@@ -27,7 +27,7 @@ export async function getKnownPlayers(): Promise<Record<string, string>> {
     selectAll<{ nickname: string }>((a, b) => db.from("rating_archive_rows").select("nickname").order("id").range(a, b)),
     selectAll<{ places: unknown }>((a, b) => db.from("hall_of_fame").select("places").order("id").range(a, b)),
     selectAll<{ nickname: string }>((a, b) =>
-      db.from("mafgame_results").select("nickname").eq("club", MAFGAME_CLUB_NAME).order("tournament_id").order("user_id").range(a, b),
+      db.from("mafgame_results").select("nickname").in("club", MAFGAME_CLUB_NAMES).order("tournament_id").order("user_id").range(a, b),
     ),
   ]);
   const canon = canonicalizer(aliases);

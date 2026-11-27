@@ -21,9 +21,9 @@ export const CLUB_SOCIAL: SocialLink[] = [
 
 /** Страницы клуба на сайтах федераций и рейтинговых платформ. */
 export const CLUB_FEDERATIONS: SocialLink[] = [
-  { kind: "web", label: "Mafgame — Mafia club \"Champions League\" Prague", href: "https://mafgame.org/clubs/4/view" },
-  { kind: "web", label: "IMAFIA — Mafia CL Prague", href: "https://imafia.org/club/50" },
-  { kind: "web", label: "Emotion Games — MafiaCL Prague", href: "https://emotion.games/ua/clubs/59" },
+  { kind: "web", label: "Mafgame", href: "https://mafgame.org/clubs/4/view" },
+  { kind: "web", label: "iMafia", href: "https://imafia.org/club/50" },
+  { kind: "web", label: "Emotion Games", href: "https://emotion.games/ua/clubs/59" },
 ];
 
 /** Проекты клуба. */
