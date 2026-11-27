@@ -23,6 +23,7 @@ export const CLUB_SOCIAL: SocialLink[] = [
 export const CLUB_FEDERATIONS: SocialLink[] = [
   { kind: "web", label: "Mafgame — Mafia club \"Champions League\" Prague", href: "https://mafgame.org/clubs/4/view" },
   { kind: "web", label: "IMAFIA — Mafia CL Prague", href: "https://imafia.org/club/50" },
+  { kind: "web", label: "Emotion Games — MafiaCL Prague", href: "https://emotion.games/ua/clubs/59" },
 ];
 
 /** Проекты клуба. */
