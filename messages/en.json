@@ -2420,7 +2420,8 @@
       "streak": "{n} club nights in a row (at least 1 game)",
       "membershipMonth": "One-month pass",
       "membershipQuarter": "Three-month pass",
-      "membershipYear": "One-year pass"
+      "membershipYear": "One-year pass",
+      "podium": "{n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} place at a tournament for MafiaCL (any federation)"
     },
     "earnNote": "Games, best moves, streaks, passes, the welcome gift, the friend bonus, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. Friend bonus: when a newcomer names you in their account (“Who invited you to the club?”) and plays their first game; up to 10 friends a month. Games from club tournaments on mafgame.org are credited once the tournament is closed, matched by nickname or the mafgame profile link in your account (Arenas count via the electronic sheet).",
     "spend": {
@@ -2472,7 +2473,8 @@
       "expire": "Expired (12 months without games)",
       "best_move": "Best move: three black",
       "streak": "Streak of nights",
-      "membership": "Pass"
+      "membership": "Pass",
+      "podium": "Tournament podium"
     },
     "orderTitle": "Pay part of the order with Respect",
     "orderHint": "You can use up to {max} Respect — a {czk} Kč discount. This can be done once; if you cancel the order, the Respect comes back.",
@@ -2763,6 +2765,45 @@
       "self": "You can't name yourself.",
       "not_eligible": "Only new club members can name who invited them.",
       "save": "Couldn't save — try again."
+    }
+  },
+  "podium": {
+    "title": "Podium finishes for MafiaCL",
+    "hint": "1st place at a tournament of any federation — +30 Respect, 2nd — +20, 3rd — +10. Only if you played for MafiaCL: the results must show our club. Mafgame tournaments are credited automatically once the tournament is closed.",
+    "placeN": "{n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} place",
+    "status": {
+      "pending": "under review",
+      "rejected": "not confirmed"
+    },
+    "claimTitle": "Report a podium finish (other federations)",
+    "name": "Tournament name",
+    "federation": "Federation",
+    "date": "Tournament date",
+    "place": "Place",
+    "placeOption": "{n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} place — +{prize}",
+    "url": "Link to results",
+    "urlHint": "A page showing your place and the MafiaCL club.",
+    "send": "Send for review",
+    "notice": {
+      "sent": "Sent — the club administration will check it and credit Respect.",
+      "invalid": "Check the fields: name, date, place and an https:// link.",
+      "date": "This date doesn't count: tournaments from the programme launch only, not in the future.",
+      "too_many": "You already have 5 requests under review — wait for a decision.",
+      "duplicate": "There's already a request for this tournament.",
+      "forbidden": "You can send a request once your account is approved.",
+      "save": "Couldn't send — try again."
+    },
+    "admin": {
+      "title": "Players' podium finishes",
+      "hint": "Open the results and check the place and the MafiaCL club. Once confirmed, the player gets Respect: 30 / 20 / 10.",
+      "empty": "No new requests.",
+      "place": "{n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} place",
+      "open": "Open results",
+      "approve": "Confirm",
+      "reject": "Reject",
+      "approved": "Confirmed — Respect credited.",
+      "rejected": "Request rejected.",
+      "error": "Couldn't save the decision."
     }
   }
 }

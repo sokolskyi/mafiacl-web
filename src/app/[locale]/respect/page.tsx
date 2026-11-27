@@ -31,6 +31,7 @@ export default async function Page({ params, searchParams }: Props) {
     [t("earn.final"), RESPECT_EARN.final],
     [t("earn.firstGame"), RESPECT_EARN.firstGame],
     [t("earn.eveningWin"), RESPECT_EARN.eveningWin],
+    ...([1, 2, 3] as const).map((p) => [t("earn.podium", { n: p }), RESPECT_EARN.podium[p]] as [string, number]),
     [t("earn.bestMove3"), RESPECT_EARN.bestMove3],
     [t("earn.streak", { n: 4 }), RESPECT_EARN.streak4],
     [t("earn.streak", { n: 10 }), RESPECT_EARN.streak10],

@@ -2420,7 +2420,8 @@
       "streak": "{n} klubových večerů po sobě (aspoň 1 hra)",
       "membershipMonth": "Permanentka na měsíc",
       "membershipQuarter": "Permanentka na 3 měsíce",
-      "membershipYear": "Permanentka na rok"
+      "membershipYear": "Permanentka na rok",
+      "podium": "{n}. místo na turnaji za MafiaCL (jakákoli federace)"
     },
     "earnNote": "Hry, nejlepší tah, série, permanentka, dárek pro nováčky, bonus za kamaráda, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda — když vás nováček uvede v účtu („Kdo vás pozval do klubu?“) a odehraje první hru; nejvýš 10 kamarádů měsíčně. Hry z turnajů klubu na mafgame.org se připíší po uzavření turnaje: podle přezdívky nebo odkazu na profil mafgame v účtu (Areny podle elektronického listu).",
     "spend": {
@@ -2472,7 +2473,8 @@
       "expire": "Propadlo (12 měsíců bez her)",
       "best_move": "Nejlepší tah: tři černí",
       "streak": "Série večerů",
-      "membership": "Permanentka"
+      "membership": "Permanentka",
+      "podium": "Umístění na turnaji"
     },
     "orderTitle": "Zaplatit část objednávky Respectem",
     "orderHint": "Můžete odečíst až {max} Respect — sleva {czk} Kč. Odečíst lze jednou; při zrušení objednávky se Respect vrátí.",
@@ -2763,6 +2765,45 @@
       "self": "Sebe uvést nelze.",
       "not_eligible": "Kdo vás pozval, mohou vyplnit jen nováčci klubu.",
       "save": "Uložení se nepovedlo — zkuste to znovu."
+    }
+  },
+  "podium": {
+    "title": "Umístění na stupních vítězů za MafiaCL",
+    "hint": "1. místo na turnaji jakékoli federace — +30 Respect, 2. místo — +20, 3. místo — +10. Jen pokud jste hráli za MafiaCL: ve výsledcích musí být uveden náš klub. Turnaje na mafgame se připíší samy po uzavření turnaje.",
+    "placeN": "{n}. místo",
+    "status": {
+      "pending": "ke kontrole",
+      "rejected": "nepotvrzeno"
+    },
+    "claimTitle": "Nahlásit umístění (jiné federace)",
+    "name": "Název turnaje",
+    "federation": "Federace",
+    "date": "Datum turnaje",
+    "place": "Umístění",
+    "placeOption": "{n}. místo — +{prize}",
+    "url": "Odkaz na výsledky",
+    "urlHint": "Stránka, kde je vidět vaše umístění a klub MafiaCL.",
+    "send": "Odeslat ke kontrole",
+    "notice": {
+      "sent": "Odesláno — vedení klubu žádost zkontroluje a připíše Respect.",
+      "invalid": "Zkontrolujte pole: název, datum, umístění a odkaz https://.",
+      "date": "Datum nesedí: počítají se turnaje od spuštění programu a ne z budoucnosti.",
+      "too_many": "Máte už 5 žádostí ke kontrole — počkejte na rozhodnutí.",
+      "duplicate": "Žádost na tento turnaj už existuje.",
+      "forbidden": "Žádost lze poslat po schválení účtu.",
+      "save": "Odeslání se nepovedlo — zkuste to znovu."
+    },
+    "admin": {
+      "title": "Umístění hráčů",
+      "hint": "Otevřete výsledky a zkontrolujte umístění a klub MafiaCL. Po potvrzení hráč dostane Respect: 30 / 20 / 10.",
+      "empty": "Žádné nové žádosti.",
+      "place": "{n}. místo",
+      "open": "Otevřít výsledky",
+      "approve": "Potvrdit",
+      "reject": "Zamítnout",
+      "approved": "Potvrzeno — Respect připsán.",
+      "rejected": "Žádost zamítnuta.",
+      "error": "Rozhodnutí se nepodařilo uložit."
     }
   }
 }

@@ -17,6 +17,7 @@ import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
 import { BirthdayShare } from "./BirthdayShare";
 import { AccountReferral } from "./AccountReferral";
+import { AccountPodiums } from "./AccountPodiums";
 import { AccountBlog } from "./AccountBlog";
 import { parseProfileLinks } from "@/lib/profileLinks";
 import { getMembershipEnding } from "@/lib/membershipReminder";
@@ -27,7 +28,7 @@ import { MyHostReviews } from "./MyHostReviews";
 import { getMyHostReviews } from "@/lib/hostReviews";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
-export async function AccountPanel({ locale, authError, post, referral }: { locale: Locale; authError: boolean; post?: string; referral?: string }) {
+export async function AccountPanel({ locale, authError, post, referral, podium }: { locale: Locale; authError: boolean; post?: string; referral?: string; podium?: string }) {
   const t = await getTranslations({ locale, namespace: "account" });
   if (!isSupabaseConfigured) return <p className="mt-10 text-neutral-400">{t("notConfigured")}</p>;
 
@@ -196,6 +197,7 @@ export async function AccountPanel({ locale, authError, post, referral }: { loca
         <h2 id="mine-title" className="text-xl font-bold">{t("group.mine")}</h2>
         <MyGames locale={locale} userId={userId} />
         {profile?.verification === "approved" && <AccountRespect locale={locale} userId={userId} nick={profile?.nickname ?? null} />}
+        {profile?.verification === "approved" && <AccountPodiums locale={locale} userId={userId} notice={podium} />}
         {hostReviews && <MyHostReviews locale={locale} data={hostReviews} />}
         <MyOrders locale={locale} userId={userId} />
         {profile?.nickname && (

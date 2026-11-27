@@ -16,6 +16,8 @@ export const RESPECT_EARN = {
   /** Серии клубных вечеров подряд в любые дни: 4 подряд и 10 подряд. */
   streak4: 1,
   streak10: 3,
+  /** Призовое место на турнире любой федерации за MafiaCL: 1, 2, 3 место. */
+  podium: { 1: 30, 2: 20, 3: 10 },
   /** Первый вход в кабинет после дня рождения. */
   birthday: 10,
   /** Первая одобренная статья в блог за календарный год. */
@@ -38,7 +40,7 @@ export type ManualReason = keyof typeof RESPECT_MANUAL;
 export const RESPECT_SHARE = { merch: 0.5, membership: 0.3 } as const;
 
 export type RespectReason =
-  | "game" | "first_game" | "milestone" | "evening_win" | "best_move" | "streak" | "membership" | "bonus" | "referral" | "birthday" | "blog" | "review"
+  | "game" | "first_game" | "podium" | "milestone" | "evening_win" | "best_move" | "streak" | "membership" | "bonus" | "referral" | "birthday" | "blog" | "review"
   | "code" | "spend_game" | "spend_shop" | "refund" | "adjust" | "expire";
 
 /** Сколько Respect стоит вечер с такой ценой. */

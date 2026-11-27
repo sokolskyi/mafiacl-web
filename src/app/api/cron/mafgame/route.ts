@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const report = await runImport(db, { ids, scan });
     if (report.saved.length) revalidateTag(MAFGAME_TAG, { expire: 0 });
     if (report.errors.length) console.error("mafgame import errors", report.errors.slice(0, 20));
-    console.info("mafgame import", { scanned: report.scanned, saved: report.saved.length, respect: report.respect });
+    console.info("mafgame import", { scanned: report.scanned, saved: report.saved.length, respect: report.respect, podiums: report.podiums });
     return Response.json(report);
   } catch (e) {
     console.error("mafgame import failed", { message: e instanceof Error ? e.message : String(e) });

@@ -13,6 +13,7 @@ import { MEMBERSHIP_PLANS } from "@/lib/memberships";
 import { isoToLocalInput } from "@/lib/admin/time";
 import { PhotoField } from "./PhotoUpload";
 import { MemberRequests } from "./MemberRequests";
+import { PodiumClaims } from "./PodiumClaims";
 import { AliasesAdmin } from "./AliasesAdmin";
 import { BirthdayRequests } from "./BirthdayRequests";
 import { NicknameRequests } from "./NicknameRequests";
@@ -21,8 +22,8 @@ import { PostsAdmin } from "./PostsAdmin";
 
 /** Читает сессию — только внутри <Suspense>. */
 export async function AdminHome({
-  locale, error, team, bot, membership, member, alias,
-}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: string; member?: string; alias?: string }) {
+  locale, error, team, bot, membership, member, alias, podium,
+}: { locale: Locale; error?: string; team?: boolean; bot?: boolean; membership?: string; member?: string; alias?: string; podium?: string }) {
   await connection(); // админка всегда по запросу: дата, сессия
   const t = await getTranslations({ locale, namespace: "admin" });
   const tg = await getTranslations({ locale, namespace: "games" });
@@ -59,6 +60,7 @@ export async function AdminHome({
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
         <MemberRequests locale={locale} notice={member} />
       )}
+      {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && <PodiumClaims locale={locale} notice={podium} />}
       {ctx.clubs.some((c) => c.roles.includes("owner")) && <NicknameRequests locale={locale} />}
       {ctx.clubs.some((c) => c.roles.includes("owner") || c.roles.includes("admin")) && (
         <FeedbackAdmin locale={locale} clubIds={ctx.clubs.filter((c) => c.roles.includes("owner") || c.roles.includes("admin")).map((c) => c.id)} />
