@@ -240,7 +240,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         <Tile tone="cream" className="col-span-1 min-h-[200px] lg:col-start-11 lg:col-end-13 lg:row-start-2">
           <Link href="/respect" className="flex h-full flex-col gap-1.5 p-5 lg:p-7">
             <TileLabel tone="cream">Respect</TileLabel>
-            <p className="font-hero text-[40px] font-extrabold leading-none lg:text-[54px]">+1</p>
+            <p className="font-hero text-[40px] font-extrabold leading-none lg:text-[54px]">{t("respectBig")}</p>
             <p className="text-sm leading-snug">{t("respectText")}</p>
           </Link>
         </Tile>

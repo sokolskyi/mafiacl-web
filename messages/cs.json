@@ -1032,7 +1032,7 @@
     "leaderEmpty": "Sezóna právě začíná",
     "leaderPoints": "{points} · her {games}",
     "fullRating": "Celý žebříček",
-    "respectText": "za každou klubovou hru. Utraťte za večery a merch.",
+    "respectText": "Respect pro nováčky po první hře. Přiveďte kamaráda — dalších +50.",
     "watch": "Sledovat",
     "finalOf": "Finále: {title}",
     "potwEmpty": "Vítěz nejbližšího mini-turnaje",
@@ -1041,7 +1041,8 @@
     "membership": "Permanentka",
     "membershipFrom": "od {price}",
     "membershipText": "Všechny klubové večery a přednostní přihláška",
-    "toShop": "Do obchodu"
+    "toShop": "Do obchodu",
+    "respectBig": "+50"
   },
   "hall": {
     "back": "Žebříčky",
@@ -2407,10 +2408,10 @@
       "game": "Hra na klubovém večeru",
       "tournament": "Hra na turnaji nebo sérii",
       "final": "Hra ve finále sezóny",
-      "firstGame": "První hra v klubu",
+      "firstGame": "První hra v klubu — dárek pro nováčky",
       "eveningWin": "Výhra v mini-turnaji",
       "milestone": "{n} her v klubu",
-      "referral": "Přivedli jste kamaráda a zahrál si",
+      "referral": "Přivedli jste kamaráda: uvedl vás v účtu a odehrál první hru",
       "blog": "Článek na blog klubu — za první schválený v roce",
       "birthday": "Narozeniny — dárek při návštěvě webu",
       "coin": "Mince Respect (soutěže, dárky)",
@@ -2421,7 +2422,7 @@
       "membershipQuarter": "Permanentka na 3 měsíce",
       "membershipYear": "Permanentka na rok"
     },
-    "earnNote": "Hry, nejlepší tah, série, permanentka, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda připisuje klub. Hry z turnajů klubu na mafgame.org se připíší po uzavření turnaje: podle přezdívky nebo odkazu na profil mafgame v účtu (Areny podle elektronického listu).",
+    "earnNote": "Hry, nejlepší tah, série, permanentka, dárek pro nováčky, bonus za kamaráda, narozeninový dárek i článek se připisují samy. Série = klubové večery po sobě v jakékoli dny (např. út → ne → út → ne), aspoň jedna hra v každém; po 10 večerech se počítá znovu. Bonus za kamaráda — když vás nováček uvede v účtu („Kdo vás pozval do klubu?“) a odehraje první hru; nejvýš 10 kamarádů měsíčně. Hry z turnajů klubu na mafgame.org se připíší po uzavření turnaje: podle přezdívky nebo odkazu na profil mafgame v účtu (Areny podle elektronického listu).",
     "spend": {
       "evening": "Herní večer",
       "eveningValue": "celý: 300 Kč = 150 Respect",
@@ -2745,5 +2746,23 @@
     "qr": "Přihláška na hry",
     "for": "Pro",
     "from": "Od: {name}"
+  },
+  "referral": {
+    "welcome": "50 Respect jako dárek pro nováčky — připíšeme po vaší první hře v klubu.",
+    "title": "Kdo vás pozval do klubu?",
+    "hint": "Napište přezdívku kamaráda, který vás přivedl. Až odehrajete první hru, dostane +50 Respect.",
+    "nick": "Přezdívka kamaráda",
+    "save": "Uložit",
+    "once": "Vyplnit jde jen jednou.",
+    "invitedBy": "Pozval vás {nick}.",
+    "rewarded": "Už dostal +50 Respect — děkujeme!",
+    "rewardLater": "Dostane +50 Respect po vaší první hře.",
+    "notice": {
+      "saved": "Uloženo — děkujeme!",
+      "not_found": "Hráč s touto přezdívkou neexistuje. Zkontrolujte ji — tak, jak je na webu.",
+      "self": "Sebe uvést nelze.",
+      "not_eligible": "Kdo vás pozval, mohou vyplnit jen nováčci klubu.",
+      "save": "Uložení se nepovedlo — zkuste to znovu."
+    }
   }
 }

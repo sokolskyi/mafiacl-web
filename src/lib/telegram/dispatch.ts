@@ -17,10 +17,12 @@ type Pending = {
     | "confirmed"
     | "waitlisted"
     | "waitlist_final"
-    | "not_enough";
+    | "not_enough"
+    | "referral_reward";
   attempts: number;
   game_id: number | null;
   profile_id: string;
+  about_profile_id: string | null;
 };
 
 /** Текст поста «стол собран» — в стиле анонсов клуба: название, дата, место, список игроков. */
@@ -52,7 +54,7 @@ export async function dispatchNotifications(origin: string) {
   const db = createAdminClient();
   const { data: pending, error } = await db
     .from("notifications")
-    .select("id, kind, attempts, game_id, profile_id")
+    .select("id, kind, attempts, game_id, profile_id, about_profile_id")
     .is("sent_at", null)
     .lt("attempts", 5)
     .lte("send_after", new Date().toISOString())
@@ -63,6 +65,10 @@ export async function dispatchNotifications(origin: string) {
   if (!rows.length) return { sent: 0, skipped: 0, failed: 0 };
 
   const profileIds = [...new Set(rows.map((r) => r.profile_id))];
+  // Ники друзей для «ваш друг сыграл первую игру».
+  const aboutIds = [...new Set(rows.map((r) => r.about_profile_id).filter((x): x is string => Boolean(x)))];
+  const { data: aboutRows } = aboutIds.length ? await db.from("profiles").select("id, nickname").in("id", aboutIds) : { data: [] };
+  const nickOf = new Map((aboutRows ?? []).map((p) => [p.id, p.nickname as string | null]));
   const gameIds = [...new Set(rows.map((r) => r.game_id).filter((x): x is number => x !== null))];
   const [{ data: privs }, { data: profiles }, { data: games }] = await Promise.all([
     db.from("profile_private").select("profile_id, telegram_chat_id").in("profile_id", profileIds),
@@ -78,6 +84,26 @@ export async function dispatchNotifications(origin: string) {
     const chatId = chatOf.get(n.profile_id);
     const g = n.game_id ? gameOf.get(n.game_id) : undefined;
     const now = new Date().toISOString();
+    if (n.kind === "referral_reward") {
+      if (!chatId) {
+        await db.from("notifications").update({ sent_at: now, last_error: "no_chat" }).eq("id", n.id);
+        skipped++;
+        continue;
+      }
+      const lang = langOf.get(n.profile_id) ?? "ru";
+      try {
+        await sendMessage(chatId, t(lang, "referralReward", { name: escapeHtml(nickOf.get(n.about_profile_id ?? "") ?? "—") }), [
+          [{ text: t(lang, "openAccount"), url: `${origin}${getPathname({ href: "/account", locale: lang })}` }],
+        ]);
+        await db.from("notifications").update({ sent_at: now, last_error: null }).eq("id", n.id);
+        sent++;
+      } catch (e) {
+        const message = e instanceof Error ? e.message : String(e);
+        await db.from("notifications").update({ attempts: n.attempts + 1, last_error: message.slice(0, 300) }).eq("id", n.id);
+        failed++;
+      }
+      continue;
+    }
     if (!chatId || !g) {
       await db.from("notifications").update({ sent_at: now, last_error: chatId ? "no_game" : "no_chat" }).eq("id", n.id);
       skipped++;

@@ -5,7 +5,7 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { SectionPage } from "@/components/SectionPage";
 import { RespectAmount, RespectCoin } from "@/components/respect/RespectAmount";
-import { CZK_PER_RESPECT, RESPECT_EARN, RESPECT_MANUAL, RESPECT_SHARE } from "@/lib/respect";
+import { CZK_PER_RESPECT, RESPECT_EARN, RESPECT_SHARE } from "@/lib/respect";
 import { redeemRespectCode } from "@/lib/respect-actions";
 import { getRespectBalance } from "@/lib/respect-queries";
 import { createClient } from "@/lib/supabase/server";
@@ -39,7 +39,7 @@ export default async function Page({ params, searchParams }: Props) {
     [t("earn.membershipQuarter"), RESPECT_EARN.membership.quarter],
     [t("earn.membershipYear"), RESPECT_EARN.membership.year],
     [t("earn.birthday"), RESPECT_EARN.birthday],
-    [t("earn.referral"), RESPECT_MANUAL.referral],
+    [t("earn.referral"), RESPECT_EARN.referral],
     [t("earn.blog"), RESPECT_EARN.blog],
   ];
 

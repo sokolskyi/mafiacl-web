@@ -6,7 +6,10 @@ export const RESPECT_EARN = {
   game: 1,
   tournament: 2,
   final: 3,
-  firstGame: 20,
+  /** Подарок новичку: начисляется после первой игры. */
+  firstGame: 50,
+  /** Пригласившему: новичок указал его в кабинете и сыграл первую игру (до 10 в месяц). */
+  referral: 50,
   eveningWin: 5,
   /** Лучший ход: первый убитый назвал всех трёх чёрных. */
   bestMove3: 1,
@@ -28,7 +31,7 @@ export const RESPECT_EARN = {
 } as const;
 
 /** Бонусы, которые начисляет клуб вручную (суммы по умолчанию в админке). */
-export const RESPECT_MANUAL = { referral: 30, bonus: 10, adjust: 0 } as const;
+export const RESPECT_MANUAL = { referral: 50, bonus: 10, adjust: 0 } as const;
 export type ManualReason = keyof typeof RESPECT_MANUAL;
 
 /** Какую долю заказа можно оплатить Respect. */

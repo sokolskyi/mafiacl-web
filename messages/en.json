@@ -1032,7 +1032,7 @@
     "leaderEmpty": "The season is just starting",
     "leaderPoints": "{points} · {games} games",
     "fullRating": "Full rating",
-    "respectText": "for every club game. Spend them on evenings and merch.",
+    "respectText": "Respect for newcomers after the first game. Bring a friend — another +50.",
     "watch": "Watch",
     "finalOf": "Final: {title}",
     "potwEmpty": "Winner of the next mini tournament",
@@ -1041,7 +1041,8 @@
     "membership": "Membership",
     "membershipFrom": "from {price}",
     "membershipText": "All club evenings and priority sign-up",
-    "toShop": "To the shop"
+    "toShop": "To the shop",
+    "respectBig": "+50"
   },
   "hall": {
     "back": "Ratings",
@@ -2407,10 +2408,10 @@
       "game": "A game at a club night",
       "tournament": "A game at a tournament or series",
       "final": "A game in the season final",
-      "firstGame": "Your first game at the club",
+      "firstGame": "First game at the club — welcome gift",
       "eveningWin": "Winning a mini-tournament",
       "milestone": "{n} games at the club",
-      "referral": "You brought a friend and they played",
+      "referral": "Brought a friend: they named you in their account and played their first game",
       "blog": "Club blog article — for your first approved one each year",
       "birthday": "Birthday — a gift when you visit the site",
       "coin": "Respect coin (prize draws, gifts)",
@@ -2421,7 +2422,7 @@
       "membershipQuarter": "Three-month pass",
       "membershipYear": "One-year pass"
     },
-    "earnNote": "Games, best moves, streaks, passes, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. The club adds the bonus for a friend. Games from club tournaments on mafgame.org are credited once the tournament is closed, matched by nickname or the mafgame profile link in your account (Arenas count via the electronic sheet).",
+    "earnNote": "Games, best moves, streaks, passes, the welcome gift, the friend bonus, the birthday gift and the article bonus are added automatically. A streak is club nights in a row on any days (e.g. Tue → Sun → Tue → Sun), at least one game at each; after 10 nights it starts again. Friend bonus: when a newcomer names you in their account (“Who invited you to the club?”) and plays their first game; up to 10 friends a month. Games from club tournaments on mafgame.org are credited once the tournament is closed, matched by nickname or the mafgame profile link in your account (Arenas count via the electronic sheet).",
     "spend": {
       "evening": "Game night",
       "eveningValue": "in full: 300 Kč = 150 Respect",
@@ -2745,5 +2746,23 @@
     "qr": "Sign up for games",
     "for": "For",
     "from": "From: {name}"
+  },
+  "referral": {
+    "welcome": "50 Respect welcome gift — credited after your first game at the club.",
+    "title": "Who invited you to the club?",
+    "hint": "Enter the nickname of the friend who brought you. When you play your first game, they get +50 Respect.",
+    "nick": "Friend's nickname",
+    "save": "Save",
+    "once": "You can set this only once.",
+    "invitedBy": "You were invited by {nick}.",
+    "rewarded": "They've already got +50 Respect — thanks!",
+    "rewardLater": "They'll get +50 Respect after your first game.",
+    "notice": {
+      "saved": "Saved — thank you!",
+      "not_found": "No player with this nickname. Check it — exactly as on the website.",
+      "self": "You can't name yourself.",
+      "not_eligible": "Only new club members can name who invited them.",
+      "save": "Couldn't save — try again."
+    }
   }
 }

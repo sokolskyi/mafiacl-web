@@ -148,6 +148,12 @@ const T = {
     uk: "🎂 Сьогодні день народження у <b>{name}</b>! Клуб MafiaCL вітає та бажає більше перемог за будь-який колір. Вітайте в коментарях 🎉",
     en: "🎂 It's <b>{name}</b>'s birthday today! MafiaCL wishes them plenty of wins on either side. Send your wishes in the comments 🎉",
   },
+  referralReward: {
+    cs: "🤝 Váš kamarád <b>{name}</b> odehrál první hru v MafiaCL — připsali jsme vám <b>+50 Respect</b>. Díky, že k nám vodíte přátele!",
+    ru: "🤝 Ваш друг <b>{name}</b> сыграл первую игру в MafiaCL — вам начислено <b>+50 Respect</b>. Спасибо, что приводите друзей!",
+    uk: "🤝 Ваш друг <b>{name}</b> зіграв першу гру в MafiaCL — вам нараховано <b>+50 Respect</b>. Дякуємо, що приводите друзів!",
+    en: "🤝 Your friend <b>{name}</b> played their first game at MafiaCL — you got <b>+50 Respect</b>. Thanks for bringing friends!",
+  },
   birthdayStory: { cs: "Přání do příběhu", ru: "Открытка для сторис", uk: "Листівка для сторіс", en: "Card for stories" },
   openAccount: { cs: "Otevřít účet", ru: "Открыть кабинет", uk: "Відкрити кабінет", en: "Open your account" },
   openMyReviews: { cs: "Otevřít v profilu", ru: "Открыть в кабинете", uk: "Відкрити в кабінеті", en: "Open in your account" },

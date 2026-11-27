@@ -16,6 +16,7 @@ import { getOptionalProviders } from "@/lib/auth/providers";
 import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { AccountRespect } from "@/components/respect/AccountRespect";
 import { BirthdayShare } from "./BirthdayShare";
+import { AccountReferral } from "./AccountReferral";
 import { AccountBlog } from "./AccountBlog";
 import { parseProfileLinks } from "@/lib/profileLinks";
 import { getMembershipEnding } from "@/lib/membershipReminder";
@@ -26,7 +27,7 @@ import { MyHostReviews } from "./MyHostReviews";
 import { getMyHostReviews } from "@/lib/hostReviews";
 
 /** Читает сессию — поэтому рендерится только внутри <Suspense>. */
-export async function AccountPanel({ locale, authError, post }: { locale: Locale; authError: boolean; post?: string }) {
+export async function AccountPanel({ locale, authError, post, referral }: { locale: Locale; authError: boolean; post?: string; referral?: string }) {
   const t = await getTranslations({ locale, namespace: "account" });
   if (!isSupabaseConfigured) return <p className="mt-10 text-neutral-400">{t("notConfigured")}</p>;
 
@@ -147,6 +148,7 @@ export async function AccountPanel({ locale, authError, post }: { locale: Locale
           {profile.verification === "pending" && !telegramOn && <> {t("verificationBotHint")}</>}
         </p>
       )}
+      <AccountReferral locale={locale} userId={userId} notice={referral} />
       {birthdayGreeting && (
         <div role="status" className="mt-6 max-w-xl rounded-lg border border-gold-500/50 bg-gold-500/10 p-4 text-gold-100">
           <p>
