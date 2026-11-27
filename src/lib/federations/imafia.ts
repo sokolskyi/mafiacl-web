@@ -38,7 +38,10 @@ export async function runImafia(db: SupabaseClient, opts: { scan?: number } = {}
   const report: FederationReport = { scanned: null, checked: 0, podiums: 0, errors: [] };
   const clubHtml = await page(`/club/${IMAFIA_CLUB_ID}`);
   const members = clubHtml ? parseImafiaClubMembers(clubHtml) : new Set<number>();
-  if (!members.size) throw new Error("imafia: club members not found");
+  if (!members.size) {
+    const title = clubHtml?.match(/<title>([^<]*)<\/title>/i)?.[1]?.trim().slice(0, 80);
+    throw new Error(`imafia: club members not found (${clubHtml ? `${clubHtml.length} bytes, title «${title ?? "—"}»` : "404"})`);
+  }
 
   const process = async (t: ImafiaTournament) => {
     const rows = t.results.filter((r) => r.place <= 3 && members.has(r.userId));
