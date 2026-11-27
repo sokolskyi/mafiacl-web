@@ -38,7 +38,11 @@ export async function POST(request: NextRequest) {
     console.info("mafgame import", { scanned: report.scanned, saved: report.saved.length, respect: report.respect, podiums: report.podiums });
     // Призовые места за клуб на iMafia и Emotion Games (сбой одной федерации не мешает остальным).
     const other: Record<string, unknown> = {};
-    for (const [name, run] of [["imafia", runImafia], ["emotion", runEmotion]] as const) {
+    // iMafia отвечает нашему серверу 404 (закрыт от автоматических запросов) — включается настройкой imafia_auto,
+    // когда iMafia откроет доступ. Пока призовые места с iMafia — заявкой из кабинета.
+    const { data: imafiaOn } = await db.rpc("app_flag", { p_name: "imafia_auto" });
+    const runs = [...(imafiaOn === true ? ([["imafia", runImafia]] as const) : []), ["emotion", runEmotion] as const];
+    for (const [name, run] of runs) {
       try {
         const r = await run(db);
         other[name] = r;

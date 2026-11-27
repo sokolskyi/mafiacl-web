@@ -2769,7 +2769,7 @@
   },
   "podium": {
     "title": "Podium finishes for MafiaCL",
-    "hint": "1st place at a tournament of any federation — +30 Respect, 2nd — +20, 3rd — +10, main tournaments only (not series) and only if you played for MafiaCL. Mafgame (our club in the results), iMafia and Emotion Games (you're a member of the MafiaCL club there) are credited automatically after the tournament — add links to your profiles in the “Profile” section. Other federations — request below.",
+    "hint": "1st place at a tournament of any federation — +30 Respect, 2nd — +20, 3rd — +10, main tournaments only (not series) and only if you played for MafiaCL. Mafgame (our club in the results) and Emotion Games (you're a member of the MafiaCL club on EG) are credited automatically after the tournament — add links to your profiles in the “Profile” section. iMafia and other federations — request below.",
     "placeN": "{n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} place",
     "status": {
       "pending": "under review",

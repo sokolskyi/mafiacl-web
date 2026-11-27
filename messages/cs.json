@@ -2769,7 +2769,7 @@
   },
   "podium": {
     "title": "Umístění na stupních vítězů za MafiaCL",
-    "hint": "1. místo na turnaji jakékoli federace — +30 Respect, 2. místo — +20, 3. místo — +10, jen za hlavní turnaje (ne série) a jen pokud jste hráli za MafiaCL. Mafgame (náš klub ve výsledcích), iMafia a Emotion Games (jste členem klubu MafiaCL na těchto webech) se připíší samy po skončení turnaje — doplňte odkazy na své profily v sekci „Profil“. Ostatní federace — žádostí níže.",
+    "hint": "1. místo na turnaji jakékoli federace — +30 Respect, 2. místo — +20, 3. místo — +10, jen za hlavní turnaje (ne série) a jen pokud jste hráli za MafiaCL. Mafgame (náš klub ve výsledcích) a Emotion Games (jste členem klubu MafiaCL na EG) se připíší samy po skončení turnaje — doplňte odkazy na své profily v sekci „Profil“. iMafia a ostatní federace — žádostí níže.",
     "placeN": "{n}. místo",
     "status": {
       "pending": "ke kontrole",
