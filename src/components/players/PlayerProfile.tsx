@@ -15,6 +15,8 @@ import { getAliases, getClubSince } from "@/lib/aliases";
 import { PROFILE_SERVICES } from "@/lib/profileLinks";
 import { cityLabel } from "@/lib/cities";
 import { getPlayerTournaments } from "@/lib/mafgame/queries";
+import { computeAchievements, getAchievementFacts } from "@/lib/achievements";
+import { PlayerAchievements } from "./PlayerAchievements";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -66,6 +68,15 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const tWins = tournaments.reduce((a, x) => a + x.wins, 0);
   const tPodiums = tournaments.filter((x) => x.place !== null && x.place <= 3).length;
   const tFinals = tournaments.filter((x) => x.finalist).length;
+  const achievements = computeAchievements({
+    player,
+    facts: await getAchievementFacts(player.id),
+    awards,
+    tournaments,
+    titles,
+    firstYear,
+    currentYear: Number(new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric" }).format(new Date())),
+  });
   const day = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
   return (
@@ -174,6 +185,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
         </dl>
         {s.games === 0 && <p className="mt-6 text-neutral-400">{t("noGames")}</p>}
       </section>
+
+      <PlayerAchievements locale={locale} items={achievements} />
 
       {prizes.length > 0 && (
         <section aria-labelledby="prizes" className="mt-10">

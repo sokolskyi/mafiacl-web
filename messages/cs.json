@@ -2813,5 +2813,146 @@
       "rejected": "Žádost zamítnuta.",
       "error": "Rozhodnutí se nepodařilo uložit."
     }
+  },
+  "achievements": {
+    "title": "Úspěchy",
+    "summary": "Odemčeno {earned} z {total}",
+    "none": "Zatím žádný — vše je před vámi. Seznam je níže.",
+    "locked": "Zatím zamčené ({count})",
+    "times": "×{count}",
+    "progress": "{value} z {goal}",
+    "group": {
+      "roles": "Role a hry",
+      "evenings": "Mini-turnaje",
+      "tournaments": "Turnaje",
+      "season": "Sezóny klubu",
+      "club": "Klub"
+    },
+    "items": {
+      "donWin": {
+        "name": "Výhra za dona",
+        "desc": "Vyhrál hru jako don"
+      },
+      "sheriffWin": {
+        "name": "Výhra za šerifa",
+        "desc": "Vyhrál hru jako šerif"
+      },
+      "godfather": {
+        "name": "Kmotr",
+        "desc": "25 výher za dona"
+      },
+      "commissar": {
+        "name": "Komisař",
+        "desc": "25 výher za šerifa"
+      },
+      "fullBestMove": {
+        "name": "Plný nejlepší tah",
+        "desc": "Jako první zabitý označil všechny tři černé"
+      },
+      "clairvoyant": {
+        "name": "Jasnovidec",
+        "desc": "10 nejlepších tahů s body"
+      },
+      "redStreak": {
+        "name": "Červená série",
+        "desc": "5 výher za červené v řadě"
+      },
+      "selfShot": {
+        "name": "Se zastřeleným spoluhráčem",
+        "desc": "Mafie zastřelila svého — a stejně vyhrála"
+      },
+      "allBlacks": {
+        "name": "Všechny černé",
+        "desc": "Během hry hlasoval proti každému černému"
+      },
+      "bestPlayer": {
+        "name": "Nejlepší hráč",
+        "desc": "Nejlepší hráč hry podle tabulky sezóny"
+      },
+      "target": {
+        "name": "Terč",
+        "desc": "20× zabit jako první"
+      },
+      "games100": {
+        "name": "Stovka",
+        "desc": "100 her v klubu"
+      },
+      "games500": {
+        "name": "Štamgast",
+        "desc": "500 her v klubu"
+      },
+      "games1000": {
+        "name": "Legenda stolu",
+        "desc": "1000 her v klubu"
+      },
+      "wins250": {
+        "name": "Vítěz",
+        "desc": "250 výher"
+      },
+      "eveningWin": {
+        "name": "Mini-turnaj",
+        "desc": "Vyhrál klubový večer"
+      },
+      "eveningStreak": {
+        "name": "Dva v řadě",
+        "desc": "Vyhrál dva mini-turnaje v řadě"
+      },
+      "eveningTwoTables": {
+        "name": "Na dva stoly",
+        "desc": "Vyhrál mini-turnaj, kde hrály dva stoly a víc"
+      },
+      "evening10": {
+        "name": "Pán večerů",
+        "desc": "10 výher v mini-turnajích"
+      },
+      "arenaWin": {
+        "name": "Aréna",
+        "desc": "Vyhrál arénu na mafgame"
+      },
+      "tournamentWin": {
+        "name": "Vítěz turnaje",
+        "desc": "1. místo na turnaji"
+      },
+      "tournamentPodium": {
+        "name": "Medailista",
+        "desc": "Místo v první trojce na turnaji"
+      },
+      "tournamentFinal": {
+        "name": "Finalista",
+        "desc": "Postoupil do finále turnaje"
+      },
+      "tournaments10": {
+        "name": "Turnajový hráč",
+        "desc": "Odehrál 10 turnajů"
+      },
+      "seasonChampion": {
+        "name": "Šampion sezóny",
+        "desc": "Vyhrál sezónu klubu"
+      },
+      "seasonFinal": {
+        "name": "Finále sezóny",
+        "desc": "Medailista finále sezóny"
+      },
+      "seasonTop10": {
+        "name": "Desítka",
+        "desc": "Top 10 Premier League po sezóně"
+      },
+      "seasons5": {
+        "name": "Pět sezón",
+        "desc": "Hrál v žebříčku pět různých let"
+      },
+      "veteran5": {
+        "name": "Stálice",
+        "desc": "5 let v klubu"
+      },
+      "veteran10": {
+        "name": "Veterán",
+        "desc": "10 let v klubu"
+      },
+      "recruiter": {
+        "name": "Přivedl kamaráda",
+        "desc": "Kamarád přišel na pozvání a zahrál si"
+      }
+    }
   }
 }

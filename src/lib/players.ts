@@ -79,6 +79,8 @@ export type PlayerPage = {
     firstKilled: number;
     bestMoveHits: number; // ЛХ с баллами (2 или 3 чёрных)
     bestMovePoints: number;
+    /** Полный лучший ход (все три чёрных) в архивных сезонах; по бланку сайта — в достижениях. */
+    bestMoveFullArchive: number;
     /** «Лучший игрок» партии в таблицах сезонов. */
     bestPlayer: number;
     /** Сумма допов и число партий, по которым она известна (архив Premier League). */
@@ -202,6 +204,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
   let archWins = 0;
   let archKilled = 0;
   let archBestMove = 0;
+  let archBestMove3 = 0;
   let archBestPlayer = 0;
   let archExtra = 0;
   let archExtraGames = 0;
@@ -236,6 +239,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
     archGames += r.games;
     archKilled += r.first_killed;
     archBestMove += r.best_move2 + r.best_move3;
+    archBestMove3 += r.best_move3;
     archBestPlayer += r.best_player;
     const fp = a.is_current ? -1 : (a.final_places ?? []).findIndex((n) => myNames.has(n.toLowerCase()));
     archive.push({
@@ -276,6 +280,7 @@ export async function getPlayer(nick: string): Promise<PlayerPage | null> {
       firstKilled: rated.filter((g) => g.firstKilled).length + archKilled,
       bestMoveHits: rated.filter((g) => g.bestMovePoints > 0).length + archBestMove,
       bestMovePoints: round(rated.reduce((a, g) => a + g.bestMovePoints, 0)),
+      bestMoveFullArchive: archBestMove3,
       bestPlayer: archBestPlayer,
       extra: round(archExtra),
       extraGames: archExtraGames,

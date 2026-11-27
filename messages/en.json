@@ -2813,5 +2813,146 @@
       "rejected": "Request rejected.",
       "error": "Couldn't save the decision."
     }
+  },
+  "achievements": {
+    "title": "Achievements",
+    "summary": "{earned} of {total} unlocked",
+    "none": "None yet — it's all ahead. See the list below.",
+    "locked": "Still locked ({count})",
+    "times": "×{count}",
+    "progress": "{value} of {goal}",
+    "group": {
+      "roles": "Roles and games",
+      "evenings": "Mini-tournaments",
+      "tournaments": "Tournaments",
+      "season": "Club seasons",
+      "club": "Club"
+    },
+    "items": {
+      "donWin": {
+        "name": "Win as Don",
+        "desc": "Won a game as the Don"
+      },
+      "sheriffWin": {
+        "name": "Win as Sheriff",
+        "desc": "Won a game as the Sheriff"
+      },
+      "godfather": {
+        "name": "Godfather",
+        "desc": "25 wins as the Don"
+      },
+      "commissar": {
+        "name": "Commissioner",
+        "desc": "25 wins as the Sheriff"
+      },
+      "fullBestMove": {
+        "name": "Perfect best move",
+        "desc": "Killed first and named all three blacks"
+      },
+      "clairvoyant": {
+        "name": "Clairvoyant",
+        "desc": "10 best moves that scored"
+      },
+      "redStreak": {
+        "name": "Red streak",
+        "desc": "5 wins for the reds in a row"
+      },
+      "selfShot": {
+        "name": "Friendly fire",
+        "desc": "The mafia shot one of its own — and still won"
+      },
+      "allBlacks": {
+        "name": "All the blacks",
+        "desc": "Voted against every black in one game"
+      },
+      "bestPlayer": {
+        "name": "Best player",
+        "desc": "Best player of a game in the season table"
+      },
+      "target": {
+        "name": "Target",
+        "desc": "Killed first 20 times"
+      },
+      "games100": {
+        "name": "Century",
+        "desc": "100 games at the club"
+      },
+      "games500": {
+        "name": "Regular",
+        "desc": "500 games at the club"
+      },
+      "games1000": {
+        "name": "Table legend",
+        "desc": "1000 games at the club"
+      },
+      "wins250": {
+        "name": "Winner",
+        "desc": "250 wins"
+      },
+      "eveningWin": {
+        "name": "Mini-tournament",
+        "desc": "Won a club evening"
+      },
+      "eveningStreak": {
+        "name": "Back to back",
+        "desc": "Won two mini-tournaments in a row"
+      },
+      "eveningTwoTables": {
+        "name": "Two tables",
+        "desc": "Won a mini-tournament with two or more tables"
+      },
+      "evening10": {
+        "name": "Master of evenings",
+        "desc": "10 mini-tournament wins"
+      },
+      "arenaWin": {
+        "name": "Arena",
+        "desc": "Won an arena on mafgame"
+      },
+      "tournamentWin": {
+        "name": "Tournament champion",
+        "desc": "1st place at a tournament"
+      },
+      "tournamentPodium": {
+        "name": "Podium",
+        "desc": "Top-3 finish at a tournament"
+      },
+      "tournamentFinal": {
+        "name": "Finalist",
+        "desc": "Reached a tournament final"
+      },
+      "tournaments10": {
+        "name": "Tournament regular",
+        "desc": "Played 10 tournaments"
+      },
+      "seasonChampion": {
+        "name": "Season champion",
+        "desc": "Won a club season"
+      },
+      "seasonFinal": {
+        "name": "Season final",
+        "desc": "Medal in a season final"
+      },
+      "seasonTop10": {
+        "name": "Top 10",
+        "desc": "Premier League top 10 at season end"
+      },
+      "seasons5": {
+        "name": "Five seasons",
+        "desc": "In the rating in five different years"
+      },
+      "veteran5": {
+        "name": "Old-timer",
+        "desc": "5 years at the club"
+      },
+      "veteran10": {
+        "name": "Veteran",
+        "desc": "10 years at the club"
+      },
+      "recruiter": {
+        "name": "Brought a friend",
+        "desc": "A friend you invited joined and played"
+      }
+    }
   }
 }
