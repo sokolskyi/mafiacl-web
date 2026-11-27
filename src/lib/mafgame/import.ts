@@ -7,14 +7,14 @@ const BASE = "https://mafgame.org";
 export const MAFGAME_CLUB_ID = 4;
 /** Арены считаются по электронному бланку на сайте — с mafgame за них Respect не начисляем. */
 const NO_RESPECT = /arena|арена/i;
-/** Как наш клуб называется на mafgame (клуб игрока в итогах турнира). */
-const OUR_CLUB = /champions\s+league/i;
+/** Запасной вариант, если у игрока нет id клуба: старое и новое название клуба на mafgame. */
+const OUR_CLUB = /champions\s+league|mafia\s*cl\b|mafiacl/i;
 
 /** Призёры за MafiaCL: 1–3 место, в итогах стоит наш клуб. Арены — не турниры, без бонуса. */
 function ourPodium(t: MafgameTournament) {
   if (t.status !== "closed" || !t.startsOn || NO_RESPECT.test(t.name)) return [];
   return t.results
-    .filter((r) => r.place >= 1 && r.place <= 3 && r.club && OUR_CLUB.test(r.club))
+    .filter((r) => r.place >= 1 && r.place <= 3 && (r.clubId === MAFGAME_CLUB_ID || (r.clubId == null && r.club != null && OUR_CLUB.test(r.club))))
     .map((r) => ({ userId: r.userId, nickname: r.nickname, place: r.place, club: r.club }));
 }
 

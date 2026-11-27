@@ -6,6 +6,8 @@ export type MafgameResult = {
   userId: number;
   nickname: string;
   club: string | null;
+  /** id клуба на mafgame, за который игрок заявлен на турнир (MafiaCL = 4). */
+  clubId: number | null;
   place: number;
   games: number;
   wins: number;
@@ -57,7 +59,7 @@ export function inertiaProps(html: string): Record<string, unknown> | null {
 
 type Row = { player_id?: unknown; games_played?: unknown; scores?: { wins?: unknown; total_score?: unknown; games_total?: unknown } };
 type StageRaw = { name?: unknown; tables?: unknown; sessions?: unknown; rows?: Row[] };
-type PlayerRaw = { nickname?: unknown; user_id?: unknown; club_name?: unknown };
+type PlayerRaw = { nickname?: unknown; user_id?: unknown; club_name?: unknown; club_id?: unknown };
 
 /**
  * Итоги турнира. Место: сначала финалисты по порядку финала, затем выбывшие на предыдущем этапе по его порядку и т. д.
@@ -74,7 +76,7 @@ export function parseResults(id: number, html: string): MafgameTournament | null
   const stageKeys = Object.keys(rating?.results ?? {}).filter((k) => /^\d+$/.test(k)).sort((a, b) => Number(a) - Number(b));
 
   const stages: MafgameStage[] = [];
-  type Acc = { userId: number; nickname: string; club: string | null; games: number; wins: number; score: number | null; stage: number; winsSum: number };
+  type Acc = { userId: number; nickname: string; club: string | null; clubId: number | null; games: number; wins: number; score: number | null; stage: number; winsSum: number };
   const byUser = new Map<number, Acc>();
   const order: number[][] = [];
 
@@ -89,7 +91,7 @@ export function parseResults(id: number, html: string): MafgameTournament | null
       const userId = int(info?.user_id);
       const nickname = str(info?.nickname, 64);
       if (userId == null || !nickname) continue;
-      const a = byUser.get(userId) ?? { userId, nickname, club: str(info?.club_name, 120), games: 0, wins: 0, score: null, stage: 1, winsSum: 0 };
+      const a = byUser.get(userId) ?? { userId, nickname, club: str(info?.club_name, 120), clubId: int(info?.club_id), games: 0, wins: 0, score: null, stage: 1, winsSum: 0 };
       const played = int(row.games_played) ?? 0;
       const total = int(row.scores?.games_total) ?? played;
       const w = int(row.scores?.wins) ?? 0;
@@ -112,7 +114,7 @@ export function parseResults(id: number, html: string): MafgameTournament | null
       if (placed.has(userId)) continue;
       placed.add(userId);
       const a = byUser.get(userId)!;
-      results.push({ userId: a.userId, nickname: a.nickname, club: a.club, games: a.games, wins: Math.min(a.wins, a.games), score: a.score, stage: a.stage, place: results.length + 1 });
+      results.push({ userId: a.userId, nickname: a.nickname, club: a.club, clubId: a.clubId, games: a.games, wins: Math.min(a.wins, a.games), score: a.score, stage: a.stage, place: results.length + 1 });
     }
   }
 
