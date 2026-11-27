@@ -4,11 +4,12 @@ import type { Locale } from "@/i18n/routing";
 import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getSeasonRating, getSeasons } from "@/lib/rating";
 import { badgeOf, getBadges } from "@/lib/badges";
+import { pragueToday } from "@/lib/today";
 
 export async function RatingTable({ locale, season, rating }: { locale: Locale; season: number | null; rating: number | null }) {
   const t = await getTranslations({ locale, namespace: "rating" });
   const seasons = await getSeasons(MAIN_CLUB_SLUG);
-  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date());
+  const today = await pragueToday();
   const s = seasons.find((x) => x.number === season) ?? currentSeason(seasons, today);
   if (!s) return <p className="mt-10 text-neutral-400">{t("noSeasons")}</p>;
   const r = s.ratings.find((x) => x.id === rating) ?? s.ratings[0];

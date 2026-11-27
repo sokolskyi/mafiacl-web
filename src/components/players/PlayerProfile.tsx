@@ -17,6 +17,7 @@ import { cityLabel } from "@/lib/cities";
 import { getPlayerTournaments } from "@/lib/mafgame/queries";
 import { computeAchievements, getAchievementFacts } from "@/lib/achievements";
 import { PlayerAchievements } from "./PlayerAchievements";
+import { pragueToday } from "@/lib/today";
 
 const ROLES: PlayerRole[] = ["civilian", "sheriff", "mafia", "don"];
 const ROLE_ICON: Record<PlayerRole, string> = { civilian: "●", sheriff: "★", mafia: "▲", don: "♛" };
@@ -37,7 +38,8 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
   const date = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "Europe/Prague" }).format(new Date(iso));
   // Победы в мини-турнирах текущего сезона и «Игрок недели».
   const seasons = await getSeasons(MAIN_CLUB_SLUG);
-  const season = currentSeason(seasons, new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date()));
+  const today = await pragueToday();
+  const season = currentSeason(seasons, today);
   const eveningRating = season?.ratings.find((r) => r.prizePerEvening !== null);
   const eveningWins = eveningRating ? (await getEveningWinners(eveningRating.id)).filter((w) => player.id !== null && w.profileId === player.id).length : 0;
   const potw = await getPlayerOfWeek(MAIN_CLUB_SLUG);
@@ -75,7 +77,7 @@ export async function PlayerProfile({ locale, player }: { locale: Locale; player
     tournaments,
     titles,
     firstYear,
-    currentYear: Number(new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric" }).format(new Date())),
+    currentYear: Number(today.slice(0, 4)),
   });
   const day = (iso: string) => new Intl.DateTimeFormat(locale, { day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 

@@ -24,5 +24,10 @@ export default async function proxy(request: NextRequest) {
 export const config = {
   // Всё, кроме API, служебных файлов Next.js и файлов с расширением (картинки, sitemap.xml, robots.txt).
   // Плюс архив MCL (public/mcl), раздел Kings (src/app/seasons) и файлы старого сайта (next.config.ts).
-  matcher: ["/mcl", "/((?!api|auth|stream|_next|_vercel|mcl|seasons|public|static|club|assets|.*\\..*).*)"],
+  // Профили игроков — отдельно: в нике бывает точка («mobi.», «D.Vader»), а общее правило пропускает пути с точкой (файлы).
+  matcher: [
+    "/mcl",
+    "/((?!api|auth|stream|_next|_vercel|mcl|seasons|public|static|club|assets|.*\\..*).*)",
+    "/:locale(cs|ru|uk|en)/:section(hraci|igroki|hravtsi|players)/:nick",
+  ],
 };
