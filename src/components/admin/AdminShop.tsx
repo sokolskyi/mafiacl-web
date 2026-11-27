@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getStaffContext } from "@/lib/admin/queries";
-import { getAdminOrders, getAdminProducts, type AdminProduct } from "@/lib/admin/shop-queries";
-import { markOrderPaid, saveProduct, setOrderStatus, setProductActive } from "@/lib/admin/shop-actions";
+import { getAdminCertificates, getAdminOrders, getAdminProducts, type AdminProduct } from "@/lib/admin/shop-queries";
+import { markOrderPaid, redeemCertificate, saveProduct, setOrderStatus, setProductActive } from "@/lib/admin/shop-actions";
 import { loc, money } from "@/lib/shop/queries";
 import { PhotoField } from "./PhotoUpload";
 import { variantText } from "@/components/shop/variant-label";
@@ -13,7 +13,7 @@ const input = "mt-1 w-full rounded border border-white/20 bg-neutral-900 px-3 py
 const LANGS = ["cs", "ru", "uk", "en"] as const;
 
 /** Читает сессию — только внутри <Suspense>. */
-export async function AdminShop({ locale, saved, orderPaid, error }: { locale: Locale; saved?: boolean; orderPaid?: boolean; error?: string }) {
+export async function AdminShop({ locale, saved, orderPaid, error, certRedeemed, certError }: { locale: Locale; saved?: boolean; orderPaid?: boolean; error?: string; certRedeemed?: string; certError?: string }) {
   await connection(); // админка всегда по запросу: дата, сессия
   const t = await getTranslations({ locale, namespace: "adminShop" });
   const ts = await getTranslations({ locale, namespace: "shop" });
@@ -32,9 +32,51 @@ export async function AdminShop({ locale, saved, orderPaid, error }: { locale: L
       {await Promise.all(
         clubs.map(async (club) => {
           const canManage = club.roles.includes("owner") || club.roles.includes("admin");
-          const [products, orders] = await Promise.all([canManage ? getAdminProducts(club.id) : Promise.resolve([]), getAdminOrders(club.id)]);
+          const [products, orders, certs] = await Promise.all([canManage ? getAdminProducts(club.id) : Promise.resolve([]), getAdminOrders(club.id), getAdminCertificates(club.id)]);
           return (
             <div key={club.id} className="space-y-14">
+              <section id="certificates" className="scroll-mt-24">
+                <h2 className="text-xl font-bold">{t("certs.title", { club: club.name })}</h2>
+                <p className="mt-1 text-sm text-neutral-400">{t("certs.hint")}</p>
+                {certRedeemed && <p role="status" className="mt-3 text-green-400">{t("certs.redeemed", { code: certRedeemed })}</p>}
+                {certError && <p role="alert" className="mt-3 text-red-400">{t(`certs.errors.${["not_found", "forbidden", "voided", "expired", "used_up"].includes(certError) ? certError : "save"}`)}</p>}
+                <form action={redeemCertificate} className="mt-4 flex flex-wrap items-end gap-3">
+                  <input type="hidden" name="locale" value={locale} />
+                  <label className="text-sm">{t("certs.code")}
+                    <input name="code" required placeholder="MCL-XXXX-XXXX" autoComplete="off" autoCapitalize="characters" spellCheck={false} className={`${input} w-48 font-mono uppercase`} />
+                  </label>
+                  <label className="text-sm">{t("certs.note")}
+                    <input name="note" maxLength={200} placeholder={t("certs.notePlaceholder")} className={`${input} w-56`} />
+                  </label>
+                  <button className="min-h-11 rounded bg-gold-400 px-4 font-bold text-neutral-950 hover:bg-gold-300">{t("certs.redeem")}</button>
+                </form>
+                {certs.length > 0 && (
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[520px] text-left text-sm">
+                      <thead className="text-neutral-400">
+                        <tr>
+                          <th className="py-2 pr-3 font-semibold">{t("certs.code")}</th>
+                          <th className="py-2 pr-3 font-semibold">{t("certs.recipient")}</th>
+                          <th className="py-2 pr-3 font-semibold">{t("certs.used")}</th>
+                          <th className="py-2 pr-3 font-semibold">{t("certs.until")}</th>
+                          <th className="py-2 font-semibold">{t("certs.order")}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/10">
+                        {certs.map((c) => (
+                          <tr key={c.code} className={c.voided ? "text-neutral-500 line-through" : undefined}>
+                            <td className="py-2 pr-3 font-mono"><a href={`/api/certificate/${c.code}?l=${locale}`} target="_blank" rel="noopener" className="underline">{c.code}</a></td>
+                            <td className="py-2 pr-3">{c.recipient}</td>
+                            <td className="py-2 pr-3">{c.usedEvenings} / {c.evenings}</td>
+                            <td className="py-2 pr-3">{c.validUntil.split("-").reverse().join(".")}</td>
+                            <td className="py-2">{c.orderId ? `#${c.orderId}` : "—"}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </section>
               <section>
                 <h2 className="text-xl font-bold">{t("orders", { club: club.name })}</h2>
                 <ul className="mt-4 divide-y divide-white/10 rounded border border-white/10">
@@ -50,7 +92,7 @@ export async function AdminShop({ locale, saved, orderPaid, error }: { locale: L
                       <p className="text-sm text-neutral-300">
                         {o.items
                           .map((i) => {
-                            const extra = [i.label ? variantText(i.label, (k) => ts(k)) : "", i.color, i.nickname ? `${t("nick")}: ${i.nickname}` : ""].filter(Boolean).join(", ");
+                            const extra = [i.label ? variantText(i.label, (k) => ts(k)) : "", i.color, i.nickname ? `${t("nick")}: ${i.nickname}` : "", i.certTo ? `${ts("certTo")}: ${i.certTo}` : ""].filter(Boolean).join(", ");
                             return `${loc(i.name, locale)}${extra ? ` (${extra})` : ""} × ${i.qty}`;
                           })
                           .join("; ")}
@@ -89,7 +131,7 @@ export async function AdminShop({ locale, saved, orderPaid, error }: { locale: L
                       <details key={p.id} className="rounded border border-white/10">
                         <summary className="flex cursor-pointer flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3">
                           <span className="flex-1 font-semibold">{loc(p.name, locale)}</span>
-                          <span className="text-sm text-neutral-400">{p.kind === "membership" ? t("kindMembership") : t("kindMerch")}</span>
+                          <span className="text-sm text-neutral-400">{p.kind === "membership" ? t("kindMembership") : p.kind === "certificate" ? t("kindCertificate") : t("kindMerch")}</span>
                           <span className="font-bold">{money(locale, p.priceCzk)}</span>
                           <span className={`rounded px-2 py-0.5 text-xs ${p.active ? "bg-green-500/20 text-green-300" : "bg-white/10 text-neutral-400"}`}>{p.active ? t("active") : t("hidden")}</span>
                         </summary>
@@ -175,7 +217,12 @@ function ProductForm({ t, locale, clubId, product }: { t: T; locale: Locale; clu
             <select name="kind" defaultValue="merch" className={input}>
               <option value="merch">{t("kindMerch")}</option>
               <option value="membership">{t("kindMembership")}</option>
+              <option value="certificate">{t("kindCertificate")}</option>
             </select>
+          </label>
+          <label className="text-sm">{t("fields.evenings")}
+            <input name="evenings" type="number" min={1} max={50} step={1} placeholder="3" className={input} />
+            <span className="mt-1 block text-xs text-neutral-500">{t("fields.eveningsHint")}</span>
           </label>
           <label className="text-sm">{t("fields.plan")}
             <select name="plan" defaultValue="month" className={input}>

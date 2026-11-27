@@ -5,7 +5,7 @@ import type { Localized } from "@/lib/games";
 export type AdminProduct = {
   id: number;
   slug: string;
-  kind: "merch" | "membership";
+  kind: "merch" | "membership" | "certificate";
   plan: string | null;
   name: Localized;
   description: Localized | null;
@@ -63,14 +63,14 @@ export type AdminOrder = {
   totalCzk: number;
   createdAt: string;
   buyer: string;
-  items: { id: number; name: Localized; label: string; nickname: string | null; color: string | null; qty: number }[];
+  items: { id: number; name: Localized; label: string; nickname: string | null; color: string | null; certTo: string | null; qty: number }[];
 };
 
 export async function getAdminOrders(clubId: number): Promise<AdminOrder[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("shop_orders")
-    .select("id, status, total_czk, created_at, profiles!shop_orders_profile_id_fkey ( nickname, display_name ), shop_order_items ( id, name, variant_label, nickname, color, qty )")
+    .select("id, status, total_czk, created_at, profiles!shop_orders_profile_id_fkey ( nickname, display_name ), shop_order_items ( id, name, variant_label, nickname, color, cert_to, qty )")
     .eq("club_id", clubId)
     .order("created_at", { ascending: false })
     .limit(50);
@@ -86,7 +86,41 @@ export async function getAdminOrders(clubId: number): Promise<AdminOrder[]> {
       totalCzk: Number(o.total_czk),
       createdAt: o.created_at,
       buyer: p?.nickname ?? p?.display_name ?? "—",
-      items: (o.shop_order_items ?? []).map((i) => ({ id: i.id, name: i.name as Localized, label: i.variant_label, nickname: i.nickname, color: i.color, qty: i.qty })),
+      items: (o.shop_order_items ?? []).map((i) => ({ id: i.id, name: i.name as Localized, label: i.variant_label, nickname: i.nickname, color: i.color, certTo: i.cert_to, qty: i.qty })),
     };
   });
+}
+
+export type AdminCertificate = {
+  code: string;
+  recipient: string;
+  evenings: number;
+  usedEvenings: number;
+  validUntil: string;
+  voided: boolean;
+  orderId: number | null;
+};
+
+/** Последние подарочные сертификаты клуба (RLS: владелец, админ, ведущий). */
+export async function getAdminCertificates(clubId: number): Promise<AdminCertificate[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("gift_certificates")
+    .select("code, recipient, evenings, used_evenings, valid_until, voided_at, order_id")
+    .eq("club_id", clubId)
+    .order("created_at", { ascending: false })
+    .limit(30);
+  if (error) {
+    console.error("getAdminCertificates failed", { code: error.code, message: error.message });
+    return [];
+  }
+  return (data ?? []).map((c) => ({
+    code: c.code,
+    recipient: c.recipient,
+    evenings: c.evenings,
+    usedEvenings: c.used_evenings,
+    validUntil: c.valid_until,
+    voided: Boolean(c.voided_at),
+    orderId: c.order_id,
+  }));
 }

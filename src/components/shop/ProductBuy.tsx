@@ -15,7 +15,7 @@ export function ProductBuy(props: {
   name: string;
   priceCzk: number;
   images: string[];
-  kind: "merch" | "membership";
+  kind: "merch" | "membership" | "certificate";
   variants: Variant[];
   askNickname: boolean;
   askColor: boolean;

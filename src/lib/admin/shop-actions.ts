@@ -167,9 +167,12 @@ export async function saveProduct(formData: FormData) {
       redirect(back(locale, "error=save"));
     }
   } else {
-    const kind = formData.get("kind") === "membership" ? "membership" : "merch";
+    const k = formData.get("kind");
+    const kind = k === "membership" || k === "certificate" ? k : "merch";
     const plan = String(formData.get("plan") ?? "");
     if (kind === "membership" && !(PLANS as readonly string[]).includes(plan)) redirect(back(locale, "error=invalid"));
+    const evenings = Number(formData.get("evenings"));
+    if (kind === "certificate" && !(Number.isInteger(evenings) && evenings >= 1 && evenings <= 50)) redirect(back(locale, "error=invalid"));
     const { data, error } = await supabase
       .from("shop_products")
       .insert({
@@ -177,6 +180,7 @@ export async function saveProduct(formData: FormData) {
         slug: slugify(name.cs ?? name.en ?? Object.values(name)[0]),
         kind,
         membership_plan: kind === "membership" ? plan : null,
+        certificate_evenings: kind === "certificate" ? evenings : null,
         name,
         description: Object.keys(description).length ? description : null,
         price_czk: price,
@@ -310,4 +314,20 @@ export async function createPhotoUploads(clubId: number, count: number) {
     uploads.push({ path: data.path, token: data.token, publicUrl: admin.storage.from("shop").getPublicUrl(data.path).data.publicUrl });
   }
   return { uploads };
+}
+
+/** Списать один вечер с подарочного сертификата (ведущий, админ, владелец — проверяет база). */
+export async function redeemCertificate(formData: FormData) {
+  const locale = toLocale(formData.get("locale"));
+  const code = String(formData.get("code") ?? "").trim().toUpperCase().replace(/\s+/g, "");
+  const note = String(formData.get("note") ?? "").trim().slice(0, 200);
+  if (!/^MCL-[A-Z2-9]{4}-[A-Z2-9]{4}$/.test(code)) redirect(`${back(locale, "certError=not_found")}#certificates`);
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("gift_certificate_redeem", { p_code: code, p_note: note || undefined });
+  if (error) {
+    const reason = ["not_found", "forbidden", "voided", "expired", "used_up"].find((r) => error.message.includes(r)) ?? "save";
+    if (reason === "save") console.error("redeemCertificate failed", { code: error.code, message: error.message });
+    redirect(`${back(locale, `certError=${reason}`)}#certificates`);
+  }
+  redirect(`${back(locale, `certRedeemed=${code}`)}#certificates`);
 }

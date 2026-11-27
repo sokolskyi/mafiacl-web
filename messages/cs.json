@@ -1141,7 +1141,23 @@
     "startsOn": "Začne platit od {date}",
     "startsNow": "Začne platit hned po zaplacení",
     "startsOnOrder": "od {date}",
-    "termsConsent": "Odesláním objednávky souhlasíte s <shop>obchodními podmínkami</shop> a berete na vědomí <privacy>zásady ochrany osobních údajů</privacy>."
+    "termsConsent": "Odesláním objednávky souhlasíte s <shop>obchodními podmínkami</shop> a berete na vědomí <privacy>zásady ochrany osobních údajů</privacy>.",
+    "certToField": "Pro koho — jméno na poukazu",
+    "certToHint": "Vytiskne se přesně takhle: třeba „Kláru“ nebo „Tomáše Nováka“.",
+    "certFromField": "Od koho (nepovinné)",
+    "certMessageField": "Přání (nepovinné)",
+    "certMessagePlaceholder": "Ať ti to u stolu vždycky vyjde!",
+    "certMessageHint": "Až 200 znaků, bude na poukazu.",
+    "certTo": "Pro koho",
+    "certFrom": "Od koho",
+    "certificates": "Poukazy",
+    "certReady": "Poukazy jsou připravené: vytiskněte PDF nebo ho pošlete obdarovanému.",
+    "certDownload": "Stáhnout PDF",
+    "certLang": "Jazyk poukazu",
+    "certCode": "Kód",
+    "certUntil": "platí do {date}",
+    "certPending": "PDF s poukazem se tu objeví hned po zaplacení.",
+    "certUsed": "využito {used} z {total}"
   },
   "adminShop": {
     "title": "Obchod",
@@ -1210,14 +1226,38 @@
       "schedule": "Ceny podle data nákupu",
       "scheduleHint": "Jeden řádek na období: „16.02.2027–15.03.2027 = 10900“. Začátek nebo konec lze vynechat: „–15.02.2027 = 9900“. Pokud řádky existují a dnešní datum v nich není, položka se neprodává. Prázdné — vždy běžná cena.",
       "validUntil": "Roční platí do",
-      "validUntilHint": "Např. 31.12.2027. Prázdné — do 31. prosince roku nákupu."
+      "validUntilHint": "Např. 31.12.2027. Prázdné — do 31. prosince roku nákupu.",
+      "evenings": "Počet večerů v poukazu",
+      "eveningsHint": "Jen pro dárkový poukaz."
     },
     "plans": {
       "month": "1 měsíc",
       "quarter": "3 měsíce",
       "year": "Rok (do 31. 12.)"
     },
-    "nick": "přezdívka"
+    "nick": "přezdívka",
+    "kindCertificate": "Dárkový poukaz",
+    "certs": {
+      "title": "Dárkové poukazy — {club}",
+      "hint": "Host řekne kód z poukazu — zadejte ho a odepište jeden večer. Níže jsou poslední vydané poukazy.",
+      "code": "Kód",
+      "note": "Poznámka",
+      "notePlaceholder": "Např. úterý 3. 12.",
+      "redeem": "Odepsat večer",
+      "redeemed": "Večer odepsán z {code}.",
+      "recipient": "Pro koho",
+      "used": "Večerů",
+      "until": "Do",
+      "order": "Objednávka",
+      "errors": {
+        "not_found": "Poukaz s tímto kódem neexistuje — zkontrolujte kód.",
+        "forbidden": "Poukaz patří jinému klubu.",
+        "voided": "Poukaz je zrušený (objednávka byla zrušena).",
+        "expired": "Platnost poukazu vypršela.",
+        "used_up": "Všechny večery z poukazu jsou už vyčerpané.",
+        "save": "Večer se nepodařilo odepsat — zkuste to znovu."
+      }
+    }
   },
   "partners": {
     "empty": "Brzy tu budou partneři klubu."
@@ -2694,5 +2734,16 @@
     "story": "Do příběhu",
     "post": "Do příspěvku",
     "shareHint": "Přání můžete dát do příběhu, do příspěvku nebo poslat přátelům."
+  },
+  "certificate": {
+    "title": "Dárkový poukaz",
+    "evenings": "{n, plural, one {herní večer} few {herní večery} other {herních večerů}}",
+    "club": "v klubu sportovní mafie MafiaCL · Praha",
+    "howTo": "Vyberte si večer v rozpisu na webu, přihlaste se a řekněte kód moderátorovi — odepíše jeden večer. Večery můžete využít v různé dny.",
+    "code": "Kód poukazu",
+    "validUntil": "Platí do {date}",
+    "qr": "Přihláška na hry",
+    "for": "Pro",
+    "from": "Od: {name}"
   }
 }

@@ -26,5 +26,5 @@ export default async function Page({ params, searchParams }: PageProps<"/[locale
 
 async function Inner({ searchParams, locale }: { searchParams: PageProps<"/[locale]/admin/shop">["searchParams"]; locale: Locale }) {
   const sp = await searchParams;
-  return <AdminShop locale={locale} saved={sp.saved === "1"} orderPaid={sp.orderPaid === "1"} error={typeof sp.error === "string" ? sp.error : undefined} />;
+  return <AdminShop locale={locale} saved={sp.saved === "1"} orderPaid={sp.orderPaid === "1"} error={typeof sp.error === "string" ? sp.error : undefined} certRedeemed={typeof sp.certRedeemed === "string" ? sp.certRedeemed : undefined} certError={typeof sp.certError === "string" ? sp.certError : undefined} />;
 }

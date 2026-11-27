@@ -1141,7 +1141,23 @@
     "startsOn": "Starts on {date}",
     "startsNow": "Starts right after payment",
     "startsOnOrder": "from {date}",
-    "termsConsent": "By submitting the order you agree to the <shop>Terms of Sale</shop> and acknowledge the <privacy>Privacy Policy</privacy>."
+    "termsConsent": "By submitting the order you agree to the <shop>Terms of Sale</shop> and acknowledge the <privacy>Privacy Policy</privacy>.",
+    "certToField": "To — name on the certificate",
+    "certToHint": "Printed exactly as typed, e.g. “Anna” or “Max Novak”.",
+    "certFromField": "From (optional)",
+    "certMessageField": "Message (optional)",
+    "certMessagePlaceholder": "May you always draw the sheriff!",
+    "certMessageHint": "Up to 200 characters, printed on the certificate.",
+    "certTo": "To",
+    "certFrom": "From",
+    "certificates": "Certificates",
+    "certReady": "Your certificates are ready: print the PDF or send it to the recipient.",
+    "certDownload": "Download PDF",
+    "certLang": "Certificate language",
+    "certCode": "Code",
+    "certUntil": "valid until {date}",
+    "certPending": "The certificate PDF will appear here right after payment.",
+    "certUsed": "{used} of {total} used"
   },
   "adminShop": {
     "title": "Shop",
@@ -1210,14 +1226,38 @@
       "schedule": "Prices by purchase date",
       "scheduleHint": "One line per period: “16.02.2027–15.03.2027 = 10900”. Start or end may be left out: “–15.02.2027 = 9900”. If there are lines but none covers today, the item is not on sale. Empty — always the regular price.",
       "validUntil": "Annual pass valid until",
-      "validUntilHint": "E.g. 31.12.2027. Empty — until 31 December of the purchase year."
+      "validUntilHint": "E.g. 31.12.2027. Empty — until 31 December of the purchase year.",
+      "evenings": "Nights in the certificate",
+      "eveningsHint": "Gift certificates only."
     },
     "plans": {
       "month": "1 month",
       "quarter": "3 months",
       "year": "Year (until 31 Dec)"
     },
-    "nick": "nickname"
+    "nick": "nickname",
+    "kindCertificate": "Gift certificate",
+    "certs": {
+      "title": "Gift certificates — {club}",
+      "hint": "The guest tells you the code from the certificate — enter it to use up one night. Recent certificates are listed below.",
+      "code": "Code",
+      "note": "Note",
+      "notePlaceholder": "e.g. Tuesday 3 Dec",
+      "redeem": "Use one night",
+      "redeemed": "One night used from {code}.",
+      "recipient": "To",
+      "used": "Nights",
+      "until": "Until",
+      "order": "Order",
+      "errors": {
+        "not_found": "No certificate with this code — check the code.",
+        "forbidden": "This certificate belongs to another club.",
+        "voided": "The certificate is void (order cancelled).",
+        "expired": "The certificate has expired.",
+        "used_up": "All nights on this certificate are used.",
+        "save": "Couldn't use the night — try again."
+      }
+    }
   },
   "partners": {
     "empty": "The club's partners will appear here soon."
@@ -2694,5 +2734,16 @@
     "story": "For stories",
     "post": "For the feed",
     "shareHint": "Post the card to your stories or feed, or send it to friends."
+  },
+  "certificate": {
+    "title": "Gift certificate",
+    "evenings": "{n, plural, one {game night} other {game nights}}",
+    "club": "at MafiaCL sports mafia club · Prague",
+    "howTo": "Pick a night in the schedule on our website, sign up and tell the host your code — they will use up one night. Nights can be used on different days.",
+    "code": "Certificate code",
+    "validUntil": "Valid until {date}",
+    "qr": "Sign up for games",
+    "for": "For",
+    "from": "From: {name}"
   }
 }

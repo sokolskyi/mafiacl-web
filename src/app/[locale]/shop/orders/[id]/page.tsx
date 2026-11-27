@@ -50,13 +50,20 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
   // RLS: игрок видит только свои заказы.
   const { data: order } = await supabase
     .from("shop_orders")
-    .select("id, status, total_czk, respect_points, respect_czk, created_at, shop_order_items ( id, name, variant_label, nickname, color, membership_from, qty, price_czk, product_id, shop_products ( kind ) )")
+    .select("id, status, total_czk, respect_points, respect_czk, created_at, shop_order_items ( id, name, variant_label, nickname, color, membership_from, cert_to, cert_from, qty, price_czk, product_id, shop_products ( kind ) )")
     .eq("id", orderId)
     .maybeSingle();
   if (!order) notFound();
 
   const items = order.shop_order_items ?? [];
-  const hasMembership = items.some((i) => (i.shop_products as unknown as { kind: string } | null)?.kind === "membership");
+  const kindOf = (i: (typeof items)[number]) => (i.shop_products as unknown as { kind: string } | null)?.kind;
+  const hasMembership = items.some((i) => kindOf(i) === "membership");
+  const hasCertificate = items.some((i) => kindOf(i) === "certificate");
+  const hasMerch = items.some((i) => kindOf(i) === "merch");
+  // Сертификаты выпускаются при оплате (RLS: покупатель видит свои).
+  const { data: certs } = hasCertificate
+    ? await supabase.from("gift_certificates").select("code, recipient, evenings, used_evenings, valid_until, voided_at").eq("order_id", order.id).order("id")
+    : { data: [] };
   const mode = paymentMode();
   const tr = await getTranslations({ locale, namespace: "respect" });
   // Сколько Respect можно списать: мерч до 50 %, абонемент до 30 % цены, но не больше баланса.
@@ -92,6 +99,8 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
               {i.color && <span className="text-neutral-400"> · {i.color}</span>}
               {i.membership_from && <span className="text-neutral-400"> · {t("startsOnOrder", { date: i.membership_from.split("-").reverse().join(".") })}</span>}
               {i.nickname && <span className="text-neutral-400"> · {t("nickname")}: {i.nickname}</span>}
+              {i.cert_to && <span className="text-neutral-400"> · {t("certTo")}: {i.cert_to}</span>}
+              {i.cert_from && <span className="text-neutral-400"> · {t("certFrom")}: {i.cert_from}</span>}
               <span className="text-neutral-400"> × {i.qty}</span>
             </span>
             <span className="font-bold">{money(locale, Number(i.price_czk) * i.qty)}</span>
@@ -154,7 +163,48 @@ async function Inner({ params, searchParams }: Pick<Props, "params" | "searchPar
           <Link href="/account" className="underline">{t("toAccount")}</Link>
         </p>
       )}
-      {status === "paid" && !hasMembership && <p className="mt-8 text-neutral-300">{t("pickup")}</p>}
+      {status === "paid" && hasMerch && <p className="mt-8 text-neutral-300">{t("pickup")}</p>}
+
+      {hasCertificate && (status === "pending" || status === "paid" || status === "fulfilled") && (
+        <section className="mt-10 rounded-lg border border-gold-500/40 bg-gold-500/5 p-6">
+          <h2 className="text-xl font-bold">{t("certificates")}</h2>
+          {status === "pending" || !certs?.length ? (
+            <p className="mt-2 text-neutral-300">{t("certPending")}</p>
+          ) : (
+            <>
+              <p className="mt-2 text-neutral-300">{t("certReady")}</p>
+              <ul className="mt-4 space-y-4">
+                {certs
+                  .filter((c) => !c.voided_at)
+                  .map((c) => (
+                    <li key={c.code} className="rounded border border-white/15 bg-neutral-950/50 p-4">
+                      <p className="font-semibold">
+                        {c.recipient} <span className="font-normal text-neutral-400">· {t("certCode")} <span className="font-mono text-gold-200">{c.code}</span></span>
+                      </p>
+                      <p className="mt-1 text-sm text-neutral-400">
+                        {t("certUntil", { date: c.valid_until.split("-").reverse().join(".") })}
+                        {c.used_evenings > 0 && <> · {t("certUsed", { used: c.used_evenings, total: c.evenings })}</>}
+                      </p>
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <a href={`/api/certificate/${c.code}?l=${locale}`} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center rounded bg-gold-400 px-4 text-sm font-bold text-neutral-950 hover:bg-gold-300">
+                          {t("certDownload")}
+                        </a>
+                        <span className="text-sm text-neutral-400">{t("certLang")}:</span>
+                        {(["cs", "ru", "uk", "en"] as const)
+                          .filter((l) => l !== locale)
+                          .map((l) => (
+                            <a key={l} href={`/api/certificate/${c.code}?l=${l}`} target="_blank" rel="noopener" lang={l} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded border border-white/25 px-2 text-sm font-semibold uppercase hover:bg-white/10">
+                              {l}
+                            </a>
+                          ))}
+                      </div>
+                    </li>
+                  ))}
+              </ul>
+            </>
+          )}
+        </section>
+      )}
 
       <p className="mt-10">
         <Link href="/shop" className="inline-flex min-h-11 items-center underline">{t("toShop")}</Link>

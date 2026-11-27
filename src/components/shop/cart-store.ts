@@ -9,23 +9,29 @@ export type CartItem = {
   label: string;
   priceCzk: number;
   imageUrl: string | null;
-  kind: "merch" | "membership";
+  kind: "merch" | "membership" | "certificate";
   /** Ник для печати и цвет — если товар их спрашивает. */
   nickname?: string;
   color?: string;
   /** Абонемент: дата начала (YYYY-MM-DD); пусто — сразу после оплаты. */
   startOn?: string;
+  /** Подарочный сертификат: кому, от кого, пожелание. */
+  certTo?: string;
+  certFrom?: string;
+  certMessage?: string;
   qty: number;
 };
 
 /** Одна строка корзины = вариант + ник + цвет (две футболки с разными никами — разные строки). */
-export const cartKey = (i: Pick<CartItem, "variantId" | "nickname" | "color" | "startOn">) =>
-  `${i.variantId}|${i.nickname ?? ""}|${i.color ?? ""}|${i.startOn ?? ""}`;
+export const cartKey = (i: Pick<CartItem, "variantId" | "nickname" | "color" | "startOn" | "certTo" | "certFrom" | "certMessage">) =>
+  `${i.variantId}|${i.nickname ?? ""}|${i.color ?? ""}|${i.startOn ?? ""}|${i.certTo ?? ""}|${i.certFrom ?? ""}|${i.certMessage ?? ""}`;
 
 const KEY = "mafiacl-cart";
 const EMPTY: CartItem[] = [];
 const listeners = new Set<() => void>();
 let snapshot: CartItem[] | null = null;
+
+const text = (v: unknown, max: number) => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : undefined);
 
 function sanitize(raw: unknown): CartItem[] {
   if (!Array.isArray(raw)) return EMPTY;
@@ -41,10 +47,13 @@ function sanitize(raw: unknown): CartItem[] {
       label: String(i.label ?? "").slice(0, 40),
       priceCzk: Number(i.priceCzk) || 0,
       imageUrl: typeof i.imageUrl === "string" ? i.imageUrl : null,
-      kind: i.kind === "membership" ? "membership" : "merch",
+      kind: i.kind === "membership" || i.kind === "certificate" ? i.kind : "merch",
       nickname: typeof i.nickname === "string" && i.nickname.trim() ? i.nickname.trim().slice(0, 32) : undefined,
       color: typeof i.color === "string" && i.color.trim() ? i.color.trim().slice(0, 40) : undefined,
       startOn: typeof i.startOn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(i.startOn) ? i.startOn : undefined,
+      certTo: text(i.certTo, 60),
+      certFrom: text(i.certFrom, 60),
+      certMessage: text(i.certMessage, 200),
       qty: Math.min(i.qty as number, 20),
     });
   }

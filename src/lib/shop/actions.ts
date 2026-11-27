@@ -26,7 +26,8 @@ const orderPath = (locale: Locale, id: number, flag?: string) => {
 /** Оформить заказ из корзины. Цены и остатки берутся из базы, не из браузера. */
 export async function checkout(formData: FormData) {
   const locale = toLocale(formData.get("locale"));
-  let items: { variantId: number; qty: number; nickname?: string; color?: string; startOn?: string }[] = [];
+  let items: { variantId: number; qty: number; nickname?: string; color?: string; startOn?: string; certTo?: string; certFrom?: string; certMessage?: string }[] = [];
+  const text = (v: unknown, max: number) => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : undefined);
   try {
     const raw = JSON.parse(String(formData.get("items") ?? "[]"));
     if (Array.isArray(raw)) {
@@ -38,6 +39,9 @@ export async function checkout(formData: FormData) {
           nickname: typeof x?.nickname === "string" ? x.nickname.trim().slice(0, 32) : undefined,
           color: typeof x?.color === "string" ? x.color.trim().slice(0, 40) : undefined,
           startOn: typeof x?.startOn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(x.startOn) ? x.startOn : undefined,
+          certTo: text(x?.certTo, 60),
+          certFrom: text(x?.certFrom, 60),
+          certMessage: text(x?.certMessage, 200),
         }))
         .filter((x) => Number.isInteger(x.variantId) && x.variantId > 0 && Number.isInteger(x.qty) && x.qty >= 1 && x.qty <= 20);
     }

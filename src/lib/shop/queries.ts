@@ -10,7 +10,7 @@ export type Variant = { id: number; label: string; stock: number | null; images:
 export type Product = {
   id: number;
   slug: string;
-  kind: "merch" | "membership";
+  kind: "merch" | "membership" | "certificate";
   name: Localized;
   description: Localized | null;
   priceCzk: number;
@@ -19,6 +19,8 @@ export type Product = {
   images: string[];
   askNickname: boolean;
   askColor: boolean;
+  /** Подарочный сертификат: на сколько игровых вечеров. */
+  certificateEvenings: number | null;
   variants: Variant[];
   /** Есть ли цена на сегодня (у товара с расписанием цен вне дат — нет). */
   onSale: boolean;
@@ -69,7 +71,7 @@ export async function getProducts(clubSlug: string): Promise<Product[]> {
   const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("shop_products")
-    .select("id, slug, kind, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, sort, clubs!inner ( slug ), shop_variants ( id, label, stock, sort, images ), shop_price_schedule ( starts_on, ends_on, price_czk )")
+    .select("id, slug, kind, name, description, price_czk, image_url, gallery, ask_nickname, ask_color, certificate_evenings, sort, clubs!inner ( slug ), shop_variants ( id, label, stock, sort, images ), shop_price_schedule ( starts_on, ends_on, price_czk )")
     .eq("clubs.slug", clubSlug)
     .order("sort")
     .order("id");
@@ -88,6 +90,7 @@ export async function getProducts(clubSlug: string): Promise<Product[]> {
     images: [p.image_url, ...(p.gallery ?? [])].filter((x): x is string => Boolean(x)),
     askNickname: p.ask_nickname,
     askColor: p.ask_color,
+    certificateEvenings: p.certificate_evenings ?? null,
     variants: [...(p.shop_variants ?? [])].sort((a, b) => a.sort - b.sort || a.id - b.id).map((v) => ({ id: v.id, label: v.label, stock: v.stock, images: v.images ?? [] })),
   }));
 }

@@ -11,7 +11,7 @@ type Props = {
   name: string;
   priceCzk: number;
   imageUrl: string | null;
-  kind: "merch" | "membership";
+  kind: "merch" | "membership" | "certificate";
   variants: { id: number; label: string; stock: number | null; images?: string[] }[];
   askNickname?: boolean;
   askColor?: boolean;
@@ -32,6 +32,7 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
   const [added, setAdded] = useState(false);
   const [nickname, setNickname] = useState(defaultNickname ?? "");
   const [color, setColor] = useState("");
+  const [cert, setCert] = useState({ to: "", from: "", message: "" });
   // Абонемент: по умолчанию начинает действовать сразу после оплаты; можно выбрать дату.
   const [now, setNow] = useState(true);
   const [startOn, setStartOn] = useState("");
@@ -40,7 +41,7 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
     const day = (offset: number) => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date(Date.now() + offset * 86_400_000));
     return { min: day(1), max: day(90) };
   });
-  const missing = (askNickname && !nickname.trim()) || (askColor && !color.trim()) || (kind === "membership" && !now && !startOn);
+  const missing = (kind === "certificate" && !cert.to.trim()) || (askNickname && !nickname.trim()) || (askColor && !color.trim()) || (kind === "membership" && !now && !startOn);
   const field = "mt-1 w-full max-w-sm rounded border border-white/30 bg-neutral-900 px-3 py-2.5 outline-none focus:border-red-500";
   const current = variants.find((v) => v.id === variantId);
   const labelled = variants.length > 1 || variants[0]?.label !== "";
@@ -149,6 +150,51 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
           <span className="mt-1 block text-xs font-normal text-neutral-400">{t("colorHint")}</span>
         </label>
       )}
+      {kind === "certificate" && (
+        <div className="space-y-4">
+          <label className="block text-sm font-semibold text-neutral-300">
+            {t("certToField")}
+            <input
+              value={cert.to}
+              onChange={(e) => {
+                setCert({ ...cert, to: e.target.value });
+                setAdded(false);
+              }}
+              maxLength={60}
+              required
+              className={field}
+            />
+            <span className="mt-1 block text-xs font-normal text-neutral-400">{t("certToHint")}</span>
+          </label>
+          <label className="block text-sm font-semibold text-neutral-300">
+            {t("certFromField")}
+            <input
+              value={cert.from}
+              onChange={(e) => {
+                setCert({ ...cert, from: e.target.value });
+                setAdded(false);
+              }}
+              maxLength={60}
+              className={field}
+            />
+          </label>
+          <label className="block text-sm font-semibold text-neutral-300">
+            {t("certMessageField")}
+            <textarea
+              value={cert.message}
+              onChange={(e) => {
+                setCert({ ...cert, message: e.target.value });
+                setAdded(false);
+              }}
+              maxLength={200}
+              rows={3}
+              placeholder={t("certMessagePlaceholder")}
+              className={field}
+            />
+            <span className="mt-1 block text-xs font-normal text-neutral-400">{t("certMessageHint")}</span>
+          </label>
+        </div>
+      )}
       {kind === "membership" && (
         <fieldset className="space-y-2 text-sm">
           <label className="flex min-h-11 cursor-pointer items-center gap-3 font-semibold">
@@ -203,6 +249,9 @@ export function AddToCart({ productId, name, priceCzk, imageUrl, kind, variants,
               nickname: askNickname ? nickname.trim().slice(0, 32) : undefined,
               color: askColor ? color.trim().slice(0, 40) : undefined,
               startOn: kind === "membership" && !now && startOn ? startOn : undefined,
+              certTo: kind === "certificate" ? cert.to.trim().slice(0, 60) : undefined,
+              certFrom: kind === "certificate" ? cert.from.trim().slice(0, 60) || undefined : undefined,
+              certMessage: kind === "certificate" ? cert.message.trim().slice(0, 200) || undefined : undefined,
             });
             setAdded(true);
           }}
