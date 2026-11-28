@@ -276,3 +276,9 @@ export async function getPremierTotals(clubSlug: string, aliases: { alias: strin
   }
   return [...m.values()];
 }
+
+/** Текущий сезон лиги из архива (пока он ведётся на the-mafia.net) с полной таблицей, или null. */
+export async function getCurrentArchiveSeason(clubSlug: string, league: ArchiveLeague = "premier") {
+  const current = (await getArchiveSeasons(clubSlug)).find((s) => s.isCurrent && s.league === league);
+  return current ? getArchiveSeason(clubSlug, current.slug) : null;
+}

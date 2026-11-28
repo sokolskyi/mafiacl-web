@@ -2,6 +2,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import { MATCHES_TAG } from "@/lib/players";
 import { currentSeason, getSeasonRating, getSeasons } from "@/lib/rating";
 import { getHallArchive } from "@/lib/hallArchive";
+import { getCurrentArchiveSeason, RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
 import { getProducts } from "@/lib/shop/queries";
 import { getTournaments, TOURNAMENTS_TAG, type Tournament } from "@/lib/tournaments";
 import type { VideoItem } from "@/lib/videos";
@@ -23,7 +24,7 @@ export async function getNextTournaments(clubSlug: string, limit = 2): Promise<T
 /** Лидер первого рейтинга текущего сезона — тот же порядок, что в таблице рейтинга. */
 export async function getSeasonLeader(clubSlug: string) {
   "use cache";
-  cacheTag(MATCHES_TAG);
+  cacheTag(MATCHES_TAG, RATING_ARCHIVE_TAG);
   cacheLife("minutes");
   const season = currentSeason(await getSeasons(clubSlug), pragueToday());
   const rating = season?.ratings[0];
@@ -33,7 +34,14 @@ export async function getSeasonLeader(clubSlug: string) {
   const top = rows
     .filter((x) => x.games > 0 && x.games >= minGames)
     .sort((a, b) => b.rating - a.rating || b.games - a.games)[0];
-  return top ? { ratingName: rating.name, nickname: top.nickname, rating: top.rating, games: top.games } : null;
+  if (top) return { ratingName: rating.name, nickname: top.nickname, rating: top.rating, games: top.games };
+  // Пока сезон ведётся на the-mafia.net — лидер из копии таблицы оттуда (как на странице рейтингов).
+  if (matches === 0) {
+    const live = await getCurrentArchiveSeason(clubSlug);
+    const first = live?.rows.find((r) => r.qualified);
+    if (first) return { ratingName: rating.name, nickname: first.nickname, rating: first.points, games: first.games };
+  }
+  return null;
 }
 
 /** Последний финал с видео из зала славы. */

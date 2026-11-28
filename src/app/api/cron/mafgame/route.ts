@@ -5,11 +5,13 @@ import { runImport } from "@/lib/mafgame/import";
 import { runImafia } from "@/lib/federations/imafia";
 import { runEmotion } from "@/lib/federations/emotion";
 import { MAFGAME_TAG } from "@/lib/mafgame/queries";
+import { refreshCurrentThemafiaSeasons } from "@/lib/themafiaRating";
+import { RATING_ARCHIVE_TAG } from "@/lib/ratingArchive";
 
 export const maxDuration = 300;
 
 /**
- * Импорт турниров клуба с mafgame.org, затем призовые места за клуб на iMafia и Emotion Games. Будильник из базы (pg_cron → pg_net) раз в 30 минут.
+ * Импорт турниров клуба с mafgame.org, затем призовые места за клуб на iMafia и Emotion Games и таблица текущего сезона с the-mafia.net. Будильник из базы (pg_cron → pg_net) раз в 30 минут.
  * Тело (необязательно): {"ids": [692]} — перечитать эти турниры; {"scan": 60} — сколько новых id просмотреть.
  */
 export async function POST(request: NextRequest) {
@@ -52,6 +54,19 @@ export async function POST(request: NextRequest) {
         other[name] = { error: e instanceof Error ? e.message : String(e) };
         console.error(`${name} import failed`, other[name]);
       }
+    }
+    // Таблица текущего сезона Premier League с the-mafia.net (раз в день, пока игры не на электронном бланке).
+    try {
+      const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date());
+      const rating = await refreshCurrentThemafiaSeasons(db, today);
+      other.themafia = rating;
+      if (rating.some((r) => !r.skipped)) {
+        revalidateTag(RATING_ARCHIVE_TAG, { expire: 0 });
+        console.info("themafia rating refreshed", rating);
+      }
+    } catch (e) {
+      other.themafia = { error: e instanceof Error ? e.message : String(e) };
+      console.error("themafia rating refresh failed", other.themafia);
     }
     return Response.json({ ...report, federations: other });
   } catch (e) {

@@ -5,6 +5,8 @@ import { MAIN_CLUB_SLUG } from "@/lib/site";
 import { currentSeason, getEveningWinners, getSeasonRating, getSeasons } from "@/lib/rating";
 import { badgeOf, getBadges } from "@/lib/badges";
 import { pragueToday } from "@/lib/today";
+import { getCurrentArchiveSeason } from "@/lib/ratingArchive";
+import { CurrentArchiveTable } from "./CurrentArchiveTable";
 
 export async function RatingTable({ locale, season, rating }: { locale: Locale; season: number | null; rating: number | null }) {
   const t = await getTranslations({ locale, namespace: "rating" });
@@ -16,6 +18,9 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
   if (!r) return <p className="mt-10 text-neutral-400">{t("empty")}</p>;
 
   const { rows, matches, evenings } = await getSeasonRating(r.id);
+  // Пока игры сезона записываются на the-mafia.net (электронным бланком ещё не играли) — показываем копию таблицы оттуда.
+  const isCurrent = s.id === currentSeason(seasons, today)?.id;
+  const live = isCurrent && matches === 0 && r.id === s.ratings[0]?.id ? await getCurrentArchiveSeason(MAIN_CLUB_SLUG) : null;
   const badges = await getBadges(MAIN_CLUB_SLUG);
   // Победы в мини-турнирах (вечерах) — для рейтингов с призом за вечер.
   const showEvenings = r.prizePerEvening !== null;
@@ -59,6 +64,10 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
         </div>
       </nav>
 
+      {live ? (
+        <CurrentArchiveTable locale={locale} season={live.season} rows={live.rows} />
+      ) : (
+      <>
       <section className="rounded-lg border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
         <h2 className="text-xl font-bold text-white">{s.name} · {r.name}</h2>
         <p className="mt-1">{t("period", { from: date(s.startsOn), to: date(s.endsOn) })} · {t("played", { matches, evenings })}</p>
@@ -130,6 +139,8 @@ export async function RatingTable({ locale, season, rating }: { locale: Locale; 
         </div>
       )}
       <p className="text-xs text-neutral-500">{t("note")}</p>
+      </>
+      )}
       <p>
         <Link href="/hall-of-fame" className="font-semibold text-gold-300 hover:text-gold-200">⭐ {t("hallOfFame")} →</Link>
       </p>

@@ -1001,7 +1001,12 @@
     "finalist": "finále",
     "rating": "Žebříček",
     "eveningWinsHint": "Výhry v mini-turnajích",
-    "hallOfFame": "Síň slávy"
+    "hallOfFame": "Síň slávy",
+    "liveGames": "Odehraných hodnocených her: {games}.",
+    "liveSource": "Dokud se hry sezóny zapisují na the-mafia.net, je tu kopie tabulky odtamtud. Aktualizuje se jednou denně, naposledy {date}.",
+    "liveThreshold": "Do pořadí se počítá od {n} her: takových hráčů je {count}. Ostatní jsou níže šedě.",
+    "liveFinal": "Do finále sezóny postupuje prvních {size}.",
+    "liveFull": "Celá tabulka a pravidla sezóny"
   },
   "home": {
     "playerOfWeek": "Hráč týdne",

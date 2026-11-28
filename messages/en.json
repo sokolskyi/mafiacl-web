@@ -1001,7 +1001,12 @@
     "finalist": "final",
     "rating": "Rating",
     "eveningWinsHint": "Mini tournament wins",
-    "hallOfFame": "Hall of fame"
+    "hallOfFame": "Hall of fame",
+    "liveGames": "Rated games played: {games}.",
+    "liveSource": "While this season's games are recorded on the-mafia.net, this is a copy of the table from there. Updated daily, last on {date}.",
+    "liveThreshold": "Ranked from {n} games: {count} players so far. Others are greyed out below.",
+    "liveFinal": "The top {size} go to the season final.",
+    "liveFull": "Full table and season rules"
   },
   "home": {
     "playerOfWeek": "Player of the week",

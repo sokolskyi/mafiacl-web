@@ -20,7 +20,7 @@
 - Пароли, ключи, платёжные данные, DNS вводит только владелец. Секреты не писать в чат и в код.
 - Выдача ролей, ослабление защиты, разрушительный SQL на живой базе — только с подтверждения.
 - В текстах: «администрация клуба» (не «владелец»), «игры» (не «партии»).
-- На сайте только ники игроков со старого сайта, без реальных имён. Rodné číslo и дату рождения из выписки не публиковать.
+- На сайте только ники игроков со старого сайта, без реальных имён. Исключение — ведущие (`hosts`): ник + имя, так задумано для корпоративных заказчиков, которым ники ещё ничего не говорят. Rodné číslo и дату рождения из выписки не публиковать.
 - Не копировать тексты конкурентов дословно.
 - Регистрация с 15 лет; в FAQ «для взрослых, с 18 лет» про формат вечеров.
 - Respect: игрок видит только Respect, без пересчёта в валюту (кроны — только в правилах, магазине и админке). Опора на будущее — «150 Respect = один игровой вечер в любом клубе», курс по клубу, где платят; подробности в документе проекта `claude/respect-economy.md`.
@@ -62,7 +62,7 @@
 | Подсказки ников в бланке | — | `lib/match/nickSearch.ts` (не та раскладка RU/UK↔EN, кириллица вместо латиницы: «Екумукн», «Тревори» → Trevery); ники: профили + архивы (`getKnownPlayers`) | `components/match/NickInput.tsx` (combobox) |
 | Электронный бланк ведущего | `admin/matches/[id]/` | `lib/match/{engine,actions,queries,types}.ts` (журнал действий → состояние); голосом — `lib/match/voiceCommands.ts` (фраза → состав по местам / фол / снять фол / выставление «N выставляет M»), ник из речи — `matchSpokenNick` в `nickSearch.ts` | `components/match/MatchApp.tsx` (`onVoice`: состав в нулевую ночь, днём — одной записью журнала, одна отмена), `VoiceInput.tsx` (Web Speech API: Chrome/Edge/Safari, язык ru/uk/cs/en в `localStorage` `mcl-voice-lang`) |
 | Плашка для трансляции | `app/stream/[club]/[table]/` + `api/stream/...` | `lib/match/queries.ts` | `Overlay.tsx` |
-| Рейтинги сезона | `ratings/` | `lib/rating.ts` (RPC `season_rating*`, `evening_*`) | `components/rating/*` |
+| Рейтинги сезона | `ratings/` | `lib/rating.ts` (RPC `season_rating*`, `evening_*`); пока в текущем сезоне нет игр по бланку, наверху — копия таблицы с the-mafia.net (`rating_archive.is_current`, `getCurrentArchiveSeason`), её же лидер — на главной (`getSeasonLeader`); копию обновляет раз в день `lib/themafiaRating.ts` (RPC `rating_archive_replace`) из крона `api/cron/mafgame` | `components/rating/*` (`CurrentArchiveTable.tsx`) |
 | Архив рейтингов Прага/Харьков | `ratings/prague/[slug]`, `ratings/kharkiv/[slug]` | `lib/ratingArchive.ts`; Харьков VI–VIII и Студлига IV взяты со снимков старого mafiacl.com в веб-архиве (2016–2019, `source_url`); у VII и VIII роли восстановлены по страницам игр (`stats.rolesFrom/rolesOf`, `stats.noExtra` — допов нет); у Харькова полная таблица показывается, только если есть роли | `ArchiveSeason*.tsx` |
 | Игроки (каталог) | `players/` | `lib/playersDirectory.ts` (колонки «Турниры», «Серии»: `mafgameKind`) | `PlayersDirectory.tsx` |
 | Профиль игрока | `players/[nick]/` | `lib/players.ts`, `lib/awards.ts`, `lib/badges.ts`, `lib/clubCompare.ts`, `lib/mafgame/queries.ts` | `PlayerProfile.tsx`, `PlayerShare.tsx`; картинка — `api/share/player` |
@@ -101,7 +101,7 @@
 | Задача (pg_cron) | Когда | Что делает |
 |---|---|---|
 | `generate-scheduled-games` | 03:15 ежедневно | создаёт игры из `game_schedules` (окно предзаписи — полночь за `priority_cutoff_days` дней до игры: вторник → вс 24:00) |
-| `mafgame-import` | :07 и :37 каждый час | POST `api/cron/mafgame` → `lib/mafgame/import.ts` (турниры и результаты mafgame, Respect 2 за игру за турниры MafiaCL с 01.02.2027) |
+| `mafgame-import` | :07 и :37 каждый час | POST `api/cron/mafgame` → `lib/mafgame/import.ts` (турниры и результаты mafgame, Respect 2 за игру за турниры MafiaCL с 01.02.2027), затем призовые iMafia/Emotion и раз в день — таблица текущего сезона с the-mafia.net (`lib/themafiaRating.ts`) |
 | `telegram-dispatch` | каждые 5 мин | `api/telegram/dispatch` → `lib/telegram/dispatch.ts` (очередь `notifications`) |
 | `season-review` | 1-го числа 07:13 | `api/cron/season-review` → `lib/reviews/*` |
 | `shop-expire-orders` | :17 каждый час | снимает неоплаченные заказы |
