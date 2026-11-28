@@ -19,12 +19,14 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/clubs/[c
   const { locale, city } = (await params) as { locale: Locale; city: string };
   const c = getCity(city);
   if (!c) return {};
-  return pageMetadata({
+  // Заготовка на будущее (страница клуба в каждом городе): пока не индексируем и не включаем в карту сайта.
+  const meta = await pageMetadata({
     locale,
     key: "club",
     href: { pathname: "/clubs/[city]", params: { city } },
     values: { club: c.club, city: c[locale] },
   });
+  return { ...meta, robots: { index: false, follow: true } };
 }
 
 export default async function Page({ params }: PageProps<"/[locale]/clubs/[city]">) {

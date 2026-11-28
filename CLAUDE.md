@@ -85,7 +85,7 @@
 | Корпоративы / детская / франшиза | `corporate/`, `kids/`, `franchise/` | `lib/corporate-actions.ts`, `lib/corporatePhotos.ts`, `lib/testimonials.ts` | `components/corporate/*`, `franchise/FranchiseForm.tsx` |
 | Партнёры | `partners/` | `lib/partners.ts` (таблица `partners`: сайт `url` + `instagram_url`; логотипы в `public/partners`, не SVG — SVG переводить в WebP через sharp) | — |
 | Документы | `documents/*` | тексты в `src/content/legal/{privacy,terms,shop}/{lang}.ts`, реквизиты `operator.ts` | `documents/LegalDoc.tsx` |
-| FAQ, контакты, клубы по городам, галерея | `faq/`, `contacts/`, `clubs/[city]`, `gallery/` | `lib/cities.ts`, `lib/social.ts` | — |
+| FAQ, контакты, клубы по городам (`clubs/[city]` — заготовка: «в разработке», noindex, не в карте сайта и меню), галерея | `faq/`, `contacts/`, `clubs/[city]`, `gallery/` | `lib/cities.ts`, `lib/social.ts` | — |
 | Кабинет | `account/` | `lib/auth/*`, `lib/nickname-actions.ts`, `lib/avatar-actions.ts`, `lib/birthday-actions.ts`, `lib/members*.ts`, `lib/memberships.ts`, `lib/feedback-actions.ts` | `components/account/*` (вход Google/Facebook/почта, Turnstile); группы «Моё / Профиль / Аккаунт» в `AccountPanel.tsx`, `MyGames.tsx` (записи + отмена через `leaveGame` с `from=account`), `MyOrders.tsx` |
 | Админка | `admin/`, `admin/games/[id]` | `lib/admin/{queries,actions,time}.ts`; заявки на ники/членство/ДР — RPC `*_requests`/`*_decide` | `components/admin/*` |
 

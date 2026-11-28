@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { absoluteUrl } from "@/lib/seo";
-import { CITIES, SECTIONS } from "@/lib/site";
+import { SECTIONS } from "@/lib/site";
 
 type Href = Parameters<typeof absoluteUrl>[0];
 
@@ -14,10 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { href: "/documents/privacy", priority: 0.3 },
     { href: "/documents/terms", priority: 0.3 },
     { href: "/documents/shop-terms", priority: 0.3 },
-    ...Object.keys(CITIES).map((city) => ({
-      href: { pathname: "/clubs/[city]" as const, params: { city } },
-      priority: 0.8,
-    })),
+    // Страницы клубов по городам (/clubs/[city]) — заготовка до второго города, в карту не включаем.
   ];
 
   return hrefs.flatMap(({ href, priority }) =>
